@@ -23,25 +23,23 @@
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
 use std::mem;
+use std::rc::Rc;
 impl Solution {
     pub fn invert_tree(root: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> {
-        
-    fn inner_invert_tree(root: Option<&RefCell<TreeNode>>) {
-        if let Some(node) = root {
-            let node_ref = &mut *node.borrow_mut();
+        fn inner_invert_tree(root: Option<&RefCell<TreeNode>>) {
+            if let Some(node) = root {
+                let node_ref = &mut *node.borrow_mut();
 
-            mem::swap(&mut node_ref.left, &mut node_ref.right);
+                mem::swap(&mut node_ref.left, &mut node_ref.right);
 
-            inner_invert_tree(node_ref.left.as_deref());
-            inner_invert_tree(node_ref.right.as_deref());
+                inner_invert_tree(node_ref.left.as_deref());
+                inner_invert_tree(node_ref.right.as_deref());
+            }
         }
-    }
         inner_invert_tree(root.as_deref());
         root
     }
 }
 // @lc code=end
-

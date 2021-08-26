@@ -10,30 +10,29 @@ impl Solution {
         let mut mx = 0;
         let mut my = 0;
         let mut a = 0;
-        for i in 0..grid.len(){
-            mx=0;
-            for j in 0..grid[i].len(){
-                if grid[i][j]>mx{
-                    mx=grid[i][j];
+        for i in 0..grid.len() {
+            mx = 0;
+            for j in 0..grid[i].len() {
+                if grid[i][j] > mx {
+                    mx = grid[i][j];
                 }
             }
-            a+=mx;
+            a += mx;
         }
 
-        for j in 0..grid[0].len(){
-            my=0;
-            for i in 0..grid.len(){
-                if grid[i][j]>my{
-                    my=grid[i][j];
+        for j in 0..grid[0].len() {
+            my = 0;
+            for i in 0..grid.len() {
+                if grid[i][j] > my {
+                    my = grid[i][j];
                 }
-                if grid[i][j]>0{
-                    a+=1;
+                if grid[i][j] > 0 {
+                    a += 1;
                 }
             }
-            a+=my;
+            a += my;
         }
         a
     }
 }
 // @lc code=end
-

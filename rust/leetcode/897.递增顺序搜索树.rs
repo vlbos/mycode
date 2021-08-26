@@ -23,37 +23,36 @@
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
     pub fn increasing_bst(root: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> {
-        fn inorder(root: &Option<Rc<RefCell<TreeNode>>>,mut vals: &mut  Vec<i32>){
-             if let Some(n)=root{
-                  inorder(&n.borrow().left,&mut vals);
-                  vals.push(n.borrow().val);
-                  inorder(&n.borrow().right,&mut vals);
+        fn inorder(root: &Option<Rc<RefCell<TreeNode>>>, mut vals: &mut Vec<i32>) {
+            if let Some(n) = root {
+                inorder(&n.borrow().left, &mut vals);
+                vals.push(n.borrow().val);
+                inorder(&n.borrow().right, &mut vals);
             }
         }
-        fn newrightnode(mut vals:&mut Vec<i32>)->Option<Rc<RefCell<TreeNode>>>{
-             if vals.is_empty(){
-               return None;
-             }
-             let val = vals.pop().unwrap();
-           
+        fn newrightnode(mut vals: &mut Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
+            if vals.is_empty() {
+                return None;
+            }
+            let val = vals.pop().unwrap();
+
             let node = Rc::new(RefCell::new(TreeNode::new(val)));
-            node.borrow_mut().right=newrightnode(vals);
+            node.borrow_mut().right = newrightnode(vals);
             Some(node)
         }
-        if let Some(n)=root.clone(){
-                let mut vals = Vec::new();
-                inorder(&root,&mut vals);
-                vals.reverse();
-                let val = vals.pop().unwrap();
-                *n.borrow_mut()=TreeNode::new(val);
-                n.borrow_mut().right=newrightnode(&mut vals);
+        if let Some(n) = root.clone() {
+            let mut vals = Vec::new();
+            inorder(&root, &mut vals);
+            vals.reverse();
+            let val = vals.pop().unwrap();
+            *n.borrow_mut() = TreeNode::new(val);
+            n.borrow_mut().right = newrightnode(&mut vals);
         }
         root
     }
 }
 // @lc code=end
-

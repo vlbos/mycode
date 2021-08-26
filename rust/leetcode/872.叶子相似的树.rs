@@ -23,26 +23,30 @@
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
-    pub fn leaf_similar(root1: Option<Rc<RefCell<TreeNode>>>, root2: Option<Rc<RefCell<TreeNode>>>) -> bool {
-        let lrd=|root: Option<Rc<RefCell<TreeNode>>>|->Vec<i32>{
-                let mut s = Vec::new();
-                let mut r = Vec::new();
-                s.push(root);
-                while let Some(n)=s.pop(){
-                    if let Some(n)=n{
-                        r.push(n.clone());
-                        s.push(n.borrow().left.clone());
-                        s.push(n.borrow().right.clone());
-                       }
+    pub fn leaf_similar(
+        root1: Option<Rc<RefCell<TreeNode>>>,
+        root2: Option<Rc<RefCell<TreeNode>>>,
+    ) -> bool {
+        let lrd = |root: Option<Rc<RefCell<TreeNode>>>| -> Vec<i32> {
+            let mut s = Vec::new();
+            let mut r = Vec::new();
+            s.push(root);
+            while let Some(n) = s.pop() {
+                if let Some(n) = n {
+                    r.push(n.clone());
+                    s.push(n.borrow().left.clone());
+                    s.push(n.borrow().right.clone());
                 }
-                r.into_iter().filter(|x|x.borrow().left.is_none()&&x.borrow().right.is_none()).map(|x|x.borrow().val).collect::<Vec<i32>>()
-
+            }
+            r.into_iter()
+                .filter(|x| x.borrow().left.is_none() && x.borrow().right.is_none())
+                .map(|x| x.borrow().val)
+                .collect::<Vec<i32>>()
         };
-        lrd(root1)==lrd(root2)
+        lrd(root1) == lrd(root2)
     }
 }
 // @lc code=end
-

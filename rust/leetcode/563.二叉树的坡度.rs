@@ -23,27 +23,26 @@
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
     pub fn find_tilt(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-            fn sum_tree(root: &Option<Rc<RefCell<TreeNode>>>)->(i32,i32){
-                 if let Some(_n)=root{
-                    let n = _n.borrow();
-                    let mut ls = (0,0);
-                    let mut rs = (0,0);
-                    if let Some(_l)=&n.left{
-                        ls  = sum_tree(&n.left);
-                    }
-                    if let Some(r)=&n.right{
-                        rs =  sum_tree(&n.right);
-                    }
-                    return (n.val+ls.0+rs.0,(ls.0-rs.0).abs()+ls.1+rs.1);
+        fn sum_tree(root: &Option<Rc<RefCell<TreeNode>>>) -> (i32, i32) {
+            if let Some(_n) = root {
+                let n = _n.borrow();
+                let mut ls = (0, 0);
+                let mut rs = (0, 0);
+                if let Some(_l) = &n.left {
+                    ls = sum_tree(&n.left);
                 }
-                (0,0)
+                if let Some(r) = &n.right {
+                    rs = sum_tree(&n.right);
+                }
+                return (n.val + ls.0 + rs.0, (ls.0 - rs.0).abs() + ls.1 + rs.1);
             }
-            sum_tree(&root).1
+            (0, 0)
+        }
+        sum_tree(&root).1
     }
 }
 // @lc code=end
-

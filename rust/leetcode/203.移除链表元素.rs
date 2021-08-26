@@ -23,16 +23,16 @@
 // }
 impl Solution {
     pub fn remove_elements(head: Option<Box<ListNode>>, val: i32) -> Option<Box<ListNode>> {
-            if head.is_none() {
+        if head.is_none() {
             return None;
-            }
-            let mut head = head;
-            let mut _head =  head.as_mut().unwrap();
-            _head.next = Self::remove_elements(_head.next.take(),val);
-            if _head.val == val{
-            return    _head.next.clone() ;
-            }
-            head
+        }
+        let mut head = head;
+        let mut _head = head.as_mut().unwrap();
+        _head.next = Self::remove_elements(_head.next.take(), val);
+        if _head.val == val {
+            return _head.next.clone();
+        }
+        head
 
         //     let mut ddb = Box::new(ListNode::new(0));
         //     ddb.next = head;
@@ -50,4 +50,3 @@ impl Solution {
     }
 }
 // @lc code=end
-

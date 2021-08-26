@@ -23,29 +23,27 @@
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
     pub fn sorted_array_to_bst(nums: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
-            if nums.is_empty(){
-                return None;
-            }
-            let mid = nums.len()/2;
+        if nums.is_empty() {
+            return None;
+        }
+        let mid = nums.len() / 2;
 
-            let mut root = Rc::new(RefCell::new(TreeNode::new(nums[mid])));
-            if mid>0{
-                (&root).borrow_mut().left =  Self::sorted_array_to_bst(nums[0..mid].to_vec());
-            }else{
-                (&root).borrow_mut().left = None;
-            }
-            if mid+1<nums.len(){
-                (&root).borrow_mut().right =  Self::sorted_array_to_bst(nums[mid+1..].to_vec());
-            }    
-            else{
-                (&root).borrow_mut().right = None;
-            }
-            Some(root)
+        let mut root = Rc::new(RefCell::new(TreeNode::new(nums[mid])));
+        if mid > 0 {
+            (&root).borrow_mut().left = Self::sorted_array_to_bst(nums[0..mid].to_vec());
+        } else {
+            (&root).borrow_mut().left = None;
+        }
+        if mid + 1 < nums.len() {
+            (&root).borrow_mut().right = Self::sorted_array_to_bst(nums[mid + 1..].to_vec());
+        } else {
+            (&root).borrow_mut().right = None;
+        }
+        Some(root)
     }
 }
 // @lc code=end
-

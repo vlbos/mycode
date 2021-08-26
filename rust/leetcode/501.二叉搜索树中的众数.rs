@@ -23,40 +23,50 @@
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
     pub fn find_mode(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
-         let mut base = 0;
+        let mut base = 0;
         let mut count = 0;
         let mut max = 0;
-         let mut r = Vec::<i32>::new();
-         fn update(x:i32,mut base:&mut i32,mut count:&mut i32,mut max:&mut i32,mut r:&mut Vec<i32>){
-                if x==*base{
-                *count +=1;
-                }else{
-                    *count = 1;
-                    *base =x;
-                }
-                if *count==*max{
-                    r.push(*base);
-                }
-                else if *count>*max{
-                    *max=*count;
-                    *r=vec![*base].to_vec();
-                }
-            };
-        fn dfs(root: &Option<Rc<RefCell<TreeNode>>>,mut base:&mut i32,mut count:&mut i32,mut max:&mut i32,mut r:&mut Vec<i32>){
-            if let Some(_r)=root{
+        let mut r = Vec::<i32>::new();
+        fn update(
+            x: i32,
+            mut base: &mut i32,
+            mut count: &mut i32,
+            mut max: &mut i32,
+            mut r: &mut Vec<i32>,
+        ) {
+            if x == *base {
+                *count += 1;
+            } else {
+                *count = 1;
+                *base = x;
+            }
+            if *count == *max {
+                r.push(*base);
+            } else if *count > *max {
+                *max = *count;
+                *r = vec![*base].to_vec();
+            }
+        };
+        fn dfs(
+            root: &Option<Rc<RefCell<TreeNode>>>,
+            mut base: &mut i32,
+            mut count: &mut i32,
+            mut max: &mut i32,
+            mut r: &mut Vec<i32>,
+        ) {
+            if let Some(_r) = root {
                 let n = _r.borrow();
-                dfs(&n.left,&mut base,&mut count,&mut max,&mut r);
-                update(n.val,&mut base,&mut count,&mut max,&mut r);
-                dfs(&n.right,&mut base,&mut count,&mut max,&mut r);
+                dfs(&n.left, &mut base, &mut count, &mut max, &mut r);
+                update(n.val, &mut base, &mut count, &mut max, &mut r);
+                dfs(&n.right, &mut base, &mut count, &mut max, &mut r);
             }
         }
-        dfs(&root,&mut base,&mut count,&mut max,&mut r);
+        dfs(&root, &mut base, &mut count, &mut max, &mut r);
         r
     }
 }
 // @lc code=end
-

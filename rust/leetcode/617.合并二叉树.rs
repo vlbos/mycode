@@ -23,26 +23,31 @@
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
-    pub fn merge_trees(root1: Option<Rc<RefCell<TreeNode>>>, root2: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> {
-        fn inner_merge_trees(root1: &Option<Rc<RefCell<TreeNode>>>, root2: &Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>>{
-            match (root1,root2){
-                (Some(n1),Some(n2))=>{
-                      let (_n1,_n2)=(n1.borrow(),n2.borrow());
-                      let mut root = TreeNode::new(_n1.val+_n2.val);
-                      root.left = inner_merge_trees(&_n1.left,&_n2.left);
-                      root.right = inner_merge_trees(&_n1.right,&_n2.right);
-                      Some(Rc::new(RefCell::new(root)))
-                },
-                (Some(n1),None)=>Some(n1.clone()),
-                (None,Some(n2))=>Some(n2.clone()),
-                (None,None)=>None,
+    pub fn merge_trees(
+        root1: Option<Rc<RefCell<TreeNode>>>,
+        root2: Option<Rc<RefCell<TreeNode>>>,
+    ) -> Option<Rc<RefCell<TreeNode>>> {
+        fn inner_merge_trees(
+            root1: &Option<Rc<RefCell<TreeNode>>>,
+            root2: &Option<Rc<RefCell<TreeNode>>>,
+        ) -> Option<Rc<RefCell<TreeNode>>> {
+            match (root1, root2) {
+                (Some(n1), Some(n2)) => {
+                    let (_n1, _n2) = (n1.borrow(), n2.borrow());
+                    let mut root = TreeNode::new(_n1.val + _n2.val);
+                    root.left = inner_merge_trees(&_n1.left, &_n2.left);
+                    root.right = inner_merge_trees(&_n1.right, &_n2.right);
+                    Some(Rc::new(RefCell::new(root)))
+                }
+                (Some(n1), None) => Some(n1.clone()),
+                (None, Some(n2)) => Some(n2.clone()),
+                (None, None) => None,
             }
-        } 
-        inner_merge_trees(&root1,&root2)
+        }
+        inner_merge_trees(&root1, &root2)
     }
 }
 // @lc code=end
-

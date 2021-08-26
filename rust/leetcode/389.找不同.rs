@@ -19,15 +19,14 @@ impl Solution {
         //     }
         // }
         // 'a'
-        let mut r =0;
-        for c in s.chars(){
-                r ^= c as u8;
+        let mut r = 0;
+        for c in s.chars() {
+            r ^= c as u8;
         }
-        for c in t.chars(){
-                r ^= c as u8;
+        for c in t.chars() {
+            r ^= c as u8;
         }
         r as char
     }
 }
 // @lc code=end
-

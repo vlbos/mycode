@@ -23,26 +23,25 @@
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
     pub fn get_minimum_difference(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-            fn dfs (root: &Option<Rc<RefCell<TreeNode>>>,pre:&mut i32,result:&mut i32){
-                if let Some(_r)=root{
-                    let r =_r.borrow();
-                    dfs(&r.left,pre,result);
-                    if *pre!=-1{
-                       *result = (r.val-*pre).min(*result);
-                    }
-                    *pre =r.val;
-                    dfs(&r.right,pre,result);
+        fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, pre: &mut i32, result: &mut i32) {
+            if let Some(_r) = root {
+                let r = _r.borrow();
+                dfs(&r.left, pre, result);
+                if *pre != -1 {
+                    *result = (r.val - *pre).min(*result);
                 }
+                *pre = r.val;
+                dfs(&r.right, pre, result);
             }
-            let mut pre =-1;
-            let mut result = i32::MAX;
-            dfs(&root,&mut pre,&mut result);
-            result
-    }   
+        }
+        let mut pre = -1;
+        let mut result = i32::MAX;
+        dfs(&root, &mut pre, &mut result);
+        result
+    }
 }
 // @lc code=end
-

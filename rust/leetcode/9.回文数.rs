@@ -20,19 +20,17 @@ impl Solution {
         // let min = i32::MIN as i64 ;
         // if result> max||result<min { false} else {x==(result as i32)}
 
-        if x<0|| (x%10==0 && x!=0) {
-        return false;
+        if x < 0 || (x % 10 == 0 && x != 0) {
+            return false;
         }
-        let mut xx  = x ;
+        let mut xx = x;
         let mut result = 0;
-        while xx>result{
-            result = result*10+xx%10;
-            xx /=10;
+        while xx > result {
+            result = result * 10 + xx % 10;
+            xx /= 10;
         }
-    
-       result==xx || xx==result/10
 
+        result == xx || xx == result / 10
     }
 }
 // @lc code=end
-

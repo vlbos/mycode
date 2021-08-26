@@ -12,21 +12,20 @@ impl Solution {
         n1.sort();
         n2.sort();
         let mut i = 0;
-        let mut j =0;
+        let mut j = 0;
         let mut r = Vec::<i32>::new();
-        while i< n1.len() && j<n2.len(){
-             if n1[i]==n2[j]{
+        while i < n1.len() && j < n2.len() {
+            if n1[i] == n2[j] {
                 r.push(n1[i]);
-                i+=1;
-                j+=1;
-             } else if n1[i]<n2[j]{
-                i+=1;
+                i += 1;
+                j += 1;
+            } else if n1[i] < n2[j] {
+                i += 1;
             } else {
-                j+=1;
+                j += 1;
             }
         }
         r
     }
 }
 // @lc code=end
-

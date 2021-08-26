@@ -23,25 +23,24 @@
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
     pub fn min_depth(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-            if let Some(n)=root{
-                if n.borrow().left.is_none() && n.borrow().right.is_none(){
-                    return 1;
-                }
-                let mut min = i32::MAX;
-                if !n.borrow().left.is_none() {
-                    min = min.min(Self::min_depth(n.borrow().left.clone()));
-                }
-                if !n.borrow().right.is_none(){
-                    min = min.min(Self::min_depth(n.borrow().right.clone()));
-                }
-                return 1+min;
+        if let Some(n) = root {
+            if n.borrow().left.is_none() && n.borrow().right.is_none() {
+                return 1;
             }
-            0
+            let mut min = i32::MAX;
+            if !n.borrow().left.is_none() {
+                min = min.min(Self::min_depth(n.borrow().left.clone()));
+            }
+            if !n.borrow().right.is_none() {
+                min = min.min(Self::min_depth(n.borrow().right.clone()));
+            }
+            return 1 + min;
+        }
+        0
     }
 }
 // @lc code=end
-

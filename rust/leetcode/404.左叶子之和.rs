@@ -23,46 +23,45 @@
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
     pub fn sum_of_left_leaves(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-        fn inner_sum_of_left_leaves(root: Option<Rc<RefCell<TreeNode>>>, is_left:bool) -> i32{
-            if root.is_none(){
-            return 0;
+        fn inner_sum_of_left_leaves(root: Option<Rc<RefCell<TreeNode>>>, is_left: bool) -> i32 {
+            if root.is_none() {
+                return 0;
             }
             let mut r = 0;
-            if let Some(_n) = root{
+            if let Some(_n) = root {
                 if _n.borrow().left.is_none() && _n.borrow().right.is_none() {
                     if is_left {
-                     return _n.borrow().val;
-                    } else{
+                        return _n.borrow().val;
+                    } else {
                         return 0;
                     }
                 }
-                if _n.borrow().left.is_some(){
-                    r += inner_sum_of_left_leaves(_n.borrow().left.clone(),true);
+                if _n.borrow().left.is_some() {
+                    r += inner_sum_of_left_leaves(_n.borrow().left.clone(), true);
                 }
-                if _n.borrow().right.is_some(){
-                    r += inner_sum_of_left_leaves(_n.borrow().right.clone(),false);
+                if _n.borrow().right.is_some() {
+                    r += inner_sum_of_left_leaves(_n.borrow().right.clone(), false);
                 }
             }
             r
         }
-        if root.is_none(){
+        if root.is_none() {
             return 0;
+        }
+        let mut r = 0;
+        if let Some(_n) = root {
+            if _n.borrow().left.is_some() {
+                r += inner_sum_of_left_leaves(_n.borrow().left.clone(), true);
             }
-            let mut r = 0;
-            if let Some(_n) = root{
-                if _n.borrow().left.is_some(){
-                    r += inner_sum_of_left_leaves(_n.borrow().left.clone(),true);
-                }
-                if _n.borrow().right.is_some(){
-                    r += inner_sum_of_left_leaves(_n.borrow().right.clone(),false);
-                }
+            if _n.borrow().right.is_some() {
+                r += inner_sum_of_left_leaves(_n.borrow().right.clone(), false);
             }
-            r
+        }
+        r
     }
 }
 // @lc code=end
-

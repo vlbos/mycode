@@ -11,16 +11,15 @@ impl Solution {
         let mut x = 1;
         let mut n = nums.clone();
         n.sort();
-        for i in 0..2{
-           x*=n[i];
+        for i in 0..2 {
+            x *= n[i];
         }
-        max = (x*n[2]).max(x*n[n.len()-1]);
-        x=1;
-        for i in 0..3{
-            x*=n[n.len()-i-1];
+        max = (x * n[2]).max(x * n[n.len() - 1]);
+        x = 1;
+        for i in 0..3 {
+            x *= n[n.len() - i - 1];
         }
         x.max(max)
     }
 }
 // @lc code=end
-

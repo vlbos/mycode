@@ -8,8 +8,8 @@
 impl Solution {
     pub fn intersection(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<i32> {
         let mut r = Vec::<i32>::new();
-        for n in nums1{
-            if nums2.contains(&n) && !r.contains(&n){
+        for n in nums1 {
+            if nums2.contains(&n) && !r.contains(&n) {
                 r.push(n)
             }
         }
@@ -17,4 +17,3 @@ impl Solution {
     }
 }
 // @lc code=end
-

@@ -13,31 +13,38 @@ impl Solution {
         let mut ss = s.split_whitespace();
         let mut p = pattern.chars();
         loop {
-            match (p.next(),ss.next()){
-            (Some(_p),Some(_ss))=>{
-                 match (c.iter().position(|&v| v==_p),d.iter().position(|v| v==_ss)){
-                 (Some(_ci),Some(_di))=>{
-                     if d[_ci]!=_ss||c[_di]!=_p{
-                        return false;
+            match (p.next(), ss.next()) {
+                (Some(_p), Some(_ss)) => {
+                    match (
+                        c.iter().position(|&v| v == _p),
+                        d.iter().position(|v| v == _ss),
+                    ) {
+                        (Some(_ci), Some(_di)) => {
+                            if d[_ci] != _ss || c[_di] != _p {
+                                return false;
+                            }
+                        }
+                        (Some(_ci), None) => {
+                            if d[_ci] != _ss {
+                                return false;
+                            }
+                        }
+                        (None, Some(_di)) => {
+                            if c[_di] != _p {
+                                return false;
+                            }
+                        }
+                        _ => {
+                            c.push(_p);
+                            d.push(_ss.to_string());
+                        }
                     }
-                },
-    (Some(_ci),None)=>if d[_ci]!=_ss{
-                        return false;
-                    },
- (None,Some(_di))=>if c[_di]!=_p{
-                        return false;
-                    },
-                    _=>                 {  c.push(_p);
-                    d.push(_ss.to_string());},
                 }
-                 },
-            (Some(_),None)|(None,Some(_))=>return false,
-            _=>break,
+                (Some(_), None) | (None, Some(_)) => return false,
+                _ => break,
             }
-            
         }
         true
     }
 }
 // @lc code=end
-

@@ -23,33 +23,32 @@
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
     pub fn tree2str(root: Option<Rc<RefCell<TreeNode>>>) -> String {
-          if let Some(_n)=root{
-                let n = _n.borrow();
-                let mut ls ="".to_string();
-                let mut rs ="".to_string();
-                return match (&n.left,&n.right){
-                 (Some(l),Some(r))=>{
+        if let Some(_n) = root {
+            let n = _n.borrow();
+            let mut ls = "".to_string();
+            let mut rs = "".to_string();
+            return match (&n.left, &n.right) {
+                (Some(l), Some(r)) => {
                     ls = Self::tree2str(n.left.clone());
                     rs = Self::tree2str(n.right.clone());
-                    format!("{}({})({})",n.val,ls,rs)
-                },
-                (Some(l),None)=>{
+                    format!("{}({})({})", n.val, ls, rs)
+                }
+                (Some(l), None) => {
                     ls = Self::tree2str(n.left.clone());
-                    format!("{}({})",n.val,ls)
-                },
-                (None,Some(r))=>{
+                    format!("{}({})", n.val, ls)
+                }
+                (None, Some(r)) => {
                     rs = Self::tree2str(n.right.clone());
-                    format!("{}()({})",n.val,rs)
-                },
-                _ =>format!("{}",n.val),
-                };
-          }
-          "".to_string()
+                    format!("{}()({})", n.val, rs)
+                }
+                _ => format!("{}", n.val),
+            };
+        }
+        "".to_string()
     }
 }
 // @lc code=end
-

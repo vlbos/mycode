@@ -23,8 +23,8 @@
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
     pub fn postorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
         // let mut v = Vec::<i32>::new();
@@ -43,17 +43,16 @@ impl Solution {
         let mut v = Vec::<i32>::new();
         let mut s = Vec::<Option<Rc<RefCell<TreeNode>>>>::new();
         s.push(root);
-        while let Some(Some(n))=s.pop(){
-            if let Some(l)=&n.borrow().left{
+        while let Some(Some(n)) = s.pop() {
+            if let Some(l) = &n.borrow().left {
                 s.push(Some(Rc::clone(&l)));
             }
-            if let Some(r)=&n.borrow().right{
+            if let Some(r) = &n.borrow().right {
                 s.push(Some(Rc::clone(&r)));
             }
-            v.insert(0,n.borrow().val);
+            v.insert(0, n.borrow().val);
         }
         v
     }
 }
 // @lc code=end
-

@@ -23,23 +23,25 @@
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
-    pub fn search_bst(root: Option<Rc<RefCell<TreeNode>>>, val: i32) -> Option<Rc<RefCell<TreeNode>>> {
+    pub fn search_bst(
+        root: Option<Rc<RefCell<TreeNode>>>,
+        val: i32,
+    ) -> Option<Rc<RefCell<TreeNode>>> {
         let node = root.clone();
-        if let Some(_n)=node{
-                let n =_n.borrow();
-                if n.val==val{
+        if let Some(_n) = node {
+            let n = _n.borrow();
+            if n.val == val {
                 return root;
-                }else if n.val>val{
-                    return Self::search_bst(n.left.clone(),val);
-                }else{
-                    return Self::search_bst(n.right.clone(),val);
-                }
+            } else if n.val > val {
+                return Self::search_bst(n.left.clone(), val);
+            } else {
+                return Self::search_bst(n.right.clone(), val);
+            }
         }
         None
     }
 }
 // @lc code=end
-

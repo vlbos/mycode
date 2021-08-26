@@ -23,24 +23,23 @@
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
     pub fn diameter_of_binary_tree(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-          fn depth(root: &Option<Rc<RefCell<TreeNode>>>,mut max:&mut i32)->i32{
-              if let Some(_r)=root{
-                    let n = _r.borrow();
-                    let l= depth(&n.left,&mut max);
-                    let r = depth(&n.right,&mut max);
-                    *max = (*max).max(l+r+1);
-                    return l.max(r)+1;
-                }
-                0
-          }
+        fn depth(root: &Option<Rc<RefCell<TreeNode>>>, mut max: &mut i32) -> i32 {
+            if let Some(_r) = root {
+                let n = _r.borrow();
+                let l = depth(&n.left, &mut max);
+                let r = depth(&n.right, &mut max);
+                *max = (*max).max(l + r + 1);
+                return l.max(r) + 1;
+            }
+            0
+        }
         let mut max = 0;
-        depth(&root,&mut max);
-        max-1
+        depth(&root, &mut max);
+        max - 1
     }
 }
 // @lc code=end
-

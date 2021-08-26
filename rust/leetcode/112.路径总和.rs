@@ -23,21 +23,20 @@
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
     pub fn has_path_sum(root: Option<Rc<RefCell<TreeNode>>>, target_sum: i32) -> bool {
-            if let Some(n)=root{
-                if n.borrow().left.is_none() && n.borrow().right.is_none(){
-                    if n.borrow().val ==target_sum{
-                        return true;
-                    }
+        if let Some(n) = root {
+            if n.borrow().left.is_none() && n.borrow().right.is_none() {
+                if n.borrow().val == target_sum {
+                    return true;
                 }
-                return Solution::has_path_sum(n.borrow().left.clone(),target_sum-n.borrow().val)
-                ||Solution::has_path_sum(n.borrow().right.clone(),target_sum-n.borrow().val);
             }
-            false
+            return Solution::has_path_sum(n.borrow().left.clone(), target_sum - n.borrow().val)
+                || Solution::has_path_sum(n.borrow().right.clone(), target_sum - n.borrow().val);
+        }
+        false
     }
 }
 // @lc code=end
-

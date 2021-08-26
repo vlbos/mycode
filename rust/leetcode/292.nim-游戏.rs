@@ -7,8 +7,7 @@
 // @lc code=start
 impl Solution {
     pub fn can_win_nim(n: i32) -> bool {
-        n%4!=0
+        n % 4 != 0
     }
 }
 // @lc code=end
-

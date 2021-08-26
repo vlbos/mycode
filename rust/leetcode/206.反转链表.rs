@@ -26,7 +26,7 @@ impl Solution {
     pub fn reverse_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
         // let mut prev: Option<Box<ListNode>> = None;
         // let mut curr = head;
-        
+
         // while let Some(mut boxed_node) = curr {
         //     curr = boxed_node.next.take().take();
         //     // let mut next = boxed_node.next.take();
@@ -34,20 +34,21 @@ impl Solution {
         //     prev = Some(boxed_node);
         //     // curr = next.take();
         // }
-        
+
         // prev
 
-        fn inner_reverse_list(reversed:Option<Box<ListNode>>,head: Option<Box<ListNode>>) -> Option<Box<ListNode>>{
-                    if let Some(mut _head)=head{
-                        let new_head=std::mem::replace(&mut _head.next,reversed);
-                        inner_reverse_list(Some(_head),new_head)
-                    }
-                    else{
-                        reversed
-                    }
+        fn inner_reverse_list(
+            reversed: Option<Box<ListNode>>,
+            head: Option<Box<ListNode>>,
+        ) -> Option<Box<ListNode>> {
+            if let Some(mut _head) = head {
+                let new_head = std::mem::replace(&mut _head.next, reversed);
+                inner_reverse_list(Some(_head), new_head)
+            } else {
+                reversed
+            }
         }
-        inner_reverse_list(None,head)
+        inner_reverse_list(None, head)
     }
 }
 // @lc code=end
-

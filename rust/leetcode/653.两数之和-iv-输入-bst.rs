@@ -23,29 +23,26 @@
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
     pub fn find_target(root: Option<Rc<RefCell<TreeNode>>>, k: i32) -> bool {
-
-        fn inorder(root: &Option<Rc<RefCell<TreeNode>>>,mut s:&mut Vec<i32>, k: i32) -> bool{
-            if let Some(_n)=root{
+        fn inorder(root: &Option<Rc<RefCell<TreeNode>>>, mut s: &mut Vec<i32>, k: i32) -> bool {
+            if let Some(_n) = root {
                 let n = _n.borrow();
-                   if  inorder(&n.left,&mut s,k)||s.contains(&(k-n.val)){
+                if inorder(&n.left, &mut s, k) || s.contains(&(k - n.val)) {
                     return true;
-                    }
-                    if !s.contains(&n.val){
+                }
+                if !s.contains(&n.val) {
                     s.push(n.val);
-                    }
-                    return inorder(&n.right,&mut s,k);
-             
+                }
+                return inorder(&n.right, &mut s, k);
             }
-                
+
             false
         }
-        let mut s =Vec::<i32>::new();
-        inorder(&root,&mut s,k)
+        let mut s = Vec::<i32>::new();
+        inorder(&root, &mut s, k)
     }
 }
 // @lc code=end
-

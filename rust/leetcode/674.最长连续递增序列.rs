@@ -10,24 +10,21 @@ impl Solution {
         let mut r = 0;
         let mut pre = i32::MIN;
         let mut max = r;
-        for n in &nums{
-            if *n>pre{
-                r+=1;
-            }
-            else{
-                if r>max{
-                   max=r;
+        for n in &nums {
+            if *n > pre {
+                r += 1;
+            } else {
+                if r > max {
+                    max = r;
                 }
                 r = 1;
             }
             pre = *n;
-
         }
-        if r>max{
-            max=r;
+        if r > max {
+            max = r;
         }
         max
     }
 }
 // @lc code=end
-

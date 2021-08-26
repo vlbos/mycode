@@ -25,12 +25,11 @@ impl Solution {
     pub fn middle_node(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
         let mut p = &head;
         let mut q = &head;
-        while p.is_some() && p.as_ref().unwrap().next.is_some(){
-             q=&q.as_ref().unwrap().next;
-             p = &p.as_ref().unwrap().next.as_ref().unwrap().next;
+        while p.is_some() && p.as_ref().unwrap().next.is_some() {
+            q = &q.as_ref().unwrap().next;
+            p = &p.as_ref().unwrap().next.as_ref().unwrap().next;
         }
         q.clone()
     }
 }
 // @lc code=end
-

@@ -23,17 +23,17 @@
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
     pub fn range_sum_bst(root: Option<Rc<RefCell<TreeNode>>>, low: i32, high: i32) -> i32 {
-        if let Some(n)=root{
+        if let Some(n) = root {
             let mut v = n.borrow().val;
-            if v<low || v>high{
-                v=0;
+            if v < low || v > high {
+                v = 0;
             }
-            v+=Self::range_sum_bst(n.borrow().left.clone(),low,high);
-            v+=Self::range_sum_bst(n.borrow().right.clone(),low,high);
+            v += Self::range_sum_bst(n.borrow().left.clone(), low, high);
+            v += Self::range_sum_bst(n.borrow().right.clone(), low, high);
             return v;
         }
 
@@ -41,4 +41,3 @@ impl Solution {
     }
 }
 // @lc code=end
-

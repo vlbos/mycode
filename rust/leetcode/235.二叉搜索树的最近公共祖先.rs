@@ -12,7 +12,7 @@
 //   pub left: Option<Rc<RefCell<TreeNode>>>,
 //   pub right: Option<Rc<RefCell<TreeNode>>>,
 // }
-// 
+//
 // impl TreeNode {
 //   #[inline]
 //   pub fn new(val: i32) -> Self {
@@ -23,11 +23,15 @@
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
 use std::mem;
+use std::rc::Rc;
 impl Solution {
-    pub fn lowest_common_ancestor(root: Option<Rc<RefCell<TreeNode>>>, p: Option<Rc<RefCell<TreeNode>>>, q: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> {
+    pub fn lowest_common_ancestor(
+        root: Option<Rc<RefCell<TreeNode>>>,
+        p: Option<Rc<RefCell<TreeNode>>>,
+        q: Option<Rc<RefCell<TreeNode>>>,
+    ) -> Option<Rc<RefCell<TreeNode>>> {
         // let mut root = root.unwrap();
         // let mut p = p.unwrap().borrow().val;
         // let mut q = q.unwrap().borrow().val;
@@ -51,17 +55,21 @@ impl Solution {
         // }
 
         // Some(root)
-            fn inner_lowest_common_ancestor(root: &Rc<RefCell<TreeNode>>, p: &TreeNode, q: &TreeNode) -> Rc<RefCell<TreeNode>> {
-                let root_ref = root.borrow();
+        fn inner_lowest_common_ancestor(
+            root: &Rc<RefCell<TreeNode>>,
+            p: &TreeNode,
+            q: &TreeNode,
+        ) -> Rc<RefCell<TreeNode>> {
+            let root_ref = root.borrow();
 
-                if q.val < root_ref.val {
-                    inner_lowest_common_ancestor(root_ref.left.as_ref().unwrap(), p, q)
-                } else if p.val > root_ref.val {
-                    inner_lowest_common_ancestor(root_ref.right.as_ref().unwrap(), p, q)
-                } else {
-                    Rc::clone(root)
-                }
+            if q.val < root_ref.val {
+                inner_lowest_common_ancestor(root_ref.left.as_ref().unwrap(), p, q)
+            } else if p.val > root_ref.val {
+                inner_lowest_common_ancestor(root_ref.right.as_ref().unwrap(), p, q)
+            } else {
+                Rc::clone(root)
             }
+        }
 
         let root = root.unwrap();
         let p = p.unwrap();
@@ -74,8 +82,6 @@ impl Solution {
         } else {
             inner_lowest_common_ancestor(&root, &q_ref, &p_ref)
         })
-
     }
 }
 // @lc code=end
-

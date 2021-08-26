@@ -23,32 +23,31 @@
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
     pub fn is_unival_tree(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
-        if let Some(n)=root{
-             if let Some(ref l)=&n.borrow().left{
-                    if n.borrow().val!= l.borrow().val{
-                        return false;
-                    }
-              }
-              if let Some(ref r)=&n.borrow().right{
-                    if n.borrow().val!= r.borrow().val{
-                        return false;
-                    }
-              }
-             let l = Self::is_unival_tree(n.borrow().left.clone());
-             if !l{
-            return false;
+        if let Some(n) = root {
+            if let Some(ref l) = &n.borrow().left {
+                if n.borrow().val != l.borrow().val {
+                    return false;
+                }
+            }
+            if let Some(ref r) = &n.borrow().right {
+                if n.borrow().val != r.borrow().val {
+                    return false;
+                }
+            }
+            let l = Self::is_unival_tree(n.borrow().left.clone());
+            if !l {
+                return false;
             }
             let r = Self::is_unival_tree(n.borrow().right.clone());
-            if !r{
-                    return false;
+            if !r {
+                return false;
             }
         }
         true
     }
 }
 // @lc code=end
-

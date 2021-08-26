@@ -23,23 +23,21 @@
 // }
 impl Solution {
     pub fn delete_duplicates(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-            let mut h = head;
-            let mut p = &mut h;
-            while let Some(ref mut _p)=p {
-                let mut q = _p.next.take();
-                while let Some( mut _q)=q{
-                    if &_p.val ==&_q.val{
-                        q = _q.next.take();
-                    }
-                    else{
-                        _p.next = Some(_q);
-                        break;
-                    }
+        let mut h = head;
+        let mut p = &mut h;
+        while let Some(ref mut _p) = p {
+            let mut q = _p.next.take();
+            while let Some(mut _q) = q {
+                if &_p.val == &_q.val {
+                    q = _q.next.take();
+                } else {
+                    _p.next = Some(_q);
+                    break;
                 }
-                p = &mut _p.next;
             }
-            h
+            p = &mut _p.next;
+        }
+        h
     }
 }
 // @lc code=end
-
