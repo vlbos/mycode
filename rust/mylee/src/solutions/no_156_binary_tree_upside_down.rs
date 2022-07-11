@@ -118,8 +118,14 @@ mod tests {
     use crate::tree;
     #[test]
     fn test_binary_tree_upside_down_basic() {
-        assert_eq!(Solution::upside_down_binary_tree(tree![1,2,3,4,5]), tree![4,5,2,null,null,3,1]);
+        assert_eq!(
+            Solution::upside_down_binary_tree(tree![1, 2, 3, 4, 5]),
+            tree![4, 5, 2, null, null, 3, 1]
+        );
 
-        assert_eq!(Solution::upside_down_binary_tree(tree![4,5,2,null,null,3,1]), tree![5,2,4]);
+        assert_eq!(
+            Solution::upside_down_binary_tree(tree![4, 5, 2, null, null, 3, 1]),
+            tree![5, 2, 4]
+        );
     }
 }

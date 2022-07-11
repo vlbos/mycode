@@ -25,7 +25,7 @@ use std::mem::swap;
 impl Solution {
     pub fn length_of_longest_substring_two_distinct(s: String) -> i32 {
         let chars = s.chars().collect::<Vec<char>>();
-        if chars.len()<=2 {
+        if chars.len() <= 2 {
             return chars.len() as i32;
         }
         let mut diff1 = chars[0];
@@ -62,7 +62,13 @@ mod tests {
 
     #[test]
     fn test_length_of_longest_substring_two_distinct() {
-        assert_eq!(Solution::length_of_longest_substring_two_distinct(String::from("eceba")), 3);
-        assert_eq!(Solution::length_of_longest_substring_two_distinct(String::from("ccaabbb")),5);
+        assert_eq!(
+            Solution::length_of_longest_substring_two_distinct(String::from("eceba")),
+            3
+        );
+        assert_eq!(
+            Solution::length_of_longest_substring_two_distinct(String::from("ccaabbb")),
+            5
+        );
     }
 }

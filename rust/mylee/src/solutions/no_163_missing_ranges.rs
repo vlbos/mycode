@@ -22,13 +22,13 @@ impl Solution {
         let mut res = vec![];
         for i in 0..new_nums.len() - 1 {
             let curr = new_nums[i];
-            let next = new_nums[i+1];
+            let next = new_nums[i + 1];
             match next - curr {
-                sub if sub==2 => {
+                sub if sub == 2 => {
                     res.push(format!("{}", curr + 1));
                 }
-                sub if sub>2 => {
-                    res.push(format!("{}->{}",curr + 1, next - 1));
+                sub if sub > 2 => {
+                    res.push(format!("{}->{}", curr + 1, next - 1));
                 }
                 _ => {}
             }

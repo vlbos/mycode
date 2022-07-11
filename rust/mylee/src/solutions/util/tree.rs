@@ -50,7 +50,7 @@ macro_rules! tree {
         {
             let vec = vec![$(stringify!($e)), *];
             let vec = vec.into_iter().map(|v| v.parse::<i32>().ok()).collect::<Vec<_>>();
-            to_tree(vec)
+            crate::solutions::util::tree::to_tree(vec)
         }
     };
     ($($e:expr,)*) => {(tree![$($e),*])};

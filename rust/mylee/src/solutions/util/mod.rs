@@ -7,5 +7,6 @@ pub mod tree;
 pub mod trees;
 #[macro_use]
 pub mod point;
-pub mod union_find;
 pub mod test_tools;
+pub mod union_find;
+pub mod array;
