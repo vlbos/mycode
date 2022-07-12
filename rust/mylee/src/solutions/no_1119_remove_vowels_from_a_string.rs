@@ -22,11 +22,17 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn remove_vowels(s: String) -> String {
-        
+        String::new()
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::remove_vowels(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test__1() {
+        assert_eq!(String::new(), Solution::remove_vowels(String::new()));
+    }
 }

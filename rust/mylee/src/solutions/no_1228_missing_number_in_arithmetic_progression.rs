@@ -26,11 +26,15 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn missing_number(arr: Vec<i32>) -> i32 {
-        
+        0
     }
 }
+#[cfg(test)]
+mod test {
+    use super::*;
 
-fn main() {
-  assert_eq!(0, Solution::missing_number(0));
-  println!("Pass test cases!");
+    #[test]
+    fn test_missing_number_1() {
+        assert_eq!(0, Solution::missing_number(Vec::new()));
+    }
 }

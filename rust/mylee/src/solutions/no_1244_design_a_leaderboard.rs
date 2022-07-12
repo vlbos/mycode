@@ -50,7 +50,7 @@ struct Leaderboard {
 impl Leaderboard {
 
     fn new() -> Self {
-        
+        Self{}
     }
     
     fn add_score(&self, player_id: i32, score: i32) {
@@ -58,7 +58,7 @@ impl Leaderboard {
     }
     
     fn top(&self, k: i32) -> i32 {
-        
+        0
     }
     
     fn reset(&self, player_id: i32) {
@@ -74,7 +74,18 @@ impl Leaderboard {
  * obj.reset(playerId);
  */
 
-fn main() {
-  assert_eq!(0, Solution::new(0));
-  println!("Pass test cases!");
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_leader_board_1() {
+let k = 10;
+let player_id=0;
+let score=0;
+          let obj = Leaderboard::new();
+ obj.add_score(player_id, score);
+  let ret_2: i32 = obj.top(k);
+  obj.reset(player_id);
+    }
 }

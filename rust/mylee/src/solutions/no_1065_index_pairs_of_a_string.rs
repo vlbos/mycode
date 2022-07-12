@@ -27,11 +27,17 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn index_pairs(text: String, words: Vec<String>) -> Vec<Vec<i32>> {
-        
+        Vec::new()
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::index_pairs(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_index_pairs_1() {
+        assert_eq!(Vec::Vec::<i32>::new(), Solution::index_pairs(String::new(),Vec::new()));
+    }
 }

@@ -36,11 +36,16 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn min_swaps(data: Vec<i32>) -> i32 {
-        
+        0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::min_swaps(0));
-  println!("Pass test cases!");
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_min_swaps_1() {
+        assert_eq!(0, Solution::min_swaps(Vec::new()));
+    }
 }

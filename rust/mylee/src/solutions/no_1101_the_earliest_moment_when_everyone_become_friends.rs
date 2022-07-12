@@ -38,11 +38,17 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn earliest_acq(logs: Vec<Vec<i32>>, n: i32) -> i32 {
-        
+        0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::earliest_acq(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test__1() {
+        assert_eq!(0, Solution::earliest_acq(Vec::new(),0));
+    }
 }

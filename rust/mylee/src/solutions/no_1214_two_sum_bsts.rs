@@ -64,11 +64,15 @@ use std::rc::Rc;
 use std::cell::RefCell;
 impl Solution {
     pub fn two_sum_bs_ts(root1: Option<Rc<RefCell<TreeNode>>>, root2: Option<Rc<RefCell<TreeNode>>>, target: i32) -> bool {
-        
+        true
     }
 }
+#[cfg(test)]
+mod test {
+    use super::*;
 
-fn main() {
-  assert_eq!(0, Solution::two_sum_bs_ts(0));
-  println!("Pass test cases!");
+    #[test]
+    fn test_two_sum_bs_ts_1() {
+        assert!( Solution::two_sum_bs_ts(None,None,0));
+    }
 }

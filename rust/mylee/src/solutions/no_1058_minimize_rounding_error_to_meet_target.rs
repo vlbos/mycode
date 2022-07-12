@@ -28,11 +28,17 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn minimize_error(prices: Vec<String>, target: i32) -> String {
-        
+        String::new()
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::minimize_error(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_minimize_error_1() {
+        assert_eq!(String::new(), Solution::minimize_error(Vec::new(),0));
+    }
 }

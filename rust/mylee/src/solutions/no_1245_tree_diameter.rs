@@ -28,11 +28,16 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn tree_diameter(edges: Vec<Vec<i32>>) -> i32 {
-        
+        0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::tree_diameter(0));
-  println!("Pass test cases!");
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_tree_diameter_1() {
+        assert_eq!(0, Solution::tree_diameter(Vec::new()));
+    }
 }

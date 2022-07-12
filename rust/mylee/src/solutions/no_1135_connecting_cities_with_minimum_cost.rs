@@ -33,11 +33,16 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn minimum_cost(n: i32, connections: Vec<Vec<i32>>) -> i32 {
-        
+        0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::minimum_cost(0));
-  println!("Pass test cases!");
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_minimum_cost_1() {
+        assert_eq!(0, Solution::minimum_cost(0,Vec::new()));
+    }
 }

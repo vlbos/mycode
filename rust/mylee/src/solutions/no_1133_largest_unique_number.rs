@@ -28,11 +28,17 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn largest_unique_number(a: Vec<i32>) -> i32 {
-        
+        0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::largest_unique_number(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_largest_unique_number_1() {
+        assert_eq!(0, Solution::largest_unique_number(Vec::new()));
+    }
 }

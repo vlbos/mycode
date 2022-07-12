@@ -21,11 +21,17 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn minmax_gas_dist(stations: Vec<i32>, k: i32) -> f64 {
-        
+        0.0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::minmax_gas_dist(0));
-  println!("Pass test cases!");
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_minmax_gas_dist_1() {
+        assert_eq!(0.0, Solution::minmax_gas_dist(Vec::new(),0));
+    }
 }
+

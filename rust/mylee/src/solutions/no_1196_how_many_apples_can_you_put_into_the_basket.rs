@@ -24,11 +24,15 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn max_number_of_apples(arr: Vec<i32>) -> i32 {
-        
+        0
     }
 }
+#[cfg(test)]
+mod test {
+    use super::*;
 
-fn main() {
-  assert_eq!(0, Solution::max_number_of_apples(0));
-  println!("Pass test cases!");
+    #[test]
+    fn test_max_number_of_apples_1() {
+        assert_eq!(0, Solution::max_number_of_apples(Vec::new()));
+    }
 }

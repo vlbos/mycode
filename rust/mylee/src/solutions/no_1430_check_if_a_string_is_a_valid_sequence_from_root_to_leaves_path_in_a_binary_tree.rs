@@ -77,11 +77,15 @@ use std::rc::Rc;
 use std::cell::RefCell;
 impl Solution {
     pub fn is_valid_sequence(root: Option<Rc<RefCell<TreeNode>>>, arr: Vec<i32>) -> bool {
-        
+        false
     }
 }
+#[cfg(test)]
+mod test {
+    use super::*;
 
-fn main() {
-  assert_eq!(0, Solution::is_valid_sequence(0));
-  println!("Pass test cases!");
+    #[test]
+    fn test_is_valid_sequence_1() {
+        assert!(Solution::is_valid_sequence(None,Vec::new()));
+    }
 }

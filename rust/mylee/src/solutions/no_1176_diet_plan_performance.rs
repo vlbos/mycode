@@ -44,11 +44,17 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn diet_plan_performance(calories: Vec<i32>, k: i32, lower: i32, upper: i32) -> i32 {
-        
+        0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::diet_plan_performance(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_diet_plan_performance_1() {
+        assert_eq!(0, Solution::diet_plan_performance(Vec::new(),0,0,0));
+    }
 }

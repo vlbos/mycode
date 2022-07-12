@@ -23,11 +23,15 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn probability_of_heads(prob: Vec<f64>, target: i32) -> f64 {
-        
+        0.0
     }
 }
+#[cfg(test)]
+mod test {
+    use super::*;
 
-fn main() {
-  assert_eq!(0, Solution::probability_of_heads(0));
-  println!("Pass test cases!");
+    #[test]
+    fn test_probability_of_heads_1() {
+        assert_eq!(0.0, Solution::probability_of_heads(Vec::new(),0));
+    }
 }

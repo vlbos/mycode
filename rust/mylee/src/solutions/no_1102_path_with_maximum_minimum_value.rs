@@ -32,11 +32,17 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn maximum_minimum_path(a: Vec<Vec<i32>>) -> i32 {
-        
+        0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::maximum_minimum_path(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_maximum_minimum_path_1() {
+        assert_eq!(0, Solution::maximum_minimum_path(Vec::new()));
+    }
 }

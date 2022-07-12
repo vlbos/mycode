@@ -32,11 +32,17 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn fixed_point(a: Vec<i32>) -> i32 {
-        
+        0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::fixed_point(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_fixed_point_1() {
+        assert_eq!(0, Solution::fixed_point(Vec::new()));
+    }
 }

@@ -19,11 +19,15 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn smallest_common_element(mat: Vec<Vec<i32>>) -> i32 {
-        
+        0
     }
 }
+#[cfg(test)]
+mod test {
+    use super::*;
 
-fn main() {
-  assert_eq!(0, Solution::smallest_common_element(0));
-  println!("Pass test cases!");
+    #[test]
+    fn test_smallest_common_element_1() {
+        assert_eq!(0, Solution::smallest_common_element(Vec::new()));
+    }
 }

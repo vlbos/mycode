@@ -32,11 +32,16 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn find_smallest_region(regions: Vec<Vec<String>>, region1: String, region2: String) -> String {
-        
+        String::new()
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::find_smallest_region(0));
-  println!("Pass test cases!");
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_find_smallest_region_1() {
+        assert_eq!(String::new(), Solution::find_smallest_region(Vec::new(),String::new(),String::new()));
+    }
 }

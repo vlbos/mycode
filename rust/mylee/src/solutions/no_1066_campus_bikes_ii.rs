@@ -32,11 +32,16 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn assign_bikes(workers: Vec<Vec<i32>>, bikes: Vec<Vec<i32>>) -> i32 {
-        
+        0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::assign_bikes(0));
-  println!("Pass test cases!");
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_assign_bikes_1() {
+        assert_eq!(0, Solution::assign_bikes(Vec::new(),Vec::new()));
+    }
 }

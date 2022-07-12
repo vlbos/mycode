@@ -70,11 +70,16 @@ pub fn from_vec(vec: Vec<i32>) -> Option<Box<ListNode>> {
 pub struct Solution {}
 impl Solution {
     pub fn delete_nodes(head: Option<Box<ListNode>>, m: i32, n: i32) -> Option<Box<ListNode>> {
-        
+        None
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::delete_nodes(0));
-  println!("Pass test cases!");
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_delete_nodes_1() {
+        assert_eq!(None, Solution::delete_nodes(None,0,0));
+    }
 }

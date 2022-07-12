@@ -44,11 +44,16 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn before_and_after_puzzles(phrases: Vec<String>) -> Vec<String> {
-        
+        Vec::new()
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::before_and_after_puzzles(0));
-  println!("Pass test cases!");
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_before_and_after_puzzles_1() {
+        assert_eq!(Vec::<String>::new(), Solution::before_and_after_puzzles(Vec::new()));
+    }
 }

@@ -73,7 +73,7 @@ mod test {
     use crate::lc_vec_s;
 
     #[test]
-    fn test_add_bold_tag_1() {
+    fn test_bold_words_1() {
         assert_eq!(
             Solution::bold_words(lc_vec_s!["abc", "123"], String::from("abcxyz123")),
             String::from("<b>abc</b>xyz<b>123</b>")
@@ -81,7 +81,7 @@ mod test {
     }
 
     #[test]
-    fn test_add_bold_tag_2() {
+    fn test_bold_words_2() {
         assert_eq!(
             Solution::bold_words(lc_vec_s!["aaa", "aab", "bc"], String::from("aaabbcc")),
             String::from("<b>aaabbc</b>c")

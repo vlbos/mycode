@@ -26,3 +26,20 @@ Constraints:
 
 
 */
+pub struct Solution {}
+impl Solution {
+    pub fn employee_free_time(schedule: Vec<Vec<Vec<i32>>>) -> Vec<Vec<i32>> {
+        Vec::new()
+    }
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_employee_free_time_1() {
+        assert_eq!(Vec::Vec::<i32>::new(), Solution::employee_free_time(Vec::new()));
+    }
+}
+

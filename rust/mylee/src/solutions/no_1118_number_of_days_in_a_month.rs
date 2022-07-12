@@ -26,11 +26,17 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn number_of_days(y: i32, m: i32) -> i32 {
-        
+        0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::number_of_days(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_number_of_days_1() {
+        assert_eq!(0, Solution::number_of_days(0,0));
+    }
 }

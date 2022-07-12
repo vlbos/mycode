@@ -39,11 +39,17 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn confusing_number(n: i32) -> bool {
-        
+        true
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::confusing_number(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_confusing_number_1() {
+        assert!( Solution::confusing_number(0));
+    }
 }

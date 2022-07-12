@@ -24,11 +24,16 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn to_hexspeak(num: String) -> String {
-        
+        String::new()
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::to_hexspeak(0));
-  println!("Pass test cases!");
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_to_hexspeak_1() {
+        assert_eq!(String::new(), Solution::to_hexspeak(String::new()));
+    }
 }

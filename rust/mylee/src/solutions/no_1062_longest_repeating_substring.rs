@@ -33,11 +33,17 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn longest_repeating_substring(s: String) -> i32 {
-        
+        0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::longest_repeating_substring(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_longest_repeating_substring_1() {
+        assert_eq!(0, Solution::longest_repeating_substring(String::new()));
+    }
 }

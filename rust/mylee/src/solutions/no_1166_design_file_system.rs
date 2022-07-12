@@ -60,15 +60,15 @@ struct FileSystem {
 impl FileSystem {
 
     fn new() -> Self {
-        
+        Self{}
     }
     
     fn create_path(&self, path: String, value: i32) -> bool {
-        
+        true
     }
     
     fn get(&self, path: String) -> i32 {
-        
+        0
     }
 }
 
@@ -79,7 +79,17 @@ impl FileSystem {
  * let ret_2: i32 = obj.get(path);
  */
 
-fn main() {
-  assert_eq!(0, Solution::new(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_create_path_1() {
+let path=String::new();
+let value =0;
+         let obj = FileSystem::new();
+  let ret_1: bool = obj.create_path(path, value);
+  let ret_2: i32 = obj.get(path);
+    }
 }

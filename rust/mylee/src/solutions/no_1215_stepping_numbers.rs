@@ -17,11 +17,15 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn count_stepping_numbers(low: i32, high: i32) -> Vec<i32> {
-        
+        Vec::new()
     }
 }
+#[cfg(test)]
+mod test {
+    use super::*;
 
-fn main() {
-  assert_eq!(0, Solution::count_stepping_numbers(0));
-  println!("Pass test cases!");
+    #[test]
+    fn test_count_stepping_numbers_1() {
+        assert_eq!(Vec::<i32>::new(), Solution::count_stepping_numbers(0,0));
+    }
 }

@@ -22,11 +22,19 @@ Note: Do not use the eval built-in library function.
 pub struct Solution {}
 impl Solution {
     pub fn calculate(s: String) -> i32 {
-        
+        0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::calculate(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_calculate_1() {
+        assert_eq!(0, Solution::calculate(String::new()));
+    }
 }
+
+

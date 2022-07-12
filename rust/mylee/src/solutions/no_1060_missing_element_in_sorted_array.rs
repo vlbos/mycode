@@ -32,11 +32,17 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn missing_element(nums: Vec<i32>, k: i32) -> i32 {
-        
+        0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::missing_element(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_missing_element_1() {
+        assert_eq!(0, Solution::missing_element(Vec::new(),0));
+    }
 }

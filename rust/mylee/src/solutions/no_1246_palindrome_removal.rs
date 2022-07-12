@@ -23,11 +23,16 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn minimum_moves(arr: Vec<i32>) -> i32 {
-        
+        0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::minimum_moves(0));
-  println!("Pass test cases!");
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_minimum_moves_1() {
+        assert_eq!(0, Solution::minimum_moves(Vec::new()));
+    }
 }

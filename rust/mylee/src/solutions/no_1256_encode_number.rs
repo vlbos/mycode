@@ -20,11 +20,16 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn encode(num: i32) -> String {
-        
+        String::new()
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::encode(0));
-  println!("Pass test cases!");
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_encode_1() {
+        assert_eq!(String::new(), Solution::encode(0));
+    }
 }

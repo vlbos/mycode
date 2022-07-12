@@ -68,3 +68,55 @@ queue.size();       // 1 element remaining in the queue.
 Since the number of threads for producer/consumer is greater than 1, we do not know how the threads will be scheduled in the operating system, even though the input seems to imply the ordering. Therefore, any of the output [1,0,2] or [1,2,0] or [0,1,2] or [0,2,1] or [2,0,1] or [2,1,0] will be accepted.
 
 */
+
+struct BoundedBlockingQueue {
+
+}
+
+
+/** 
+ * `&self` means the method takes an immutable reference.
+ * If you need a mutable reference, change it to `&mut self` instead.
+ */
+impl BoundedBlockingQueue {
+    fn new(capacity:i32) -> Self {
+        Self{}
+    }
+    
+    fn en_queue(&self, element: i32){
+        
+    }
+    
+    fn de_queue(&self) -> i32 {
+        0
+    }
+    fn size(&self) -> i32 {
+        0
+    }
+}
+
+/**
+ * Your BoundedBlockingQueue object will be instantiated and called as such:
+ * let obj = BoundedBlockingQueue::new(k);
+ * let ret_1: bool = obj.en_queue(value);
+ * let ret_2: bool = obj.de_queue();
+ * let ret_3: i32 = obj.front();
+ * let ret_4: i32 = obj.rear();
+ * let ret_5: bool = obj.is_empty();
+ * let ret_6: bool = obj.is_full();
+ */
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test__1() {
+        let k = 1;
+let value=0;
+        let obj = BoundedBlockingQueue::new(k);
+ obj.en_queue(value);
+ let ret_2: i32 = obj.de_queue();
+ let ret_3: i32 = obj.size();
+
+    }
+}

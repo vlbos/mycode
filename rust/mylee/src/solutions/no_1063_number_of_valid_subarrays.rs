@@ -30,11 +30,17 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn valid_subarrays(nums: Vec<i32>) -> i32 {
-        
+        0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::valid_subarrays(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_valid_subarrays_1() {
+        assert_eq!(0, Solution::valid_subarrays(Vec::new()));
+    }
 }

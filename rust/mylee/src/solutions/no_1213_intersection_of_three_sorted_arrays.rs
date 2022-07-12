@@ -17,11 +17,15 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn arrays_intersection(arr1: Vec<i32>, arr2: Vec<i32>, arr3: Vec<i32>) -> Vec<i32> {
-        
+        Vec::new()
     }
 }
+#[cfg(test)]
+mod test {
+    use super::*;
 
-fn main() {
-  assert_eq!(0, Solution::arrays_intersection(0));
-  println!("Pass test cases!");
+    #[test]
+    fn test_arrays_intersection_1() {
+        assert_eq!(Vec::<i32>::new(), Solution::arrays_intersection(Vec::new(),Vec::new(),Vec::new()));
+    }
 }

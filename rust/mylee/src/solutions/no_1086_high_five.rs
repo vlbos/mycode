@@ -25,11 +25,17 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn high_five(items: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-        
+        Vec::new()
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::high_five(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_high_five_1() {
+        assert_eq!(Vec::Vec::<i32>::new(), Solution::high_five(Vec::new()));
+    }
 }

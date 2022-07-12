@@ -27,11 +27,17 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn sum_of_digits(a: Vec<i32>) -> i32 {
-        
+        0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::sum_of_digits(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_sum_of_digits_1() {
+        assert_eq!(0, Solution::sum_of_digits(Vec::new()));
+    }
 }

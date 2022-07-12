@@ -25,11 +25,17 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn similar_rgb(color: String) -> String {
-        
+        String::new()
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::similar_rgb(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_similar_rgb_1() {
+        assert_eq!(String::new(), Solution::similar_rgb(String::new()));
+    }
 }

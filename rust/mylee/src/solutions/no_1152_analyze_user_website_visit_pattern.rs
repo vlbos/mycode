@@ -44,11 +44,17 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn most_visited_pattern(username: Vec<String>, timestamp: Vec<i32>, website: Vec<String>) -> Vec<String> {
-        
+        Vec::new()
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::most_visited_pattern(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_most_visited_pattern_1() {
+        assert_eq!(Vec::<String>::new(), Solution::most_visited_pattern(Vec::new(),Vec::new(),Vec::new()));
+    }
 }

@@ -27,11 +27,17 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn is_armstrong(n: i32) -> bool {
-        
+        true
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::is_armstrong(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_is_armstrong_1() {
+        assert!( Solution::is_armstrong(0));
+    }
 }

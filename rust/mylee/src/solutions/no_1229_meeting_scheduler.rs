@@ -30,11 +30,15 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn min_available_duration(slots1: Vec<Vec<i32>>, slots2: Vec<Vec<i32>>, duration: i32) -> Vec<i32> {
-        
+        Vec::new()
     }
 }
+#[cfg(test)]
+mod test {
+    use super::*;
 
-fn main() {
-  assert_eq!(0, Solution::min_available_duration(0));
-  println!("Pass test cases!");
+    #[test]
+    fn test_min_available_duration_1() {
+        assert_eq!(Vec::<i32>::new(), Solution::min_available_duration(Vec::new(),Vec::new(),0));
+    }
 }

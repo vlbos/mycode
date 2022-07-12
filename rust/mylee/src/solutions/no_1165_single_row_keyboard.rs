@@ -28,11 +28,17 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn calculate_time(keyboard: String, word: String) -> i32 {
-        
+        0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::calculate_time(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_calculate_time_1() {
+        assert_eq!(0, Solution::calculate_time(String::new(),String::new()));
+    }
 }

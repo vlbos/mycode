@@ -27,11 +27,17 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn two_sum_less_than_k(a: Vec<i32>, k: i32) -> i32 {
-        
+        0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::two_sum_less_than_k(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_two_sum_less_than_k_1() {
+        assert_eq!(0, Solution::two_sum_less_than_k(Vec::new(),0));
+    }
 }

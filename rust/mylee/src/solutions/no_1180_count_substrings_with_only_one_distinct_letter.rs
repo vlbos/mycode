@@ -26,11 +26,17 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn count_letters(s: String) -> i32 {
-        
+        0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::count_letters(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_count_letters_1() {
+        assert_eq!(0, Solution::count_letters(String::new()));
+    }
 }

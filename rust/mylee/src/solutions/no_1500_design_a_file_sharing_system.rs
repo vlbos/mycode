@@ -63,7 +63,6 @@ Constraints:
 
 
 */
-pub struct Solution {}
 struct FileSharing {
 
 }
@@ -76,11 +75,11 @@ struct FileSharing {
 impl FileSharing {
 
     fn new(m: i32) -> Self {
-        
+        Self{}
     }
     
     fn join(&self, owned_chunks: Vec<i32>) -> i32 {
-        
+        0
     }
     
     fn leave(&self, user_id: i32) {
@@ -88,7 +87,7 @@ impl FileSharing {
     }
     
     fn request(&self, user_id: i32, chunk_id: i32) -> Vec<i32> {
-        
+        Vec::new()
     }
 }
 
@@ -100,7 +99,19 @@ impl FileSharing {
  * let ret_3: Vec<i32> = obj.request(userID, chunkID);
  */
 
-fn main() {
-  assert_eq!(0, Solution::new(0));
-  println!("Pass test cases!");
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_file_sharing_1() {
+let m = 0;
+let owned_chunks=Vec::new();
+let used_id=0;
+let chunk_id=0;
+          let obj = FileSharing::new(m);
+  let ret_1: i32 = obj.join(owned_chunks);
+  obj.leave(used_id);
+ let ret_3: Vec<i32> = obj.request(used_id, chunk_id);
+    }
 }

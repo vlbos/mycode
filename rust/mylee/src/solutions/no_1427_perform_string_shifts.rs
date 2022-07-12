@@ -38,11 +38,16 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn string_shift(s: String, shift: Vec<Vec<i32>>) -> String {
-        
+        String::new()
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::string_shift(0));
-  println!("Pass test cases!");
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_string_shift_1() {
+        assert_eq!(String::new(), Solution::string_shift(String::new(),Vec::new()));
+    }
 }

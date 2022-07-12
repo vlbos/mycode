@@ -78,11 +78,17 @@ use std::rc::Rc;
 use std::cell::RefCell;
 impl Solution {
     pub fn split_bst(root: Option<Rc<RefCell<TreeNode>>>, v: i32) -> Vec<Option<Rc<RefCell<TreeNode>>>> {
-        
+        Vec::new()
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::split_bst(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_split_bst_1() {
+        assert_eq!(Vec::Option<Rc<RefCell<TreeNode>>>::new(), Solution::split_bst(None,0));
+    }
 }

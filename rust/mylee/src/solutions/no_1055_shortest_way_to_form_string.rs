@@ -29,11 +29,17 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn shortest_way(source: String, target: String) -> i32 {
-        
+        0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::shortest_way(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_shortest_way_1() {
+        assert_eq!(0, Solution::shortest_way(String::new(),String::new()));
+    }
 }

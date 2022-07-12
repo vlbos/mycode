@@ -69,11 +69,17 @@ use std::rc::Rc;
 use std::cell::RefCell;
 impl Solution {
     pub fn maximum_average_subtree(root: Option<Rc<RefCell<TreeNode>>>) -> f64 {
-        
+        0.0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::maximum_average_subtree(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_maximum_average_subtree_1() {
+        assert_eq!(0.0, Solution::maximum_average_subtree(None));
+    }
 }

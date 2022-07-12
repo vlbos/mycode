@@ -25,11 +25,17 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn digits_count(d: i32, low: i32, high: i32) -> i32 {
-        
+        0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::digits_count(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_digits_count_1() {
+        assert_eq!(0, Solution::digits_count(0,0,0));
+    }
 }

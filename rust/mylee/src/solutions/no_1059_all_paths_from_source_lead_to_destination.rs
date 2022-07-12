@@ -49,11 +49,17 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn leads_to_destination(n: i32, edges: Vec<Vec<i32>>, source: i32, destination: i32) -> bool {
-        
+        true
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::leads_to_destination(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_leads_to_destination_1() {
+        assert!( Solution::leads_to_destination(0,Vec::new(),0,0));
+    }
 }

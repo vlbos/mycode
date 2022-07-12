@@ -27,11 +27,16 @@ A[i], B[i] are integers in range [0, 10^5].
 pub struct Solution {}
 impl Solution {
     pub fn anagram_mappings(a: Vec<i32>, b: Vec<i32>) -> Vec<i32> {
-        
+        Vec::new()
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::anagram_mappings(0));
-  println!("Pass test cases!");
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_anagram_mappings_1() {
+        assert_eq!(Vec::<i32>::new(), Solution::anagram_mappings(Vec::new(),Vec::new()));
+    }
 }

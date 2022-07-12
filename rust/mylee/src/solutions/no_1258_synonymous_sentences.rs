@@ -26,11 +26,16 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn generate_sentences(synonyms: Vec<Vec<String>>, text: String) -> Vec<String> {
-        
+        Vec::new()
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::generate_sentences(0));
-  println!("Pass test cases!");
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_generate_sentences_1() {
+        assert_eq!(Vec::<String>::new(), Solution::generate_sentences(Vec::new(),String::new()));
+    }
 }

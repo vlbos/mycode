@@ -31,11 +31,17 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn shortest_distance_color(colors: Vec<i32>, queries: Vec<Vec<i32>>) -> Vec<i32> {
-        
+        Vec::new()
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::shortest_distance_color(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_shortest_distance_color_1() {
+        assert_eq!(Vec::<i32>::new(), Solution::shortest_distance_color(Vec::new(),Vec::new()));
+    }
 }

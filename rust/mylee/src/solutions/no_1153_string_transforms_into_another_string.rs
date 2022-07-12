@@ -28,11 +28,17 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn can_convert(str1: String, str2: String) -> bool {
-        
+        true
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::can_convert(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_can_convert_1() {
+        assert!( Solution::can_convert(String::new(),String::new()));
+    }
 }

@@ -27,11 +27,17 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn num_k_len_substr_no_repeats(s: String, k: i32) -> i32 {
-        
+        0
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::num_k_len_substr_no_repeats(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_num_k_len_substr_no_repeats_1() {
+        assert_eq!(0, Solution::num_k_len_substr_no_repeats(String::new(),0));
+    }
 }

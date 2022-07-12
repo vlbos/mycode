@@ -33,11 +33,15 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn maximize_sweetness(sweetness: Vec<i32>, k: i32) -> i32 {
-        
+        0
     }
 }
+#[cfg(test)]
+mod test {
+    use super::*;
 
-fn main() {
-  assert_eq!(0, Solution::maximize_sweetness(0));
-  println!("Pass test cases!");
+    #[test]
+    fn test_maximize_sweetness_1() {
+        assert_eq!(0, Solution::maximize_sweetness(Vec::new(),0));
+    }
 }

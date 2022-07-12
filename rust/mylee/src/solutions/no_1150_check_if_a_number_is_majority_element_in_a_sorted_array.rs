@@ -30,11 +30,17 @@ Constraints:
 pub struct Solution {}
 impl Solution {
     pub fn is_majority_element(nums: Vec<i32>, target: i32) -> bool {
-        
+        true
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::is_majority_element(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_is_majority_element_1() {
+        assert!( Solution::is_majority_element(Vec::new(),0));
+    }
 }

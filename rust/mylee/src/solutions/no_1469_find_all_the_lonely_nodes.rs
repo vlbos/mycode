@@ -86,11 +86,16 @@ use std::rc::Rc;
 use std::cell::RefCell;
 impl Solution {
     pub fn get_lonely_nodes(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
-        
+        Vec::new()
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::get_lonely_nodes(0));
-  println!("Pass test cases!");
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_get_lonely_nodes_1() {
+        assert_eq!(Vec::<i32>::new(), Solution::get_lonely_nodes(None));
+    }
 }

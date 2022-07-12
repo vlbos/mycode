@@ -39,11 +39,17 @@ Note:
 pub struct Solution {}
 impl Solution {
     pub fn smallest_equivalent_string(a: String, b: String, s: String) -> String {
-        
+        String::new()
     }
 }
 
-fn main() {
-  assert_eq!(0, Solution::smallest_equivalent_string(0));
-  println!("Pass test cases!");
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_smallest_equivalent_string_1() {
+        assert_eq!(String::new(), Solution::smallest_equivalent_string(String::new(),String::new(),String::new()));
+    }
 }
