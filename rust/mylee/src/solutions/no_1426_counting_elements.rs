@@ -3,7 +3,7 @@ Given an integer array arr, count how many elements x there are, such that x + 1
 
 If there're duplicates in arr, count them seperately.
 
- 
+
 Example 1:
 Input: arr = [1,2,3]
 Output: 2
@@ -29,10 +29,10 @@ Input: arr = [1,1,2]
 Output: 2
 Explanation: Both 1s are counted because 2 is in the array.
 
- 
+
 Constraints:
-	1 <= arr.length <= 1000
-	0 <= arr[i] <= 1000
+    1 <= arr.length <= 1000
+    0 <= arr[i] <= 1000
 
 */
 pub struct Solution {}

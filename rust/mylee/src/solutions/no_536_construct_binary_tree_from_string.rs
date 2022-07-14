@@ -1,4 +1,3 @@
-
 /*
  * @lc app=leetcode.cn id=536 lang=rust
  *
@@ -24,10 +23,10 @@
 //     }
 //   }
 // }
+use crate::solutions::util::tree::TreeNode;
 use std::cell::RefCell;
 use std::collections::VecDeque;
 use std::rc::Rc;
-use crate::solutions::util::tree::TreeNode;
 
 impl Solution {
     pub fn str2tree(s: String) -> Option<Rc<RefCell<TreeNode>>> {

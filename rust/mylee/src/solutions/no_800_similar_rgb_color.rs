@@ -10,15 +10,15 @@ Given the color "#ABCDEF", return a 7 character color that is most similar to #A
 Example 1:
 Input: color = "#09f166"
 Output: "#11ee66"
-Explanation:  
+Explanation:
 The similarity is -(0x09 - 0x11)^2 -(0xf1 - 0xee)^2 - (0x66 - 0x66)^2 = -64 -9 -0 = -73.
 This is the highest among any shorthand color.
 
 Note:
-	color is a string of length 7.
-	color is a valid RGB color: for i > 0, color[i] is a hexadecimal digit from 0 to f
-	Any answer which has the same (highest) similarity as the best answer will be accepted.
-	All inputs and outputs should use lowercase letters, and the output is 7 characters.
+    color is a string of length 7.
+    color is a valid RGB color: for i > 0, color[i] is a hexadecimal digit from 0 to f
+    Any answer which has the same (highest) similarity as the best answer will be accepted.
+    All inputs and outputs should use lowercase letters, and the output is 7 characters.
 
 
 */
@@ -28,7 +28,6 @@ impl Solution {
         String::new()
     }
 }
-
 
 #[cfg(test)]
 mod test {

@@ -66,9 +66,9 @@ struct Solution;
 #[cfg(test)]
 mod test {
     use super::*;
-    use crate::solutions::util::linked_list::ListNode;
     use crate::linked;
- use crate::solutions::util::linked_list::to_list;
+    use crate::solutions::util::linked_list::to_list;
+    use crate::solutions::util::linked_list::ListNode;
     #[test]
     fn test_plus_one() {
         let mut input = linked![1, 2, 3];

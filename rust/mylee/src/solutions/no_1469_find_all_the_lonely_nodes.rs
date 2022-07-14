@@ -3,7 +3,7 @@ In a binary tree, a lonely node is a node that is the only child of its parent n
 
 Given the root of a binary tree, return an array containing the values of all lonely nodes in the tree. Return the list in any order.
 
- 
+
 Example 1:
 Input: root = [1,2,3,null,4]
 Output: [4]
@@ -18,7 +18,7 @@ Explanation: Light blue nodes are lonely nodes.
 Please remember that order doesn't matter, [2,6] is also an acceptable answer.
 
 Example 3:
- 
+
 
 Input: root = [11,99,88,77,null,null,66,55,null,null,44,33,null,null,22]
 Output: [77,55,33,66,44,22]
@@ -33,10 +33,10 @@ Example 5:
 Input: root = [31,null,78,null,28]
 Output: [78,28]
 
- 
+
 Constraints:
-	The number of nodes in the tree is in the range [1, 1000].
-	Each node's value is between [1, 10^6].
+    The number of nodes in the tree is in the range [1, 1000].
+    Each node's value is between [1, 10^6].
 
 
 */
@@ -82,8 +82,8 @@ pub fn to_tree(vec: Vec<Option<i32>>) -> Option<Rc<RefCell<TreeNode>>> {
     head
 }
 pub struct Solution {}
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
     pub fn get_lonely_nodes(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
         Vec::new()

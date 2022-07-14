@@ -5,7 +5,7 @@ A knight has 8 possible moves it can make, as illustrated below. Each move is tw
 
 Return the minimum number of steps needed to move the knight to the square [x, y].  It is guaranteed the answer exists.
 
- 
+
 Example 1:
 Input: x = 2, y = 1
 Output: 1
@@ -16,9 +16,9 @@ Input: x = 5, y = 5
 Output: 4
 Explanation: [0, 0] &rarr; [2, 1] &rarr; [4, 2] &rarr; [3, 4] &rarr; [5, 5]
 
- 
+
 Constraints:
-	|x| + |y| <= 300
+    |x| + |y| <= 300
 
 
 */
@@ -34,6 +34,6 @@ mod test {
 
     #[test]
     fn test_min_knight_moves_1() {
-        assert_eq!(0, Solution::min_knight_moves(0,0));
+        assert_eq!(0, Solution::min_knight_moves(0, 0));
     }
 }

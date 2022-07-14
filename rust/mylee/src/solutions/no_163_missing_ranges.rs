@@ -16,24 +16,44 @@ struct Solution;
 
 impl Solution {
     pub fn find_missing_ranges(nums: Vec<i32>, lower: i32, upper: i32) -> Vec<String> {
-        let mut new_nums = vec![lower as i64 - 1];
-        new_nums.extend(nums.into_iter().map(|i| i as i64).collect::<Vec<i64>>());
-        new_nums.push(upper as i64 + 1);
-        let mut res = vec![];
-        for i in 0..new_nums.len() - 1 {
-            let curr = new_nums[i];
-            let next = new_nums[i + 1];
-            match next - curr {
-                sub if sub == 2 => {
-                    res.push(format!("{}", curr + 1));
-                }
-                sub if sub > 2 => {
-                    res.push(format!("{}->{}", curr + 1, next - 1));
-                }
-                _ => {}
+        // let mut new_nums = vec![lower as i64 - 1];
+        // new_nums.extend(nums.into_iter().map(|i| i as i64).collect::<Vec<i64>>());
+        // new_nums.push(upper as i64 + 1);
+        // let mut res = vec![];
+        // for i in 0..new_nums.len() - 1 {
+        //     let curr = new_nums[i];
+        //     let next = new_nums[i + 1];
+        //     match next - curr {
+        //         sub if sub == 2 => {
+        //             res.push(format!("{}", curr + 1));
+        //         }
+        //         sub if sub > 2 => {
+        //             res.push(format!("{}->{}", curr + 1, next - 1));
+        //         }
+        //         _ => {}
+        //     }
+        // }
+        // res
+        let mut ans = Vec::new();
+        let mut lower = lower;
+        for &num in &nums {
+            if num > lower {
+                ans.push(if num - 1 > lower {
+                    format!("{}->{}", lower, num - 1)
+                } else {
+                    lower.to_string()
+                });
             }
+            lower = num + 1;
         }
-        res
+        if upper >= lower {
+            ans.push(if upper > lower {
+                format!("{}->{}", lower, upper)
+            } else {
+                lower.to_string()
+            });
+        }
+        ans
     }
 }
 // @lc code=end

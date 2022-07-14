@@ -117,7 +117,7 @@ mod test {
 
     #[test]
     fn test_longest_consecutive_3() {
-        let tree = tree![1,2, 4, 3];
+        let tree = tree![1, 2, 4, 3];
         assert_eq!(Solution::longest_consecutive(tree), 2);
     }
 

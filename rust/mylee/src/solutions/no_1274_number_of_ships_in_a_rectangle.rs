@@ -9,19 +9,19 @@ Given two points, which are the top right and bottom left corners of a rectangle
 
 Submissions making more than 400 calls to hasShips will be judged Wrong Answer.  Also, any solutions that attempt to circumvent the judge will result in disqualification.
 
- 
+
 Example :
 
-Input: 
+Input:
 ships = [[1,1],[2,2],[3,3],[5,5]], topRight = [4,4], bottomLeft = [0,0]
 Output: 3
 Explanation: From [0,0] to [4,4] we can count 3 ships within the range.
 
- 
+
 Constraints:
-	On the input ships is only given to initialize the map internally. You must solve this problem "blindfolded". In other words, you must find the answer using the given hasShips API, without knowing the ships position.
-	0 <= bottomLeft[0] <= topRight[0] <= 1000
-	0 <= bottomLeft[1] <= topRight[1] <= 1000
+    On the input ships is only given to initialize the map internally. You must solve this problem "blindfolded". In other words, you must find the answer using the given hasShips API, without knowing the ships position.
+    0 <= bottomLeft[0] <= topRight[0] <= 1000
+    0 <= bottomLeft[1] <= topRight[1] <= 1000
 
 
 */

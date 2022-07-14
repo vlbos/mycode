@@ -5,12 +5,12 @@ A 3-sequence is a list of websites of length 3 sorted in ascending order by the 
 
 Find the 3-sequence visited by the largest number of users. If there is more than one solution, return the lexicographically smallest such 3-sequence.
 
- 
+
 
 Example 1:
 Input: username = ["joe","joe","joe","james","james","james","james","mary","mary","mary"], timestamp = [1,2,3,4,5,6,7,8,9,10], website = ["home","about","career","home","cart","maps","home","home","about","career"]
 Output: ["home","about","career"]
-Explanation: 
+Explanation:
 The tuples in this example are:
 ["joe", 1, "home"]
 ["joe", 2, "about"]
@@ -28,26 +28,29 @@ The 3-sequence ("home", "cart", "home") was visited at least once by 1 user.
 The 3-sequence ("home", "maps", "home") was visited at least once by 1 user.
 The 3-sequence ("cart", "maps", "home") was visited at least once by 1 user.
 
- 
+
 
 Note:
-	3 <= N = username.length = timestamp.length = website.length <= 50
-	1 <= username[i].length <= 10
-	0 <= timestamp[i] <= 10^9
-	1 <= website[i].length <= 10
-	Both username[i] and website[i] contain only lowercase characters.
-	It is guaranteed that there is at least one user who visited at least 3 websites.
-	No user visits two websites at the same time.
+    3 <= N = username.length = timestamp.length = website.length <= 50
+    1 <= username[i].length <= 10
+    0 <= timestamp[i] <= 10^9
+    1 <= website[i].length <= 10
+    Both username[i] and website[i] contain only lowercase characters.
+    It is guaranteed that there is at least one user who visited at least 3 websites.
+    No user visits two websites at the same time.
 
 
 */
 pub struct Solution {}
 impl Solution {
-    pub fn most_visited_pattern(username: Vec<String>, timestamp: Vec<i32>, website: Vec<String>) -> Vec<String> {
+    pub fn most_visited_pattern(
+        username: Vec<String>,
+        timestamp: Vec<i32>,
+        website: Vec<String>,
+    ) -> Vec<String> {
         Vec::new()
     }
 }
-
 
 #[cfg(test)]
 mod test {
@@ -55,6 +58,9 @@ mod test {
 
     #[test]
     fn test_most_visited_pattern_1() {
-        assert_eq!(Vec::<String>::new(), Solution::most_visited_pattern(Vec::new(),Vec::new(),Vec::new()));
+        assert_eq!(
+            Vec::<String>::new(),
+            Solution::most_visited_pattern(Vec::new(), Vec::new(), Vec::new())
+        );
     }
 }

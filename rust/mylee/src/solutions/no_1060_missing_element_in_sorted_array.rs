@@ -1,32 +1,32 @@
 /*
 Given a sorted array A of unique numbers, find the K-th missing number starting from the leftmost number of the array.
 
- 
+
 
 Example 1:
 Input: A = [4,7,9,10], K = 1
 Output: 5
-Explanation: 
+Explanation:
 The first missing number is 5.
 
 Example 2:
 Input: A = [4,7,9,10], K = 3
 Output: 8
-Explanation: 
+Explanation:
 The missing numbers are [5,6,8,...], hence the third missing number is 8.
 
 Example 3:
 Input: A = [1,2,4], K = 3
 Output: 6
-Explanation: 
+Explanation:
 The missing numbers are [3,5,6,7,...], hence the third missing number is 6.
 
- 
+
 
 Note:
-	1 <= A.length <= 50000
-	1 <= A[i] <= 1e7
-	1 <= K <= 1e8
+    1 <= A.length <= 50000
+    1 <= A[i] <= 1e7
+    1 <= K <= 1e8
 
 */
 pub struct Solution {}
@@ -36,13 +36,12 @@ impl Solution {
     }
 }
 
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_missing_element_1() {
-        assert_eq!(0, Solution::missing_element(Vec::new(),0));
+        assert_eq!(0, Solution::missing_element(Vec::new(), 0));
     }
 }

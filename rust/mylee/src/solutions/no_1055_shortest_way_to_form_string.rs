@@ -3,7 +3,7 @@ From any string, we can form a subsequence of that string by deleting some numbe
 
 Given two strings source and target, return the minimum number of subsequences of source such that their concatenation equals target. If the task is impossible, return -1.
 
- 
+
 
 Example 1:
 Input: source = "abc", target = "abcbc"
@@ -20,10 +20,10 @@ Input: source = "xyz", target = "xzyxz"
 Output: 3
 Explanation: The target string can be constructed as follows "xz" + "y" + "xz".
 
- 
+
 Constraints:
-	Both the source and target strings consist of only lowercase English letters from "a"-"z".
-	The lengths of source and target string are between 1 and 1000.
+    Both the source and target strings consist of only lowercase English letters from "a"-"z".
+    The lengths of source and target string are between 1 and 1000.
 
 */
 pub struct Solution {}
@@ -33,13 +33,12 @@ impl Solution {
     }
 }
 
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_shortest_way_1() {
-        assert_eq!(0, Solution::shortest_way(String::new(),String::new()));
+        assert_eq!(0, Solution::shortest_way(String::new(), String::new()));
     }
 }

@@ -9,7 +9,7 @@ Output the minimum time needed to build all blocks.
 
 Initially, there is only one worker.
 
- 
+
 Example 1:
 Input: blocks = [1], split = 1
 Output: 1
@@ -27,11 +27,11 @@ Explanation: Split 1 worker into 2, then assign the first worker to the last blo
 Then, use the two unassigned workers to build the first two blocks.
 The cost is 1 + max(3, 1 + max(1, 2)) = 4.
 
- 
+
 Constraints:
-	1 <= blocks.length <= 1000
-	1 <= blocks[i] <= 10^5
-	1 <= split <= 100
+    1 <= blocks.length <= 1000
+    1 <= blocks[i] <= 10^5
+    1 <= split <= 100
 
 
 */
@@ -47,6 +47,6 @@ mod test {
 
     #[test]
     fn test_min_build_time_1() {
-        assert_eq!(0, Solution::min_build_time(Vec::new(),0));
+        assert_eq!(0, Solution::min_build_time(Vec::new(), 0));
     }
 }

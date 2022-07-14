@@ -3,7 +3,7 @@ A decimal number can be converted to its Hexspeak representation by first conver
 
 Given a string num representing a decimal integer N, return the Hexspeak representation of N if it is valid, otherwise return "ERROR".
 
- 
+
 Example 1:
 Input: num = "257"
 Output: "IOI"
@@ -13,11 +13,11 @@ Example 2:
 Input: num = "3"
 Output: "ERROR"
 
- 
+
 Constraints:
-	1 <= N <= 10^12
-	There are no leading zeros in the given string.
-	All answers must be in uppercase letters.
+    1 <= N <= 10^12
+    There are no leading zeros in the given string.
+    All answers must be in uppercase letters.
 
 
 */

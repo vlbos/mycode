@@ -14,7 +14,7 @@ Some examples:
 "2*(5+5*2)/3+(6/2+8)" = 21
 "(2+6* 3+5- (3*14/7+2)*5)+3"=-12
 
- 
+
 
 Note: Do not use the eval built-in library function.
 
@@ -26,7 +26,6 @@ impl Solution {
     }
 }
 
-
 #[cfg(test)]
 mod test {
     use super::*;
@@ -36,5 +35,3 @@ mod test {
         assert_eq!(0, Solution::calculate(String::new()));
     }
 }
-
-

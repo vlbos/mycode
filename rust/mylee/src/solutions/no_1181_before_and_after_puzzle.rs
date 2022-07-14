@@ -9,7 +9,7 @@ Return the Before and After puzzles that can be formed by every two phrases phra
 
 You should return a list of distinct strings sorted lexicographically.
 
- 
+
 Example 1:
 Input: phrases = ["writing code","code rocks"]
 Output: ["writing code rocks"]
@@ -34,10 +34,10 @@ Example 3:
 Input: phrases = ["a","b","a"]
 Output: ["a"]
 
- 
+
 Constraints:
-	1 <= phrases.length <= 100
-	1 <= phrases[i].length <= 100
+    1 <= phrases.length <= 100
+    1 <= phrases[i].length <= 100
 
 
 */
@@ -54,6 +54,9 @@ mod test {
 
     #[test]
     fn test_before_and_after_puzzles_1() {
-        assert_eq!(Vec::<String>::new(), Solution::before_and_after_puzzles(Vec::new()));
+        assert_eq!(
+            Vec::<String>::new(),
+            Solution::before_and_after_puzzles(Vec::new())
+        );
     }
 }

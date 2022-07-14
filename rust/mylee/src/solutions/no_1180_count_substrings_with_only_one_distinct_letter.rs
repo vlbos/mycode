@@ -1,7 +1,7 @@
 /*
 Given a string S, return the number of substrings that have only one distinct letter.
 
- 
+
 Example 1:
 Input: S = "aaaba"
 Output: 8
@@ -16,10 +16,10 @@ Example 2:
 Input: S = "aaaaaaaaaa"
 Output: 55
 
- 
+
 Constraints:
-	1 <= S.length <= 1000
-	S[i] consists of only lowercase English letters.
+    1 <= S.length <= 1000
+    S[i] consists of only lowercase English letters.
 
 
 */
@@ -29,7 +29,6 @@ impl Solution {
         0
     }
 }
-
 
 #[cfg(test)]
 mod test {

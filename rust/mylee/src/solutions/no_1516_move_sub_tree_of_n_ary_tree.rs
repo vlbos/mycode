@@ -5,23 +5,23 @@ You should move the subtree of the node p to become a direct child of node q. If
 
 Return the root of the tree after adjusting it.
 
- 
+
 
 There are 3 cases for nodes p and q:
 
-	Node q is in the sub-tree of node p.
-	Node p is in the sub-tree of node q.
-	Neither node p is in the sub-tree of node q nor node q is in the sub-tree of node p.
+    Node q is in the sub-tree of node p.
+    Node p is in the sub-tree of node q.
+    Neither node p is in the sub-tree of node q nor node q is in the sub-tree of node p.
 
 In cases 2 and 3, you just need to move p (with its sub-tree) to be a child of q, but in case 1 the tree may be disconnected, thus you need to reconnect the tree again. Please read the examples carefully before solving this problem.
 
- 
+
 
 Nary-Tree input serialization is represented in their level order traversal, each group of children is separated by the null value (See examples).
 
 For example, the above tree is serialized as [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14].
 
- 
+
 Example 1:
 Input: root = [1,null,2,3,null,4,5,null,6,null,7,8], p = 4, q = 1
 Output: [1,null,2,3,4,null,5,null,6,null,7,8]
@@ -52,13 +52,13 @@ Explanation: Node q is in the sub-tree of node p, so this is case 1.
 The first step, we move node p (with all of its sub-tree except for node q) and add it as a child to node q.
 As node p was the root of the tree, node q replaces it and becomes the root of the tree.
 
- 
+
 Constraints:
-	The total number of nodes is between [2, 1000].
-	Each node has a unique value.
-	p != null
-	q != null
-	p and q are two different nodes (i.e. p != q).
+    The total number of nodes is between [2, 1000].
+    Each node has a unique value.
+    p != null
+    q != null
+    p and q are two different nodes (i.e. p != q).
 
 
 */

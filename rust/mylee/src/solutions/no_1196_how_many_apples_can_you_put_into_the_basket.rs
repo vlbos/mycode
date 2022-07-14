@@ -3,7 +3,7 @@ You have some apples, where arr[i] is the weight of the i-th apple.  You also ha
 
 Return the maximum number of apples you can put in the basket.
 
- 
+
 Example 1:
 Input: arr = [100,200,150,1000]
 Output: 4
@@ -14,10 +14,10 @@ Input: arr = [900,950,800,1000,700,800]
 Output: 5
 Explanation: The sum of weights of the 6 apples exceeds 5000 so we choose any 5 of them.
 
- 
+
 Constraints:
-	1 <= arr.length <= 10^3
-	1 <= arr[i] <= 10^3
+    1 <= arr.length <= 10^3
+    1 <= arr[i] <= 10^3
 
 
 */

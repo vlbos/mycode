@@ -1,7 +1,7 @@
 /*
 Given a string S, find out the length of the longest repeating substring(s). Return 0 if no repeating substring exists.
 
- 
+
 
 Example 1:
 Input: "abcd"
@@ -23,10 +23,10 @@ Input: "aaaaa"
 Output: 4
 Explanation: The longest repeating substring is "aaaa", which occurs twice.
 
- 
+
 Constraints:
-	The string S consists of only lowercase English letters from 'a' - 'z'.
-	1 <= S.length <= 1500
+    The string S consists of only lowercase English letters from 'a' - 'z'.
+    1 <= S.length <= 1500
 
 
 */
@@ -36,7 +36,6 @@ impl Solution {
         0
     }
 }
-
 
 #[cfg(test)]
 mod test {

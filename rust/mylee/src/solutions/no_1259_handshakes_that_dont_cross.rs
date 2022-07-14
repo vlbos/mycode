@@ -5,7 +5,7 @@ Return the number of ways these handshakes could occur such that none of the han
 
 Since this number could be very big, return the answer mod 10^9 + 7
 
- 
+
 Example 1:
 Input: num_people = 2
 Output: 1
@@ -23,10 +23,10 @@ Example 4:
 Input: num_people = 8
 Output: 14
 
- 
+
 Constraints:
-	2 <= num_people <= 1000
-	num_people % 2 == 0
+    2 <= num_people <= 1000
+    num_people % 2 == 0
 
 
 */

@@ -1,17 +1,17 @@
 /*
-A dieter consumes calories[i] calories on the i-th day. 
+A dieter consumes calories[i] calories on the i-th day.
 
 Given an integer k, for every consecutive sequence of k days (calories[i], calories[i+1], ..., calories[i+k-1] for all 0 <= i <= n-k), they look at T, the total calories consumed during that sequence of k days (calories[i] + calories[i+1] + ... + calories[i+k-1]):
 
-	If T < lower, they performed poorly on their diet and lose 1 point; 
-	If T > upper, they performed well on their diet and gain 1 point;
-	Otherwise, they performed normally and there is no change in points.
+    If T < lower, they performed poorly on their diet and lose 1 point;
+    If T > upper, they performed well on their diet and gain 1 point;
+    Otherwise, they performed normally and there is no change in points.
 
 Initially, the dieter has zero points. Return the total number of points the dieter has after dieting for calories.length days.
 
 Note that the total points can be negative.
 
- 
+
 Example 1:
 Input: calories = [1,2,3,4,5], k = 1, lower = 3, upper = 3
 Output: 0
@@ -33,11 +33,11 @@ calories[0] + calories[1] > upper so 1 point is gained.
 lower <= calories[1] + calories[2] <= upper so no change in points.
 calories[2] + calories[3] < lower so 1 point is lost.
 
- 
+
 Constraints:
-	1 <= k <= calories.length <= 10^5
-	0 <= calories[i] <= 20000
-	0 <= lower <= upper
+    1 <= k <= calories.length <= 10^5
+    0 <= calories[i] <= 20000
+    0 <= lower <= upper
 
 
 */
@@ -48,13 +48,12 @@ impl Solution {
     }
 }
 
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_diet_plan_performance_1() {
-        assert_eq!(0, Solution::diet_plan_performance(Vec::new(),0,0,0));
+        assert_eq!(0, Solution::diet_plan_performance(Vec::new(), 0, 0, 0));
     }
 }

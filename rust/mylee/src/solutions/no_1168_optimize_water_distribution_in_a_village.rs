@@ -5,23 +5,23 @@ For each house i, we can either build a well inside it directly with cost wells[
 
 Find the minimum total cost to supply water to all houses.
 
- 
+
 Example 1:
 Input: n = 3, wells = [1,2,2], pipes = [[1,2,1],[2,3,1]]
 Output: 3
-Explanation: 
+Explanation:
 The image shows the costs of connecting houses using pipes.
 The best strategy is to build a well in the first house with cost 1 and connect the other houses to it with cost 2 so the total cost is 3.
 
- 
+
 Constraints:
-	1 <= n <= 10000
-	wells.length == n
-	0 <= wells[i] <= 10^5
-	1 <= pipes.length <= 10000
-	1 <= pipes[i][0], pipes[i][1] <= n
-	0 <= pipes[i][2] <= 10^5
-	pipes[i][0] != pipes[i][1]
+    1 <= n <= 10000
+    wells.length == n
+    0 <= wells[i] <= 10^5
+    1 <= pipes.length <= 10000
+    1 <= pipes[i][0], pipes[i][1] <= n
+    0 <= pipes[i][2] <= 10^5
+    pipes[i][0] != pipes[i][1]
 
 
 */
@@ -32,13 +32,15 @@ impl Solution {
     }
 }
 
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_min_cost_to_supply_water_1() {
-        assert_eq!(0, Solution::min_cost_to_supply_water(0,Vec::new(),Vec::new()));
+        assert_eq!(
+            0,
+            Solution::min_cost_to_supply_water(0, Vec::new(), Vec::new())
+        );
     }
 }

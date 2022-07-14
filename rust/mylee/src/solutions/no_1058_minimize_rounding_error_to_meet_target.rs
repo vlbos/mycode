@@ -3,26 +3,26 @@ Given an array of prices [p1,p2...,pn] and a target, round each price pi to Roun
 
 Return the string "-1" if the rounded array is impossible to sum to target. Otherwise, return the smallest rounding error, which is defined as &Sigma; |Roundi(pi) - (pi)| for i from 1 to n, as a string with three places after the decimal.
 
- 
+
 
 Example 1:
 Input: prices = ["0.700","2.800","4.900"], target = 8
 Output: "1.000"
-Explanation: 
+Explanation:
 Use Floor, Ceil and Ceil operations to get (0.7 - 0) + (3 - 2.8) + (5 - 4.9) = 0.7 + 0.2 + 0.1 = 1.0 .
 
 Example 2:
 Input: prices = ["1.500","2.500","3.500"], target = 10
 Output: "-1"
-Explanation: 
+Explanation:
 It is impossible to meet the target.
 
- 
+
 
 Note:
-	1 <= prices.length <= 500.
-	Each string of prices prices[i] represents a real number which is between 0 and 1000 and has exactly 3 decimal places.
-	target is between 0 and 1000000.
+    1 <= prices.length <= 500.
+    Each string of prices prices[i] represents a real number which is between 0 and 1000 and has exactly 3 decimal places.
+    target is between 0 and 1000000.
 
 */
 pub struct Solution {}
@@ -32,13 +32,12 @@ impl Solution {
     }
 }
 
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_minimize_error_1() {
-        assert_eq!(String::new(), Solution::minimize_error(Vec::new(),0));
+        assert_eq!(String::new(), Solution::minimize_error(Vec::new(), 0));
     }
 }

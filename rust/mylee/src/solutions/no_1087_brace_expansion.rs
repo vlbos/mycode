@@ -7,7 +7,7 @@ For example, "{a,b,c}d{e,f}" represents the list ["ade", "adf", "bde", "bdf", "c
 
 Return all words that can be formed in this manner, in lexicographical order.
 
- 
+
 
 Example 1:
 Input: "{a,b}c{d,e}f"
@@ -17,12 +17,12 @@ Example 2:
 Input: "abcd"
 Output: ["abcd"]
 
- 
+
 
 Note:
-	1 <= S.length <= 50
-	There are no nested curly brackets.
-	All characters inside a pair of consecutive opening and ending curly brackets are different.
+    1 <= S.length <= 50
+    There are no nested curly brackets.
+    All characters inside a pair of consecutive opening and ending curly brackets are different.
 
 
 */

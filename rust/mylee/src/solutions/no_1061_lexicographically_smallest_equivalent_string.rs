@@ -3,15 +3,15 @@ Given strings A and B of the same length, we say A[i] and B[i] are equivalent ch
 
 Equivalent characters follow the usual rules of any equivalence relation:
 
-	Reflexivity: 'a' == 'a'
-	Symmetry: 'a' == 'b' implies 'b' == 'a'
-	Transitivity: 'a' == 'b' and 'b' == 'c' implies 'a' == 'c'
+    Reflexivity: 'a' == 'a'
+    Symmetry: 'a' == 'b' implies 'b' == 'a'
+    Transitivity: 'a' == 'b' and 'b' == 'c' implies 'a' == 'c'
 
 For example, given the equivalency information from A and B above, S = "eed", "acd", and "aab" are equivalent strings, and "aab" is the lexicographically smallest equivalent string of S.
 
 Return the lexicographically smallest equivalent string of S by using the equivalency information from A and B.
 
- 
+
 
 Example 1:
 Input: A = "parker", B = "morris", S = "parser"
@@ -28,12 +28,12 @@ Input: A = "leetcode", B = "programs", S = "sourcecode"
 Output: "aauaaaaada"
 Explanation:  We group the equivalent characters in A and B as [a,o,e,r,s,c], [l,p], [g,t] and [d,m], thus all letters in S except 'u' and 'd' are transformed to 'a', the answer is "aauaaaaada".
 
- 
+
 
 Note:
-	String A, B and S consist of only lowercase English letters from 'a' - 'z'.
-	The lengths of string A, B and S are between 1 and 1000.
-	String A and B are of the same length.
+    String A, B and S consist of only lowercase English letters from 'a' - 'z'.
+    The lengths of string A, B and S are between 1 and 1000.
+    String A and B are of the same length.
 
 */
 pub struct Solution {}
@@ -43,13 +43,15 @@ impl Solution {
     }
 }
 
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_smallest_equivalent_string_1() {
-        assert_eq!(String::new(), Solution::smallest_equivalent_string(String::new(),String::new(),String::new()));
+        assert_eq!(
+            String::new(),
+            Solution::smallest_equivalent_string(String::new(), String::new(), String::new())
+        );
     }
 }

@@ -9,7 +9,7 @@ If you are given regions r1, r2 and r3 such that r1 includes r3, it is guarantee
 
 It's guaranteed the smallest region exists.
 
- 
+
 Example 1:
 Input:
 regions = [["Earth","North America","South America"],
@@ -21,17 +21,21 @@ region1 = "Quebec",
 region2 = "New York"
 Output: "North America"
 
- 
+
 Constraints:
-	2 <= regions.length <= 10^4
-	region1 != region2
-	All strings consist of English letters and spaces with at most 20 letters.
+    2 <= regions.length <= 10^4
+    region1 != region2
+    All strings consist of English letters and spaces with at most 20 letters.
 
 
 */
 pub struct Solution {}
 impl Solution {
-    pub fn find_smallest_region(regions: Vec<Vec<String>>, region1: String, region2: String) -> String {
+    pub fn find_smallest_region(
+        regions: Vec<Vec<String>>,
+        region1: String,
+        region2: String,
+    ) -> String {
         String::new()
     }
 }
@@ -42,6 +46,9 @@ mod test {
 
     #[test]
     fn test_find_smallest_region_1() {
-        assert_eq!(String::new(), Solution::find_smallest_region(Vec::new(),String::new(),String::new()));
+        assert_eq!(
+            String::new(),
+            Solution::find_smallest_region(Vec::new(), String::new(), String::new())
+        );
     }
 }

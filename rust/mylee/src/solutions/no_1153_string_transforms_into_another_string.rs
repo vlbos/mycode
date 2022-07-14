@@ -5,7 +5,7 @@ In one conversion you can convert all occurrences of one character in str1 to an
 
 Return true if and only if you can transform str1 into str2.
 
- 
+
 
 Example 1:
 Input: str1 = "aabcc", str2 = "ccdee"
@@ -17,11 +17,11 @@ Input: str1 = "leetcode", str2 = "codeleet"
 Output: false
 Explanation: There is no way to transform str1 to str2.
 
- 
+
 
 Note:
-	1 <= str1.length == str2.length <= 10^4
-	Both str1 and str2 contain only lowercase English letters.
+    1 <= str1.length == str2.length <= 10^4
+    Both str1 and str2 contain only lowercase English letters.
 
 
 */
@@ -32,13 +32,12 @@ impl Solution {
     }
 }
 
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_can_convert_1() {
-        assert!( Solution::can_convert(String::new(),String::new()));
+        assert!(Solution::can_convert(String::new(), String::new()));
     }
 }

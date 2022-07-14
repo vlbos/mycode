@@ -59,7 +59,9 @@ struct Solution;
 #[cfg(test)]
 mod test {
     use super::*;
-    use crate::solutions::util::test_tools::{assert_equivalent, map_nested_to_string, map_to_string};
+    use crate::solutions::util::test_tools::{
+        assert_equivalent, map_nested_to_string, map_to_string,
+    };
 
     #[test]
     fn test_word_squares_1() {

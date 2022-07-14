@@ -74,7 +74,9 @@ impl Solution {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::solutions::util::test_tools::{assert_nested_equivalent, map_nested_to_string, map_to_string};
+    use crate::solutions::util::test_tools::{
+        assert_nested_equivalent, map_nested_to_string, map_to_string,
+    };
 
     #[test]
     fn test_group_strings() {

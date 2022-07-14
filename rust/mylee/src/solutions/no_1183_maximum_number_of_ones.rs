@@ -3,7 +3,7 @@ Consider a matrix M with dimensions width * height, such that every cell has val
 
 Return the maximum possible number of ones that the matrix M can have.
 
- 
+
 Example 1:
 Input: width = 3, height = 3, sideLength = 2, maxOnes = 1
 Output: 4
@@ -22,11 +22,11 @@ Explanation:
 [1,0,1]
 [1,0,1]
 
- 
+
 Constraints:
-	1 <= width, height <= 100
-	1 <= sideLength <= width, height
-	0 <= maxOnes <= sideLength * sideLength
+    1 <= width, height <= 100
+    1 <= sideLength <= width, height
+    0 <= maxOnes <= sideLength * sideLength
 
 
 */
@@ -37,13 +37,12 @@ impl Solution {
     }
 }
 
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_maximum_number_of_ones_1() {
-        assert_eq!(0, Solution::maximum_number_of_ones(0,0,0,0));
+        assert_eq!(0, Solution::maximum_number_of_ones(0, 0, 0, 0));
     }
 }

@@ -3,7 +3,7 @@ Given an array A of integers, return the number of non-empty continuous subarray
 
 The leftmost element of the subarray is not larger than other elements in the subarray.
 
- 
+
 
 Example 1:
 Input: [1,4,2,5,3]
@@ -20,11 +20,11 @@ Input: [2,2,2]
 Output: 6
 Explanation: There are 6 valid subarrays: [2],[2],[2],[2,2],[2,2],[2,2,2].
 
- 
+
 
 Note:
-	1 <= A.length <= 50000
-	0 <= A[i] <= 100000
+    1 <= A.length <= 50000
+    0 <= A[i] <= 100000
 
 */
 pub struct Solution {}
@@ -33,7 +33,6 @@ impl Solution {
         0
     }
 }
-
 
 #[cfg(test)]
 mod test {

@@ -7,21 +7,21 @@ Users can request a certain chunk of the file, the system should return a list o
 
 Implement the FileSharing class:
 
-	FileSharing(int m) Initializes the object with a file of m chunks.
-	int join(int[] ownedChunks): A new user joined the system owning some chunks of the file, the system should assign an id to the user which is the smallest positive integer not taken by any other user. Return the assigned id.
-	void leave(int userID): The user with userID will leave the system, you cannot take file chunks from them anymore.
-	int[] request(int userID, int chunkID): The user userID requested the file chunk with chunkID. Return a list of the IDs of all users that own this chunk sorted in ascending order.
+    FileSharing(int m) Initializes the object with a file of m chunks.
+    int join(int[] ownedChunks): A new user joined the system owning some chunks of the file, the system should assign an id to the user which is the smallest positive integer not taken by any other user. Return the assigned id.
+    void leave(int userID): The user with userID will leave the system, you cannot take file chunks from them anymore.
+    int[] request(int userID, int chunkID): The user userID requested the file chunk with chunkID. Return a list of the IDs of all users that own this chunk sorted in ascending order.
 
- 
+
 
 Follow-ups:
 
-	What happens if the system identifies the user by their IP address instead of their unique ID and users disconnect and connect from the system with the same IP?
-	If the users in the system join and leave the system frequently without requesting any chunks, will your solution still be efficient?
-	If all each user join the system one time, request all files and then leave, will your solution still be efficient?
-	If the system will be used to share n files where the ith file consists of m[i], what are the changes you have to do?
+    What happens if the system identifies the user by their IP address instead of their unique ID and users disconnect and connect from the system with the same IP?
+    If the users in the system join and leave the system frequently without requesting any chunks, will your solution still be efficient?
+    If all each user join the system one time, request all files and then leave, will your solution still be efficient?
+    If the system will be used to share n files where the ith file consists of m[i], what are the changes you have to do?
 
- 
+
 Example:
 
 Input:
@@ -50,42 +50,36 @@ fileSharing.leave(2);        // The user with id = 2 left the system.
 
 fileSharing.join([]);        // A user who doesn't have any chunks joined the system, assign id = 1 to them and return 1. Notice that ids 1 and 2 are free and we can reuse them.
 
- 
+
 Constraints:
-	1 <= m <= 10^5
-	0 <= ownedChunks.length <= min(100, m)
-	1 <= ownedChunks[i] <= m
-	Values of ownedChunks are unique.
-	1 <= chunkID <= m
-	userID is guaranteed to be a user in the system if you assign the IDs correctly. 
-	At most 10^4 calls will be made to join, leave and request.
-	Each call to leave will have a matching call for join.
+    1 <= m <= 10^5
+    0 <= ownedChunks.length <= min(100, m)
+    1 <= ownedChunks[i] <= m
+    Values of ownedChunks are unique.
+    1 <= chunkID <= m
+    userID is guaranteed to be a user in the system if you assign the IDs correctly.
+    At most 10^4 calls will be made to join, leave and request.
+    Each call to leave will have a matching call for join.
 
 
 */
-struct FileSharing {
+struct FileSharing {}
 
-}
-
-
-/** 
+/**
  * `&self` means the method takes an immutable reference.
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl FileSharing {
-
     fn new(m: i32) -> Self {
-        Self{}
+        Self {}
     }
-    
+
     fn join(&self, owned_chunks: Vec<i32>) -> i32 {
         0
     }
-    
-    fn leave(&self, user_id: i32) {
-        
-    }
-    
+
+    fn leave(&self, user_id: i32) {}
+
     fn request(&self, user_id: i32, chunk_id: i32) -> Vec<i32> {
         Vec::new()
     }
@@ -105,13 +99,13 @@ mod test {
 
     #[test]
     fn test_file_sharing_1() {
-let m = 0;
-let owned_chunks=Vec::new();
-let used_id=0;
-let chunk_id=0;
-          let obj = FileSharing::new(m);
-  let ret_1: i32 = obj.join(owned_chunks);
-  obj.leave(used_id);
- let ret_3: Vec<i32> = obj.request(used_id, chunk_id);
+        let m = 0;
+        let owned_chunks = Vec::new();
+        let used_id = 0;
+        let chunk_id = 0;
+        let obj = FileSharing::new(m);
+        let ret_1: i32 = obj.join(owned_chunks);
+        obj.leave(used_id);
+        let ret_3: Vec<i32> = obj.request(used_id, chunk_id);
     }
 }

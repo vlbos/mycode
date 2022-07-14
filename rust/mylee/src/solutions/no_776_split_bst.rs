@@ -28,8 +28,8 @@ while the diagrams for the outputs are:
            5   7         1
 
 Note:
-	The size of the BST will not exceed 50.
-	The BST is always valid and each node's value is different.
+    The size of the BST will not exceed 50.
+    The BST is always valid and each node's value is different.
 
 */
 
@@ -74,14 +74,16 @@ pub fn to_tree(vec: Vec<Option<i32>>) -> Option<Rc<RefCell<TreeNode>>> {
     head
 }
 pub struct Solution {}
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
-    pub fn split_bst(root: Option<Rc<RefCell<TreeNode>>>, v: i32) -> Vec<Option<Rc<RefCell<TreeNode>>>> {
+    pub fn split_bst(
+        root: Option<Rc<RefCell<TreeNode>>>,
+        v: i32,
+    ) -> Vec<Option<Rc<RefCell<TreeNode>>>> {
         Vec::new()
     }
 }
-
 
 #[cfg(test)]
 mod test {
@@ -89,6 +91,9 @@ mod test {
 
     #[test]
     fn test_split_bst_1() {
-        assert_eq!(Vec::Option<Rc<RefCell<TreeNode>>>::new(), Solution::split_bst(None,0));
+        assert_eq!(
+            Vec::<Option<Rc<RefCell<TreeNode>>>>::new(),
+            Solution::split_bst(None, 0)
+        );
     }
 }

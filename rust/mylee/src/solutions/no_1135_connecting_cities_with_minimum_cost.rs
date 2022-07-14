@@ -5,28 +5,28 @@ You are given connections, where each connections[i] = [city1, city2, cost] repr
 
 Return the minimum cost so that for every pair of cities, there exists a path of connections (possibly of length 1) that connects those two cities together.  The cost is the sum of the connection costs used. If the task is impossible, return -1.
 
- 
+
 
 Example 1:
 Input: N = 3, connections = [[1,2,5],[1,3,6],[2,3,1]]
 Output: 6
-Explanation: 
+Explanation:
 Choosing any 2 edges will connect all cities so we choose the minimum 2.
 
 Example 2:
 Input: N = 4, connections = [[1,2,3],[3,4,4]]
 Output: -1
-Explanation: 
+Explanation:
 There is no way to connect all cities even if all edges are used.
 
- 
+
 
 Note:
-	1 <= N <= 10000
-	1 <= connections.length <= 10000
-	1 <= connections[i][0], connections[i][1] <= N
-	0 <= connections[i][2] <= 10^5
-	connections[i][0] != connections[i][1]
+    1 <= N <= 10000
+    1 <= connections.length <= 10000
+    1 <= connections[i][0], connections[i][1] <= N
+    0 <= connections[i][2] <= 10^5
+    connections[i][0] != connections[i][1]
 
 
 */
@@ -43,6 +43,6 @@ mod test {
 
     #[test]
     fn test_minimum_cost_1() {
-        assert_eq!(0, Solution::minimum_cost(0,Vec::new()));
+        assert_eq!(0, Solution::minimum_cost(0, Vec::new()));
     }
 }

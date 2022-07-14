@@ -1,16 +1,16 @@
 /*
 Implement a thread safe bounded blocking queue that has the following methods:
 
-	BoundedBlockingQueue(int capacity) The constructor initializes the queue with a maximum capacity.
-	void enqueue(int element) Adds an element to the front of the queue. If the queue is full, the calling thread is blocked until the queue is no longer full.
-	int dequeue() Returns the element at the rear of the queue and removes it. If the queue is empty, the calling thread is blocked until the queue is no longer empty.
-	int size() Returns the number of elements currently in the queue.
+    BoundedBlockingQueue(int capacity) The constructor initializes the queue with a maximum capacity.
+    void enqueue(int element) Adds an element to the front of the queue. If the queue is full, the calling thread is blocked until the queue is no longer full.
+    int dequeue() Returns the element at the rear of the queue and removes it. If the queue is empty, the calling thread is blocked until the queue is no longer empty.
+    int size() Returns the number of elements currently in the queue.
 
 Your implementation will be tested using multiple threads at the same time. Each thread will either be a producer thread that only makes calls to the enqueue method or a consumer thread that only makes calls to the dequeue method. The size method will be called after every test case.
 
 Please do not use built-in implementations of bounded blocking queue as this will not be accepted in an interview.
 
- 
+
 
 Example 1:
 Input:
@@ -38,7 +38,7 @@ queue.enqueue(4);   // The producer thread is blocked because the queue's capaci
 queue.dequeue();    // The consumer thread returns 2 from the queue. The producer thread is unblocked and enqueues 4 to the queue.
 queue.size();       // 2 elements remaining in the queue. size() is always called at the end of each test case.
 
- 
+
 
 Example 2:
 Input:
@@ -69,24 +69,19 @@ Since the number of threads for producer/consumer is greater than 1, we do not k
 
 */
 
-struct BoundedBlockingQueue {
+struct BoundedBlockingQueue {}
 
-}
-
-
-/** 
+/**
  * `&self` means the method takes an immutable reference.
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl BoundedBlockingQueue {
-    fn new(capacity:i32) -> Self {
-        Self{}
+    fn new(capacity: i32) -> Self {
+        Self {}
     }
-    
-    fn en_queue(&self, element: i32){
-        
-    }
-    
+
+    fn en_queue(&self, element: i32) {}
+
     fn de_queue(&self) -> i32 {
         0
     }
@@ -112,11 +107,10 @@ mod test {
     #[test]
     fn test__1() {
         let k = 1;
-let value=0;
+        let value = 0;
         let obj = BoundedBlockingQueue::new(k);
- obj.en_queue(value);
- let ret_2: i32 = obj.de_queue();
- let ret_3: i32 = obj.size();
-
+        obj.en_queue(value);
+        let ret_2: i32 = obj.de_queue();
+        let ret_3: i32 = obj.size();
     }
 }

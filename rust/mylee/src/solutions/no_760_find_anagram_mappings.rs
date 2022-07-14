@@ -37,6 +37,9 @@ mod test {
 
     #[test]
     fn test_anagram_mappings_1() {
-        assert_eq!(Vec::<i32>::new(), Solution::anagram_mappings(Vec::new(),Vec::new()));
+        assert_eq!(
+            Vec::<i32>::new(),
+            Solution::anagram_mappings(Vec::new(), Vec::new())
+        );
     }
 }

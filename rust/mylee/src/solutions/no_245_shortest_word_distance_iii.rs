@@ -32,27 +32,49 @@ struct Solution;
 // @lc code=start
 impl Solution {
     pub fn shortest_word_distance(words: Vec<String>, word1: String, word2: String) -> i32 {
-        let mut i = -1 - (words.len() as i32);
-        let mut j = -1 - (words.len() as i32);
-        let mut dist = i32::max_value();
-        let is_same = word1 == word2;
-        for (k, w) in words.iter().enumerate() {
-            if is_same && *w == word1 {
-                if i < j {
-                    i = k as i32;
-                } else {
-                    j = k as i32;
-                }
-            } else if *w == word1 {
-                i = k as i32;
-            } else if *w == word2 {
-                j = k as i32;
-            } else {
+        // let mut i = -1 - (words.len() as i32);
+        // let mut j = -1 - (words.len() as i32);
+        // let mut dist = i32::max_value();
+        // let is_same = word1 == word2;
+        // for (k, w) in words.iter().enumerate() {
+        //     if is_same && *w == word1 {
+        //         if i < j {
+        //             i = k as i32;
+        //         } else {
+        //             j = k as i32;
+        //         }
+        //     } else if *w == word1 {
+        //         i = k as i32;
+        //     } else if *w == word2 {
+        //         j = k as i32;
+        //     } else {
+        //         continue;
+        //     }
+        //     dist = i32::min(dist, i32::abs(i - j));
+        // }
+        // dist
+        let n = words.len() as i32;
+        let (mut i1, mut i2) = (-n - 1, -n - 1);
+        let mut ans = i32::MAX;
+        for (j, w) in words.iter().enumerate() {
+            if *w != word1 && *w != word2 {
                 continue;
             }
-            dist = i32::min(dist, i32::abs(i - j));
+            let j = j as i32;
+            if word1 == word2 && *w == word1 {
+                if i1 < i2 {
+                    i1 = j;
+                } else {
+                    i2 = j;
+                }
+            } else if *w == word1 {
+                i1 = j;
+            } else if *w == word2 {
+                i2 = j;
+            }
+            ans = ans.min((i1 - i2).abs());
         }
-        dist
+        ans
     }
 }
 // @lc code=end

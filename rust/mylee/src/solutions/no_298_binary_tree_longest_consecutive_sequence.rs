@@ -90,12 +90,11 @@ struct Solution;
 #[cfg(test)]
 mod test {
     use super::*;
-    use crate::{tree};
+    use crate::tree;
 
     #[test]
     fn test_longest_consecutive1() {
-        let tree =
-        tree![];
+        let tree = tree![];
         assert_eq!(Solution::longest_consecutive(tree), 3);
     }
 

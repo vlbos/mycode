@@ -21,29 +21,42 @@ struct Solution;
 
 impl Solution {
     pub fn reverse_words(s: &mut Vec<char>) {
-        if s.is_empty() {
-            return;
-        }
-        let mut i = 0;
-        while i < s.len() {
-            let mut j = i;
-            while j + 1 < s.len() && s[j + 1] != ' ' {
+        // if s.is_empty() {
+        //     return;
+        // }
+        // let mut i = 0;
+        // while i < s.len() {
+        //     let mut j = i;
+        //     while j + 1 < s.len() && s[j + 1] != ' ' {
+        //         j += 1;
+        //     }
+        //     let new_i = if j + 1 >= s.len() { j + 1 } else { j + 2 };
+        //     while i < j {
+        //         s.swap(i, j);
+        //         i += 1;
+        //         j -= 1;
+        //     }
+        //     i = new_i;
+        // }
+        // let mut j = 0;
+        // let mut k = s.len() - 1;
+        // while j < k {
+        //     s.swap(j, k);
+        //     j += 1;
+        //     k -= 1;
+        // }
+        s.reverse();
+        let n = s.len();
+        let (mut i, mut j) = (0, 0);
+        while j < n {
+            while j < n && s[j] != ' ' {
                 j += 1;
             }
-            let new_i = if j + 1 >= s.len() { j + 1 } else { j + 2 };
-            while i < j {
-                s.swap(i, j);
-                i += 1;
-                j -= 1;
+            if j > i {
+                s[i..j].reverse();
             }
-            i = new_i;
-        }
-        let mut j = 0;
-        let mut k = s.len() - 1;
-        while j < k {
-            s.swap(j, k);
             j += 1;
-            k -= 1;
+            i = j;
         }
     }
 }

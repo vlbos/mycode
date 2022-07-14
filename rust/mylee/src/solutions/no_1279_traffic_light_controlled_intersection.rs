@@ -3,8 +3,8 @@ There is an intersection of two roads. First road is road A where cars travel fr
 
 There is a traffic light located on each road before the intersection. A traffic light can either be green or red.
 
-	Green means cars can cross the intersection in both directions of the road.
-	Red means cars in both directions cannot cross the intersection and must wait until the light turns green.
+    Green means cars can cross the intersection in both directions of the road.
+    Red means cars in both directions cannot cross the intersection and must wait until the light turns green.
 
 The traffic lights cannot be green on both roads at the same time. That means when the light is green on road A, it is red on road B and when the light is green on road B, it is red on road A.
 
@@ -14,15 +14,15 @@ Design a deadlock-free traffic light controlled system at this intersection.
 
 Implement the function void carArrived(carId, roadId, direction, turnGreen, crossCar) where:
 
-	carId is the id of the car that arrived.
-	roadId is the id of the road that the car travels on.
-	direction is the direction of the car.
-	turnGreen is a function you can call to turn the traffic light to green on the current road.
-	crossCar is a function you can call to let the current car cross the intersection.
+    carId is the id of the car that arrived.
+    roadId is the id of the road that the car travels on.
+    direction is the direction of the car.
+    turnGreen is a function you can call to turn the traffic light to green on the current road.
+    crossCar is a function you can call to let the current car cross the intersection.
 
 Your answer is considered correct if it avoids cars deadlock in the intersection. Turning the light green on a road when it was already green is considered a wrong answer.
 
- 
+
 Example 1:
 Input: cars = [1,3,5,2,4], directions = [2,1,2,4,3], arrivalTimes = [10,20,30,40,50]
 Output: [
@@ -48,14 +48,14 @@ Output: [
 ]
 Explanation: This is a dead-lock free scenario. Note that the scenario when car 4 crosses before turning light into green on road A and allowing car 5 to pass is also correct and Accepted scenario.
 
- 
+
 Constraints:
-	1 <= cars.length <= 20
-	cars.length = directions.length
-	cars.length = arrivalTimes.length
-	All values of cars are unique
-	1 <= directions[i] <= 4
-	arrivalTimes is non-decreasing
+    1 <= cars.length <= 20
+    cars.length = directions.length
+    cars.length = arrivalTimes.length
+    All values of cars are unique
+    1 <= directions[i] <= 4
+    arrivalTimes is non-decreasing
 
 
 */

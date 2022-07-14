@@ -1,4 +1,3 @@
-
 // 545\. Boundary of Binary Tree
 // =============================
 
@@ -79,9 +78,9 @@
 //     }
 //   }
 // }
+use crate::solutions::util::tree::TreeNode;
 use std::cell::RefCell;
 use std::rc::Rc;
-use crate::solutions::util::tree::TreeNode;
 
 enum BoundaryState {
     Root,
@@ -194,7 +193,7 @@ mod test {
 
     #[test]
     fn test_boundary_of_binary_tree_2() {
-        let tree = tree![1,2,4,7,8,9,10,6,3];
+        let tree = tree![1, 2, 4, 7, 8, 9, 10, 6, 3];
         assert_eq!(
             Solution::boundary_of_binary_tree(tree),
             vec![1, 2, 4, 7, 8, 9, 10, 6, 3]

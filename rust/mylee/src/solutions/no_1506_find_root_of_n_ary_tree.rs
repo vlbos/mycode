@@ -3,12 +3,12 @@ Given all the nodes of an N-ary tree as an array  Node[] tree where each node ha
 
 Find and return the root of the N-ary tree.
 
- 
+
 
 Follow up:
 Could you solve this problem in constant space complexity with a linear time algorithm?
 
- 
+
 
 Nary-Tree input serialization is represented in their level order traversal, each group of children is separated by the null value (See examples).
 
@@ -19,7 +19,7 @@ You should provide the serialization of the input tree.
 The Driver code then extracts the nodes from the tree and shuffles them. You shouldn't care how the extracted nodes are shuffled.
 The driver code will provide you with an array of the extracted nodes in random order and you need to find the root of the tree out of these nodes.
 
- 
+
 Example 1:
 Input: tree = [1,null,3,2,4,null,5,6]
 Output: [1,null,3,2,4,null,5,6]
@@ -30,10 +30,10 @@ Example 2:
 Input: tree = [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]
 Output: [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]
 
- 
+
 Constraints:
-	The total number of nodes is between [1, 5 * 10^4].
-	Each node has a unique value.
+    The total number of nodes is between [1, 5 * 10^4].
+    Each node has a unique value.
 
 
 */

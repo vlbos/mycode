@@ -147,14 +147,14 @@ mod test {
 
     #[test]
     fn test_closest_k_values() {
-        let tree = tree![4,2,5,1,3];
-          
+        let tree = tree![4, 2, 5, 1, 3];
+
         assert_equivalent(&Solution::closest_k_values(tree, 3.714286, 2), &[3, 4]);
     }
 
     #[test]
     fn test_closest_k_values1() {
-        let tree = tree![8,1];
+        let tree = tree![8, 1];
         assert_equivalent(&Solution::closest_k_values(tree, 6., 1), &[8]);
     }
 }

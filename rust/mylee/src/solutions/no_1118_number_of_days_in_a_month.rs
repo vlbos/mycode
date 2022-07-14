@@ -1,7 +1,7 @@
 /*
 Given a year Y and a month M, return how many days there are in that month.
 
- 
+
 
 Example 1:
 Input: Y = 1992, M = 7
@@ -15,11 +15,11 @@ Example 3:
 Input: Y = 1900, M = 2
 Output: 28
 
- 
+
 
 Note:
-	1583 <= Y <= 2100
-	1 <= M <= 12
+    1583 <= Y <= 2100
+    1 <= M <= 12
 
 
 */
@@ -30,13 +30,12 @@ impl Solution {
     }
 }
 
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_number_of_days_1() {
-        assert_eq!(0, Solution::number_of_days(0,0));
+        assert_eq!(0, Solution::number_of_days(0, 0));
     }
 }
