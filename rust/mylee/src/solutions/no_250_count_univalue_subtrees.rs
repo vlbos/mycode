@@ -33,68 +33,93 @@ use crate::solutions::util::tree::TreeNode;
 use std::cell::RefCell;
 use std::rc::Rc;
 
-enum TreeState {
-    Uni((usize, i32)),
-    Diff(usize),
-    Empty,
-}
+// enum TreeState {
+//     Uni((usize, i32)),
+//     Diff(usize),
+//     Empty,
+// }
 
 impl Solution {
     pub fn count_unival_subtrees(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-        use TreeState::{Diff, Empty, Uni};
-        let res = Solution::count_unival_subtrees_rec(&root);
-        (match res {
-            Diff(count) => count,
-            Uni((count, _)) => count,
-            Empty => 0,
-        }) as i32
+        // use TreeState::{Diff, Empty, Uni};
+        // let res = Solution::count_unival_subtrees_rec(&root);
+        // (match res {
+        //     Diff(count) => count,
+        //     Uni((count, _)) => count,
+        //     Empty => 0,
+        // }) as i32
+        use std::collections::HashSet;
+        fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, ans: &mut i32) -> HashSet<i32> {
+            if let Some(p) = root {
+                let node = p.borrow();
+                let mut values = HashSet::from([node.val]);
+                let l = dfs(&node.left, ans);
+                let r = dfs(&node.right, ans);
+                values = values
+                    .union(&l)
+                    .cloned()
+                    .collect::<HashSet<i32>>()
+                    .union(&r)
+                    .cloned()
+                    .collect();
+                if values.len() == 1 {
+                    *ans += 1;
+                }
+                values
+            } else {
+                HashSet::new()
+            }
+        }
+        let mut ans = 0;
+        dfs(&root, &mut ans);
+        ans
     }
 
-    fn count_unival_subtrees_rec(root: &Option<Rc<RefCell<TreeNode>>>) -> TreeState {
-        use TreeState::{Diff, Empty, Uni};
-        match root {
-            Some(node_ref) => {
-                let node_b = node_ref.borrow();
-                let left = Solution::count_unival_subtrees_rec(&node_b.left);
-                let right = Solution::count_unival_subtrees_rec(&node_b.right);
-                let mut is_uni = true;
-                let mut uni_count = 0;
-                match left {
-                    Uni((count, value)) => {
-                        uni_count += count;
-                        if value != node_b.val {
-                            is_uni = false;
-                        }
-                    }
-                    Diff(count) => {
-                        uni_count += count;
-                        is_uni = false;
-                    }
-                    Empty => {}
-                }
-                match right {
-                    Uni((count, value)) => {
-                        uni_count += count;
-                        if value != node_b.val {
-                            is_uni = false;
-                        }
-                    }
-                    Diff(count) => {
-                        uni_count += count;
-                        is_uni = false;
-                    }
-                    Empty => {}
-                }
-                if is_uni {
-                    uni_count += 1;
-                    Uni((uni_count, node_b.val))
-                } else {
-                    Diff(uni_count)
-                }
-            }
-            None => Empty,
-        }
-    }
+    // fn count_unival_subtrees_rec(root: &Option<Rc<RefCell<TreeNode>>>) -> TreeState {
+    //     use TreeState::{Diff, Empty, Uni};
+    //     match root {
+    //         Some(node_ref) => {
+    //             let node_b = node_ref.borrow();
+    //             let left = Solution::count_unival_subtrees_rec(&node_b.left);
+    //             let right = Solution::count_unival_subtrees_rec(&node_b.right);
+    //             let mut is_uni = true;
+    //             let mut uni_count = 0;
+    //             match left {
+    //                 Uni((count, value)) => {
+    //                     uni_count += count;
+    //                     if value != node_b.val {
+    //                         is_uni = false;
+    //                     }
+    //                 }
+    //                 Diff(count) => {
+    //                     uni_count += count;
+    //                     is_uni = false;
+    //                 }
+    //                 Empty => {}
+    //             }
+    //             match right {
+    //                 Uni((count, value)) => {
+    //                     uni_count += count;
+    //                     if value != node_b.val {
+    //                         is_uni = false;
+    //                     }
+    //                 }
+    //                 Diff(count) => {
+    //                     uni_count += count;
+    //                     is_uni = false;
+    //                 }
+    //                 Empty => {}
+    //             }
+    //             if is_uni {
+    //                 uni_count += 1;
+    //                 Uni((uni_count, node_b.val))
+    //             } else {
+    //                 Diff(uni_count)
+    //             }
+    //         }
+    //         None => Empty,
+    //     }
+    // }
 }
 // @lc code=end
 struct Solution;
@@ -106,7 +131,7 @@ mod test {
 
     #[test]
     fn test_count_unival_subtrees() {
-        let tree = tree![];
+        let tree = tree![5, 1, 5, 5, 5, null, 5];
         assert_eq!(Solution::count_unival_subtrees(tree), 4);
     }
 }

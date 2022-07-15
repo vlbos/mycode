@@ -72,9 +72,9 @@ impl Solution {
         let mut i = 0;
         let n = bn.len();
         while i <= n / 2 {
-            let j = n-i-1;
+            let j = n - i - 1;
             if bn[i] == bn[j] {
-                if [b'0', b'1', b'8'].iter().find(|&x|*x==bn[i]).is_none() {
+                if [b'0', b'1', b'8'].iter().find(|&x| *x == bn[i]).is_none() {
                     return false;
                 }
             } else {
@@ -86,7 +86,11 @@ impl Solution {
             i += 1;
         }
         if n % 2 > 0 {
-            if [b'0', b'1', b'8'].iter().find(|&x|*x==bn[n / 2]).is_none() {
+            if [b'0', b'1', b'8']
+                .iter()
+                .find(|&x| *x == bn[n / 2])
+                .is_none()
+            {
                 return false;
             }
         }

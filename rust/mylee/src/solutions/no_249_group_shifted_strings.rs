@@ -31,42 +31,54 @@
 // [Facebook](https://leetcode.ca/tags/#Facebook) [Google](https://leetcode.ca/tags/#Google) [Uber](https://leetcode.ca/tags/#Uber)
 struct Solution;
 // @lc code=start
-use std::collections::HashMap;
+// use std::collections::HashMap;
 
-const A_CHARCODE: i32 = 'a' as i32;
+// const A_CHARCODE: i32 = 'a' as i32;
 
 impl Solution {
     pub fn group_strings(strings: Vec<String>) -> Vec<Vec<String>> {
-        let mut dict = HashMap::<String, Vec<String>>::new();
-        for s in strings {
-            let norm = Solution::shift_normalize(&s);
-            dict.entry(norm)
-                .and_modify(|v| v.push(s.clone()))
-                .or_insert_with(|| vec![s]);
+        // let mut dict = HashMap::<String, Vec<String>>::new();
+        // for s in strings {
+        //     let norm = Solution::shift_normalize(&s);
+        //     dict.entry(norm)
+        //         .and_modify(|v| v.push(s.clone()))
+        //         .or_insert_with(|| vec![s]);
+        // }
+        // dict.values().cloned().collect::<Vec<Vec<String>>>()
+        let shift = |s: &String| {
+            let mut key = String::new();
+            for w in s.as_bytes().windows(2) {
+                key.push_str(format!("{}_", (w[1] + 26 - w[0]) % 26).as_str());
+            }
+            key
+        };
+        let mut g = std::collections::HashMap::new();
+        for s in &strings {
+            g.entry(shift(s)).or_insert(Vec::new()).push(s.clone());
         }
-        dict.values().cloned().collect::<Vec<Vec<String>>>()
+        g.values().cloned().collect()
     }
 
-    fn shift(ch: char, times: i32) -> char {
-        (A_CHARCODE + ((ch as i32) - A_CHARCODE + times).rem_euclid(26)) as u8 as char
-    }
+    // fn shift(ch: char, times: i32) -> char {
+    //     (A_CHARCODE + ((ch as i32) - A_CHARCODE + times).rem_euclid(26)) as u8 as char
+    // }
 
-    fn shift_normalize(string: &String) -> String {
-        if string.is_empty() {
-            return string.to_string();
-        }
-        let mut times = 0;
-        let chars = string.chars().collect::<Vec<_>>();
-        let mut temp_char = chars[0];
-        while temp_char != 'a' {
-            temp_char = Solution::shift(temp_char, -1);
-            times -= 1;
-        }
-        chars
-            .iter()
-            .map(|ch| Solution::shift(*ch, times))
-            .collect::<String>()
-    }
+    // fn shift_normalize(string: &String) -> String {
+    //     if string.is_empty() {
+    //         return string.to_string();
+    //     }
+    //     let mut times = 0;
+    //     let chars = string.chars().collect::<Vec<_>>();
+    //     let mut temp_char = chars[0];
+    //     while temp_char != 'a' {
+    //         temp_char = Solution::shift(temp_char, -1);
+    //         times -= 1;
+    //     }
+    //     chars
+    //         .iter()
+    //         .map(|ch| Solution::shift(*ch, times))
+    //         .collect::<String>()
+    // }
 }
 
 // @lc code=end
