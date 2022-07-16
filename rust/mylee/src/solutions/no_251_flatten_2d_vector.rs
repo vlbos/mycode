@@ -38,9 +38,12 @@
 
 // @lc code=start
 struct Vector2D {
-    values: Vec<Vec<i32>>,
-    i: usize,
-    j: usize,
+    // values: Vec<Vec<i32>>,
+    // i: usize,
+    // j: usize,
+    v: Vec<Vec<i32>>,
+    row: usize,
+    col: usize,
 }
 
 /**
@@ -49,35 +52,45 @@ struct Vector2D {
  */
 impl Vector2D {
     fn new(v: Vec<Vec<i32>>) -> Self {
-        Vector2D {
-            values: v,
-            i: 0,
-            j: 0,
-        }
+        // Vector2D {
+        //     values: v,
+        //     i: 0,
+        //     j: 0,
+        // }
+        Self { v, row: 0, col: 0 }
     }
 
     fn next(&mut self) -> i32 {
-        let has_next = self.has_next();
-        if has_next {
-            let res = self.values[self.i][self.j];
-            self.j += 1;
-            res
+        // let has_next = self.has_next();
+        // if has_next {
+        //     let res = self.values[self.i][self.j];
+        //     self.j += 1;
+        //     res
+        // } else {
+        //     panic!("has not next")
+        // }
+        let ans = self.v[self.row][self.col];
+        if self.col + 1 == self.v[self.row].len() {
+            self.row = self.row + 1;
+            self.col = 0;
         } else {
-            panic!("has not next")
+            self.col += 1;
         }
+        ans
     }
 
     fn has_next(&mut self) -> bool {
-        loop {
-            if self.i >= self.values.len() {
-                return false;
-            } else if self.j < self.values[self.i].len() {
-                return true;
-            } else {
-                self.i += 1;
-                self.j = 0;
-            }
-        }
+        // loop {
+        //     if self.i >= self.values.len() {
+        //         return false;
+        //     } else if self.j < self.values[self.i].len() {
+        //         return true;
+        //     } else {
+        //         self.i += 1;
+        //         self.j = 0;
+        //     }
+        // }
+        self.row < self.v.len() && self.col < self.v[self.row].len()
     }
 }
 // @lc code=end

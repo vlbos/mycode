@@ -29,18 +29,29 @@
 // @lc code=start
 
 impl Solution {
-    pub fn can_attend_meetings(mut intervals: Vec<Vec<i32>>) -> bool {
-        intervals.sort_by_key(|v| v[0]);
-        if intervals.is_empty() {
+    pub fn can_attend_meetings(intervals: Vec<Vec<i32>>) -> bool {
+        // intervals.sort_by_key(|v| v[0]);
+        // if intervals.is_empty() {
+        //     return true;
+        // }
+        // let mut all_period = intervals[0].clone();
+        // for i in 1..intervals.len() {
+        //     let period = &intervals[i];
+        //     if period[0] < all_period[1] {
+        //         return false;
+        //     } else {
+        //         all_period[1] = period[1];
+        //     }
+        // }
+        // true
+        let mut intervals = intervals;
+        intervals.sort_by_key(|x| x[0]);
+        if intervals.len() < 2 {
             return true;
         }
-        let mut all_period = intervals[0].clone();
-        for i in 1..intervals.len() {
-            let period = &intervals[i];
-            if period[0] < all_period[1] {
+        for v in intervals.windows(2) {
+            if v[1][0] < v[0][1] {
                 return false;
-            } else {
-                all_period[1] = period[1];
             }
         }
         true

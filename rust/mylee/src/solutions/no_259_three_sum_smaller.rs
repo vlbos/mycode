@@ -1,7 +1,10 @@
 // 259\. 3Sum Smaller
 // ==================
 
-// Given an array of _n_ integers _nums_ and a _target_, find the number of index triplets `i, j, k` with `0 <= i < j < k < n` that satisfy the condition `nums[i] + nums[j] + nums[k] < target`.
+// Given an array of _n_ integers _nums_ and a _target_, 
+// find the number of index triplets `i, j, k` with `0 <= i < j < k < n` 
+// that satisfy the condition `nums[i] + nums[j] + nums[k] < target`.
+
 
 // **Example:**
 
