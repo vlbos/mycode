@@ -42,23 +42,23 @@ struct Solution;
 
 impl Solution {
     pub fn verify_preorder(preorder: Vec<i32>) -> bool {
- fn verify_preorder(arr: &[i32]) -> bool {
-        if arr.is_empty() {
-            return true;
-        }
-        let root = arr[0];
-        let mut i = 1+arr[1..].iter().position(|&x|x >= root).unwrap_or(arr.len()-1);
-        let left_size = i ;
-        if arr[i..].iter().any(|x|*x< root)  {
+        fn verify_preorder(arr: &[i32]) -> bool {
+            if arr.is_empty() {
+                return true;
+            }
+            let root = arr[0];
+            let mut i = 1 + arr[1..]
+                .iter()
+                .position(|&x| x >= root)
+                .unwrap_or(arr.len() - 1);
+            let left_size = i;
+            if arr[i..].iter().any(|x| *x < root) {
                 return false;
+            }
+            verify_preorder(&arr[1..left_size]) && verify_preorder(&arr[left_size..])
         }
-        verify_preorder(&arr[1..left_size])
-            && verify_preorder(&arr[left_size..])
+        verify_preorder(&preorder)
     }
-       verify_preorder(&preorder)
-    }
-
-   
 }
 
 // @lc code=end

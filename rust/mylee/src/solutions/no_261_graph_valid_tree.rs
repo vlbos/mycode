@@ -28,69 +28,88 @@
 // [Adobe](https://leetcode.ca/tags/#Adobe) [Amazon](https://leetcode.ca/tags/#Amazon) [Facebook](https://leetcode.ca/tags/#Facebook) [Google](https://leetcode.ca/tags/#Google) [LinkedIn](https://leetcode.ca/tags/#LinkedIn) [Pinterest](https://leetcode.ca/tags/#Pinterest) [Salesforce](https://leetcode.ca/tags/#Salesforce) [Zenefits](https://leetcode.ca/tags/#Zenefits)
 
 // @lc code=start
-struct UnionFind {
-    sz: Vec<usize>,
-    id: Vec<usize>,
-    count: usize,
-}
+// struct UnionFind {
+//     sz: Vec<usize>,
+//     id: Vec<usize>,
+//     count: usize,
+// }
 
-impl UnionFind {
-    pub fn new(size: usize) -> Self {
-        UnionFind {
-            id: (vec![0; size]).iter().enumerate().map(|(i, _)| i).collect(),
-            sz: vec![1; size],
-            count: size,
-        }
-    }
+// impl UnionFind {
+//     pub fn new(size: usize) -> Self {
+//         UnionFind {
+//             id: (vec![0; size]).iter().enumerate().map(|(i, _)| i).collect(),
+//             sz: vec![1; size],
+//             count: size,
+//         }
+//     }
 
-    pub fn union(&mut self, p: usize, q: usize) {
-        let pid = self.find(p);
-        let qid = self.find(q);
-        if pid == qid {
-            return;
-        }
-        if self.sz[pid] > self.sz[qid] {
-            self.id[qid] = pid;
-            self.sz[pid] += self.sz[qid];
-        } else {
-            self.id[pid] = qid;
-            self.sz[qid] = self.sz[pid];
-        }
-        self.count -= 1;
-    }
+//     pub fn union(&mut self, p: usize, q: usize) {
+//         let pid = self.find(p);
+//         let qid = self.find(q);
+//         if pid == qid {
+//             return;
+//         }
+//         if self.sz[pid] > self.sz[qid] {
+//             self.id[qid] = pid;
+//             self.sz[pid] += self.sz[qid];
+//         } else {
+//             self.id[pid] = qid;
+//             self.sz[qid] = self.sz[pid];
+//         }
+//         self.count -= 1;
+//     }
 
-    pub fn find(&self, mut p: usize) -> usize {
-        loop {
-            let pid = self.id[p];
-            if pid == p {
-                return p;
-            }
-            p = pid;
-        }
-    }
+//     pub fn find(&self, mut p: usize) -> usize {
+//         loop {
+//             let pid = self.id[p];
+//             if pid == p {
+//                 return p;
+//             }
+//             p = pid;
+//         }
+//     }
 
-    pub fn connected(&self, p: usize, q: usize) -> bool {
-        self.find(p) == self.find(q)
-    }
-}
+//     pub fn connected(&self, p: usize, q: usize) -> bool {
+//         self.find(p) == self.find(q)
+//     }
+// }
 
 impl Solution {
     pub fn valid_tree(n: i32, edges: Vec<Vec<i32>>) -> bool {
-        if n < 0 {
-            return false;
-        } else if n == 0 {
-            return true;
+        // if n < 0 {
+        //     return false;
+        // } else if n == 0 {
+        //     return true;
+        // }
+        // let mut uf = UnionFind::new(n as usize);
+        // for edge in edges {
+        //     let s = edge[0] as usize;
+        //     let e = edge[1] as usize;
+        //     if uf.connected(s, e) {
+        //         return false;
+        //     }
+        //     uf.union(s, e);
+        // }
+        // uf.count == 1
+        let n = n as usize;
+        let mut g = vec![Vec::new(); n];
+        for e in &edges {
+            let (u, v) = (e[0] as usize, e[1] as usize);
+            g[u].push(v);
+            g[v].push(u);
         }
-        let mut uf = UnionFind::new(n as usize);
-        for edge in edges {
-            let s = edge[0] as usize;
-            let e = edge[1] as usize;
-            if uf.connected(s, e) {
-                return false;
+        use std::collections::HashSet;
+        let mut visited = HashSet::new();
+        fn dfs(u: usize, g: &Vec<Vec<usize>>, visited: &mut HashSet<usize>) {
+            visited.insert(u);
+            for &v in &g[u] {
+                if !visited.contains(&v) {
+                    dfs(v, g, visited);
+                }
             }
-            uf.union(s, e);
         }
-        uf.count == 1
+        dfs(0, &g, &mut visited);
+        visited.len() == n && edges.len() == n - 1
     }
 }
 // @lc code=end

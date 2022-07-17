@@ -2,11 +2,11 @@
 // =================
 
 // There are a row of _n_ houses, each house can be painted with one of the three colors: red, blue or green.
-//  The cost of painting each house with a certain color is different. 
+//  The cost of painting each house with a certain color is different.
 // You have to paint all the houses such that no two adjacent houses have the same color.
 
-// The cost of painting each house with a certain color is represented by a `_n_ x _3_` cost matrix. 
-// For example, `costs[0][0]` is the cost of painting house 0 with color red; `costs[1][2]` is the cost of painting house 1 with color green, 
+// The cost of painting each house with a certain color is represented by a `_n_ x _3_` cost matrix.
+// For example, `costs[0][0]` is the cost of painting house 0 with color red; `costs[1][2]` is the cost of painting house 1 with color green,
 // and so on... Find the minimum cost to paint all houses.
 
 // **Note:**
@@ -52,13 +52,20 @@ impl Solution {
         // dp[iter]
         //     .iter()
         //     .fold(i32::max_value(), |sum, curr| i32::min(sum, *curr))
-        let mut dp=costs[0].clone();
-        for cost in &costs[1..]{
-            let mut new_dp=vec![0;3];
-            for i in 0..3{
-                new_dp[i]=cost[i]+*dp.iter().enumerate().filter(|(j,_)|*j!=i).min_by_key(|(_,&v)|v).unwrap().1;
+        let mut dp = costs[0].clone();
+        for cost in &costs[1..] {
+            let mut new_dp = vec![0; 3];
+            for i in 0..3 {
+                new_dp[i] = cost[i]
+                    + *dp
+                        .iter()
+                        .enumerate()
+                        .filter(|(j, _)| *j != i)
+                        .min_by_key(|(_, &v)| v)
+                        .unwrap()
+                        .1;
             }
-            dp=new_dp;
+            dp = new_dp;
         }
         dp.into_iter().min().unwrap()
     }

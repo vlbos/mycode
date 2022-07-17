@@ -32,7 +32,7 @@ use std::collections::BinaryHeap;
 
 impl Solution {
     pub fn min_meeting_rooms(intervals: Vec<Vec<i32>>) -> i32 {
-        let mut intervals= intervals;
+        let mut intervals = intervals;
         intervals.sort_by_key(|v| v[0]);
         let mut heap = BinaryHeap::<Reverse<i32>>::new();
         for p in &intervals {
