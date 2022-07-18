@@ -37,41 +37,57 @@ use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
     pub fn closest_value(root: Option<Rc<RefCell<TreeNode>>>, target: f64) -> i32 {
-        Solution::closest_value_rec(&root, target).unwrap()
-    }
-
-    fn closest_value_rec(root: &Option<Rc<RefCell<TreeNode>>>, target: f64) -> Option<i32> {
-        match root {
-            Some(node_ref) => {
-                let node_b = node_ref.borrow();
-                let mut another_val: i32 = i32::min_value();
-                let mut has_another = false;
-                if target < (node_b.val as f64) {
-                    if let Some(left_max) = Solution::closest_value_rec(&node_b.left, target) {
-                        another_val = left_max;
-                        has_another = true;
-                    }
-                } else if target > (node_b.val as f64) {
-                    if let Some(right_min) = Solution::closest_value_rec(&node_b.right, target) {
-                        another_val = right_min;
-                        has_another = true;
-                    }
-                }
-                if has_another {
-                    if f64::abs((another_val as f64) - target)
-                        < f64::abs((node_b.val as f64) - target)
-                    {
-                        Some(another_val)
-                    } else {
-                        Some(node_b.val)
-                    }
-                } else {
-                    Some(node_b.val)
-                }
-            }
-            None => None,
+        // Solution::closest_value_rec(&root, target).unwrap()
+        let node = root.as_ref().unwrap().borrow();
+        let val = node.val;
+        let t = if target < val as f64 {
+            node.left.clone()
+        } else {
+            node.right.clone()
+        };
+        if t.is_none() {
+            return val;
+        }
+        let cval = Self::closest_value(t, target);
+        if (val as f64 - target).abs() < (cval as f64 - target).abs() {
+            val
+        } else {
+            cval
         }
     }
+
+    // fn closest_value_rec(root: &Option<Rc<RefCell<TreeNode>>>, target: f64) -> Option<i32> {
+    //     match root {
+    //         Some(node_ref) => {
+    //             let node_b = node_ref.borrow();
+    //             let mut another_val: i32 = i32::min_value();
+    //             let mut has_another = false;
+    //             if target < (node_b.val as f64) {
+    //                 if let Some(left_max) = Solution::closest_value_rec(&node_b.left, target) {
+    //                     another_val = left_max;
+    //                     has_another = true;
+    //                 }
+    //             } else if target > (node_b.val as f64) {
+    //                 if let Some(right_min) = Solution::closest_value_rec(&node_b.right, target) {
+    //                     another_val = right_min;
+    //                     has_another = true;
+    //                 }
+    //             }
+    //             if has_another {
+    //                 if f64::abs((another_val as f64) - target)
+    //                     < f64::abs((node_b.val as f64) - target)
+    //                 {
+    //                     Some(another_val)
+    //                 } else {
+    //                     Some(node_b.val)
+    //                 }
+    //             } else {
+    //                 Some(node_b.val)
+    //             }
+    //         }
+    //         None => None,
+    //     }
+    // }
 }
 // @lc code=end
 struct Solution;

@@ -48,7 +48,6 @@ impl Solution {
         for _ in 1..n {
             let diff = (k - 1) * (prev_diff + prev_same);
             let same = prev_diff;
-            println!("{},{}", same, diff);
             prev_same = same;
             prev_diff = diff;
         }
