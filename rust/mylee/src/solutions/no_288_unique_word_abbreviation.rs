@@ -19,7 +19,8 @@
 //      ↓   ↓    ↓
 // d) l|ocalizatio|n          --> l10n
 
-// Assume you have a dictionary and given a word, find whether its abbreviation is unique in the dictionary. A word's abbreviation is unique if no _other_ word from the dictionary has the same abbreviation.
+// Assume you have a dictionary and given a word, find whether its abbreviation is unique in the dictionary.
+//  A word's abbreviation is unique if no _other_ word from the dictionary has the same abbreviation.
 
 // **Example:**
 
@@ -43,46 +44,70 @@
 // [Google](https://leetcode.ca/tags/#Google)
 
 // @lc code=start
-use std::collections::HashMap;
+use std::collections::HashSet;
 
 struct ValidWordAbbr {
-    values: HashMap<String, (usize, String)>,
+    // values: HashMap<String, (usize, String)>,
+    dic: HashSet<String>,
 }
 
 impl ValidWordAbbr {
     fn new(dictionary: Vec<String>) -> Self {
-        let mut dict: HashMap<String, (usize, String)> = HashMap::new();
-        for s in dictionary {
-            let abbr = ValidWordAbbr::to_abbr(&s);
-            dict.entry(abbr)
-                .and_modify(|c| {
-                    if s != c.1 {
-                        c.0 += 1;
-                    }
-                })
-                .or_insert_with(|| (1, s));
+        // let mut dict: HashMap<String, (usize, String)> = HashMap::new();
+        // for s in dictionary {
+        //     let abbr = ValidWordAbbr::to_abbr(&s);
+        //     dict.entry(abbr)
+        //         .and_modify(|c| {
+        //             if s != c.1 {
+        //                 c.0 += 1;
+        //             }
+        //         })
+        //         .or_insert_with(|| (1, s));
+        // }
+        // Self { values: dict }
+
+        let mut dic = HashSet::new();
+        for s in &dictionary {
+            let a = if s.len() < 3 {
+                s.clone()
+            } else {
+                format!("{}{}{}", &s[..1], s.len() - 2, &s[s.len() - 1..])
+            };
+            dic.insert(a.clone());
         }
-        Self { values: dict }
+        Self { dic }
     }
 
     fn is_unique(&self, word: String) -> bool {
-        self.values
-            .get(&ValidWordAbbr::to_abbr(&word))
-            .map_or(true, |c| c.0 == 1 && c.1 == word)
+        // self.values
+        //     .get(&ValidWordAbbr::to_abbr(&word))
+        //     .map_or(true, |c| c.0 == 1 && c.1 == word)
+        let a = if word.len() < 3 {
+            word.clone()
+        } else {
+            format!(
+                "{}{}{}",
+                &word[..1],
+                word.len() - 2,
+                &word[word.len() - 1..]
+            )
+        };
+
+        !self.dic.contains(&a)
     }
 
-    fn to_abbr(word: &str) -> String {
-        if word.len() <= 2 {
-            return word.to_string();
-        }
-        let chars = word.chars().collect::<Vec<char>>();
-        let chars_last_i = chars.len() - 1;
-        let mut res = String::new();
-        res.push(chars[0]);
-        res.extend(chars[1..chars_last_i].len().to_string().chars());
-        res.push(chars[chars_last_i]);
-        res
-    }
+    // fn to_abbr(word: &str) -> String {
+    //     if word.len() <= 2 {
+    //         return word.to_string();
+    //     }
+    //     let chars = word.chars().collect::<Vec<char>>();
+    //     let chars_last_i = chars.len() - 1;
+    //     let mut res = String::new();
+    //     res.push(chars[0]);
+    //     res.extend(chars[1..chars_last_i].len().to_string().chars());
+    //     res.push(chars[chars_last_i]);
+    //     res
+    // }
 }
 // @lc code=end
 

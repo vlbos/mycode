@@ -61,7 +61,7 @@ impl Solution {
         if rooms.is_empty() || rooms[0].is_empty() {
             return;
         }
-        let (m, n) = (rooms.len() , rooms[0].len() );
+        let (m, n) = (rooms.len(), rooms[0].len());
         let mut visited = vec![vec![false; n]; m];
         fn dfs(i: i32, j: i32, d: i32, rooms: &mut Vec<Vec<i32>>, visited: &mut Vec<Vec<bool>>) {
             let (m, n) = (rooms.len() as i32, rooms[0].len() as i32);
@@ -73,17 +73,17 @@ impl Solution {
                 return;
             }
             visited[i][j] = true;
-            rooms[i][j]=d;
+            rooms[i][j] = d;
             let dirs = [0, 1, 0, -1, 0];
             for (k, &v) in dirs[1..].iter().enumerate() {
-                dfs(i as i32+ dirs[k], j as i32 + v, d + 1, rooms, visited);
+                dfs(i as i32 + dirs[k], j as i32 + v, d + 1, rooms, visited);
             }
             visited[i][j] = false;
         }
-        for i in 0..m{
-            for j in 0..n{
+        for i in 0..m {
+            for j in 0..n {
                 if rooms[i][j] == 0 {
-                    dfs(i as i32, j as i32, 0,  rooms, &mut visited);
+                    dfs(i as i32, j as i32, 0, rooms, &mut visited);
                 }
             }
         }

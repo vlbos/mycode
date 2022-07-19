@@ -1,7 +1,10 @@
 // 296\. Best Meeting Point
 // ========================
 
-// A group of two or more people wants to meet and minimize the total travel distance. You are given a 2D grid of values 0 or 1, where each 1 marks the home of someone in the group. The distance is calculated using [Manhattan Distance](http://en.wikipedia.org/wiki/Taxicab_geometry), where distance(p1, p2) = `|p2.x - p1.x| + |p2.y - p1.y|`.
+// A group of two or more people wants to meet and minimize the total travel distance.
+// You are given a 2D grid of values 0 or 1, where each 1 marks the home of someone in the group.
+//  The distance is calculated using [Manhattan Distance](http://en.wikipedia.org/wiki/Taxicab_geometry),
+// where distance(p1, p2) = `|p2.x - p1.x| + |p2.y - p1.y|`.
 
 // **Example:**
 
@@ -34,45 +37,64 @@
 // @lc code=start
 impl Solution {
     pub fn min_total_distance(grid: Vec<Vec<i32>>) -> i32 {
-        if grid.is_empty() {
+        // if grid.is_empty() {
+        //     return 0;
+        // }
+        // if grid[0].is_empty() {
+        //     return 0;
+        // }
+        // let mut rows = vec![];
+        // for (i, r) in grid.iter().enumerate() {
+        //     for v in r.iter() {
+        //         if *v == 1 {
+        //             rows.push(i);
+        //         }
+        //     }
+        // }
+        // let mut cols = vec![];
+        // for j in 0..grid[0].len() {
+        //     for i in 0..grid.len() {
+        //         if grid[i][j] == 1 {
+        //             cols.push(j);
+        //         }
+        //     }
+        // }
+        // (Solution::min_distance_linear(&rows) + Solution::min_distance_linear(&cols)) as i32
+        if grid.is_empty() || grid[0].is_empty() {
             return 0;
         }
-        if grid[0].is_empty() {
-            return 0;
-        }
-        let mut rows = vec![];
+        let mut rc = vec![Vec::new(); 2];
         for (i, r) in grid.iter().enumerate() {
-            for v in r.iter() {
-                if *v == 1 {
-                    rows.push(i);
+            for (j, &v) in r.iter().enumerate() {
+                if v == 1 {
+                    rc[0].push(i);
+                    rc[1].push(j);
                 }
             }
         }
-        let mut cols = vec![];
-        for j in 0..grid[0].len() {
-            for i in 0..grid.len() {
-                if grid[i][j] == 1 {
-                    cols.push(j);
-                }
-            }
+        rc[1].sort();
+        let mut ans = 0;
+        let n = rc[0].len();
+        for i in 0..n / 2 {
+            ans += rc[0][n - i - 1] - rc[0][i] + rc[1][n - i - 1] - rc[1][i];
         }
-        (Solution::min_distance_linear(&rows) + Solution::min_distance_linear(&cols)) as i32
+        ans as _
     }
 
-    fn min_distance_linear(arr: &[usize]) -> usize {
-        if arr.is_empty() {
-            return 0;
-        }
-        let mut distance = 0usize;
-        let mut i = 0usize;
-        let mut j = arr.len() - 1;
-        while i < j {
-            distance += (arr[j] - arr[i]) as usize;
-            i += 1;
-            j -= 1;
-        }
-        return distance;
-    }
+    // fn min_distance_linear(arr: &[usize]) -> usize {
+    //     if arr.is_empty() {
+    //         return 0;
+    //     }
+    //     let mut distance = 0usize;
+    //     let mut i = 0usize;
+    //     let mut j = arr.len() - 1;
+    //     while i < j {
+    //         distance += (arr[j] - arr[i]) as usize;
+    //         i += 1;
+    //         j -= 1;
+    //     }
+    //     return distance;
+    // }
 }
 // @lc code=end
 
