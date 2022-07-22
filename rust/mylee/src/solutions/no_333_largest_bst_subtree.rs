@@ -74,10 +74,10 @@ impl Solution {
                 let node = node.borrow();
                 let l = dfs(&node.left);
                 let r = dfs(&node.right);
-                if l.1 && r.1  && node.val > l.3 && node.val < r.2 {
-                        (l.0 + r.0 + 1, true, l.2.min(node.val), r.3.max(node.val))
+                if l.1 && r.1 && node.val > l.3 && node.val < r.2 {
+                    (l.0 + r.0 + 1, true, l.2.min(node.val), r.3.max(node.val))
                 } else {
-                        (l.0.max(r.0), false,  l.2.min(node.val), r.3.max(node.val))
+                    (l.0.max(r.0), false, l.2.min(node.val), r.3.max(node.val))
                 }
             } else {
                 (0, true, i32::MAX, i32::MIN)
@@ -133,13 +133,13 @@ mod test {
 
     #[test]
     fn test_largest_bst_subtree_1() {
-        let tree = tree![10,5,15,1,8,null,7];
+        let tree = tree![10, 5, 15, 1, 8, null, 7];
         assert_eq!(Solution::largest_bst_subtree(tree), 3);
     }
 
     #[test]
     fn test_largest_bst_subtree_2() {
-        let tree = tree![10,5,15,null,8,null,7];
+        let tree = tree![10, 5, 15, null, 8, null, 7];
         assert_eq!(Solution::largest_bst_subtree(tree), 2);
     }
 }

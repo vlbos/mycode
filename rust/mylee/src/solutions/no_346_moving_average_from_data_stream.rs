@@ -1,8 +1,27 @@
-/*
- * @lc app=leetcode.cn id=346 lang=rust
- *
- * [346] 数据流中的移动平均值
- */
+// 346\. Moving Average from Data Stream
+// =====================================
+
+// Given a stream of integers and a window size, calculate the moving average of all integers in the sliding window.
+
+// **Example:**
+
+// MovingAverage m = new MovingAverage(3);
+// m.next(1) = 1
+// m.next(10) = (1 + 10) / 2
+// m.next(3) = (1 + 10 + 3) / 3
+// m.next(5) = (10 + 3 + 5) / 3
+
+// ### Difficulty:
+
+// Easy
+
+// ### Lock:
+
+// Prime
+
+// ### Company:
+
+// [Amazon](https://leetcode.ca/tags/#Amazon) [Bloomberg](https://leetcode.ca/tags/#Bloomberg) [Facebook](https://leetcode.ca/tags/#Facebook) [Google](https://leetcode.ca/tags/#Google) [Indeed](https://leetcode.ca/tags/#Indeed) [Microsoft](https://leetcode.ca/tags/#Microsoft) [Twitter](https://leetcode.ca/tags/#Twitter) [Uber](https://leetcode.ca/tags/#Uber)
 
 // @lc code=start
 use std::collections::VecDeque;
