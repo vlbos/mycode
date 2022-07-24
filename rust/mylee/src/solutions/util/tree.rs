@@ -58,7 +58,7 @@ macro_rules! tree {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    // use super::*;
 
     #[test]
     fn test_macro() {

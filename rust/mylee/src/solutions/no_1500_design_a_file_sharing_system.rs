@@ -104,8 +104,8 @@ mod test {
         let used_id = 0;
         let chunk_id = 0;
         let obj = FileSharing::new(m);
-        let ret_1: i32 = obj.join(owned_chunks);
+        let _ret_1: i32 = obj.join(owned_chunks);
         obj.leave(used_id);
-        let ret_3: Vec<i32> = obj.request(used_id, chunk_id);
+        let _ret_3: Vec<i32> = obj.request(used_id, chunk_id);
     }
 }

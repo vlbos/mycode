@@ -84,7 +84,7 @@ mod test {
         let path = String::new();
         let value = 0;
         let obj = FileSystem::new();
-        let ret_1: bool = obj.create_path(path.clone(), value);
-        let ret_2: i32 = obj.get(path);
+        let _ret_1: bool = obj.create_path(path.clone(), value);
+        let _ret_2: i32 = obj.get(path);
     }
 }

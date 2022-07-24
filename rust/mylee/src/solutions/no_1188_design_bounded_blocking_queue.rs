@@ -110,7 +110,7 @@ mod test {
         let value = 0;
         let obj = BoundedBlockingQueue::new(k);
         obj.en_queue(value);
-        let ret_2: i32 = obj.de_queue();
-        let ret_3: i32 = obj.size();
+        let _ret_2: i32 = obj.de_queue();
+        let _ret_3: i32 = obj.size();
     }
 }

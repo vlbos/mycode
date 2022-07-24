@@ -77,7 +77,7 @@ mod test {
         let score = 0;
         let obj = Leaderboard::new();
         obj.add_score(player_id, score);
-        let ret_2: i32 = obj.top(k);
+        let _ret_2: i32 = obj.top(k);
         obj.reset(player_id);
     }
 }

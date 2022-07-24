@@ -95,7 +95,7 @@ mod test {
         let nums = Vec::new();
         let value = 0;
         let obj = FirstUnique::new(nums);
-        let ret_1: i32 = obj.show_first_unique();
+        let _ret_1: i32 = obj.show_first_unique();
         obj.add(value);
     }
 }
