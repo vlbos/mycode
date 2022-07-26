@@ -111,7 +111,7 @@ impl Solution {
                 let mut cnt = n as i32;
                 let mut b = 3;
                 while b < bn {
-                    if (mask & b )== 0 {
+                    if (mask & b) == 0 {
                         cnt -= 1;
                     }
                     b <<= 1;
@@ -147,12 +147,12 @@ impl Solution {
         let mut ans = String::new();
         let mut pre = n - 1;
         for i in (0..n).rev() {
-            if  (min_ab & 1) > 0 {
-                if pre > i  {
+            if (min_ab & 1) > 0 {
+                if pre > i {
                     ans = (pre - i).to_string() + ans.as_str();
                 }
-                if i>0{
-                pre = i - 1;
+                if i > 0 {
+                    pre = i - 1;
                 }
                 ans = target[i..i + 1].to_string() + ans.as_str();
             } else if i == 0 {

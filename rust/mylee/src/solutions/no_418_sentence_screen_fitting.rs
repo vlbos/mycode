@@ -120,22 +120,21 @@ impl Solution {
         //     }
         // }
         // count as i32
-        let sen=sentence.join(" ")+" ";
+        let sen = sentence.join(" ") + " ";
         let n = sen.len();
-        let mut start=0;
-        let bs=sen.as_bytes();
-        for _ in 0..rows{
-            start+=cols as usize;
-            if bs[start%n]==b' '{
-            start+=1;
-            }else{
-                while start >0 && bs[(start-1)%n]!=b' '{
-                start-=1;
+        let mut start = 0;
+        let bs = sen.as_bytes();
+        for _ in 0..rows {
+            start += cols as usize;
+            if bs[start % n] == b' ' {
+                start += 1;
+            } else {
+                while start > 0 && bs[(start - 1) % n] != b' ' {
+                    start -= 1;
                 }
             }
-
         }
-        (start/n) as _
+        (start / n) as _
     }
 }
 // @lc code=end
