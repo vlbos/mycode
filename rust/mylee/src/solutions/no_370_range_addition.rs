@@ -3,7 +3,7 @@
 
 // Assume you have an array of length **_n_** initialized with all **0**'s and are given **_k_** update operations.
 
-// Each operation is represented as a triplet: 
+// Each operation is represented as a triplet:
 // **\[startIndex, endIndex, inc\]** which increments each element of subarray **A\[startIndex ... endIndex\]** (startIndex and endIndex inclusive) with **inc**.
 
 // Return the modified array after all **_k_** operations were executed.
@@ -55,9 +55,9 @@ impl Solution {
         //         Some(*acc)
         //     })
         //     .collect()
-        let mut ans = vec![0; length as usize+1];
+        let mut ans = vec![0; length as usize + 1];
         for u in updates {
-            let (a,b)=(u[0] as usize,u[1] as usize + 1);
+            let (a, b) = (u[0] as usize, u[1] as usize + 1);
             ans[a] += u[2];
             ans[b] -= u[2];
         }
@@ -68,7 +68,6 @@ impl Solution {
                 Some(*acc)
             })
             .collect()
-
     }
 }
 // @lc code=end

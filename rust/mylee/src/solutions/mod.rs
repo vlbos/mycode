@@ -148,7 +148,6 @@ mod no_370_range_addition;
 mod no_379_design_phone_directory;
 mod no_408_valid_word_abbreviation;
 mod no_411_minimum_unique_word_abbreviation;
-mod no_416_partition_equal_subset_sum;
 mod no_418_sentence_screen_fitting;
 mod no_425_word_squares;
 mod no_439_ternary_expression_parser;
