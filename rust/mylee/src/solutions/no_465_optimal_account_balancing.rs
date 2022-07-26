@@ -105,9 +105,27 @@ impl Solution {
             *cnt.entry(t[0]).or_insert(0) += t[2];
             *cnt.entry(t[1]).or_insert(0) -= t[2];
         }
-        let pay = cnt.values().filter(|&x| *x < 0).count() as i32;
-        let debt = cnt.values().filter(|&x| *x > 0).count() as i32;
-        pay.max(debt)
+        let mut acc = cnt.values().filter(|&x| *x != 0).cloned().collect();
+        let mut ans=i32::MAX;
+        fn helper(acc:&mut Vec<i32>,mut start:usize,cnt:i32,ans:&mut i32){
+            let n = acc.len();
+            while start<n && acc[start]==0{
+            start+=1;
+            }
+            if start==n{
+                *ans=cnt.min(*ans);
+                return;
+            }
+            for i in start+1..n{
+                if acc[i]*acc[start]<0{
+                    acc[i]+=acc[start];
+                    helper(acc,start+1,cnt+1,ans);
+                    acc[i]-=acc[start];
+                }
+            }
+        }
+        helper(&mut acc,0,0,&mut ans);
+        ans
     }
 }
 // @lc code=end
