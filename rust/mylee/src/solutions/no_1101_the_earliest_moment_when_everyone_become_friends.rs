@@ -47,7 +47,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test__1() {
+    fn test_earliest_acq_1() {
         assert_eq!(0, Solution::earliest_acq(Vec::new(), 0));
     }
 }

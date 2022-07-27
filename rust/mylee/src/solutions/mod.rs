@@ -157,7 +157,6 @@ mod no_469_convex_polygon;
 mod no_484_find_permutation;
 mod no_487_max_consecutive_ones_ii;
 mod no_490_the_maze;
-mod no_494_target_sum;
 mod no_499_the_maze_iii;
 mod no_505_the_maze_ii;
 mod no_527_word_abbreviation;
