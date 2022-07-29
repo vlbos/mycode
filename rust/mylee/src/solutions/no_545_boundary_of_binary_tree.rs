@@ -1,11 +1,16 @@
 // 545\. Boundary of Binary Tree
 // =============================
 
-// Given a binary tree, return the values of its boundary in **anti-clockwise** direction starting from root. Boundary includes left boundary, leaves, and right boundary in order without duplicate **nodes**.  (The values of the nodes may still be duplicates.)
+// Given a binary tree, return the values of its boundary in **anti-clockwise** direction starting from root. 
+// Boundary includes left boundary, leaves, and right boundary in order without duplicate **nodes**.  (The values of the nodes may still be duplicates.)
 
-// **Left boundary** is defined as the path from root to the **left-most** node. **Right boundary** is defined as the path from root to the **right-most** node. If the root doesn't have left subtree or right subtree, then the root itself is left boundary or right boundary. Note this definition only applies to the input binary tree, and not applies to any subtrees.
+// **Left boundary** is defined as the path from root to the **left-most** node. 
+// **Right boundary** is defined as the path from root to the **right-most** node.
+//  If the root doesn't have left subtree or right subtree, then the root itself is left boundary or right boundary. 
+// Note this definition only applies to the input binary tree, and not applies to any subtrees.
 
-// The **left-most** node is defined as a **leaf** node you could reach when you always firstly travel to the left subtree if exists. If not, travel to the right subtree. Repeat until you reach a leaf node.
+// The **left-most** node is defined as a **leaf** node you could reach when you always firstly travel to the left subtree if exists. 
+// If not, travel to the right subtree. Repeat until you reach a leaf node.
 
 // The **right-most** node is also defined by the same way with left and right exchanged.
 
@@ -82,98 +87,136 @@ use crate::solutions::util::tree::TreeNode;
 use std::cell::RefCell;
 use std::rc::Rc;
 
-enum BoundaryState {
-    Root,
-    Left,
-    Right,
-    Leaf,
-    Unknown,
-}
+// enum BoundaryState {
+//     Root,
+//     Left,
+//     Right,
+//     Leaf,
+//     Unknown,
+// }
 
 impl Solution {
-    fn boundary_of_binary_tree_recursive(
-        curr: Option<Rc<RefCell<TreeNode>>>,
-        mut bs: BoundaryState,
-        mut res: &mut Vec<i32>,
-    ) {
-        if let Some(curr_ref) = curr {
-            let mut curr_node = curr_ref.borrow_mut();
-            if curr_node.left.is_none() && curr_node.right.is_none() {
-                bs = BoundaryState::Leaf;
-            }
-            match bs {
-                BoundaryState::Root => {
-                    res.push(curr_node.val);
-                    Solution::boundary_of_binary_tree_recursive(
-                        curr_node.left.take(),
-                        BoundaryState::Left,
-                        &mut res,
-                    );
-                    Solution::boundary_of_binary_tree_recursive(
-                        curr_node.right.take(),
-                        BoundaryState::Right,
-                        &mut res,
-                    );
-                }
-                BoundaryState::Left => {
-                    res.push(curr_node.val);
-                    let left_empty = curr_node.left.is_none();
-                    Solution::boundary_of_binary_tree_recursive(
-                        curr_node.left.take(),
-                        BoundaryState::Left,
-                        &mut res,
-                    );
-                    Solution::boundary_of_binary_tree_recursive(
-                        curr_node.right.take(),
-                        if left_empty {
-                            BoundaryState::Left
-                        } else {
-                            BoundaryState::Unknown
-                        },
-                        &mut res,
-                    );
-                }
-                BoundaryState::Right => {
-                    let right_empty = curr_node.right.is_none();
-                    Solution::boundary_of_binary_tree_recursive(
-                        curr_node.left.take(),
-                        if right_empty {
-                            BoundaryState::Right
-                        } else {
-                            BoundaryState::Unknown
-                        },
-                        &mut res,
-                    );
-                    Solution::boundary_of_binary_tree_recursive(
-                        curr_node.right.take(),
-                        BoundaryState::Right,
-                        &mut res,
-                    );
-                    res.push(curr_node.val);
-                }
-                BoundaryState::Unknown => {
-                    Solution::boundary_of_binary_tree_recursive(
-                        curr_node.left.take(),
-                        BoundaryState::Unknown,
-                        &mut res,
-                    );
-                    Solution::boundary_of_binary_tree_recursive(
-                        curr_node.right.take(),
-                        BoundaryState::Unknown,
-                        &mut res,
-                    );
-                }
-                BoundaryState::Leaf => {
-                    res.push(curr_node.val);
-                }
-            }
-        }
-    }
+    // fn boundary_of_binary_tree_recursive(
+    //     curr: Option<Rc<RefCell<TreeNode>>>,
+    //     mut bs: BoundaryState,
+    //     mut res: &mut Vec<i32>,
+    // ) {
+    //     if let Some(curr_ref) = curr {
+    //         let mut curr_node = curr_ref.borrow_mut();
+    //         if curr_node.left.is_none() && curr_node.right.is_none() {
+    //             bs = BoundaryState::Leaf;
+    //         }
+    //         match bs {
+    //             BoundaryState::Root => {
+    //                 res.push(curr_node.val);
+    //                 Solution::boundary_of_binary_tree_recursive(
+    //                     curr_node.left.take(),
+    //                     BoundaryState::Left,
+    //                     &mut res,
+    //                 );
+    //                 Solution::boundary_of_binary_tree_recursive(
+    //                     curr_node.right.take(),
+    //                     BoundaryState::Right,
+    //                     &mut res,
+    //                 );
+    //             }
+    //             BoundaryState::Left => {
+    //                 res.push(curr_node.val);
+    //                 let left_empty = curr_node.left.is_none();
+    //                 Solution::boundary_of_binary_tree_recursive(
+    //                     curr_node.left.take(),
+    //                     BoundaryState::Left,
+    //                     &mut res,
+    //                 );
+    //                 Solution::boundary_of_binary_tree_recursive(
+    //                     curr_node.right.take(),
+    //                     if left_empty {
+    //                         BoundaryState::Left
+    //                     } else {
+    //                         BoundaryState::Unknown
+    //                     },
+    //                     &mut res,
+    //                 );
+    //             }
+    //             BoundaryState::Right => {
+    //                 let right_empty = curr_node.right.is_none();
+    //                 Solution::boundary_of_binary_tree_recursive(
+    //                     curr_node.left.take(),
+    //                     if right_empty {
+    //                         BoundaryState::Right
+    //                     } else {
+    //                         BoundaryState::Unknown
+    //                     },
+    //                     &mut res,
+    //                 );
+    //                 Solution::boundary_of_binary_tree_recursive(
+    //                     curr_node.right.take(),
+    //                     BoundaryState::Right,
+    //                     &mut res,
+    //                 );
+    //                 res.push(curr_node.val);
+    //             }
+    //             BoundaryState::Unknown => {
+    //                 Solution::boundary_of_binary_tree_recursive(
+    //                     curr_node.left.take(),
+    //                     BoundaryState::Unknown,
+    //                     &mut res,
+    //                 );
+    //                 Solution::boundary_of_binary_tree_recursive(
+    //                     curr_node.right.take(),
+    //                     BoundaryState::Unknown,
+    //                     &mut res,
+    //                 );
+    //             }
+    //             BoundaryState::Leaf => {
+    //                 res.push(curr_node.val);
+    //             }
+    //         }
+    //     }
+    // }
 
     pub fn boundary_of_binary_tree(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
-        let mut res = vec![];
-        Solution::boundary_of_binary_tree_recursive(root, BoundaryState::Root, &mut res);
-        res
+        // let mut res = vec![];
+        // Solution::boundary_of_binary_tree_recursive(root, BoundaryState::Root, &mut res);
+        // res
+        let (mut ans,mut left,mut right,mut leaf)=(Vec::new(),Vec::new(),Vec::new(),Vec::new());
+        
+        fn in_order(root: &Option<Rc<RefCell<TreeNode>>>,leaf:&mut Vec<i32>){
+            if let Some(node)=root{
+                let node=node.borrow();
+                in_order(&node.left,leaf);
+                if node.left.is_none() && node.right.is_none(){
+                    leaf.push(node.val);
+                }
+                in_order(&node.right,leaf);
+            }
+        }
+        fn left_order(root: &Option<Rc<RefCell<TreeNode>>>,left:&mut Vec<i32>){
+            if let Some(node)=root{
+                let node=node.borrow();
+                left.push(node.val);
+                left_order(&node.left,left);
+            }
+        }
+        fn right_order(root: &Option<Rc<RefCell<TreeNode>>>,right:&mut Vec<i32>){
+            if let Some(node)=root{
+                let node=node.borrow();
+                right.push(node.val);
+                right_order(&node.right,right);
+            }
+        }
+        left_order(&root,&mut left);
+        in_order(&root,&mut leaf);
+        right_order(&root,&mut right);
+        right.reverse();
+        let mut dup=std::collections::HashSet::new();
+        for &v in left.iter().chain(&leaf).chain(&right){
+            if !dup.contains(&v){
+                ans.push(v);
+                dup.insert(v);
+            }
+        }
+        ans
     }
 }
 // @lc code=end
@@ -187,13 +230,13 @@ mod test {
 
     #[test]
     fn test_boundary_of_binary_tree_1() {
-        let tree = tree![1, 3, 4, 2];
+        let tree = tree![1, null,2,3, 4];
         assert_eq!(Solution::boundary_of_binary_tree(tree), vec![1, 3, 4, 2]);
     }
 
     #[test]
     fn test_boundary_of_binary_tree_2() {
-        let tree = tree![1, 2, 4, 7, 8, 9, 10, 6, 3];
+        let tree = tree![1, 2,3, 4,5,6,null, 7, 8, 9, 10];
         assert_eq!(
             Solution::boundary_of_binary_tree(tree),
             vec![1, 2, 4, 7, 8, 9, 10, 6, 3]
