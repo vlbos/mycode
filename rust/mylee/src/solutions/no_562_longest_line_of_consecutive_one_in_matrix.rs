@@ -3,7 +3,7 @@
 
 // Given a 01 matrix **M**, find the longest line of consecutive one in the matrix. The line could be horizontal, vertical, diagonal or anti-diagonal.
 
-// **Example:**  
+// **Example:**
 
 // **Input:**
 // \[\[0,1,1,0\],
@@ -80,25 +80,31 @@ impl Solution {
         //     }
         // }
         // max_line
-        let mut ans=0;
-        let dirs=[0,1,0,-1,0];
-        
-        for (i,row) in m.iter().enumerate(){
-        for (j,&v) in row.iter().enumerate(){
-                if v==0{
-                continue;
+        let mut ans = 0;
+        let dirs = [0, 1, 0, -1, 0];
+
+        for (i, row) in m.iter().enumerate() {
+            for (j, &v) in row.iter().enumerate() {
+                if v == 0 {
+                    continue;
                 }
-                for (dx,dy) in [(1,0),(0,1),(-1,-1),(-1,1)]{
-                    let mut cnt=0;
-                    let (mut x, mut y)=(i as i32,j as i32);
-                    while x>=0 && x<m.len() as i32 && y>=0 && y<row.len() as i32 && m[x as usize][y as usize]==1{
-                    x+=dx;
-                    y+=dy;
-                    cnt+=1;
+                for (dx, dy) in [(1, 0), (0, 1), (-1, -1), (-1, 1)] {
+                    let mut cnt = 0;
+                    let (mut x, mut y) = (i as i32, j as i32);
+                    while x >= 0
+                        && x < m.len() as i32
+                        && y >= 0
+                        && y < row.len() as i32
+                        && m[x as usize][y as usize] == 1
+                    {
+                        x += dx;
+                        y += dy;
+                        cnt += 1;
                     }
-                    ans=ans.max(cnt);
+                    ans = ans.max(cnt);
                 }
-        }}
+            }
+        }
         ans
     }
 }

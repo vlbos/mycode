@@ -1,14 +1,14 @@
 // 505\. The Maze II
 // =================
 
-// There is a **ball** in a maze with empty spaces and walls. The ball can go through empty spaces by rolling **up**, **down**, **left** or **right**, 
+// There is a **ball** in a maze with empty spaces and walls. The ball can go through empty spaces by rolling **up**, **down**, **left** or **right**,
 // but it won't stop rolling until hitting a wall. When the ball stops, it could choose the next direction.
 
-// Given the ball's **start position**, the **destination** and the **maze**, find the shortest distance for the ball to stop at the destination. 
-// The distance is defined by the number of **empty spaces** traveled by the ball from the start position (excluded) to the destination (included). 
+// Given the ball's **start position**, the **destination** and the **maze**, find the shortest distance for the ball to stop at the destination.
+// The distance is defined by the number of **empty spaces** traveled by the ball from the start position (excluded) to the destination (included).
 // If the ball cannot stop at the destination, return -1.
 
-// The maze is represented by a binary 2D array. 1 means the wall and 0 means the empty space. You may assume that the borders of the maze are all walls. 
+// The maze is represented by a binary 2D array. 1 means the wall and 0 means the empty space. You may assume that the borders of the maze are all walls.
 // The start and destination coordinates are represented by row and column indexes.
 
 // **Example 1:**
@@ -137,34 +137,43 @@ impl Solution {
         // } else {
         //     min_cost as i32
         // }
-        let (m,n)=(maze.len(),maze[0].len());
-        let mut dists=vec![vec![i32::MAX;n];m];
-        dists[start[0] as usize][start[1] as usize]=0;
-        fn dfs(maze: &mut Vec<Vec<i32>>, start: &Vec<i32>, destination: &Vec<i32>,dists:&mut Vec<Vec<i32>>){
-            let (m,n)=(maze.len() as i32,maze[0].len() as i32);
-            let dirs=[0,1,0,-1,0];
-            for (i,&d) in dirs[1..].iter().enumerate(){
-                let (mut x,mut y)=(start[0]+dirs[i],start[1]+d);
-                let mut dist=0;
-                while x>=0 && x<m && y>=0 && y<n &&  maze[x as usize][y as usize]==0 {
-                    x+=dirs[i];
-                    y+=d;
-                    dist+=1;
+        let (m, n) = (maze.len(), maze[0].len());
+        let mut dists = vec![vec![i32::MAX; n]; m];
+        dists[start[0] as usize][start[1] as usize] = 0;
+        fn dfs(
+            maze: &mut Vec<Vec<i32>>,
+            start: &Vec<i32>,
+            destination: &Vec<i32>,
+            dists: &mut Vec<Vec<i32>>,
+        ) {
+            let (m, n) = (maze.len() as i32, maze[0].len() as i32);
+            let dirs = [0, 1, 0, -1, 0];
+            for (i, &d) in dirs[1..].iter().enumerate() {
+                let (mut x, mut y) = (start[0] + dirs[i], start[1] + d);
+                let mut dist = 0;
+                while x >= 0 && x < m && y >= 0 && y < n && maze[x as usize][y as usize] == 0 {
+                    x += dirs[i];
+                    y += d;
+                    dist += 1;
                 }
-                    x-=dirs[i];
-                    y-=d;
-                if dists[x as usize][y as usize]>dist+dists[start[0] as usize][start[1] as usize]{
-                    dists[x as usize][y as usize]=dist+dists[start[0] as usize][start[1] as usize];
-                    dfs(maze,&vec![x,y],destination,dists);
+                x -= dirs[i];
+                y -= d;
+                if dists[x as usize][y as usize]
+                    > dist + dists[start[0] as usize][start[1] as usize]
+                {
+                    dists[x as usize][y as usize] =
+                        dist + dists[start[0] as usize][start[1] as usize];
+                    dfs(maze, &vec![x, y], destination, dists);
                 }
-
             }
-            
         }
-        let mut maze=maze;
-        dfs(&mut maze,&start,&destination,&mut dists);
-        if dists[destination[0] as usize][destination[1] as usize]!=i32::MAX{
-        dists[destination[0] as usize][destination[1] as usize]}else{-1}
+        let mut maze = maze;
+        dfs(&mut maze, &start, &destination, &mut dists);
+        if dists[destination[0] as usize][destination[1] as usize] != i32::MAX {
+            dists[destination[0] as usize][destination[1] as usize]
+        } else {
+            -1
+        }
     }
 }
 // @lc code=end

@@ -57,7 +57,7 @@
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Google](https://leetcode.ca/tags/#Google) [Uber](https://leetcode.ca/tags/#Uber)
 
 // @lc code=start
-use std::collections::HashMap;
+// use std::collections::HashMap;
 
 impl Solution {
     pub fn min_transfers(transactions: Vec<Vec<i32>>) -> i32 {
@@ -106,25 +106,25 @@ impl Solution {
             *cnt.entry(t[1]).or_insert(0) -= t[2];
         }
         let mut acc = cnt.values().filter(|&x| *x != 0).cloned().collect();
-        let mut ans=i32::MAX;
-        fn helper(acc:&mut Vec<i32>,mut start:usize,cnt:i32,ans:&mut i32){
+        let mut ans = i32::MAX;
+        fn helper(acc: &mut Vec<i32>, mut start: usize, cnt: i32, ans: &mut i32) {
             let n = acc.len();
-            while start<n && acc[start]==0{
-            start+=1;
+            while start < n && acc[start] == 0 {
+                start += 1;
             }
-            if start==n{
-                *ans=cnt.min(*ans);
+            if start == n {
+                *ans = cnt.min(*ans);
                 return;
             }
-            for i in start+1..n{
-                if acc[i]*acc[start]<0{
-                    acc[i]+=acc[start];
-                    helper(acc,start+1,cnt+1,ans);
-                    acc[i]-=acc[start];
+            for i in start + 1..n {
+                if acc[i] * acc[start] < 0 {
+                    acc[i] += acc[start];
+                    helper(acc, start + 1, cnt + 1, ans);
+                    acc[i] -= acc[start];
                 }
             }
         }
-        helper(&mut acc,0,0,&mut ans);
+        helper(&mut acc, 0, 0, &mut ans);
         ans
     }
 }

@@ -3,12 +3,12 @@
 
 // You need to construct a binary tree from a string consisting of parenthesis and integers.
 
-// The whole input represents a binary tree. It contains an integer followed by zero, one or two pairs of parenthesis. 
+// The whole input represents a binary tree. It contains an integer followed by zero, one or two pairs of parenthesis.
 // The integer represents the root's value and a pair of parenthesis contains a child binary tree with the same structure.
 
 // You always start to construct the **left** child node of the parent first if it exists.
 
-// **Example:**  
+// **Example:**
 
 // **Input:** "4(2(3)(1))(6(5))"
 // **Output:** return the tree root node representing the following tree:
@@ -19,7 +19,7 @@
 //    / \\   /
 //   3   1 5
 
-// **Note:**  
+// **Note:**
 
 // 1.  There will only be `'('`, `')'`, `'-'` and `'0'` ~ `'9'` in the input string.
 // 2.  An empty tree is represented by `""` instead of `"()"`.
@@ -57,7 +57,7 @@
 // }
 use crate::solutions::util::tree::TreeNode;
 use std::cell::RefCell;
-use std::collections::VecDeque;
+// use std::collections::VecDeque;
 use std::rc::Rc;
 
 impl Solution {
@@ -106,33 +106,40 @@ impl Solution {
         //     }
         // }
         // working[0].pop_front().unwrap()
-        if s.is_empty(){
-        return None;
+        if s.is_empty() {
+            return None;
         }
         let found = s.find("(");
-        let mut j=s.len();
-        let val = if let Some(i) = found{j=i;&s[..i]}else{&s[..]}.parse::<i32>().unwrap();
-        let mut cur=TreeNode::new(val);
-        if found.is_none(){
-        return Some(Rc::new(RefCell::new(cur)));
+        let mut j = s.len();
+        let val = if let Some(i) = found {
+            j = i;
+            &s[..i]
+        } else {
+            &s[..]
         }
-        let mut cnt=0;
-        let bs=s.as_bytes();
-        let mut start=j;
-        for i in start..bs.len(){
-            if bs[i]==b'('{
-                cnt+=1;
-                }else if bs[i]==b')'{
-                    cnt-=1;
+        .parse::<i32>()
+        .unwrap();
+        let mut cur = TreeNode::new(val);
+        if found.is_none() {
+            return Some(Rc::new(RefCell::new(cur)));
+        }
+        let mut cnt = 0;
+        let bs = s.as_bytes();
+        let mut start = j;
+        for i in start..bs.len() {
+            if bs[i] == b'(' {
+                cnt += 1;
+            } else if bs[i] == b')' {
+                cnt -= 1;
             }
-            if cnt!=0{
-            continue;
+            if cnt != 0 {
+                continue;
             }
-            if start==j{
-            cur.left=Self::str2tree(s[start+1..i].to_string());
-                start=i+1;
-            }else{
-                cur.right=Self::str2tree(s[start+1..i].to_string());
+            if start == j {
+                cur.left = Self::str2tree(s[start + 1..i].to_string());
+                start = i + 1;
+            } else {
+                cur.right = Self::str2tree(s[start + 1..i].to_string());
             }
         }
         Some(Rc::new(RefCell::new(cur)))
@@ -158,7 +165,7 @@ mod test {
 
     #[test]
     fn test_str2tree_1() {
-        let tree = tree![4,2,6,3,1,5];
+        let tree = tree![4, 2, 6, 3, 1, 5];
         assert_eq!(Solution::str2tree(String::from("4(2(3)(1))(6(5))")), tree);
     }
 }

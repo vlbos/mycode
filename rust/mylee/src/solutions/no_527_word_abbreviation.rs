@@ -4,12 +4,12 @@
 // Given an array of n distinct non-empty strings, you need to generate **minimal** possible abbreviations for every word following rules below.
 
 // 1.  Begin with the first character and then the number of characters abbreviated, which followed by the last character.
-// 2.  If there are any conflict, that is more than one words share the same abbreviation, 
-// a longer prefix is used instead of only the first character until making the map from word to abbreviation become unique. 
+// 2.  If there are any conflict, that is more than one words share the same abbreviation,
+// a longer prefix is used instead of only the first character until making the map from word to abbreviation become unique.
 // In other words, a final abbreviation cannot map to more than one original words.
 // 3.  If the abbreviation doesn't make the word shorter, then keep it as original.
 
-// **Example:**  
+// **Example:**
 
 // **Input:** \["like", "god", "internal", "me", "internet", "interval", "intension", "face", "intrusion"\]
 // **Output:** \["l2e","god","internal","me","i6t","interval","inte4n","f2e","intr4n"\]
@@ -158,51 +158,61 @@ impl Solution {
         //         abbr
         //     })
         //     .collect::<Vec<_>>()
-        let mut ans=Vec::new();
+        let mut ans = Vec::new();
         use std::collections::HashMap;
-        let mut map=HashMap::new();
-        for (i,s) in dict.iter().enumerate(){
-            if s.len()<4{
+        let mut map = HashMap::new();
+        for (i, s) in dict.iter().enumerate() {
+            if s.len() < 4 {
                 ans.push(s.clone());
                 continue;
             }
-            let tmp=format!("{}{}{}",&s[..1],s.len()-2,&s[s.len()-1..]); 
+            let tmp = format!("{}{}{}", &s[..1], s.len() - 2, &s[s.len() - 1..]);
             map.entry(tmp.clone()).or_insert(Vec::new()).push(i);
             ans.push(tmp);
         }
-        let find_common_prefix=|indices:&Vec<usize>|{
-            let mut prefix=dict[indices[0]].clone();
-            for &index in &indices[1..]{
-                let compare=&dict[index];
-                for i in (0..=prefix.len()).rev(){
-                    if &prefix[0..i]==&compare[0..i]{
-                        prefix=prefix[0..i].to_string();
+        let find_common_prefix = |indices: &Vec<usize>| {
+            let mut prefix = dict[indices[0]].clone();
+            for &index in &indices[1..] {
+                let compare = &dict[index];
+                for i in (0..=prefix.len()).rev() {
+                    if &prefix[0..i] == &compare[0..i] {
+                        prefix = prefix[0..i].to_string();
                         break;
                     }
                 }
             }
-             prefix
+            prefix
         };
-        while !map.is_empty(){
-                let mut new_map=HashMap::new();
-                let to_remove:Vec<String>=map.iter().filter(|(_,v)|v.len()==1).map(|(k,_v)|k.clone()).collect();
-                for s in &to_remove{
+        while !map.is_empty() {
+            let mut new_map = HashMap::new();
+            let to_remove: Vec<String> = map
+                .iter()
+                .filter(|(_, v)| v.len() == 1)
+                .map(|(k, _v)| k.clone())
+                .collect();
+            for s in &to_remove {
                 map.remove(s);
-                }
-                for (k,indices) in &map{
-                    let prefix=find_common_prefix(indices);
-                    for &i in indices{
-                        let original = &dict[i];
-                        if original.len()<=3+prefix.len(){
-                        ans[i]=original.clone();
-                        }else{
-                            let replace=format!("{}{}{}{}",prefix,&original[prefix.len()..prefix.len()+1],original.len()-prefix.len()-2,&original[original.len()-1..]); 
-                            ans[i]=replace.clone();
-                            new_map.entry(replace).or_insert(Vec::new()).push(i);
-                        }
+            }
+            for (k, indices) in &map {
+                let prefix = find_common_prefix(indices);
+                for &i in indices {
+                    let original = &dict[i];
+                    if original.len() <= 3 + prefix.len() {
+                        ans[i] = original.clone();
+                    } else {
+                        let replace = format!(
+                            "{}{}{}{}",
+                            prefix,
+                            &original[prefix.len()..prefix.len() + 1],
+                            original.len() - prefix.len() - 2,
+                            &original[original.len() - 1..]
+                        );
+                        ans[i] = replace.clone();
+                        new_map.entry(replace).or_insert(Vec::new()).push(i);
                     }
                 }
-                map=new_map;
+            }
+            map = new_map;
         }
         ans
     }

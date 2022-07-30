@@ -49,7 +49,7 @@
 // ### Company:
 
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Facebook](https://leetcode.ca/tags/#Facebook) [Google](https://leetcode.ca/tags/#Google) [Uber](https://leetcode.ca/tags/#Uber)
-use super::util::tree::{to_tree, TreeNode};
+use super::util::tree::TreeNode;
 use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {

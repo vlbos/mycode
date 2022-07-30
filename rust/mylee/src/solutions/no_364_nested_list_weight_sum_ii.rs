@@ -40,7 +40,7 @@ pub enum NestedInteger {
 }
 
 // @lc code=start
-use std::collections::VecDeque;
+// use std::collections::VecDeque;
 
 impl Solution {
     pub fn depth_sum_inverse(nested_list: Vec<NestedInteger>) -> i32 {

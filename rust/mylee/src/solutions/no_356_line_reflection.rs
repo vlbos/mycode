@@ -26,7 +26,7 @@
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Google](https://leetcode.ca/tags/#Google)
 
 // @lc code=start
-use std::collections::{HashMap, HashSet};
+// use std::collections::{HashMap, HashSet};
 
 impl Solution {
     pub fn is_reflected(points: Vec<Vec<i32>>) -> bool {

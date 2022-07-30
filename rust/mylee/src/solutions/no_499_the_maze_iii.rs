@@ -1,16 +1,16 @@
 // 499\. The Maze III
 // ==================
 
-// There is a **ball** in a maze with empty spaces and walls. The ball can go through empty spaces by rolling **up** (u), **down** (d), **left** (l) or **right** (r), 
-// but it won't stop rolling until hitting a wall. When the ball stops, it could choose the next direction. There is also a **hole** in this maze. 
+// There is a **ball** in a maze with empty spaces and walls. The ball can go through empty spaces by rolling **up** (u), **down** (d), **left** (l) or **right** (r),
+// but it won't stop rolling until hitting a wall. When the ball stops, it could choose the next direction. There is also a **hole** in this maze.
 // The ball will drop into the hole if it rolls on to the hole.
 
-// Given the **ball position**, the **hole position** and the **maze**, find out how the ball could drop into the hole by moving the **shortest distance**. 
+// Given the **ball position**, the **hole position** and the **maze**, find out how the ball could drop into the hole by moving the **shortest distance**.
 // The distance is defined by the number of **empty spaces** traveled by the ball from the start position (excluded) to the hole (included).
-// Output the moving **directions** by using 'u', 'd', 'l' and 'r'. Since there could be several different shortest ways, 
+// Output the moving **directions** by using 'u', 'd', 'l' and 'r'. Since there could be several different shortest ways,
 // you should output the **lexicographically smallest** way. If the ball cannot reach the hole, output "impossible".
 
-// The maze is represented by a binary 2D array. 1 means the wall and 0 means the empty space. You may assume that the borders of the maze are all walls. 
+// The maze is represented by a binary 2D array. 1 means the wall and 0 means the empty space. You may assume that the borders of the maze are all walls.
 // The ball and the hole coordinates are represented by row and column indexes.
 
 // **Example 1:**
@@ -148,49 +148,64 @@ impl Solution {
         // } else {
         //     min_cost.1
         // }
-        let (m,n)=(maze.len(),maze[0].len());
-        let mut dists=vec![vec![i32::MAX;n];m];
-        dists[ball[0] as usize][ball[1] as usize]=0;
+        let (m, n) = (maze.len(), maze[0].len());
+        let mut dists = vec![vec![i32::MAX; n]; m];
+        dists[ball[0] as usize][ball[1] as usize] = 0;
         use std::collections::HashMap;
-        let mut u =HashMap::new();
-        fn dfs(maze: &mut Vec<Vec<i32>>, ball: &Vec<i32>, hole: &Vec<i32>,dists:&mut Vec<Vec<i32>>,u:&mut HashMap<Vec<i32>,String>){
-            if ball==hole{
-            return ;
+        let mut u = HashMap::new();
+        fn dfs(
+            maze: &mut Vec<Vec<i32>>,
+            ball: &Vec<i32>,
+            hole: &Vec<i32>,
+            dists: &mut Vec<Vec<i32>>,
+            u: &mut HashMap<Vec<i32>, String>,
+        ) {
+            if ball == hole {
+                return;
             }
-            let (m,n)=(maze.len() as i32,maze[0].len() as i32);
-            let dirs=[0,1,0,-1,0];
-            let way="rdlu".as_bytes();
-            for (i,&d) in dirs[1..].iter().enumerate(){
-                let (mut x,mut y)=(ball[0],ball[1]);
-                let mut dist=dists[x as usize][y as usize];
-                let mut path=u.get(&vec![x,y]).unwrap_or(&String::new()).clone();
-                while x>=0 && x<m && y>=0 && y<n &&  maze[x as usize][y as usize]==0 &&  ( x!=hole[0]|| y!=hole[1]){
-                    x+=dirs[i];
-                    y+=d;
-                    dist+=1;
+            let (m, n) = (maze.len() as i32, maze[0].len() as i32);
+            let dirs = [0, 1, 0, -1, 0];
+            let way = "rdlu".as_bytes();
+            for (i, &d) in dirs[1..].iter().enumerate() {
+                let (mut x, mut y) = (ball[0], ball[1]);
+                let mut dist = dists[x as usize][y as usize];
+                let mut path = u.get(&vec![x, y]).unwrap_or(&String::new()).clone();
+                while x >= 0
+                    && x < m
+                    && y >= 0
+                    && y < n
+                    && maze[x as usize][y as usize] == 0
+                    && (x != hole[0] || y != hole[1])
+                {
+                    x += dirs[i];
+                    y += d;
+                    dist += 1;
                 }
-                if  x!=hole[0]|| y!=hole[1]{
-                    x-=dirs[i];
-                    y-=d;
-                    dist-=1;
+                if x != hole[0] || y != hole[1] {
+                    x -= dirs[i];
+                    y -= d;
+                    dist -= 1;
                 }
                 path.push(way[i] as char);
-                if dists[x as usize][y as usize]>dist{
-                    dists[x as usize][y as usize]=dist;
-                    u.insert(vec![x,y],path);
-                    dfs(maze,&vec![x,y],hole,dists,u);
-                }else if dists[x as usize][y as usize]==dist && &path<u.get(&vec![x,y]).unwrap_or(&String::new()){
-                          u.insert(vec![x,y],path);
-                    dfs(maze,&vec![x,y],hole,dists,u);
+                if dists[x as usize][y as usize] > dist {
+                    dists[x as usize][y as usize] = dist;
+                    u.insert(vec![x, y], path);
+                    dfs(maze, &vec![x, y], hole, dists, u);
+                } else if dists[x as usize][y as usize] == dist
+                    && &path < u.get(&vec![x, y]).unwrap_or(&String::new())
+                {
+                    u.insert(vec![x, y], path);
+                    dfs(maze, &vec![x, y], hole, dists, u);
                 }
-
             }
-            
         }
-        let mut maze=maze;
-        dfs(&mut maze,&ball,&hole,&mut dists,&mut u);
-        if let Some(s)= u.get(&hole){
-         s.clone()}else{"impossible".to_string()}
+        let mut maze = maze;
+        dfs(&mut maze, &ball, &hole, &mut dists, &mut u);
+        if let Some(s) = u.get(&hole) {
+            s.clone()
+        } else {
+            "impossible".to_string()
+        }
     }
 }
 // @lc code=end

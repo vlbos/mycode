@@ -7,7 +7,7 @@
 
 // A black lonely pixel is character 'B' that located at a specific position where the same row and same column don't have any other black pixels.
 
-// **Example:**  
+// **Example:**
 
 // **Input:**
 // \[\['W', 'W', 'B'\],
@@ -17,7 +17,7 @@
 // **Output:** 3
 // **Explanation:** All the three 'B's are black lonely pixels.
 
-// **Note:**  
+// **Note:**
 
 // 1.  The range of width and height of the input 2D array is \[1,500\].
 
@@ -54,11 +54,32 @@ impl Solution {
         // row_b.into_iter().fold(0i32, |acc, (cnt, col)| {
         //     acc + if cnt == 1 && col_b[col] == 1 { 1 } else { 0 }
         // })
-        let (m,n)=(picture.len(),picture[0].len());
-        let (mut rows,mut cols)=(vec![0;m],vec![0;n]);
-        picture.iter().enumerate().for_each(|(i,row)| row.iter().enumerate().for_each(|(j,&v)| if v=='B'{rows[i]+=1;cols[j]+=1;}));
-        picture.iter().enumerate().map(|(i,row)| row.iter().enumerate().map(|(j,&v)| if v=='B' && rows[i]==1&& cols[j]==1{1}else{0}).sum::<i32>()).sum::<i32>()
-
+        let (m, n) = (picture.len(), picture[0].len());
+        let (mut rows, mut cols) = (vec![0; m], vec![0; n]);
+        picture.iter().enumerate().for_each(|(i, row)| {
+            row.iter().enumerate().for_each(|(j, &v)| {
+                if v == 'B' {
+                    rows[i] += 1;
+                    cols[j] += 1;
+                }
+            })
+        });
+        picture
+            .iter()
+            .enumerate()
+            .map(|(i, row)| {
+                row.iter()
+                    .enumerate()
+                    .map(|(j, &v)| {
+                        if v == 'B' && rows[i] == 1 && cols[j] == 1 {
+                            1
+                        } else {
+                            0
+                        }
+                    })
+                    .sum::<i32>()
+            })
+            .sum::<i32>()
     }
 }
 // @lc code=end

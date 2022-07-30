@@ -65,10 +65,10 @@
 // [Google](https://leetcode.ca/tags/#Google)
 
 // @lc code=start
-use std::collections::{HashMap, HashSet};
 
 impl Solution {
     pub fn sequence_reconstruction(org: Vec<i32>, seqs: Vec<Vec<i32>>) -> bool {
+        // use std::collections::{HashMap, HashSet};
         // let mut org_set = org
         //     .iter()
         //     .map(|k| (*k, 0usize))

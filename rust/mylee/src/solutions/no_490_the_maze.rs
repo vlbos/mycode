@@ -6,7 +6,7 @@
 
 // Given the ball's **start position**, the **destination** and the **maze**, determine whether the ball could stop at the destination.
 
-// The maze is represented by a binary 2D array. 1 means the wall and 0 means the empty space. You may assume that the borders of the maze are all walls. 
+// The maze is represented by a binary 2D array. 1 means the wall and 0 means the empty space. You may assume that the borders of the maze are all walls.
 // The start and destination coordinates are represented by row and column indexes.
 
 // **Example 1:**
@@ -126,30 +126,35 @@ impl Solution {
         //     }
         // }
         // false
-        fn dfs(maze: &mut Vec<Vec<i32>>, start:&Vec<i32>, destination: &Vec<i32>)->bool{
-            if start==destination{
-            return true;
-            }
-            if maze[start[0] as usize][start[1] as usize]!=0{
-            return false;
-            }
-             maze[start[0] as usize][start[1] as usize]=-1;
-            let (m,n)=(maze.len() as i32,maze[0].len() as i32);
-            let dirs=[0,1,0,-1,0];
-            for (i,&d) in dirs[1..].iter().enumerate(){
-                let (mut x,mut y)=(start[0],start[1]);
-                while x+dirs[i]>=0 && x+dirs[i]<m && y+d>=0 && y+d<n &&   maze[(x+dirs[i]) as usize][(y+d) as usize]!=1{
-                    x+=dirs[i];
-                    y+=d;
-                }
-                if dfs(maze,&vec![x,y],destination){
+        fn dfs(maze: &mut Vec<Vec<i32>>, start: &Vec<i32>, destination: &Vec<i32>) -> bool {
+            if start == destination {
                 return true;
+            }
+            if maze[start[0] as usize][start[1] as usize] != 0 {
+                return false;
+            }
+            maze[start[0] as usize][start[1] as usize] = -1;
+            let (m, n) = (maze.len() as i32, maze[0].len() as i32);
+            let dirs = [0, 1, 0, -1, 0];
+            for (i, &d) in dirs[1..].iter().enumerate() {
+                let (mut x, mut y) = (start[0], start[1]);
+                while x + dirs[i] >= 0
+                    && x + dirs[i] < m
+                    && y + d >= 0
+                    && y + d < n
+                    && maze[(x + dirs[i]) as usize][(y + d) as usize] != 1
+                {
+                    x += dirs[i];
+                    y += d;
+                }
+                if dfs(maze, &vec![x, y], destination) {
+                    return true;
                 }
             }
             false
         }
-        let mut maze=maze;
-        dfs(&mut maze,&start,&destination)
+        let mut maze = maze;
+        dfs(&mut maze, &start, &destination)
     }
 }
 // @lc code=end

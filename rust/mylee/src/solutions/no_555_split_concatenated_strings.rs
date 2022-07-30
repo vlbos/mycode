@@ -1,7 +1,7 @@
 // 555\. Split Concatenated Strings
 // ================================
 
-// Given a list of strings, you could concatenate these strings together into a loop, where for each string you could choose to reverse it or not. 
+// Given a list of strings, you could concatenate these strings together into a loop, where for each string you could choose to reverse it or not.
 // Among all the possible loops, you need to find the lexicographically biggest string after cutting the loop, which will make the looped string into a regular one.
 
 // Specifically, to find the lexicographically biggest string, you need to experience two phases:
@@ -11,16 +11,16 @@
 
 // And your job is to find the lexicographically biggest one among all the possible regular strings.
 
-// **Example:**  
+// **Example:**
 
 // **Input:** "abc", "xyz"
 // **Output:** "zyxcba"
-// **Explanation:** You can get the looped string "-abcxyz-", "-abczyx-", "-cbaxyz-", "-cbazyx-",   
-// where '-' represents the looped status.   
-// The answer string came from the fourth looped one,   
+// **Explanation:** You can get the looped string "-abcxyz-", "-abczyx-", "-cbaxyz-", "-cbazyx-",
+// where '-' represents the looped status.
+// The answer string came from the fourth looped one,
 // where you could cut from the middle character 'a' and get "zyxcba".
 
-// **Note:**  
+// **Note:**
 
 // 1.  The input strings will only contain lowercase letters.
 // 2.  The total length of all the strings will not over 1,000.
@@ -70,14 +70,17 @@ impl Solution {
         //     }
         // }
         // res
-        let strs:Vec<String>=strs.into_iter().map(|s| s.chars().rev().collect::<String>().max(s)).collect();
-        let mut ans=String::new();
-        for (i,st) in strs.iter().enumerate(){
-            let (left,right)=strs.split_at(i);
-            let (left,right)=(left.concat(),right[1..].concat());
-            for s in [st,&st.chars().rev().collect::<String>()]{
-                for j in 0..s.len(){
-                    ans=ans.max(s[j..].to_string()+right.as_str()+left.as_str()+&s[..j]);
+        let strs: Vec<String> = strs
+            .into_iter()
+            .map(|s| s.chars().rev().collect::<String>().max(s))
+            .collect();
+        let mut ans = String::new();
+        for (i, st) in strs.iter().enumerate() {
+            let (left, right) = strs.split_at(i);
+            let (left, right) = (left.concat(), right[1..].concat());
+            for s in [st, &st.chars().rev().collect::<String>()] {
+                for j in 0..s.len() {
+                    ans = ans.max(s[j..].to_string() + right.as_str() + left.as_str() + &s[..j]);
                 }
             }
         }

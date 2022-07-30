@@ -1,7 +1,7 @@
 // 533\. Lonely Pixel II
 // =====================
 
-// Given a picture consisting of black and white pixels, and a positive integer N, 
+// Given a picture consisting of black and white pixels, and a positive integer N,
 // find the number of black pixels located at some specific row **R** and column **C** that align with all the following rules:
 
 // 1.  Row R and column C both contain exactly N black pixels.
@@ -9,7 +9,7 @@
 
 // The picture is represented by a 2D char array consisting of 'B' and 'W', which means black and white pixels respectively.
 
-// **Example:**  
+// **Example:**
 
 // **Input:**
 // \[\['W', 'B', 'W', 'B', 'B', 'W'\],
@@ -31,7 +31,7 @@
 // Rule 1, row R = 0 and column C = 1 both have exactly N = 3 black pixels.
 // Rule 2, the rows have black pixel at column C = 1 are row 0, row 1 and row 2. They are exactly the same as row R = 0.
 
-// **Note:**  
+// **Note:**
 
 // 1.  The range of width and height of the input 2D array is \[1,200\].
 
@@ -48,7 +48,7 @@
 // [Google](https://leetcode.ca/tags/#Google)
 
 // @lc code=start
-use std::collections::HashMap;
+// use std::collections::HashMap;
 
 impl Solution {
     pub fn find_black_pixel(picture: Vec<Vec<char>>, n: i32) -> i32 {
@@ -86,31 +86,38 @@ impl Solution {
         // }
         // sum
         let nn = n;
-        let (m,n)=(picture.len(),picture[0].len());
-        let (mut rows,mut cols)=(vec![0;m],vec![0;n]);
-        picture.iter().enumerate().for_each(|(i,row)| row.iter().enumerate().for_each(|(j,&v)| if v=='B'{rows[i]+=1;cols[j]+=1;}));
-        let mut invalid_col:Vec<bool>=cols.iter().map(|x|*x!=nn).collect();
-        for j in 0..n{
-            let mut same_row=String::new();
-            for i  in 0..m{
-                if picture[i][j]=='W'{
-                continue;
+        let (m, n) = (picture.len(), picture[0].len());
+        let (mut rows, mut cols) = (vec![0; m], vec![0; n]);
+        picture.iter().enumerate().for_each(|(i, row)| {
+            row.iter().enumerate().for_each(|(j, &v)| {
+                if v == 'B' {
+                    rows[i] += 1;
+                    cols[j] += 1;
                 }
-                if rows[i]!=nn{
-                    invalid_col[j]=true;
-                break;
-                }
-                if same_row.is_empty(){
-                    same_row=picture[i].iter().cloned().collect();
+            })
+        });
+        let mut invalid_col: Vec<bool> = cols.iter().map(|x| *x != nn).collect();
+        for j in 0..n {
+            let mut same_row = String::new();
+            for i in 0..m {
+                if picture[i][j] == 'W' {
                     continue;
                 }
-                if same_row!=picture[i].iter().cloned().collect::<String>(){
-                    invalid_col[j]=true;
-                break;
+                if rows[i] != nn {
+                    invalid_col[j] = true;
+                    break;
+                }
+                if same_row.is_empty() {
+                    same_row = picture[i].iter().cloned().collect();
+                    continue;
+                }
+                if same_row != picture[i].iter().cloned().collect::<String>() {
+                    invalid_col[j] = true;
+                    break;
                 }
             }
         }
-        invalid_col.iter().filter(|x|!*x).count() as i32 * nn
+        invalid_col.iter().filter(|x| !*x).count() as i32 * nn
     }
 }
 // @lc code=end

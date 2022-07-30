@@ -1,10 +1,9 @@
-
 // 549\. Binary Tree Longest Consecutive Sequence II
 // =================================================
 
 // Given a binary tree, you need to find the length of Longest Consecutive Path in Binary Tree.
 
-// Especially, this path can be either increasing or decreasing. For example, \[1,2,3,4\] and \[4,3,2,1\] are both considered valid, 
+// Especially, this path can be either increasing or decreasing. For example, \[1,2,3,4\] and \[4,3,2,1\] are both considered valid,
 // but the path \[1,2,4,3\] is not valid. On the other hand, the path can be in the child-Parent-child order, where not necessarily be parent-child order.
 
 // **Example 1:**
@@ -38,7 +37,6 @@
 // ### Company:
 
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Apple](https://leetcode.ca/tags/#Apple) [Facebook](https://leetcode.ca/tags/#Facebook) [Google](https://leetcode.ca/tags/#Google)
-
 
 use crate::solutions::util::tree::TreeNode;
 
@@ -75,27 +73,27 @@ impl Solution {
         // let mut max = 0usize;
         // Solution::longest_consecutive_recursive(root, &mut max);
         // max as i32
-        let mut ans=0;
-        fn solve(root: &Option<Rc<RefCell<TreeNode>>>,ans:&mut i32)->(i32,i32){
-            let (mut inc,mut dec)=(0,0);
-            if let Some(node)=root{
-                let node=node.borrow();
-                for child in [&node.left,&node.right]{
-                    if child.is_none(){
-                    continue;
+        let mut ans = 0;
+        fn solve(root: &Option<Rc<RefCell<TreeNode>>>, ans: &mut i32) -> (i32, i32) {
+            let (mut inc, mut dec) = (0, 0);
+            if let Some(node) = root {
+                let node = node.borrow();
+                for child in [&node.left, &node.right] {
+                    if child.is_none() {
+                        continue;
                     }
-                    let (cinc,cdec)=solve(child,ans);
-                    if child.as_ref().unwrap().borrow().val==node.val-1{
-                        dec=dec.max(cdec);
-                    } else if child.as_ref().unwrap().borrow().val==node.val+1{
-                        inc=inc.max(cinc);
-                    } 
+                    let (cinc, cdec) = solve(child, ans);
+                    if child.as_ref().unwrap().borrow().val == node.val - 1 {
+                        dec = dec.max(cdec);
+                    } else if child.as_ref().unwrap().borrow().val == node.val + 1 {
+                        inc = inc.max(cinc);
+                    }
                 }
-                *ans=(*ans).max(inc+dec+1);
+                *ans = (*ans).max(inc + dec + 1);
             }
-            (inc+1,dec+1)
-        }   
-        solve(&root,&mut ans);    
+            (inc + 1, dec + 1)
+        }
+        solve(&root, &mut ans);
         ans
     }
 

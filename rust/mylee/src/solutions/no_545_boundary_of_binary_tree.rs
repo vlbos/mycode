@@ -1,15 +1,15 @@
 // 545\. Boundary of Binary Tree
 // =============================
 
-// Given a binary tree, return the values of its boundary in **anti-clockwise** direction starting from root. 
+// Given a binary tree, return the values of its boundary in **anti-clockwise** direction starting from root.
 // Boundary includes left boundary, leaves, and right boundary in order without duplicate **nodes**.  (The values of the nodes may still be duplicates.)
 
-// **Left boundary** is defined as the path from root to the **left-most** node. 
+// **Left boundary** is defined as the path from root to the **left-most** node.
 // **Right boundary** is defined as the path from root to the **right-most** node.
-//  If the root doesn't have left subtree or right subtree, then the root itself is left boundary or right boundary. 
+//  If the root doesn't have left subtree or right subtree, then the root itself is left boundary or right boundary.
 // Note this definition only applies to the input binary tree, and not applies to any subtrees.
 
-// The **left-most** node is defined as a **leaf** node you could reach when you always firstly travel to the left subtree if exists. 
+// The **left-most** node is defined as a **leaf** node you could reach when you always firstly travel to the left subtree if exists.
 // If not, travel to the right subtree. Repeat until you reach a leaf node.
 
 // The **right-most** node is also defined by the same way with left and right exchanged.
@@ -179,39 +179,40 @@ impl Solution {
         // let mut res = vec![];
         // Solution::boundary_of_binary_tree_recursive(root, BoundaryState::Root, &mut res);
         // res
-        let (mut ans,mut left,mut right,mut leaf)=(Vec::new(),Vec::new(),Vec::new(),Vec::new());
-        
-        fn in_order(root: &Option<Rc<RefCell<TreeNode>>>,leaf:&mut Vec<i32>){
-            if let Some(node)=root{
-                let node=node.borrow();
-                in_order(&node.left,leaf);
-                if node.left.is_none() && node.right.is_none(){
+        let (mut ans, mut left, mut right, mut leaf) =
+            (Vec::new(), Vec::new(), Vec::new(), Vec::new());
+
+        fn in_order(root: &Option<Rc<RefCell<TreeNode>>>, leaf: &mut Vec<i32>) {
+            if let Some(node) = root {
+                let node = node.borrow();
+                in_order(&node.left, leaf);
+                if node.left.is_none() && node.right.is_none() {
                     leaf.push(node.val);
                 }
-                in_order(&node.right,leaf);
+                in_order(&node.right, leaf);
             }
         }
-        fn left_order(root: &Option<Rc<RefCell<TreeNode>>>,left:&mut Vec<i32>){
-            if let Some(node)=root{
-                let node=node.borrow();
+        fn left_order(root: &Option<Rc<RefCell<TreeNode>>>, left: &mut Vec<i32>) {
+            if let Some(node) = root {
+                let node = node.borrow();
                 left.push(node.val);
-                left_order(&node.left,left);
+                left_order(&node.left, left);
             }
         }
-        fn right_order(root: &Option<Rc<RefCell<TreeNode>>>,right:&mut Vec<i32>){
-            if let Some(node)=root{
-                let node=node.borrow();
+        fn right_order(root: &Option<Rc<RefCell<TreeNode>>>, right: &mut Vec<i32>) {
+            if let Some(node) = root {
+                let node = node.borrow();
                 right.push(node.val);
-                right_order(&node.right,right);
+                right_order(&node.right, right);
             }
         }
-        left_order(&root,&mut left);
-        in_order(&root,&mut leaf);
-        right_order(&root,&mut right);
+        left_order(&root, &mut left);
+        in_order(&root, &mut leaf);
+        right_order(&root, &mut right);
         right.reverse();
-        let mut dup=std::collections::HashSet::new();
-        for &v in left.iter().chain(&leaf).chain(&right){
-            if !dup.contains(&v){
+        let mut dup = std::collections::HashSet::new();
+        for &v in left.iter().chain(&leaf).chain(&right) {
+            if !dup.contains(&v) {
                 ans.push(v);
                 dup.insert(v);
             }
@@ -230,13 +231,13 @@ mod test {
 
     #[test]
     fn test_boundary_of_binary_tree_1() {
-        let tree = tree![1, null,2,3, 4];
+        let tree = tree![1, null, 2, 3, 4];
         assert_eq!(Solution::boundary_of_binary_tree(tree), vec![1, 3, 4, 2]);
     }
 
     #[test]
     fn test_boundary_of_binary_tree_2() {
-        let tree = tree![1, 2,3, 4,5,6,null, 7, 8, 9, 10];
+        let tree = tree![1, 2, 3, 4, 5, 6, null, 7, 8, 9, 10];
         assert_eq!(
             Solution::boundary_of_binary_tree(tree),
             vec![1, 2, 4, 7, 8, 9, 10, 6, 3]

@@ -29,7 +29,7 @@
 
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Cloudera](https://leetcode.ca/tags/#Cloudera) [Facebook](https://leetcode.ca/tags/#Facebook) [LinkedIn](https://leetcode.ca/tags/#LinkedIn) [Uber](https://leetcode.ca/tags/#Uber)
 // @lc code=start
-use std::collections::VecDeque;
+// use std::collections::VecDeque;
 #[derive(Debug, PartialEq, Eq)]
 pub enum NestedInteger {
     Int(i32),

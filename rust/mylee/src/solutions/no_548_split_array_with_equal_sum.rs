@@ -8,7 +8,7 @@
 
 // where we define that subarray (L, R) represents a slice of the original array starting from the element indexed L to the element indexed R.
 
-// **Example:**  
+// **Example:**
 
 // **Input:** \[1,2,1,2,1,2,1\]
 // **Output:** True
@@ -80,22 +80,27 @@ impl Solution {
         // }
         // false
         let n = nums.len();
-        if n<7{
-        return false;
+        if n < 7 {
+            return false;
         }
-        let sums:Vec<i32>=nums.iter().scan(0,|acc,&x| {*acc=*acc+x; Some(*acc)}).collect();
-        for j in 3..n-3{
-            let mut s= std::collections::HashSet::new();
-            for i in 1..j-1{
-                if sums[i-1]==sums[j-1]-sums[i]{
-                    s.insert(sums[i-1]);
+        let sums: Vec<i32> = nums
+            .iter()
+            .scan(0, |acc, &x| {
+                *acc = *acc + x;
+                Some(*acc)
+            })
+            .collect();
+        for j in 3..n - 3 {
+            let mut s = std::collections::HashSet::new();
+            for i in 1..j - 1 {
+                if sums[i - 1] == sums[j - 1] - sums[i] {
+                    s.insert(sums[i - 1]);
                 }
-
             }
-            for k in j+1..n-1{
-                let (s3,s4)=(sums[k-1]-sums[j],sums[n-1]-sums[k]);
-                if s3==s4 && s.contains(&s3){
-                return true;
+            for k in j + 1..n - 1 {
+                let (s3, s4) = (sums[k - 1] - sums[j], sums[n - 1] - sums[k]);
+                if s3 == s4 && s.contains(&s3) {
+                    return true;
                 }
             }
         }
