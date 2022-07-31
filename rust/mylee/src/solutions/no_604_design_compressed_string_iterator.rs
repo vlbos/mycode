@@ -157,7 +157,7 @@ impl StringIterator {
         //     } => true,
         //     _ => unreachable!(),
         // }
-        self.idx + 1 < self.s.len()
+        self.idx + 1 < self.s.len()|| (self.idx + 1 == self.s.len() && self.i<self.t[self.idx])
     }
 }
 
