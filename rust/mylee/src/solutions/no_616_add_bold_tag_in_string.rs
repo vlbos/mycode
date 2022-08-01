@@ -1,11 +1,11 @@
 // 616\. Add Bold Tag in String
 // ============================
 
-// Given a string **s** and a list of strings **dict**, you need to add a closed pair of bold tag `<b>` and `</b>` to wrap the substrings in s that exist in dict. 
-// If two such substrings overlap, you need to wrap them together by only one pair of closed bold tag. 
+// Given a string **s** and a list of strings **dict**, you need to add a closed pair of bold tag `<b>` and `</b>` to wrap the substrings in s that exist in dict.
+// If two such substrings overlap, you need to wrap them together by only one pair of closed bold tag.
 // Also, if two substrings wrapped by bold tags are consecutive, you need to combine them.
 
-// **Example 1:**  
+// **Example 1:**
 
 // **Input:**
 // s = "abcxyz123"
@@ -13,7 +13,7 @@
 // **Output:**
 // "<b>abc</b>xyz<b>123</b>"
 
-// **Example 2:**  
+// **Example 2:**
 
 // **Input:**
 // s = "aaabbcc"
@@ -21,7 +21,7 @@
 // **Output:**
 // "<b>aaabbc</b>c"
 
-// **Note:**  
+// **Note:**
 
 // 1.  The given dict won't contain duplicates, and its length won't exceed 100.
 // 2.  All the strings in input have length in range \[1, 1000\].
@@ -95,30 +95,30 @@ impl Solution {
         //     res += &s[to..];
         // }
         // res
-        let mut pairs=Vec::new();
-        for w in &dict{
+        let mut pairs = Vec::new();
+        for w in &dict {
             let i = s.find(w).unwrap();
-            pairs.push(vec![i,i+w.len()]);
+            pairs.push(vec![i, i + w.len()]);
         }
         pairs.sort();
-        let mut merged=Vec::new();
-        let mut last=pairs[0].clone();
+        let mut merged = Vec::new();
+        let mut last = pairs[0].clone();
         let mut i = 1;
-        while i<pairs.len(){
-            if pairs[i][0]>last[1]{
-            merged.push(last.clone());
-            last=pairs[i].clone();
-            }else{
-                last[1]=pairs[i][1];
+        while i < pairs.len() {
+            if pairs[i][0] > last[1] {
+                merged.push(last.clone());
+                last = pairs[i].clone();
+            } else {
+                last[1] = pairs[i][1];
             }
-           
-            i+=1;
+
+            i += 1;
         }
         merged.push(last.clone());
         let mut s = s;
-        for  idx  in merged.iter().rev(){
-            s.insert_str(idx[1],"</b>");
-            s.insert_str(idx[0],"<b>");
+        for idx in merged.iter().rev() {
+            s.insert_str(idx[1], "</b>");
+            s.insert_str(idx[0], "<b>");
         }
         s
     }

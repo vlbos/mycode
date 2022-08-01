@@ -1,10 +1,10 @@
 // 624\. Maximum Distance in Arrays
 // ================================
 
-// Given `m` arrays, and each array is sorted in ascending order. Now you can pick up two integers from two different arrays (each array picks one) and calculate the distance. 
+// Given `m` arrays, and each array is sorted in ascending order. Now you can pick up two integers from two different arrays (each array picks one) and calculate the distance.
 // We define the distance between two integers `a` and `b` to be their absolute difference `|a-b|`. Your task is to find the maximum distance.
 
-// **Example 1:**  
+// **Example 1:**
 
 // **Input:**
 // \[\[1,2,3\],
@@ -14,7 +14,7 @@
 // **Explanation:**
 // One way to reach the maximum distance 4 is to pick 1 in the first or third array and pick 5 in the second array.
 
-// **Note:**  
+// **Note:**
 
 // 1.  Each given array will have at least 1 number. There will be at least two non-empty arrays.
 // 2.  The total number of the integers in **all** the `m` arrays will be in the range of \[2, 10000\].
@@ -79,12 +79,23 @@ impl Solution {
         //         i32::abs(maxs[1].0 - mins[0].0),
         //     )
         // }
-        let mut min:Vec<(i32,usize)>= arrays.iter().enumerate().map(|(i,x)| (*x.iter().min().unwrap(),i)).collect();
-        let mut max:Vec<(i32,usize)>= arrays.iter().enumerate().map(|(i,x)| (*x.iter().max().unwrap(),i)).collect();
-        min.sort_by_key(|x|x.0);
-        max.sort_by(|a,b| b.0.cmp(&a.0));
-        if min[0].1!=max[0].1{
-           ( min[0].0-max[0].0).abs()}else{( min[0].0-max[1].0).abs().max(( min[1].0-max[0].0).abs())}
+        let mut min: Vec<(i32, usize)> = arrays
+            .iter()
+            .enumerate()
+            .map(|(i, x)| (*x.iter().min().unwrap(), i))
+            .collect();
+        let mut max: Vec<(i32, usize)> = arrays
+            .iter()
+            .enumerate()
+            .map(|(i, x)| (*x.iter().max().unwrap(), i))
+            .collect();
+        min.sort_by_key(|x| x.0);
+        max.sort_by(|a, b| b.0.cmp(&a.0));
+        if min[0].1 != max[0].1 {
+            (min[0].0 - max[0].0).abs()
+        } else {
+            (min[0].0 - max[1].0).abs().max((min[1].0 - max[0].0).abs())
+        }
     }
 }
 // @lc code=end

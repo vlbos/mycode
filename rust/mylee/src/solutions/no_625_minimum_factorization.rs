@@ -5,16 +5,16 @@
 
 // If there is no answer or the answer is not fit in 32-bit signed integer, then return 0.
 
-// **Example 1**  
+// **Example 1**
 // Input:
 
-// 48 
+// 48
 
 // Output:
 
 // 68
 
-// **Example 2**  
+// **Example 2**
 // Input:
 
 // 15
@@ -56,22 +56,26 @@ impl Solution {
         // } else {
         //     0
         // }
-        if 1==a{
-        return a;
+        if 1 == a {
+            return a;
         }
-        let mut a=a;
-        let mut ans=String::new();
-        for k in (2..=9).rev(){
-            while a%k==0{
-                ans=k.to_string()+ans.as_str();
-            a/=k;
+        let mut a = a;
+        let mut ans = String::new();
+        for k in (2..=9).rev() {
+            while a % k == 0 {
+                ans = k.to_string() + ans.as_str();
+                a /= k;
             }
         }
-        if a>1{
-        return 0;
+        if a > 1 {
+            return 0;
         }
-        let ans=ans.parse::<i64>().unwrap();
-        if ans >i32::MAX as i64 {0}else {ans as _} 
+        let ans = ans.parse::<i64>().unwrap();
+        if ans > i32::MAX as i64 {
+            0
+        } else {
+            ans as _
+        }
     }
 }
 // @lc code=end
