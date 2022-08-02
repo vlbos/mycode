@@ -13,7 +13,7 @@
 
 // Now, you can only press the keyboard for **N** times (with the above four keys), find out the maximum numbers of 'A' you can print on screen.
 
-// **Example 1:**  
+// **Example 1:**
 
 // **Input:** N = 3
 // **Output:** 3
@@ -21,7 +21,7 @@
 // We can at most get 3 A's on screen by pressing following key sequence:
 // A, A, A
 
-// **Example 2:**  
+// **Example 2:**
 
 // **Input:** N = 7
 // **Output:** 9
@@ -29,7 +29,7 @@
 // We can at most get 9 A's on screen by pressing following key sequence:
 // A, A, A, Ctrl A, Ctrl C, Ctrl V, Ctrl V
 
-// **Note:**  
+// **Note:**
 
 // 1.  1 <= N <= 50
 // 2.  Answers will be in the range of 32-bit signed integer.
@@ -46,7 +46,6 @@
 
 // [Google](https://leetcode.ca/tags/#Google) [Microsoft](https://leetcode.ca/tags/#Microsoft)
 
-
 // @star
 // @lc code=start
 impl Solution {
@@ -62,9 +61,9 @@ impl Solution {
         //     dp.push(m);
         // }
         // dp[n] as i32
-        let mut ans=n;
-        for i in 1..n-2{
-            ans=ans.max(Self::max_a(i)*(n-1-i));
+        let mut ans = n;
+        for i in 1..n - 2 {
+            ans = ans.max(Self::max_a(i) * (n - 1 - i));
         }
         ans
     }
