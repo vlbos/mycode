@@ -43,7 +43,7 @@ impl Solution {
             let c = bs[i] as char;
             if c.is_ascii_digit() {
                 num *= 10;
-                num += (c as u8 - b'0') as i32;
+                num += (c as u8 - b'0') as i64;
             } else if c == '(' {
                 let j = i;
                 let mut cnt = 0;
@@ -59,7 +59,7 @@ impl Solution {
 
                     i += 1;
                 }
-                num = Self::calculate(s[j + 1..i].to_string());
+                num = Self::calculate(s[j + 1..i].to_string()) as i64;
             }
             if i == n - 1 || "+-*/".chars().any(|x| x == c) {
                 match op {
@@ -78,7 +78,7 @@ impl Solution {
 
             i += 1;
         }
-        ans
+        ans as _
     }
 }
 
@@ -103,6 +103,13 @@ mod test {
         assert_eq!(
             -12,
             Solution::calculate(String::from("(2+6* 3+5- (3*14/7+2)*5)+3"))
+        );
+    }
+    #[test]
+    fn test_calculate_5() {
+        assert_eq!(
+            -2147483648,
+            Solution::calculate(String::from("0-2147483648"))
         );
     }
 }
