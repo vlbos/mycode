@@ -1,31 +1,52 @@
-/*
-In the following, every capital letter represents some hexadecimal digit from 0 to f.
+// 800\. Similar RGB Color
+// =======================
 
-The red-green-blue color "#AABBCC" can be written as "#ABC" in shorthand.  For example, "#15c" is shorthand for the color "#1155cc".
+// In the following, every capital letter represents some hexadecimal digit from `0` to `f`.
 
-Now, say the similarity between two colors "#ABCDEF" and "#UVWXYZ" is -(AB - UV)^2 - (CD - WX)^2 - (EF - YZ)^2.
+// The red-green-blue color `"#AABBCC"` can be written as `"#ABC"` in shorthand.  For example, `"#15c"` is shorthand for the color `"#1155cc"`.
 
-Given the color "#ABCDEF", return a 7 character color that is most similar to #ABCDEF, and has a shorthand (that is, it can be represented as some "#XYZ"
+// Now, say the similarity between two colors `"#ABCDEF"` and `"#UVWXYZ"` is `-(AB - UV)^2 - (CD - WX)^2 - (EF - YZ)^2`.
 
-Example 1:
-Input: color = "#09f166"
-Output: "#11ee66"
-Explanation:
-The similarity is -(0x09 - 0x11)^2 -(0xf1 - 0xee)^2 - (0x66 - 0x66)^2 = -64 -9 -0 = -73.
-This is the highest among any shorthand color.
+// Given the color `"#ABCDEF"`, return a 7 character color that is most similar to `#ABCDEF`, and has a shorthand (that is, it can be represented as some `"#XYZ"`
 
-Note:
-    color is a string of length 7.
-    color is a valid RGB color: for i > 0, color[i] is a hexadecimal digit from 0 to f
-    Any answer which has the same (highest) similarity as the best answer will be accepted.
-    All inputs and outputs should use lowercase letters, and the output is 7 characters.
+// **Example 1:**
+// **Input:** color = "#09f166"
+// **Output:** "#11ee66"
+// **Explanation:**
+// The similarity is -(0x09 - 0x11)^2 -(0xf1 - 0xee)^2 - (0x66 - 0x66)^2 = -64 -9 -0 = -73.
+// This is the highest among any shorthand color.
 
+// **Note:**
 
-*/
+// *   `color` is a string of length `7`.
+// *   `color` is a valid RGB color: for `i > 0`, `color[i]` is a hexadecimal digit from `0` to `f`
+// *   Any answer which has the same (highest) similarity as the best answer will be accepted.
+// *   All inputs and outputs should use lowercase letters, and the output is 7 characters.
+
+// ### Difficulty:
+
+// Easy
+
+// ### Lock:
+
+// Prime
+
+// ### Company:
+
+// [Google](https://leetcode.ca/tags/#Google)
+
 pub struct Solution {}
 impl Solution {
     pub fn similar_rgb(color: String) -> String {
-        String::new()
+        let mut ans = String::from("#");
+        for i in (1..color.len()).step_by(2) {
+            let num = u8::from_str_radix(&color[i..i + 2], 16).unwrap();
+            let idx = num / 17 + if num % 17 > 8 { 1 } else { 0 };
+            let c = (if idx > 9 { idx - 10 + b'a' } else { idx + b'0' }) as char;
+            ans.push(c);
+            ans.push(c);
+        }
+        ans
     }
 }
 
@@ -35,6 +56,9 @@ mod test {
 
     #[test]
     fn test_similar_rgb_1() {
-        assert_eq!(String::new(), Solution::similar_rgb(String::new()));
+        assert_eq!(
+            String::from("#11ee66"),
+            Solution::similar_rgb(String::from("#09f166"))
+        );
     }
 }
