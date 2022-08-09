@@ -47,7 +47,7 @@ impl Solution {
                 return true;
             }
             let root = arr[0];
-            let mut i = 1 + arr[1..]
+            let i = 1 + arr[1..]
                 .iter()
                 .position(|&x| x >= root)
                 .unwrap_or(arr.len() - 1);

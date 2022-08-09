@@ -93,11 +93,12 @@
 //     head
 // }
 use super::util::tree::TreeNode;
-
+#[allow(dead_code)]
 pub struct Solution {}
 use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
+#[allow(dead_code)]
     pub fn split_bst(
         mut root: Option<Rc<RefCell<TreeNode>>>,
         v: i32,

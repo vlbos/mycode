@@ -71,7 +71,7 @@ impl Solution {
                 if (mask & (1 << bike_idx)) == 0 {
                     let dist = (workers[worker_idx][0] - bikes[bike_idx][0]).abs()
                         + (workers[worker_idx][1] - bikes[bike_idx][1]).abs();
-                    let new_mask = (mask | (1 << bike_idx));
+                    let new_mask = mask | (1 << bike_idx);
                     dp[new_mask] = dp[new_mask].min(dist + dp[mask]);
                 }
             }

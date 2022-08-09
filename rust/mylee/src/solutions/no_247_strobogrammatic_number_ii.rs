@@ -68,7 +68,7 @@ impl Solution {
         } else {
             ["0", "1", "8"].into_iter().map(String::from).collect()
         };
-        for i in (0..n / 2) {
+        for i in 0..n / 2 {
             let mut tmp = Vec::new();
             for a in &ans {
                 for (j, d) in [['0', '0'], ['1', '1'], ['8', '8'], ['6', '9'], ['9', '6']]

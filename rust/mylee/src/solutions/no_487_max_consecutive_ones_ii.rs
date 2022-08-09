@@ -33,7 +33,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn find_max_consecutive_ones(mut nums: Vec<i32>) -> i32 {
+    pub fn find_max_consecutive_ones(nums: Vec<i32>) -> i32 {
         // nums.push(0);
         // let mut last_max_len = -1;
         // let mut curr_max_len = 0;

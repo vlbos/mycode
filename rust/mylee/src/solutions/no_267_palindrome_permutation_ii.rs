@@ -27,8 +27,8 @@
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Google](https://leetcode.ca/tags/#Google) [Uber](https://leetcode.ca/tags/#Uber)
 
 // @lc code=start
-use std::cell::RefCell;
-use std::rc::Rc;
+// use std::cell::RefCell;
+// use std::rc::Rc;
 
 // use std::collections::HashMap;
 
@@ -99,7 +99,7 @@ impl Solution {
         if cnt.values().filter(|x| *x % 2 == 1).count() > 1 {
             return Vec::new();
         }
-        let mut target: Vec<char> = cnt
+        let target: Vec<char> = cnt
             .iter()
             .filter(|x| *x.1 % 2 == 0)
             .map(|x| vec![*x.0; *x.1 / 2])

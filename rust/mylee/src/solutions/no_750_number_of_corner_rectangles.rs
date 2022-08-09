@@ -39,7 +39,7 @@
 // 3.  The number of `1`s in the grid will be at most `6000`.
 
 // @lc code=start
-use std::collections::HashMap;
+// use std::collections::HashMap;
 
 impl Solution {
     pub fn count_corner_rectangles(grid: Vec<Vec<i32>>) -> i32 {

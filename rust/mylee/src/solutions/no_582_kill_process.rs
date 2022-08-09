@@ -45,7 +45,7 @@
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Apple](https://leetcode.ca/tags/#Apple) [Bloomberg](https://leetcode.ca/tags/#Bloomberg) [Google](https://leetcode.ca/tags/#Google) [Microsoft](https://leetcode.ca/tags/#Microsoft)
 
 // @lc code=start
-use std::collections::HashMap;
+// use std::collections::HashMap;
 
 impl Solution {
     pub fn kill_process(pid: Vec<i32>, ppid: Vec<i32>, kill: i32) -> Vec<i32> {
@@ -71,7 +71,7 @@ impl Solution {
         //     }
         // }
         // res
-        use std::collections::HashMap;
+        // use std::collections::HashMap;
         let mut g = HashMap::new();
         for (&c, &p) in pid.iter().zip(&ppid) {
             g.entry(p).or_insert(Vec::new()).push(c);

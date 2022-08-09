@@ -86,7 +86,6 @@ impl Solution {
         let mut cur: Vec<String> = (1..n).map(|x| x.to_string()).collect();
         while cur.len() > 1 {
             let mut next = Vec::new();
-            let mut i = 0;
             for i in 0..cur.len() / 2 {
                 next.push(format!("({},{})", cur[i], cur[cur.len() - 1 - i]));
             }

@@ -62,7 +62,7 @@ impl Solution {
         // }
         fn dfs(head: &mut Option<Box<ListNode>>) -> i32 {
             if let Some(node) = head {
-                let mut ans = dfs(&mut node.next) + node.val;
+                let ans = dfs(&mut node.next) + node.val;
                 node.val = ans % 10;
                 ans / 10
             } else {

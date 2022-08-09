@@ -46,7 +46,7 @@
 
 //  @tag-tree
 pub struct Solution {}
-use super::util::tree::{to_tree, TreeNode};
+use super::util::tree::{TreeNode};
 // submission codes start here
 
 // Definition for a binary tree node.

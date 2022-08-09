@@ -60,7 +60,7 @@ impl Solution {
             }
         }
         let (mut assigned_worker, mut assigned_bike) = (vec![-1; workers.len()], HashMap::new());
-        for (&dist, bucket) in &buckets {
+        for (_, bucket) in &buckets {
             for &(i, j) in bucket {
                 if assigned_worker[i] == -1 && assigned_bike.get(&j).is_none() {
                     assigned_worker[i] = j as i32;
