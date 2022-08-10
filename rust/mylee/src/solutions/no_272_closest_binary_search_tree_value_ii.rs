@@ -35,7 +35,7 @@
 // ### Company:
 
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Facebook](https://leetcode.ca/tags/#Facebook) [ForUsAll](https://leetcode.ca/tags/#ForUsAll) [Google](https://leetcode.ca/tags/#Google) [LinkedIn](https://leetcode.ca/tags/#LinkedIn)
-use super::util::tree::{ TreeNode};
+use super::util::tree::TreeNode;
 // @lc code=start
 use std::cell::RefCell;
 use std::rc::Rc;

@@ -1,7 +1,7 @@
 // 1088\. Confusing Number II
 // ==========================
 
-// We can rotate digits by 180 degrees to form new digits. When 0, 1, 6, 8, 9 are rotated 180 degrees, 
+// We can rotate digits by 180 degrees to form new digits. When 0, 1, 6, 8, 9 are rotated 180 degrees,
 // they become 0, 1, 9, 8, 6 respectively. When 2, 3, 4, 5 and 7 are rotated 180 degrees, they become invalid.
 
 // A _confusing number_ is a number that when rotated 180 degrees becomes a **different** number with each digit valid.
@@ -13,7 +13,7 @@
 
 // **Input:** 20
 // **Output:** 6
-// **Explanation:** 
+// **Explanation:**
 // The confusing numbers are \[6,9,10,16,18,19\].
 // 6 converts to 9.
 // 9 converts to 6.
@@ -26,7 +26,7 @@
 
 // **Input:** 100
 // **Output:** 19
-// **Explanation:** 
+// **Explanation:**
 // The confusing numbers are \[6,9,10,16,18,19,60,61,66,68,80,81,86,89,90,91,98,99,100\].
 
 // **Note:**
@@ -47,45 +47,45 @@
 pub struct Solution {}
 impl Solution {
     pub fn confusing_number_ii(n: i32) -> i32 {
-        let mut ans=0;
-        let m=std::collections::BTreeMap::from([(0,0),(1,1),(6,9),(8,8),(9,6)]);
-        let mut s=vec![0];
-        let mut found=false;
-        let is_confusing_num=|old_num:i32|{
-            let mut num=old_num;
-            let mut ans=0;
-            while num>0{
-                if let Some(&v)=m.get(&(num%10)){
-                    ans=ans*10+v;
-                }else{
-                return false;
+        let mut ans = 0;
+        let m = std::collections::BTreeMap::from([(0, 0), (1, 1), (6, 9), (8, 8), (9, 6)]);
+        let mut s = vec![0];
+        let mut found = false;
+        let is_confusing_num = |old_num: i32| {
+            let mut num = old_num;
+            let mut ans = 0;
+            while num > 0 {
+                if let Some(&v) = m.get(&(num % 10)) {
+                    ans = ans * 10 + v;
+                } else {
+                    return false;
                 }
-                num/=10;
+                num /= 10;
             }
-            old_num!=ans
+            old_num != ans
         };
-        while !found{
-            let mut t =Vec::new();
-            for &num in &s{
-                for (&k,_) in &m{
-                    let cur=num*10+k;
-                    if cur>n{
-                    found=true;
-                    break;
+        while !found {
+            let mut t = Vec::new();
+            for &num in &s {
+                for (&k, _) in &m {
+                    let cur = num * 10 + k;
+                    if cur > n {
+                        found = true;
+                        break;
                     }
-                    if cur!=0{
-                    t.push(cur);
+                    if cur != 0 {
+                        t.push(cur);
                     }
-                    if is_confusing_num(cur){
-                    println!("=={},{},{}",cur,cur,cur);
-                    ans+=1;
+                    if is_confusing_num(cur) {
+                        println!("=={},{},{}", cur, cur, cur);
+                        ans += 1;
                     }
                 }
-                if found{
-                break;
+                if found {
+                    break;
                 }
             }
-            s=t;
+            s = t;
         }
         ans
     }

@@ -71,7 +71,7 @@ impl Solution {
         //     }
         // }
         // res
-        // use std::collections::HashMap;
+        use std::collections::HashMap;
         let mut g = HashMap::new();
         for (&c, &p) in pid.iter().zip(&ppid) {
             g.entry(p).or_insert(Vec::new()).push(c);

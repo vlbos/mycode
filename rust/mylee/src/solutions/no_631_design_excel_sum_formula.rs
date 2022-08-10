@@ -162,10 +162,10 @@ impl Excel {
         // let col = Excel::col_c2i(c as u8);
         // let row = Excel::row_i2i(r);
         // self.retrieve(row, col).value
-         if  self.m.get(&(r, c)).is_some()
-        {
-         let strs = self.m.get(&(r, c)).unwrap(); 
-        return self.sum(r, c, strs.clone());
+        let flag = self.m.get(&(r, c)).is_some();
+        if flag {
+            let strs = self.m.get(&(r, c)).unwrap().clone();
+            return self.sum(r, c, strs);
         }
 
         self.mat[r as usize - 1][(c as u8 - b'A') as usize]

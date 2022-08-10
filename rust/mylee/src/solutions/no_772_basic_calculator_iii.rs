@@ -33,7 +33,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-#[allow(dead_code)]
+    #[allow(dead_code)]
     pub fn calculate(s: String) -> i32 {
         let n = s.len();
         let (mut num, mut cur_res) = (0, 0);

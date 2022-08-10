@@ -1,28 +1,41 @@
-/*
-Given a string S, remove the vowels 'a', 'e', 'i', 'o', and 'u' from it, and return the new string.
+// 1119\. Remove Vowels from a String
+// ==================================
 
+// Given a string `S`, remove the vowels `'a'`, `'e'`, `'i'`, `'o'`, and `'u'` from it, and return the new string.
 
+// **Example 1:**
 
-Example 1:
-Input: "leetcodeisacommunityforcoders"
-Output: "ltcdscmmntyfrcdrs"
+// **Input:** "leetcodeisacommunityforcoders"
+// **Output:** "ltcdscmmntyfrcdrs"
 
-Example 2:
-Input: "aeiou"
-Output: ""
+// **Example 2:**
 
+// **Input:** "aeiou"
+// **Output:** ""
 
+// **Note:**
 
-Note:
-    S consists of lowercase English letters only.
-    1 <= S.length <= 1000
+// 1.  `S` consists of lowercase English letters only.
+// 2.  `1 <= S.length <= 1000`
 
+// ### Difficulty:
 
-*/
+// Easy
+
+// ### Lock:
+
+// Prime
+
+// ### Company:
+
+// [Amazon](https://leetcode.ca/tags/#Amazon)
 pub struct Solution {}
 impl Solution {
-    pub fn remove_vowels(s: String) -> String {
-        String::new()
+    pub fn remove_vowels(mut s: String) -> String {
+        for c in "aeiou".chars() {
+            s = s.replace(c.to_string().as_str(), "");
+        }
+        s
     }
 }
 
@@ -31,7 +44,17 @@ mod test {
     use super::*;
 
     #[test]
-    fn test__1() {
-        assert_eq!(String::new(), Solution::remove_vowels(String::new()));
+    fn test_remove_vowels_1() {
+        assert_eq!(
+            String::from("ltcdscmmntyfrcdrs"),
+            Solution::remove_vowels(String::from("leetcodeisacommunityforcoders"))
+        );
+    }
+    #[test]
+    fn test_remove_vowels_2() {
+        assert_eq!(
+            String::new(),
+            Solution::remove_vowels(String::from("aeiou"))
+        );
     }
 }

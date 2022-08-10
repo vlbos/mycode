@@ -9,7 +9,7 @@
 
 // **Input:** \[\[1,91\],\[1,92\],\[2,93\],\[2,97\],\[1,60\],\[2,77\],\[1,65\],\[1,87\],\[1,100\],\[2,100\],\[2,76\]\]
 // **Output:** \[\[1,87\],\[2,88\]\]
-// **Explanation:** 
+// **Explanation:**
 // The average of the student with id = 1 is 87.
 // The average of the student with id = 2 is 88.6. But with integer division their average converts to 88.
 
@@ -35,13 +35,26 @@
 pub struct Solution {}
 impl Solution {
     pub fn high_five(items: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-       let mut cnt=std::collections::HashMap::<i32,(i32,i32)>::new();
-        for item in &items{
-            cnt.entry(item[0]).and_modify(|mut x| {x.0+=item[1];x.1+=1;}).or_insert((item[1],1));
+        let mut cnt = std::collections::HashMap::<i32, (i32, i32)>::new();
+        for item in &items {
+            cnt.entry(item[0])
+                .and_modify(|mut x| {
+                    x.0 += item[1];
+                    x.1 += 1;
+                })
+                .or_insert((item[1], 1));
         }
-        let mut average_scores:Vec<(i32,i32)>=cnt.into_iter().map(|(k,v)| (-v.0/v.1,k)).collect();
+        let mut average_scores: Vec<(i32, i32)> =
+            cnt.into_iter().map(|(k, v)| (-v.0 / v.1, k)).collect();
         average_scores.sort();
-        (if average_scores.len()>5{&average_scores[..5]}else{&average_scores[..]}).iter().map(|x| vec![x.1,-x.0]).collect()
+        (if average_scores.len() > 5 {
+            &average_scores[..5]
+        } else {
+            &average_scores[..]
+        })
+        .iter()
+        .map(|x| vec![x.1, -x.0])
+        .collect()
     }
 }
 
@@ -51,6 +64,21 @@ mod test {
 
     #[test]
     fn test_high_five_1() {
-        assert_eq!(vec![vec![1,87],vec![2,88]], Solution::high_five(vec![vec![1,91],vec![1,92],vec![2,93],vec![2,97],vec![1,60],vec![2,77],vec![1,65],vec![1,87],vec![1,100],vec![2,100],vec![2,76]]));
+        assert_eq!(
+            vec![vec![1, 87], vec![2, 88]],
+            Solution::high_five(vec![
+                vec![1, 91],
+                vec![1, 92],
+                vec![2, 93],
+                vec![2, 97],
+                vec![1, 60],
+                vec![2, 77],
+                vec![1, 65],
+                vec![1, 87],
+                vec![1, 100],
+                vec![2, 100],
+                vec![2, 76]
+            ])
+        );
     }
 }

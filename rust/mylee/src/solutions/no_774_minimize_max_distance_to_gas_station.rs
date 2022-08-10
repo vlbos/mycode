@@ -33,7 +33,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-#[allow(dead_code)]
+    #[allow(dead_code)]
     pub fn minmax_gas_dist(stations: Vec<i32>, k: i32) -> f64 {
         let (mut left, mut right) = (0.0, 1e8);
         while right - left > 1e-6 {

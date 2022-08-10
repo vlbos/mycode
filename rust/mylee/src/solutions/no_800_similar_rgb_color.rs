@@ -37,7 +37,7 @@
 #[allow(dead_code)]
 pub struct Solution;
 impl Solution {
-#[allow(dead_code)]
+    #[allow(dead_code)]
     pub fn similar_rgb(color: String) -> String {
         let mut ans = String::from("#");
         for i in (1..color.len()).step_by(2) {
