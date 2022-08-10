@@ -23,8 +23,9 @@ Note:
     1 <= nums[i] <= 10^5
 
 
-*/
-pub struct Solution {}
+*/ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn can_divide_into_subsequences(nums: Vec<i32>, k: i32) -> bool {
         true

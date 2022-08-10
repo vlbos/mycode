@@ -29,8 +29,9 @@
 
 // ### Company:
 
-// [Apple](https://leetcode.ca/tags/#Apple) [LinkedIn](https://leetcode.ca/tags/#LinkedIn) [Twitter](https://leetcode.ca/tags/#Twitter)
-struct Solution;
+// [Apple](https://leetcode.ca/tags/#Apple) [LinkedIn](https://leetcode.ca/tags/#LinkedIn) [Twitter](https://leetcode.ca/tags/#Twitter) 
+#[allow(dead_code)] 
+ struct Solution;
 // @lc code=start
 
 const COLOR_SIZE: usize = 3;

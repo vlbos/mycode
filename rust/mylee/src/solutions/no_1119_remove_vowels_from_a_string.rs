@@ -28,8 +28,9 @@
 
 // ### Company:
 
-// [Amazon](https://leetcode.ca/tags/#Amazon)
-pub struct Solution {}
+// [Amazon](https://leetcode.ca/tags/#Amazon) 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn remove_vowels(mut s: String) -> String {
         for c in "aeiou".chars() {

@@ -19,8 +19,9 @@ Constraints:
     Answers will be accepted as correct if they are within 10^-5 of the correct answer.
 
 
-*/
-pub struct Solution {}
+*/ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn probability_of_heads(prob: Vec<f64>, target: i32) -> f64 {
         0.0

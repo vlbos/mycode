@@ -71,8 +71,9 @@ pub fn to_tree(vec: Vec<Option<i32>>) -> Option<Rc<RefCell<TreeNode>>> {
         }
     }
     head
-}
-pub struct Solution {}
+} 
+#[allow(dead_code)] 
+ pub struct Solution {}
 use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {

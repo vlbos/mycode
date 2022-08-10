@@ -27,8 +27,9 @@
 
 // ### Company:
 
-// [LinkedIn](https://leetcode.ca/tags/#LinkedIn) [Microsoft](https://leetcode.ca/tags/#Microsoft)
-struct Solution;
+// [LinkedIn](https://leetcode.ca/tags/#LinkedIn) [Microsoft](https://leetcode.ca/tags/#Microsoft) 
+#[allow(dead_code)] 
+ struct Solution;
 // @lc code=start
 impl Solution {
     pub fn shortest_word_distance(words: Vec<String>, word1: String, word2: String) -> i32 {

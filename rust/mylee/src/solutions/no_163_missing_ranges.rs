@@ -10,8 +10,9 @@
 // Lock:
 // Prime
 // Company:
-// Amazon Facebook Google Oracle
-struct Solution;
+// Amazon Facebook Google Oracle 
+#[allow(dead_code)] 
+ struct Solution;
 // @lc code=start
 
 impl Solution {

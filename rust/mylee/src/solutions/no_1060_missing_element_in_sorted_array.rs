@@ -40,8 +40,9 @@
 
 // ### Company:
 
-// [Amazon](https://leetcode.ca/tags/#Amazon) [Apple](https://leetcode.ca/tags/#Apple) [Bloomberg](https://leetcode.ca/tags/#Bloomberg) [Facebook](https://leetcode.ca/tags/#Facebook) [Google](https://leetcode.ca/tags/#Google)
-pub struct Solution {}
+// [Amazon](https://leetcode.ca/tags/#Amazon) [Apple](https://leetcode.ca/tags/#Apple) [Bloomberg](https://leetcode.ca/tags/#Bloomberg) [Facebook](https://leetcode.ca/tags/#Facebook) [Google](https://leetcode.ca/tags/#Google) 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn missing_element(nums: Vec<i32>, k: i32) -> i32 {
         let mut ans = nums[0] + 1;

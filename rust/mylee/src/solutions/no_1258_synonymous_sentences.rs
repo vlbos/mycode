@@ -22,8 +22,9 @@ Constraints:
     text is a single space separated sentence of at most 10 words.
 
 
-*/
-pub struct Solution {}
+*/ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn generate_sentences(synonyms: Vec<Vec<String>>, text: String) -> Vec<String> {
         Vec::new()

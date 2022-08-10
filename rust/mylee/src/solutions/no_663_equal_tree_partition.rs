@@ -159,8 +159,9 @@ impl Solution {
     // }
 }
 // @lc code=end
-
-struct Solution;
+ 
+#[allow(dead_code)] 
+ struct Solution;
 
 #[cfg(test)]
 mod test {

@@ -43,8 +43,9 @@
 
 // ### Company:
 
-// [Google](https://leetcode.ca/tags/#Google)
-pub struct Solution {}
+// [Google](https://leetcode.ca/tags/#Google) 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn confusing_number_ii(n: i32) -> i32 {
         let mut ans = 0;

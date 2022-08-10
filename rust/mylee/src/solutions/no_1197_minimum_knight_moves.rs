@@ -21,8 +21,9 @@ Constraints:
     |x| + |y| <= 300
 
 
-*/
-pub struct Solution {}
+*/ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn min_knight_moves(x: i32, y: i32) -> i32 {
         0

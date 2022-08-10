@@ -34,8 +34,9 @@ Constraints:
     1 <= arr.length <= 1000
     0 <= arr[i] <= 1000
 
-*/
-pub struct Solution {}
+*/ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn count_elements(arr: Vec<i32>) -> i32 {
         0

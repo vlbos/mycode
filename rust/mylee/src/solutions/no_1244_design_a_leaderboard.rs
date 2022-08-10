@@ -36,8 +36,9 @@ Constraints:
     There will be at most 1000 function calls.
 
 
-*/
-pub struct Solution {}
+*/ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 struct Leaderboard {}
 
 /**

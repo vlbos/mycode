@@ -20,8 +20,9 @@ Constraints:
     1 <= arr[i] <= 10^3
 
 
-*/
-pub struct Solution {}
+*/ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn max_number_of_apples(arr: Vec<i32>) -> i32 {
         0

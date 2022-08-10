@@ -13,8 +13,9 @@ Constraints:
     1 <= arr1[i], arr2[i], arr3[i] <= 2000
 
 
-*/
-pub struct Solution {}
+*/ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn arrays_intersection(arr1: Vec<i32>, arr2: Vec<i32>, arr3: Vec<i32>) -> Vec<i32> {
         Vec::new()

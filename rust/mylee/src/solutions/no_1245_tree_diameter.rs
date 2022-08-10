@@ -24,8 +24,9 @@ Constraints:
     The given edges form an undirected tree.
 
 
-*/
-pub struct Solution {}
+*/ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn tree_diameter(edges: Vec<Vec<i32>>) -> i32 {
         0

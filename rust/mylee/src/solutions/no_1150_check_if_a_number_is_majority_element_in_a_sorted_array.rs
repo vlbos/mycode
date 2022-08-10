@@ -26,8 +26,9 @@ Constraints:
     1 <= target <= 10^9
 
 
-*/
-pub struct Solution {}
+*/ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn is_majority_element(nums: Vec<i32>, target: i32) -> bool {
         true

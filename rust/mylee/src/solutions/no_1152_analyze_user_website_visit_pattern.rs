@@ -40,8 +40,9 @@ Note:
     No user visits two websites at the same time.
 
 
-*/
-pub struct Solution {}
+*/ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn most_visited_pattern(
         username: Vec<String>,

@@ -26,8 +26,9 @@ Constraints:
     1 <= duration <= 10^6
 
 
-*/
-pub struct Solution {}
+*/ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn min_available_duration(
         slots1: Vec<Vec<i32>>,

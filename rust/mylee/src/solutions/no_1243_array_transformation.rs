@@ -31,8 +31,9 @@ Constraints:
     1 <= arr[i] <= 100
 
 
-*/
-pub struct Solution {}
+*/ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn transform_array(arr: Vec<i32>) -> Vec<i32> {
         Vec::new()

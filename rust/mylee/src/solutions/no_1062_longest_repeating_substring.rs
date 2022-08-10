@@ -43,8 +43,9 @@
 // ### Company:
 
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Google](https://leetcode.ca/tags/#Google)
-
-pub struct Solution {}
+ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn longest_repeating_substring(s: String) -> i32 {
         let mut pre = ' ';

@@ -37,8 +37,9 @@
 // ### Company:
 
 // [Google](https://leetcode.ca/tags/#Google)
-
-pub struct Solution {}
+ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn expand(s: String) -> Vec<String> {
         let mut ans = vec![String::new()];

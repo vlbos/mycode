@@ -20,8 +20,9 @@ Constraints:
     All answers must be in uppercase letters.
 
 
-*/
-pub struct Solution {}
+*/ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn to_hexspeak(num: String) -> String {
         String::new()

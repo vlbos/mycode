@@ -30,8 +30,9 @@
 
 // ### Company:
 
-// [Facebook](https://leetcode.ca/tags/#Facebook) [Google](https://leetcode.ca/tags/#Google)
-struct Solution;
+// [Facebook](https://leetcode.ca/tags/#Facebook) [Google](https://leetcode.ca/tags/#Google) 
+#[allow(dead_code)] 
+ struct Solution;
 // @lc code=start
 impl Solution {
     // #[inline]

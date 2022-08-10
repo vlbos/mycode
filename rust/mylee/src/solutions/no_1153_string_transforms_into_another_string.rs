@@ -24,8 +24,9 @@ Note:
     Both str1 and str2 contain only lowercase English letters.
 
 
-*/
-pub struct Solution {}
+*/ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn can_convert(str1: String, str2: String) -> bool {
         true

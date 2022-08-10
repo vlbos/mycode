@@ -25,8 +25,9 @@
 // ### Company:
 
 // [Facebook](https://leetcode.ca/tags/#Facebook) [Google](https://leetcode.ca/tags/#Google)
-
-struct Solution;
+ 
+#[allow(dead_code)] 
+ struct Solution;
 // @lc code=start
 
 // use std::cell::RefCell;

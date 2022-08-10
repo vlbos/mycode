@@ -40,8 +40,9 @@
 // ### Company:
 
 // [Google](https://leetcode.ca/tags/#Google)
-
-pub struct Solution {}
+ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn shortest_way(source: String, target: String) -> i32 {
         let mut ans = 1;

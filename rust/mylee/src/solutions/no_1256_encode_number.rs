@@ -16,8 +16,9 @@ Output: "101100"
 Constraints:
     0 <= num <= 10^9
 
-*/
-pub struct Solution {}
+*/ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn encode(num: i32) -> String {
         String::new()

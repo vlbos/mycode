@@ -46,8 +46,9 @@ Constraints:
 
 NOTE: create method has been changed on August 29, 2019 to createPath. Please reset to default code definition to get new method signature.
 
-*/
-pub struct Solution {}
+*/ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 struct FileSystem {}
 
 /**

@@ -19,8 +19,9 @@ Constraints:
     1 <= arr[i] <= 20
 
 
-*/
-pub struct Solution {}
+*/ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn minimum_moves(arr: Vec<i32>) -> i32 {
         0

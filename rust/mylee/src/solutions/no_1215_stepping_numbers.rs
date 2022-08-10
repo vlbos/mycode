@@ -13,8 +13,9 @@ Constraints:
     0 <= low <= high <= 2 * 10^9
 
 
-*/
-pub struct Solution {}
+*/ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn count_stepping_numbers(low: i32, high: i32) -> Vec<i32> {
         Vec::new()

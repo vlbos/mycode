@@ -44,8 +44,9 @@
 
 //  The above binary tree is serialized as [1,2,3,#,#,4,#,#,5].
 
-//  @tag-tree
-pub struct Solution {}
+//  @tag-tree 
+#[allow(dead_code)] 
+ pub struct Solution {}
 use super::util::tree::TreeNode;
 // submission codes start here
 

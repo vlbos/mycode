@@ -35,8 +35,9 @@
 // ### Company:
 
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Google](https://leetcode.ca/tags/#Google)
-
-pub struct Solution {}
+ 
+#[allow(dead_code)] 
+ pub struct Solution {}
 impl Solution {
     pub fn two_sum_less_than_k(a: Vec<i32>, k: i32) -> i32 {
         let mut ans = -1;
