@@ -34,9 +34,9 @@
 // ### Company:
 
 // [Amazon](https://leetcode.ca/tags/#Amazon)
- 
-#[allow(dead_code)] 
- pub struct Solution {}
+
+#[allow(dead_code)]
+pub  struct Solution {}
 impl Solution {
     pub fn num_k_len_substr_no_repeats(s: String, k: i32) -> i32 {
         let mut ans = 0;

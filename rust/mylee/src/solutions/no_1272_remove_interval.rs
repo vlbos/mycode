@@ -19,9 +19,9 @@ Constraints:
     -10^9 <= intervals[i][0] < intervals[i][1] <= 10^9
 
 
-*/ 
-#[allow(dead_code)] 
- pub struct Solution {}
+*/
+#[allow(dead_code)]
+pub  struct Solution {}
 impl Solution {
     pub fn remove_interval(intervals: Vec<Vec<i32>>, to_be_removed: Vec<i32>) -> Vec<Vec<i32>> {
         Vec::new()

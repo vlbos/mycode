@@ -16,9 +16,9 @@ Constraints:
     1 <= k <= s.length
 
 
-*/ 
-#[allow(dead_code)] 
- pub struct Solution {}
+*/
+#[allow(dead_code)]
+pub  struct Solution {}
 impl Solution {
     pub fn is_valid_palindrome(s: String, k: i32) -> bool {
         true

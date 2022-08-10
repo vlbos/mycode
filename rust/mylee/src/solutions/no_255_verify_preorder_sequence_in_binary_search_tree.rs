@@ -36,9 +36,9 @@
 
 // ### Company:
 
-// [Mathworks](https://leetcode.ca/tags/#Mathworks) [Uber](https://leetcode.ca/tags/#Uber) [Walmart Labs](https://leetcode.ca/tags/#Walmart%20Labs) [Zenefits](https://leetcode.ca/tags/#Zenefits) 
-#[allow(dead_code)] 
- struct Solution;
+// [Mathworks](https://leetcode.ca/tags/#Mathworks) [Uber](https://leetcode.ca/tags/#Uber) [Walmart Labs](https://leetcode.ca/tags/#Walmart%20Labs) [Zenefits](https://leetcode.ca/tags/#Zenefits)
+#[allow(dead_code)]
+pub  struct  Solution;
 // @lc code=start
 
 impl Solution {

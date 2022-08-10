@@ -40,9 +40,9 @@
 // ### Company:
 
 // [Uber](https://leetcode.ca/tags/#Uber)
- 
-#[allow(dead_code)] 
- pub struct Solution {}
+
+#[allow(dead_code)]
+pub  struct Solution {}
 impl Solution {
     pub fn fixed_point(a: Vec<i32>) -> i32 {
         for (i, &v) in a.iter().enumerate() {

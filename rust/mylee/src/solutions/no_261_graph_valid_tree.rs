@@ -28,7 +28,7 @@
 // [Adobe](https://leetcode.ca/tags/#Adobe) [Amazon](https://leetcode.ca/tags/#Amazon) [Facebook](https://leetcode.ca/tags/#Facebook) [Google](https://leetcode.ca/tags/#Google) [LinkedIn](https://leetcode.ca/tags/#LinkedIn) [Pinterest](https://leetcode.ca/tags/#Pinterest) [Salesforce](https://leetcode.ca/tags/#Salesforce) [Zenefits](https://leetcode.ca/tags/#Zenefits)
 
 // @lc code=start
-// struct UnionFind {
+// pub  struct  UnionFind {
 //     sz: Vec<usize>,
 //     id: Vec<usize>,
 //     count: usize,
@@ -113,9 +113,9 @@ impl Solution {
     }
 }
 // @lc code=end
- 
-#[allow(dead_code)] 
- struct Solution;
+
+#[allow(dead_code)]
+pub  struct  Solution;
 
 #[cfg(test)]
 mod test {

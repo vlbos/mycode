@@ -43,9 +43,9 @@
 
 // ### Company:
 
-// [Airbnb](https://leetcode.ca/tags/#Airbnb) [Amazon](https://leetcode.ca/tags/#Amazon) [Bloomberg](https://leetcode.ca/tags/#Bloomberg) [DoorDash](https://leetcode.ca/tags/#DoorDash) [Google](https://leetcode.ca/tags/#Google) [Intuit](https://leetcode.ca/tags/#Intuit) [Microsoft](https://leetcode.ca/tags/#Microsoft) [Pinterest](https://leetcode.ca/tags/#Pinterest) [Uber](https://leetcode.ca/tags/#Uber) [Wayfair](https://leetcode.ca/tags/#Wayfair) 
-#[allow(dead_code)] 
- pub struct Solution {}
+// [Airbnb](https://leetcode.ca/tags/#Airbnb) [Amazon](https://leetcode.ca/tags/#Amazon) [Bloomberg](https://leetcode.ca/tags/#Bloomberg) [DoorDash](https://leetcode.ca/tags/#DoorDash) [Google](https://leetcode.ca/tags/#Google) [Intuit](https://leetcode.ca/tags/#Intuit) [Microsoft](https://leetcode.ca/tags/#Microsoft) [Pinterest](https://leetcode.ca/tags/#Pinterest) [Uber](https://leetcode.ca/tags/#Uber) [Wayfair](https://leetcode.ca/tags/#Wayfair)
+#[allow(dead_code)]
+pub  struct Solution {}
 impl Solution {
     pub fn employee_free_time(schedule: Vec<Vec<Vec<i32>>>) -> Vec<Vec<i32>> {
         //    let mut schedule:Vec<Vec<i32>> =schedule.into_iter().flatten().collect();

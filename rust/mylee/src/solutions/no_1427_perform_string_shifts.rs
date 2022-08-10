@@ -34,9 +34,9 @@ Constraints:
     0 <= shift[i][0] <= 1
     0 <= shift[i][1] <= 100
 
-*/ 
-#[allow(dead_code)] 
- pub struct Solution {}
+*/
+#[allow(dead_code)]
+pub  struct Solution {}
 impl Solution {
     pub fn string_shift(s: String, shift: Vec<Vec<i32>>) -> String {
         String::new()

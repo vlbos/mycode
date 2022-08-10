@@ -24,9 +24,9 @@ Note:
     0 <= A[i] <= 1000
 
 
-*/ 
-#[allow(dead_code)] 
- pub struct Solution {}
+*/
+#[allow(dead_code)]
+pub  struct Solution {}
 impl Solution {
     pub fn largest_unique_number(a: Vec<i32>) -> i32 {
         0

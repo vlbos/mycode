@@ -37,7 +37,7 @@
 // [Airbnb](https://leetcode.ca/tags/#Airbnb) [Amazon](https://leetcode.ca/tags/#Amazon) [Apple](https://leetcode.ca/tags/#Apple) [Facebook](https://leetcode.ca/tags/#Facebook) [Google](https://leetcode.ca/tags/#Google) [Lyft](https://leetcode.ca/tags/#Lyft) [Salesforce](https://leetcode.ca/tags/#Salesforce) [Twitter](https://leetcode.ca/tags/#Twitter) [Uber](https://leetcode.ca/tags/#Uber) [Zenefits](https://leetcode.ca/tags/#Zenefits)
 
 // @lc code=start
-struct Vector2D {
+pub  struct  Vector2D {
     // values: Vec<Vec<i32>>,
     // i: usize,
     // j: usize,

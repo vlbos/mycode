@@ -41,7 +41,7 @@
 // const ACHARCODE: usize = 'a' as usize;
 
 // #[derive(Debug)]
-// struct Trie {
+// pub  struct Trie {
 //     children: HashMap<char, Rc<RefCell<Trie>>>,
 //     key: Vec<char>,
 //     is_leaf: bool,
@@ -218,9 +218,9 @@ impl Solution {
     }
 }
 // @lc code=end
- 
-#[allow(dead_code)] 
- struct Solution;
+
+#[allow(dead_code)]
+pub  struct Solution;
 
 #[cfg(test)]
 mod test {

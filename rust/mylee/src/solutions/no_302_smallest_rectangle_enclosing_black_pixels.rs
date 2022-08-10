@@ -67,9 +67,9 @@ impl Solution {
         (xy[0][1] - xy[0][0] + 1) * (xy[1][1] - xy[1][0] + 1)
     }
 }
-// @lc code=end 
-#[allow(dead_code)] 
- struct Solution;
+// @lc code=end
+#[allow(dead_code)]
+pub  struct  Solution;
 
 #[cfg(test)]
 mod tests {

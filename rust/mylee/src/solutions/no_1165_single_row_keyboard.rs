@@ -24,9 +24,9 @@ Constraints:
     word[i] is an English lowercase letter.
 
 
-*/ 
-#[allow(dead_code)] 
- pub struct Solution {}
+*/
+#[allow(dead_code)]
+pub  struct Solution {}
 impl Solution {
     pub fn calculate_time(keyboard: String, word: String) -> i32 {
         0

@@ -52,7 +52,7 @@
 // @lc code=start
 
 #[derive(Debug)]
-struct HitCounter {
+pub  struct HitCounter {
     // roll: Vec<i32>,
     // count: i32,
     // last_updated: i32,

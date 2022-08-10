@@ -75,7 +75,7 @@
 // const A_CHAR_CODE: usize = 'A' as u8 as usize;
 
 // #[derive(Clone)]
-// struct ExcelNode {
+// pub  struct ExcelNode {
 //     value: i32,
 //     watches: Vec<Vec<(usize, usize)>>,
 //     observers: HashMap<(usize, usize), usize>,
@@ -120,7 +120,7 @@
 // }
 use std::collections::HashMap;
 
-struct Excel {
+pub  struct Excel {
     // values: Vec<Vec<ExcelNode>>,
     // rows: usize,
     // cols: usize,

@@ -44,15 +44,15 @@
 
 //  The above binary tree is serialized as [1,2,3,#,#,4,#,#,5].
 
-//  @tag-tree 
-#[allow(dead_code)] 
- pub struct Solution {}
+//  @tag-tree
+#[allow(dead_code)]
+pub  struct Solution {}
 use super::util::tree::TreeNode;
 // submission codes start here
 
 // Definition for a binary tree node.
 // #[derive(Debug, PartialEq, Eq)]
-// pub struct TreeNode {
+// pub  struct TreeNode {
 //   pub val: i32,
 //   pub left: Option<Rc<RefCell<TreeNode>>>,
 //   pub right: Option<Rc<RefCell<TreeNode>>>,

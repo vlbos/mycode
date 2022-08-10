@@ -69,7 +69,7 @@ Since the number of threads for producer/consumer is greater than 1, we do not k
 
 */
 
-struct BoundedBlockingQueue {}
+pub  struct BoundedBlockingQueue {}
 
 /**
  * `&self` means the method takes an immutable reference.

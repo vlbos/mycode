@@ -19,9 +19,9 @@ Constraints:
     1 <= sticks[i] <= 10^4
 
 
-*/ 
-#[allow(dead_code)] 
- pub struct Solution {}
+*/
+#[allow(dead_code)]
+pub  struct Solution {}
 impl Solution {
     pub fn connect_sticks(sticks: Vec<i32>) -> i32 {
         0

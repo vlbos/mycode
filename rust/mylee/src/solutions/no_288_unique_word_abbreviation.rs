@@ -46,7 +46,7 @@
 // @lc code=start
 use std::collections::HashSet;
 
-struct ValidWordAbbr {
+pub  struct  ValidWordAbbr {
     // values: HashMap<String, (usize, String)>,
     dic: HashSet<String>,
 }

@@ -22,9 +22,9 @@ Constraints:
     0 <= arr[i] <= 10^5
 
 
-*/ 
-#[allow(dead_code)] 
- pub struct Solution {}
+*/
+#[allow(dead_code)]
+pub  struct Solution {}
 impl Solution {
     pub fn missing_number(arr: Vec<i32>) -> i32 {
         0

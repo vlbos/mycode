@@ -22,9 +22,9 @@ Constraints:
     S[i] consists of only lowercase English letters.
 
 
-*/ 
-#[allow(dead_code)] 
- pub struct Solution {}
+*/
+#[allow(dead_code)]
+pub  struct Solution {}
 impl Solution {
     pub fn count_letters(s: String) -> i32 {
         0

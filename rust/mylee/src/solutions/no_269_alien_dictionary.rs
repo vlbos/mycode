@@ -67,7 +67,7 @@
 // use std::iter::FromIterator;
 
 // #[derive(Clone, Debug)]
-// struct GraphNode {
+// pub  struct  GraphNode {
 //     ins: HashSet<char>,
 //     outs: HashSet<char>,
 // }
@@ -219,9 +219,9 @@ impl Solution {
 }
 
 // @lc code=end
- 
-#[allow(dead_code)] 
- struct Solution;
+
+#[allow(dead_code)]
+pub  struct  Solution;
 
 #[cfg(test)]
 mod test {

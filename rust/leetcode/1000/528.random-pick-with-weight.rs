@@ -7,7 +7,7 @@
 // @lc code=start
 use rand::distributions::WeightedIndex;
 use rand::prelude::*;
-struct Solution {
+pub  struct  Solution {
     rng: ThreadRng,
     dist: WeightedIndex<i32>,
 }

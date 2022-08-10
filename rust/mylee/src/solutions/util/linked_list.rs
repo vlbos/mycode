@@ -1,5 +1,5 @@
 #[derive(PartialEq, Eq, Debug, Clone)]
-pub struct ListNode {
+pub  struct ListNode {
     pub val: i32,
     pub next: Option<Box<ListNode>>,
 }

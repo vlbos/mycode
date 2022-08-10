@@ -63,7 +63,7 @@ Constraints:
 
 
 */
-struct FileSharing {}
+pub  struct FileSharing {}
 
 /**
  * `&self` means the method takes an immutable reference.

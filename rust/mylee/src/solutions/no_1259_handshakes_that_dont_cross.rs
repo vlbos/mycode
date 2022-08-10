@@ -29,9 +29,9 @@ Constraints:
     num_people % 2 == 0
 
 
-*/ 
-#[allow(dead_code)] 
- pub struct Solution {}
+*/
+#[allow(dead_code)]
+pub  struct Solution {}
 impl Solution {
     pub fn number_of_ways(num_people: i32) -> i32 {
         0

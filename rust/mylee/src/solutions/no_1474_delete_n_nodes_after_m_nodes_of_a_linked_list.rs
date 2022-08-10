@@ -42,7 +42,7 @@ Constraints:
 
 // Definition for singly-linked list.
 #[derive(PartialEq, Eq, Clone, Debug)]
-pub struct ListNode {
+pub  struct ListNode {
     pub val: i32,
     pub next: Option<Box<ListNode>>,
 }
@@ -63,9 +63,9 @@ pub fn from_vec(vec: Vec<i32>) -> Option<Box<ListNode>> {
         current = Some(Box::new(node));
     }
     current
-} 
-#[allow(dead_code)] 
- pub struct Solution {}
+}
+#[allow(dead_code)]
+pub  struct Solution {}
 impl Solution {
     pub fn delete_nodes(head: Option<Box<ListNode>>, m: i32, n: i32) -> Option<Box<ListNode>> {
         None

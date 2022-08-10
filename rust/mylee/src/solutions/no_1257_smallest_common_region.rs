@@ -28,9 +28,9 @@ Constraints:
     All strings consist of English letters and spaces with at most 20 letters.
 
 
-*/ 
-#[allow(dead_code)] 
- pub struct Solution {}
+*/
+#[allow(dead_code)]
+pub  struct Solution {}
 impl Solution {
     pub fn find_smallest_region(
         regions: Vec<Vec<String>>,

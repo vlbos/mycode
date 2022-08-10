@@ -84,7 +84,7 @@
 // }
 
 // #[derive(Debug)]
-// struct Route {
+// pub  struct Route {
 //     used: HashSet<i32>,
 //     curr: i32,
 //     unused: HashSet<i32>,
@@ -188,9 +188,9 @@ impl Solution {
     }
 }
 // @lc code=end
- 
-#[allow(dead_code)] 
- struct Solution;
+
+#[allow(dead_code)]
+pub  struct Solution;
 
 #[cfg(test)]
 mod test {

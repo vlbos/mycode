@@ -46,9 +46,9 @@
 // ### Company:
 
 // [Amazon](https://leetcode.ca/tags/#Amazon)
- 
-#[allow(dead_code)] 
- pub struct Solution {}
+
+#[allow(dead_code)]
+pub  struct Solution {}
 impl Solution {
     pub fn maximum_minimum_path(a: Vec<Vec<i32>>) -> i32 {
         let (m, n) = (a.len(), a[0].len());

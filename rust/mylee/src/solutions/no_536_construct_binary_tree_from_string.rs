@@ -39,7 +39,7 @@
 // @lc code=start
 // Definition for a binary tree node.
 // #[derive(Debug, PartialEq, Eq)]
-// pub struct TreeNode {
+// pub  struct TreeNode {
 //   pub val: i32,
 //   pub left: Option<Rc<RefCell<TreeNode>>>,
 //   pub right: Option<Rc<RefCell<TreeNode>>>,
@@ -155,9 +155,9 @@ impl Solution {
     // }
 }
 // @lc code=end
- 
-#[allow(dead_code)] 
- struct Solution;
+
+#[allow(dead_code)]
+pub  struct Solution;
 
 #[cfg(test)]
 mod test {

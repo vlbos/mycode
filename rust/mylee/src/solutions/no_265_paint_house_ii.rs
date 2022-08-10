@@ -37,7 +37,7 @@
 
 // @lc code=start
 
-// struct CostRecord {
+// pub  struct  CostRecord {
 //     min_cost: i32,
 //     second_min_cost: i32,
 //     min_id: usize,
@@ -101,9 +101,9 @@ impl Solution {
     }
 }
 // @lc code=end
- 
-#[allow(dead_code)] 
- struct Solution;
+
+#[allow(dead_code)]
+pub  struct  Solution;
 
 #[cfg(test)]
 mod test {

@@ -98,7 +98,7 @@ impl Solution {
 // @lc code=end
  
 #[allow(dead_code)] 
- struct Solution;
+ pub  struct Solution;
 
 #[cfg(test)]
 mod test {

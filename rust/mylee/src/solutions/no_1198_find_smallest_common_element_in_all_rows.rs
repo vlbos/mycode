@@ -15,9 +15,9 @@ Constraints:
     mat[i] is sorted in strictly increasing order.
 
 
-*/ 
-#[allow(dead_code)] 
- pub struct Solution {}
+*/
+#[allow(dead_code)]
+pub  struct Solution {}
 impl Solution {
     pub fn smallest_common_element(mat: Vec<Vec<i32>>) -> i32 {
         0

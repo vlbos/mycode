@@ -29,9 +29,9 @@ Note:
     connections[i][0] != connections[i][1]
 
 
-*/ 
-#[allow(dead_code)] 
- pub struct Solution {}
+*/
+#[allow(dead_code)]
+pub  struct Solution {}
 impl Solution {
     pub fn minimum_cost(n: i32, connections: Vec<Vec<i32>>) -> i32 {
         0

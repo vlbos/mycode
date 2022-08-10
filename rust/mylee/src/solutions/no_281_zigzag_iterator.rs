@@ -39,7 +39,7 @@
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Apple](https://leetcode.ca/tags/#Apple) [Cruise Automation](https://leetcode.ca/tags/#Cruise%20Automation) [Facebook](https://leetcode.ca/tags/#Facebook) [Google](https://leetcode.ca/tags/#Google)
 // @lc code=start
 use std::collections::VecDeque;
-struct ZigzagIterator {
+pub  struct  ZigzagIterator {
     // vs: Vec<Vec<i32>>,
     // i: usize,
     // j: usize,

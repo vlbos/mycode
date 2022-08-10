@@ -85,13 +85,13 @@
 // use std::rc::Rc;
 
 // #[derive(Clone, Debug)]
-// struct TrieNode {
+// pub  struct TrieNode {
 //     children: HashMap<char, Trie>,
 //     terms: usize,
 // }
 
 // #[derive(Clone, Debug)]
-// struct Trie(Rc<RefCell<TrieNode>>);
+// pub  struct Trie(Rc<RefCell<TrieNode>>);
 
 // impl Deref for Trie {
 //     type Target = Rc<RefCell<TrieNode>>;
@@ -152,7 +152,7 @@
 //     }
 // }
 
-// struct TrieIntoIterator {
+// pub  struct TrieIntoIterator {
 //     queue: Vec<(Trie, Vec<char>)>,
 // }
 
@@ -179,7 +179,7 @@
 // }
 
 use std::collections::HashMap;
-struct Trie {
+pub  struct Trie {
     times: i32,
     branches: HashMap<char, Option<Box<Trie>>>,
 }
@@ -233,7 +233,7 @@ impl Trie {
         }
     }
 }
-struct AutocompleteSystem {
+pub  struct AutocompleteSystem {
     // root: Trie,
     // sentence: Vec<char>,
     // curr: Option<Trie>,

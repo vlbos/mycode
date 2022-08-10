@@ -36,10 +36,10 @@ Constraints:
     There will be at most 1000 function calls.
 
 
-*/ 
-#[allow(dead_code)] 
- pub struct Solution {}
-struct Leaderboard {}
+*/
+#[allow(dead_code)]
+pub  struct Solution {}
+pub  struct Leaderboard {}
 
 /**
  * `&self` means the method takes an immutable reference.

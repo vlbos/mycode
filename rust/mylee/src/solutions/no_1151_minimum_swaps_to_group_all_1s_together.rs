@@ -32,9 +32,9 @@ Note:
     0 <= data[i] <= 1
 
 
-*/ 
-#[allow(dead_code)] 
- pub struct Solution {}
+*/
+#[allow(dead_code)]
+pub  struct Solution {}
 impl Solution {
     pub fn min_swaps(data: Vec<i32>) -> i32 {
         0

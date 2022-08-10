@@ -29,7 +29,7 @@ use crate::solutions::util::linked_list::ListNode;
 // @lc code=start
 // Definition for singly-linked list.
 // #[derive(PartialEq, Eq, Clone, Debug)]
-// pub struct ListNode {
+// pub  struct ListNode {
 //   pub val: i32,
 //   pub next: Option<Box<ListNode>>
 // }
@@ -94,9 +94,9 @@ impl Solution {
     // }
 }
 // @lc code=end
- 
-#[allow(dead_code)] 
- struct Solution;
+
+#[allow(dead_code)]
+pub  struct Solution;
 
 #[cfg(test)]
 mod test {

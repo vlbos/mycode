@@ -54,9 +54,9 @@ impl Solution {
         (prev_same + prev_diff) * k
     }
 }
-// @lc code=end 
-#[allow(dead_code)] 
- struct Solution;
+// @lc code=end
+#[allow(dead_code)]
+pub  struct  Solution;
 
 #[cfg(test)]
 mod test {

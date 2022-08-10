@@ -87,7 +87,7 @@
 //     [[0, -1], [-1, 0]],
 // ];
 
-// struct UnionFind {
+// pub  struct UnionFind {
 //     sz: Vec<usize>,
 //     id: Vec<usize>,
 //     count: usize,
@@ -256,9 +256,9 @@ impl Solution {
     // }
 }
 // @lc code=end
- 
-#[allow(dead_code)] 
- struct Solution;
+
+#[allow(dead_code)]
+pub  struct Solution;
 
 #[cfg(test)]
 mod test {

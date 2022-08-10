@@ -43,7 +43,7 @@ use crate::solutions::util::tree::TreeNode;
 // @lc code=start
 // Definition for a binary tree node.
 // #[derive(Debug, PartialEq, Eq)]
-// pub struct TreeNode {
+// pub  struct TreeNode {
 //   pub val: i32,
 //   pub left: Option<Rc<RefCell<TreeNode>>>,
 //   pub right: Option<Rc<RefCell<TreeNode>>>,
@@ -62,7 +62,7 @@ use crate::solutions::util::tree::TreeNode;
 use std::cell::RefCell;
 use std::rc::Rc;
 
-// struct Data {
+// pub  struct Data {
 //     val: i32,
 //     increase: Option<usize>,
 //     decease: Option<usize>,
@@ -151,9 +151,9 @@ impl Solution {
     // }
 }
 // @lc code=end
- 
-#[allow(dead_code)] 
- struct Solution;
+
+#[allow(dead_code)]
+pub  struct Solution;
 
 #[cfg(test)]
 mod test {

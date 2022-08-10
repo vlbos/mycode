@@ -61,7 +61,7 @@
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Facebook](https://leetcode.ca/tags/#Facebook) [Google](https://leetcode.ca/tags/#Google) [Snapchat](https://leetcode.ca/tags/#Snapchat) [Uber](https://leetcode.ca/tags/#Uber)
 
 // @lc code=start
-// struct UnionFind {
+// pub  struct  UnionFind {
 //     count: usize,
 //     sz: Vec<usize>,
 //     id: Vec<usize>,
@@ -190,9 +190,9 @@ impl Solution {
     }
 }
 // @lc code=end
- 
-#[allow(dead_code)] 
- struct Solution;
+
+#[allow(dead_code)]
+pub  struct  Solution;
 
 #[cfg(test)]
 mod test {

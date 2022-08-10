@@ -46,7 +46,7 @@
 // @lc code=start
 use std::collections::HashMap; //{HashSet, VecDeque};
 
-struct Logger {
+pub  struct Logger {
     // unique: HashSet<String>,
     // log: VecDeque<(i32, String)>,
     m: HashMap<String, i32>,

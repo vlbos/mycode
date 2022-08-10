@@ -34,9 +34,9 @@
 // ### Company:
 
 // [Google](https://leetcode.ca/tags/#Google)
- 
-#[allow(dead_code)] 
- pub struct Solution;
+
+#[allow(dead_code)]
+pub  struct Solution;
 impl Solution {
     #[allow(dead_code)]
     pub fn similar_rgb(color: String) -> String {

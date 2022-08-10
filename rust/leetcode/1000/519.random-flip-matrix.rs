@@ -5,7 +5,7 @@
  */
 
 // @lc code=start
-struct Solution {
+pub  struct  Solution {
 s:std::collections::HashSet<i32>,
 m:i32,
 n:i32,

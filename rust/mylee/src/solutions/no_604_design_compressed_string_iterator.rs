@@ -50,7 +50,7 @@
 // }
 
 #[derive(Clone, Debug)]
-struct StringIterator {
+pub  struct StringIterator {
     // source: Vec<char>,
     // cursor: usize,
     // state: StringIteratorState,

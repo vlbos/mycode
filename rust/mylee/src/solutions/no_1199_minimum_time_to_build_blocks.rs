@@ -34,9 +34,9 @@ Constraints:
     1 <= split <= 100
 
 
-*/ 
-#[allow(dead_code)] 
- pub struct Solution {}
+*/
+#[allow(dead_code)]
+pub  struct Solution {}
 impl Solution {
     pub fn min_build_time(blocks: Vec<i32>, split: i32) -> i32 {
         0

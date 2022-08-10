@@ -46,10 +46,10 @@ Constraints:
 
 NOTE: create method has been changed on August 29, 2019 to createPath. Please reset to default code definition to get new method signature.
 
-*/ 
-#[allow(dead_code)] 
- pub struct Solution {}
-struct FileSystem {}
+*/
+#[allow(dead_code)]
+pub  struct Solution {}
+pub  struct FileSystem {}
 
 /**
  * `&self` means the method takes an immutable reference.

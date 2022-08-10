@@ -47,7 +47,7 @@ use std::rc::Rc;
 // }
 
 // #[derive(PartialEq, PartialOrd)]
-// struct NonNan(f64);
+// pub  struct  NonNan(f64);
 
 // impl Eq for NonNan {}
 
@@ -182,9 +182,9 @@ impl Solution {
     //     values
     // }
 }
-// @lc code=end 
-#[allow(dead_code)] 
- struct Solution;
+// @lc code=end
+#[allow(dead_code)]
+pub  struct  Solution;
 
 #[cfg(test)]
 mod test {

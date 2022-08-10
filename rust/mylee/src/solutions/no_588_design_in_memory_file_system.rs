@@ -74,7 +74,7 @@
 use std::collections::{BTreeSet, HashMap};
 
 #[derive(Debug)]
-struct FileSystem {
+pub  struct FileSystem {
     // vfs: Rc<RefCell<FSNode>>,
     // files: Vec<String>,
     dirs: HashMap<String, BTreeSet<String>>,

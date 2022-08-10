@@ -56,7 +56,7 @@
 // use std::rc::Rc;
 
 // #[derive(Debug, Clone)]
-// struct TrieNode {
+// pub  struct  TrieNode {
 //     id: usize,
 //     content: Vec<char>,
 //     children: HashMap<char, usize>,
@@ -117,7 +117,7 @@
 //     }
 // }
 
-// struct TrieTree {
+// pub  struct  TrieTree {
 //     root: Rc<RefCell<TrieNode>>,
 //     nodes: Vec<Rc<RefCell<TrieNode>>>,
 // }
@@ -240,7 +240,7 @@
 //     }
 // }
 
-struct Codec {}
+pub  struct  Codec {}
 
 /**
  * `&self` means the method takes an immutable reference.
@@ -299,9 +299,9 @@ impl Codec {
         ans
     }
 }
-// @lc code=end 
-#[allow(dead_code)] 
- struct Solution;
+// @lc code=end
+#[allow(dead_code)]
+pub  struct  Solution;
 
 #[cfg(test)]
 mod test {

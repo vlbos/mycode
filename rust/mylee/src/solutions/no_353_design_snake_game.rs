@@ -76,7 +76,7 @@ use std::collections::VecDeque;
 // const DIRECTIONS: [(&str, isize, isize); 4] = [UP, DOWN, LEFT, RIGHT];
 
 #[derive(Debug)]
-struct SnakeGame {
+pub  struct SnakeGame {
     // snake: VecDeque<(isize, isize)>,
     // body: HashSet<(isize, isize)>,
     // foods: Vec<(isize, isize)>,
