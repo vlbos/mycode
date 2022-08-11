@@ -30,7 +30,7 @@ Constraints:
 
 */
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn find_smallest_region(
         regions: Vec<Vec<String>>,

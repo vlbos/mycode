@@ -44,7 +44,7 @@
 // use std::collections::BTreeMap;
 
 #[derive(Debug)]
-pub  struct MaxStack {
+pub struct MaxStack {
     // stack: BTreeMap<usize, i32>,
     // max: BTreeMap<(i32, usize), usize>,
     s: Vec<i32>,

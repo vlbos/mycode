@@ -35,7 +35,7 @@
 
 // [Amazon](https://leetcode.ca/tags/#Amazon)
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn digits_count(d: i32, low: i32, high: i32) -> i32 {
         let count = |n: i32| {

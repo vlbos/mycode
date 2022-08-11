@@ -240,7 +240,7 @@
 //     }
 // }
 
-pub  struct  Codec {}
+pub struct Codec {}
 
 /**
  * `&self` means the method takes an immutable reference.
@@ -301,7 +301,7 @@ impl Codec {
 }
 // @lc code=end
 #[allow(dead_code)]
-pub  struct  Solution;
+pub struct Solution;
 
 #[cfg(test)]
 mod test {

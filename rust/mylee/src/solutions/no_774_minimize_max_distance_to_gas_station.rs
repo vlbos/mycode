@@ -32,7 +32,7 @@
 // [Google](https://leetcode.ca/tags/#Google)
 
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     #[allow(dead_code)]
     pub fn minmax_gas_dist(stations: Vec<i32>, k: i32) -> f64 {

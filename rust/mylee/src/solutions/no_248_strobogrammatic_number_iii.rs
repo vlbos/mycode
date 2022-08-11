@@ -27,7 +27,7 @@
 // [Facebook](https://leetcode.ca/tags/#Facebook) [Google](https://leetcode.ca/tags/#Google)
 
 #[allow(dead_code)]
-pub  struct  Solution;
+pub struct Solution;
 // @lc code=start
 
 // use std::cell::RefCell;

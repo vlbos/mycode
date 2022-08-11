@@ -35,7 +35,7 @@
 
 // [Google](https://leetcode.ca/tags/#Google)
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn anagram_mappings(a: Vec<i32>, b: Vec<i32>) -> Vec<i32> {
         // Vec::new()

@@ -29,7 +29,7 @@
 // @lc code=start
 use std::collections::HashMap;
 
-pub  struct      WordDistance {
+pub struct WordDistance {
     // dict: HashMap<String, Vec<usize>>,
     k2i: HashMap<String, Vec<i32>>,
 }

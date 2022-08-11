@@ -26,7 +26,7 @@
 // @lc code=start
 use std::collections::VecDeque;
 
-pub  struct MovingAverage {
+pub struct MovingAverage {
     window: VecDeque<i32>,
     sum: i32,
     size: usize,

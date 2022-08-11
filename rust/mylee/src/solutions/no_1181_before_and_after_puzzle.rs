@@ -42,7 +42,7 @@ Constraints:
 
 */
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn before_and_after_puzzles(phrases: Vec<String>) -> Vec<String> {
         Vec::new()

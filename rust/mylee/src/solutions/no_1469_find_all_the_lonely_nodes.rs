@@ -43,7 +43,7 @@ Constraints:
 
 // Definition for a binary tree node
 #[derive(Debug, PartialEq, Eq)]
-pub  struct TreeNode {
+pub struct TreeNode {
     pub val: i32,
     pub left: Option<Rc<RefCell<TreeNode>>>,
     pub right: Option<Rc<RefCell<TreeNode>>>,
@@ -82,7 +82,7 @@ pub fn to_tree(vec: Vec<Option<i32>>) -> Option<Rc<RefCell<TreeNode>>> {
     head
 }
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {

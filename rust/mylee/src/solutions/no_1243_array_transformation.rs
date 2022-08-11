@@ -33,7 +33,7 @@ Constraints:
 
 */
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn transform_array(arr: Vec<i32>) -> Vec<i32> {
         Vec::new()

@@ -1,7 +1,7 @@
 use std::mem;
 use std::usize;
 
-pub  struct UnionFind {
+pub struct UnionFind {
     weights: Vec<usize>,
     groups: Vec<usize>,
 }

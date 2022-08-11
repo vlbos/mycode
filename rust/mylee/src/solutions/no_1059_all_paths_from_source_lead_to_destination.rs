@@ -72,7 +72,7 @@
 // [Google](https://leetcode.ca/tags/#Google)
 
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn leads_to_destination(
         _n: i32,

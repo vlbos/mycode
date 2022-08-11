@@ -24,7 +24,7 @@ Constraints:
 
 */
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn count_letters(s: String) -> i32 {
         0

@@ -33,7 +33,7 @@
 
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Goldman Sachs](https://leetcode.ca/tags/#Goldman%20Sachs)
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn high_five(items: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
         let mut cnt = std::collections::HashMap::<i32, (i32, i32)>::new();

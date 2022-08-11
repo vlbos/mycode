@@ -26,7 +26,7 @@ Constraints:
 
 */
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn calculate_time(keyboard: String, word: String) -> i32 {
         0

@@ -22,7 +22,7 @@
 
 // [Cisco](https://leetcode.ca/tags/#Cisco) [Facebook](https://leetcode.ca/tags/#Facebook) [Google](https://leetcode.ca/tags/#Google)
 #[allow(dead_code)]
-pub  struct  Solution;
+pub struct Solution;
 // @lc code=start
 // const CENTER_CHAR_SIZE: usize = 3;
 // const PAIR_CHAR_SIZE: usize = 5;

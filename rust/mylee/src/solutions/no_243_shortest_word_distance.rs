@@ -27,7 +27,7 @@
 
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Google](https://leetcode.ca/tags/#Google) [LinkedIn](https://leetcode.ca/tags/#LinkedIn) [Microsoft](https://leetcode.ca/tags/#Microsoft) [Oracle](https://leetcode.ca/tags/#Oracle) [Paypal](https://leetcode.ca/tags/#Paypal) [Uber](https://leetcode.ca/tags/#Uber)
 #[allow(dead_code)]
-pub  struct  Solution;
+pub struct Solution;
 // @lc code=start
 impl Solution {
     pub fn shortest_distance(words: Vec<String>, word1: String, word2: String) -> i32 {

@@ -17,7 +17,7 @@
 /// [Amazon](https:///leetcode.ca/tags/#Amazon) [Facebook](https:///leetcode.ca/tags/#Facebook) [Microsoft](https:///leetcode.ca/tags/#Microsoft) [Uber](https:///leetcode.ca/tags/#Uber)
 
 #[allow(dead_code)]
-pub  struct  Solution;
+pub struct Solution;
 /// @lc code=start
 
 impl Solution {

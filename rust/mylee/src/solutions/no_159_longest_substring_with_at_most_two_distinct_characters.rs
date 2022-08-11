@@ -18,7 +18,7 @@
 // Company:
 // Adobe Amazon Facebook Google Microsoft
 #[allow(dead_code)]
-pub  struct  Solution;
+pub struct Solution;
 // @lc code=start
 
 // use std::mem::swap;

@@ -120,7 +120,7 @@
 // }
 use std::collections::HashMap;
 
-pub  struct Excel {
+pub struct Excel {
     // values: Vec<Vec<ExcelNode>>,
     // rows: usize,
     // cols: usize,

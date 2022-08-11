@@ -30,7 +30,7 @@
 // Company:
 // Amazon Facebook Google Microsoft Snapchat Twitter Uber
 #[allow(dead_code)]
-pub  struct  Solution;
+pub struct Solution;
 // @lc code=start
 
 impl Solution {

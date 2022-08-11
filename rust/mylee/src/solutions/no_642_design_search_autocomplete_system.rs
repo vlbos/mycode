@@ -179,7 +179,7 @@
 // }
 
 use std::collections::HashMap;
-pub  struct Trie {
+pub struct Trie {
     times: i32,
     branches: HashMap<char, Option<Box<Trie>>>,
 }
@@ -233,7 +233,7 @@ impl Trie {
         }
     }
 }
-pub  struct AutocompleteSystem {
+pub struct AutocompleteSystem {
     // root: Trie,
     // sentence: Vec<char>,
     // curr: Option<Trie>,

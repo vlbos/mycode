@@ -22,7 +22,7 @@ Constraints:
 
 */
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn to_hexspeak(num: String) -> String {
         String::new()

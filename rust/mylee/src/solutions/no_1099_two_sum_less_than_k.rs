@@ -37,7 +37,7 @@
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Google](https://leetcode.ca/tags/#Google)
 
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn two_sum_less_than_k(a: Vec<i32>, k: i32) -> i32 {
         let mut ans = -1;

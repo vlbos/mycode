@@ -23,7 +23,7 @@
 
 // @lc code=start
 use std::collections::HashMap;
-pub  struct  TwoSum {
+pub struct TwoSum {
     // values: Vec<i32>,
     // counts: Vec<usize>,
     cnt: HashMap<i32, i32>,

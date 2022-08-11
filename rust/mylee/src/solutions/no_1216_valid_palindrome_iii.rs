@@ -18,7 +18,7 @@ Constraints:
 
 */
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn is_valid_palindrome(s: String, k: i32) -> bool {
         true

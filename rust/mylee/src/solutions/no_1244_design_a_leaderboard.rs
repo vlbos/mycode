@@ -38,8 +38,8 @@ Constraints:
 
 */
 #[allow(dead_code)]
-pub  struct Solution {}
-pub  struct Leaderboard {}
+pub struct Solution {}
+pub struct Leaderboard {}
 
 /**
  * `&self` means the method takes an immutable reference.

@@ -40,7 +40,7 @@
 // [Airbnb](https://leetcode.ca/tags/#Airbnb)
 
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn minimize_error(prices: Vec<String>, target: i32) -> String {
         let prices: Vec<f32> = prices

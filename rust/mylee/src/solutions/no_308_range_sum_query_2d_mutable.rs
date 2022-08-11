@@ -44,7 +44,7 @@
 // @lc code=start
 use std::vec;
 #[derive(Debug)]
-pub  struct  NumMatrix {
+pub struct NumMatrix {
     tree: Vec<Vec<i32>>,
     rows: usize,
     cols: usize,

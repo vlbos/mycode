@@ -24,7 +24,7 @@ Constraints:
 
 */
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn generate_sentences(synonyms: Vec<Vec<String>>, text: String) -> Vec<String> {
         Vec::new()

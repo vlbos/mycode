@@ -67,7 +67,7 @@
 
 // @lc code=start
 #[derive(Debug)]
-pub  struct TicTacToe {
+pub struct TicTacToe {
     // rows: Vec<Option<i32>>,
     // cols: Vec<Option<i32>>,
     // crosses: (Option<i32>, Option<i32>),

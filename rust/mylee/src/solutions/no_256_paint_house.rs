@@ -31,7 +31,7 @@
 
 // [Apple](https://leetcode.ca/tags/#Apple) [LinkedIn](https://leetcode.ca/tags/#LinkedIn) [Twitter](https://leetcode.ca/tags/#Twitter)
 #[allow(dead_code)]
-pub  struct  Solution;
+pub struct Solution;
 // @lc code=start
 
 const COLOR_SIZE: usize = 3;

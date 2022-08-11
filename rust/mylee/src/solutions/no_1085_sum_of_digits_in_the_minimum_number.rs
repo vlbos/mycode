@@ -37,7 +37,7 @@
 // [Amazon](https://leetcode.ca/tags/#Amazon)
 
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn sum_of_digits(a: Vec<i32>) -> i32 {
         1 - a

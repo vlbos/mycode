@@ -55,7 +55,7 @@
 // [Unknown](https://leetcode.ca/tags/#Unknown)
 
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn smallest_equivalent_string(a: String, b: String, s: String) -> String {
         use std::collections::{HashMap, HashSet};

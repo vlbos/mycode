@@ -48,8 +48,8 @@ NOTE: create method has been changed on August 29, 2019 to createPath. Please re
 
 */
 #[allow(dead_code)]
-pub  struct Solution {}
-pub  struct FileSystem {}
+pub struct Solution {}
+pub struct FileSystem {}
 
 /**
  * `&self` means the method takes an immutable reference.

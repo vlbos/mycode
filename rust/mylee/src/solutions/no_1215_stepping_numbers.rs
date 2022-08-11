@@ -15,7 +15,7 @@ Constraints:
 
 */
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn count_stepping_numbers(low: i32, high: i32) -> Vec<i32> {
         Vec::new()

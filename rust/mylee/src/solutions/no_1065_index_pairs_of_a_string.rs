@@ -37,7 +37,7 @@
 // [Amazon](https://leetcode.ca/tags/#Amazon)
 
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn index_pairs(text: String, words: Vec<String>) -> Vec<Vec<i32>> {
         let mut ans = Vec::new();

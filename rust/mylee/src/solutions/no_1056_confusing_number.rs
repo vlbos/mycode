@@ -60,7 +60,7 @@
 // [Google](https://leetcode.ca/tags/#Google)
 
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn confusing_number(n: i32) -> bool {
         let ns = n.to_string();

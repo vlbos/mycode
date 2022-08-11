@@ -35,7 +35,7 @@
 
 // [Amazon](https://leetcode.ca/tags/#Amazon)
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn number_of_days(y: i32, m: i32) -> i32 {
         if m == 2 {

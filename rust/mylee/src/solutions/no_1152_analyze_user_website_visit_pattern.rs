@@ -42,7 +42,7 @@ Note:
 
 */
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn most_visited_pattern(
         username: Vec<String>,

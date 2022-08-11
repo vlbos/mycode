@@ -32,7 +32,7 @@
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Apple](https://leetcode.ca/tags/#Apple) [DoorDash](https://leetcode.ca/tags/#DoorDash) [Facebook](https://leetcode.ca/tags/#Facebook) [Google](https://leetcode.ca/tags/#Google) [Houzz](https://leetcode.ca/tags/#Houzz) [Hulu](https://leetcode.ca/tags/#Hulu) [Jingchi](https://leetcode.ca/tags/#Jingchi) [Microsoft](https://leetcode.ca/tags/#Microsoft) [Pinterest](https://leetcode.ca/tags/#Pinterest) [Pocket Gems](https://leetcode.ca/tags/#Pocket%20Gems) [Salesforce](https://leetcode.ca/tags/#Salesforce) [Snapchat](https://leetcode.ca/tags/#Snapchat) [Uber](https://leetcode.ca/tags/#Uber)
 
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     #[allow(dead_code)]
     pub fn calculate(s: String) -> i32 {

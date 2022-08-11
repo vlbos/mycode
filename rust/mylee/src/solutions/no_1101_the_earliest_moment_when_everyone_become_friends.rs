@@ -46,7 +46,7 @@
 // [Expedia](https://leetcode.ca/tags/#Expedia)
 
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn earliest_acq(logs: Vec<Vec<i32>>, n: i32) -> i32 {
         use std::collections::{HashMap, HashSet};

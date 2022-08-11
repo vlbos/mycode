@@ -26,7 +26,7 @@ Note:
 
 */
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn can_convert(str1: String, str2: String) -> bool {
         true

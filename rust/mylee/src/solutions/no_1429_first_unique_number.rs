@@ -61,7 +61,7 @@ Constraints:
 
 
 */
-pub  struct FirstUnique {}
+pub struct FirstUnique {}
 
 /**
  * `&self` means the method takes an immutable reference.

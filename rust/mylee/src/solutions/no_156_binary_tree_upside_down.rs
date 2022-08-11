@@ -46,7 +46,7 @@
 
 //  @tag-tree
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 use super::util::tree::TreeNode;
 // submission codes start here
 

@@ -43,7 +43,7 @@
 // const ENDS: [&'static str; 6] = ["9999", "12", "31", "23", "59", "59"];
 
 use std::collections::HashMap;
-pub  struct LogSystem {
+pub struct LogSystem {
     // logs: BTreeMap<u64, i32>,
     id2tm: HashMap<i32, String>,
     granularities: HashMap<String, usize>,

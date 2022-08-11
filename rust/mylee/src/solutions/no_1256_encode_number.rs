@@ -18,7 +18,7 @@ Constraints:
 
 */
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn encode(num: i32) -> String {
         String::new()

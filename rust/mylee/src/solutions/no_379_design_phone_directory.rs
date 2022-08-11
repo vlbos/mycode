@@ -48,7 +48,7 @@
 // @lc code=start
 use std::collections::HashSet;
 
-pub  struct PhoneDirectory {
+pub struct PhoneDirectory {
     // size: usize,
     // unused: HashSet<i32>,
     numbers: HashSet<i32>,

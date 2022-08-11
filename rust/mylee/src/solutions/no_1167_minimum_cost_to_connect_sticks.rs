@@ -21,7 +21,7 @@ Constraints:
 
 */
 #[allow(dead_code)]
-pub  struct Solution {}
+pub struct Solution {}
 impl Solution {
     pub fn connect_sticks(sticks: Vec<i32>) -> i32 {
         0
