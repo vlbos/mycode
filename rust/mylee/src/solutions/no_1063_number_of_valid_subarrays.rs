@@ -43,7 +43,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn valid_subarrays(nums: Vec<i32>) -> i32 {
+    pub fn   valid_subarrays(nums: Vec<i32>) -> i32 {
         let n = nums.len();
         let mut ans = 0;
         let mut s = Vec::new();
@@ -65,15 +65,15 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_valid_subarrays_1() {
+   pub fn  test_valid_subarrays_1() {
         assert_eq!(11, Solution::valid_subarrays(vec![1, 4, 2, 5, 3]));
     }
     #[test]
-    fn test_valid_subarrays_2() {
+   pub fn  test_valid_subarrays_2() {
         assert_eq!(3, Solution::valid_subarrays(vec![3, 2, 1]));
     }
     #[test]
-    fn test_valid_subarrays_3() {
+   pub fn  test_valid_subarrays_3() {
         assert_eq!(6, Solution::valid_subarrays(vec![2, 2, 2]));
     }
 }

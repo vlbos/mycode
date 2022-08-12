@@ -17,7 +17,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn arrays_intersection(arr1: Vec<i32>, arr2: Vec<i32>, arr3: Vec<i32>) -> Vec<i32> {
+    pub fn   arrays_intersection(arr1: Vec<i32>, arr2: Vec<i32>, arr3: Vec<i32>) -> Vec<i32> {
         Vec::new()
     }
 }
@@ -26,7 +26,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_arrays_intersection_1() {
+   pub fn  test_arrays_intersection_1() {
         assert_eq!(
             Vec::<i32>::new(),
             Solution::arrays_intersection(Vec::new(), Vec::new(), Vec::new())

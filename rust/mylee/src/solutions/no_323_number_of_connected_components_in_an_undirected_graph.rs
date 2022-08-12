@@ -49,7 +49,7 @@
 // }
 
 // impl UnionFind {
-//     pub fn new(size: usize) -> UnionFind {
+//     pub fn   new(size: usize) -> UnionFind {
 //         UnionFind {
 //             sz: vec![0; size],
 //             id: (0usize..size as usize).collect(),
@@ -57,7 +57,7 @@
 //         }
 //     }
 
-//     pub fn find(&self, mut p: usize) -> usize {
+//     pub fn   find(&self, mut p: usize) -> usize {
 //         let id = &self.id;
 //         loop {
 //             let q = id[p];
@@ -69,11 +69,11 @@
 //         }
 //     }
 
-//     pub fn connected(&self, p: usize, q: usize) -> bool {
+//     pub fn   connected(&self, p: usize, q: usize) -> bool {
 //         self.find(p) == self.find(q)
 //     }
 
-//     pub fn union(&mut self, p: usize, q: usize) {
+//     pub fn   union(&mut self, p: usize, q: usize) {
 //         let pid = self.find(p);
 //         let qid = self.find(q);
 //         if pid != qid {
@@ -90,7 +90,7 @@
 // }
 
 impl Solution {
-    pub fn count_components(n: i32, edges: Vec<Vec<i32>>) -> i32 {
+    pub fn   count_components(n: i32, edges: Vec<Vec<i32>>) -> i32 {
         // let mut uf = UnionFind::new(n as usize);
         // for e in edges {
         //     let p = e[0] as usize;
@@ -106,7 +106,7 @@ impl Solution {
             g[v].push(u);
         }
         let mut visited = vec![false; n];
-        fn dfs(u: usize, g: &Vec<Vec<usize>>, visited: &mut Vec<bool>) {
+       pub fn  dfs(u: usize, g: &Vec<Vec<usize>>, visited: &mut Vec<bool>) {
             visited[u] = true;
             for &v in &g[u] {
                 if !visited[v] {
@@ -134,7 +134,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_count_components_1() {
+   pub fn  test_count_components_1() {
         assert_eq!(
             Solution::count_components(5, vec![vec![0, 1], vec![1, 2], vec![3, 4]]),
             2
@@ -142,7 +142,7 @@ mod test {
     }
 
     #[test]
-    fn test_count_components_2() {
+   pub fn  test_count_components_2() {
         assert_eq!(
             Solution::count_components(5, vec![vec![0, 1], vec![1, 2], vec![2, 3], vec![3, 4]]),
             1

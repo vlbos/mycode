@@ -61,13 +61,13 @@
 // }
 
 // impl FSNode {
-//     pub fn new_directory() -> Self {
+//     pub fn   new_directory() -> Self {
 //         FSNode::Directory {
 //             children: BTreeMap::new(),
 //         }
 //     }
 
-//     pub fn new_file(address: usize) -> Self {
+//     pub fn   new_file(address: usize) -> Self {
 //         FSNode::File { address }
 //     }
 // }
@@ -86,7 +86,7 @@ pub struct FileSystem {
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl FileSystem {
-    pub fn new() -> Self {
+    pub fn   new() -> Self {
         // Self {
         //     vfs: Rc::new(RefCell::new(FSNode::new_directory())),
         //     files: vec![],
@@ -97,7 +97,7 @@ impl FileSystem {
         }
     }
 
-    // fn vcd(&self, ps: &[&str]) -> Option<(String, Rc<RefCell<FSNode>>)> {
+    //pub fn  vcd(&self, ps: &[&str]) -> Option<(String, Rc<RefCell<FSNode>>)> {
     //     let mut curr = self.vfs.clone();
     //     let mut key = String::new();
     //     for p in ps {
@@ -115,7 +115,7 @@ impl FileSystem {
     //     Some((key, curr))
     // }
 
-    pub fn ls(&self, path: String) -> Vec<String> {
+    pub fn   ls(&self, path: String) -> Vec<String> {
         // let ps = path
         //     .split("/")
         //     .skip(1)
@@ -148,7 +148,7 @@ impl FileSystem {
         }
     }
 
-    pub fn mkdir(&mut self, path: String) {
+    pub fn   mkdir(&mut self, path: String) {
         // let ps = path
         //     .split("/")
         //     .skip(1)
@@ -188,7 +188,7 @@ impl FileSystem {
         }
     }
 
-    pub fn add_content_to_file(&mut self, file_path: String, content: String) {
+    pub fn   add_content_to_file(&mut self, file_path: String, content: String) {
         // let ps = file_path
         //     .split("/")
         //     .skip(1)
@@ -239,7 +239,7 @@ impl FileSystem {
             .push_str(content.as_str());
     }
 
-    fn read_content_from_file(&self, file_path: String) -> String {
+   pub fn  read_content_from_file(&self, file_path: String) -> String {
         // let ps = file_path
         //     .split("/")
         //     .skip(1)
@@ -274,7 +274,7 @@ mod test {
     use crate::lc_vec_s;
 
     #[test]
-    fn test_file_system_1() {
+   pub fn  test_file_system_1() {
         let mut fs = FileSystem::new();
         assert_eq!(fs.ls(String::from("/")), Vec::<String>::new());
         fs.mkdir(String::from("/a/b/c"));
@@ -287,7 +287,7 @@ mod test {
     }
 
     #[test]
-    fn test_file_system_2() {
+   pub fn  test_file_system_2() {
         let mut fs = FileSystem::new();
         fs.mkdir(String::from("/goowmfn"));
         assert_eq!(fs.ls(String::from("/goowmfn")), Vec::<String>::new());

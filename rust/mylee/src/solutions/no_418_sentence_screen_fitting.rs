@@ -71,7 +71,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn words_typing(sentence: Vec<String>, rows: i32, cols: i32) -> i32 {
+    pub fn   words_typing(sentence: Vec<String>, rows: i32, cols: i32) -> i32 {
         // let chars = sentence
         //     .into_iter()
         //     .map(|s| s.chars().collect::<Vec<char>>())
@@ -147,7 +147,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_words_typing_1() {
+   pub fn  test_words_typing_1() {
         assert_eq!(
             Solution::words_typing(vec![String::from("hello"), String::from("world")], 2, 8),
             1
@@ -155,7 +155,7 @@ mod test {
     }
 
     #[test]
-    fn test_words_typing_2() {
+   pub fn  test_words_typing_2() {
         assert_eq!(
             Solution::words_typing(
                 vec![String::from("a"), String::from("bcd"), String::from("e")],
@@ -167,7 +167,7 @@ mod test {
     }
 
     #[test]
-    fn test_words_typing_3() {
+   pub fn  test_words_typing_3() {
         assert_eq!(
             Solution::words_typing(
                 vec![
@@ -184,7 +184,7 @@ mod test {
     }
 
     #[test]
-    fn test_words_typing_4() {
+   pub fn  test_words_typing_4() {
         assert_eq!(
             Solution::words_typing(
                 vec![String::from("f"), String::from("p"), String::from("a")],
@@ -196,7 +196,7 @@ mod test {
     }
 
     #[test]
-    fn test_words_typing_5() {
+   pub fn  test_words_typing_5() {
         assert_eq!(Solution::words_typing(vec![String::from("a")], 2, 3), 4);
     }
 }

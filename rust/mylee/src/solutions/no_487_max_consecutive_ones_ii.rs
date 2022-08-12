@@ -33,7 +33,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn find_max_consecutive_ones(nums: Vec<i32>) -> i32 {
+    pub fn   find_max_consecutive_ones(nums: Vec<i32>) -> i32 {
         // nums.push(0);
         // let mut last_max_len = -1;
         // let mut curr_max_len = 0;
@@ -80,12 +80,12 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_find_max_consecutive_ones_1() {
+   pub fn  test_find_max_consecutive_ones_1() {
         assert_eq!(Solution::find_max_consecutive_ones(vec![1, 0, 1, 1, 0]), 4);
     }
 
     #[test]
-    fn test_find_max_consecutive_ones_2() {
+   pub fn  test_find_max_consecutive_ones_2() {
         assert_eq!(Solution::find_max_consecutive_ones(vec![1]), 1);
     }
 }

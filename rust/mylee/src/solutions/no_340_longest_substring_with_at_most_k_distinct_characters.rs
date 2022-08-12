@@ -30,7 +30,7 @@
 // @lc code=start
 
 impl Solution {
-    pub fn length_of_longest_substring_k_distinct(s: String, k: i32) -> i32 {
+    pub fn   length_of_longest_substring_k_distinct(s: String, k: i32) -> i32 {
         // use std::collections::HashMap;
         // if k <= 0 {
         //     return k;
@@ -94,7 +94,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_length_of_longest_substring_k_distinct_1() {
+   pub fn  test_length_of_longest_substring_k_distinct_1() {
         assert_eq!(
             Solution::length_of_longest_substring_k_distinct(String::from("eceba"), 2),
             3
@@ -102,7 +102,7 @@ mod test {
     }
 
     #[test]
-    fn test_length_of_longest_substring_k_distinct_2() {
+   pub fn  test_length_of_longest_substring_k_distinct_2() {
         assert_eq!(
             Solution::length_of_longest_substring_k_distinct(String::from("aa"), 1),
             2

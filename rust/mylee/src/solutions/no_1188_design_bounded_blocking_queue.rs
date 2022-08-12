@@ -76,16 +76,16 @@ pub struct BoundedBlockingQueue {}
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl BoundedBlockingQueue {
-    fn new(capacity: i32) -> Self {
+    pub fn    new(capacity: i32) -> Self {
         Self {}
     }
 
-    fn en_queue(&self, element: i32) {}
+    pub fn    en_queue(&self, element: i32) {}
 
-    fn de_queue(&self) -> i32 {
+    pub fn    de_queue(&self) -> i32 {
         0
     }
-    fn size(&self) -> i32 {
+    pub fn    size(&self) -> i32 {
         0
     }
 }
@@ -105,7 +105,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test__1() {
+    pub fn    test__1() {
         let k = 1;
         let value = 0;
         let obj = BoundedBlockingQueue::new(k);

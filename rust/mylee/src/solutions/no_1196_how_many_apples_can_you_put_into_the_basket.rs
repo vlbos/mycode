@@ -24,7 +24,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn max_number_of_apples(arr: Vec<i32>) -> i32 {
+    pub fn   max_number_of_apples(arr: Vec<i32>) -> i32 {
         0
     }
 }
@@ -33,7 +33,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_max_number_of_apples_1() {
+   pub fn  test_max_number_of_apples_1() {
         assert_eq!(0, Solution::max_number_of_apples(Vec::new()));
     }
 }

@@ -74,7 +74,7 @@
 // const MOVEMENTS: &[Pos; 4] = &[(-1, 0), (0, 1), (1, 0), (0, -1)];
 
 impl Solution {
-    pub fn shortest_distance(maze: Vec<Vec<i32>>, start: Vec<i32>, destination: Vec<i32>) -> i32 {
+    pub fn   shortest_distance(maze: Vec<Vec<i32>>, start: Vec<i32>, destination: Vec<i32>) -> i32 {
         // let rows = maze.len() as isize;
         // let cols = if rows == 0 { 0 } else { maze[0].len() as isize };
         // if rows == 0 || cols == 0 {
@@ -140,7 +140,7 @@ impl Solution {
         let (m, n) = (maze.len(), maze[0].len());
         let mut dists = vec![vec![i32::MAX; n]; m];
         dists[start[0] as usize][start[1] as usize] = 0;
-        fn dfs(
+       pub fn  dfs(
             maze: &mut Vec<Vec<i32>>,
             start: &Vec<i32>,
             destination: &Vec<i32>,
@@ -186,7 +186,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_has_path_1() {
+   pub fn  test_has_path_1() {
         let maze = vec![
             vec![0, 0, 1, 0, 0],
             vec![0, 0, 0, 0, 0],
@@ -201,7 +201,7 @@ mod test {
     }
 
     #[test]
-    fn test_has_path_2() {
+   pub fn  test_has_path_2() {
         let maze = vec![
             vec![0, 0, 1, 0, 0],
             vec![0, 0, 0, 0, 0],

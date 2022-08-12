@@ -31,7 +31,7 @@ use std::cmp::Reverse;
 use std::collections::BinaryHeap;
 
 impl Solution {
-    pub fn min_meeting_rooms(intervals: Vec<Vec<i32>>) -> i32 {
+    pub fn   min_meeting_rooms(intervals: Vec<Vec<i32>>) -> i32 {
         let mut intervals = intervals;
         intervals.sort_by_key(|v| v[0]);
         let mut heap = BinaryHeap::<Reverse<i32>>::new();
@@ -57,7 +57,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_min_meeting_rooms() {
+   pub fn  test_min_meeting_rooms() {
         assert_eq!(
             Solution::min_meeting_rooms(vec![vec![0, 30], vec![5, 10], vec![15, 20]]),
             2

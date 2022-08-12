@@ -39,7 +39,7 @@
 // @lc code=start
 
 impl Solution {
-    pub fn split_array(nums: Vec<i32>) -> bool {
+    pub fn   split_array(nums: Vec<i32>) -> bool {
         // use std::collections::HashMap;
 
         // let len = nums.len();
@@ -117,12 +117,12 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_split_array_1() {
+   pub fn  test_split_array_1() {
         assert_eq!(Solution::split_array(vec![1, 2, 1, 2, 1, 2, 1]), true);
     }
 
     #[test]
-    fn test_split_array_2() {
+   pub fn  test_split_array_2() {
         assert_eq!(Solution::split_array(vec![-1, 0, -1, 0, -1, 0, -1]), true);
     }
 }

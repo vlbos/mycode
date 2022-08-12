@@ -45,7 +45,7 @@
 
 // impl TreeNode {
 //     #[inline]
-//     pub fn new(val: i32) -> Self {
+//     pub fn   new(val: i32) -> Self {
 //         TreeNode {
 //             val,
 //             left: None,
@@ -54,7 +54,7 @@
 //     }
 // }
 
-// pub fn to_tree(vec: Vec<Option<i32>>) -> Option<Rc<RefCell<TreeNode>>> {
+// pub fn   to_tree(vec: Vec<Option<i32>>) -> Option<Rc<RefCell<TreeNode>>> {
 //     use std::collections::VecDeque;
 //     let head = Some(Rc::new(RefCell::new(TreeNode::new(vec[0].unwrap()))));
 //     let mut queue = VecDeque::new();
@@ -82,8 +82,8 @@ pub struct Solution {}
 use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
-    pub fn maximum_average_subtree(root: Option<Rc<RefCell<TreeNode>>>) -> f64 {
-        fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, ans: &mut f64) -> (i32, i32) {
+    pub fn   maximum_average_subtree(root: Option<Rc<RefCell<TreeNode>>>) -> f64 {
+       pub fn  dfs(root: &Option<Rc<RefCell<TreeNode>>>, ans: &mut f64) -> (i32, i32) {
             if root.is_none() {
                 return (0, 0);
             }
@@ -105,7 +105,7 @@ mod test {
     use super::*;
     use crate::tree;
     #[test]
-    fn test_maximum_average_subtree_1() {
+   pub fn  test_maximum_average_subtree_1() {
         assert_eq!(6.0000, Solution::maximum_average_subtree(tree![5, 6, 1]));
     }
 }

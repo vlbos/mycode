@@ -47,7 +47,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn longest_repeating_substring(s: String) -> i32 {
+    pub fn   longest_repeating_substring(s: String) -> i32 {
         let mut pre = ' ';
         let mut cnt = 0;
         let mut ans = 0;
@@ -68,28 +68,28 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_longest_repeating_substring_1() {
+   pub fn  test_longest_repeating_substring_1() {
         assert_eq!(
             0,
             Solution::longest_repeating_substring(String::from("abcd"))
         );
     }
     #[test]
-    fn test_longest_repeating_substring_2() {
+   pub fn  test_longest_repeating_substring_2() {
         assert_eq!(
             2,
             Solution::longest_repeating_substring(String::from("abbaba"))
         );
     }
     #[test]
-    fn test_longest_repeating_substring_3() {
+   pub fn  test_longest_repeating_substring_3() {
         assert_eq!(
             3,
             Solution::longest_repeating_substring(String::from("aabcaabdaab"))
         );
     }
     #[test]
-    fn test_longest_repeating_substring_4() {
+   pub fn  test_longest_repeating_substring_4() {
         assert_eq!(
             4,
             Solution::longest_repeating_substring(String::from("aaaaa"))

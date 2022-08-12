@@ -28,7 +28,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn calculate_time(keyboard: String, word: String) -> i32 {
+    pub fn   calculate_time(keyboard: String, word: String) -> i32 {
         0
     }
 }
@@ -38,7 +38,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_calculate_time_1() {
+   pub fn  test_calculate_time_1() {
         assert_eq!(0, Solution::calculate_time(String::new(), String::new()));
     }
 }

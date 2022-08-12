@@ -27,7 +27,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn longest_line(m: Vec<Vec<i32>>) -> i32 {
+    pub fn   longest_line(m: Vec<Vec<i32>>) -> i32 {
         // let rows = m.len();
         // let cols = if rows == 0 { 0 } else { m[0].len() };
         // let mut dp_vertical = vec![vec![0; cols]; 2];
@@ -81,8 +81,6 @@ impl Solution {
         // }
         // max_line
         let mut ans = 0;
-        let dirs = [0, 1, 0, -1, 0];
-
         for (i, row) in m.iter().enumerate() {
             for (j, &v) in row.iter().enumerate() {
                 if v == 0 {
@@ -118,7 +116,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_longest_line_1() {
+   pub fn  test_longest_line_1() {
         assert_eq!(
             Solution::longest_line(vec![vec![0, 1, 1, 0], vec![0, 1, 1, 0], vec![0, 0, 0, 1]]),
             3
@@ -126,7 +124,7 @@ mod test {
     }
 
     #[test]
-    fn test_longest_line_2() {
+   pub fn  test_longest_line_2() {
         assert_eq!(
             Solution::longest_line(vec![
                 vec![0, 1, 0, 1, 1],

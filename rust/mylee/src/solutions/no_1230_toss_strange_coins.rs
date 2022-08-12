@@ -23,7 +23,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn probability_of_heads(prob: Vec<f64>, target: i32) -> f64 {
+    pub fn   probability_of_heads(prob: Vec<f64>, target: i32) -> f64 {
         0.0
     }
 }
@@ -32,7 +32,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_probability_of_heads_1() {
+   pub fn  test_probability_of_heads_1() {
         assert_eq!(0.0, Solution::probability_of_heads(Vec::new(), 0));
     }
 }

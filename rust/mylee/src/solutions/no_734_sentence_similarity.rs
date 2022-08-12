@@ -36,7 +36,7 @@
 // use std::collections::HashSet;
 
 impl Solution {
-    pub fn are_sentences_similar(
+    pub fn   are_sentences_similar(
         sentence1: Vec<String>,
         sentence2: Vec<String>,
         similar_pairs: Vec<Vec<String>>,
@@ -94,7 +94,7 @@ mod test {
     use crate::{lc_matrix_s, lc_vec_s};
 
     #[test]
-    fn test_are_sentences_similar_1() {
+   pub fn  test_are_sentences_similar_1() {
         assert_eq!(
             Solution::are_sentences_similar(
                 lc_vec_s!["great", "haha"],

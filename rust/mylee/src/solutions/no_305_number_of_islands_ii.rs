@@ -69,7 +69,7 @@
 // }
 
 // impl UnionFind {
-//     pub fn new(size: usize) -> UnionFind {
+//     pub fn   new(size: usize) -> UnionFind {
 //         UnionFind {
 //             count: 0,
 //             sz: vec![1usize; size],
@@ -78,25 +78,25 @@
 //         }
 //     }
 
-//     pub fn add(&mut self, id: usize) {
+//     pub fn   add(&mut self, id: usize) {
 //         if !self.land[id] {
 //             self.land[id] = true;
 //             self.count += 1;
 //         }
 //     }
 
-//     pub fn connected(&self, p: usize, q: usize) -> bool {
+//     pub fn   connected(&self, p: usize, q: usize) -> bool {
 //         self.find(p) == self.find(q)
 //     }
 
-//     pub fn find(&self, mut p: usize) -> usize {
+//     pub fn   find(&self, mut p: usize) -> usize {
 //         while p != self.id[p] {
 //             p = self.id[p]
 //         }
 //         p
 //     }
 
-//     pub fn try_union(&mut self, p: usize, q: usize) {
+//     pub fn   try_union(&mut self, p: usize, q: usize) {
 //         if self.land[p] && self.land[q] {
 //             let pid = self.find(p);
 //             let qid = self.find(q);
@@ -115,7 +115,7 @@
 //     }
 
 //     #[inline(always)]
-//     pub fn count(&self) -> usize {
+//     pub fn   count(&self) -> usize {
 //         self.count
 //     }
 // }
@@ -124,11 +124,11 @@
 
 impl Solution {
     // #[inline(always)]
-    // fn pos2id(x: usize, y: usize, _rows: usize, cols: usize) -> usize {
+    //pub fn  pos2id(x: usize, y: usize, _rows: usize, cols: usize) -> usize {
     //     x * cols + y
     // }
 
-    pub fn num_islands2(m: i32, n: i32, positions: Vec<Vec<i32>>) -> Vec<i32> {
+    pub fn   num_islands2(m: i32, n: i32, positions: Vec<Vec<i32>>) -> Vec<i32> {
         // let m = m as usize;
         // let n = n as usize;
         // let points = (m * n) as usize;
@@ -155,14 +155,13 @@ impl Solution {
         let mut count = 0;
         let mut map = HashMap::new();
         let dirs = [0, 1, 0, -1, 0];
-        fn find(mut pos: i32, map: &mut HashMap<i32, i32>) -> i32 {
+       pub fn  find(mut pos: i32, map: &mut HashMap<i32, i32>) -> i32 {
             let mut father = *map.get(&pos).unwrap();
             while father != *map.get(&father).unwrap() {
                 father = *map.get(&father).unwrap();
             }
-            let mut temp = -1;
             while pos != *map.get(&pos).unwrap() {
-                temp = *map.get(&pos).unwrap();
+                let temp = *map.get(&pos).unwrap();
                 map.insert(pos, father);
                 pos = temp;
             }
@@ -199,7 +198,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_num_islands2() {
+   pub fn  test_num_islands2() {
         let positions = [[0, 0], [0, 1], [1, 2], [2, 1]]
             .iter()
             .map(|x| x.to_vec())

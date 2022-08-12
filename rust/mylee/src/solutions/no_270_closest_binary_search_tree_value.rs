@@ -36,7 +36,7 @@ use super::util::tree::TreeNode;
 use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
-    pub fn closest_value(root: Option<Rc<RefCell<TreeNode>>>, target: f64) -> i32 {
+    pub fn   closest_value(root: Option<Rc<RefCell<TreeNode>>>, target: f64) -> i32 {
         // Solution::closest_value_rec(&root, target).unwrap()
         let node = root.as_ref().unwrap().borrow();
         let val = node.val;
@@ -56,7 +56,7 @@ impl Solution {
         }
     }
 
-    // fn closest_value_rec(root: &Option<Rc<RefCell<TreeNode>>>, target: f64) -> Option<i32> {
+    //pub fn  closest_value_rec(root: &Option<Rc<RefCell<TreeNode>>>, target: f64) -> Option<i32> {
     //     match root {
     //         Some(node_ref) => {
     //             let node_b = node_ref.borrow();
@@ -99,7 +99,7 @@ mod test {
     use crate::tree;
 
     #[test]
-    fn test_closest_value_rec() {
+   pub fn  test_closest_value_rec() {
         assert_eq!(
             Solution::closest_value(tree![4, 5, 2, null, null, 3, 1], 3.714286),
             4

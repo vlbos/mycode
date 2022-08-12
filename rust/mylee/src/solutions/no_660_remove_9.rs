@@ -28,7 +28,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn new_integer(mut n: i32) -> i32 {
+    pub fn   new_integer(mut n: i32) -> i32 {
         // let mut res = 0;
         // let mut times = 0;
         // while n > 0 {
@@ -55,12 +55,12 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_new_integer_1() {
+   pub fn  test_new_integer_1() {
         assert_eq!(Solution::new_integer(9), 10);
     }
 
     #[test]
-    fn test_new_integer_2() {
+   pub fn  test_new_integer_2() {
         assert_eq!(Solution::new_integer(82), 101);
     }
 }

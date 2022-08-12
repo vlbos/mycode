@@ -23,7 +23,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn remove_interval(intervals: Vec<Vec<i32>>, to_be_removed: Vec<i32>) -> Vec<Vec<i32>> {
+    pub fn   remove_interval(intervals: Vec<Vec<i32>>, to_be_removed: Vec<i32>) -> Vec<Vec<i32>> {
         Vec::new()
     }
 }
@@ -33,7 +33,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_remove_interval_1() {
+   pub fn  test_remove_interval_1() {
         assert_eq!(
             Vec::<Vec<i32>>::new(),
             Solution::remove_interval(Vec::new(), Vec::new())

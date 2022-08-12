@@ -61,7 +61,7 @@
 // }
 
 // impl UnionFind {
-//     pub fn new(size: usize) -> Self {
+//     pub fn   new(size: usize) -> Self {
 //         Self {
 //             sz: vec![0; size],
 //             id: (0..size).collect(),
@@ -69,20 +69,20 @@
 //         }
 //     }
 
-//     pub fn find(&self, mut p: usize) -> usize {
+//     pub fn   find(&self, mut p: usize) -> usize {
 //         while self.id[p] != p {
 //             p = self.id[p];
 //         }
 //         p
 //     }
 
-//     pub fn connected(&self, p: usize, q: usize) -> bool {
+//     pub fn   connected(&self, p: usize, q: usize) -> bool {
 //         let pid = self.find(p);
 //         let qid = self.find(q);
 //         pid == qid
 //     }
 
-//     pub fn union(&mut self, p: usize, q: usize) {
+//     pub fn   union(&mut self, p: usize, q: usize) {
 //         let pid = self.find(p);
 //         let qid = self.find(q);
 //         if pid == qid {
@@ -97,7 +97,7 @@
 // }
 
 impl Solution {
-    pub fn num_distinct_islands(grid: Vec<Vec<i32>>) -> i32 {
+    pub fn   num_distinct_islands(grid: Vec<Vec<i32>>) -> i32 {
         // let rows = grid.len();
         // let cols = if rows == 0 { 0 } else { grid[0].len() };
         // if rows * cols == 0 {
@@ -138,7 +138,7 @@ impl Solution {
         //     .collect::<HashSet<_>>()
         //     .len() as i32
         use std::collections::HashSet;
-        fn dfs(
+       pub fn  dfs(
             i: usize,
             j: usize,
             grid: &Vec<Vec<i32>>,
@@ -189,7 +189,7 @@ mod test {
     use crate::lc_matrix;
 
     #[test]
-    fn test_num_distinct_islands_1() {
+   pub fn  test_num_distinct_islands_1() {
         let grid = lc_matrix![
             [1, 1, 0, 0, 0],
             [1, 1, 0, 0, 0],
@@ -200,7 +200,7 @@ mod test {
     }
 
     #[test]
-    fn test_num_distinct_islands_2() {
+   pub fn  test_num_distinct_islands_2() {
         let grid = lc_matrix![
             [1, 1, 0, 1, 1],
             [1, 0, 0, 0, 0],

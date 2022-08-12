@@ -23,7 +23,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn connect_sticks(sticks: Vec<i32>) -> i32 {
+    pub fn   connect_sticks(sticks: Vec<i32>) -> i32 {
         0
     }
 }
@@ -33,7 +33,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_connect_sticks_1() {
+   pub fn  test_connect_sticks_1() {
         assert_eq!(0, Solution::connect_sticks(Vec::new()));
     }
 }

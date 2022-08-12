@@ -59,7 +59,7 @@
 // use std::collections::VecDeque;
 
 impl Solution {
-    pub fn find_contest_match(n: i32) -> String {
+    pub fn   find_contest_match(n: i32) -> String {
         // let mut last_queue = (1..=n)
         //     .map(|c| c.to_string().chars().collect::<VecDeque<char>>())
         //     .collect::<VecDeque<_>>();
@@ -104,12 +104,12 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_output_contest_matches_1() {
+   pub fn  test_output_contest_matches_1() {
         assert_eq!(Solution::find_contest_match(2), String::from("(1,2)"));
     }
 
     #[test]
-    fn test_output_contest_matches_2() {
+   pub fn  test_output_contest_matches_2() {
         assert_eq!(
             Solution::find_contest_match(4),
             String::from("((1,4),(2,3))")
@@ -117,7 +117,7 @@ mod test {
     }
 
     #[test]
-    fn test_output_contest_matches_3() {
+   pub fn  test_output_contest_matches_3() {
         assert_eq!(
             Solution::find_contest_match(8),
             String::from("(((1,8),(4,5)),((2,7),(3,6)))")

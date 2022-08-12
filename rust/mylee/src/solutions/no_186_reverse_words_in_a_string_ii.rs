@@ -21,7 +21,7 @@ pub struct Solution;
 /// @lc code=start
 
 impl Solution {
-    pub fn reverse_words(s: &mut Vec<char>) {
+    pub fn   reverse_words(s: &mut Vec<char>) {
         // if s.is_empty() {
         //     return;
         // }
@@ -68,7 +68,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_reverse_words() {
+   pub fn  test_reverse_words() {
         let mut src = vec![
             't', 'h', 'e', ' ', 's', 'k', 'y', ' ', 'i', 's', ' ', 'b', 'l', 'u', 'e',
         ];

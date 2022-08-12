@@ -33,7 +33,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn maximum_number_of_ones(width: i32, height: i32, side_length: i32, max_ones: i32) -> i32 {
+    pub fn   maximum_number_of_ones(width: i32, height: i32, side_length: i32, max_ones: i32) -> i32 {
         0
     }
 }
@@ -43,7 +43,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_maximum_number_of_ones_1() {
+   pub fn  test_maximum_number_of_ones_1() {
         assert_eq!(0, Solution::maximum_number_of_ones(0, 0, 0, 0));
     }
 }

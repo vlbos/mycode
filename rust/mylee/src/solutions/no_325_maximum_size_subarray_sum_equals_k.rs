@@ -36,7 +36,7 @@
 // @lc code=start
 
 impl Solution {
-    pub fn max_sub_array_len(nums: Vec<i32>, k: i32) -> i32 {
+    pub fn   max_sub_array_len(nums: Vec<i32>, k: i32) -> i32 {
         // use std::collections::HashMap;
         // let from_to_here_sum: Vec<i32> = (0..=nums.len())
         //     .into_iter()
@@ -102,12 +102,12 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_max_sub_array_len_1() {
+   pub fn  test_max_sub_array_len_1() {
         assert_eq!(Solution::max_sub_array_len(vec![1, -1, 5, -2, 3], 3), 4);
     }
 
     #[test]
-    fn test_max_sub_array_len_2() {
+   pub fn  test_max_sub_array_len_2() {
         assert_eq!(Solution::max_sub_array_len(vec![-2, -1, 2, 1], 1), 2);
     }
 }

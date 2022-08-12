@@ -36,7 +36,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn min_total_distance(grid: Vec<Vec<i32>>) -> i32 {
+    pub fn   min_total_distance(grid: Vec<Vec<i32>>) -> i32 {
         // if grid.is_empty() {
         //     return 0;
         // }
@@ -81,7 +81,7 @@ impl Solution {
         ans as _
     }
 
-    // fn min_distance_linear(arr: &[usize]) -> usize {
+    //pub fn  min_distance_linear(arr: &[usize]) -> usize {
     //     if arr.is_empty() {
     //         return 0;
     //     }
@@ -106,7 +106,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_min_total_distance() {
+   pub fn  test_min_total_distance() {
         let matrix = vec![
             vec![1, 0, 0, 0, 1],
             vec![0, 0, 0, 0, 0],

@@ -40,7 +40,7 @@ use std::rc::Rc;
 // }
 
 impl Solution {
-    pub fn count_unival_subtrees(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+    pub fn   count_unival_subtrees(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
         // use TreeState::{Diff, Empty, Uni};
         // let res = Solution::count_unival_subtrees_rec(&root);
         // (match res {
@@ -49,7 +49,7 @@ impl Solution {
         //     Empty => 0,
         // }) as i32
         use std::collections::HashSet;
-        fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, ans: &mut i32) -> HashSet<i32> {
+       pub fn  dfs(root: &Option<Rc<RefCell<TreeNode>>>, ans: &mut i32) -> HashSet<i32> {
             if let Some(p) = root {
                 let node = p.borrow();
                 let mut values = HashSet::from([node.val]);
@@ -75,7 +75,7 @@ impl Solution {
         ans
     }
 
-    // fn count_unival_subtrees_rec(root: &Option<Rc<RefCell<TreeNode>>>) -> TreeState {
+    //pub fn  count_unival_subtrees_rec(root: &Option<Rc<RefCell<TreeNode>>>) -> TreeState {
     //     use TreeState::{Diff, Empty, Uni};
     //     match root {
     //         Some(node_ref) => {
@@ -131,7 +131,7 @@ mod test {
     use crate::tree;
 
     #[test]
-    fn test_count_unival_subtrees() {
+   pub fn  test_count_unival_subtrees() {
         let tree = tree![5, 1, 5, 5, 5, null, 5];
         assert_eq!(Solution::count_unival_subtrees(tree), 4);
     }

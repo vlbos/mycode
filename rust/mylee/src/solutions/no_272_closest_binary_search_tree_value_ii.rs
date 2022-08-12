@@ -52,17 +52,17 @@ use std::rc::Rc;
 // impl Eq for NonNan {}
 
 // impl Ord for NonNan {
-//     fn cmp(&self, other: &Self) -> Ordering {
+//    pub fn  cmp(&self, other: &Self) -> Ordering {
 //         self.partial_cmp(other).unwrap()
 //     }
 // }
 
 impl Solution {
-    pub fn closest_k_values(root: Option<Rc<RefCell<TreeNode>>>, target: f64, k: i32) -> Vec<i32> {
+    pub fn   closest_k_values(root: Option<Rc<RefCell<TreeNode>>>, target: f64, k: i32) -> Vec<i32> {
         // let sorted = Solution::inorder_traversal(root);
         // Solution::find_closest(&sorted, target, k as isize)
         let mut ans = Vec::new();
-        fn in_order(
+       pub fn  in_order(
             root: &Option<Rc<RefCell<TreeNode>>>,
             target: f64,
             reverse: bool,
@@ -110,7 +110,7 @@ impl Solution {
         ans
     }
 
-    // pub fn find_closest(arr: &[i32], target: f64, k: isize) -> Vec<i32> {
+    // pub fn   find_closest(arr: &[i32], target: f64, k: isize) -> Vec<i32> {
     //     if (arr.len() as isize) <= k {
     //         return arr.iter().cloned().collect();
     //     }
@@ -147,7 +147,7 @@ impl Solution {
     //     heap.iter().map(|(_, v)| *v).collect()
     // }
 
-    // pub fn cmp_add(heap: &mut BinaryHeap<(NonNan, i32)>, elem: (NonNan, i32), k: isize) {
+    // pub fn   cmp_add(heap: &mut BinaryHeap<(NonNan, i32)>, elem: (NonNan, i32), k: isize) {
     //     if heap.len() < k as usize {
     //         heap.push(elem);
     //     } else {
@@ -160,7 +160,7 @@ impl Solution {
     //     }
     // }
 
-    // pub fn inorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
+    // pub fn   inorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
     //     use NodeOrVal::{Node, Val};
     //     let mut values = vec![];
     //     let mut stack: Vec<NodeOrVal> = vec![Node(root)];
@@ -193,14 +193,14 @@ mod test {
     use crate::tree;
 
     #[test]
-    fn test_closest_k_values() {
+   pub fn  test_closest_k_values() {
         let tree = tree![4, 2, 5, 1, 3];
 
         assert_equivalent(&Solution::closest_k_values(tree, 3.714286, 2), &[3, 4]);
     }
 
     #[test]
-    fn test_closest_k_values1() {
+   pub fn  test_closest_k_values1() {
         let tree = tree![8, 1];
         assert_equivalent(&Solution::closest_k_values(tree, 6., 1), &[8]);
     }

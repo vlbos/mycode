@@ -69,7 +69,7 @@
 // const SP4: &'static str = "者";
 
 // impl TrieNode {
-//     pub fn serialize(&self) -> String {
+//     pub pub fn    serialize(&self) -> String {
 //         format!(
 //             "{}{}{}{}{}{}{}",
 //             self.id,
@@ -90,7 +90,7 @@
 //         )
 //     }
 
-//     pub fn deserialize(s: &str) -> TrieNode {
+//     pub pub fn    deserialize(s: &str) -> TrieNode {
 //         let parts = s.split(SP2).collect::<Vec<_>>();
 //         let id = parts[0].parse::<usize>().unwrap();
 //         let content = parts[1].chars().collect::<Vec<char>>();
@@ -123,7 +123,7 @@
 // }
 
 // impl TrieTree {
-//     pub fn new() -> Self {
+//     pub pub fn    new() -> Self {
 //         let root = Rc::new(RefCell::new(TrieNode {
 //             id: 0,
 //             content: vec![],
@@ -136,7 +136,7 @@
 //         }
 //     }
 
-//     pub fn gen(&mut self, content: Vec<char>) -> Rc<RefCell<TrieNode>> {
+//     pub pub fn    gen(&mut self, content: Vec<char>) -> Rc<RefCell<TrieNode>> {
 //         let node = Rc::new(RefCell::new(TrieNode {
 //             id: self.nodes.len(),
 //             content,
@@ -147,11 +147,11 @@
 //         node
 //     }
 
-//     pub fn add(&mut self, content: &[char], term_id: usize) {
+//     pub pub fn    add(&mut self, content: &[char], term_id: usize) {
 //         self.insert(self.root.clone(), content, term_id);
 //     }
 
-//     pub fn insert(&mut self, node_rc: Rc<RefCell<TrieNode>>, content: &[char], term_id: usize) {
+//     pub pub fn    insert(&mut self, node_rc: Rc<RefCell<TrieNode>>, content: &[char], term_id: usize) {
 //         let mut i = 0;
 //         let mut node = node_rc.borrow_mut();
 //         while i < content.len() && i < node.content.len() {
@@ -187,7 +187,7 @@
 //         }
 //     }
 
-//     pub fn serialize(&self) -> String {
+//     pub pub fn    serialize(&self) -> String {
 //         self.nodes
 //             .iter()
 //             .map(|n| {
@@ -198,7 +198,7 @@
 //             .join(SP1)
 //     }
 
-//     pub fn deserialize(inputs: &str) -> TrieTree {
+//     pub pub fn    deserialize(inputs: &str) -> TrieTree {
 //         let nodes = inputs
 //             .split(SP1)
 //             .map(|s| Rc::new(RefCell::new(TrieNode::deserialize(s))))
@@ -209,7 +209,7 @@
 //         }
 //     }
 
-//     pub fn retrieve(&self) -> Vec<String> {
+//     pub pub fn    retrieve(&self) -> Vec<String> {
 //         let res_rc = Rc::new(RefCell::new(vec![]));
 //         {
 //             self.retrieve_rec(self.nodes[0].clone(), String::from(""), res_rc.clone());
@@ -219,7 +219,7 @@
 //         res.iter().map(|e| e.0.clone()).collect::<Vec<String>>()
 //     }
 
-//     pub fn retrieve_rec(
+//     pub pub fn    retrieve_rec(
 //         &self,
 //         node_rc: Rc<RefCell<TrieNode>>,
 //         mut visited: String,
@@ -239,7 +239,6 @@
 //         }
 //     }
 // }
-
 pub struct Codec {}
 
 /**
@@ -247,11 +246,11 @@ pub struct Codec {}
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl Codec {
-    fn new() -> Self {
+    pub fn    new() -> Self {
         Self {}
     }
 
-    fn encode(&self, strs: Vec<String>) -> String {
+    pub fn    encode(&self, strs: Vec<String>) -> String {
         // let mut trie = TrieTree::new();
         // for (i, s) in strs.into_iter().enumerate() {
         //     let chars = s.chars().collect::<Vec<_>>();
@@ -268,7 +267,7 @@ impl Codec {
         strs.join("|")
     }
 
-    fn decode(&self, s: String) -> Vec<String> {
+    pub fn    decode(&self, s: String) -> Vec<String> {
         // let trie = TrieTree::deserialize(&s);
         // trie.retrieve()
         let mut ans = Vec::new();
@@ -300,8 +299,6 @@ impl Codec {
     }
 }
 // @lc code=end
-#[allow(dead_code)]
-pub struct Solution;
 
 #[cfg(test)]
 mod test {
@@ -309,7 +306,7 @@ mod test {
     use crate::solutions::util::test_tools::map_to_string;
 
     #[test]
-    fn test_encode_decode() {
+    pub fn    test_encode_decode() {
         let inputs = map_to_string(&["abc", "acd", "abcde", "efg"]);
         let codec = Codec {};
         let message = codec.encode(inputs.clone());

@@ -50,7 +50,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn maximum_minimum_path(a: Vec<Vec<i32>>) -> i32 {
+    pub fn   maximum_minimum_path(a: Vec<Vec<i32>>) -> i32 {
         let (m, n) = (a.len(), a[0].len());
         let mut visited = vec![vec![false; n]; m];
         let mut q = std::collections::BinaryHeap::from([(a[0][0], 0, 0)]);
@@ -80,7 +80,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_maximum_minimum_path_1() {
+   pub fn  test_maximum_minimum_path_1() {
         assert_eq!(
             4,
             Solution::maximum_minimum_path(vec![vec![5, 4, 5], vec![1, 2, 6], vec![7, 4, 6]])
@@ -88,7 +88,7 @@ mod test {
     }
 
     #[test]
-    fn test_maximum_minimum_path_2() {
+   pub fn  test_maximum_minimum_path_2() {
         assert_eq!(
             2,
             Solution::maximum_minimum_path(vec![vec![2, 2, 1, 2, 2, 2], vec![1, 2, 2, 2, 1, 2]])
@@ -96,7 +96,7 @@ mod test {
     }
 
     #[test]
-    fn test_maximum_minimum_path_3() {
+   pub fn  test_maximum_minimum_path_3() {
         assert_eq!(
             3,
             Solution::maximum_minimum_path(vec![

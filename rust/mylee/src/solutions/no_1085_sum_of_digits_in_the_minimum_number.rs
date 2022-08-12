@@ -39,7 +39,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn sum_of_digits(a: Vec<i32>) -> i32 {
+    pub fn   sum_of_digits(a: Vec<i32>) -> i32 {
         1 - a
             .into_iter()
             .min()
@@ -57,14 +57,14 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_sum_of_digits_1() {
+   pub fn  test_sum_of_digits_1() {
         assert_eq!(
             0,
             Solution::sum_of_digits(vec![34, 23, 1, 24, 75, 33, 54, 8])
         );
     }
     #[test]
-    fn test_sum_of_digits_2() {
+   pub fn  test_sum_of_digits_2() {
         assert_eq!(1, Solution::sum_of_digits(vec![99, 77, 33, 66, 55]));
     }
 }

@@ -35,7 +35,7 @@
 pub struct Solution {}
 impl Solution {
     #[allow(dead_code)]
-    pub fn calculate(s: String) -> i32 {
+    pub fn   calculate(s: String) -> i32 {
         let n = s.len();
         let (mut num, mut cur_res) = (0, 0);
         let mut ans = 0;
@@ -90,26 +90,26 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_calculate_1() {
+   pub fn  test_calculate_1() {
         assert_eq!(2, Solution::calculate(String::from("1 + 1")));
     }
     #[test]
-    fn test_calculate_2() {
+   pub fn  test_calculate_2() {
         assert_eq!(4, Solution::calculate(String::from(" 6-4 / 2 ")));
     }
     #[test]
-    fn test_calculate_3() {
+   pub fn  test_calculate_3() {
         assert_eq!(21, Solution::calculate(String::from("2*(5+5*2)/3+(6/2+8)")));
     }
     #[test]
-    fn test_calculate_4() {
+   pub fn  test_calculate_4() {
         assert_eq!(
             -12,
             Solution::calculate(String::from("(2+6* 3+5- (3*14/7+2)*5)+3"))
         );
     }
     #[test]
-    fn test_calculate_5() {
+   pub fn  test_calculate_5() {
         assert_eq!(
             -2147483648,
             Solution::calculate(String::from("0-2147483648"))

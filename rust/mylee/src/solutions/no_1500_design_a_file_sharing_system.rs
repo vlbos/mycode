@@ -70,17 +70,17 @@ pub struct FileSharing {}
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl FileSharing {
-    fn new(m: i32) -> Self {
+   pub fn  new(m: i32) -> Self {
         Self {}
     }
 
-    fn join(&self, owned_chunks: Vec<i32>) -> i32 {
+   pub fn  join(&self, owned_chunks: Vec<i32>) -> i32 {
         0
     }
 
-    fn leave(&self, user_id: i32) {}
+   pub fn  leave(&self, user_id: i32) {}
 
-    fn request(&self, user_id: i32, chunk_id: i32) -> Vec<i32> {
+   pub fn  request(&self, user_id: i32, chunk_id: i32) -> Vec<i32> {
         Vec::new()
     }
 }
@@ -98,7 +98,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_file_sharing_1() {
+   pub fn  test_file_sharing_1() {
         let m = 0;
         let owned_chunks = Vec::new();
         let used_id = 0;

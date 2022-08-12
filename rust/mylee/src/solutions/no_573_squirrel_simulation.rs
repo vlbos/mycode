@@ -39,11 +39,11 @@
 // [Square](https://leetcode.ca/tags/#Square)
 // @lc code=start
 impl Solution {
-    // fn distance(a: &[i32], b: &[i32]) -> i32 {
+    //pub fn  distance(a: &[i32], b: &[i32]) -> i32 {
     //     i32::abs(a[0] - b[0]) + i32::abs(a[1] - b[1])
     // }
 
-    pub fn min_distance(
+    pub fn   min_distance(
         _: i32,
         _: i32,
         tree: Vec<i32>,
@@ -96,7 +96,7 @@ mod test {
     use crate::lc_matrix;
 
     #[test]
-    fn test_min_distance_1() {
+   pub fn  test_min_distance_1() {
         assert_eq!(
             Solution::min_distance(5, 7, vec![2, 2], vec![4, 4], lc_matrix![[3, 0], [2, 5]]),
             12

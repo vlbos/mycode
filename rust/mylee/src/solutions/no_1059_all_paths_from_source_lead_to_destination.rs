@@ -74,7 +74,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn leads_to_destination(
+    pub fn   leads_to_destination(
         _n: i32,
         edges: Vec<Vec<i32>>,
         source: i32,
@@ -85,7 +85,7 @@ impl Solution {
         for e in &edges {
             g.entry(e[0]).or_insert(Vec::new()).push(e[1]);
         }
-        fn dfs(g: &HashMap<i32, Vec<i32>>, visited: &mut HashSet<i32>, cur: i32, end: i32) -> bool {
+       pub fn  dfs(g: &HashMap<i32, Vec<i32>>, visited: &mut HashSet<i32>, cur: i32, end: i32) -> bool {
             if !g.contains_key(&cur) {
                 return cur == end;
             }
@@ -108,7 +108,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_leads_to_destination_1() {
+   pub fn  test_leads_to_destination_1() {
         assert!(!Solution::leads_to_destination(
             3,
             vec![vec![0, 1], vec![0, 2]],
@@ -117,7 +117,7 @@ mod test {
         ));
     }
     #[test]
-    fn test_leads_to_destination_2() {
+   pub fn  test_leads_to_destination_2() {
         assert!(!Solution::leads_to_destination(
             4,
             vec![vec![0, 1], vec![0, 3], vec![1, 2], vec![2, 1]],
@@ -126,7 +126,7 @@ mod test {
         ));
     }
     #[test]
-    fn test_leads_to_destination_3() {
+   pub fn  test_leads_to_destination_3() {
         assert!(Solution::leads_to_destination(
             4,
             vec![vec![0, 1], vec![0, 2], vec![1, 3], vec![2, 3]],
@@ -135,7 +135,7 @@ mod test {
         ));
     }
     #[test]
-    fn test_leads_to_destination_4() {
+   pub fn  test_leads_to_destination_4() {
         assert!(!Solution::leads_to_destination(
             3,
             vec![vec![0, 1], vec![1, 1], vec![1, 2]],
@@ -144,7 +144,7 @@ mod test {
         ));
     }
     #[test]
-    fn test_leads_to_destination_5() {
+   pub fn  test_leads_to_destination_5() {
         assert!(!Solution::leads_to_destination(
             2,
             vec![vec![0, 1], vec![1, 1]],

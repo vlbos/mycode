@@ -76,7 +76,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn max_vacation_days(flights: Vec<Vec<i32>>, days: Vec<Vec<i32>>) -> i32 {
+    pub fn   max_vacation_days(flights: Vec<Vec<i32>>, days: Vec<Vec<i32>>) -> i32 {
         // let clen = days.len();
         // let dlen = if clen == 0 { 0 } else { days[0].len() };
         // if dlen + clen == 0 {
@@ -133,21 +133,21 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_max_vacation_days_1() {
+   pub fn  test_max_vacation_days_1() {
         let flights = vec![vec![0, 1, 1], vec![1, 0, 1], vec![1, 1, 0]];
         let days = vec![vec![1, 3, 1], vec![6, 0, 3], vec![3, 3, 3]];
         assert_eq!(Solution::max_vacation_days(flights, days), 12);
     }
 
     #[test]
-    fn test_max_vacation_days_2() {
+   pub fn  test_max_vacation_days_2() {
         let flights = vec![vec![0, 0, 0], vec![0, 0, 0], vec![0, 0, 0]];
         let days = vec![vec![1, 1, 1], vec![7, 7, 7], vec![7, 7, 7]];
         assert_eq!(Solution::max_vacation_days(flights, days), 3);
     }
 
     #[test]
-    fn test_max_vacation_days_3() {
+   pub fn  test_max_vacation_days_3() {
         let flights = vec![vec![0, 1, 1], vec![1, 0, 1], vec![1, 1, 0]];
         let days = vec![vec![7, 0, 0], vec![0, 7, 0], vec![0, 0, 7]];
         assert_eq!(Solution::max_vacation_days(flights, days), 21);

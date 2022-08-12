@@ -50,13 +50,13 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn minimum_cost(n: i32, connections: Vec<Vec<i32>>) -> i32 {
+    pub fn   minimum_cost(n: i32, connections: Vec<Vec<i32>>) -> i32 {
         let n = n as usize;
         let mut connections = connections;
         connections.sort_by_key(|x| x[2]);
         let mut weight = vec![1; n + 1];
         let mut parent: Vec<usize> = (0..=n).collect();
-        fn find(x: usize, parent: &mut Vec<usize>) -> usize {
+       pub fn  find(x: usize, parent: &mut Vec<usize>) -> usize {
             if x == parent[x] {
                 return x;
             }
@@ -64,7 +64,7 @@ impl Solution {
             parent[x] = find(y, parent);
             parent[x]
         }
-        fn unite(
+       pub fn  unite(
             x: usize,
             y: usize,
             parent: &mut Vec<usize>,
@@ -104,14 +104,14 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_minimum_cost_1() {
+   pub fn  test_minimum_cost_1() {
         assert_eq!(
             6,
             Solution::minimum_cost(3, vec![vec![1, 2, 5], vec![1, 3, 6], vec![2, 3, 1]])
         );
     }
     #[test]
-    fn test_minimum_cost_2() {
+   pub fn  test_minimum_cost_2() {
         assert_eq!(
             -1,
             Solution::minimum_cost(4, vec![vec![1, 2, 3], vec![3, 4, 4]])

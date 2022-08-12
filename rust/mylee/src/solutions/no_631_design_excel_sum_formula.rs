@@ -82,7 +82,7 @@
 // }
 
 // impl ExcelNode {
-//     pub fn new(value: i32) -> Self {
+//     pub fn   new(value: i32) -> Self {
 //         Self {
 //             value,
 //             watches: vec![],
@@ -90,7 +90,7 @@
 //         }
 //     }
 
-//     pub fn watches_to_vec(&self) -> Vec<(usize, usize)> {
+//     pub fn   watches_to_vec(&self) -> Vec<(usize, usize)> {
 //         let mut res = vec![];
 //         for s in &self.watches {
 //             if s.len() == 1 {
@@ -108,7 +108,7 @@
 //         res
 //     }
 
-//     pub fn observers_to_vec(&self) -> Vec<(usize, usize)> {
+//     pub fn   observers_to_vec(&self) -> Vec<(usize, usize)> {
 //         let mut res = vec![];
 //         for (&k, &v) in &self.observers {
 //             for _ in 0..v {
@@ -133,7 +133,7 @@ pub struct Excel {
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl Excel {
-    pub fn new(h: i32, w: char) -> Self {
+    pub fn   new(h: i32, w: char) -> Self {
         // let cols = h as usize;
         // let rows = Excel::col_c2i(w as u8) + 1;
         // Self {
@@ -147,7 +147,7 @@ impl Excel {
         }
     }
 
-    pub fn set(&mut self, r: i32, c: char, v: i32) {
+    pub fn   set(&mut self, r: i32, c: char, v: i32) {
         // let col = Excel::col_c2i(c as u8);
         // let row = Excel::row_i2i(r);
         // self.set_impl(row, col, v);
@@ -158,7 +158,7 @@ impl Excel {
         self.mat[r as usize - 1][(c as u8 - b'A') as usize] = v;
     }
 
-    pub fn get(&mut self, r: i32, c: char) -> i32 {
+    pub fn   get(&mut self, r: i32, c: char) -> i32 {
         // let col = Excel::col_c2i(c as u8);
         // let row = Excel::row_i2i(r);
         // self.retrieve(row, col).value
@@ -171,7 +171,7 @@ impl Excel {
         self.mat[r as usize - 1][(c as u8 - b'A') as usize]
     }
 
-    pub fn sum(&mut self, r: i32, c: char, strs: Vec<String>) -> i32 {
+    pub fn   sum(&mut self, r: i32, c: char, strs: Vec<String>) -> i32 {
         // let col = Excel::col_c2i(c as u8);
         // let row = Excel::row_i2i(r);
         // self.set_impl(row, col, 0);
@@ -205,7 +205,7 @@ impl Excel {
         ans
     }
 
-    // fn set_impl(&mut self, row: usize, col: usize, v: i32) {
+    //pub fn  set_impl(&mut self, row: usize, col: usize, v: i32) {
     //     let sub_v = v - self.retrieve(row, col).value;
     //     let mut stack = vec![(row, col)];
     //     while let Some((r, c)) = stack.pop() {
@@ -215,15 +215,15 @@ impl Excel {
     //     }
     // }
 
-    // fn retrieve_mut(&mut self, r: usize, c: usize) -> &mut ExcelNode {
+    //pub fn  retrieve_mut(&mut self, r: usize, c: usize) -> &mut ExcelNode {
     //     &mut self.values[r][c]
     // }
 
-    // fn retrieve(&self, r: usize, c: usize) -> &ExcelNode {
+    //pub fn  retrieve(&self, r: usize, c: usize) -> &ExcelNode {
     //     &self.values[r][c]
     // }
 
-    // fn clear_watches(&mut self, row: usize, col: usize) {
+    //pub fn  clear_watches(&mut self, row: usize, col: usize) {
     //     let node = self.retrieve_mut(row, col);
     //     let watches = node.watches_to_vec();
     //     node.watches = vec![];
@@ -239,7 +239,7 @@ impl Excel {
     //     }
     // }
 
-    // fn add_watches(&mut self, row: usize, col: usize, strs: Vec<String>) {
+    //pub fn  add_watches(&mut self, row: usize, col: usize, strs: Vec<String>) {
     //     let node = self.retrieve_mut(row, col);
     //     for s in strs {
     //         let splits = s.split(":").collect::<Vec<_>>();
@@ -268,28 +268,28 @@ impl Excel {
     // }
 
     // #[inline]
-    // fn col_c2i(c: u8) -> usize {
+    //pub fn  col_c2i(c: u8) -> usize {
     //     c as usize - A_CHAR_CODE
     // }
 
     // #[inline]
-    // fn row_s2i(c: &str) -> usize {
+    //pub fn  row_s2i(c: &str) -> usize {
     //     c.parse::<usize>().unwrap() - 1
     // }
 
     // #[inline]
-    // fn row_i2i(i: i32) -> usize {
+    //pub fn  row_i2i(i: i32) -> usize {
     //     (i - 1) as usize
     // }
 
     // #[inline]
-    // fn colrow_to_index(colrow: &str) -> (usize, usize) {
+    //pub fn  colrow_to_index(colrow: &str) -> (usize, usize) {
     //     let col = Excel::col_c2i(colrow.as_bytes()[0]);
     //     let row = Excel::row_s2i(&colrow[1..]);
     //     (row, col)
     // }
 
-    // fn to_matrix(&self) -> Vec<Vec<i32>> {
+    //pub fn  to_matrix(&self) -> Vec<Vec<i32>> {
     //     self.values
     //         .iter()
     //         .map(|v| v.iter().map(|n| n.value).collect::<Vec<i32>>())
@@ -304,7 +304,7 @@ mod test {
     use crate::{lc_matrix, lc_vec_s};
 
     #[test]
-    fn test_excel_1() {
+   pub fn  test_excel_1() {
         let mut excel = Excel::new(3, 'C');
         assert_eq!(excel.mat, lc_matrix![[0, 0, 0], [0, 0, 0], [0, 0, 0]]);
         excel.set(1, 'A', 2);
@@ -316,7 +316,7 @@ mod test {
     }
 
     #[test]
-    fn test_excel_2() {
+   pub fn  test_excel_2() {
         let mut excel = Excel::new(5, 'E');
         assert_eq!(excel.get(1, 'A'), 0);
         excel.set(1, 'A', 1);

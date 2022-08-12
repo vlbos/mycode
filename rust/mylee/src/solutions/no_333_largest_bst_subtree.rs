@@ -47,7 +47,7 @@ use crate::solutions::util::tree::TreeNode;
 //
 // impl TreeNode {
 //   #[inline]
-//   pub fn new(val: i32) -> Self {
+//   pub fn   new(val: i32) -> Self {
 //     TreeNode {
 //       val,
 //       left: None,
@@ -67,9 +67,9 @@ use std::rc::Rc;
 // }
 
 impl Solution {
-    pub fn largest_bst_subtree(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+    pub fn   largest_bst_subtree(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
         // Solution::largest_bst_subtree_recursive(root).max_bst as i32
-        fn dfs(root: &Option<Rc<RefCell<TreeNode>>>) -> (i32, bool, i32, i32) {
+       pub fn  dfs(root: &Option<Rc<RefCell<TreeNode>>>) -> (i32, bool, i32, i32) {
             if let Some(node) = root {
                 let node = node.borrow();
                 let l = dfs(&node.left);
@@ -86,7 +86,7 @@ impl Solution {
         dfs(&root).0
     }
 
-    // fn largest_bst_subtree_recursive(root: Option<Rc<RefCell<TreeNode>>>) -> LargetBSTSolution {
+    //pub fn  largest_bst_subtree_recursive(root: Option<Rc<RefCell<TreeNode>>>) -> LargetBSTSolution {
     //     match root {
     //         None => LargetBSTSolution {
     //             max_bst: 0,
@@ -133,13 +133,13 @@ mod test {
     use crate::tree;
 
     #[test]
-    fn test_largest_bst_subtree_1() {
+   pub fn  test_largest_bst_subtree_1() {
         let tree = tree![10, 5, 15, 1, 8, null, 7];
         assert_eq!(Solution::largest_bst_subtree(tree), 3);
     }
 
     #[test]
-    fn test_largest_bst_subtree_2() {
+   pub fn  test_largest_bst_subtree_2() {
         let tree = tree![10, 5, 15, null, 8, null, 7];
         assert_eq!(Solution::largest_bst_subtree(tree), 2);
     }

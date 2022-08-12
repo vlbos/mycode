@@ -44,7 +44,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn missing_element(nums: Vec<i32>, k: i32) -> i32 {
+    pub fn   missing_element(nums: Vec<i32>, k: i32) -> i32 {
         let mut ans = nums[0] + 1;
         let mut cnt = 0;
         for w in nums.windows(2) {
@@ -66,15 +66,15 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_missing_element_1() {
+   pub fn  test_missing_element_1() {
         assert_eq!(5, Solution::missing_element(vec![4, 7, 9, 10], 1));
     }
     #[test]
-    fn test_missing_element_2() {
+   pub fn  test_missing_element_2() {
         assert_eq!(8, Solution::missing_element(vec![4, 7, 9, 10], 3));
     }
     #[test]
-    fn test_missing_element_3() {
+   pub fn  test_missing_element_3() {
         assert_eq!(6, Solution::missing_element(vec![1, 2, 4], 3));
     }
 }

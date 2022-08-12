@@ -62,7 +62,7 @@
 
 // impl TreeNode {
 //     #[inline]
-//     pub fn new(val: i32) -> Self {
+//     pub fn   new(val: i32) -> Self {
 //         TreeNode {
 //             val,
 //             left: None,
@@ -71,7 +71,7 @@
 //     }
 // }
 
-// pub fn to_tree(vec: Vec<Option<i32>>) -> Option<Rc<RefCell<TreeNode>>> {
+// pub fn   to_tree(vec: Vec<Option<i32>>) -> Option<Rc<RefCell<TreeNode>>> {
 //     use std::collections::VecDeque;
 //     let head = Some(Rc::new(RefCell::new(TreeNode::new(vec[0].unwrap()))));
 //     let mut queue = VecDeque::new();
@@ -100,7 +100,7 @@ use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
     #[allow(dead_code)]
-    pub fn split_bst(
+    pub fn   split_bst(
         mut root: Option<Rc<RefCell<TreeNode>>>,
         v: i32,
     ) -> Vec<Option<Rc<RefCell<TreeNode>>>> {
@@ -127,7 +127,7 @@ mod test {
     use crate::tree;
 
     #[test]
-    fn test_split_bst_1() {
+   pub fn  test_split_bst_1() {
         assert_eq!(
             vec![tree![2, 1], tree![4, 3, 6, null, null, 5, 7]],
             Solution::split_bst(tree![4, 2, 6, 1, 3, 5, 7], 2)

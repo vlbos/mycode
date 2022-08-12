@@ -75,7 +75,7 @@
 //
 // impl TreeNode {
 //   #[inline]
-//   pub fn new(val: i32) -> Self {
+//   pub fn   new(val: i32) -> Self {
 //     TreeNode {
 //       val,
 //       left: None,
@@ -96,7 +96,7 @@ use std::rc::Rc;
 // }
 
 impl Solution {
-    // fn boundary_of_binary_tree_recursive(
+    //pub fn  boundary_of_binary_tree_recursive(
     //     curr: Option<Rc<RefCell<TreeNode>>>,
     //     mut bs: BoundaryState,
     //     mut res: &mut Vec<i32>,
@@ -175,14 +175,14 @@ impl Solution {
     //     }
     // }
 
-    pub fn boundary_of_binary_tree(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
+    pub fn   boundary_of_binary_tree(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
         // let mut res = vec![];
         // Solution::boundary_of_binary_tree_recursive(root, BoundaryState::Root, &mut res);
         // res
         let (mut ans, mut left, mut right, mut leaf) =
             (Vec::new(), Vec::new(), Vec::new(), Vec::new());
 
-        fn in_order(root: &Option<Rc<RefCell<TreeNode>>>, leaf: &mut Vec<i32>) {
+       pub fn  in_order(root: &Option<Rc<RefCell<TreeNode>>>, leaf: &mut Vec<i32>) {
             if let Some(node) = root {
                 let node = node.borrow();
                 in_order(&node.left, leaf);
@@ -192,14 +192,14 @@ impl Solution {
                 in_order(&node.right, leaf);
             }
         }
-        fn left_order(root: &Option<Rc<RefCell<TreeNode>>>, left: &mut Vec<i32>) {
+       pub fn  left_order(root: &Option<Rc<RefCell<TreeNode>>>, left: &mut Vec<i32>) {
             if let Some(node) = root {
                 let node = node.borrow();
                 left.push(node.val);
                 left_order(&node.left, left);
             }
         }
-        fn right_order(root: &Option<Rc<RefCell<TreeNode>>>, right: &mut Vec<i32>) {
+       pub fn  right_order(root: &Option<Rc<RefCell<TreeNode>>>, right: &mut Vec<i32>) {
             if let Some(node) = root {
                 let node = node.borrow();
                 right.push(node.val);
@@ -231,13 +231,13 @@ mod test {
     use crate::tree;
 
     #[test]
-    fn test_boundary_of_binary_tree_1() {
+   pub fn  test_boundary_of_binary_tree_1() {
         let tree = tree![1, null, 2, 3, 4];
         assert_eq!(Solution::boundary_of_binary_tree(tree), vec![1, 3, 4, 2]);
     }
 
     #[test]
-    fn test_boundary_of_binary_tree_2() {
+   pub fn  test_boundary_of_binary_tree_2() {
         let tree = tree![1, 2, 3, 4, 5, 6, null, 7, 8, 9, 10];
         assert_eq!(
             Solution::boundary_of_binary_tree(tree),

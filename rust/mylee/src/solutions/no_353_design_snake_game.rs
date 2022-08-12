@@ -99,7 +99,7 @@ impl SnakeGame {
     @param height - screen height
     @param food - A list of food positions
     E.g food = [[1,1], [1,0]] means the first food is positioned at [1,1], the second is at [1,0]. */
-    pub fn new(width: i32, height: i32, food: Vec<Vec<i32>>) -> Self {
+    pub fn   new(width: i32, height: i32, food: Vec<Vec<i32>>) -> Self {
         // SnakeGame {
         //     snake: {
         //         let mut res = VecDeque::new();
@@ -130,7 +130,7 @@ impl SnakeGame {
     @param direction - 'U' = Up, 'L' = Left, 'R' = Right, 'D' = Down
     @return The game's score after the move. Return -1 if game over.
     Game over when snake crosses the screen boundary or bites its body. */
-    pub fn make_a_move(&mut self, direction: String) -> i32 {
+    pub fn   make_a_move(&mut self, direction: String) -> i32 {
         let front = self.snake.front().unwrap();
         let (mut x, mut y) = (front[0], front[1]);
         match direction.as_str() {
@@ -195,7 +195,7 @@ impl SnakeGame {
         // self.snake.push_front(next_head);
         // (self.snake.len() - 1) as i32
     }
-    // fn head(&self) -> (isize, isize) {
+    //pub fn  head(&self) -> (isize, isize) {
     //     self.snake.get(0).unwrap().clone()
     // }
 }
@@ -207,7 +207,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_snake_game() {
+   pub fn  test_snake_game() {
         let mut snake_game = SnakeGame::new(3, 2, vec![vec![1, 2], vec![0, 1]]);
         let directions = ["R", "D", "R", "U", "L", "U"];
         let result = [0, 0, 1, 1, 2, -1];

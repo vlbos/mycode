@@ -7,7 +7,7 @@ pub struct UnionFind {
 }
 
 impl UnionFind {
-    pub fn new(size: usize) -> UnionFind {
+    pub fn   new(size: usize) -> UnionFind {
         let mut groups = Vec::with_capacity(size);
         for i in 0..size {
             groups.push(i);
@@ -18,7 +18,7 @@ impl UnionFind {
         }
     }
 
-    pub fn find(&mut self, i: usize) -> usize {
+    pub fn   find(&mut self, i: usize) -> usize {
         if i >= self.groups.len() {
             return usize::MAX;
         }
@@ -41,7 +41,7 @@ impl UnionFind {
         i
     }
 
-    pub fn union(&mut self, i: usize, j: usize) -> bool {
+    pub fn   union(&mut self, i: usize, j: usize) -> bool {
         let (mut i, mut j) = (self.find(i), self.find(j));
         if i == j {
             return false;

@@ -36,7 +36,7 @@ pub enum NestedInteger {
     List(Vec<NestedInteger>),
 }
 impl Solution {
-    pub fn depth_sum(nested_list: Vec<NestedInteger>) -> i32 {
+    pub fn   depth_sum(nested_list: Vec<NestedInteger>) -> i32 {
         // let mut deque = VecDeque::<(NestedInteger, i32)>::new();
         // deque.push_back((NestedInteger::List(nested_list), 0));
         // let mut sum = 0;
@@ -50,7 +50,7 @@ impl Solution {
         //     }
         // }
         // sum
-        fn dfs(nested_list: &Vec<NestedInteger>, level: i32) -> i32 {
+       pub fn  dfs(nested_list: &Vec<NestedInteger>, level: i32) -> i32 {
             nested_list.into_iter().fold(0, |acc, x| {
                 acc + match x {
                     NestedInteger::Int(v) => *v * level,
@@ -72,7 +72,7 @@ mod test {
     use NestedInteger::{Int, List};
 
     #[test]
-    fn test_depth_sum_1() {
+   pub fn  test_depth_sum_1() {
         assert_eq!(
             Solution::depth_sum(vec![
                 List(vec![Int(1), Int(1)]),
@@ -84,7 +84,7 @@ mod test {
     }
 
     #[test]
-    fn test_depth_sum_2() {
+   pub fn  test_depth_sum_2() {
         assert_eq!(
             Solution::depth_sum(vec![Int(1), List(vec![Int(4), List(vec![Int(6)])])]),
             27
@@ -92,12 +92,12 @@ mod test {
     }
 
     #[test]
-    fn test_depth_sum_3() {
+   pub fn  test_depth_sum_3() {
         assert_eq!(Solution::depth_sum(vec![Int(0)]), 0);
     }
 
     #[test]
-    fn test_depth_sum_4() {
+   pub fn  test_depth_sum_4() {
         assert_eq!(Solution::depth_sum(vec![]), 0);
     }
 }

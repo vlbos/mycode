@@ -56,7 +56,7 @@ pub struct NumMatrix {
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl NumMatrix {
-    pub fn new(matrix: Vec<Vec<i32>>) -> Self {
+    pub fn   new(matrix: Vec<Vec<i32>>) -> Self {
         let rows = matrix.len();
         let cols = if rows <= 0 { 0 } else { matrix[0].len() };
         let tree = vec![vec![0; cols + 1]; rows + 1];
@@ -74,7 +74,7 @@ impl NumMatrix {
         }
         res
     }
-    pub fn update(&mut self, row: i32, col: i32, val: i32) {
+    pub fn   update(&mut self, row: i32, col: i32, val: i32) {
         let delta = val - self.matrix[row as usize][col as usize];
         self.matrix[row as usize][col as usize] = val;
         let mut i = (row + 1) as usize;
@@ -88,18 +88,18 @@ impl NumMatrix {
         }
     }
 
-    pub fn sum_region(&self, row1: i32, col1: i32, row2: i32, col2: i32) -> i32 {
+    pub fn   sum_region(&self, row1: i32, col1: i32, row2: i32, col2: i32) -> i32 {
         self.get_sum(row2 + 1, col2 + 1)
             - self.get_sum(row1, col2 + 1)
             - self.get_sum(row2 + 1, col1)
             + self.get_sum(row1, col1)
     }
 
-    fn low_bit(num: i32) -> i32 {
+   pub fn  low_bit(num: i32) -> i32 {
         num & (-num)
     }
 
-    fn get_sum(&self, row: i32, col: i32) -> i32 {
+   pub fn  get_sum(&self, row: i32, col: i32) -> i32 {
         let mut sum = 0;
         let mut i = row;
         while i > 0 {
@@ -121,7 +121,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_range_sum_query_2d_mutable() {
+   pub fn  test_range_sum_query_2d_mutable() {
         let matrix = vec![
             vec![3, 0, 1, 4, 2],
             vec![5, 6, 3, 2, 1],

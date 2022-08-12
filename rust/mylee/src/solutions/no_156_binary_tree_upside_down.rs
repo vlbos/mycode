@@ -60,7 +60,7 @@ use super::util::tree::TreeNode;
 //
 // impl TreeNode {
 //   #[inline]
-//   pub fn new(val: i32) -> Self {
+//   pub fn   new(val: i32) -> Self {
 //     TreeNode {
 //       val,
 //       left: None,
@@ -73,13 +73,13 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 impl Solution {
-    pub fn upside_down_binary_tree(
+    pub fn   upside_down_binary_tree(
         root: Option<Rc<RefCell<TreeNode>>>,
     ) -> Option<Rc<RefCell<TreeNode>>> {
         if root.is_none() {
             return root;
         }
-        // fn dfs(
+        //pub fn  dfs(
         //     mut root: Option<Rc<RefCell<TreeNode>>>,
         //     parent: Option<Rc<RefCell<TreeNode>>>,
         //     sibling: Option<Rc<RefCell<TreeNode>>>,
@@ -96,11 +96,10 @@ impl Solution {
         // dfs(root, None,None)
 
         let mut curr = root;
-        let mut next: Option<Rc<RefCell<TreeNode>>> = None;
         let mut pre: Option<Rc<RefCell<TreeNode>>> = None;
         let mut sibling: Option<Rc<RefCell<TreeNode>>> = None;
         while curr.is_some() {
-            next = curr.as_ref().unwrap().borrow_mut().left.take();
+            let next = curr.as_ref().unwrap().borrow_mut().left.take();
             curr.as_ref().unwrap().borrow_mut().left = sibling;
             sibling = curr.as_ref().unwrap().borrow_mut().right.take();
             curr.as_ref().unwrap().borrow_mut().right = pre;
@@ -108,7 +107,7 @@ impl Solution {
             curr = next;
         }
         pre
-        // fn right_sibling(
+        //pub fn  right_sibling(
         //     root: Option<Rc<RefCell<TreeNode>>>,
         //     parent: Option<Rc<RefCell<TreeNode>>>,
         //     right: Option<Rc<RefCell<TreeNode>>>,
@@ -147,7 +146,7 @@ mod tests {
     use super::*;
     use crate::tree;
     #[test]
-    fn test_binary_tree_upside_down_basic() {
+   pub fn  test_binary_tree_upside_down_basic() {
         assert_eq!(
             Solution::upside_down_binary_tree(tree![1, 2, 3, 4, 5]),
             tree![4, 5, 2, null, null, 3, 1]

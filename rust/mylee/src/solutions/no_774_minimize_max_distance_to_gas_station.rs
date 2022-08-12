@@ -35,7 +35,7 @@
 pub struct Solution {}
 impl Solution {
     #[allow(dead_code)]
-    pub fn minmax_gas_dist(stations: Vec<i32>, k: i32) -> f64 {
+    pub fn   minmax_gas_dist(stations: Vec<i32>, k: i32) -> f64 {
         let (mut left, mut right) = (0.0, 1e8);
         while right - left > 1e-6 {
             let mid = (right + left) / 2.0;
@@ -59,7 +59,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_minmax_gas_dist_1() {
+   pub fn  test_minmax_gas_dist_1() {
         assert!(
             (0.500000 - Solution::minmax_gas_dist(vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 9)).abs()
                 < 1e-6

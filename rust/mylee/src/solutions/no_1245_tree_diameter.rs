@@ -28,7 +28,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn tree_diameter(edges: Vec<Vec<i32>>) -> i32 {
+    pub fn   tree_diameter(edges: Vec<Vec<i32>>) -> i32 {
         0
     }
 }
@@ -38,7 +38,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_tree_diameter_1() {
+   pub fn  test_tree_diameter_1() {
         assert_eq!(0, Solution::tree_diameter(Vec::new()));
     }
 }

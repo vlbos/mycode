@@ -38,13 +38,13 @@
 
 // @lc code=start
 impl Solution {
-    pub fn word_pattern_match(pattern: String, str: String) -> bool {
+    pub fn   word_pattern_match(pattern: String, str: String) -> bool {
         // let (pchars, pdict) = Solution::pattern_analyse(&pattern);
         // let chars = str.chars().collect::<Vec<char>>();
         // Solution::match_rec(&pchars, pdict, &chars, HashSet::new()).0
         use std::collections::HashMap;
         let mut m = HashMap::new();
-        fn back_track(
+       pub fn  back_track(
             pattern: &String,
             str: &String,
             p: usize,
@@ -82,7 +82,7 @@ impl Solution {
     }
 
     // // @return is_match, should pruning
-    // fn match_rec(
+    //pub fn  match_rec(
     //     pchars: &[char],
     //     pdict: HashMap<char, Vec<char>>,
     //     chars: &[char],
@@ -127,7 +127,7 @@ impl Solution {
     // }
 
     // // assume chars1.len() == chars2.len()
-    // fn chars_equal(chars1: &[char], chars2: &[char]) -> bool {
+    //pub fn  chars_equal(chars1: &[char], chars2: &[char]) -> bool {
     //     for i in 0..chars1.len() {
     //         if chars1[i] != chars2[i] {
     //             return false;
@@ -136,7 +136,7 @@ impl Solution {
     //     return true;
     // }
 
-    // fn pattern_analyse(pattern: &str) -> (Vec<char>, HashMap<char, Vec<char>>) {
+    //pub fn  pattern_analyse(pattern: &str) -> (Vec<char>, HashMap<char, Vec<char>>) {
     //     let chars = pattern.chars().collect::<Vec<char>>();
     //     let mut res = HashMap::new();
     //     for c in pattern.chars() {
@@ -154,7 +154,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_word_pattern_match1() {
+   pub fn  test_word_pattern_match1() {
         assert!(Solution::word_pattern_match(
             String::from("abab"),
             String::from("redblueredblue")
@@ -162,7 +162,7 @@ mod test {
     }
 
     #[test]
-    fn test_word_pattern_match2() {
+   pub fn  test_word_pattern_match2() {
         assert!(Solution::word_pattern_match(
             String::from("aaaa"),
             String::from("asdasdasdasd")
@@ -170,7 +170,7 @@ mod test {
     }
 
     #[test]
-    fn test_word_pattern_match3() {
+   pub fn  test_word_pattern_match3() {
         assert!(!Solution::word_pattern_match(
             String::from("aabb"),
             String::from("xyzabcxzyabc")
@@ -178,7 +178,7 @@ mod test {
     }
 
     #[test]
-    fn test_word_pattern_match4() {
+   pub fn  test_word_pattern_match4() {
         assert!(Solution::word_pattern_match(
             String::from("d"),
             String::from("e")
@@ -186,7 +186,7 @@ mod test {
     }
 
     #[test]
-    fn test_word_pattern_match5() {
+   pub fn  test_word_pattern_match5() {
         assert!(!Solution::word_pattern_match(
             String::from("ab"),
             String::from("aa")

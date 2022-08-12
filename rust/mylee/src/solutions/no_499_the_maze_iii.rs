@@ -79,7 +79,7 @@
 //     &[(-1, 0, 'u'), (0, 1, 'r'), (1, 0, 'd'), (0, -1, 'l')];
 
 impl Solution {
-    pub fn find_shortest_way(maze: Vec<Vec<i32>>, ball: Vec<i32>, hole: Vec<i32>) -> String {
+    pub fn   find_shortest_way(maze: Vec<Vec<i32>>, ball: Vec<i32>, hole: Vec<i32>) -> String {
         // let impossible = String::from("impossible");
         // let rows = maze.len() as isize;
         // let cols = if rows == 0 { 0 } else { maze[0].len() as isize };
@@ -153,7 +153,7 @@ impl Solution {
         dists[ball[0] as usize][ball[1] as usize] = 0;
         use std::collections::HashMap;
         let mut u = HashMap::new();
-        fn dfs(
+       pub fn  dfs(
             maze: &mut Vec<Vec<i32>>,
             ball: &Vec<i32>,
             hole: &Vec<i32>,
@@ -218,7 +218,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_has_path_1() {
+   pub fn  test_has_path_1() {
         let maze = vec![
             vec![0, 0, 0, 0, 0],
             vec![1, 1, 0, 0, 1],
@@ -233,7 +233,7 @@ mod test {
     }
 
     #[test]
-    fn test_has_path_2() {
+   pub fn  test_has_path_2() {
         let maze = vec![
             vec![0, 0, 0, 0, 0],
             vec![1, 1, 0, 0, 1],
@@ -248,7 +248,7 @@ mod test {
     }
 
     #[test]
-    fn test_has_path_3() {
+   pub fn  test_has_path_3() {
         let maze = vec![
             vec![0, 0, 0, 0, 0, 0, 0],
             vec![0, 0, 1, 0, 0, 1, 0],

@@ -56,15 +56,15 @@ pub struct FileSystem {}
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl FileSystem {
-    fn new() -> Self {
+   pub fn  new() -> Self {
         Self {}
     }
 
-    fn create_path(&self, path: String, value: i32) -> bool {
+   pub fn  create_path(&self, path: String, value: i32) -> bool {
         true
     }
 
-    fn get(&self, path: String) -> i32 {
+   pub fn  get(&self, path: String) -> i32 {
         0
     }
 }
@@ -81,7 +81,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_create_path_1() {
+   pub fn  test_create_path_1() {
         let path = String::new();
         let value = 0;
         let obj = FileSystem::new();

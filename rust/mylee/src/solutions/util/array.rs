@@ -51,14 +51,14 @@ mod test {
     use crate::{lc_matrix, lc_matrix_s, lc_vec_s};
 
     #[test]
-    fn test_matrix_macro_1() {
+   pub fn  test_matrix_macro_1() {
         let m1 = lc_matrix![[1, 2, 3], [4, 5, 6], [7, 8, 9]];
         let m2 = vec![vec![1, 2, 3], vec![4, 5, 6], vec![7, 8, 9]];
         assert_eq!(m1, m2);
     }
 
     #[test]
-    fn test_matrix_macro_2() {
+   pub fn  test_matrix_macro_2() {
         let m1 = lc_matrix_s![["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]];
         let m2 = vec![
             vec!["1", "2", "3"],
@@ -69,7 +69,7 @@ mod test {
     }
 
     #[test]
-    fn test_vec_macro_1() {
+   pub fn  test_vec_macro_1() {
         let m1 = lc_vec_s!["1", "2", "3"];
         let m2 = vec![String::from("1"), String::from("2"), String::from("3")];
         assert_eq!(m1, m2);

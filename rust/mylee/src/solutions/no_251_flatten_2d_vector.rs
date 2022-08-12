@@ -51,7 +51,7 @@ pub struct Vector2D {
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl Vector2D {
-    fn new(v: Vec<Vec<i32>>) -> Self {
+   pub fn  new(v: Vec<Vec<i32>>) -> Self {
         // Vector2D {
         //     values: v,
         //     i: 0,
@@ -60,7 +60,7 @@ impl Vector2D {
         Self { v, row: 0, col: 0 }
     }
 
-    fn next(&mut self) -> i32 {
+   pub fn  next(&mut self) -> i32 {
         // let has_next = self.has_next();
         // if has_next {
         //     let res = self.values[self.i][self.j];
@@ -79,7 +79,7 @@ impl Vector2D {
         ans
     }
 
-    fn has_next(&mut self) -> bool {
+   pub fn  has_next(&mut self) -> bool {
         // loop {
         //     if self.i >= self.values.len() {
         //         return false;
@@ -100,7 +100,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_vector_2d() {
+   pub fn  test_vector_2d() {
         let vv = vec![vec![1, 2], vec![3], vec![4]];
         let mut v2d = Vector2D::new(vv);
         assert_eq!(v2d.next(), 1);

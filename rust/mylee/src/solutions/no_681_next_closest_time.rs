@@ -35,10 +35,10 @@
 // use std::collections::BTreeSet;
 // use std::ops::Bound::{Excluded, Unbounded};
 
-const ZERO_CHARCODE: i32 = '0' as i32;
+// const ZERO_CHARCODE: i32 = '0' as i32;
 
 impl Solution {
-    pub fn next_closest_time(time: String) -> String {
+    pub fn   next_closest_time(time: String) -> String {
         // let mut digits = BTreeSet::<i32>::new();
         // let current_time = Solution::parse_time(&time);
         // for d in &current_time {
@@ -88,7 +88,7 @@ impl Solution {
         ans
     }
 
-    // fn parse_time(time: &str) -> Vec<i32> {
+    //pub fn  parse_time(time: &str) -> Vec<i32> {
     //     let chars = time.chars().collect::<Vec<_>>();
     //     vec![chars[0], chars[1], chars[3], chars[4]]
     //         .into_iter()
@@ -96,11 +96,11 @@ impl Solution {
     //         .collect()
     // }
 
-    // fn parse_digit(ch: char) -> i32 {
+    //pub fn  parse_digit(ch: char) -> i32 {
     //     return ch as i32 - ZERO_CHARCODE;
     // }
 
-    // fn valid_time(time: &[i32]) -> bool {
+    //pub fn  valid_time(time: &[i32]) -> bool {
     //     let hours = time[0] * 10 + time[1];
     //     let minutes = time[2] * 10 + time[3];
     //     hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59
@@ -116,7 +116,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_next_closest_time_1() {
+   pub fn  test_next_closest_time_1() {
         assert_eq!(
             Solution::next_closest_time(String::from("19:34")),
             String::from("19:39")
@@ -124,7 +124,7 @@ mod test {
     }
 
     #[test]
-    fn test_next_closest_time_2() {
+   pub fn  test_next_closest_time_2() {
         assert_eq!(
             Solution::next_closest_time(String::from("23:59")),
             String::from("22:22")
@@ -132,7 +132,7 @@ mod test {
     }
 
     #[test]
-    fn test_next_closest_time_3() {
+   pub fn  test_next_closest_time_3() {
         assert_eq!(
             Solution::next_closest_time(String::from("13:55")),
             String::from("15:11")
@@ -140,7 +140,7 @@ mod test {
     }
 
     #[test]
-    fn test_next_closest_time_4() {
+   pub fn  test_next_closest_time_4() {
         assert_eq!(
             Solution::next_closest_time(String::from("20:48")),
             String::from("22:00")

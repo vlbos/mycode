@@ -47,7 +47,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn employee_free_time(schedule: Vec<Vec<Vec<i32>>>) -> Vec<Vec<i32>> {
+    pub fn   employee_free_time(schedule: Vec<Vec<Vec<i32>>>) -> Vec<Vec<i32>> {
         //    let mut schedule:Vec<Vec<i32>> =schedule.into_iter().flatten().collect();
         //     let mut ans=Vec::new();
         //     schedule.sort_by_key(|x|x[0]);
@@ -91,7 +91,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_employee_free_time_1() {
+   pub fn  test_employee_free_time_1() {
         assert_eq!(
             vec![vec![3, 4]],
             Solution::employee_free_time(vec![
@@ -102,7 +102,7 @@ mod test {
         );
     }
     #[test]
-    fn test_employee_free_time_2() {
+   pub fn  test_employee_free_time_2() {
         assert_eq!(
             vec![vec![5, 6], vec![7, 9]],
             Solution::employee_free_time(vec![

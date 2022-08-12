@@ -68,15 +68,15 @@ pub struct FirstUnique {}
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl FirstUnique {
-    fn new(nums: Vec<i32>) -> Self {
+    pub fn    new(nums: Vec<i32>) -> Self {
         Self {}
     }
 
-    fn show_first_unique(&self) -> i32 {
+    pub fn    show_first_unique(&self) -> i32 {
         0
     }
 
-    fn add(&self, value: i32) {}
+    pub fn    add(&self, value: i32) {}
 }
 
 /**
@@ -91,7 +91,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_first_unique_1() {
+    pub fn    test_first_unique_1() {
         let nums = Vec::new();
         let value = 0;
         let obj = FirstUnique::new(nums);

@@ -37,7 +37,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn digits_count(d: i32, low: i32, high: i32) -> i32 {
+    pub fn   digits_count(d: i32, low: i32, high: i32) -> i32 {
         let count = |n: i32| {
             let mut cnt = 0;
             let mut i = 1;
@@ -71,11 +71,11 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_digits_count_1() {
+   pub fn  test_digits_count_1() {
         assert_eq!(6, Solution::digits_count(1, 1, 13));
     }
     #[test]
-    fn test_digits_count_2() {
+   pub fn  test_digits_count_2() {
         assert_eq!(35, Solution::digits_count(3, 100, 250));
     }
 }

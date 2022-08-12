@@ -38,7 +38,7 @@
 // [Google](https://leetcode.ca/tags/#Google)
 // @lc code=start
 impl Solution {
-    pub fn num_ways(n: i32, k: i32) -> i32 {
+    pub fn   num_ways(n: i32, k: i32) -> i32 {
         // per color
         if n == 0 || k == 0 {
             return 0;
@@ -62,7 +62,7 @@ pub struct Solution;
 mod test {
     use super::*;
     #[test]
-    fn test_num_ways() {
+   pub fn  test_num_ways() {
         assert_eq!(Solution::num_ways(3, 3), 24);
     }
 }

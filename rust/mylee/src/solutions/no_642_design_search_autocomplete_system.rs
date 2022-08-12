@@ -96,26 +96,26 @@
 // impl Deref for Trie {
 //     type Target = Rc<RefCell<TrieNode>>;
 
-//     fn deref(self: &'_ Self) -> &'_ Self::Target {
+//     pub fn    deref(self: &'_ Self) -> &'_ Self::Target {
 //         &self.0
 //     }
 // }
 
 // impl DerefMut for Trie {
-//     fn deref_mut(self: &'_ mut Self) -> &'_ mut Self::Target {
+//     pub fn    deref_mut(self: &'_ mut Self) -> &'_ mut Self::Target {
 //         &mut self.0
 //     }
 // }
 
 // impl Trie {
-//     pub fn new() -> Self {
+//     pub pub fn    new() -> Self {
 //         Self(Rc::new(RefCell::new(TrieNode {
 //             children: HashMap::new(),
 //             terms: 0,
 //         })))
 //     }
 
-//     pub fn add(&mut self, word: &[char], times: usize) {
+//     pub pub fn    add(&mut self, word: &[char], times: usize) {
 //         let mut node = self.borrow_mut();
 //         if word.is_empty() {
 //             node.terms += times;
@@ -131,7 +131,7 @@
 //         }
 //     }
 
-//     pub fn match_next(&self, ch: char) -> Option<Trie> {
+//     pub pub fn    match_next(&self, ch: char) -> Option<Trie> {
 //         let node = self.borrow();
 //         if let Some(child_node) = node.children.get(&ch) {
 //             Some(child_node.clone())
@@ -145,7 +145,7 @@
 //     type Item = (Trie, Vec<char>);
 //     type IntoIter = TrieIntoIterator;
 
-//     fn into_iter(self) -> Self::IntoIter {
+//     pub fn    into_iter(self) -> Self::IntoIter {
 //         TrieIntoIterator {
 //             queue: vec![(self, vec![])],
 //         }
@@ -159,7 +159,7 @@
 // impl Iterator for TrieIntoIterator {
 //     type Item = (Trie, Vec<char>);
 
-//     fn next(&mut self) -> Option<(Trie, Vec<char>)> {
+//     pub fn    next(&mut self) -> Option<(Trie, Vec<char>)> {
 //         while let Some((trie, s)) = self.queue.pop() {
 //             let is_term = {
 //                 let node = trie.borrow_mut();
@@ -184,13 +184,13 @@ pub struct Trie {
     branches: HashMap<char, Option<Box<Trie>>>,
 }
 impl Trie {
-    fn new() -> Self {
+    pub fn    new() -> Self {
         Self {
             times: 0,
             branches: HashMap::new(),
         }
     }
-    fn insert(&mut self, s: &String, times: i32) {
+    pub fn    insert(&mut self, s: &String, times: i32) {
         let mut t = self;
         for c in s.chars() {
             t = t
@@ -202,7 +202,7 @@ impl Trie {
         }
         t.times += times;
     }
-    fn lookup(&self, s: &String) -> Vec<(String, i32)> {
+    pub fn    lookup(&self, s: &String) -> Vec<(String, i32)> {
         let mut list = Vec::new();
         let mut t = self;
         for c in s.chars() {
@@ -215,7 +215,7 @@ impl Trie {
         self.traverse(s, t, &mut list);
         list
     }
-    fn traverse(&self, s: &String, t: &Trie, list: &mut Vec<(String, i32)>) {
+    pub fn    traverse(&self, s: &String, t: &Trie, list: &mut Vec<(String, i32)>) {
         if t.times > 0 {
             list.push((s.clone(), t.times));
         }
@@ -247,7 +247,7 @@ pub struct AutocompleteSystem {
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl AutocompleteSystem {
-    fn new(sentences: Vec<String>, times: Vec<i32>) -> Self {
+    pub fn    new(sentences: Vec<String>, times: Vec<i32>) -> Self {
         // let sentence = vec![];
         // let root = Trie::new();
         // let mut acs = Self {
@@ -272,7 +272,7 @@ impl AutocompleteSystem {
         }
     }
 
-    fn input(&mut self, c: char) -> Vec<String> {
+    pub fn    input(&mut self, c: char) -> Vec<String> {
         // if c == '#' {
         //     self.root.add(&self.sentence, 1);
         //     self.sentence.clear();
@@ -344,7 +344,7 @@ mod test {
     use crate::lc_vec_s;
 
     #[test]
-    fn test_autocomplete_system_1() {
+    pub fn    test_autocomplete_system_1() {
         let mut acs = AutocompleteSystem::new(
             lc_vec_s!["i love you", "island", "iroman", "i love leetcode"],
             vec![5, 3, 2, 2],
@@ -376,7 +376,7 @@ mod test {
     }
 
     #[test]
-    fn test_autocomplete_system_2() {
+    pub fn    test_autocomplete_system_2() {
         let mut acs = AutocompleteSystem::new(lc_vec_s!["abc", "abbc", "a"], vec![3, 3, 3]);
         assert_eq!(acs.input('b'), Vec::<String>::new());
         assert_eq!(acs.input('c'), Vec::<String>::new());

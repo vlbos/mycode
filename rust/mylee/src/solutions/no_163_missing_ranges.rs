@@ -16,7 +16,7 @@ pub struct Solution;
 // @lc code=start
 
 impl Solution {
-    pub fn find_missing_ranges(nums: Vec<i32>, lower: i32, upper: i32) -> Vec<String> {
+    pub fn   find_missing_ranges(nums: Vec<i32>, lower: i32, upper: i32) -> Vec<String> {
         // let mut new_nums = vec![lower as i64 - 1];
         // new_nums.extend(nums.into_iter().map(|i| i as i64).collect::<Vec<i64>>());
         // new_nums.push(upper as i64 + 1);
@@ -65,7 +65,7 @@ mod tests {
     use crate::solutions::util::test_tools::map_to_string;
 
     #[test]
-    fn test_find_missing_ranges() {
+   pub fn  test_find_missing_ranges() {
         let nums = vec![0, 1, 3, 50, 75];
         let res = map_to_string(&["2", "4->49", "51->74", "76->99"]);
         assert_eq!(Solution::find_missing_ranges(nums, 0, 99), res);

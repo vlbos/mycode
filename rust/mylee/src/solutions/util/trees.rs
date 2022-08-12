@@ -11,7 +11,7 @@ pub struct TreeNode {
 
 impl TreeNode {
     #[inline]
-    pub fn new(val: i32) -> Self {
+    pub fn   new(val: i32) -> Self {
         TreeNode {
             val,
             left: None,
@@ -19,10 +19,10 @@ impl TreeNode {
         }
     }
 
-    pub fn build_tree(preorder: Vec<i32>, inorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
+    pub fn   build_tree(preorder: Vec<i32>, inorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
         use std::collections::HashMap;
         #[allow(clippy::too_many_arguments)]
-        fn build_tree_helper(
+       pub fn  build_tree_helper(
             preorder: &[i32],
             inorder: &[i32],
             inorder_indices: &HashMap<i32, usize>,
@@ -76,7 +76,7 @@ impl TreeNode {
         )
     }
 
-    pub fn build_lc_tree(tree_vec: Vec<Option<i32>>) -> Option<Rc<RefCell<TreeNode>>> {
+    pub fn   build_lc_tree(tree_vec: Vec<Option<i32>>) -> Option<Rc<RefCell<TreeNode>>> {
         let len = tree_vec.len();
         if len == 0 {
             return None;
@@ -174,14 +174,14 @@ mod test {
     use crate::{lc_tree, lc_tree_vec, tree_leaf, tree_node};
 
     #[test]
-    fn test_lc_tree_vec_macro_1() {
+   pub fn  test_lc_tree_vec_macro_1() {
         let i = lc_tree_vec![2, null, 2];
         let o = vec![Some(2), None, Some(2)];
         assert_eq!(i, o);
     }
 
     #[test]
-    fn test_build_lc_tree_1() {
+   pub fn  test_build_lc_tree_1() {
         let i = vec![Some(1), Some(2), Some(3), Some(4), None, Some(5)];
         let o = tree_node!(
             1,
@@ -192,7 +192,7 @@ mod test {
     }
 
     #[test]
-    fn test_lc_tree_macro_1() {
+   pub fn  test_lc_tree_macro_1() {
         let i = lc_tree![1, 2, 3, 4, null, 5];
         let o = tree_node!(
             1,

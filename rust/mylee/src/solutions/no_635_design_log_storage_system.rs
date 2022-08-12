@@ -54,7 +54,7 @@ pub struct LogSystem {
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl LogSystem {
-    pub fn new() -> Self {
+    pub fn   new() -> Self {
         // Self {
         //     logs: BTreeMap::new(),
         // }
@@ -68,12 +68,12 @@ impl LogSystem {
         }
     }
 
-    pub fn put(&mut self, id: i32, timestamp: String) {
+    pub fn   put(&mut self, id: i32, timestamp: String) {
         // self.logs.insert(LogSystem::to_timestamp(&timestamp), id);
         self.id2tm.insert(id, timestamp);
     }
 
-    pub fn retrieve(&self, start: String, end: String, granularity: String) -> Vec<i32> {
+    pub fn   retrieve(&self, start: String, end: String, granularity: String) -> Vec<i32> {
         // let level = LogSystem::granularity_to_level(&granularity);
         // let from = LogSystem::to_start_timestamp(&start, level);
         // let to = LogSystem::to_end_timestamp(&end, level);
@@ -92,11 +92,11 @@ impl LogSystem {
         ans
     }
 
-    // fn timestamp_to_chunks<'a>(ts: &'a str) -> Vec<&'a str> {
+    //pub fn  timestamp_to_chunks<'a>(ts: &'a str) -> Vec<&'a str> {
     //     ts.split(":").collect::<Vec<_>>()
     // }
 
-    // fn granularity_to_level(granularity: &str) -> usize {
+    //pub fn  granularity_to_level(granularity: &str) -> usize {
     //     match granularity {
     //         "Year" => 1,
     //         "Month" => 2,
@@ -108,11 +108,11 @@ impl LogSystem {
     //     }
     // }
 
-    // fn to_timestamp(ts: &str) -> u64 {
+    //pub fn  to_timestamp(ts: &str) -> u64 {
     //     ts.replace(":", "").parse::<u64>().unwrap()
     // }
 
-    // fn to_start_timestamp(ts: &str, level: usize) -> u64 {
+    //pub fn  to_start_timestamp(ts: &str, level: usize) -> u64 {
     //     let chunks = LogSystem::timestamp_to_chunks(ts);
     //     let mut res = String::new();
     //     for i in 0..level {
@@ -124,7 +124,7 @@ impl LogSystem {
     //     res.parse::<u64>().unwrap()
     // }
 
-    // fn to_end_timestamp(ts: &str, level: usize) -> u64 {
+    //pub fn  to_end_timestamp(ts: &str, level: usize) -> u64 {
     //     let chunks = LogSystem::timestamp_to_chunks(ts);
     //     let mut res = String::new();
     //     for i in 0..level {
@@ -144,7 +144,7 @@ mod test {
     use super::*;
     use std::collections::HashSet;
     #[test]
-    fn test_log_system_1() {
+   pub fn  test_log_system_1() {
         let mut ls = LogSystem::new();
         ls.put(1, String::from("2017:01:01:23:59:59"));
         ls.put(2, String::from("2017:01:01:22:59:59"));

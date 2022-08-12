@@ -47,7 +47,7 @@
 //
 // impl TreeNode {
 //   #[inline]
-//   pub fn new(val: i32) -> Self {
+//   pub fn   new(val: i32) -> Self {
 //     TreeNode {
 //       val,
 //       left: None,
@@ -61,7 +61,7 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 impl Solution {
-    pub fn str2tree(s: String) -> Option<Rc<RefCell<TreeNode>>> {
+    pub fn   str2tree(s: String) -> Option<Rc<RefCell<TreeNode>>> {
         // let chars = {
         //     let mut cs = vec!['('];
         //     cs.extend(s.chars());
@@ -145,7 +145,7 @@ impl Solution {
         Some(Rc::new(RefCell::new(cur)))
     }
 
-    // fn to_num(s: &[char]) -> Option<Rc<RefCell<TreeNode>>> {
+    //pub fn  to_num(s: &[char]) -> Option<Rc<RefCell<TreeNode>>> {
     //     s.iter()
     //         .cloned()
     //         .collect::<String>()
@@ -165,7 +165,7 @@ mod test {
     use crate::tree;
 
     #[test]
-    fn test_str2tree_1() {
+   pub fn  test_str2tree_1() {
         let tree = tree![4, 2, 6, 3, 1, 5];
         assert_eq!(Solution::str2tree(String::from("4(2(3)(1))(6(5))")), tree);
     }

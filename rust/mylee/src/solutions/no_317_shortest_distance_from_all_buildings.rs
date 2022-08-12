@@ -44,7 +44,7 @@
 // const DELTAS: [(isize, isize); 4] = [(-1, 0), (1, 0), (0, -1), (0, 1)];
 
 impl Solution {
-    pub fn shortest_distance(grid: Vec<Vec<i32>>) -> i32 {
+    pub fn   shortest_distance(grid: Vec<Vec<i32>>) -> i32 {
         // let rows = grid.len();
         // let cols = if rows == 0 { 0 } else { grid[0].len() };
         // if rows == 0 || cols == 0 {
@@ -165,7 +165,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_shortest_distance() {
+   pub fn  test_shortest_distance() {
         let grid = vec![
             vec![1, 0, 2, 0, 1],
             vec![0, 0, 0, 0, 0],

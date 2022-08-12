@@ -56,7 +56,7 @@
 
 // static mut INDIRECT: Vec<HashMap<i32, i32>> = vec![];
 
-// fn try_init_indirect() -> &'static Vec<HashMap<i32, i32>> {
+//pub fn  try_init_indirect() -> &'static Vec<HashMap<i32, i32>> {
 //     unsafe {
 //         if INDIRECT.is_empty() {
 //             INDIRECT = vec![
@@ -91,7 +91,7 @@
 // }
 
 // impl Route {
-//     pub fn new() -> Self {
+//     pub fn   new() -> Self {
 //         // Route {
 //         //     used: HashSet::new(),
 //         //     curr: 0,
@@ -99,7 +99,7 @@
 //         // }
 //     }
 
-//     pub fn accessible(&self) -> Vec<Route> {
+//     pub fn   accessible(&self) -> Vec<Route> {
 //         let indirect = &try_init_indirect()[self.curr as usize];
 //         self.unused
 //             .iter()
@@ -120,7 +120,7 @@
 //             .collect()
 //     }
 
-//     pub fn next(&self, target: i32) -> Self {
+//     pub fn   next(&self, target: i32) -> Self {
 //         let mut next_used = self.used.clone();
 //         next_used.insert(target);
 //         let mut next_unused = self.unused.clone();
@@ -134,7 +134,7 @@
 // }
 
 impl Solution {
-    pub fn number_of_patterns(m: i32, n: i32) -> i32 {
+    pub fn   number_of_patterns(m: i32, n: i32) -> i32 {
         // let mut rs = vec![Route::new()];
         // let mut count = 0;
         // while let Some(r) = rs.pop() {
@@ -198,12 +198,12 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_number_of_patterns_1() {
+   pub fn  test_number_of_patterns_1() {
         assert_eq!(Solution::number_of_patterns(1, 1), 9);
     }
 
     #[test]
-    fn test_number_of_patterns_2() {
+   pub fn  test_number_of_patterns_2() {
         assert_eq!(Solution::number_of_patterns(1, 2), 65);
     }
 }

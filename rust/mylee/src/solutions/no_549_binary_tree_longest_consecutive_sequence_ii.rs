@@ -51,7 +51,7 @@ use crate::solutions::util::tree::TreeNode;
 //
 // impl TreeNode {
 //   #[inline]
-//   pub fn new(val: i32) -> Self {
+//   pub fn   new(val: i32) -> Self {
 //     TreeNode {
 //       val,
 //       left: None,
@@ -69,12 +69,12 @@ use std::rc::Rc;
 // }
 
 impl Solution {
-    pub fn longest_consecutive(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+    pub fn   longest_consecutive(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
         // let mut max = 0usize;
         // Solution::longest_consecutive_recursive(root, &mut max);
         // max as i32
         let mut ans = 0;
-        fn solve(root: &Option<Rc<RefCell<TreeNode>>>, ans: &mut i32) -> (i32, i32) {
+       pub fn  solve(root: &Option<Rc<RefCell<TreeNode>>>, ans: &mut i32) -> (i32, i32) {
             let (mut inc, mut dec) = (0, 0);
             if let Some(node) = root {
                 let node = node.borrow();
@@ -97,7 +97,7 @@ impl Solution {
         ans
     }
 
-    // fn longest_consecutive_recursive(
+    //pub fn  longest_consecutive_recursive(
     //     curr: Option<Rc<RefCell<TreeNode>>>,
     //     mut max_len: &mut usize,
     // ) -> Data {
@@ -161,25 +161,25 @@ mod test {
     use crate::tree;
 
     #[test]
-    fn test_longest_consecutive_1() {
+   pub fn  test_longest_consecutive_1() {
         let tree = tree![1, 2, 3];
         assert_eq!(Solution::longest_consecutive(tree), 2);
     }
 
     #[test]
-    fn test_longest_consecutive_2() {
+   pub fn  test_longest_consecutive_2() {
         let tree = tree![2, 1, 3];
         assert_eq!(Solution::longest_consecutive(tree), 3);
     }
 
     #[test]
-    fn test_longest_consecutive_3() {
+   pub fn  test_longest_consecutive_3() {
         let tree = tree![1, 2, 4, 3];
         assert_eq!(Solution::longest_consecutive(tree), 3);
     }
 
     #[test]
-    fn test_longest_consecutive_4() {
+   pub fn  test_longest_consecutive_4() {
         let tree = tree![3, 1, 2];
         assert_eq!(Solution::longest_consecutive(tree), 2);
     }

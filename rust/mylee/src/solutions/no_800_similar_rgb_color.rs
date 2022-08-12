@@ -39,7 +39,7 @@
 pub struct Solution;
 impl Solution {
     #[allow(dead_code)]
-    pub fn similar_rgb(color: String) -> String {
+    pub fn   similar_rgb(color: String) -> String {
         let mut ans = String::from("#");
         for i in (1..color.len()).step_by(2) {
             let num = u8::from_str_radix(&color[i..i + 2], 16).unwrap();
@@ -57,7 +57,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_similar_rgb_1() {
+   pub fn  test_similar_rgb_1() {
         assert_eq!(
             String::from("#11ee66"),
             Solution::similar_rgb(String::from("#09f166"))

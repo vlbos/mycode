@@ -38,7 +38,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn min_build_time(blocks: Vec<i32>, split: i32) -> i32 {
+    pub fn   min_build_time(blocks: Vec<i32>, split: i32) -> i32 {
         0
     }
 }
@@ -47,7 +47,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_min_build_time_1() {
+   pub fn  test_min_build_time_1() {
         assert_eq!(0, Solution::min_build_time(Vec::new(), 0));
     }
 }

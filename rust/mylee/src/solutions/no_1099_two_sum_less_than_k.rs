@@ -39,7 +39,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn two_sum_less_than_k(a: Vec<i32>, k: i32) -> i32 {
+    pub fn   two_sum_less_than_k(a: Vec<i32>, k: i32) -> i32 {
         let mut ans = -1;
         for i in 0..a.len() {
             for j in i + 1..a.len() {
@@ -58,14 +58,14 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_two_sum_less_than_k_1() {
+   pub fn  test_two_sum_less_than_k_1() {
         assert_eq!(
             58,
             Solution::two_sum_less_than_k(vec![34, 23, 1, 24, 75, 33, 54, 8], 60)
         );
     }
     #[test]
-    fn test_two_sum_less_than_k_2() {
+   pub fn  test_two_sum_less_than_k_2() {
         assert_eq!(-1, Solution::two_sum_less_than_k(vec![10, 20, 30], 15));
     }
 }

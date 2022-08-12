@@ -30,7 +30,7 @@
 pub struct Solution;
 // @lc code=start
 impl Solution {
-    pub fn shortest_distance(words: Vec<String>, word1: String, word2: String) -> i32 {
+    pub fn   shortest_distance(words: Vec<String>, word1: String, word2: String) -> i32 {
         // let mut i = -1 - (words.len() as i32);
         // let mut j = -1 - (words.len() as i32);
         // let mut dist = i32::max_value();
@@ -68,7 +68,7 @@ mod tests {
     use crate::solutions::util::test_tools::map_to_string;
 
     #[test]
-    fn test_shortest_distance1() {
+   pub fn  test_shortest_distance1() {
         let words = map_to_string(&["practice", "makes", "perfect", "coding", "makes"]);
         assert_eq!(
             Solution::shortest_distance(words, String::from("coding"), String::from("practice")),
@@ -77,7 +77,7 @@ mod tests {
     }
 
     #[test]
-    fn test_shortest_distance2() {
+   pub fn  test_shortest_distance2() {
         let words = map_to_string(&["practice", "makes", "perfect", "coding", "makes"]);
         assert_eq!(
             Solution::shortest_distance(words, String::from("makes"), String::from("coding")),

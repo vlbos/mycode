@@ -44,7 +44,7 @@
 // }
 
 // impl CostRecord {
-//     pub fn new(init_cost: i32) -> Self {
+//     pub fn   new(init_cost: i32) -> Self {
 //         Self {
 //             min_cost: init_cost,
 //             second_min_cost: init_cost,
@@ -52,7 +52,7 @@
 //         }
 //     }
 
-//     pub fn add(&mut self, last_record: &CostRecord, id: usize, cost: i32) {
+//     pub fn   add(&mut self, last_record: &CostRecord, id: usize, cost: i32) {
 //         let new_all_cost = (if id == last_record.min_id {
 //             last_record.second_min_cost
 //         } else {
@@ -69,7 +69,7 @@
 // }
 
 impl Solution {
-    pub fn min_cost_ii(costs: Vec<Vec<i32>>) -> i32 {
+    pub fn   min_cost_ii(costs: Vec<Vec<i32>>) -> i32 {
         // if costs.len() == 0 {
         //     return 0;
         // }
@@ -110,7 +110,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_min_cost_ii() {
+   pub fn  test_min_cost_ii() {
         let costs = vec![vec![1, 5, 3], vec![2, 9, 4]];
         assert_eq!(Solution::min_cost_ii(costs), 5);
     }

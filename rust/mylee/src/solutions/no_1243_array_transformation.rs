@@ -35,7 +35,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn transform_array(arr: Vec<i32>) -> Vec<i32> {
+    pub fn   transform_array(arr: Vec<i32>) -> Vec<i32> {
         Vec::new()
     }
 }
@@ -45,7 +45,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_transform_array_1() {
+   pub fn  test_transform_array_1() {
         assert_eq!(Vec::<i32>::new(), Solution::transform_array(Vec::new()));
     }
 }

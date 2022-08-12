@@ -41,10 +41,10 @@
 // use std::mem::swap;
 
 // const MOVEMENTS: [(isize, isize); 4] = [(1, 0), (-1, 0), (0, 1), (0, -1)];
-const INF: i32 = 2147483647;
+pub const INF: i32 = 2147483647;
 
 impl Solution {
-    pub fn walls_and_gates(rooms: &mut Vec<Vec<i32>>) {
+    pub fn   walls_and_gates(rooms: &mut Vec<Vec<i32>>) {
         // if rooms.is_empty() {
         //     return;
         // }
@@ -63,7 +63,7 @@ impl Solution {
         }
         let (m, n) = (rooms.len(), rooms[0].len());
         let mut visited = vec![vec![false; n]; m];
-        fn dfs(i: i32, j: i32, d: i32, rooms: &mut Vec<Vec<i32>>, visited: &mut Vec<Vec<bool>>) {
+       pub fn  dfs(i: i32, j: i32, d: i32, rooms: &mut Vec<Vec<i32>>, visited: &mut Vec<Vec<bool>>) {
             let (m, n) = (rooms.len() as i32, rooms[0].len() as i32);
             if i < 0 || i >= m || j < 0 || j >= n {
                 return;
@@ -90,7 +90,7 @@ impl Solution {
     }
 
     // // the value of each grid tells us if it has been visited
-    // fn broadcast_update(rooms: &mut Vec<Vec<i32>>, r: usize, c: usize, rows: usize, cols: usize) {
+    //pub fn  broadcast_update(rooms: &mut Vec<Vec<i32>>, r: usize, c: usize, rows: usize, cols: usize) {
     //     if rooms[r][c] != 0 {
     //         return;
     //     }
@@ -129,7 +129,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_walls_and_gates() {
+   pub fn  test_walls_and_gates() {
         let mut src: Vec<Vec<i32>> = vec![
             vec![INF, -1, 0, INF],
             vec![INF, INF, INF, -1],

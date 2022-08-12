@@ -42,7 +42,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn minimize_error(prices: Vec<String>, target: i32) -> String {
+    pub fn   minimize_error(prices: Vec<String>, target: i32) -> String {
         let prices: Vec<f32> = prices
             .into_iter()
             .map(|x| x.parse::<f32>().unwrap())
@@ -75,7 +75,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_minimize_error_1() {
+   pub fn  test_minimize_error_1() {
         assert_eq!(
             String::from("1.000"),
             Solution::minimize_error(
@@ -88,7 +88,7 @@ mod test {
         );
     }
     #[test]
-    fn test_minimize_error_2() {
+   pub fn  test_minimize_error_2() {
         assert_eq!(
             String::from("-1"),
             Solution::minimize_error(

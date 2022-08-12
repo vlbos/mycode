@@ -51,7 +51,7 @@ pub struct TreeNode {
 
 impl TreeNode {
     #[inline]
-    pub fn new(val: i32) -> Self {
+    pub fn   new(val: i32) -> Self {
         TreeNode {
             val,
             left: None,
@@ -60,7 +60,7 @@ impl TreeNode {
     }
 }
 
-pub fn to_tree(vec: Vec<Option<i32>>) -> Option<Rc<RefCell<TreeNode>>> {
+pub fn   to_tree(vec: Vec<Option<i32>>) -> Option<Rc<RefCell<TreeNode>>> {
     use std::collections::VecDeque;
     let head = Some(Rc::new(RefCell::new(TreeNode::new(vec[0].unwrap()))));
     let mut queue = VecDeque::new();
@@ -86,7 +86,7 @@ pub struct Solution {}
 use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
-    pub fn get_lonely_nodes(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
+    pub fn   get_lonely_nodes(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
         Vec::new()
     }
 }
@@ -96,7 +96,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_get_lonely_nodes_1() {
+   pub fn  test_get_lonely_nodes_1() {
         assert_eq!(Vec::<i32>::new(), Solution::get_lonely_nodes(None));
     }
 }

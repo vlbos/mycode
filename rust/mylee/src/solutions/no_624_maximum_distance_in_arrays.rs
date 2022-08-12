@@ -37,7 +37,7 @@
 // use std::collections::BinaryHeap;
 
 impl Solution {
-    pub fn max_distance(arrays: Vec<Vec<i32>>) -> i32 {
+    pub fn   max_distance(arrays: Vec<Vec<i32>>) -> i32 {
         // let len = arrays.len();
         // if len <= 1 {
         //     return 0;
@@ -109,7 +109,7 @@ mod test {
     use crate::lc_matrix;
 
     #[test]
-    fn test_max_distance_1() {
+   pub fn  test_max_distance_1() {
         assert_eq!(
             Solution::max_distance(lc_matrix![[1, 2, 3], [0, 4, 5], [1, 2, 3]]),
             4

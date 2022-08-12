@@ -26,7 +26,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn missing_number(arr: Vec<i32>) -> i32 {
+    pub fn   missing_number(arr: Vec<i32>) -> i32 {
         0
     }
 }
@@ -35,7 +35,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_missing_number_1() {
+   pub fn  test_missing_number_1() {
         assert_eq!(0, Solution::missing_number(Vec::new()));
     }
 }

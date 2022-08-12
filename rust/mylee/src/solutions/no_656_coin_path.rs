@@ -46,7 +46,7 @@
 // @star
 // @lc code=start
 impl Solution {
-    pub fn cheapest_jump(a: Vec<i32>, b: i32) -> Vec<i32> {
+    pub fn   cheapest_jump(a: Vec<i32>, b: i32) -> Vec<i32> {
         //     let n = a.len();
         //     if n == 0 || a[n - 1] < 0 {
         //         return vec![];
@@ -129,7 +129,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_coin_path_1() {
+   pub fn  test_coin_path_1() {
         assert_eq!(
             Solution::cheapest_jump(vec![1, 2, 4, -1, 2], 2),
             vec![1, 3, 5]
@@ -137,12 +137,12 @@ mod test {
     }
 
     #[test]
-    fn test_coin_path_2() {
+   pub fn  test_coin_path_2() {
         assert_eq!(Solution::cheapest_jump(vec![1, 2, 4, -1, 2], 1), vec![]);
     }
 
     #[test]
-    fn test_coin_path_3() {
+   pub fn  test_coin_path_3() {
         assert_eq!(
             Solution::cheapest_jump(vec![0, 0, 0, 0, 0, 0], 3),
             vec![1, 2, 3, 4, 5, 6]
@@ -150,7 +150,7 @@ mod test {
     }
 
     #[test]
-    fn test_coin_path_4() {
+   pub fn  test_coin_path_4() {
         assert_eq!(
             Solution::cheapest_jump(vec![0, -1, -1, -1, -1, -1], 5),
             vec![]

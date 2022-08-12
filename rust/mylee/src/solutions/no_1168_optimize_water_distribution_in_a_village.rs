@@ -28,7 +28,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn min_cost_to_supply_water(n: i32, wells: Vec<i32>, pipes: Vec<Vec<i32>>) -> i32 {
+    pub fn   min_cost_to_supply_water(n: i32, wells: Vec<i32>, pipes: Vec<Vec<i32>>) -> i32 {
         0
     }
 }
@@ -38,7 +38,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_min_cost_to_supply_water_1() {
+   pub fn  test_min_cost_to_supply_water_1() {
         assert_eq!(
             0,
             Solution::min_cost_to_supply_water(0, Vec::new(), Vec::new())

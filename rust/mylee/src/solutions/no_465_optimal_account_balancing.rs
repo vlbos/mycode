@@ -60,7 +60,7 @@
 // use std::collections::HashMap;
 
 impl Solution {
-    pub fn min_transfers(transactions: Vec<Vec<i32>>) -> i32 {
+    pub fn   min_transfers(transactions: Vec<Vec<i32>>) -> i32 {
         // let mut balance = HashMap::<i32, i32>::new();
         // for v in transactions {
         //     let i = v[0];
@@ -107,7 +107,7 @@ impl Solution {
         }
         let mut acc = cnt.values().filter(|&x| *x != 0).cloned().collect();
         let mut ans = i32::MAX;
-        fn helper(acc: &mut Vec<i32>, mut start: usize, cnt: i32, ans: &mut i32) {
+       pub fn  helper(acc: &mut Vec<i32>, mut start: usize, cnt: i32, ans: &mut i32) {
             let n = acc.len();
             while start < n && acc[start] == 0 {
                 start += 1;
@@ -138,7 +138,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_min_transfers_1() {
+   pub fn  test_min_transfers_1() {
         assert_eq!(
             Solution::min_transfers(vec![vec![0, 1, 10], vec![2, 0, 5]]),
             2
@@ -146,7 +146,7 @@ mod test {
     }
 
     #[test]
-    fn test_min_transfers_2() {
+   pub fn  test_min_transfers_2() {
         assert_eq!(
             Solution::min_transfers(vec![
                 vec![0, 1, 10],

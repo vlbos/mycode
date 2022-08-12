@@ -73,7 +73,7 @@
 // }
 
 // impl GraphNode {
-//     fn new() -> GraphNode {
+//    pub fn  new() -> GraphNode {
 //         GraphNode {
 //             ins: HashSet::new(),
 //             outs: HashSet::new(),
@@ -82,7 +82,7 @@
 // }
 
 impl Solution {
-    // fn link_graph(
+    //pub fn  link_graph(
     //     words: &Vec<Vec<char>>,
     //     c: usize,
     //     rs: usize,
@@ -125,7 +125,7 @@ impl Solution {
     //     true
     // }
 
-    pub fn alien_order(words: Vec<String>) -> String {
+    pub fn   alien_order(words: Vec<String>) -> String {
         // let words = words
         //     .iter()
         //     .map(|s| s.chars().collect::<Vec<char>>())
@@ -229,19 +229,19 @@ mod test {
     use crate::solutions::util::test_tools::map_to_string;
 
     #[test]
-    fn test_alien_order1() {
+   pub fn  test_alien_order1() {
         let inputs = map_to_string(&["wrt", "wrf", "er", "ett", "rftt"]);
         assert_eq!(Solution::alien_order(inputs), String::from("wertf"));
     }
 
     #[test]
-    fn test_alien_order2() {
+   pub fn  test_alien_order2() {
         let inputs = map_to_string(&["z", "x"]);
         assert_eq!(Solution::alien_order(inputs), String::from("zx"));
     }
 
     #[test]
-    fn test_alien_order3() {
+   pub fn  test_alien_order3() {
         let inputs = map_to_string(&["z", "x", "z"]);
         assert_eq!(Solution::alien_order(inputs), String::from(""));
     }

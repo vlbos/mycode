@@ -33,7 +33,7 @@
 // use std::collections::HashMap;
 
 impl Solution {
-    pub fn can_permute_palindrome(s: String) -> bool {
+    pub fn   can_permute_palindrome(s: String) -> bool {
         // let mut dict = HashMap::<char, usize>::new();
         // for c in s.chars() {
         //     dict.entry(c).and_modify(|c| *c += 1).or_insert(1);
@@ -66,7 +66,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_can_permute_palindrome() {
+   pub fn  test_can_permute_palindrome() {
         assert!(!Solution::can_permute_palindrome(String::from("code")));
         assert!(Solution::can_permute_palindrome(String::from("aab")));
         assert!(Solution::can_permute_palindrome(String::from("carerac")));

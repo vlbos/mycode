@@ -47,7 +47,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn confusing_number_ii(n: i32) -> i32 {
+    pub fn   confusing_number_ii(n: i32) -> i32 {
         let mut ans = 0;
         let m = std::collections::BTreeMap::from([(0, 0), (1, 1), (6, 9), (8, 8), (9, 6)]);
         let mut s = vec![0];
@@ -97,11 +97,11 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_confusing_number_ii_1() {
+   pub fn  test_confusing_number_ii_1() {
         assert_eq!(6, Solution::confusing_number_ii(20));
     }
     #[test]
-    fn test_confusing_number_ii_2() {
+   pub fn  test_confusing_number_ii_2() {
         assert_eq!(19, Solution::confusing_number_ii(100));
     }
 }

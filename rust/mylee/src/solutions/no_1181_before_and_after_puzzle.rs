@@ -44,7 +44,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn before_and_after_puzzles(phrases: Vec<String>) -> Vec<String> {
+    pub fn   before_and_after_puzzles(phrases: Vec<String>) -> Vec<String> {
         Vec::new()
     }
 }
@@ -54,7 +54,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_before_and_after_puzzles_1() {
+   pub fn  test_before_and_after_puzzles_1() {
         assert_eq!(
             Vec::<String>::new(),
             Solution::before_and_after_puzzles(Vec::new())

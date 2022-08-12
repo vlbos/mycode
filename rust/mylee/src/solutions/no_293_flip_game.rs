@@ -33,7 +33,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn generate_possible_next_moves(s: String) -> Vec<String> {
+    pub fn   generate_possible_next_moves(s: String) -> Vec<String> {
         // let chars = s.chars().collect::<Vec<char>>();
         // let mut res = vec![];
         // for i in 1..chars.len() {
@@ -68,7 +68,7 @@ mod test {
     use crate::solutions::util::test_tools::{assert_equivalent, map_to_string};
 
     #[test]
-    fn test_generate_possible_next_moves() {
+   pub fn  test_generate_possible_next_moves() {
         let tar = map_to_string(&["--++", "+--+", "++--"]);
         assert_equivalent(
             &Solution::generate_possible_next_moves(String::from("++++")),

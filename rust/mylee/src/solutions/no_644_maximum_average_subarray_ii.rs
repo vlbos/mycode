@@ -34,7 +34,7 @@
 // @star
 // @lc code=start
 impl Solution {
-    pub fn find_max_average(nums: Vec<i32>, k: i32) -> f64 {
+    pub fn   find_max_average(nums: Vec<i32>, k: i32) -> f64 {
         // let len = nums.len();
         // let k = k as usize;
         // if len == 0 || k > len || k == 0 {
@@ -84,7 +84,7 @@ impl Solution {
         left
     }
 
-    // fn has_k_more_average(nums: &[i32], ave: f64, k: usize) -> bool {
+    //pub fn  has_k_more_average(nums: &[i32], ave: f64, k: usize) -> bool {
     //     let mut min_sum = 0f64;
     //     let mut sum = 0f64;
     //     for i in 0..k {
@@ -116,7 +116,7 @@ mod test {
     use crate::assert_feq;
 
     #[test]
-    fn test_find_max_average_1() {
+   pub fn  test_find_max_average_1() {
         assert_feq!(
             Solution::find_max_average(vec![1, 12, -5, -6, 50, 3], 4),
             12.75,

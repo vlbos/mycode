@@ -50,11 +50,11 @@ use std::rc::Rc;
 use std::cell::RefCell;
 
 impl Solution {
-    pub fn find_leaves(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Vec<i32>> {
+    pub fn   find_leaves(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Vec<i32>> {
     //   let mut res: Vec<Vec<i32>> = vec![];
     //   Solution::find_leaves_recursive(root, &mut res);
     //   res
-        fn dfs(root: &Option<Rc<RefCell<TreeNode>>>,ans:&mut Vec<Vec<i32>> )->i32{
+       pub fn  dfs(root: &Option<Rc<RefCell<TreeNode>>>,ans:&mut Vec<Vec<i32>> )->i32{
             if let Some(node)=root{
                 let node=node.borrow();
                 let (left,right)=(dfs(&node.left,ans),dfs(&node.right,ans));
@@ -75,7 +75,7 @@ impl Solution {
         ans
     }
 
-    // fn find_leaves_recursive(root: Option<Rc<RefCell<TreeNode>>>, mut res: &mut Vec<Vec<i32>>) -> i32 {
+    //pub fn  find_leaves_recursive(root: Option<Rc<RefCell<TreeNode>>>, mut res: &mut Vec<Vec<i32>>) -> i32 {
     //   match root {
     //     Some(node_ref) => {
     //       let mut node = node_ref.borrow_mut();
@@ -106,7 +106,7 @@ mod test {
     use crate::{tree_node, tree_leaf};
 
     #[test]
-    fn test_find_leaves() {
+   pub fn  test_find_leaves() {
       let tree = tree_node!(
         1,
         tree_node!(2,

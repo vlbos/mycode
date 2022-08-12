@@ -48,7 +48,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn earliest_acq(logs: Vec<Vec<i32>>, n: i32) -> i32 {
+    pub fn   earliest_acq(logs: Vec<Vec<i32>>, n: i32) -> i32 {
         use std::collections::{HashMap, HashSet};
         let mut logs = logs;
         logs.sort_by_key(|x| x[0]);
@@ -78,7 +78,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_earliest_acq_1() {
+   pub fn  test_earliest_acq_1() {
         assert_eq!(
             20190301,
             Solution::earliest_acq(

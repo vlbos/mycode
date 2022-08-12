@@ -37,7 +37,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn smallest_factorization(a: i32) -> i32 {
+    pub fn   smallest_factorization(a: i32) -> i32 {
         // if a < 2 {
         //     return a;
         // }
@@ -88,17 +88,17 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_smallest_factorization_1() {
+   pub fn  test_smallest_factorization_1() {
         assert_eq!(Solution::smallest_factorization(48), 68);
     }
 
     #[test]
-    fn test_smallest_factorization_2() {
+   pub fn  test_smallest_factorization_2() {
         assert_eq!(Solution::smallest_factorization(15), 35);
     }
 
     #[test]
-    fn test_smallest_factorization_3() {
+   pub fn  test_smallest_factorization_3() {
         assert_eq!(Solution::smallest_factorization(i32::max_value()), 0);
     }
 }

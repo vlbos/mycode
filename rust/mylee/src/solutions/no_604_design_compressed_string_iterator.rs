@@ -65,7 +65,7 @@ pub struct StringIterator {
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl StringIterator {
-    pub fn new(compressed_string: String) -> Self {
+    pub fn   new(compressed_string: String) -> Self {
         // let mut source = compressed_string.chars().collect::<Vec<_>>();
         // source.push('#');
         // Self {
@@ -87,7 +87,7 @@ impl StringIterator {
         Self { s, t, idx: 0, i: 0 }
     }
 
-    // pub fn consume_next(&mut self) {
+    // pub fn   consume_next(&mut self) {
     //     // if let StringIteratorState::Unknown = self.state {
     //     //     let mut i = self.cursor;
     //     //     let ch = self.source[i];
@@ -114,7 +114,7 @@ impl StringIterator {
     //     // }
     // }
 
-    pub fn next(&mut self) -> char {
+    pub fn   next(&mut self) -> char {
         // self.consume_next();
         // let res = match self.state {
         //     StringIteratorState::Empty => ' ',
@@ -147,7 +147,7 @@ impl StringIterator {
         self.s[self.idx]
     }
 
-    pub fn has_next(&mut self) -> bool {
+    pub fn   has_next(&mut self) -> bool {
         // self.consume_next();
         // match self.state {
         //     StringIteratorState::Empty => false,
@@ -168,7 +168,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_string_iterator_1() {
+   pub fn  test_string_iterator_1() {
         let mut iter = StringIterator::new(String::from("L1e2t1C1o1d1e1"));
         let res = vec!['L', 'e', 'e', 't', 'C', 'o', 'd'];
         for r in res {

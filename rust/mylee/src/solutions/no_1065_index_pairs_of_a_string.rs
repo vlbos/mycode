@@ -39,7 +39,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn index_pairs(text: String, words: Vec<String>) -> Vec<Vec<i32>> {
+    pub fn   index_pairs(text: String, words: Vec<String>) -> Vec<Vec<i32>> {
         let mut ans = Vec::new();
         for i in 0..text.len() {
             for word in &words {
@@ -57,7 +57,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_index_pairs_1() {
+   pub fn  test_index_pairs_1() {
         assert_eq!(
             vec![vec![3, 7], vec![9, 13], vec![10, 17]],
             Solution::index_pairs(
@@ -70,7 +70,7 @@ mod test {
         );
     }
     #[test]
-    fn test_index_pairs_2() {
+   pub fn  test_index_pairs_2() {
         assert_eq!(
             vec![vec![0, 1], vec![0, 2], vec![2, 3], vec![2, 4]],
             Solution::index_pairs(

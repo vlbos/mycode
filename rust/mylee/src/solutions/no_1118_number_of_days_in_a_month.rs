@@ -37,7 +37,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn number_of_days(y: i32, m: i32) -> i32 {
+    pub fn   number_of_days(y: i32, m: i32) -> i32 {
         if m == 2 {
             if y % 4 == 0 && (y % 100 > 0 || y % 400 == 0) {
                 29
@@ -57,17 +57,17 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_number_of_days_1() {
+   pub fn  test_number_of_days_1() {
         assert_eq!(31, Solution::number_of_days(1992, 7));
     }
 
     #[test]
-    fn test_number_of_days_2() {
+   pub fn  test_number_of_days_2() {
         assert_eq!(29, Solution::number_of_days(2000, 2));
     }
 
     #[test]
-    fn test_number_of_days_3() {
+   pub fn  test_number_of_days_3() {
         assert_eq!(28, Solution::number_of_days(1900, 2));
     }
 }

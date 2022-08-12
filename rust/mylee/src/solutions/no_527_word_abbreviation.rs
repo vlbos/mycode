@@ -48,7 +48,7 @@
 // }
 
 // impl Trie {
-//     pub fn root() -> Self {
+//     pub fn   root() -> Self {
 //         Self {
 //             children: HashMap::<char, Rc<RefCell<Trie>>>::new(),
 //             key: vec![],
@@ -56,7 +56,7 @@
 //         }
 //     }
 
-//     pub fn new(key: &[char], is_leaf: bool) -> Self {
+//     pub fn   new(key: &[char], is_leaf: bool) -> Self {
 //         Self {
 //             children: HashMap::<char, Rc<RefCell<Trie>>>::new(),
 //             key: key.to_vec(),
@@ -64,7 +64,7 @@
 //         }
 //     }
 
-//     pub fn add(&mut self, word: &[char]) {
+//     pub fn   add(&mut self, word: &[char]) {
 //         let mut i = 0;
 //         while i < word.len() && i < self.key.len() && word[i] == self.key[i] {
 //             i += 1;
@@ -93,7 +93,7 @@
 //         }
 //     }
 
-//     fn to_abbr_rec(&self, word: &[char], unique: bool) -> usize {
+//    pub fn  to_abbr_rec(&self, word: &[char], unique: bool) -> usize {
 //         let mut i = 0;
 //         while i < word.len() && i < self.key.len() && word[i] == self.key[i] {
 //             i += 1;
@@ -113,13 +113,13 @@
 //         }
 //     }
 
-//     pub fn to_abbr(&self, word: &[char]) -> usize {
+//     pub fn   to_abbr(&self, word: &[char]) -> usize {
 //         self.to_abbr_rec(word, true)
 //     }
 // }
 
 impl Solution {
-    pub fn words_abbreviation(dict: Vec<String>) -> Vec<String> {
+    pub fn   words_abbreviation(dict: Vec<String>) -> Vec<String> {
         // let dict = dict
         //     .into_iter()
         //     .map(|v| v.chars().collect::<Vec<char>>())
@@ -193,7 +193,7 @@ impl Solution {
             for s in &to_remove {
                 map.remove(s);
             }
-            for (k, indices) in &map {
+            for (_, indices) in &map {
                 let prefix = find_common_prefix(indices);
                 for &i in indices {
                     let original = &dict[i];
@@ -228,7 +228,7 @@ mod test {
     use crate::solutions::util::test_tools::map_to_string;
 
     #[test]
-    fn test_words_abbreviation_1() {
+   pub fn  test_words_abbreviation_1() {
         let i = map_to_string(&[
             "like",
             "god",
@@ -247,14 +247,14 @@ mod test {
     }
 
     #[test]
-    fn test_words_abbreviation_2() {
+   pub fn  test_words_abbreviation_2() {
         let i = map_to_string(&["abcdefg", "abccefg", "abcckkg"]);
         let o = map_to_string(&["abcd2g", "abccefg", "abcckkg"]);
         assert_eq!(Solution::words_abbreviation(i), o);
     }
 
     #[test]
-    fn test_words_abbreviation_3() {
+   pub fn  test_words_abbreviation_3() {
         let i = map_to_string(&["met", "meet"]);
         let o = map_to_string(&["met", "m2t"]);
         assert_eq!(Solution::words_abbreviation(i), o);

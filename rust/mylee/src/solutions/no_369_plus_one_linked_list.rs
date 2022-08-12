@@ -36,7 +36,7 @@ use crate::solutions::util::linked_list::ListNode;
 //
 // impl ListNode {
 //   #[inline]
-//   fn new(val: i32) -> Self {
+//  pub fn  new(val: i32) -> Self {
 //     ListNode {
 //       next: None,
 //       val
@@ -46,7 +46,7 @@ use crate::solutions::util::linked_list::ListNode;
 // use std::borrow::BorrowMut;
 
 impl Solution {
-    pub fn plus_one(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+    pub fn   plus_one(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
         // let inc = match head {
         //     Some(ref mut head_node) => Solution::plus_one_recursive(head_node),
         //     None => false,
@@ -60,7 +60,7 @@ impl Solution {
         // } else {
         //     head
         // }
-        fn dfs(head: &mut Option<Box<ListNode>>) -> i32 {
+       pub fn  dfs(head: &mut Option<Box<ListNode>>) -> i32 {
             if let Some(node) = head {
                 let ans = dfs(&mut node.next) + node.val;
                 node.val = ans % 10;
@@ -76,7 +76,7 @@ impl Solution {
         }
     }
 
-    // pub fn plus_one_recursive(mut head: &mut Box<ListNode>) -> bool {
+    // pub fn   plus_one_recursive(mut head: &mut Box<ListNode>) -> bool {
     //     let next = head.next.borrow_mut();
     //     let inc = match next {
     //         Some(ref mut next_ref) => Solution::plus_one_recursive(next_ref),
@@ -105,7 +105,7 @@ mod test {
     // use crate::solutions::util::linked_list::to_list;
     // use crate::solutions::util::linked_list::ListNode;
     #[test]
-    fn test_plus_one() {
+   pub fn  test_plus_one() {
         let mut input = linked![1, 2, 3];
         let output = linked![1, 2, 4];
         input = Solution::plus_one(input);
@@ -113,7 +113,7 @@ mod test {
     }
 
     #[test]
-    fn test_plus_one_1() {
+   pub fn  test_plus_one_1() {
         let mut input = linked![9];
         let output = linked![1, 0];
         input = Solution::plus_one(input);

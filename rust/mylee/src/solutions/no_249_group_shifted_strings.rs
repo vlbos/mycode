@@ -37,7 +37,7 @@ pub struct Solution;
 // const A_CHARCODE: i32 = 'a' as i32;
 
 impl Solution {
-    pub fn group_strings(strings: Vec<String>) -> Vec<Vec<String>> {
+    pub fn   group_strings(strings: Vec<String>) -> Vec<Vec<String>> {
         // let mut dict = HashMap::<String, Vec<String>>::new();
         // for s in strings {
         //     let norm = Solution::shift_normalize(&s);
@@ -60,11 +60,11 @@ impl Solution {
         g.values().cloned().collect()
     }
 
-    // fn shift(ch: char, times: i32) -> char {
+    //pub fn  shift(ch: char, times: i32) -> char {
     //     (A_CHARCODE + ((ch as i32) - A_CHARCODE + times).rem_euclid(26)) as u8 as char
     // }
 
-    // fn shift_normalize(string: &String) -> String {
+    //pub fn  shift_normalize(string: &String) -> String {
     //     if string.is_empty() {
     //         return string.to_string();
     //     }
@@ -92,7 +92,7 @@ mod tests {
     };
 
     #[test]
-    fn test_group_strings() {
+   pub fn  test_group_strings() {
         let src = map_to_string(&["abc", "bcd", "acef", "xyz", "az", "ba", "a", "z"]);
         let tar = map_nested_to_string(&[
             vec!["abc", "bcd", "xyz"],

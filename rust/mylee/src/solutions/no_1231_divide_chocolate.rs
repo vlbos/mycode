@@ -33,7 +33,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn maximize_sweetness(sweetness: Vec<i32>, k: i32) -> i32 {
+    pub fn   maximize_sweetness(sweetness: Vec<i32>, k: i32) -> i32 {
         0
     }
 }
@@ -42,7 +42,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_maximize_sweetness_1() {
+   pub fn  test_maximize_sweetness_1() {
         assert_eq!(0, Solution::maximize_sweetness(Vec::new(), 0));
     }
 }
