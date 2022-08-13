@@ -35,7 +35,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn   min_abbreviation(target: String, dictionary: Vec<String>) -> String {
+    pub fn min_abbreviation(target: String, dictionary: Vec<String>) -> String {
         // let chars = target.chars().collect::<Vec<char>>();
         // let len = chars.len();
         // if len <= 0 {
@@ -97,7 +97,7 @@ impl Solution {
             candidates |= word;
         }
         let mut min_ab = 0;
-       pub fn  dfs(
+        pub fn dfs(
             dict: &Vec<i32>,
             bit: i32,
             mask: i32,
@@ -176,7 +176,7 @@ mod test {
     use std::collections::HashSet;
 
     #[test]
-   pub fn  test_min_abbreviation_1() {
+    pub fn test_min_abbreviation_1() {
         assert_eq!(
             Solution::min_abbreviation(String::from("apple"), vec![String::from("blade")]),
             String::from("a4")
@@ -184,7 +184,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_min_abbreviation_2() {
+    pub fn test_min_abbreviation_2() {
         let set = vec!["ap3", "a3e", "2p2", "3le", "3l1", "1p3"]
             .into_iter()
             .map(String::from)

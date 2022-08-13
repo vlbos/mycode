@@ -133,7 +133,7 @@ pub struct Excel {
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl Excel {
-    pub fn   new(h: i32, w: char) -> Self {
+    pub fn new(h: i32, w: char) -> Self {
         // let cols = h as usize;
         // let rows = Excel::col_c2i(w as u8) + 1;
         // Self {
@@ -147,7 +147,7 @@ impl Excel {
         }
     }
 
-    pub fn   set(&mut self, r: i32, c: char, v: i32) {
+    pub fn set(&mut self, r: i32, c: char, v: i32) {
         // let col = Excel::col_c2i(c as u8);
         // let row = Excel::row_i2i(r);
         // self.set_impl(row, col, v);
@@ -158,7 +158,7 @@ impl Excel {
         self.mat[r as usize - 1][(c as u8 - b'A') as usize] = v;
     }
 
-    pub fn   get(&mut self, r: i32, c: char) -> i32 {
+    pub fn get(&mut self, r: i32, c: char) -> i32 {
         // let col = Excel::col_c2i(c as u8);
         // let row = Excel::row_i2i(r);
         // self.retrieve(row, col).value
@@ -171,7 +171,7 @@ impl Excel {
         self.mat[r as usize - 1][(c as u8 - b'A') as usize]
     }
 
-    pub fn   sum(&mut self, r: i32, c: char, strs: Vec<String>) -> i32 {
+    pub fn sum(&mut self, r: i32, c: char, strs: Vec<String>) -> i32 {
         // let col = Excel::col_c2i(c as u8);
         // let row = Excel::row_i2i(r);
         // self.set_impl(row, col, 0);
@@ -304,7 +304,7 @@ mod test {
     use crate::{lc_matrix, lc_vec_s};
 
     #[test]
-   pub fn  test_excel_1() {
+    pub fn test_excel_1() {
         let mut excel = Excel::new(3, 'C');
         assert_eq!(excel.mat, lc_matrix![[0, 0, 0], [0, 0, 0], [0, 0, 0]]);
         excel.set(1, 'A', 2);
@@ -316,7 +316,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_excel_2() {
+    pub fn test_excel_2() {
         let mut excel = Excel::new(5, 'E');
         assert_eq!(excel.get(1, 'A'), 0);
         excel.set(1, 'A', 1);

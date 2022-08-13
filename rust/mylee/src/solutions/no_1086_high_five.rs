@@ -35,7 +35,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   high_five(items: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+    pub fn high_five(items: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
         let mut cnt = std::collections::HashMap::<i32, (i32, i32)>::new();
         for item in &items {
             cnt.entry(item[0])
@@ -64,7 +64,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_high_five_1() {
+    pub fn test_high_five_1() {
         assert_eq!(
             vec![vec![1, 87], vec![2, 88]],
             Solution::high_five(vec![

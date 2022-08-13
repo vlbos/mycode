@@ -130,7 +130,7 @@
 // }
 
 impl Solution {
-    pub fn   num_distinct_islands2(grid: Vec<Vec<i32>>) -> i32 {
+    pub fn num_distinct_islands2(grid: Vec<Vec<i32>>) -> i32 {
         // let rows = grid.len();
         // let cols = if rows == 0 { 0 } else { grid[0].len() };
         // let size = rows * cols;
@@ -187,7 +187,7 @@ impl Solution {
         // }
         // unique.len() as i32
         use std::collections::HashSet;
-       pub fn  dfs(
+        pub fn dfs(
             i: usize,
             j: usize,
             grid: &Vec<Vec<i32>>,
@@ -266,7 +266,7 @@ mod test {
     use crate::lc_matrix;
 
     #[test]
-   pub fn  test_num_distinct_islands2_1() {
+    pub fn test_num_distinct_islands2_1() {
         let grid = lc_matrix![
             [1, 1, 0, 0, 0],
             [1, 0, 0, 0, 0],
@@ -277,7 +277,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_num_distinct_islands2_2() {
+    pub fn test_num_distinct_islands2_2() {
         let grid = lc_matrix![
             [1, 1, 1, 0, 0],
             [1, 0, 0, 0, 1],

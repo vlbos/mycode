@@ -36,7 +36,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn   min_total_distance(grid: Vec<Vec<i32>>) -> i32 {
+    pub fn min_total_distance(grid: Vec<Vec<i32>>) -> i32 {
         // if grid.is_empty() {
         //     return 0;
         // }
@@ -106,7 +106,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_min_total_distance() {
+    pub fn test_min_total_distance() {
         let matrix = vec![
             vec![1, 0, 0, 0, 1],
             vec![0, 0, 0, 0, 0],

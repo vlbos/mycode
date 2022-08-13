@@ -39,7 +39,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn   split_looped_string(strs: Vec<String>) -> String {
+    pub fn split_looped_string(strs: Vec<String>) -> String {
         // let strs = strs
         //     .into_iter()
         //     .map(|s| {
@@ -98,7 +98,7 @@ mod test {
     use crate::solutions::util::test_tools::map_to_string;
 
     #[test]
-   pub fn  test_split_looped_string_1() {
+    pub fn test_split_looped_string_1() {
         assert_eq!(
             Solution::split_looped_string(map_to_string(&["abc", "xyz"])),
             String::from("zyxcba")

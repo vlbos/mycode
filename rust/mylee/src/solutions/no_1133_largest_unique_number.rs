@@ -39,7 +39,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   largest_unique_number(a: Vec<i32>) -> i32 {
+    pub fn largest_unique_number(a: Vec<i32>) -> i32 {
         let mut a = a;
         a.sort();
         let mut pre = a[a.len() - 1];
@@ -64,14 +64,14 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_largest_unique_number_1() {
+    pub fn test_largest_unique_number_1() {
         assert_eq!(
             8,
             Solution::largest_unique_number(vec![5, 7, 3, 9, 4, 9, 8, 3, 1])
         );
     }
     #[test]
-   pub fn  test_largest_unique_number_2() {
+    pub fn test_largest_unique_number_2() {
         assert_eq!(-1, Solution::largest_unique_number(vec![9, 9, 8, 8]));
     }
 }

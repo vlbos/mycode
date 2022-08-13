@@ -57,11 +57,11 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   smallest_equivalent_string(a: String, b: String, s: String) -> String {
+    pub fn smallest_equivalent_string(a: String, b: String, s: String) -> String {
         use std::collections::{HashMap, HashSet};
         let mut g = HashMap::new();
         let mut seen = HashSet::new();
-       pub fn  dfs(
+        pub fn dfs(
             c: char,
             min_n: char,
             g: &HashMap<char, Vec<char>>,
@@ -97,7 +97,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_smallest_equivalent_string_1() {
+    pub fn test_smallest_equivalent_string_1() {
         assert_eq!(
             String::from("makkek"),
             Solution::smallest_equivalent_string(
@@ -108,7 +108,7 @@ mod test {
         );
     }
     #[test]
-   pub fn  test_smallest_equivalent_string_2() {
+    pub fn test_smallest_equivalent_string_2() {
         assert_eq!(
             String::from("hdld"),
             Solution::smallest_equivalent_string(
@@ -119,7 +119,7 @@ mod test {
         );
     }
     #[test]
-   pub fn  test_smallest_equivalent_string_3() {
+    pub fn test_smallest_equivalent_string_3() {
         assert_eq!(
             String::from("aauaaaaada"),
             Solution::smallest_equivalent_string(

@@ -35,7 +35,7 @@
 // const DIRECTIONS: [(isize, isize); 4] = [(0, 1), (0, -1), (1, 0), (-1, 0)];
 
 impl Solution {
-    pub fn   max_killed_enemies(grid: Vec<Vec<char>>) -> i32 {
+    pub fn max_killed_enemies(grid: Vec<Vec<char>>) -> i32 {
         // let rows = grid.len();
         // let cols = if rows == 0 { 0 } else { grid[0].len() };
         // let mut dp: Vec<Vec<Vec<usize>>> = vec![vec![vec![0usize; cols + 2]; rows + 2]; 4];
@@ -128,7 +128,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_bomb_enemy() {
+    pub fn test_bomb_enemy() {
         let matrix = vec![
             vec!['0', 'E', '0', '0'],
             vec!['E', '0', 'W', 'E'],

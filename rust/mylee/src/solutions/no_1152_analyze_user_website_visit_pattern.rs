@@ -11,7 +11,7 @@
 
 // **Input:** username = \["joe","joe","joe","james","james","james","james","mary","mary","mary"\], timestamp = \[1,2,3,4,5,6,7,8,9,10\], website = \["home","about","career","home","cart","maps","home","home","about","career"\]
 // **Output:** \["home","about","career"\]
-// **Explanation:** 
+// **Explanation:**
 // The tuples in this example are:
 // \["joe", 1, "home"\]
 // \["joe", 2, "about"\]
@@ -54,25 +54,31 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   most_visited_pattern(
+    pub fn most_visited_pattern(
         username: Vec<String>,
         timestamp: Vec<i32>,
         website: Vec<String>,
     ) -> Vec<String> {
         use std::collections::HashMap;
-        let mut uw=HashMap::new();
-        let mut cnt=HashMap::new();
-        let mut timestamp :Vec<(i32,usize)>  =timestamp.into_iter().enumerate().map(|(i,v)| (v,i)).collect();    
+        let mut uw = HashMap::new();
+        let mut cnt = HashMap::new();
+        let mut timestamp: Vec<(i32, usize)> = timestamp
+            .into_iter()
+            .enumerate()
+            .map(|(i, v)| (v, i))
+            .collect();
         timestamp.sort();
-        for &(t,i) in &timestamp{
-            uw.entry(username[i].clone()).or_insert(Vec::new()).push(website[i].clone());
+        for &(t, i) in &timestamp {
+            uw.entry(username[i].clone())
+                .or_insert(Vec::new())
+                .push(website[i].clone());
         }
-        for v in uw.values(){
-            for w in v.windows(3){
-                *cnt.entry(w.to_vec()).or_insert(0)+=1;
+        for v in uw.values() {
+            for w in v.windows(3) {
+                *cnt.entry(w.to_vec()).or_insert(0) += 1;
             }
         }
-        let mut cnt:Vec<(i32,Vec<String>)>= cnt.iter().map(|(k,&v)|(-v,k.clone())).collect();
+        let mut cnt: Vec<(i32, Vec<String>)> = cnt.iter().map(|(k, &v)| (-v, k.clone())).collect();
         cnt.sort();
         cnt[0].1.clone()
     }
@@ -83,10 +89,26 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_most_visited_pattern_1() {
+    pub fn test_most_visited_pattern_1() {
         assert_eq!(
-            ["home","about","career"].into_iter().map(String::from).collect::<Vec<String>>(),
-            Solution::most_visited_pattern(["joe","joe","joe","james","james","james","james","mary","mary","mary"].into_iter().map(String::from).collect::<Vec<String>>(), vec![1,2,3,4,5,6,7,8,9,10], ["home","about","career","home","cart","maps","home","home","about","career"].into_iter().map(String::from).collect::<Vec<String>>())
+            ["home", "about", "career"]
+                .into_iter()
+                .map(String::from)
+                .collect::<Vec<String>>(),
+            Solution::most_visited_pattern(
+                ["joe", "joe", "joe", "james", "james", "james", "james", "mary", "mary", "mary"]
+                    .into_iter()
+                    .map(String::from)
+                    .collect::<Vec<String>>(),
+                vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                [
+                    "home", "about", "career", "home", "cart", "maps", "home", "home", "about",
+                    "career"
+                ]
+                .into_iter()
+                .map(String::from)
+                .collect::<Vec<String>>()
+            )
         );
     }
 }

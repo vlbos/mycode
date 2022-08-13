@@ -31,7 +31,7 @@
 // const CLOSE_TAG: &'static str = "</b>";
 
 impl Solution {
-    pub fn   bold_words(words: Vec<String>, s: String) -> String {
+    pub fn bold_words(words: Vec<String>, s: String) -> String {
         // let mut ranges = vec![];
         // let len = s.len();
         // if words.is_empty() {
@@ -118,7 +118,7 @@ mod test {
     use crate::lc_vec_s;
 
     #[test]
-   pub fn  test_bold_words_1() {
+    pub fn test_bold_words_1() {
         assert_eq!(
             Solution::bold_words(lc_vec_s!["abc", "123"], String::from("abcxyz123")),
             String::from("<b>abc</b>xyz<b>123</b>")
@@ -126,7 +126,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_bold_words_2() {
+    pub fn test_bold_words_2() {
         assert_eq!(
             Solution::bold_words(lc_vec_s!["aaa", "aab", "bc"], String::from("aaabbcc")),
             String::from("<b>aaabbc</b>c")

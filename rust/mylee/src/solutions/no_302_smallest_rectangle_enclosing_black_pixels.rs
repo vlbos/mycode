@@ -32,7 +32,7 @@
 // [Google](https://leetcode.ca/tags/#Google)
 // @lc code=start
 impl Solution {
-    pub fn   min_area(image: Vec<Vec<char>>, x: i32, y: i32) -> i32 {
+    pub fn min_area(image: Vec<Vec<char>>, x: i32, y: i32) -> i32 {
         // if image.is_empty() {
         //     return 0;
         // }
@@ -76,7 +76,7 @@ mod tests {
     use super::*;
 
     #[test]
-   pub fn  test_min_area() {
+    pub fn test_min_area() {
         let input = ["0010", "0110", "0100"]
             .iter()
             .map(|s| s.chars().collect::<Vec<char>>())

@@ -20,7 +20,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   encode(num: i32) -> String {
+    pub fn encode(num: i32) -> String {
         String::new()
     }
 }
@@ -30,7 +30,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_encode_1() {
+    pub fn test_encode_1() {
         assert_eq!(String::new(), Solution::encode(0));
     }
 }

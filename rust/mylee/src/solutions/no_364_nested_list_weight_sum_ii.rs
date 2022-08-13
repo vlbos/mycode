@@ -43,7 +43,7 @@ pub enum NestedInteger {
 // use std::collections::VecDeque;
 
 impl Solution {
-    pub fn   depth_sum_inverse(nested_list: Vec<NestedInteger>) -> i32 {
+    pub fn depth_sum_inverse(nested_list: Vec<NestedInteger>) -> i32 {
         // let root = &NestedInteger::List(nested_list);
         // let mut queue: VecDeque<(&NestedInteger, i32)> = VecDeque::new();
         // queue.push_back((root, 0));
@@ -74,7 +74,7 @@ impl Solution {
         //     }
         // }
         // sum
-       pub fn  dfsh(nested_list: &Vec<NestedInteger>) -> i32 {
+        pub fn dfsh(nested_list: &Vec<NestedInteger>) -> i32 {
             nested_list.into_iter().fold(0, |acc, x| {
                 acc.max(match x {
                     NestedInteger::Int(_) => 1,
@@ -82,7 +82,7 @@ impl Solution {
                 })
             })
         }
-       pub fn  dfs(nested_list: &Vec<NestedInteger>, level: i32) -> i32 {
+        pub fn dfs(nested_list: &Vec<NestedInteger>, level: i32) -> i32 {
             nested_list.into_iter().fold(0, |acc, x| {
                 acc + match x {
                     NestedInteger::Int(v) => v * level,
@@ -105,7 +105,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_depth_sum_inverse_1() {
+    pub fn test_depth_sum_inverse_1() {
         assert_eq!(
             Solution::depth_sum_inverse(vec![
                 List(vec![Int(1), Int(1)]),
@@ -117,7 +117,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_depth_sum_inverse_2() {
+    pub fn test_depth_sum_inverse_2() {
         assert_eq!(
             Solution::depth_sum_inverse(vec![Int(1), List(vec![Int(4), List(vec![Int(6)])])]),
             17

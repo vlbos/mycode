@@ -38,7 +38,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   num_k_len_substr_no_repeats(s: String, k: i32) -> i32 {
+    pub fn num_k_len_substr_no_repeats(s: String, k: i32) -> i32 {
         let mut ans = 0;
         let mut cnt = std::collections::HashMap::new();
         let k = k as usize;
@@ -74,14 +74,14 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_num_k_len_substr_no_repeats_1() {
+    pub fn test_num_k_len_substr_no_repeats_1() {
         assert_eq!(
             6,
             Solution::num_k_len_substr_no_repeats(String::from("havefunonleetcode"), 5)
         );
     }
     #[test]
-   pub fn  test_num_k_len_substr_no_repeats_2() {
+    pub fn test_num_k_len_substr_no_repeats_2() {
         assert_eq!(
             0,
             Solution::num_k_len_substr_no_repeats(String::from("home"), 5)

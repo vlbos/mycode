@@ -24,7 +24,7 @@ pub struct Solution;
 // use std::mem::swap;
 
 impl Solution {
-    pub fn   length_of_longest_substring_two_distinct(s: String) -> i32 {
+    pub fn length_of_longest_substring_two_distinct(s: String) -> i32 {
         // let chars = s.chars().collect::<Vec<char>>();
         // if chars.len() <= 2 {
         //     return chars.len() as i32;
@@ -79,14 +79,14 @@ mod tests {
     use super::*;
 
     #[test]
-   pub fn  test_length_of_longest_substring_two_distinct_1() {
+    pub fn test_length_of_longest_substring_two_distinct_1() {
         assert_eq!(
             Solution::length_of_longest_substring_two_distinct(String::from("eceba")),
             3
         );
     }
     #[test]
-   pub fn  test_length_of_longest_substring_two_distinct_2() {
+    pub fn test_length_of_longest_substring_two_distinct_2() {
         assert_eq!(
             Solution::length_of_longest_substring_two_distinct(String::from("ccaabbb")),
             5

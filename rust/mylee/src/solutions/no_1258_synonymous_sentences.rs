@@ -26,7 +26,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   generate_sentences(synonyms: Vec<Vec<String>>, text: String) -> Vec<String> {
+    pub fn generate_sentences(synonyms: Vec<Vec<String>>, text: String) -> Vec<String> {
         Vec::new()
     }
 }
@@ -36,7 +36,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_generate_sentences_1() {
+    pub fn test_generate_sentences_1() {
         assert_eq!(
             Vec::<String>::new(),
             Solution::generate_sentences(Vec::new(), String::new())

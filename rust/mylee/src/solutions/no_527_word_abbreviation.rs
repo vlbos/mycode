@@ -119,7 +119,7 @@
 // }
 
 impl Solution {
-    pub fn   words_abbreviation(dict: Vec<String>) -> Vec<String> {
+    pub fn words_abbreviation(dict: Vec<String>) -> Vec<String> {
         // let dict = dict
         //     .into_iter()
         //     .map(|v| v.chars().collect::<Vec<char>>())
@@ -228,7 +228,7 @@ mod test {
     use crate::solutions::util::test_tools::map_to_string;
 
     #[test]
-   pub fn  test_words_abbreviation_1() {
+    pub fn test_words_abbreviation_1() {
         let i = map_to_string(&[
             "like",
             "god",
@@ -247,14 +247,14 @@ mod test {
     }
 
     #[test]
-   pub fn  test_words_abbreviation_2() {
+    pub fn test_words_abbreviation_2() {
         let i = map_to_string(&["abcdefg", "abccefg", "abcckkg"]);
         let o = map_to_string(&["abcd2g", "abccefg", "abcckkg"]);
         assert_eq!(Solution::words_abbreviation(i), o);
     }
 
     #[test]
-   pub fn  test_words_abbreviation_3() {
+    pub fn test_words_abbreviation_3() {
         let i = map_to_string(&["met", "meet"]);
         let o = map_to_string(&["met", "m2t"]);
         assert_eq!(Solution::words_abbreviation(i), o);

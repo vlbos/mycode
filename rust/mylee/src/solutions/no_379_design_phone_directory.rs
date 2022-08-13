@@ -61,7 +61,7 @@ pub struct PhoneDirectory {
 impl PhoneDirectory {
     /** Initialize your data structure here
     @param maxNumbers - The maximum numbers that can be stored in the phone directory. */
-   pub fn  new(max_numbers: i32) -> Self {
+    pub fn new(max_numbers: i32) -> Self {
         // Self {
         //     size: max_numbers as usize,
         //     unused: (0..max_numbers).collect(),
@@ -73,7 +73,7 @@ impl PhoneDirectory {
 
     /** Provide a number which is not assigned to anyone.
     @return - Return an available number. Return -1 if none is available. */
-   pub fn  get(&mut self) -> i32 {
+    pub fn get(&mut self) -> i32 {
         // let mut res = -1;
         // for i in &self.unused {
         //     res = *i;
@@ -91,13 +91,13 @@ impl PhoneDirectory {
     }
 
     /** Check if a number is available or not. */
-   pub fn  check(&self, number: i32) -> bool {
+    pub fn check(&self, number: i32) -> bool {
         // self.unused.contains(&number)
         self.numbers.contains(&number)
     }
 
     /** Recycle or release a number. */
-   pub fn  release(&mut self, number: i32) {
+    pub fn release(&mut self, number: i32) {
         // self.unused.insert(number);
         self.numbers.insert(number);
     }

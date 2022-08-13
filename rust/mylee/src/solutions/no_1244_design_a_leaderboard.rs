@@ -46,17 +46,17 @@ pub struct Leaderboard {}
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl Leaderboard {
-   pub fn  new() -> Self {
+    pub fn new() -> Self {
         Self {}
     }
 
-   pub fn  add_score(&self, player_id: i32, score: i32) {}
+    pub fn add_score(&self, player_id: i32, score: i32) {}
 
-   pub fn  top(&self, k: i32) -> i32 {
+    pub fn top(&self, k: i32) -> i32 {
         0
     }
 
-   pub fn  reset(&self, player_id: i32) {}
+    pub fn reset(&self, player_id: i32) {}
 }
 
 /**
@@ -72,7 +72,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_leader_board_1() {
+    pub fn test_leader_board_1() {
         let k = 10;
         let player_id = 0;
         let score = 0;

@@ -29,7 +29,7 @@
 // @lc code=start
 
 impl Solution {
-    pub fn   can_attend_meetings(intervals: Vec<Vec<i32>>) -> bool {
+    pub fn can_attend_meetings(intervals: Vec<Vec<i32>>) -> bool {
         // intervals.sort_by_key(|v| v[0]);
         // if intervals.is_empty() {
         //     return true;
@@ -67,13 +67,13 @@ mod test {
     use super::Solution;
 
     #[test]
-   pub fn  test_can_attend_meetings_1() {
+    pub fn test_can_attend_meetings_1() {
         let src = vec![vec![0, 30], vec![5, 10], vec![15, 20]];
         assert!(!Solution::can_attend_meetings(src));
     }
 
     #[test]
-   pub fn  test_can_attend_meetings_2() {
+    pub fn test_can_attend_meetings_2() {
         let src = vec![vec![7, 10], vec![2, 4]];
         assert!(Solution::can_attend_meetings(src));
     }

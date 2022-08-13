@@ -32,7 +32,7 @@ pub struct Solution;
 
 impl Solution {
     #[allow(clippy::needless_range_loop)]
-    pub fn   find_strobogrammatic(n: i32) -> Vec<String> {
+    pub fn find_strobogrammatic(n: i32) -> Vec<String> {
         // if n <= 0 {
         //     return vec![];
         // }
@@ -95,7 +95,7 @@ mod tests {
     use super::*;
     use crate::solutions::util::test_tools::{assert_equivalent, map_to_string};
     #[test]
-   pub fn  test_find_strobogrammatic() {
+    pub fn test_find_strobogrammatic() {
         let tar = Solution::find_strobogrammatic(2);
         let src = map_to_string(&["11", "69", "88", "96"]);
         assert_equivalent(&tar, &src);

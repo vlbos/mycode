@@ -39,7 +39,7 @@ pub struct Solution;
 // const PAIR_CHARS: [(u64, u64); PAIR_CHAR_SIZE] = [(0, 0), (1, 1), (6, 9), (8, 8), (9, 6)];
 
 impl Solution {
-    pub fn   strobogrammatic_in_range(low: String, high: String) -> i32 {
+    pub fn strobogrammatic_in_range(low: String, high: String) -> i32 {
         // let ll = low.len();
         // let lh = high.len();
         // let low = low.parse().unwrap();
@@ -71,7 +71,7 @@ impl Solution {
                 find(&low, &high, d.to_string(), i, &mut ans);
             }
         }
-       pub fn  find(low: &String, high: &String, s: String, len: usize, ans: &mut i32) {
+        pub fn find(low: &String, high: &String, s: String, len: usize, ans: &mut i32) {
             if len == s.len() {
                 if len == low.len() && s < *low || len == high.len() && s > *high {
                     return;
@@ -151,13 +151,13 @@ impl Solution {
 mod tests {
     use super::*;
     #[test]
-   pub fn  test_strobogrammatic_in_range_1() {
+    pub fn test_strobogrammatic_in_range_1() {
         let src = Solution::strobogrammatic_in_range(String::from("0"), String::from("100"));
         assert_eq!(src, 7);
     }
 
     #[test]
-   pub fn  test_strobogrammatic_in_range_2() {
+    pub fn test_strobogrammatic_in_range_2() {
         let src = Solution::strobogrammatic_in_range(String::from("50"), String::from("100"));
         assert_eq!(src, 3);
     }

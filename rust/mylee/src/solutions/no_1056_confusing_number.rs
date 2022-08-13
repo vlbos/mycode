@@ -62,7 +62,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   confusing_number(n: i32) -> bool {
+    pub fn confusing_number(n: i32) -> bool {
         let ns = n.to_string();
         ns.chars()
             .filter(|x| "01869".chars().all(|c| c != *x))
@@ -77,19 +77,19 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_confusing_number_1() {
+    pub fn test_confusing_number_1() {
         assert!(Solution::confusing_number(6));
     }
     #[test]
-   pub fn  test_confusing_number_2() {
+    pub fn test_confusing_number_2() {
         assert!(Solution::confusing_number(89));
     }
     #[test]
-   pub fn  test_confusing_number_3() {
+    pub fn test_confusing_number_3() {
         assert!(!Solution::confusing_number(11));
     }
     #[test]
-   pub fn  test_confusing_number_4() {
+    pub fn test_confusing_number_4() {
         assert!(!Solution::confusing_number(25));
     }
 }

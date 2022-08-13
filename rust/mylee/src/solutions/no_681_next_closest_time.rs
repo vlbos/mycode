@@ -38,7 +38,7 @@
 // const ZERO_CHARCODE: i32 = '0' as i32;
 
 impl Solution {
-    pub fn   next_closest_time(time: String) -> String {
+    pub fn next_closest_time(time: String) -> String {
         // let mut digits = BTreeSet::<i32>::new();
         // let current_time = Solution::parse_time(&time);
         // for d in &current_time {
@@ -116,7 +116,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_next_closest_time_1() {
+    pub fn test_next_closest_time_1() {
         assert_eq!(
             Solution::next_closest_time(String::from("19:34")),
             String::from("19:39")
@@ -124,7 +124,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_next_closest_time_2() {
+    pub fn test_next_closest_time_2() {
         assert_eq!(
             Solution::next_closest_time(String::from("23:59")),
             String::from("22:22")
@@ -132,7 +132,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_next_closest_time_3() {
+    pub fn test_next_closest_time_3() {
         assert_eq!(
             Solution::next_closest_time(String::from("13:55")),
             String::from("15:11")
@@ -140,7 +140,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_next_closest_time_4() {
+    pub fn test_next_closest_time_4() {
         assert_eq!(
             Solution::next_closest_time(String::from("20:48")),
             String::from("22:00")

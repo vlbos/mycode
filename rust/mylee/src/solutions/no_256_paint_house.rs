@@ -37,7 +37,7 @@ pub struct Solution;
 // const COLOR_SIZE: usize = 3;
 
 impl Solution {
-    pub fn   min_cost(costs: Vec<Vec<i32>>) -> i32 {
+    pub fn min_cost(costs: Vec<Vec<i32>>) -> i32 {
         // let mut dp: [[i32; COLOR_SIZE]; 2] = [[0, 0, 0], [0, 0, 0]];
         // let mut iter = 0;
         // for c in costs {
@@ -79,7 +79,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_min_cost() {
+    pub fn test_min_cost() {
         let inputs = vec![vec![17, 2, 17], vec![16, 16, 5], vec![14, 3, 19]];
         assert_eq!(Solution::min_cost(inputs), 10);
     }

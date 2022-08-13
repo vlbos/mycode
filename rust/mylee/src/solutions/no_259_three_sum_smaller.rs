@@ -28,7 +28,7 @@
 // [Google](https://leetcode.ca/tags/#Google) [IBM](https://leetcode.ca/tags/#IBM) [Mathworks](https://leetcode.ca/tags/#Mathworks)
 // @lc code=start
 impl Solution {
-    pub fn   three_sum_smaller(mut nums: Vec<i32>, target: i32) -> i32 {
+    pub fn three_sum_smaller(mut nums: Vec<i32>, target: i32) -> i32 {
         nums.sort();
         if nums.len() < 3 {
             return 0;
@@ -60,7 +60,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_three_sum_smaller() {
+    pub fn test_three_sum_smaller() {
         let nums = vec![-2, 0, 1, 3];
         assert_eq!(Solution::three_sum_smaller(nums, 4), 3);
     }

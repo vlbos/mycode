@@ -42,7 +42,7 @@
 // const CLOSE_TAG: &'static str = "</b>";
 
 impl Solution {
-    pub fn   add_bold_tag(s: String, dict: Vec<String>) -> String {
+    pub fn add_bold_tag(s: String, dict: Vec<String>) -> String {
         // let mut ranges = vec![];
         // let len = s.len();
         // if dict.is_empty() {
@@ -134,7 +134,7 @@ mod test {
     use crate::lc_vec_s;
 
     #[test]
-   pub fn  test_add_bold_1tag_1() {
+    pub fn test_add_bold_1tag_1() {
         assert_eq!(
             Solution::add_bold_tag(String::from("abcxyz123"), lc_vec_s!["abc", "123"]),
             String::from("<b>abc</b>xyz<b>123</b>")
@@ -142,7 +142,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_add_bold_tag_2() {
+    pub fn test_add_bold_tag_2() {
         assert_eq!(
             Solution::add_bold_tag(String::from("aaabbcc"), lc_vec_s!["aaa", "aab", "bc"]),
             String::from("<b>aaabbc</b>c")

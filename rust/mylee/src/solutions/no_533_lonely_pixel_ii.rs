@@ -51,7 +51,7 @@
 // use std::collections::HashMap;
 
 impl Solution {
-    pub fn   find_black_pixel(picture: Vec<Vec<char>>, n: i32) -> i32 {
+    pub fn find_black_pixel(picture: Vec<Vec<char>>, n: i32) -> i32 {
         // let rows = picture.len();
         // let cols = if rows == 0 { 0 } else { picture[0].len() };
         // if rows == 0 || cols == 0 {
@@ -130,7 +130,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_find_black_pixel_1() {
+    pub fn test_find_black_pixel_1() {
         let p = vec![
             vec!['W', 'B', 'W', 'B', 'B', 'W'],
             vec!['W', 'B', 'W', 'B', 'B', 'W'],

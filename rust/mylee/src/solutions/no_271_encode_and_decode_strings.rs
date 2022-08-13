@@ -246,11 +246,11 @@ pub struct Codec {}
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl Codec {
-    pub fn    new() -> Self {
+    pub fn new() -> Self {
         Self {}
     }
 
-    pub fn    encode(&self, strs: Vec<String>) -> String {
+    pub fn encode(&self, strs: Vec<String>) -> String {
         // let mut trie = TrieTree::new();
         // for (i, s) in strs.into_iter().enumerate() {
         //     let chars = s.chars().collect::<Vec<_>>();
@@ -267,7 +267,7 @@ impl Codec {
         strs.join("|")
     }
 
-    pub fn    decode(&self, s: String) -> Vec<String> {
+    pub fn decode(&self, s: String) -> Vec<String> {
         // let trie = TrieTree::deserialize(&s);
         // trie.retrieve()
         let mut ans = Vec::new();
@@ -306,7 +306,7 @@ mod test {
     use crate::solutions::util::test_tools::map_to_string;
 
     #[test]
-    pub fn    test_encode_decode() {
+    pub fn test_encode_decode() {
         let inputs = map_to_string(&["abc", "acd", "abcde", "efg"]);
         let codec = Codec {};
         let message = codec.encode(inputs.clone());

@@ -38,7 +38,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   count_elements(arr: Vec<i32>) -> i32 {
+    pub fn count_elements(arr: Vec<i32>) -> i32 {
         0
     }
 }
@@ -48,7 +48,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_count_elements_1() {
+    pub fn test_count_elements_1() {
         assert_eq!(0, Solution::count_elements(Vec::new()));
     }
 }

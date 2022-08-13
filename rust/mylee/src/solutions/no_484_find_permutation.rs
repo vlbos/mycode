@@ -43,7 +43,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn   find_permutation(s: String) -> Vec<i32> {
+    pub fn find_permutation(s: String) -> Vec<i32> {
         // let chars = s.chars().collect::<Vec<char>>();
         // let len = chars.len();
         // let mut res = (1..=(len + 1) as i32).into_iter().collect::<Vec<i32>>();
@@ -90,12 +90,12 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_find_permutation_1() {
+    pub fn test_find_permutation_1() {
         assert_eq!(Solution::find_permutation(String::from("I")), vec![1, 2]);
     }
 
     #[test]
-   pub fn  test_find_permutation_2() {
+    pub fn test_find_permutation_2() {
         assert_eq!(
             Solution::find_permutation(String::from("DI")),
             vec![2, 1, 3]

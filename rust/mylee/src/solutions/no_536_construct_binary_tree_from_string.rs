@@ -61,7 +61,7 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 impl Solution {
-    pub fn   str2tree(s: String) -> Option<Rc<RefCell<TreeNode>>> {
+    pub fn str2tree(s: String) -> Option<Rc<RefCell<TreeNode>>> {
         // let chars = {
         //     let mut cs = vec!['('];
         //     cs.extend(s.chars());
@@ -165,7 +165,7 @@ mod test {
     use crate::tree;
 
     #[test]
-   pub fn  test_str2tree_1() {
+    pub fn test_str2tree_1() {
         let tree = tree![4, 2, 6, 3, 1, 5];
         assert_eq!(Solution::str2tree(String::from("4(2(3)(1))(6(5))")), tree);
     }

@@ -41,7 +41,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn   is_convex(points: Vec<Vec<i32>>) -> bool {
+    pub fn is_convex(points: Vec<Vec<i32>>) -> bool {
         // let points = points.into_iter().map(|v| (v[0], v[1])).collect::<Vec<_>>();
         // let len = points.len();
         // if len <= 3 {
@@ -63,7 +63,7 @@ impl Solution {
         // return true;
         let mut points = points;
         points.extend_from_within(..2);
-        let mut pre =0;
+        let mut pre = 0;
         for w in points.windows(3) {
             let mut dxy = Vec::new();
             for d in w.windows(2) {
@@ -94,7 +94,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_is_convex_1() {
+    pub fn test_is_convex_1() {
         assert!(Solution::is_convex(vec![
             vec![0, 0],
             vec![0, 1],
@@ -104,7 +104,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_is_convex_2() {
+    pub fn test_is_convex_2() {
         assert!(!Solution::is_convex(vec![
             vec![0, 0],
             vec![0, 10],

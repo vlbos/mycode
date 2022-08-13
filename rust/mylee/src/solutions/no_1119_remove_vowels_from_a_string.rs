@@ -32,7 +32,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   remove_vowels(mut s: String) -> String {
+    pub fn remove_vowels(mut s: String) -> String {
         for c in "aeiou".chars() {
             s = s.replace(c.to_string().as_str(), "");
         }
@@ -45,14 +45,14 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_remove_vowels_1() {
+    pub fn test_remove_vowels_1() {
         assert_eq!(
             String::from("ltcdscmmntyfrcdrs"),
             Solution::remove_vowels(String::from("leetcodeisacommunityforcoders"))
         );
     }
     #[test]
-   pub fn  test_remove_vowels_2() {
+    pub fn test_remove_vowels_2() {
         assert_eq!(
             String::new(),
             Solution::remove_vowels(String::from("aeiou"))

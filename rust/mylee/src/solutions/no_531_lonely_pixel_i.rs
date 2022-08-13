@@ -35,7 +35,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn   find_lonely_pixel(picture: Vec<Vec<char>>) -> i32 {
+    pub fn find_lonely_pixel(picture: Vec<Vec<char>>) -> i32 {
         // let rows = picture.len();
         // let cols = if rows == 0 { 0 } else { picture[0].len() };
         // if rows == 0 || cols == 0 {
@@ -92,7 +92,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_find_lonely_pixel_1() {
+    pub fn test_find_lonely_pixel_1() {
         assert_eq!(
             Solution::find_lonely_pixel(vec![
                 vec!['W', 'W', 'B'],

@@ -52,7 +52,7 @@
 // use std::collections::{HashMap, HashSet};
 
 impl Solution {
-    pub fn   path_sum(nums: Vec<i32>) -> i32 {
+    pub fn path_sum(nums: Vec<i32>) -> i32 {
         // if nums.is_empty() {
         //     return 0;
         // }
@@ -81,7 +81,7 @@ impl Solution {
         for &num in &nums {
             nodes.insert(num / 10, num % 10);
         }
-       pub fn  dfs(root: i32, mut cur: i32, nodes: &HashMap<i32, i32>, ans: &mut i32) {
+        pub fn dfs(root: i32, mut cur: i32, nodes: &HashMap<i32, i32>, ans: &mut i32) {
             if !nodes.contains_key(&root) {
                 return;
             }
@@ -111,17 +111,17 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_path_sum_1() {
+    pub fn test_path_sum_1() {
         assert_eq!(Solution::path_sum(vec![113, 215, 221]), 12);
     }
 
     #[test]
-   pub fn  test_path_sum_2() {
+    pub fn test_path_sum_2() {
         assert_eq!(Solution::path_sum(vec![113, 221]), 4);
     }
 
     #[test]
-   pub fn  test_path_sum_3() {
+    pub fn test_path_sum_3() {
         assert_eq!(Solution::path_sum(vec![111, 217, 221, 315, 415]), 20);
     }
 }

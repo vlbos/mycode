@@ -41,7 +41,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   expand(s: String) -> Vec<String> {
+    pub fn expand(s: String) -> Vec<String> {
         let mut ans = vec![String::new()];
         let mut pre = 0;
         for (i, _) in s.match_indices(&['{', '}']) {
@@ -75,7 +75,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_expand_1() {
+    pub fn test_expand_1() {
         assert_eq!(
             ["acdf", "acef", "bcdf", "bcef"]
                 .into_iter()
@@ -85,7 +85,7 @@ mod test {
         );
     }
     #[test]
-   pub fn  test_expand_2() {
+    pub fn test_expand_2() {
         assert_eq!(
             vec!["abcd".to_string()],
             Solution::expand(String::from("abcd"))

@@ -67,7 +67,7 @@
 // @lc code=start
 
 impl Solution {
-    pub fn   sequence_reconstruction(org: Vec<i32>, seqs: Vec<Vec<i32>>) -> bool {
+    pub fn sequence_reconstruction(org: Vec<i32>, seqs: Vec<Vec<i32>>) -> bool {
         // use std::collections::{HashMap, HashSet};
         // let mut org_set = org
         //     .iter()
@@ -178,7 +178,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_sequence_reconstruction_1() {
+    pub fn test_sequence_reconstruction_1() {
         assert!(!Solution::sequence_reconstruction(
             vec![1, 2, 3],
             vec![vec![1, 2], vec![1, 3]]
@@ -186,7 +186,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_sequence_reconstruction_2() {
+    pub fn test_sequence_reconstruction_2() {
         assert!(!Solution::sequence_reconstruction(
             vec![1, 2, 3],
             vec![vec![1, 3]]
@@ -194,7 +194,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_sequence_reconstruction_3() {
+    pub fn test_sequence_reconstruction_3() {
         assert!(!Solution::sequence_reconstruction(
             vec![1, 2, 3],
             vec![vec![1, 2]]
@@ -202,7 +202,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_sequence_reconstruction_4() {
+    pub fn test_sequence_reconstruction_4() {
         assert!(Solution::sequence_reconstruction(
             vec![1, 2, 3],
             vec![vec![1, 2], vec![1, 3], vec![2, 3]]
@@ -210,7 +210,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_sequence_reconstruction_5() {
+    pub fn test_sequence_reconstruction_5() {
         assert!(Solution::sequence_reconstruction(
             vec![4, 1, 5, 2, 6, 3],
             vec![vec![5, 2, 6, 3], vec![4, 1, 5, 2]]

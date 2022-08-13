@@ -1,51 +1,83 @@
-/*
-A dieter consumes calories[i] calories on the i-th day.
+// 1176\. Diet Plan Performance
+// ============================
 
-Given an integer k, for every consecutive sequence of k days (calories[i], calories[i+1], ..., calories[i+k-1] for all 0 <= i <= n-k), they look at T, the total calories consumed during that sequence of k days (calories[i] + calories[i+1] + ... + calories[i+k-1]):
+// A dieter consumes `calories[i]` calories on the `i`\-th day.
 
-    If T < lower, they performed poorly on their diet and lose 1 point;
-    If T > upper, they performed well on their diet and gain 1 point;
-    Otherwise, they performed normally and there is no change in points.
+// Given an integer `k`, for **every** consecutive sequence of `k` days (`calories[i], calories[i+1], ..., calories[i+k-1]` for all `0 <= i <= n-k`),
+// they look at _T_, the total calories consumed during that sequence of `k` days (`calories[i] + calories[i+1] + ... + calories[i+k-1]`):
 
-Initially, the dieter has zero points. Return the total number of points the dieter has after dieting for calories.length days.
+// *   If `T < lower`, they performed poorly on their diet and lose 1 point;
+// *   If `T > upper`, they performed well on their diet and gain 1 point;
+// *   Otherwise, they performed normally and there is no change in points.
 
-Note that the total points can be negative.
+// Initially, the dieter has zero points. Return the total number of points the dieter has after dieting for `calories.length` days.
 
+// Note that the total points can be negative.
 
-Example 1:
-Input: calories = [1,2,3,4,5], k = 1, lower = 3, upper = 3
-Output: 0
-Explanation: Since k = 1, we consider each element of the array separately and compare it to lower and upper.
-calories[0] and calories[1] are less than lower so 2 points are lost.
-calories[3] and calories[4] are greater than upper so 2 points are gained.
+// **Example 1:**
 
-Example 2:
-Input: calories = [3,2], k = 2, lower = 0, upper = 1
-Output: 1
-Explanation: Since k = 2, we consider subarrays of length 2.
-calories[0] + calories[1] > upper so 1 point is gained.
+// **Input:** calories = \[1,2,3,4,5\], k = 1, lower = 3, upper = 3
+// **Output:** 0
+// **Explanation**: Since k = 1, we consider each element of the array separately and compare it to lower and upper.
+// calories\[0\] and calories\[1\] are less than lower so 2 points are lost.
+// calories\[3\] and calories\[4\] are greater than upper so 2 points are gained.
 
-Example 3:
-Input: calories = [6,5,0,0], k = 2, lower = 1, upper = 5
-Output: 0
-Explanation:
-calories[0] + calories[1] > upper so 1 point is gained.
-lower <= calories[1] + calories[2] <= upper so no change in points.
-calories[2] + calories[3] < lower so 1 point is lost.
+// **Example 2:**
 
+// **Input:** calories = \[3,2\], k = 2, lower = 0, upper = 1
+// **Output:** 1
+// **Explanation**: Since k = 2, we consider subarrays of length 2.
+// calories\[0\] + calories\[1\] > upper so 1 point is gained.
 
-Constraints:
-    1 <= k <= calories.length <= 10^5
-    0 <= calories[i] <= 20000
-    0 <= lower <= upper
+// **Example 3:**
 
+// **Input:** calories = \[6,5,0,0\], k = 2, lower = 1, upper = 5
+// **Output:** 0
+// **Explanation**:
+// calories\[0\] + calories\[1\] > upper so 1 point is gained.
+// lower <= calories\[1\] + calories\[2\] <= upper so no change in points.
+// calories\[2\] + calories\[3\] < lower so 1 point is lost.
 
-*/
+// **Constraints:**
+
+// *   `1 <= k <= calories.length <= 10^5`
+// *   `0 <= calories[i] <= 20000`
+// *   `0 <= lower <= upper`
+
+// ### Difficulty:
+
+// Easy
+
+// ### Lock:
+
+// Prime
+
+// ### Company:
+
+// [Amazon](https://leetcode.ca/tags/#Amazon)
+
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   diet_plan_performance(calories: Vec<i32>, k: i32, lower: i32, upper: i32) -> i32 {
-        0
+    pub fn diet_plan_performance(calories: Vec<i32>, k: i32, lower: i32, upper: i32) -> i32 {
+        let mut ans = 0;
+        let k = k as usize;
+        let mut sum = calories[..k].iter().sum::<i32>();
+        if sum < lower {
+            ans -= 1;
+        } else if sum > upper {
+            ans += 1;
+        }
+        for (i, &c) in calories[k..].iter().enumerate() {
+            sum -= calories[i];
+            sum += c;
+            if sum < lower {
+                ans -= 1;
+            } else if sum > upper {
+                ans += 1;
+            }
+        }
+        ans
     }
 }
 
@@ -54,7 +86,23 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_diet_plan_performance_1() {
-        assert_eq!(0, Solution::diet_plan_performance(Vec::new(), 0, 0, 0));
+    pub fn test_diet_plan_performance_1() {
+        assert_eq!(
+            0,
+            Solution::diet_plan_performance(vec![1, 2, 3, 4, 5], 1, 3, 3)
+        );
+    }
+
+    #[test]
+    pub fn test_diet_plan_performance_2() {
+        assert_eq!(1, Solution::diet_plan_performance(vec![3, 2], 2, 0, 1));
+    }
+
+    #[test]
+    pub fn test_diet_plan_performance_3() {
+        assert_eq!(
+            0,
+            Solution::diet_plan_performance(vec![6, 5, 0, 0], 2, 1, 5)
+        );
     }
 }

@@ -20,7 +20,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   is_valid_palindrome(s: String, k: i32) -> bool {
+    pub fn is_valid_palindrome(s: String, k: i32) -> bool {
         true
     }
 }
@@ -29,7 +29,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_is_valid_palindrome_1() {
+    pub fn test_is_valid_palindrome_1() {
         assert!(Solution::is_valid_palindrome(String::new(), 0));
     }
 }

@@ -31,7 +31,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   shortest_distance_color(colors: Vec<i32>, queries: Vec<Vec<i32>>) -> Vec<i32> {
+    pub fn shortest_distance_color(colors: Vec<i32>, queries: Vec<Vec<i32>>) -> Vec<i32> {
         Vec::new()
     }
 }
@@ -41,7 +41,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_shortest_distance_color_1() {
+    pub fn test_shortest_distance_color_1() {
         assert_eq!(
             Vec::<i32>::new(),
             Solution::shortest_distance_color(Vec::new(), Vec::new())

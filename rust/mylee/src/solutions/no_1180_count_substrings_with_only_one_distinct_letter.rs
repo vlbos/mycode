@@ -26,7 +26,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   count_letters(s: String) -> i32 {
+    pub fn count_letters(s: String) -> i32 {
         0
     }
 }
@@ -36,7 +36,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_count_letters_1() {
+    pub fn test_count_letters_1() {
         assert_eq!(0, Solution::count_letters(String::new()));
     }
 }

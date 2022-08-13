@@ -25,7 +25,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn   generate_abbreviations(word: String) -> Vec<String> {
+    pub fn generate_abbreviations(word: String) -> Vec<String> {
         // let chars = word.chars().collect::<Vec<char>>();
         // let len = chars.len();
         // let size = 1 << len;
@@ -94,7 +94,7 @@ mod test {
     use crate::solutions::util::test_tools::assert_equivalent;
 
     #[test]
-   pub fn  test_generate_abbreviations() {
+    pub fn test_generate_abbreviations() {
         let word = String::from("word");
         assert_equivalent(
             &Solution::generate_abbreviations(word),

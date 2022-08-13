@@ -44,7 +44,7 @@
 // }
 
 impl Solution {
-    pub fn   multiply(a: Vec<Vec<i32>>, b: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+    pub fn multiply(a: Vec<Vec<i32>>, b: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
         // let a_rows = a.len();
         // let multi_lines = b.len();
         // let b_cols = if multi_lines == 0 { 0 } else { b[0].len() };
@@ -135,7 +135,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_multiply() {
+    pub fn test_multiply() {
         let a = vec![vec![1, 0, 0], vec![-1, 0, 3]];
         let b = vec![vec![7, 0, 0], vec![0, 0, 0], vec![0, 0, 1]];
         assert_eq!(

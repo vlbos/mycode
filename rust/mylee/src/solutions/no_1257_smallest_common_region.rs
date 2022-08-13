@@ -32,7 +32,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   find_smallest_region(
+    pub fn find_smallest_region(
         regions: Vec<Vec<String>>,
         region1: String,
         region2: String,
@@ -46,7 +46,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_find_smallest_region_1() {
+    pub fn test_find_smallest_region_1() {
         assert_eq!(
             String::new(),
             Solution::find_smallest_region(Vec::new(), String::new(), String::new())

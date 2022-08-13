@@ -51,7 +51,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   assign_bikes(workers: Vec<Vec<i32>>, bikes: Vec<Vec<i32>>) -> Vec<i32> {
+    pub fn assign_bikes(workers: Vec<Vec<i32>>, bikes: Vec<Vec<i32>>) -> Vec<i32> {
         use std::collections::{BTreeMap, HashMap};
         let mut buckets = BTreeMap::new();
         for (i, w) in workers.iter().enumerate() {
@@ -78,14 +78,14 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_assign_bikes_1() {
+    pub fn test_assign_bikes_1() {
         assert_eq!(
             vec![1, 0],
             Solution::assign_bikes(vec![vec![0, 0], vec![2, 1]], vec![vec![1, 2], vec![3, 3]])
         );
     }
     #[test]
-   pub fn  test_assign_bikes_2() {
+    pub fn test_assign_bikes_2() {
         assert_eq!(
             vec![0, 2, 1],
             Solution::assign_bikes(

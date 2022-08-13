@@ -69,7 +69,7 @@
 // }
 
 impl Solution {
-    pub fn   min_cost_ii(costs: Vec<Vec<i32>>) -> i32 {
+    pub fn min_cost_ii(costs: Vec<Vec<i32>>) -> i32 {
         // if costs.len() == 0 {
         //     return 0;
         // }
@@ -110,7 +110,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_min_cost_ii() {
+    pub fn test_min_cost_ii() {
         let costs = vec![vec![1, 5, 3], vec![2, 9, 4]];
         assert_eq!(Solution::min_cost_ii(costs), 5);
     }

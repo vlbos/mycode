@@ -50,7 +50,7 @@ pub struct ZigzagIterator {
 impl ZigzagIterator {
     /** initialize your data structure here. */
 
-    pub fn    new(v1: Vec<i32>, v2: Vec<i32>) -> Self {
+    pub fn new(v1: Vec<i32>, v2: Vec<i32>) -> Self {
         // let vs = vec![v1, v2];
         // let mut end_line = 0;
         // let mut line_max = usize::min_value();
@@ -81,7 +81,7 @@ impl ZigzagIterator {
         Self { q }
     }
 
-    pub fn    next(&mut self) -> i32 {
+    pub fn next(&mut self) -> i32 {
         // if !self.has_next(){
         // return -1;
         // }
@@ -99,7 +99,7 @@ impl ZigzagIterator {
         self.q.pop_front().unwrap()
     }
 
-    pub fn    has_next(&self) -> bool {
+    pub fn has_next(&self) -> bool {
         // let line_max = self.vs[self.ei].len();
         // loop {
         //     if (self.i > self.ei && self.j + 1 == line_max) || self.j >= line_max {
@@ -128,7 +128,7 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn    test_zigzag_iterator1() {
+    pub fn test_zigzag_iterator1() {
         let mut zz = ZigzagIterator::new(vec![1, 2], vec![3, 4, 5, 6]);
         let mut res = vec![];
         while zz.has_next() {
@@ -138,7 +138,7 @@ mod test {
     }
 
     #[test]
-    pub fn    test_zigzag_iterator2() {
+    pub fn test_zigzag_iterator2() {
         let mut zz = ZigzagIterator::new(vec![], vec![]);
         let mut res = vec![];
         while zz.has_next() {

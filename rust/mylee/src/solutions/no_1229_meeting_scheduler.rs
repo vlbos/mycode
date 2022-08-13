@@ -30,7 +30,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   min_available_duration(
+    pub fn min_available_duration(
         slots1: Vec<Vec<i32>>,
         slots2: Vec<Vec<i32>>,
         duration: i32,
@@ -43,7 +43,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_min_available_duration_1() {
+    pub fn test_min_available_duration_1() {
         assert_eq!(
             Vec::<i32>::new(),
             Solution::min_available_duration(Vec::new(), Vec::new(), 0)

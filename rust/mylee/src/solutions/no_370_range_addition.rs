@@ -41,7 +41,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn   get_modified_array(length: i32, updates: Vec<Vec<i32>>) -> Vec<i32> {
+    pub fn get_modified_array(length: i32, updates: Vec<Vec<i32>>) -> Vec<i32> {
         // let mut res = vec![0; length as usize];
         // for u in updates {
         //     res[u[0] as usize] += u[2];
@@ -80,7 +80,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_range_addition() {
+    pub fn test_range_addition() {
         assert_eq!(
             Solution::get_modified_array(5, vec![vec![1, 3, 2], vec![2, 4, 3], vec![0, 2, -2]]),
             vec![-2, 0, 3, 5, 3]

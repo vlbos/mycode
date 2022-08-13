@@ -26,7 +26,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   delete_tree_nodes(nodes: i32, parent: Vec<i32>, value: Vec<i32>) -> i32 {
+    pub fn delete_tree_nodes(nodes: i32, parent: Vec<i32>, value: Vec<i32>) -> i32 {
         0
     }
 }
@@ -36,7 +36,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_delete_tree_nodes_1() {
+    pub fn test_delete_tree_nodes_1() {
         assert_eq!(0, Solution::delete_tree_nodes(0, Vec::new(), Vec::new()));
     }
 }

@@ -47,7 +47,7 @@ impl Solution {
     //         || (c1 == c2 && Solution::is_center(c1))
     // }
 
-    pub fn   is_strobogrammatic(num: String) -> bool {
+    pub fn is_strobogrammatic(num: String) -> bool {
         // if num.is_empty() {
         //     return true;
         // }
@@ -104,15 +104,15 @@ impl Solution {
 mod tests {
     use super::*;
     #[test]
-   pub fn  test_is_strobogrammatic_1() {
+    pub fn test_is_strobogrammatic_1() {
         assert!(Solution::is_strobogrammatic(String::from("69")));
     }
     #[test]
-   pub fn  test_is_strobogrammatic_2() {
+    pub fn test_is_strobogrammatic_2() {
         assert!(Solution::is_strobogrammatic(String::from("88")));
     }
     #[test]
-   pub fn  test_is_strobogrammatic_3() {
+    pub fn test_is_strobogrammatic_3() {
         assert!(!Solution::is_strobogrammatic(String::from("692")));
     }
 }

@@ -52,7 +52,7 @@ pub struct ValidWordAbbr {
 }
 
 impl ValidWordAbbr {
-    pub fn    new(dictionary: Vec<String>) -> Self {
+    pub fn new(dictionary: Vec<String>) -> Self {
         // let mut dict: HashMap<String, (usize, String)> = HashMap::new();
         // for s in dictionary {
         //     let abbr = ValidWordAbbr::to_abbr(&s);
@@ -78,7 +78,7 @@ impl ValidWordAbbr {
         Self { dic }
     }
 
-    pub fn    is_unique(&self, word: String) -> bool {
+    pub fn is_unique(&self, word: String) -> bool {
         // self.values
         //     .get(&ValidWordAbbr::to_abbr(&word))
         //     .map_or(true, |c| c.0 == 1 && c.1 == word)
@@ -117,7 +117,7 @@ mod test {
     use crate::solutions::util::test_tools::map_to_string;
 
     #[test]
-    pub fn    test_valid_word_abbr() {
+    pub fn test_valid_word_abbr() {
         let input = map_to_string(&["deer", "door", "cake", "card"]);
         let validator = ValidWordAbbr::new(input);
         assert!(!validator.is_unique(String::from("dear")));

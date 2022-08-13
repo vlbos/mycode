@@ -71,7 +71,7 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 impl Solution {
-    pub fn   find_closest_leaf(root: Option<Rc<RefCell<TreeNode>>>, k: i32) -> i32 {
+    pub fn find_closest_leaf(root: Option<Rc<RefCell<TreeNode>>>, k: i32) -> i32 {
         // let (graph, leaves) = Solution::tree_to_graph(root);
         // let mut deque = VecDeque::new();
         // deque.push_back(k);
@@ -90,7 +90,7 @@ impl Solution {
         // }
         // unreachable!()
         use std::collections::HashMap;
-       pub fn  dfs(
+        pub fn dfs(
             root: &Option<Rc<RefCell<TreeNode>>>,
             k: i32,
             parent: &Option<Rc<RefCell<TreeNode>>>,
@@ -196,20 +196,20 @@ mod tests {
     use crate::tree;
     use std::collections::HashSet;
     #[test]
-   pub fn  test_find_closest_leaf_1() {
+    pub fn test_find_closest_leaf_1() {
         let tree = tree![1, 3, 2];
         let maybe = HashSet::from([2, 3]);
         assert!(maybe.contains(&Solution::find_closest_leaf(tree, 1)));
     }
 
     #[test]
-   pub fn  test_find_closest_leaf_2() {
+    pub fn test_find_closest_leaf_2() {
         let tree = tree![1];
         assert_eq!(Solution::find_closest_leaf(tree, 1), 1);
     }
 
     #[test]
-   pub fn  test_find_closest_leaf_3() {
+    pub fn test_find_closest_leaf_3() {
         let tree = tree![1, 2, 3, 4, null, null, null, 5, null, 6];
         assert_eq!(Solution::find_closest_leaf(tree, 2), 3);
     }

@@ -37,7 +37,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   anagram_mappings(a: Vec<i32>, b: Vec<i32>) -> Vec<i32> {
+    pub fn anagram_mappings(a: Vec<i32>, b: Vec<i32>) -> Vec<i32> {
         // Vec::new()
         let bm: std::collections::HashMap<i32, i32> =
             b.iter().enumerate().map(|(i, &v)| (v, i as i32)).collect();
@@ -50,7 +50,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_anagram_mappings_1() {
+    pub fn test_anagram_mappings_1() {
         assert_eq!(
             Vec::<i32>::new(),
             Solution::anagram_mappings(Vec::new(), Vec::new())

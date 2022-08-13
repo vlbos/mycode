@@ -44,7 +44,7 @@
 // }
 
 impl Solution {
-    pub fn   valid_word_abbreviation(word: String, abbr: String) -> bool {
+    pub fn valid_word_abbreviation(word: String, abbr: String) -> bool {
         let (bw, ba) = (word.as_bytes(), abbr.as_bytes());
         let (mut i, mut j) = (0, 0);
         while i < bw.len() && j < ba.len() {
@@ -139,7 +139,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_valid_word_abbreviation_1() {
+    pub fn test_valid_word_abbreviation_1() {
         assert!(Solution::valid_word_abbreviation(
             String::from("internationalization"),
             String::from("i12iz4n")
@@ -147,7 +147,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_valid_word_abbreviation_2() {
+    pub fn test_valid_word_abbreviation_2() {
         assert!(!Solution::valid_word_abbreviation(
             String::from("apple"),
             String::from("a2e")
@@ -155,7 +155,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_valid_word_abbreviation_3() {
+    pub fn test_valid_word_abbreviation_3() {
         assert!(!Solution::valid_word_abbreviation(
             String::from("hi"),
             String::from("1")

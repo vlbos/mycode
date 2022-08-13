@@ -35,7 +35,7 @@ pub struct TwoSum {
  */
 impl TwoSum {
     /** Initialize your data structure here. */
-   pub fn  new() -> Self {
+    pub fn new() -> Self {
         // TwoSum {
         //     values: vec![],
         //     counts: vec![],
@@ -47,7 +47,7 @@ impl TwoSum {
 
     #[allow(clippy::comparison_chain)]
     /** Add the number to an internal data structure.. */
-   pub fn  add(&mut self, number: i32) {
+    pub fn add(&mut self, number: i32) {
         // let mut start = 0;
         // let mut end = self.values.len();
         // while start < end {
@@ -71,7 +71,7 @@ impl TwoSum {
 
     #[allow(clippy::comparison_chain)]
     /** Find if there exists any pair of numbers which sum is equal to the value. */
-   pub fn  find(&self, value: i32) -> bool {
+    pub fn find(&self, value: i32) -> bool {
         // let mut i = 0i32;
         // let mut j = (self.values.len() as i32) - 1;
         // while i < j {
@@ -105,7 +105,7 @@ impl TwoSum {
 mod tests {
     use super::*;
     #[test]
-   pub fn  test_two_sum_data_structure_1() {
+    pub fn test_two_sum_data_structure_1() {
         let mut two_sum = TwoSum::new();
         two_sum.add(1);
         two_sum.add(3);
@@ -115,7 +115,7 @@ mod tests {
     }
 
     #[test]
-   pub fn  test_two_sum_data_structure_2() {
+    pub fn test_two_sum_data_structure_2() {
         let mut two_sum = TwoSum::new();
         two_sum.add(3);
         two_sum.add(1);
@@ -125,7 +125,7 @@ mod tests {
     }
 
     #[test]
-   pub fn  test_two_sum_data_structure_3() {
+    pub fn test_two_sum_data_structure_3() {
         let mut two_sum = TwoSum::new();
         two_sum.add(2);
         two_sum.add(3);

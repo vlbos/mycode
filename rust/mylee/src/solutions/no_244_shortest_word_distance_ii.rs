@@ -39,7 +39,7 @@ pub struct WordDistance {
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl WordDistance {
-    pub fn    new(words: Vec<String>) -> Self {
+    pub fn new(words: Vec<String>) -> Self {
         // let mut dict: HashMap<String, Vec<usize>> = HashMap::new();
         // for (i, w) in words.iter().cloned().enumerate() {
         //     dict.entry(w)
@@ -54,7 +54,7 @@ impl WordDistance {
         Self { k2i }
     }
 
-    pub fn    shortest(&self, word1: String, word2: String) -> i32 {
+    pub fn shortest(&self, word1: String, word2: String) -> i32 {
         // let mut i = 0;
         // let mut j = 0;
         // let indices1 = self.dict.get(&word1).unwrap();
@@ -97,7 +97,7 @@ mod tests {
     use crate::solutions::util::test_tools::map_to_string;
 
     #[test]
-    pub fn    test_word_distance_ii_1() {
+    pub fn test_word_distance_ii_1() {
         let words = map_to_string(&["practice", "makes", "perfect", "coding", "makes"]);
         let wd = WordDistance::new(words);
         assert_eq!(
@@ -106,7 +106,7 @@ mod tests {
         );
     }
     #[test]
-    pub fn    test_word_distance_ii_2() {
+    pub fn test_word_distance_ii_2() {
         let words = map_to_string(&["practice", "makes", "perfect", "coding", "makes"]);
         let wd = WordDistance::new(words);
 

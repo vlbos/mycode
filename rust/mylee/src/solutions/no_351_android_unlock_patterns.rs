@@ -134,7 +134,7 @@
 // }
 
 impl Solution {
-    pub fn   number_of_patterns(m: i32, n: i32) -> i32 {
+    pub fn number_of_patterns(m: i32, n: i32) -> i32 {
         // let mut rs = vec![Route::new()];
         // let mut count = 0;
         // while let Some(r) = rs.pop() {
@@ -198,12 +198,12 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_number_of_patterns_1() {
+    pub fn test_number_of_patterns_1() {
         assert_eq!(Solution::number_of_patterns(1, 1), 9);
     }
 
     #[test]
-   pub fn  test_number_of_patterns_2() {
+    pub fn test_number_of_patterns_2() {
         assert_eq!(Solution::number_of_patterns(1, 2), 65);
     }
 }

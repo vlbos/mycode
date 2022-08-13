@@ -10,7 +10,7 @@ pub struct TreeNode {
 
 impl TreeNode {
     #[inline]
-    pub fn   new(val: i32) -> Self {
+    pub fn new(val: i32) -> Self {
         TreeNode {
             val,
             left: None,
@@ -19,7 +19,7 @@ impl TreeNode {
     }
 }
 
-pub fn   to_tree(vec: Vec<Option<i32>>) -> Option<Rc<RefCell<TreeNode>>> {
+pub fn to_tree(vec: Vec<Option<i32>>) -> Option<Rc<RefCell<TreeNode>>> {
     use std::collections::VecDeque;
     let head = Some(Rc::new(RefCell::new(TreeNode::new(vec[0].unwrap()))));
     let mut queue = VecDeque::new();
@@ -61,7 +61,7 @@ mod tests {
     // use super::*;
 
     #[test]
-   pub fn  test_macro() {
+    pub fn test_macro() {
         let _empty_tree: Option<i32> = tree![];
         tree![1,];
         tree![1, 1];

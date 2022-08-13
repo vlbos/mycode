@@ -48,7 +48,7 @@
 // }
 
 impl Solution {
-    pub fn   generate_palindromes(s: String) -> Vec<String> {
+    pub fn generate_palindromes(s: String) -> Vec<String> {
         // let mut counter = CharCounter::new();
         // for c in s.chars() {
         //     count(&mut counter, c);
@@ -166,7 +166,7 @@ mod test {
     use crate::solutions::util::test_tools::{assert_equivalent, map_to_string};
 
     #[test]
-   pub fn  test_generate_palindromes() {
+    pub fn test_generate_palindromes() {
         let target = map_to_string(&["abba", "baab"]);
         assert_equivalent(
             &Solution::generate_palindromes(String::from("aabb")),

@@ -80,13 +80,13 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 impl Solution {
-    pub fn   check_equal_tree(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
+    pub fn check_equal_tree(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
         // let root_sum = Solution::sum_tree_rec(root.clone());
         // if root_sum.is_none() || root_sum.unwrap() % 2 == 1 {
         //     return false;
         // }
         // Solution::check_equal_tree_rec(root, &root_sum).1
-       pub fn  dfs(root: &Option<Rc<RefCell<TreeNode>>>, parent_sum: i32, ans: &mut bool) -> i32 {
+        pub fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, parent_sum: i32, ans: &mut bool) -> i32 {
             if root.is_none() {
                 return 0;
             }
@@ -169,7 +169,7 @@ mod test {
     use crate::tree;
 
     #[test]
-   pub fn  test_check_equal_tree_1() {
+    pub fn test_check_equal_tree_1() {
         assert_eq!(
             Solution::check_equal_tree(tree![5, 10, 10, null, null, 2, 3]),
             true
@@ -177,19 +177,19 @@ mod test {
     }
 
     #[test]
-   pub fn  test_check_equal_tree_2() {
+    pub fn test_check_equal_tree_2() {
         let tree = tree![1, 2, 10, null, null, 2, 20];
         assert_eq!(Solution::check_equal_tree(tree), false);
     }
 
     #[test]
-   pub fn  test_check_equal_tree_3() {
+    pub fn test_check_equal_tree_3() {
         let tree = tree![1, null, 2, 2];
         assert_eq!(Solution::check_equal_tree(tree), false);
     }
 
     #[test]
-   pub fn  test_check_equal_tree_4() {
+    pub fn test_check_equal_tree_4() {
         let tree = tree![2, 1, 3, 0, 2, null, null, null, null, 2, null, 1, null, null, 1];
         assert_eq!(Solution::check_equal_tree(tree), true);
     }

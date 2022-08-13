@@ -82,8 +82,8 @@ pub struct Solution {}
 use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
-    pub fn   maximum_average_subtree(root: Option<Rc<RefCell<TreeNode>>>) -> f64 {
-       pub fn  dfs(root: &Option<Rc<RefCell<TreeNode>>>, ans: &mut f64) -> (i32, i32) {
+    pub fn maximum_average_subtree(root: Option<Rc<RefCell<TreeNode>>>) -> f64 {
+        pub fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, ans: &mut f64) -> (i32, i32) {
             if root.is_none() {
                 return (0, 0);
             }
@@ -105,7 +105,7 @@ mod test {
     use super::*;
     use crate::tree;
     #[test]
-   pub fn  test_maximum_average_subtree_1() {
+    pub fn test_maximum_average_subtree_1() {
         assert_eq!(6.0000, Solution::maximum_average_subtree(tree![5, 6, 1]));
     }
 }

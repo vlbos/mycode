@@ -73,7 +73,7 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 impl Solution {
-    pub fn   upside_down_binary_tree(
+    pub fn upside_down_binary_tree(
         root: Option<Rc<RefCell<TreeNode>>>,
     ) -> Option<Rc<RefCell<TreeNode>>> {
         if root.is_none() {
@@ -146,7 +146,7 @@ mod tests {
     use super::*;
     use crate::tree;
     #[test]
-   pub fn  test_binary_tree_upside_down_basic() {
+    pub fn test_binary_tree_upside_down_basic() {
         assert_eq!(
             Solution::upside_down_binary_tree(tree![1, 2, 3, 4, 5]),
             tree![4, 5, 2, null, null, 3, 1]

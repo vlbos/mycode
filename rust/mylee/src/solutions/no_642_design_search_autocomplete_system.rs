@@ -184,13 +184,13 @@ pub struct Trie {
     branches: HashMap<char, Option<Box<Trie>>>,
 }
 impl Trie {
-    pub fn    new() -> Self {
+    pub fn new() -> Self {
         Self {
             times: 0,
             branches: HashMap::new(),
         }
     }
-    pub fn    insert(&mut self, s: &String, times: i32) {
+    pub fn insert(&mut self, s: &String, times: i32) {
         let mut t = self;
         for c in s.chars() {
             t = t
@@ -202,7 +202,7 @@ impl Trie {
         }
         t.times += times;
     }
-    pub fn    lookup(&self, s: &String) -> Vec<(String, i32)> {
+    pub fn lookup(&self, s: &String) -> Vec<(String, i32)> {
         let mut list = Vec::new();
         let mut t = self;
         for c in s.chars() {
@@ -215,7 +215,7 @@ impl Trie {
         self.traverse(s, t, &mut list);
         list
     }
-    pub fn    traverse(&self, s: &String, t: &Trie, list: &mut Vec<(String, i32)>) {
+    pub fn traverse(&self, s: &String, t: &Trie, list: &mut Vec<(String, i32)>) {
         if t.times > 0 {
             list.push((s.clone(), t.times));
         }
@@ -247,7 +247,7 @@ pub struct AutocompleteSystem {
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl AutocompleteSystem {
-    pub fn    new(sentences: Vec<String>, times: Vec<i32>) -> Self {
+    pub fn new(sentences: Vec<String>, times: Vec<i32>) -> Self {
         // let sentence = vec![];
         // let root = Trie::new();
         // let mut acs = Self {
@@ -272,7 +272,7 @@ impl AutocompleteSystem {
         }
     }
 
-    pub fn    input(&mut self, c: char) -> Vec<String> {
+    pub fn input(&mut self, c: char) -> Vec<String> {
         // if c == '#' {
         //     self.root.add(&self.sentence, 1);
         //     self.sentence.clear();
@@ -344,7 +344,7 @@ mod test {
     use crate::lc_vec_s;
 
     #[test]
-    pub fn    test_autocomplete_system_1() {
+    pub fn test_autocomplete_system_1() {
         let mut acs = AutocompleteSystem::new(
             lc_vec_s!["i love you", "island", "iroman", "i love leetcode"],
             vec![5, 3, 2, 2],
@@ -376,7 +376,7 @@ mod test {
     }
 
     #[test]
-    pub fn    test_autocomplete_system_2() {
+    pub fn test_autocomplete_system_2() {
         let mut acs = AutocompleteSystem::new(lc_vec_s!["abc", "abbc", "a"], vec![3, 3, 3]);
         assert_eq!(acs.input('b'), Vec::<String>::new());
         assert_eq!(acs.input('c'), Vec::<String>::new());

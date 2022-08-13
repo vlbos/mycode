@@ -24,7 +24,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   to_hexspeak(num: String) -> String {
+    pub fn to_hexspeak(num: String) -> String {
         String::new()
     }
 }
@@ -34,7 +34,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_to_hexspeak_1() {
+    pub fn test_to_hexspeak_1() {
         assert_eq!(String::new(), Solution::to_hexspeak(String::new()));
     }
 }

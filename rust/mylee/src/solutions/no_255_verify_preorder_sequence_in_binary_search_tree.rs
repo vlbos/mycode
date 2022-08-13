@@ -42,8 +42,8 @@ pub struct Solution;
 // @lc code=start
 
 impl Solution {
-    pub fn   verify_preorder(preorder: Vec<i32>) -> bool {
-       pub fn  verify_preorder(arr: &[i32]) -> bool {
+    pub fn verify_preorder(preorder: Vec<i32>) -> bool {
+        pub fn verify_preorder(arr: &[i32]) -> bool {
             if arr.is_empty() {
                 return true;
             }
@@ -69,13 +69,13 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_verify_preorder_1() {
+    pub fn test_verify_preorder_1() {
         let src = vec![5, 2, 6, 1, 3];
         assert!(!Solution::verify_preorder(src));
     }
 
     #[test]
-   pub fn  test_verify_preorder_2() {
+    pub fn test_verify_preorder_2() {
         let src = vec![5, 2, 1, 3, 6];
         assert!(Solution::verify_preorder(src));
     }

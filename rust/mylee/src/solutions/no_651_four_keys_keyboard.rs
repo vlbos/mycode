@@ -49,7 +49,7 @@
 // @star
 // @lc code=start
 impl Solution {
-    pub fn   max_a(n: i32) -> i32 {
+    pub fn max_a(n: i32) -> i32 {
         // let n = n as usize;
         // let mut dp = vec![0usize, 1];
         // for k in 2..=n {
@@ -78,7 +78,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_max_a_1() {
+    pub fn test_max_a_1() {
         assert_eq!(Solution::max_a(3), 3);
         assert_eq!(Solution::max_a(7), 9);
     }

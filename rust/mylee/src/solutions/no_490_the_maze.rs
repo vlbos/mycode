@@ -73,7 +73,7 @@
 // const MOVEMENTS: &[Pos; 4] = &[(0, 1), (0, -1), (1, 0), (-1, 0)];
 
 impl Solution {
-    pub fn   has_path(maze: Vec<Vec<i32>>, start: Vec<i32>, destination: Vec<i32>) -> bool {
+    pub fn has_path(maze: Vec<Vec<i32>>, start: Vec<i32>, destination: Vec<i32>) -> bool {
         // let rows = maze.len();
         // let cols = if rows == 0 { 0 } else { maze[0].len() };
         // if rows == 0 || cols == 0 {
@@ -126,7 +126,7 @@ impl Solution {
         //     }
         // }
         // false
-       pub fn  dfs(maze: &mut Vec<Vec<i32>>, start: &Vec<i32>, destination: &Vec<i32>) -> bool {
+        pub fn dfs(maze: &mut Vec<Vec<i32>>, start: &Vec<i32>, destination: &Vec<i32>) -> bool {
             if start == destination {
                 return true;
             }
@@ -167,7 +167,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_has_path_1() {
+    pub fn test_has_path_1() {
         let maze = vec![
             vec![0, 0, 1, 0, 0],
             vec![0, 0, 0, 0, 0],
@@ -179,7 +179,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_has_path_2() {
+    pub fn test_has_path_2() {
         let maze = vec![
             vec![0, 0, 1, 0, 0],
             vec![0, 0, 0, 0, 0],

@@ -48,7 +48,7 @@
 // use std::collections::HashMap;
 
 impl Solution {
-    pub fn   kill_process(pid: Vec<i32>, ppid: Vec<i32>, kill: i32) -> Vec<i32> {
+    pub fn kill_process(pid: Vec<i32>, ppid: Vec<i32>, kill: i32) -> Vec<i32> {
         // let len = pid.len();
         // if len == 0 {
         //     return vec![];
@@ -77,7 +77,7 @@ impl Solution {
             g.entry(p).or_insert(Vec::new()).push(c);
         }
 
-       pub fn  dfs(g: &HashMap<i32, Vec<i32>>, kill: i32, ans: &mut Vec<i32>) {
+        pub fn dfs(g: &HashMap<i32, Vec<i32>>, kill: i32, ans: &mut Vec<i32>) {
             ans.push(kill);
             if let Some(ids) = g.get(&kill) {
                 for &id in ids {
@@ -100,7 +100,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_kill_process_1() {
+    pub fn test_kill_process_1() {
         assert_eq!(
             Solution::kill_process(vec![1, 3, 10, 5], vec![3, 0, 5, 3], 5),
             [5, 10]

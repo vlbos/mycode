@@ -36,24 +36,27 @@
 
 // [Google](https://leetcode.ca/tags/#Google)
 
-
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   can_convert(str1: String, str2: String) -> bool {
-        if str1==str2{
-        return true;
+    pub fn can_convert(str1: String, str2: String) -> bool {
+        if str1 == str2 {
+            return true;
         }
-        let mut m=std::collections::HashMap::new();
-        for (c1,c2) in str1.chars().zip(str2.chars()){
-            if let Some(&c)=m.get(&c1){
-                if c!=c2{
-                return false;
+        let mut m = std::collections::HashMap::new();
+        for (c1, c2) in str1.chars().zip(str2.chars()) {
+            if let Some(&c) = m.get(&c1) {
+                if c != c2 {
+                    return false;
                 }
             }
-            m.insert(c1,c2);
+            m.insert(c1, c2);
         }
-        m.values().cloned().collect::<std::collections::HashSet<char>>().len() <26
+        m.values()
+            .cloned()
+            .collect::<std::collections::HashSet<char>>()
+            .len()
+            < 26
     }
 }
 
@@ -62,11 +65,17 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_can_convert_1() {
-        assert!(Solution::can_convert(String::from("aabcc"), String::from("ccdee")));
+    pub fn test_can_convert_1() {
+        assert!(Solution::can_convert(
+            String::from("aabcc"),
+            String::from("ccdee")
+        ));
     }
-   #[test]
-   pub fn  test_can_convert_2() {
-        assert!(!Solution::can_convert(String::from("leetcode"), String::from("codeleet")));
+    #[test]
+    pub fn test_can_convert_2() {
+        assert!(!Solution::can_convert(
+            String::from("leetcode"),
+            String::from("codeleet")
+        ));
     }
 }

@@ -128,7 +128,7 @@ impl Solution {
     //     x * cols + y
     // }
 
-    pub fn   num_islands2(m: i32, n: i32, positions: Vec<Vec<i32>>) -> Vec<i32> {
+    pub fn num_islands2(m: i32, n: i32, positions: Vec<Vec<i32>>) -> Vec<i32> {
         // let m = m as usize;
         // let n = n as usize;
         // let points = (m * n) as usize;
@@ -155,7 +155,7 @@ impl Solution {
         let mut count = 0;
         let mut map = HashMap::new();
         let dirs = [0, 1, 0, -1, 0];
-       pub fn  find(mut pos: i32, map: &mut HashMap<i32, i32>) -> i32 {
+        pub fn find(mut pos: i32, map: &mut HashMap<i32, i32>) -> i32 {
             let mut father = *map.get(&pos).unwrap();
             while father != *map.get(&father).unwrap() {
                 father = *map.get(&father).unwrap();
@@ -198,7 +198,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_num_islands2() {
+    pub fn test_num_islands2() {
         let positions = [[0, 0], [0, 1], [1, 2], [2, 1]]
             .iter()
             .map(|x| x.to_vec())

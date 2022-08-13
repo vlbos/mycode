@@ -23,7 +23,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   minimum_moves(arr: Vec<i32>) -> i32 {
+    pub fn minimum_moves(arr: Vec<i32>) -> i32 {
         0
     }
 }
@@ -33,7 +33,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_minimum_moves_1() {
+    pub fn test_minimum_moves_1() {
         assert_eq!(0, Solution::minimum_moves(Vec::new()));
     }
 }

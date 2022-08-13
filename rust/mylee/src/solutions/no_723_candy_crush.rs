@@ -48,7 +48,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn   candy_crush(mut board: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+    pub fn candy_crush(mut board: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
         // let rows = board.len();
         // let cols = if rows == 0 { 0 } else { board[0].len() };
         // if rows * cols == 0 {
@@ -187,7 +187,7 @@ mod test {
     use crate::lc_matrix;
 
     #[test]
-   pub fn  test_candy_crush_1() {
+    pub fn test_candy_crush_1() {
         let board = lc_matrix![
             [110, 5, 112, 113, 114],
             [210, 211, 5, 213, 214],

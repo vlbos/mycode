@@ -29,7 +29,7 @@
 // use std::collections::{HashMap, HashSet};
 
 impl Solution {
-    pub fn   is_reflected(points: Vec<Vec<i32>>) -> bool {
+    pub fn is_reflected(points: Vec<Vec<i32>>) -> bool {
         // let points = points
         //     .into_iter()
         //     .map(|v| (v[0], v[1]))
@@ -96,12 +96,12 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_line_reflection_1() {
+    pub fn test_line_reflection_1() {
         assert!(Solution::is_reflected(vec![vec![1, 1], vec![-1, 1]]));
     }
 
     #[test]
-   pub fn  test_line_reflection_2() {
+    pub fn test_line_reflection_2() {
         assert!(!Solution::is_reflected(vec![vec![1, 1], vec![-1, -1]]));
     }
 }

@@ -33,7 +33,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   number_of_ways(num_people: i32) -> i32 {
+    pub fn number_of_ways(num_people: i32) -> i32 {
         0
     }
 }
@@ -42,7 +42,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_number_of_ways_1() {
+    pub fn test_number_of_ways_1() {
         assert_eq!(0, Solution::number_of_ways(0));
     }
 }

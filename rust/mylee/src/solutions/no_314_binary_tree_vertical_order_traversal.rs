@@ -109,7 +109,7 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 impl Solution {
-    pub fn   vertical_order(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Vec<i32>> {
+    pub fn vertical_order(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Vec<i32>> {
         //     let mut levels: HashMap<i32, Vec<i32>> = HashMap::new();
         //     let mut queue = VecDeque::new();
         //     queue.push_back((0, root));
@@ -132,7 +132,7 @@ impl Solution {
         //     ret.into_iter().map(|(_, v)| v).collect()
         use std::collections::BTreeMap;
         use std::collections::BTreeSet;
-       pub fn  dfs(
+        pub fn dfs(
             root: &Option<Rc<RefCell<TreeNode>>>,
             i: i32,
             j: i32,
@@ -165,7 +165,7 @@ mod test {
     use crate::tree;
 
     #[test]
-   pub fn  test_binary_tree_vertical_order_traversal_1() {
+    pub fn test_binary_tree_vertical_order_traversal_1() {
         let tree = tree![3, 9, 20, null, null, 15, 7];
         assert_eq!(
             Solution::vertical_order(tree),
@@ -174,7 +174,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_binary_tree_vertical_order_traversal_2() {
+    pub fn test_binary_tree_vertical_order_traversal_2() {
         let tree = tree![3, 9, 8, 4, 0, 1, 7];
         assert_eq!(
             Solution::vertical_order(tree),
@@ -183,7 +183,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_binary_tree_vertical_order_traversal_3() {
+    pub fn test_binary_tree_vertical_order_traversal_3() {
         let tree = tree![3, 9, 8, 4, 0, 1, 7, null, null, null, 2, 5];
         assert_eq!(
             Solution::vertical_order(tree),
@@ -192,7 +192,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_binary_tree_vertical_order_traversal_4() {
+    pub fn test_binary_tree_vertical_order_traversal_4() {
         let tree = None;
         assert_eq!(Solution::vertical_order(tree), Vec::<Vec<i32>>::new());
     }

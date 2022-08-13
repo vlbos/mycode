@@ -25,7 +25,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   min_knight_moves(x: i32, y: i32) -> i32 {
+    pub fn min_knight_moves(x: i32, y: i32) -> i32 {
         0
     }
 }
@@ -34,7 +34,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_min_knight_moves_1() {
+    pub fn test_min_knight_moves_1() {
         assert_eq!(0, Solution::min_knight_moves(0, 0));
     }
 }

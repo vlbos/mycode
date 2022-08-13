@@ -38,7 +38,7 @@ pub struct MovingAverage {
  */
 impl MovingAverage {
     /** Initialize your data structure here. */
-    pub fn    new(size: i32) -> Self {
+    pub fn new(size: i32) -> Self {
         MovingAverage {
             window: VecDeque::new(),
             sum: 0,
@@ -46,7 +46,7 @@ impl MovingAverage {
         }
     }
 
-    pub fn    next(&mut self, val: i32) -> f64 {
+    pub fn next(&mut self, val: i32) -> f64 {
         if self.window.len() == self.size {
             if let Some(first) = self.window.pop_front() {
                 self.sum -= first;
@@ -68,7 +68,7 @@ mod test {
     use crate::solutions::util::test_tools::assert_feq;
 
     #[test]
-    pub fn    test_moveing_average_1() {
+    pub fn test_moveing_average_1() {
         let mut m = MovingAverage::new(3);
         assert_feq(m.next(1), 1f64);
         assert_feq(m.next(10), ((1 + 10) as f64) / 2f64);
@@ -77,7 +77,7 @@ mod test {
     }
 
     #[test]
-    pub fn    test_moveing_average_2() {
+    pub fn test_moveing_average_2() {
         let mut m = MovingAverage::new(0);
         assert_feq(m.next(1), 0f64);
         assert_feq(m.next(10), 0f64);

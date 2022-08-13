@@ -44,7 +44,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   shortest_way(source: String, target: String) -> i32 {
+    pub fn shortest_way(source: String, target: String) -> i32 {
         let mut ans = 1;
         let mut pos = None;
         for c in target.chars() {
@@ -66,21 +66,21 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_shortest_way_1() {
+    pub fn test_shortest_way_1() {
         assert_eq!(
             2,
             Solution::shortest_way(String::from("abc"), String::from("abcbc"))
         );
     }
     #[test]
-   pub fn  test_shortest_way_2() {
+    pub fn test_shortest_way_2() {
         assert_eq!(
             -1,
             Solution::shortest_way(String::from("abc"), String::from("acdbc"))
         );
     }
     #[test]
-   pub fn  test_shortest_way_3() {
+    pub fn test_shortest_way_3() {
         assert_eq!(
             3,
             Solution::shortest_way(String::from("xyz"), String::from("xzyxz"))

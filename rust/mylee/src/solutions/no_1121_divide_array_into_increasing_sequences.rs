@@ -39,7 +39,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   can_divide_into_subsequences(nums: Vec<i32>, k: i32) -> bool {
+    pub fn can_divide_into_subsequences(nums: Vec<i32>, k: i32) -> bool {
         let (mut cur, mut groups) = (1, 1);
         for num in nums.windows(2) {
             cur = if num[0] < num[1] { 1 } else { cur + 1 };
@@ -54,7 +54,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_can_divide_into_subsequences_1() {
+    pub fn test_can_divide_into_subsequences_1() {
         assert!(Solution::can_divide_into_subsequences(
             vec![1, 2, 2, 3, 3, 4, 4],
             3
@@ -62,7 +62,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_can_divide_into_subsequences_2() {
+    pub fn test_can_divide_into_subsequences_2() {
         assert!(!Solution::can_divide_into_subsequences(
             vec![5, 6, 6, 7, 8],
             3

@@ -58,7 +58,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn   parse_ternary(expression: String) -> String {
+    pub fn parse_ternary(expression: String) -> String {
         // let chars = expression.chars().collect::<Vec<_>>();
         // if chars.len() <= 0 {
         //     return String::from("");
@@ -109,17 +109,17 @@ pub struct Solution;
 mod test {
     use super::*;
     #[test]
-   pub fn  test_parse_ternary_1() {
+    pub fn test_parse_ternary_1() {
         assert_eq!(Solution::parse_ternary(String::from("T?2:3")), "2");
     }
 
     #[test]
-   pub fn  test_parse_ternary_2() {
+    pub fn test_parse_ternary_2() {
         assert_eq!(Solution::parse_ternary(String::from("F?1:T?4:5")), "4");
     }
 
     #[test]
-   pub fn  test_parse_ternary_3() {
+    pub fn test_parse_ternary_3() {
         assert_eq!(Solution::parse_ternary(String::from("T?T?F:5:3")), "F");
     }
 }

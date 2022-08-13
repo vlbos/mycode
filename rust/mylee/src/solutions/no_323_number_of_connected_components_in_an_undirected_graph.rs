@@ -90,7 +90,7 @@
 // }
 
 impl Solution {
-    pub fn   count_components(n: i32, edges: Vec<Vec<i32>>) -> i32 {
+    pub fn count_components(n: i32, edges: Vec<Vec<i32>>) -> i32 {
         // let mut uf = UnionFind::new(n as usize);
         // for e in edges {
         //     let p = e[0] as usize;
@@ -106,7 +106,7 @@ impl Solution {
             g[v].push(u);
         }
         let mut visited = vec![false; n];
-       pub fn  dfs(u: usize, g: &Vec<Vec<usize>>, visited: &mut Vec<bool>) {
+        pub fn dfs(u: usize, g: &Vec<Vec<usize>>, visited: &mut Vec<bool>) {
             visited[u] = true;
             for &v in &g[u] {
                 if !visited[v] {
@@ -134,7 +134,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_count_components_1() {
+    pub fn test_count_components_1() {
         assert_eq!(
             Solution::count_components(5, vec![vec![0, 1], vec![1, 2], vec![3, 4]]),
             2
@@ -142,7 +142,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_count_components_2() {
+    pub fn test_count_components_2() {
         assert_eq!(
             Solution::count_components(5, vec![vec![0, 1], vec![1, 2], vec![2, 3], vec![3, 4]]),
             1

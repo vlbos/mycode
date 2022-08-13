@@ -81,7 +81,7 @@ pub struct TicTacToe {
  */
 impl TicTacToe {
     /** Initialize your data structure here. */
-   pub fn  new(n: i32) -> Self {
+    pub fn new(n: i32) -> Self {
         // TicTacToe {
         //     rows: vec![Some(0); n as usize],
         //     cols: vec![Some(0); n as usize],
@@ -102,7 +102,7 @@ impl TicTacToe {
             0: No one wins.
             1: Player 1 wins.
             2: Player 2 wins. */
-   pub fn  make_a_move(&mut self, row: i32, col: i32, player: i32) -> i32 {
+    pub fn make_a_move(&mut self, row: i32, col: i32, player: i32) -> i32 {
         // let size = self.size;
         // if (TicTacToe::update_line(&mut self.rows[row as usize], player, size) == 0)
         //     && (TicTacToe::update_line(&mut self.cols[col as usize], player, size) == 0)
@@ -185,7 +185,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_tic_tac_toe() {
+    pub fn test_tic_tac_toe() {
         let mut toe = TicTacToe::new(3);
         assert_eq!(toe.make_a_move(0, 0, 1), 0);
         assert_eq!(toe.make_a_move(0, 2, 2), 0);

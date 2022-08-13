@@ -44,7 +44,7 @@
 pub const INF: i32 = 2147483647;
 
 impl Solution {
-    pub fn   walls_and_gates(rooms: &mut Vec<Vec<i32>>) {
+    pub fn walls_and_gates(rooms: &mut Vec<Vec<i32>>) {
         // if rooms.is_empty() {
         //     return;
         // }
@@ -63,7 +63,13 @@ impl Solution {
         }
         let (m, n) = (rooms.len(), rooms[0].len());
         let mut visited = vec![vec![false; n]; m];
-       pub fn  dfs(i: i32, j: i32, d: i32, rooms: &mut Vec<Vec<i32>>, visited: &mut Vec<Vec<bool>>) {
+        pub fn dfs(
+            i: i32,
+            j: i32,
+            d: i32,
+            rooms: &mut Vec<Vec<i32>>,
+            visited: &mut Vec<Vec<bool>>,
+        ) {
             let (m, n) = (rooms.len() as i32, rooms[0].len() as i32);
             if i < 0 || i >= m || j < 0 || j >= n {
                 return;
@@ -129,7 +135,7 @@ mod tests {
     use super::*;
 
     #[test]
-   pub fn  test_walls_and_gates() {
+    pub fn test_walls_and_gates() {
         let mut src: Vec<Vec<i32>> = vec![
             vec![INF, -1, 0, INF],
             vec![INF, INF, INF, -1],

@@ -33,7 +33,7 @@
 // use std::collections::HashMap;
 
 impl Solution {
-    pub fn   can_win(s: String) -> bool {
+    pub fn can_win(s: String) -> bool {
         // let mut memo = HashMap::new();
         // Solution::can_win_rec(&mut memo, s)
         for (i, _) in s.as_bytes().windows(2).enumerate().filter(|x| x.1 == b"++") {
@@ -82,7 +82,7 @@ mod test {
     use super::Solution;
 
     #[test]
-   pub fn  test_can_win() {
+    pub fn test_can_win() {
         assert!(Solution::can_win(String::from("++++")));
     }
 }

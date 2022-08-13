@@ -58,11 +58,11 @@ use std::rc::Rc;
 // }
 
 impl Solution {
-    pub fn   closest_k_values(root: Option<Rc<RefCell<TreeNode>>>, target: f64, k: i32) -> Vec<i32> {
+    pub fn closest_k_values(root: Option<Rc<RefCell<TreeNode>>>, target: f64, k: i32) -> Vec<i32> {
         // let sorted = Solution::inorder_traversal(root);
         // Solution::find_closest(&sorted, target, k as isize)
         let mut ans = Vec::new();
-       pub fn  in_order(
+        pub fn in_order(
             root: &Option<Rc<RefCell<TreeNode>>>,
             target: f64,
             reverse: bool,
@@ -193,14 +193,14 @@ mod test {
     use crate::tree;
 
     #[test]
-   pub fn  test_closest_k_values() {
+    pub fn test_closest_k_values() {
         let tree = tree![4, 2, 5, 1, 3];
 
         assert_equivalent(&Solution::closest_k_values(tree, 3.714286, 2), &[3, 4]);
     }
 
     #[test]
-   pub fn  test_closest_k_values1() {
+    pub fn test_closest_k_values1() {
         let tree = tree![8, 1];
         assert_equivalent(&Solution::closest_k_values(tree, 6., 1), &[8]);
     }

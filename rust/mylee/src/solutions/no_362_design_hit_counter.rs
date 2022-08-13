@@ -67,7 +67,7 @@ pub struct HitCounter {
  */
 impl HitCounter {
     /** Initialize your data structure here. */
-    pub fn   new() -> Self {
+    pub fn new() -> Self {
         // Self {
         //     roll: vec![0; 300],
         //     count: 0,
@@ -82,7 +82,7 @@ impl HitCounter {
 
     /** Record a hit.
     @param timestamp - The current timestamp (in seconds granularity). */
-    pub fn   hit(&mut self, timestamp: i32) {
+    pub fn hit(&mut self, timestamp: i32) {
         // self.clear(timestamp);
         // self.roll[((timestamp - 1) % 300) as usize] += 1;
         // self.count += 1;
@@ -98,7 +98,7 @@ impl HitCounter {
 
     /** Return the number of hits in the past 5 minutes.
     @param timestamp - The current timestamp (in seconds granularity). */
-    pub fn   get_hits(&self, timestamp: i32) -> i32 {
+    pub fn get_hits(&self, timestamp: i32) -> i32 {
         // self.clear(timestamp);
         // return self.count;
         self.time
@@ -132,7 +132,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_hit_counter_1() {
+    pub fn test_hit_counter_1() {
         let mut counter = HitCounter::new();
         counter.hit(1);
         counter.hit(2);
@@ -144,7 +144,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_hit_counter_2() {
+    pub fn test_hit_counter_2() {
         let mut counter = HitCounter::new();
         counter.hit(100);
         counter.hit(101);

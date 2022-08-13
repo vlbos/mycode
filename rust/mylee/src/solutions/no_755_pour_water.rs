@@ -134,7 +134,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn   pour_water(mut heights: Vec<i32>, v: i32, k: i32) -> Vec<i32> {
+    pub fn pour_water(mut heights: Vec<i32>, v: i32, k: i32) -> Vec<i32> {
         // let len = heights.len() as i32;
         // let mut v = v;
         // while v > 0 {
@@ -206,7 +206,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_pour_water_1() {
+    pub fn test_pour_water_1() {
         assert_eq!(
             Solution::pour_water(vec![2, 1, 1, 2, 1, 2, 2], 4, 3),
             vec![2, 2, 2, 3, 2, 2, 2]
@@ -214,7 +214,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_pour_water_2() {
+    pub fn test_pour_water_2() {
         assert_eq!(
             Solution::pour_water(vec![1, 2, 3, 4], 2, 2),
             vec![2, 3, 3, 4]
@@ -222,7 +222,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_pour_water_3() {
+    pub fn test_pour_water_3() {
         assert_eq!(Solution::pour_water(vec![3, 1, 3], 5, 1), [4, 4, 4]);
     }
 }

@@ -42,7 +42,7 @@
 // use std::collections::HashMap;
 
 impl Solution {
-    pub fn   count_corner_rectangles(grid: Vec<Vec<i32>>) -> i32 {
+    pub fn count_corner_rectangles(grid: Vec<Vec<i32>>) -> i32 {
         // let rows = grid.len();
         // let cols = if rows == 0 { 0 } else { grid[0].len() };
         // if rows * cols == 0 {
@@ -99,7 +99,7 @@ mod test {
     use crate::lc_matrix;
 
     #[test]
-   pub fn  test_count_corner_rectangles_1() {
+    pub fn test_count_corner_rectangles_1() {
         let grid = lc_matrix![
             [1, 0, 0, 1, 0],
             [0, 0, 1, 0, 1],
@@ -110,13 +110,13 @@ mod test {
     }
 
     #[test]
-   pub fn  test_count_corner_rectangles_2() {
+    pub fn test_count_corner_rectangles_2() {
         let grid = lc_matrix![[1, 1, 1], [1, 1, 1], [1, 1, 1]];
         assert_eq!(Solution::count_corner_rectangles(grid), 9);
     }
 
     #[test]
-   pub fn  test_count_corner_rectangles_3() {
+    pub fn test_count_corner_rectangles_3() {
         let grid = lc_matrix![[1, 1, 1, 1]];
         assert_eq!(Solution::count_corner_rectangles(grid), 0);
     }

@@ -37,7 +37,7 @@ pub struct Solution;
 // const A_CHARCODE: i32 = 'a' as i32;
 
 impl Solution {
-    pub fn   group_strings(strings: Vec<String>) -> Vec<Vec<String>> {
+    pub fn group_strings(strings: Vec<String>) -> Vec<Vec<String>> {
         // let mut dict = HashMap::<String, Vec<String>>::new();
         // for s in strings {
         //     let norm = Solution::shift_normalize(&s);
@@ -92,7 +92,7 @@ mod tests {
     };
 
     #[test]
-   pub fn  test_group_strings() {
+    pub fn test_group_strings() {
         let src = map_to_string(&["abc", "bcd", "acef", "xyz", "az", "ba", "a", "z"]);
         let tar = map_nested_to_string(&[
             vec!["abc", "bcd", "xyz"],

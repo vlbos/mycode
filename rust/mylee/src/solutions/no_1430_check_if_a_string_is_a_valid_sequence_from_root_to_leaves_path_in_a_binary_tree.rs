@@ -42,7 +42,7 @@ pub struct TreeNode {
 
 impl TreeNode {
     #[inline]
-    pub fn   new(val: i32) -> Self {
+    pub fn new(val: i32) -> Self {
         TreeNode {
             val,
             left: None,
@@ -51,7 +51,7 @@ impl TreeNode {
     }
 }
 
-pub fn   to_tree(vec: Vec<Option<i32>>) -> Option<Rc<RefCell<TreeNode>>> {
+pub fn to_tree(vec: Vec<Option<i32>>) -> Option<Rc<RefCell<TreeNode>>> {
     use std::collections::VecDeque;
     let head = Some(Rc::new(RefCell::new(TreeNode::new(vec[0].unwrap()))));
     let mut queue = VecDeque::new();
@@ -77,7 +77,7 @@ pub struct Solution {}
 use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
-    pub fn   is_valid_sequence(root: Option<Rc<RefCell<TreeNode>>>, arr: Vec<i32>) -> bool {
+    pub fn is_valid_sequence(root: Option<Rc<RefCell<TreeNode>>>, arr: Vec<i32>) -> bool {
         false
     }
 }
@@ -86,7 +86,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_is_valid_sequence_1() {
+    pub fn test_is_valid_sequence_1() {
         assert!(Solution::is_valid_sequence(None, Vec::new()));
     }
 }

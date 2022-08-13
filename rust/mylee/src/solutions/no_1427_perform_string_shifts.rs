@@ -38,7 +38,7 @@ Constraints:
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   string_shift(s: String, shift: Vec<Vec<i32>>) -> String {
+    pub fn string_shift(s: String, shift: Vec<Vec<i32>>) -> String {
         String::new()
     }
 }
@@ -48,7 +48,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_string_shift_1() {
+    pub fn test_string_shift_1() {
         assert_eq!(
             String::new(),
             Solution::string_shift(String::new(), Vec::new())

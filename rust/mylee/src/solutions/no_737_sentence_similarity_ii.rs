@@ -80,7 +80,7 @@
 // }
 
 impl Solution {
-    pub fn   are_sentences_similar_two(
+    pub fn are_sentences_similar_two(
         words1: Vec<String>,
         words2: Vec<String>,
         pairs: Vec<Vec<String>>,
@@ -131,7 +131,7 @@ impl Solution {
                 .or_insert(HashSet::new())
                 .insert(p[0].clone());
         }
-       pub fn  dfs(
+        pub fn dfs(
             m: &HashMap<String, HashSet<String>>,
             w1: &String,
             w2: &String,
@@ -169,7 +169,7 @@ mod test {
     use crate::{lc_matrix_s, lc_vec_s};
 
     #[test]
-   pub fn  test_are_sentences_similar_two_1() {
+    pub fn test_are_sentences_similar_two_1() {
         assert_eq!(
             Solution::are_sentences_similar_two(
                 lc_vec_s!["great", "acting", "skills"],

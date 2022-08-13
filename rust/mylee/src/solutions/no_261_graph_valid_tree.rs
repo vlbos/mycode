@@ -75,7 +75,7 @@
 // }
 
 impl Solution {
-    pub fn   valid_tree(n: i32, edges: Vec<Vec<i32>>) -> bool {
+    pub fn valid_tree(n: i32, edges: Vec<Vec<i32>>) -> bool {
         // if n < 0 {
         //     return false;
         // } else if n == 0 {
@@ -100,7 +100,7 @@ impl Solution {
         }
         use std::collections::HashSet;
         let mut visited = HashSet::new();
-       pub fn  dfs(u: usize, g: &Vec<Vec<usize>>, visited: &mut HashSet<usize>) {
+        pub fn dfs(u: usize, g: &Vec<Vec<usize>>, visited: &mut HashSet<usize>) {
             visited.insert(u);
             for &v in &g[u] {
                 if !visited.contains(&v) {
@@ -122,13 +122,13 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_valid_tree_1() {
+    pub fn test_valid_tree_1() {
         let edges = vec![vec![0, 1], vec![0, 2], vec![0, 3], vec![1, 4]];
         assert!(Solution::valid_tree(5, edges));
     }
 
     #[test]
-   pub fn  test_valid_tree_2() {
+    pub fn test_valid_tree_2() {
         let edges = vec![vec![0, 1], vec![1, 2], vec![2, 3], vec![1, 3], vec![1, 4]];
         assert!(!Solution::valid_tree(5, edges));
     }

@@ -78,7 +78,7 @@
 // @lc code=start
 
 impl Solution {
-    pub fn   word_squares(words: Vec<String>) -> Vec<Vec<String>> {
+    pub fn word_squares(words: Vec<String>) -> Vec<Vec<String>> {
         // use std::collections::HashMap;
         // let len = words[0].len();
         // let mut cache = HashMap::<&str, Vec<usize>>::new();
@@ -126,7 +126,7 @@ impl Solution {
         }
         use std::collections::HashMap;
         let mut prefix_map = HashMap::new();
-       pub fn  add_word(
+        pub fn add_word(
             str: &String,
             i: usize,
             idx: usize,
@@ -142,7 +142,7 @@ impl Solution {
         for (i, w) in words.iter().enumerate() {
             add_word(w, 1, i, &mut prefix_map);
         }
-       pub fn  get_square(
+        pub fn get_square(
             i: usize,
             mut square: Vec<String>,
             words: &Vec<String>,
@@ -187,7 +187,7 @@ mod test {
     };
 
     #[test]
-   pub fn  test_word_squares_1() {
+    pub fn test_word_squares_1() {
         let input = map_to_string(&["area", "lead", "wall", "lady", "ball"]);
         let output = map_nested_to_string(&[
             vec!["wall", "area", "lead", "lady"],
@@ -197,7 +197,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_word_squares_2() {
+    pub fn test_word_squares_2() {
         let input = map_to_string(&["abat", "baba", "atan", "atal"]);
         let output = map_nested_to_string(&[
             vec!["baba", "abat", "baba", "atan"],

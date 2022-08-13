@@ -57,7 +57,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   assign_bikes(workers: Vec<Vec<i32>>, bikes: Vec<Vec<i32>>) -> i32 {
+    pub fn assign_bikes(workers: Vec<Vec<i32>>, bikes: Vec<Vec<i32>>) -> i32 {
         let (n, m) = (workers.len(), bikes.len());
         let mut ans = i32::MAX;
         let mut dp = vec![i32::MAX / 3; 1 << m];
@@ -86,7 +86,7 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_assign_bikes_1() {
+    pub fn test_assign_bikes_1() {
         assert_eq!(
             6,
             Solution::assign_bikes(vec![vec![0, 0], vec![2, 1]], vec![vec![1, 2], vec![3, 3]])
@@ -94,7 +94,7 @@ mod test {
     }
 
     #[test]
-   pub fn  test_assign_bikes_2() {
+    pub fn test_assign_bikes_2() {
         assert_eq!(
             4,
             Solution::assign_bikes(
@@ -104,7 +104,7 @@ mod test {
         );
     }
     #[test]
-   pub fn  test_assign_bikes_3() {
+    pub fn test_assign_bikes_3() {
         assert_eq!(
             4995,
             Solution::assign_bikes(

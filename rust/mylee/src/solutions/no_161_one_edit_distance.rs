@@ -34,7 +34,7 @@ pub struct Solution;
 // @lc code=start
 
 impl Solution {
-    pub fn   is_one_edit_distance(s: String, t: String) -> bool {
+    pub fn is_one_edit_distance(s: String, t: String) -> bool {
         // let s_chars = s.chars().collect::<Vec<char>>();
         // let t_chars = t.chars().collect::<Vec<char>>();
         // let s_len = s.len();
@@ -97,21 +97,21 @@ mod tests {
     use super::*;
 
     #[test]
-   pub fn  test_is_one_edit_distance_1() {
+    pub fn test_is_one_edit_distance_1() {
         assert!(Solution::is_one_edit_distance(
             String::from("ab"),
             String::from("acb")
         ));
     }
     #[test]
-   pub fn  test_is_one_edit_distance_2() {
+    pub fn test_is_one_edit_distance_2() {
         assert!(!Solution::is_one_edit_distance(
             String::from("cab"),
             String::from("ad"),
         ));
     }
     #[test]
-   pub fn  test_is_one_edit_distance_3() {
+    pub fn test_is_one_edit_distance_3() {
         assert!(Solution::is_one_edit_distance(
             String::from("1203"),
             String::from("1213")

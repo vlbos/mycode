@@ -38,7 +38,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn   is_armstrong(n: i32) -> bool {
+    pub fn is_armstrong(n: i32) -> bool {
         let ns = n.to_string();
         ns.bytes()
             .map(|b| ((b - b'0') as i32).pow(ns.len() as u32))
@@ -52,12 +52,12 @@ mod test {
     use super::*;
 
     #[test]
-   pub fn  test_is_armstrong_1() {
+    pub fn test_is_armstrong_1() {
         assert!(Solution::is_armstrong(153));
     }
 
     #[test]
-   pub fn  test_is_armstrong_2() {
+    pub fn test_is_armstrong_2() {
         assert!(!Solution::is_armstrong(123));
     }
 }
