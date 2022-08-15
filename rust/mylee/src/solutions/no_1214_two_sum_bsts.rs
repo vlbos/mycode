@@ -1,64 +1,42 @@
-/*
-Given two binary search trees, return True if and only if there is a node in the first tree and a node in the second tree whose values sum up to a given integer target.
+// 1214\. Two Sum BSTs
+// ===================
 
+// Given two binary search trees, return `True` if and only if there is a node in the first tree and a node in the second tree whose values sum up to a given integer `target`.
 
-Example 1:
-Input: root1 = [2,1,4], root2 = [1,0,3], target = 5
-Output: true
-Explanation: 2 and 3 sum up to 5.
+// **Example 1:**
 
-Example 2:
-Input: root1 = [0,-10,10], root2 = [5,1,7,0,2], target = 18
-Output: false
+// **![](https://assets.leetcode.com/uploads/2019/05/31/1368_1_a2.png)![](https://assets.leetcode.com/uploads/2019/05/31/1368_1_b.png)**
 
+// **Input:** root1 = \[2,1,4\], root2 = \[1,0,3\], target = 5
+// **Output:** true
+// **Explanation:** 2 and 3 sum up to 5.
 
-Constraints:
-    Each tree has at most 5000 nodes.
-    -10^9 <= target, node.val <= 10^9
+// **Example 2:**
 
+// **![](https://assets.leetcode.com/uploads/2019/05/31/1368_2_a.png)![](https://assets.leetcode.com/uploads/2019/05/31/1368_2_b.png)**
 
-*/
+// **Input:** root1 = \[0,-10,10\], root2 = \[5,1,7,0,2\], target = 18
+// **Output:** false
+
+// **Constraints:**
+
+// *   Each tree has at most `5000` nodes.
+// *   `-10^9 <= target, node.val <= 10^9`
+
+// ### Difficulty:
+
+// Medium
+
+// ### Lock:
+
+// Prime
+
+// ### Company:
+
+// [Amazon](https://leetcode.ca/tags/#Amazon)
 
 // Definition for a binary tree node
-#[derive(Debug, PartialEq, Eq)]
-pub struct TreeNode {
-    pub val: i32,
-    pub left: Option<Rc<RefCell<TreeNode>>>,
-    pub right: Option<Rc<RefCell<TreeNode>>>,
-}
-
-impl TreeNode {
-    #[inline]
-    pub fn new(val: i32) -> Self {
-        TreeNode {
-            val,
-            left: None,
-            right: None,
-        }
-    }
-}
-
-pub fn to_tree(vec: Vec<Option<i32>>) -> Option<Rc<RefCell<TreeNode>>> {
-    use std::collections::VecDeque;
-    let head = Some(Rc::new(RefCell::new(TreeNode::new(vec[0].unwrap()))));
-    let mut queue = VecDeque::new();
-    queue.push_back(head.as_ref().unwrap().clone());
-
-    for children in vec[1..].chunks(2) {
-        let parent = queue.pop_front().unwrap();
-        if let Some(v) = children[0] {
-            parent.borrow_mut().left = Some(Rc::new(RefCell::new(TreeNode::new(v))));
-            queue.push_back(parent.borrow().left.as_ref().unwrap().clone());
-        }
-        if children.len() > 1 {
-            if let Some(v) = children[1] {
-                parent.borrow_mut().right = Some(Rc::new(RefCell::new(TreeNode::new(v))));
-                queue.push_back(parent.borrow().right.as_ref().unwrap().clone());
-            }
-        }
-    }
-    head
-}
+use super::util::tree::TreeNode;
 #[allow(dead_code)]
 pub struct Solution {}
 use std::cell::RefCell;
@@ -69,15 +47,39 @@ impl Solution {
         root2: Option<Rc<RefCell<TreeNode>>>,
         target: i32,
     ) -> bool {
-        true
+        if root1.is_none() || root2.is_none() {
+            return false;
+        }
+        let (node1, node2) = (
+            root1.as_ref().unwrap().borrow(),
+            root2.as_ref().unwrap().borrow(),
+        );
+        if node1.val + node2.val == target {
+            return true;
+        }
+        if node1.val + node2.val > target {
+            Self::two_sum_bs_ts(node1.left.clone(), root2.clone(), target)
+                || Self::two_sum_bs_ts(root1.clone(), node2.left.clone(), target)
+        } else {
+            Self::two_sum_bs_ts(node1.right.clone(), root2.clone(), target)
+                || Self::two_sum_bs_ts(root1.clone(), node2.right.clone(), target)
+        }
     }
 }
 #[cfg(test)]
 mod test {
     use super::*;
-
+    use crate::tree;
     #[test]
     pub fn test_two_sum_bs_ts_1() {
-        assert!(Solution::two_sum_bs_ts(None, None, 0));
+        assert!(Solution::two_sum_bs_ts(tree![2, 1, 4], tree![1, 0, 3], 5));
+    }
+    #[test]
+    pub fn test_two_sum_bs_ts_2() {
+        assert!(!Solution::two_sum_bs_ts(
+            tree![0, -10, 10],
+            tree![5, 1, 7, 0, 2],
+            18
+        ));
     }
 }
