@@ -1,67 +1,84 @@
-/*
-You have a queue of integers, you need to retrieve the first unique integer in the queue.
+// 1429\. First Unique Number
+// ==========================
 
-Implement the FirstUnique class:
+// You have a queue of integers, you need to retrieve the first unique integer in the queue.
 
-    FirstUnique(int[] nums) Initializes the object with the numbers in the queue.
-    int showFirstUnique() returns the value of the first unique integer of the queue, and returns -1 if there is no such integer.
-    void add(int value) insert value to the queue.
+// Implement the `FirstUnique` class:
 
+// *   `FirstUnique(int[] nums)` Initializes the object with the numbers in the queue.
+// *   `int showFirstUnique()` returns the value of **the first unique** integer of the queue, and returns **\-1** if there is no such integer.
+// *   `void add(int value)` insert value to the queue.
 
-Example 1:
-Input:
-["FirstUnique","showFirstUnique","add","showFirstUnique","add","showFirstUnique","add","showFirstUnique"]
-[[[2,3,5]],[],[5],[],[2],[],[3],[]]
-Output:
-[null,2,null,2,null,3,null,-1]
-Explanation:
-FirstUnique firstUnique = new FirstUnique([2,3,5]);
-firstUnique.showFirstUnique(); // return 2
-firstUnique.add(5);            // the queue is now [2,3,5,5]
-firstUnique.showFirstUnique(); // return 2
-firstUnique.add(2);            // the queue is now [2,3,5,5,2]
-firstUnique.showFirstUnique(); // return 3
-firstUnique.add(3);            // the queue is now [2,3,5,5,2,3]
-firstUnique.showFirstUnique(); // return -1
+// **Example 1:**
 
-Example 2:
-Input:
-["FirstUnique","showFirstUnique","add","add","add","add","add","showFirstUnique"]
-[[[7,7,7,7,7,7]],[],[7],[3],[3],[7],[17],[]]
-Output:
-[null,-1,null,null,null,null,null,17]
-Explanation:
-FirstUnique firstUnique = new FirstUnique([7,7,7,7,7,7]);
-firstUnique.showFirstUnique(); // return -1
-firstUnique.add(7);            // the queue is now [7,7,7,7,7,7,7]
-firstUnique.add(3);            // the queue is now [7,7,7,7,7,7,7,3]
-firstUnique.add(3);            // the queue is now [7,7,7,7,7,7,7,3,3]
-firstUnique.add(7);            // the queue is now [7,7,7,7,7,7,7,3,3,7]
-firstUnique.add(17);           // the queue is now [7,7,7,7,7,7,7,3,3,7,17]
-firstUnique.showFirstUnique(); // return 17
+// **Input:**
+// \["FirstUnique","showFirstUnique","add","showFirstUnique","add","showFirstUnique","add","showFirstUnique"\]
+// \[\[\[2,3,5\]\],\[\],\[5\],\[\],\[2\],\[\],\[3\],\[\]\]
+// **Output:**
+// \[null,2,null,2,null,3,null,-1\]
+// **Explanation:**
+// FirstUnique firstUnique = new FirstUnique(\[2,3,5\]);
+// firstUnique.showFirstUnique(); // return 2
+// firstUnique.add(5);            // the queue is now \[2,3,5,5\]
+// firstUnique.showFirstUnique(); // return 2
+// firstUnique.add(2);            // the queue is now \[2,3,5,5,2\]
+// firstUnique.showFirstUnique(); // return 3
+// firstUnique.add(3);            // the queue is now \[2,3,5,5,2,3\]
+// firstUnique.showFirstUnique(); // return -1
 
-Example 3:
-Input:
-["FirstUnique","showFirstUnique","add","showFirstUnique"]
-[[[809]],[],[809],[]]
-Output:
-[null,809,null,-1]
-Explanation:
-FirstUnique firstUnique = new FirstUnique([809]);
-firstUnique.showFirstUnique(); // return 809
-firstUnique.add(809);          // the queue is now [809,809]
-firstUnique.showFirstUnique(); // return -1
+// **Example 2:**
 
+// **Input:**
+// \["FirstUnique","showFirstUnique","add","add","add","add","add","showFirstUnique"\]
+// \[\[\[7,7,7,7,7,7\]\],\[\],\[7\],\[3\],\[3\],\[7\],\[17\],\[\]\]
+// **Output:**
+// \[null,-1,null,null,null,null,null,17\]
+// **Explanation:**
+// FirstUnique firstUnique = new FirstUnique(\[7,7,7,7,7,7\]);
+// firstUnique.showFirstUnique(); // return -1
+// firstUnique.add(7);            // the queue is now \[7,7,7,7,7,7,7\]
+// firstUnique.add(3);            // the queue is now \[7,7,7,7,7,7,7,3\]
+// firstUnique.add(3);            // the queue is now \[7,7,7,7,7,7,7,3,3\]
+// firstUnique.add(7);            // the queue is now \[7,7,7,7,7,7,7,3,3,7\]
+// firstUnique.add(17);           // the queue is now \[7,7,7,7,7,7,7,3,3,7,17\]
+// firstUnique.showFirstUnique(); // return 17
 
-Constraints:
-    1 <= nums.length <= 10^5
-    1 <= nums[i] <= 10^8
-    1 <= value <= 10^8
-    At most 50000 calls will be made to showFirstUnique and add.
+// **Example 3:**
 
+// **Input:**
+// \["FirstUnique","showFirstUnique","add","showFirstUnique"\]
+// \[\[\[809\]\],\[\],\[809\],\[\]\]
+// **Output:**
+// \[null,809,null,-1\]
+// **Explanation:**
+// FirstUnique firstUnique = new FirstUnique(\[809\]);
+// firstUnique.showFirstUnique(); // return 809
+// firstUnique.add(809);          // the queue is now \[809,809\]
+// firstUnique.showFirstUnique(); // return -1
 
-*/
-pub struct FirstUnique {}
+// **Constraints:**
+
+// *   `1 <= nums.length <= 10^5`
+// *   `1 <= nums[i] <= 10^8`
+// *   `1 <= value <= 10^8`
+// *   At most `50000` calls will be made to `showFirstUnique` and `add`.
+
+// ### Difficulty:
+
+// Medium
+
+// ### Lock:
+
+// Prime
+
+// ### Company:
+
+// [Amazon](https://leetcode.ca/tags/#Amazon)
+use std::collections::{HashMap, VecDeque};
+pub struct FirstUnique {
+    q: VecDeque<i32>,
+    m: HashMap<i32, i32>,
+}
 
 /**
  * `&self` means the method takes an immutable reference.
@@ -69,14 +86,32 @@ pub struct FirstUnique {}
  */
 impl FirstUnique {
     pub fn new(nums: Vec<i32>) -> Self {
-        Self {}
+        let mut m = HashMap::new();
+        for &num in &nums {
+            *m.entry(num).or_insert(0) += 1;
+        }
+        Self {
+            q: nums.into_iter().collect(),
+            m,
+        }
     }
 
-    pub fn show_first_unique(&self) -> i32 {
-        0
+    pub fn show_first_unique(&mut self) -> i32 {
+        while !self.q.is_empty() {
+            let num = *self.q.front().unwrap();
+            if *self.m.get(&num).unwrap() > 1 {
+                self.q.pop_front();
+            } else {
+                return num;
+            }
+        }
+        -1
     }
 
-    pub fn add(&self, value: i32) {}
+    pub fn add(&mut self, value: i32) {
+        *self.m.entry(value).or_insert(0) += 1;
+        self.q.push_back(value);
+    }
 }
 
 /**
@@ -92,10 +127,24 @@ mod test {
 
     #[test]
     pub fn test_first_unique_1() {
-        let nums = Vec::new();
-        let value = 0;
-        let obj = FirstUnique::new(nums);
-        let _ret_1: i32 = obj.show_first_unique();
-        obj.add(value);
+        let mut obj = FirstUnique::new(vec![2, 3, 5]);
+        assert_eq!(2, obj.show_first_unique());
+        obj.add(5);
+        assert_eq!(2, obj.show_first_unique());
+        obj.add(2);
+        assert_eq!(3, obj.show_first_unique());
+        obj.add(3);
+        assert_eq!(-1, obj.show_first_unique());
+    }
+    #[test]
+    pub fn test_first_unique_2() {
+        let mut obj = FirstUnique::new(vec![7, 7, 7, 7, 7, 7]);
+        assert_eq!(-1, obj.show_first_unique());
+        obj.add(7);
+        obj.add(3);
+        obj.add(3);
+        obj.add(7);
+        obj.add(17);
+        assert_eq!(17, obj.show_first_unique());
     }
 }
