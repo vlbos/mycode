@@ -84,6 +84,7 @@ pub mod no_1516_move_sub_tree_of_n_ary_tree;
 pub mod no_1522_diameter_of_n_ary_tree;
 pub mod no_1533_find_the_index_of_the_large_integer;
 pub mod no_1538_guess_the_majority_in_a_hidden_array;
+pub mod no_1548_the_most_similar_path_in_a_graph;
 pub mod no_156_binary_tree_upside_down;
 pub mod no_159_longest_substring_with_at_most_two_distinct_characters;
 pub mod no_161_one_edit_distance;
