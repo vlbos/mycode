@@ -56,7 +56,7 @@
 pub struct Solution {}
 impl Solution {
     pub fn count_elements(arr: Vec<i32>) -> i32 {
-        let mut cnt: std::collections::HashSet<i32> = arr.iter().cloned().collect();
+        let cnt: std::collections::HashSet<i32> = arr.iter().cloned().collect();
         arr.iter()
             .map(|&a| if cnt.contains(&(a + 1)) { 1 } else { 0 })
             .sum::<i32>()
