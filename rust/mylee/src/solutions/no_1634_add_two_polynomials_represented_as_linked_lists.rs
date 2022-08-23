@@ -65,78 +65,110 @@
 
 //  PolyNode addPoly(PolyNode poly1, PolyNode poly2)
 
-use super::util::tree::TreeNode;
+#[derive(PartialEq, Eq, Debug, Clone)]
+pub struct PolyNode {
+    pub coefficient: i32,
+    pub power: i32,
+    pub next: Option<Box<PolyNode>>,
+}
+
+impl PolyNode {
+    #[inline]
+    pub fn new(coefficient: i32, power: i32) -> Self {
+        Self {
+            coefficient,
+            power,
+            next: None,
+        }
+    }
+}
+
+// helper function for test
+pub fn to_poly_list(vec: Vec<Vec<i32>>) -> Option<Box<PolyNode>> {
+    let mut current = None;
+    for v in vec.iter().rev() {
+        let mut node = PolyNode::new(v[0], v[1]);
+        node.next = current;
+        current = Some(Box::new(node));
+    }
+    current
+}
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn check_equivalence(
-        root1: Option<Rc<RefCell<TreeNode>>>,
-        root2: Option<Rc<RefCell<TreeNode>>>,
-    ) -> bool {
-        use std::collections::HashMap;
-        fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, v: i32, freq: &mut HashMap<i32, i32>) {
-            if root.is_none() {
-                return;
-            }
-            let node = root.as_ref().unwrap().borrow();
-            if (node.val as u8 as char).is_ascii_alphabetic() {
-                *freq.entry(node.val).or_insert(0) += v;
+    pub fn add_poly(
+        poly1: Option<Box<PolyNode>>,
+        poly2: Option<Box<PolyNode>>,
+    ) -> Option<Box<PolyNode>> {
+        let (mut p1, mut p2) = (poly1, poly2);
+        let mut ans = None;
+        let mut cur = &mut ans;
+        let p = &mut cur;
+        while p1.is_some() || p2.is_some() {
+            if p1.is_none()
+                || (p2.is_some() && p2.as_ref().unwrap().power > p1.as_ref().unwrap().power)
+            {
+                let next = p2.as_mut().unwrap().next.take();
+                cur = &mut cur.get_or_insert(p2.unwrap()).next;
+                p2 = next;
+            } else if p2.is_none()
+                || (p1.is_some() && p1.as_ref().unwrap().power > p2.as_ref().unwrap().power)
+            {
+                let next = p1.as_mut().unwrap().next.take();
+                cur = &mut cur.get_or_insert(p1.unwrap()).next;
+                p1 = next;
             } else {
-                dfs(&node.left, v, freq);
-                dfs(&node.right, v, freq);
+                let val = p1.as_ref().unwrap().coefficient + p2.as_ref().unwrap().coefficient;
+                if val != 0 {
+                    cur = &mut cur
+                        .get_or_insert(Box::new(PolyNode {
+                            coefficient: val,
+                            power: p1.as_ref().unwrap().power,
+                            next: None,
+                        }))
+                        .next;
+                }
+                p1 = p1.as_mut().unwrap().next.take();
+                p2 = p2.as_mut().unwrap().next.take();
             }
         }
-        let mut freq = HashMap::new();
-        dfs(&root1, 1, &mut freq);
-        dfs(&root2, -1, &mut freq);
-        if freq.values().any(|v| *v > 0) {
-            false
-        } else {
-            true
-        }
+        ans
     }
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
-    // use crate::tree;
-    use super::super::util::tree::to_tree;
-    fn to_exp_tree(s: &str) -> Option<Rc<RefCell<TreeNode>>> {
-        to_tree(
-            s.split(',')
-                .map(|x| {
-                    if x == "null" {
-                        None
-                    } else {
-                        Some(x.as_bytes()[0] as i32)
-                    }
-                })
-                .collect::<Vec<Option<i32>>>(),
-        )
+
+    #[test]
+    pub fn test_add_poly_1() {
+        assert_eq!(
+            to_poly_list(vec![vec![1, 1], vec![1, 0]]),
+            Solution::add_poly(
+                to_poly_list(vec![vec![1, 1]]),
+                to_poly_list(vec![vec![1, 0]])
+            )
+        );
     }
     #[test]
-    pub fn test_check_equivalence_1() {
-        assert!(Solution::check_equivalence(
-            to_exp_tree("x"),
-            to_exp_tree("x")
-        ));
+    pub fn test_add_poly_2() {
+        assert_eq!(
+            to_poly_list(vec![vec![5, 2], vec![2, 0]]),
+            Solution::add_poly(
+                to_poly_list(vec![vec![2, 2], vec![4, 1], vec![3, 0]]),
+                to_poly_list(vec![vec![3, 2], vec![-4, 1], vec![-1, 0]])
+            )
+        );
     }
     #[test]
-    pub fn test_check_equivalence_2() {
-        assert!(Solution::check_equivalence(
-            to_exp_tree("+,a,+,null,null,b,c"),
-            to_exp_tree("+,+,b,c,a")
-        ));
-    }
-    #[test]
-    pub fn test_check_equivalence_3() {
-        assert!(!Solution::check_equivalence(
-            to_exp_tree("+,a,+,null,null,b,c"),
-            to_exp_tree("+,+,b,d,a")
-        ));
+    pub fn test_add_poly_3() {
+        assert_eq!(
+            to_poly_list(vec![]),
+            Solution::add_poly(
+                to_poly_list(vec![vec![1, 2]]),
+                to_poly_list(vec![vec![-1, 2]])
+            )
+        );
     }
 }

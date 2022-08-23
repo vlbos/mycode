@@ -128,7 +128,6 @@ mod test {
     use super::*;
     // use crate::tree;
     use super::super::util::tree::to_tree;
-    use std::collections::HashSet;
     #[test]
     pub fn test_exp_tree_1() {
         assert_eq!(

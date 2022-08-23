@@ -92,7 +92,6 @@ impl Solution {
 mod test {
     use super::*;
     use crate::tree;
-    use std::collections::HashSet;
     #[test]
     pub fn test_find_nearest_right_node_1() {
         assert_eq!(

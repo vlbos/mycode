@@ -65,78 +65,113 @@
 
 //     public int evaluate() {
 
-use super::util::tree::TreeNode;
-
 #[allow(dead_code)]
-pub struct Solution {}
+pub struct MyNode {
+    val: String,
+    left: Option<Rc<RefCell<MyNode>>>,
+    right: Option<Rc<RefCell<MyNode>>>,
+}
+impl MyNode {
+    fn new(val: String) -> Self {
+        Self {
+            val,
+            left: None,
+            right: None,
+        }
+    }
+    fn evaluate(&self) -> i32 {
+        if let Ok(v) = self.val.parse::<i32>() {
+            return v;
+        }
+        let (left, right) = (
+            self.left.as_ref().unwrap().borrow().evaluate(),
+            self.right.as_ref().unwrap().borrow().evaluate(),
+        );
+        match self.val.as_str() {
+            "+" => left + right,
+            "-" => left - right,
+            "*" => left * right,
+            "/" => left / right,
+            _ => 0,
+        }
+    }
+}
+
 use std::cell::RefCell;
 use std::rc::Rc;
+pub struct Solution;
 impl Solution {
-    pub fn check_equivalence(
-        root1: Option<Rc<RefCell<TreeNode>>>,
-        root2: Option<Rc<RefCell<TreeNode>>>,
-    ) -> bool {
-        use std::collections::HashMap;
-        fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, v: i32, freq: &mut HashMap<i32, i32>) {
-            if root.is_none() {
-                return;
-            }
-            let node = root.as_ref().unwrap().borrow();
-            if (node.val as u8 as char).is_ascii_alphabetic() {
-                *freq.entry(node.val).or_insert(0) += v;
+    pub fn build_tree(postfix: Vec<String>) -> i32 {
+        let mut stack = Vec::new();
+        for val in &postfix {
+            let node = if val.parse::<i32>().is_ok() {
+                MyNode::new(val.clone())
             } else {
-                dfs(&node.left, v, freq);
-                dfs(&node.right, v, freq);
-            }
+                let (right, left) = (
+                    Some(Rc::new(RefCell::new(stack.pop().unwrap()))),
+                    Some(Rc::new(RefCell::new(stack.pop().unwrap()))),
+                );
+                MyNode {
+                    val: val.clone(),
+                    left,
+                    right,
+                }
+            };
+            stack.push(node);
         }
-        let mut freq = HashMap::new();
-        dfs(&root1, 1, &mut freq);
-        dfs(&root2, -1, &mut freq);
-        if freq.values().any(|v| *v > 0) {
-            false
-        } else {
-            true
-        }
+        stack.last().unwrap().evaluate()
     }
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
-    // use crate::tree;
-    use super::super::util::tree::to_tree;
-    fn to_exp_tree(s: &str) -> Option<Rc<RefCell<TreeNode>>> {
-        to_tree(
-            s.split(',')
-                .map(|x| {
-                    if x == "null" {
-                        None
-                    } else {
-                        Some(x.as_bytes()[0] as i32)
-                    }
-                })
-                .collect::<Vec<Option<i32>>>(),
-        )
+    #[test]
+    pub fn test_build_tree_1() {
+        assert_eq!(
+            2,
+            Solution::build_tree(
+                ["3", "4", "+", "2", "*", "7", "/"]
+                    .into_iter()
+                    .map(String::from)
+                    .collect::<Vec<String>>(),
+            )
+        );
     }
     #[test]
-    pub fn test_check_equivalence_1() {
-        assert!(Solution::check_equivalence(
-            to_exp_tree("x"),
-            to_exp_tree("x")
-        ));
+    pub fn test_build_tree_2() {
+        assert_eq!(
+            -16,
+            Solution::build_tree(
+                ["4", "5", "7", "2", "+", "-", "*"]
+                    .into_iter()
+                    .map(String::from)
+                    .collect::<Vec<String>>(),
+            )
+        );
     }
     #[test]
-    pub fn test_check_equivalence_2() {
-        assert!(Solution::check_equivalence(
-            to_exp_tree("+,a,+,null,null,b,c"),
-            to_exp_tree("+,+,b,c,a")
-        ));
+    pub fn test_build_tree_3() {
+        assert_eq!(
+            18,
+            Solution::build_tree(
+                ["4", "2", "+", "3", "5", "1", "-", "*", "+"]
+                    .into_iter()
+                    .map(String::from)
+                    .collect::<Vec<String>>(),
+            )
+        );
     }
     #[test]
-    pub fn test_check_equivalence_3() {
-        assert!(!Solution::check_equivalence(
-            to_exp_tree("+,a,+,null,null,b,c"),
-            to_exp_tree("+,+,b,d,a")
-        ));
+    pub fn test_build_tree_4() {
+        assert_eq!(
+            757,
+            Solution::build_tree(
+                ["100", "200", "+", "2", "/", "5", "*", "7", "+"]
+                    .into_iter()
+                    .map(String::from)
+                    .collect::<Vec<String>>(),
+            )
+        );
     }
 }

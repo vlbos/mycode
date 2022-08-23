@@ -71,15 +71,41 @@
 
 // int max_font(String text, int w, int h, int[] fonts, FontInfo fontInfo)
 
-use super::util::tree::TreeNode;
-pub struct FontInfo {}
+pub struct FontInfo;
+impl FontInfo {
+    pub fn get_height(&self, font_size: i32) -> i32 {
+        font_size
+    }
+    pub fn get_width(&self, font_size: i32, ch: char) -> i32 {
+        (((ch as u8 as f32 * 1.5) as u8 / (ch as u8)) as i32) * font_size
+    }
+}
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
     pub fn max_font(text: String, w: i32, h: i32, fonts: Vec<i32>, font_info: FontInfo) -> i32 {
-        -1
+        let can_fit = |text: &String, w: i32, h: i32, font: i32, font_info: &FontInfo| {
+            let sum_width = text
+                .chars()
+                .map(|c| font_info.get_width(font, c))
+                .sum::<i32>();
+            println!("{},{},{},{}", font_info.get_height(font), h, w, sum_width);
+            font_info.get_height(font) <= h && sum_width <= w
+        };
+        let (mut low, mut high) = (0, fonts.len() as i32 - 1);
+        while low <= high {
+            let mid = low + (high - low) / 2;
+            if can_fit(&text, w, h, fonts[mid as usize], &font_info) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        if low > 0 {
+            fonts[low as usize - 1]
+        } else {
+            -1
+        }
     }
 }
 
@@ -90,10 +116,10 @@ mod test {
     #[test]
     pub fn test_max_font_1() {
         assert_eq!(
-            6,
+            8,
             Solution::max_font(
                 String::from("helloworld"),
-                10,
+                80,
                 20,
                 vec![6, 8, 10, 12, 14, 16, 18, 24, 36],
                 FontInfo {}
@@ -116,7 +142,7 @@ mod test {
     #[test]
     pub fn test_max_font_3() {
         assert_eq!(
-            1,
+            -1,
             Solution::max_font(
                 String::from("easyquestion"),
                 100,
