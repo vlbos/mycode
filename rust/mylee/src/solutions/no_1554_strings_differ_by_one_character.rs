@@ -53,7 +53,7 @@ impl Solution {
         }
         let mut s = std::collections::HashSet::new();
         for d in dict {
-            let mut dv: Vec<char> = d.chars().collect();
+            let dv: Vec<char> = d.chars().collect();
             for i in 0..dv.len() {
                 let mut t = dv.clone();
                 t[i] = '*';

@@ -117,7 +117,7 @@ impl FileSharing {
     }
 
     pub fn request(&mut self, user_id: i32, chunk_id: i32) -> Vec<i32> {
-        let mut ans = self
+        let ans = self
             .c2u
             .get(&chunk_id)
             .unwrap_or(&HashSet::new())

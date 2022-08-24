@@ -4,6 +4,8 @@ pub mod linked_list;
 pub mod vec_string;
 #[macro_use]
 pub mod tree;
+#[macro_use]
+pub mod ptree;
 pub mod trees;
 #[macro_use]
 pub mod point;
