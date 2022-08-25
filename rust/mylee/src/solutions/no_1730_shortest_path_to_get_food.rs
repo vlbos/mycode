@@ -66,80 +66,101 @@
 
 // [Unknown](https://leetcode.ca/tags/#Unknown)
 
-//  int getFood(char[][] grid)
-
-use super::util::tree::TreeNode;
+//  int get_food(char[][] grid)
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn check_equivalence(
-        root1: Option<Rc<RefCell<TreeNode>>>,
-        root2: Option<Rc<RefCell<TreeNode>>>,
-    ) -> bool {
-        use std::collections::HashMap;
-        fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, v: i32, freq: &mut HashMap<i32, i32>) {
-            if root.is_none() {
-                return;
-            }
-            let node = root.as_ref().unwrap().borrow();
-            if (node.val as u8 as char).is_ascii_alphabetic() {
-                *freq.entry(node.val).or_insert(0) += v;
-            } else {
-                dfs(&node.left, v, freq);
-                dfs(&node.right, v, freq);
+    pub fn get_food(grid: Vec<Vec<char>>) -> i32 {
+        let (m, n) = (grid.len(), grid[0].len());
+        let mut start = (0, 0);
+        for i in 0..m {
+            for j in 0..n {
+                if grid[i][j] == '*' {
+                    start = (i as i32, j as i32);
+                    break;
+                }
             }
         }
-        let mut freq = HashMap::new();
-        dfs(&root1, 1, &mut freq);
-        dfs(&root2, -1, &mut freq);
-        if freq.values().any(|v| *v > 0) {
-            false
-        } else {
-            true
+        let mut q = std::collections::VecDeque::from([start]);
+        let mut steps = 0;
+        let dirs = [0, 1, 0, -1, 0];
+        let mut visited = std::collections::HashSet::new();
+        while !q.is_empty() {
+            let qn = q.len();
+            for _ in 0..qn {
+                let (x, y) = q.pop_front().unwrap();
+                for (dx, dy) in dirs[..dirs.len() - 1].iter().zip(&dirs[1..]) {
+                    let (nx, ny) = (x + dx, y + dy);
+                    if nx < 0
+                        || nx >= m as i32
+                        || ny < 0
+                        || ny >= n as i32
+                        || grid[nx as usize][ny as usize] == 'X'
+                        || visited.contains(&(nx, ny))
+                    {
+                        continue;
+                    }
+                    if grid[nx as usize][ny as usize] == '#' {
+                        return steps + 1;
+                    }
+                    visited.insert((nx, ny));
+                    q.push_back((nx, ny));
+                }
+            }
+            steps += 1;
         }
+        -1
     }
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
-    // use crate::tree;
-    use super::super::util::tree::to_tree;
-    fn to_exp_tree(s: &str) -> Option<Rc<RefCell<TreeNode>>> {
-        to_tree(
-            s.split(',')
-                .map(|x| {
-                    if x == "null" {
-                        None
-                    } else {
-                        Some(x.as_bytes()[0] as i32)
-                    }
-                })
-                .collect::<Vec<Option<i32>>>(),
-        )
+
+    #[test]
+    pub fn test_get_food_1() {
+        assert_eq!(
+            3,
+            Solution::get_food(vec![
+                vec!['X', 'X', 'X', 'X', 'X', 'X'],
+                vec!['X', '*', 'O', 'O', 'O', 'X'],
+                vec!['X', 'O', 'O', '#', 'O', 'X'],
+                vec!['X', 'X', 'X', 'X', 'X', 'X']
+            ])
+        );
     }
     #[test]
-    pub fn test_check_equivalence_1() {
-        assert!(Solution::check_equivalence(
-            to_exp_tree("x"),
-            to_exp_tree("x")
-        ));
+    pub fn test_get_food_2() {
+        assert_eq!(
+            -1,
+            Solution::get_food(vec![
+                vec!['X', 'X', 'X', 'X', 'X'],
+                vec!['X', '*', 'X', 'O', 'X'],
+                vec!['X', 'O', 'X', '#', 'X'],
+                vec!['X', 'X', 'X', 'X', 'X']
+            ])
+        );
     }
     #[test]
-    pub fn test_check_equivalence_2() {
-        assert!(Solution::check_equivalence(
-            to_exp_tree("+,a,+,null,null,b,c"),
-            to_exp_tree("+,+,b,c,a")
-        ));
+    pub fn test_get_food_3() {
+        assert_eq!(
+            6,
+            Solution::get_food(vec![
+                vec!['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'],
+                vec!['X', '*', 'O', 'X', 'O', '#', 'O', 'X'],
+                vec!['X', 'O', 'O', 'X', 'O', 'O', 'X', 'X'],
+                vec!['X', 'O', 'O', 'O', 'O', '#', 'O', 'X'],
+                vec!['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
+            ])
+        );
     }
     #[test]
-    pub fn test_check_equivalence_3() {
-        assert!(!Solution::check_equivalence(
-            to_exp_tree("+,a,+,null,null,b,c"),
-            to_exp_tree("+,+,b,d,a")
-        ));
+    pub fn test_get_food_4() {
+        assert_eq!(2, Solution::get_food(vec![vec!['O', '*'], vec!['#', 'O']]));
+    }
+    #[test]
+    pub fn test_get_food_5() {
+        assert_eq!(-1, Solution::get_food(vec![vec!['X', '*'], vec!['#', 'X']]));
     }
 }

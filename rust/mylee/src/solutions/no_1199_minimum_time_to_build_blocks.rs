@@ -57,7 +57,7 @@ impl Solution {
         let mut q: std::collections::BinaryHeap<Reverse<i32>> =
             blocks.into_iter().map(|x| Reverse(x)).collect();
         while q.len() > 1 {
-            let (x, y) = (q.pop().unwrap().0, q.pop().unwrap().0);
+            let (_, y) = (q.pop().unwrap().0, q.pop().unwrap().0);
             q.push(Reverse(y + split));
         }
         q.peek().unwrap().0

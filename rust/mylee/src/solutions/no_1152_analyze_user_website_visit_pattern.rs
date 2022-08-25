@@ -68,7 +68,7 @@ impl Solution {
             .map(|(i, v)| (v, i))
             .collect();
         timestamp.sort();
-        for &(t, i) in &timestamp {
+        for &(_, i) in &timestamp {
             uw.entry(username[i].clone())
                 .or_insert(Vec::new())
                 .push(website[i].clone());

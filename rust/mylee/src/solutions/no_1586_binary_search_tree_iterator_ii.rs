@@ -118,7 +118,7 @@ impl BSTIterator {
         self.p[self.index as usize].borrow().val
     }
     fn next(&mut self) -> i32 {
-        let mut val = 0;
+        let val;
         let i = (self.index + 1) as usize;
         if i >= 0 && i < self.p.len() {
             val = self.p[i].borrow().val;

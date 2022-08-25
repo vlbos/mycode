@@ -56,70 +56,63 @@ impl Solution {
         root: Option<Rc<RefCell<TreeNode>>>,
         leaf: Option<Rc<RefCell<TreeNode>>>,
     ) -> Option<Rc<RefCell<TreeNode>>> {
-        // let mut curr = leaf.clone();
-        // let mut new_parent: Option<Rc<RefCell<TreeNode>>> = None;
-        // let mut i = 0;
-        // while curr!=root {
-        //     if i>3{
-        //     break;
-        //     }
-        //     if curr.as_ref().unwrap().borrow().left.is_some(){
-        //          curr.as_ref().unwrap().borrow_mut().right =curr.as_ref().unwrap().borrow_mut().left.take();
-        //     }
-        //      if curr.as_ref().unwrap().borrow().parent.is_some(){
-        //         let parent=curr.as_ref().unwrap().borrow_mut().parent.take();
-        //         if parent.as_ref().unwrap().borrow().left==curr{
-        //             parent.as_ref().unwrap().borrow_mut().left=None;
-        //         }else{
-        //             parent.as_ref().unwrap().borrow_mut().right=None;
-        //         }
-        //         curr.as_ref().unwrap().borrow_mut().left = parent;
-        //      }
-        //     curr.as_ref().unwrap().borrow_mut().parent = new_parent;
-        //     let left = curr.as_ref().unwrap().borrow_mut().left.take();
-        //     new_parent = curr;
-        //     curr = left;
-        //     println!("{:?}",&curr);
-        //     i+=1;
-        // }
-        // curr.as_ref().unwrap().borrow_mut().parent = new_parent;
-        // leaf
-        // fn dfs(
-        //     root: Option<Rc<RefCell<TreeNode>>>,
-        //     node: Option<Rc<RefCell<TreeNode>>>,
-        //     new_parent: Option<Rc<RefCell<TreeNode>>>,
-        // ) -> Option<Rc<RefCell<TreeNode>>> {
-        //     // let old_parent = node.as_ref().unwrap().borrow_mut().parent.take();
-        //     // node.as_ref().unwrap().borrow_mut().parent = new_parent.clone();
-        //     // println!("===={:?}",&node);
-        //     // if  node.as_ref().unwrap().borrow().left== new_parent {
-        //     //     node.as_ref().unwrap().borrow_mut().left = None;
-        //     // }
-        //     // if node.as_ref().unwrap().borrow().right== new_parent {
-        //     //     node.as_ref().unwrap().borrow_mut().right = None;
-        //     // }
+        use std::collections::HashMap;
+        fn dfs(
+            root: &Option<Rc<RefCell<TreeNode>>>,
+            v: i32,
+            parent: &Option<Rc<RefCell<TreeNode>>>,
+            path: &mut HashMap<i32, Option<Rc<RefCell<TreeNode>>>>,
+        ) -> bool {
+            if root.is_none() {
+                return false;
+            }
+            let node = root.as_ref().unwrap().borrow();
+            path.insert(node.val, parent.clone());
 
-        //     // if node == root{
-        //     //     return node;
-        //     // }
-        //     // if node.as_ref().unwrap().borrow().left.is_some() {
-        //     //     let left= node.as_ref().unwrap().borrow_mut().left.take();
-        //     //     node.as_ref().unwrap().borrow_mut().right =left;
-        //     // }
-        //     // node.as_ref().unwrap().borrow_mut().left = dfs(root, old_parent, node.clone());
-        //     // node
-        //     if node == root{
-        //         return node;
-        //     }
-        //     if node.as_ref().unwrap().borrow().parent.is_none(){
-        //     return new_parent
-        //     }
-        //     // dfs(root,node.as_ref().unwrap().borrow().parent.clone(),new_parent)
-        //     None
-        // }
-        // println!("===={:?}",&root);
-        // dfs(root, leaf, None)
-        None
+            if node.val == v || dfs(&node.left, v, root, path) || dfs(&node.right, v, root, path) {
+                return true;
+            }
+            path.remove(&node.val);
+            false
+        }
+        let mut parents = HashMap::new();
+        dfs(
+            &root,
+            leaf.as_ref().unwrap().borrow().val,
+            &None,
+            &mut parents,
+        );
+        parents.remove(&root.as_ref().unwrap().borrow().val);
+
+        fn flip(
+            root: &Option<Rc<RefCell<TreeNode>>>,
+            node: &Option<Rc<RefCell<TreeNode>>>,
+            new_parent: &Option<Rc<RefCell<TreeNode>>>,
+            parents: &HashMap<i32, Option<Rc<RefCell<TreeNode>>>>,
+        ) -> Option<Rc<RefCell<TreeNode>>> {
+            let old_parent = parents
+                .get(&node.as_ref().unwrap().borrow().val)
+                .unwrap_or(&None);
+
+            if &node.as_ref().unwrap().borrow().left == new_parent {
+                node.as_ref().unwrap().borrow_mut().left = None;
+            }
+            if &node.as_ref().unwrap().borrow().right == new_parent {
+                node.as_ref().unwrap().borrow_mut().right = None;
+            }
+            if root == node {
+                return node.clone();
+            }
+            if node.as_ref().unwrap().borrow().left.is_some() {
+                let left = node.as_ref().unwrap().borrow().left.clone();
+                node.as_ref().unwrap().borrow_mut().right = left;
+            }
+            let s = flip(root, old_parent, node, parents);
+            node.as_ref().unwrap().borrow_mut().left = s;
+            node.clone()
+        }
+
+        flip(&root, &leaf, &None, &parents)
     }
 }
 
@@ -129,7 +122,7 @@ mod test {
     use crate::tree;
     fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, v: i32) -> Option<Rc<RefCell<TreeNode>>> {
         if let Some(node) = root {
-            let node = root.as_ref().unwrap().borrow();
+            let node = node.borrow();
             if node.val == v {
                 return root.clone();
             }
@@ -144,7 +137,7 @@ mod test {
     }
     #[test]
     pub fn test_flip_binary_tree_1() {
-        let mut t = tree![3, 5, 1, 6, 2, 0, 8, null, null, 7, 4];
+        let t = tree![3, 5, 1, 6, 2, 0, 8, null, null, 7, 4];
         let leaf = dfs(&t, 7);
         assert_eq!(
             tree![7, 2, null, 5, 4, 3, 6, null, null, null, 1, null, null, 0, 8],
@@ -153,7 +146,7 @@ mod test {
     }
     #[test]
     pub fn test_flip_binary_tree_2() {
-        let mut t = tree![3, 5, 1, 6, 2, 0, 8, null, null, 7, 4];
+        let t = tree![3, 5, 1, 6, 2, 0, 8, null, null, 7, 4];
         let leaf = dfs(&t, 0);
         assert_eq!(
             tree![0, 1, null, 3, 8, 5, null, null, null, 6, 2, null, null, 7, 4],

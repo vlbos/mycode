@@ -58,8 +58,7 @@
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
     pub fn count_distinct(s: String) -> i32 {
         let mut ss = std::collections::HashSet::new();

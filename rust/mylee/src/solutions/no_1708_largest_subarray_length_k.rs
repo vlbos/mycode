@@ -51,80 +51,40 @@
 
 // [Google](https://leetcode.ca/tags/#Google)
 
-//  int[] largestSubarray(int[] nums, int k)
-
-use super::util::tree::TreeNode;
+//  int[] largest_subarray(int[] nums, int k)
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn check_equivalence(
-        root1: Option<Rc<RefCell<TreeNode>>>,
-        root2: Option<Rc<RefCell<TreeNode>>>,
-    ) -> bool {
-        use std::collections::HashMap;
-        fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, v: i32, freq: &mut HashMap<i32, i32>) {
-            if root.is_none() {
-                return;
-            }
-            let node = root.as_ref().unwrap().borrow();
-            if (node.val as u8 as char).is_ascii_alphabetic() {
-                *freq.entry(node.val).or_insert(0) += v;
-            } else {
-                dfs(&node.left, v, freq);
-                dfs(&node.right, v, freq);
-            }
-        }
-        let mut freq = HashMap::new();
-        dfs(&root1, 1, &mut freq);
-        dfs(&root2, -1, &mut freq);
-        if freq.values().any(|v| *v > 0) {
-            false
-        } else {
-            true
-        }
+    pub fn largest_subarray(nums: Vec<i32>, k: i32) -> Vec<i32> {
+        let (n, k) = (nums.len(), k as usize);
+        let max = *nums[..=n - k].iter().max().unwrap();
+        let i = nums.iter().position(|x| *x == max).unwrap();
+        nums[i..i + k].to_vec()
     }
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
-    // use crate::tree;
-    use super::super::util::tree::to_tree;
-    fn to_exp_tree(s: &str) -> Option<Rc<RefCell<TreeNode>>> {
-        to_tree(
-            s.split(',')
-                .map(|x| {
-                    if x == "null" {
-                        None
-                    } else {
-                        Some(x.as_bytes()[0] as i32)
-                    }
-                })
-                .collect::<Vec<Option<i32>>>(),
-        )
+
+    #[test]
+    pub fn test_largest_subarray_1() {
+        assert_eq!(
+            vec![5, 2, 3],
+            Solution::largest_subarray(vec![1, 4, 5, 2, 3], 3)
+        );
     }
     #[test]
-    pub fn test_check_equivalence_1() {
-        assert!(Solution::check_equivalence(
-            to_exp_tree("x"),
-            to_exp_tree("x")
-        ));
+    pub fn test_largest_subarray_2() {
+        assert_eq!(
+            vec![4, 5, 2, 3],
+            Solution::largest_subarray(vec![1, 4, 5, 2, 3], 4)
+        );
     }
     #[test]
-    pub fn test_check_equivalence_2() {
-        assert!(Solution::check_equivalence(
-            to_exp_tree("+,a,+,null,null,b,c"),
-            to_exp_tree("+,+,b,c,a")
-        ));
-    }
-    #[test]
-    pub fn test_check_equivalence_3() {
-        assert!(!Solution::check_equivalence(
-            to_exp_tree("+,a,+,null,null,b,c"),
-            to_exp_tree("+,+,b,d,a")
-        ));
+    pub fn test_largest_subarray_3() {
+        assert_eq!(vec![5], Solution::largest_subarray(vec![1, 4, 5, 2, 3], 1));
     }
 }

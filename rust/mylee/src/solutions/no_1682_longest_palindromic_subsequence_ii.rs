@@ -44,12 +44,9 @@
 
 // int longest_palindrome_subseq(String s)
 
-use super::util::tree::TreeNode;
-
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
     pub fn longest_palindrome_subseq(s: String) -> i32 {
         let n = s.len();

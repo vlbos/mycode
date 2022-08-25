@@ -130,7 +130,7 @@ use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
     pub fn lowest_common_ancestor(
-        root: Option<Rc<RefCell<TreeNode>>>,
+        _root: Option<Rc<RefCell<TreeNode>>>,
         p: Option<Rc<RefCell<TreeNode>>>,
         q: Option<Rc<RefCell<TreeNode>>>,
     ) -> Option<Rc<RefCell<TreeNode>>> {
@@ -159,7 +159,7 @@ mod test {
 
     fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, v: i32) -> Option<Rc<RefCell<TreeNode>>> {
         if let Some(node) = root {
-            let node = root.as_ref().unwrap().borrow();
+            let node = node.borrow();
             if node.val == v {
                 return root.clone();
             }

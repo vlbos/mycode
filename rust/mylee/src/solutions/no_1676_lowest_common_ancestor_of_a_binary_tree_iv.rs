@@ -110,7 +110,7 @@ mod test {
 
     fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, v: i32) -> Option<Rc<RefCell<TreeNode>>> {
         if let Some(node) = root {
-            let node = root.as_ref().unwrap().borrow();
+            let node = node.borrow();
             if node.val == v {
                 return root.clone();
             }

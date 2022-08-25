@@ -143,7 +143,7 @@ mod test {
     use crate::tree;
     fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, v: i32) -> Option<Rc<RefCell<TreeNode>>> {
         if let Some(node) = root {
-            let node = root.as_ref().unwrap().borrow();
+            let node = node.borrow();
             if node.val == v {
                 return root.clone();
             }
@@ -158,7 +158,7 @@ mod test {
     }
     #[test]
     pub fn test_correct_binary_tree_1() {
-        let mut t = tree![1, 2, 3];
+        let t = tree![1, 2, 3];
         let mut n2 = dfs(&t, 2);
         let n3 = dfs(&t, 3);
         n2.as_mut().unwrap().borrow_mut().right = n3;
@@ -166,7 +166,7 @@ mod test {
     }
     #[test]
     pub fn test_correct_binary_tree_2() {
-        let mut t = tree![8, 3, 1, 7, null, 9, 4, 2, null, null, null, 5, 6];
+        let t = tree![8, 3, 1, 7, null, 9, 4, 2, null, null, null, 5, 6];
         let mut n7 = dfs(&t, 7);
         let n4 = dfs(&t, 4);
         n7.as_mut().unwrap().borrow_mut().right = n4;

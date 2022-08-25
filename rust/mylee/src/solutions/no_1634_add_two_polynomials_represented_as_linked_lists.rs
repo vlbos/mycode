@@ -104,7 +104,6 @@ impl Solution {
         let (mut p1, mut p2) = (poly1, poly2);
         let mut ans = None;
         let mut cur = &mut ans;
-        let p = &mut cur;
         while p1.is_some() || p2.is_some() {
             if p1.is_none()
                 || (p2.is_some() && p2.as_ref().unwrap().power > p1.as_ref().unwrap().power)
