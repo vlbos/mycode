@@ -3,14 +3,19 @@
 
 // This is an **interactive problem**.
 
-// You are given a robot in a hidden grid, and it wants to go to a target cell in this grid. The grid is of size `m x n`, and each cell in the grid can be empty or blocked. It is **guaranteed** that the start point and the robot's destination are different, and neither of them is blocked.
+// You are given a robot in a hidden grid, and it wants to go to a target cell in this grid.
+// The grid is of size `m x n`, and each cell in the grid can be empty or blocked.
+// It is **guaranteed** that the start point and the robot's destination are different, and neither of them is blocked.
 
-// You want to find the robot's minimum distance to the target cell. However, you do not know the grid's dimensions, or the starting point of the robot, or its target destination. You are only allowed to ask queries to your `GridMaster` object.
+// You want to find the robot's minimum distance to the target cell.
+// However, you do not know the grid's dimensions, or the starting point of the robot, or its target destination.
+//  You are only allowed to ask queries to your `GridMaster` object.
 
 // You are given a class `GridMaster` which you can call the following functions from:
 
 // *   `boolean GridMaster.canMove(char direction)` returns `true` if the robot can move in that direction. Otherwise, it returns `false`.
-// *   `void GridMaster.move(char direction)` moves the robot in that direction. If this move would move the robot to a blocked cell or off the grid, it will be **ignored,** and the robot would remain in the same position.
+// *   `void GridMaster.move(char direction)` moves the robot in that direction.
+// If this move would move the robot to a blocked cell or off the grid, it will be **ignored,** and the robot would remain in the same position.
 // *   `boolean GridMaster.isTarget()` returns `true` if the robot is currently on the target cell. Otherwise, it returns `false`.
 
 // Note that `direction` in the above functions should be a character from `{'U','D','L','R'}`, representing the directions up, down, left, and right, respectively.
@@ -81,80 +86,132 @@
 
 // [Unknown](https://leetcode.ca/tags/#Unknown)
 
-// int findShortestPath(GridMaster master) {
-
-use super::util::tree::TreeNode;
-
+// int find_shortest_path(GridMaster master) {
+fn d2xy(direction: char) -> (i32, i32) {
+    match direction {
+        'U' => (-1, 0),
+        'D' => (1, 0),
+        'L' => (0, -1),
+        'R' => (0, 1),
+        _ => (0, 0),
+    }
+}
+pub struct GridMaster {
+    grid: Vec<Vec<i32>>,
+    curr: (i32, i32),
+    target: (i32, i32),
+}
+impl GridMaster {
+    pub fn new(grid: Vec<Vec<i32>>) -> Self {
+        let mut curr = (0, 0);
+        let mut target = (0, 0);
+        for (i, row) in grid.iter().enumerate() {
+            for (j, &v) in row.iter().enumerate() {
+                if v == -1 {
+                    curr = (i as i32, j as i32);
+                } else if v == 2 {
+                    target = (i as i32, j as i32);
+                }
+            }
+        }
+        Self { grid, curr, target }
+    }
+    pub fn can_move(&self, direction: char) -> bool {
+        let (dx, dy) = d2xy(direction);
+        let (x, y) = self.curr;
+        let (nx, ny) = (x + dx, y + dy);
+        if nx < 0 || nx >= self.grid.len() as i32 || ny < 0 || ny >= self.grid[0].len() as i32 {
+            return false;
+        }
+        self.grid[nx as usize][ny as usize] != 0
+    }
+    pub fn moving(&mut self, direction: char) {
+        if self.can_move(direction) {
+            let (dx, dy) = d2xy(direction);
+            self.curr.0 += dx;
+            self.curr.1 += dy;
+        }
+    }
+    pub fn is_target(&self) -> bool {
+        self.curr == self.target
+    }
+}
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn check_equivalence(
-        root1: Option<Rc<RefCell<TreeNode>>>,
-        root2: Option<Rc<RefCell<TreeNode>>>,
-    ) -> bool {
-        use std::collections::HashMap;
-        fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, v: i32, freq: &mut HashMap<i32, i32>) {
-            if root.is_none() {
+    pub fn find_shortest_path(master: GridMaster) -> i32 {
+        let mut master = master;
+        use std::collections::HashSet;
+        let max = 500;
+        let mut grid = vec![vec![-2; max * 2]; max * 2];
+        fn dfs(x: i32, y: i32, grid: &mut Vec<Vec<i32>>, master: &mut GridMaster) {
+            if grid[x as usize][y as usize] != -2 {
                 return;
             }
-            let node = root.as_ref().unwrap().borrow();
-            if (node.val as u8 as char).is_ascii_alphabetic() {
-                *freq.entry(node.val).or_insert(0) += v;
-            } else {
-                dfs(&node.left, v, freq);
-                dfs(&node.right, v, freq);
+            grid[x as usize][y as usize] = if master.is_target() { 2 } else { 1 };
+            for d in ['U', 'D', 'L', 'R'] {
+                let (dx, dy) = d2xy(d);
+                let (nx, ny) = (x + dx, y + dy);
+                if master.can_move(d) {
+                    master.moving(d);
+                    dfs(nx, ny, grid, master);
+                    let rd = match d {
+                        'U' => 'D',
+                        'D' => 'U',
+                        'L' => 'R',
+                        'R' => 'L',
+                        _ => ' ',
+                    };
+                    master.moving(rd);
+                } else {
+                    grid[nx as usize][ny as usize] = 0;
+                }
             }
         }
-        let mut freq = HashMap::new();
-        dfs(&root1, 1, &mut freq);
-        dfs(&root2, -1, &mut freq);
-        if freq.values().any(|v| *v > 0) {
-            false
-        } else {
-            true
+        dfs(max as i32, max as i32, &mut grid, &mut master);
+        let mut steps = 0;
+        let mut q = std::collections::VecDeque::from([(max as i32, max as i32)]);
+        grid[max][max] = 0;
+        let dirs = [0, 1, 0, -1, 0];
+        while !q.is_empty() {
+            steps += 1;
+            let n = q.len();
+            for _ in 0..n {
+                let (x, y) = q.pop_front().unwrap();
+                for (dx, dy) in dirs[..dirs.len() - 1].iter().zip(&dirs[1..]) {
+                    let (nx, ny) = (x + dx, y + dy);
+                    if grid[nx as usize][ny as usize] == 2 {
+                        return steps;
+                    }
+                    if grid[nx as usize][ny as usize] == 0 {
+                        continue;
+                    }
+                    grid[nx as usize][ny as usize] = 0;
+                    q.push_back((nx, ny));
+                }
+            }
         }
+        -1
     }
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
-    // use crate::tree;
-    use super::super::util::tree::to_tree;
-    fn to_exp_tree(s: &str) -> Option<Rc<RefCell<TreeNode>>> {
-        to_tree(
-            s.split(',')
-                .map(|x| {
-                    if x == "null" {
-                        None
-                    } else {
-                        Some(x.as_bytes()[0] as i32)
-                    }
-                })
-                .collect::<Vec<Option<i32>>>(),
-        )
+
+    #[test]
+    pub fn test_find_shortest_path_1() {
+        let master = GridMaster::new(vec![vec![1, 2], vec![-1, 0]]);
+        assert_eq!(2, Solution::find_shortest_path(master,));
     }
     #[test]
-    pub fn test_check_equivalence_1() {
-        assert!(Solution::check_equivalence(
-            to_exp_tree("x"),
-            to_exp_tree("x")
-        ));
+    pub fn test_find_shortest_path_2() {
+        let master = GridMaster::new(vec![vec![0, 0, -1], vec![1, 1, 1], vec![2, 0, 0]]);
+        assert_eq!(4, Solution::find_shortest_path(master,));
     }
     #[test]
-    pub fn test_check_equivalence_2() {
-        assert!(Solution::check_equivalence(
-            to_exp_tree("+,a,+,null,null,b,c"),
-            to_exp_tree("+,+,b,c,a")
-        ));
-    }
-    #[test]
-    pub fn test_check_equivalence_3() {
-        assert!(!Solution::check_equivalence(
-            to_exp_tree("+,a,+,null,null,b,c"),
-            to_exp_tree("+,+,b,d,a")
-        ));
+    pub fn test_find_shortest_path_3() {
+        let master = GridMaster::new(vec![vec![-1, 0], vec![0, 2]]);
+        assert_eq!(-1, Solution::find_shortest_path(master,));
     }
 }

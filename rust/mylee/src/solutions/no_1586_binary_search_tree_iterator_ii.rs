@@ -140,7 +140,7 @@ impl BSTIterator {
     }
     fn has_next(&self) -> bool {
         let i = (self.index + 1) as usize;
-        if i >= 0 && i < self.p.len() {
+        if i < self.p.len() {
             return true;
         }
 
