@@ -1,14 +1,16 @@
 // 1788\. Maximize the Beauty of the Garden
 // ========================================
 
-// There is a garden of `n` flowers, and each flower has an integer beauty value. The flowers are arranged in a line. You are given an integer array `flowers` of size `n` and each `flowers[i]` represents the beauty of the `ith` flower.
+// There is a garden of `n` flowers, and each flower has an integer beauty value.
+// The flowers are arranged in a line. You are given an integer array `flowers` of size `n` and each `flowers[i]` represents the beauty of the `ith` flower.
 
 // A garden is **valid** if it meets these conditions:
 
 // *   The garden has at least two flowers.
 // *   The first and the last flower of the garden have the same beauty value.
 
-// As the appointed gardener, you have the ability to **remove** any (possibly none) flowers from the garden. You want to remove flowers in a way that makes the remaining garden **valid**. The beauty of the garden is the sum of the beauty of all the remaining flowers.
+// As the appointed gardener, you have the ability to **remove** any (possibly none) flowers from the garden.
+// You want to remove flowers in a way that makes the remaining garden **valid**. The beauty of the garden is the sum of the beauty of all the remaining flowers.
 
 // Return the maximum possible beauty of some **valid** garden after you have removed any (possibly none) flowers.
 
@@ -48,80 +50,43 @@
 
 // [Amazon](https://leetcode.ca/tags/#Amazon)
 
-// int maximumBeauty(int[] flowers) {
-
-use super::util::tree::TreeNode;
+// int maximum_beauty(int[] flowers) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn check_equivalence(
-        root1: Option<Rc<RefCell<TreeNode>>>,
-        root2: Option<Rc<RefCell<TreeNode>>>,
-    ) -> bool {
-        use std::collections::HashMap;
-        fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, v: i32, freq: &mut HashMap<i32, i32>) {
-            if root.is_none() {
-                return;
+    pub fn maximum_beauty(flowers: Vec<i32>) -> i32 {
+        let mut lookup = std::collections::HashMap::new();
+        let mut prefix = vec![0];
+        let mut ans = i32::MIN;
+        for (i, f) in flowers.into_iter().enumerate() {
+            let last = prefix[prefix.len() - 1] + if f > 0 { f } else { 0 };
+            prefix.push(last);
+            if !lookup.contains_key(&f) {
+                lookup.insert(f, i);
+                continue;
             }
-            let node = root.as_ref().unwrap().borrow();
-            if (node.val as u8 as char).is_ascii_alphabetic() {
-                *freq.entry(node.val).or_insert(0) += v;
-            } else {
-                dfs(&node.left, v, freq);
-                dfs(&node.right, v, freq);
-            }
+            ans = ans.max(prefix[i + 1] - prefix[lookup[&f]] + if f < 0 { f * 2 } else { 0 });
         }
-        let mut freq = HashMap::new();
-        dfs(&root1, 1, &mut freq);
-        dfs(&root2, -1, &mut freq);
-        if freq.values().any(|v| *v > 0) {
-            false
-        } else {
-            true
-        }
+        ans
     }
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
-    // use crate::tree;
-    use super::super::util::tree::to_tree;
-    fn to_exp_tree(s: &str) -> Option<Rc<RefCell<TreeNode>>> {
-        to_tree(
-            s.split(',')
-                .map(|x| {
-                    if x == "null" {
-                        None
-                    } else {
-                        Some(x.as_bytes()[0] as i32)
-                    }
-                })
-                .collect::<Vec<Option<i32>>>(),
-        )
+
+    #[test]
+    pub fn test_maximum_beauty_1() {
+        assert_eq!(8, Solution::maximum_beauty(vec![1, 2, 3, 1, 2],));
     }
     #[test]
-    pub fn test_check_equivalence_1() {
-        assert!(Solution::check_equivalence(
-            to_exp_tree("x"),
-            to_exp_tree("x")
-        ));
+    pub fn test_maximum_beauty_2() {
+        assert_eq!(3, Solution::maximum_beauty(vec![100, 1, 1, -3, 1],));
     }
     #[test]
-    pub fn test_check_equivalence_2() {
-        assert!(Solution::check_equivalence(
-            to_exp_tree("+,a,+,null,null,b,c"),
-            to_exp_tree("+,+,b,c,a")
-        ));
-    }
-    #[test]
-    pub fn test_check_equivalence_3() {
-        assert!(!Solution::check_equivalence(
-            to_exp_tree("+,a,+,null,null,b,c"),
-            to_exp_tree("+,+,b,d,a")
-        ));
+    pub fn test_maximum_beauty_3() {
+        assert_eq!(-2, Solution::maximum_beauty(vec![-1, -2, 0, -1],));
     }
 }

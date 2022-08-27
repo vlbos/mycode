@@ -1,7 +1,10 @@
 // 1804\. Implement Trie II (Prefix Tree)
 // ======================================
 
-// A [**trie**](https://en.wikipedia.org/wiki/Trie) (pronounced as "try") or **prefix tree** is a tree data structure used to efficiently store and retrieve keys in a dataset of strings. There are various applications of this data structure, such as autocomplete and spellchecker.
+// A [**trie**](https://en.wikipedia.org/wiki/Trie) (pronounced as "try")
+// or **prefix tree** is a tree data structure used to efficiently store
+// and retrieve keys in a dataset of strings.
+// There are various applications of this data structure, such as autocomplete and spellchecker.
 
 // Implement the Trie class:
 
@@ -50,78 +53,78 @@
 
 // [Unknown](https://leetcode.ca/tags/#Unknown)
 
-use super::util::tree::TreeNode;
-
+use std::collections::HashMap;
 #[allow(dead_code)]
-pub struct Solution {}
+pub struct Trie {
+    children: HashMap<char, Trie>,
+    word_count: i32,
+    prefix_count: i32,
+}
 use std::cell::RefCell;
 use std::rc::Rc;
-impl Solution {
-    pub fn check_equivalence(
-        root1: Option<Rc<RefCell<TreeNode>>>,
-        root2: Option<Rc<RefCell<TreeNode>>>,
-    ) -> bool {
-        use std::collections::HashMap;
-        fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, v: i32, freq: &mut HashMap<i32, i32>) {
-            if root.is_none() {
-                return;
-            }
-            let node = root.as_ref().unwrap().borrow();
-            if (node.val as u8 as char).is_ascii_alphabetic() {
-                *freq.entry(node.val).or_insert(0) += v;
+impl Trie {
+    pub fn new() -> Self {
+        Self {
+            children: HashMap::new(),
+            word_count: 0,
+            prefix_count: 0,
+        }
+    }
+    pub fn insert(&mut self, word: String) {
+        let mut node = self;
+        for c in word.chars() {
+            node = node.children.entry(c).or_insert(Trie::new());
+            node.prefix_count += 1;
+        }
+        node.word_count += 1;
+    }
+    pub fn count_words_equal_to(&self, word: String) -> i32 {
+        let mut node = self;
+        for c in word.chars() {
+            if let Some(next) = node.children.get(&c) {
+                node = next;
             } else {
-                dfs(&node.left, v, freq);
-                dfs(&node.right, v, freq);
+                return 0;
             }
         }
-        let mut freq = HashMap::new();
-        dfs(&root1, 1, &mut freq);
-        dfs(&root2, -1, &mut freq);
-        if freq.values().any(|v| *v > 0) {
-            false
-        } else {
-            true
+        node.word_count
+    }
+    pub fn count_words_starting_with(&self, prefix: String) -> i32 {
+        let mut node = self;
+        for c in prefix.chars() {
+            if let Some(next) = node.children.get(&c) {
+                node = next;
+            } else {
+                return 0;
+            }
         }
+        node.prefix_count
+    }
+    pub fn erase(&mut self, word: String) {
+        let mut node = self;
+        for c in word.chars() {
+            node = node.children.entry(c).or_insert(Trie::new());
+            node.prefix_count -= 1;
+        }
+        node.word_count -= 1;
     }
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
-    // use crate::tree;
-    use super::super::util::tree::to_tree;
-    fn to_exp_tree(s: &str) -> Option<Rc<RefCell<TreeNode>>> {
-        to_tree(
-            s.split(',')
-                .map(|x| {
-                    if x == "null" {
-                        None
-                    } else {
-                        Some(x.as_bytes()[0] as i32)
-                    }
-                })
-                .collect::<Vec<Option<i32>>>(),
-        )
-    }
+
     #[test]
-    pub fn test_check_equivalence_1() {
-        assert!(Solution::check_equivalence(
-            to_exp_tree("x"),
-            to_exp_tree("x")
-        ));
-    }
-    #[test]
-    pub fn test_check_equivalence_2() {
-        assert!(Solution::check_equivalence(
-            to_exp_tree("+,a,+,null,null,b,c"),
-            to_exp_tree("+,+,b,c,a")
-        ));
-    }
-    #[test]
-    pub fn test_check_equivalence_3() {
-        assert!(!Solution::check_equivalence(
-            to_exp_tree("+,a,+,null,null,b,c"),
-            to_exp_tree("+,+,b,d,a")
-        ));
+    pub fn test_trie_1() {
+        let mut trie = Trie::new();
+        trie.insert("apple".to_string()); // Inserts "apple".
+        trie.insert("apple".to_string()); // Inserts another "apple".
+        assert_eq!(2, trie.count_words_equal_to("apple".to_string())); // There are two instances of "apple" so return 2.
+        assert_eq!(2, trie.count_words_starting_with("app".to_string())); // "app" is a prefix of "apple" so return 2.
+        trie.erase("apple".to_string()); // Erases one "apple".
+        assert_eq!(1, trie.count_words_equal_to("apple".to_string())); // Now there is only one instance of "apple" so return 1.
+        assert_eq!(1, trie.count_words_starting_with("app".to_string())); // return 1
+        trie.erase("apple".to_string()); // Erases "apple". Now the trie is empty.
+        assert_eq!(0, trie.count_words_starting_with("app".to_string())); // return 0
     }
 }
