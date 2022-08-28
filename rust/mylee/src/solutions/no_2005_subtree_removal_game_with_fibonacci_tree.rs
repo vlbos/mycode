@@ -1,6 +1,5 @@
 // # [2005. Subtree Removal Game with Fibonacci Tree](https://leetcode.com/problems/subtree-removal-game-with-fibonacci-tree)
 
-
 // ## Description
 
 // <p>A <strong>Fibonacci</strong> tree is a binary tree created using the order function <code>order(n)</code>:</p>
@@ -62,44 +61,56 @@
 // 	<li><code>1 &lt;= n &lt;= 100</code></li>
 // </ul>
 
-
 //  bool findGameWinner(int n) {
-
-
-
 
 #[allow(dead_code)]
 pub struct Solution {}
 use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(
-        words:Vec<String>,
-    ) -> String {
-       String::new()
+    pub fn longest_word(words: Vec<String>) -> String {
+        String::new()
     }
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
-   
+
     #[test]
     pub fn test_longest_word_1() {
-        assert_eq!("kiran".to_string(),Solution::longest_word(
-            ["k","ki","kir","kira", "kiran"].into_iter().map(String::from).collect::<Vec<String>>()
-        ));
+        assert_eq!(
+            "kiran".to_string(),
+            Solution::longest_word(
+                ["k", "ki", "kir", "kira", "kiran"]
+                    .into_iter()
+                    .map(String::from)
+                    .collect::<Vec<String>>()
+            )
+        );
     }
     #[test]
     pub fn test_longest_word_2() {
-          assert_eq!("apple".to_string(),Solution::longest_word(
-           ["a", "banana", "app", "appl", "ap", "apply", "apple"].into_iter().map(String::from).collect::<Vec<String>>()
-        ));
+        assert_eq!(
+            "apple".to_string(),
+            Solution::longest_word(
+                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
+                    .into_iter()
+                    .map(String::from)
+                    .collect::<Vec<String>>()
+            )
+        );
     }
     #[test]
     pub fn test_longest_word_3() {
-          assert_eq!(String::new(),Solution::longest_word(
-            ["abc", "bc", "ab", "qwe"].into_iter().map(String::from).collect::<Vec<String>>(),
-        ));
+        assert_eq!(
+            String::new(),
+            Solution::longest_word(
+                ["abc", "bc", "ab", "qwe"]
+                    .into_iter()
+                    .map(String::from)
+                    .collect::<Vec<String>>(),
+            )
+        );
     }
 }

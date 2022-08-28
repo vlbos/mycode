@@ -43,43 +43,99 @@
 // *   `1 <= words[i].length <= 10^5`
 // *   `1 <= sum(words[i].length) <= 10^5`
 
-
-
-
-//   string longest_word(vector<string>& words) 
-
+//   string longest_word(vector<string>& words)
+use std::collections::HashMap;
+pub struct Trie {
+    children: HashMap<char, Trie>,
+    is_word: bool,
+}
+impl Trie {
+    pub fn new() -> Self {
+        Self {
+            children: HashMap::new(),
+            is_word: false,
+        }
+    }
+    pub fn insert(&mut self, word: &String) {
+        let mut node = self;
+        for c in word.chars() {
+            node = node.children.entry(c).or_insert(Trie::new());
+        }
+        node.is_word = true;
+    }
+    pub fn all_prefixed(&self, word: &String) -> bool {
+        let mut node = self;
+        for c in word.chars() {
+            if let Some(child) = node.children.get(&c) {
+                if !child.is_word {
+                    return false;
+                }
+                node = child;
+            }
+        }
+        node.is_word
+    }
+}
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(
-        words:Vec<String>,
-    ) -> String {
-       String::new()
+    pub fn longest_word(words: Vec<String>) -> String {
+        let mut trie = Trie::new();
+        for w in &words {
+            trie.insert(w);
+        }
+        let mut ans = String::new();
+        for w in &words {
+            if !trie.all_prefixed(w) {
+                continue;
+            }
+            if ans.len() < w.len() || (ans.len() == w.len() && w < &ans) {
+                ans = w.clone();
+            }
+        }
+        ans
     }
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
-   
+
     #[test]
     pub fn test_longest_word_1() {
-        assert_eq!("kiran".to_string(),Solution::longest_word(
-            ["k","ki","kir","kira", "kiran"].into_iter().map(String::from).collect::<Vec<String>>()
-        ));
+        assert_eq!(
+            "kiran".to_string(),
+            Solution::longest_word(
+                ["k", "ki", "kir", "kira", "kiran"]
+                    .into_iter()
+                    .map(String::from)
+                    .collect::<Vec<String>>()
+            )
+        );
     }
     #[test]
     pub fn test_longest_word_2() {
-          assert_eq!("apple".to_string(),Solution::longest_word(
-           ["a", "banana", "app", "appl", "ap", "apply", "apple"].into_iter().map(String::from).collect::<Vec<String>>()
-        ));
+        assert_eq!(
+            "apple".to_string(),
+            Solution::longest_word(
+                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
+                    .into_iter()
+                    .map(String::from)
+                    .collect::<Vec<String>>()
+            )
+        );
     }
     #[test]
     pub fn test_longest_word_3() {
-          assert_eq!(String::new(),Solution::longest_word(
-            ["abc", "bc", "ab", "qwe"].into_iter().map(String::from).collect::<Vec<String>>(),
-        ));
+        assert_eq!(
+            String::new(),
+            Solution::longest_word(
+                ["abc", "bc", "ab", "qwe"]
+                    .into_iter()
+                    .map(String::from)
+                    .collect::<Vec<String>>(),
+            )
+        );
     }
 }

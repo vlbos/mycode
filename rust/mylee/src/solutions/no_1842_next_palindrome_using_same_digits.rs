@@ -42,37 +42,45 @@
 
 // [Amazon](https://leetcode.ca/tags/#Amazon)
 
-use super::util::tree::TreeNode;
+//  public String next_palindrome(String num) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn check_equivalence(
-        root1: Option<Rc<RefCell<TreeNode>>>,
-        root2: Option<Rc<RefCell<TreeNode>>>,
-    ) -> bool {
-        use std::collections::HashMap;
-        fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, v: i32, freq: &mut HashMap<i32, i32>) {
-            if root.is_none() {
-                return;
-            }
-            let node = root.as_ref().unwrap().borrow();
-            if (node.val as u8 as char).is_ascii_alphabetic() {
-                *freq.entry(node.val).or_insert(0) += v;
-            } else {
-                dfs(&node.left, v, freq);
-                dfs(&node.right, v, freq);
-            }
+    pub fn next_palindrome(num: String) -> String {
+        let n = num.len();
+        if n < 4 {
+            return String::new();
         }
-        let mut freq = HashMap::new();
-        dfs(&root1, 1, &mut freq);
-        dfs(&root2, -1, &mut freq);
-        if freq.values().any(|v| *v > 0) {
-            false
+        let next_pal = |bs: &[u8]| -> Option<(usize, usize)> {
+            let mut i = bs.len() - 1;
+            while i > 0 && bs[i] <= bs[i - 1] {
+                i -= 1;
+            }
+            if i == 0 {
+                return None;
+            }
+            i -= 1;
+            let mut j = bs.len() - 1;
+            while j > i && bs[j] <= bs[i] {
+                j -= 1;
+            }
+            Some((i, j))
+        };
+        if let Some((i, j)) = next_pal(num[..n / 2].as_bytes()) {
+            let mut s: Vec<char> = num[..n / 2].chars().collect();
+            s.swap(i, j);
+            s[i + 1..n / 2].reverse();
+            let mut ss = s.clone();
+            ss.reverse();
+            if n % 2 > 0 {
+                s.push(num.chars().nth(n / 2).unwrap());
+            }
+            s.extend(ss);
+            s.into_iter().collect()
         } else {
-            true
+            String::new()
         }
     }
 }
@@ -80,40 +88,26 @@ impl Solution {
 #[cfg(test)]
 mod test {
     use super::*;
-    // use crate::tree;
-    use super::super::util::tree::to_tree;
-    fn to_exp_tree(s: &str) -> Option<Rc<RefCell<TreeNode>>> {
-        to_tree(
-            s.split(',')
-                .map(|x| {
-                    if x == "null" {
-                        None
-                    } else {
-                        Some(x.as_bytes()[0] as i32)
-                    }
-                })
-                .collect::<Vec<Option<i32>>>(),
-        )
+
+    #[test]
+    pub fn test_next_palindrome_1() {
+        assert_eq!(
+            String::from("2112"),
+            Solution::next_palindrome(String::from("1221"),)
+        );
     }
     #[test]
-    pub fn test_check_equivalence_1() {
-        assert!(Solution::check_equivalence(
-            to_exp_tree("x"),
-            to_exp_tree("x")
-        ));
+    pub fn test_next_palindrome_2() {
+        assert_eq!(
+            String::from(""),
+            Solution::next_palindrome(String::from("32123"),)
+        );
     }
     #[test]
-    pub fn test_check_equivalence_2() {
-        assert!(Solution::check_equivalence(
-            to_exp_tree("+,a,+,null,null,b,c"),
-            to_exp_tree("+,+,b,c,a")
-        ));
-    }
-    #[test]
-    pub fn test_check_equivalence_3() {
-        assert!(!Solution::check_equivalence(
-            to_exp_tree("+,a,+,null,null,b,c"),
-            to_exp_tree("+,+,b,d,a")
-        ));
+    pub fn test_next_palindrome_3() {
+        assert_eq!(
+            String::from("54455445"),
+            Solution::next_palindrome(String::from("45544554"),)
+        );
     }
 }

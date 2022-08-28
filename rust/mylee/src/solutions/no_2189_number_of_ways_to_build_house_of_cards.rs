@@ -43,10 +43,10 @@
 
 // *   `1 <= n <= 500`
 
-// **Companies**:  
+// **Companies**:
 // [Airbnb](https://leetcode.com/company/airbnb)
 
-// **Related Topics**:  
+// **Related Topics**:
 // [Math](https://leetcode.com/tag/math/), [Dynamic Programming](https://leetcode.com/tag/dynamic-programming/)
 
 // **Similar Questions**:
@@ -68,7 +68,6 @@
 
 //     dp[i][j] = SUM( dp[i - usedCards][housesInCurrentRow - 1] )
 //                     where usedCards = 3 * housesInCurrentRow - 1
-    
 
 // The trivial case is `dp[0][j] = 1` – we add one to the answer once we used all the cards.
 
@@ -84,33 +83,49 @@ pub struct Solution {}
 use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(
-        words:Vec<String>,
-    ) -> String {
-       String::new()
+    pub fn longest_word(words: Vec<String>) -> String {
+        String::new()
     }
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
-   
+
     #[test]
     pub fn test_longest_word_1() {
-        assert_eq!("kiran".to_string(),Solution::longest_word(
-            ["k","ki","kir","kira", "kiran"].into_iter().map(String::from).collect::<Vec<String>>()
-        ));
+        assert_eq!(
+            "kiran".to_string(),
+            Solution::longest_word(
+                ["k", "ki", "kir", "kira", "kiran"]
+                    .into_iter()
+                    .map(String::from)
+                    .collect::<Vec<String>>()
+            )
+        );
     }
     #[test]
     pub fn test_longest_word_2() {
-          assert_eq!("apple".to_string(),Solution::longest_word(
-           ["a", "banana", "app", "appl", "ap", "apply", "apple"].into_iter().map(String::from).collect::<Vec<String>>()
-        ));
+        assert_eq!(
+            "apple".to_string(),
+            Solution::longest_word(
+                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
+                    .into_iter()
+                    .map(String::from)
+                    .collect::<Vec<String>>()
+            )
+        );
     }
     #[test]
     pub fn test_longest_word_3() {
-          assert_eq!(String::new(),Solution::longest_word(
-            ["abc", "bc", "ab", "qwe"].into_iter().map(String::from).collect::<Vec<String>>(),
-        ));
+        assert_eq!(
+            String::new(),
+            Solution::longest_word(
+                ["abc", "bc", "ab", "qwe"]
+                    .into_iter()
+                    .map(String::from)
+                    .collect::<Vec<String>>(),
+            )
+        );
     }
 }

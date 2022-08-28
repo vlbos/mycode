@@ -19,7 +19,6 @@
 //                      [1,4,7,9]]
 //     Output: [1,4]
 //     Explanation: The longest common subsequence in the two arrays is [1,4].
-    
 
 // **Example 2:**
 
@@ -28,7 +27,6 @@
 //                      [2,3,4,6,9]]
 //     Output: [2,3,6]
 //     Explanation: The longest common subsequence in all three arrays is [2,3,6].
-    
 
 // **Example 3:**
 
@@ -36,7 +34,6 @@
 //                      [6,7,8]]
 //     Output: []
 //     Explanation: There is no common subsequence between the two arrays.
-    
 
 // **Constraints:**
 
@@ -55,39 +52,54 @@
 //     class Solution {
 //         public List<Integer> longestCommomSubsequence(int[][] arrays) {
 
-
 #[allow(dead_code)]
 pub struct Solution {}
 use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(
-        words:Vec<String>,
-    ) -> String {
-       String::new()
+    pub fn longest_word(words: Vec<String>) -> String {
+        String::new()
     }
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
-   
+
     #[test]
     pub fn test_longest_word_1() {
-        assert_eq!("kiran".to_string(),Solution::longest_word(
-            ["k","ki","kir","kira", "kiran"].into_iter().map(String::from).collect::<Vec<String>>()
-        ));
+        assert_eq!(
+            "kiran".to_string(),
+            Solution::longest_word(
+                ["k", "ki", "kir", "kira", "kiran"]
+                    .into_iter()
+                    .map(String::from)
+                    .collect::<Vec<String>>()
+            )
+        );
     }
     #[test]
     pub fn test_longest_word_2() {
-          assert_eq!("apple".to_string(),Solution::longest_word(
-           ["a", "banana", "app", "appl", "ap", "apply", "apple"].into_iter().map(String::from).collect::<Vec<String>>()
-        ));
+        assert_eq!(
+            "apple".to_string(),
+            Solution::longest_word(
+                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
+                    .into_iter()
+                    .map(String::from)
+                    .collect::<Vec<String>>()
+            )
+        );
     }
     #[test]
     pub fn test_longest_word_3() {
-          assert_eq!(String::new(),Solution::longest_word(
-            ["abc", "bc", "ab", "qwe"].into_iter().map(String::from).collect::<Vec<String>>(),
-        ));
+        assert_eq!(
+            String::new(),
+            Solution::longest_word(
+                ["abc", "bc", "ab", "qwe"]
+                    .into_iter()
+                    .map(String::from)
+                    .collect::<Vec<String>>(),
+            )
+        );
     }
 }

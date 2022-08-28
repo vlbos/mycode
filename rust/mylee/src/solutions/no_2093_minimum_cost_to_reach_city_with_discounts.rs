@@ -7,7 +7,7 @@
 
 // Return _the **minimum total cost** to go from city_ `0` _to city_ `n - 1`_, or_ `-1` _if it is not possible to go from city_ `0` _to city_ `n - 1`_._
 
-// **Example 1:**  
+// **Example 1:**
 // ![](https://assets.leetcode.com/uploads/2021/11/29/image-20211129222429-1.png)
 
 // **Input:** n = 5, highways = \[\[0,1,4\],\[2,1,3\],\[1,4,11\],\[3,2,3\],\[3,4,2\]\], discounts = 1
@@ -17,7 +17,7 @@
 // Go from 1 to 4 and use a discount for a cost of 11 / 2 = 5.
 // The minimum cost to go from 0 to 4 is 4 + 5 = 9.
 
-// **Example 2:**  
+// **Example 2:**
 // ![](https://assets.leetcode.com/uploads/2021/11/29/image-20211129222650-4.png)
 
 // **Input:** n = 4, highways = \[\[1,3,17\],\[1,2,7\],\[3,2,5\],\[0,1,6\],\[3,0,20\]\], discounts = 20
@@ -28,7 +28,7 @@
 // Go from 2 to 3 and use a discount for a cost of 5 / 2 = 2.
 // The minimum cost to go from 0 to 3 is 3 + 3 + 2 = 8.
 
-// **Example 3:**  
+// **Example 3:**
 // ![](https://assets.leetcode.com/uploads/2021/11/29/image-20211129222531-3.png)
 
 // **Input:** n = 4, highways = \[\[0,1,3\],\[2,3,2\]\], discounts = 0
@@ -47,10 +47,10 @@
 // *   `0 <= discounts <= 500`
 // *   There are no duplicate highways.
 
-// **Companies**:  
+// **Companies**:
 // [Flipkart](https://leetcode.com/company/flipkart)
 
-// **Related Topics**:  
+// **Related Topics**:
 // [Graph](https://leetcode.com/tag/graph/), [Shortest Path](https://leetcode.com/tag/shortest-path/)
 
 // **Similar Questions**:
@@ -85,33 +85,49 @@ pub struct Solution {}
 use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(
-        words:Vec<String>,
-    ) -> String {
-       String::new()
+    pub fn longest_word(words: Vec<String>) -> String {
+        String::new()
     }
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
-   
+
     #[test]
     pub fn test_longest_word_1() {
-        assert_eq!("kiran".to_string(),Solution::longest_word(
-            ["k","ki","kir","kira", "kiran"].into_iter().map(String::from).collect::<Vec<String>>()
-        ));
+        assert_eq!(
+            "kiran".to_string(),
+            Solution::longest_word(
+                ["k", "ki", "kir", "kira", "kiran"]
+                    .into_iter()
+                    .map(String::from)
+                    .collect::<Vec<String>>()
+            )
+        );
     }
     #[test]
     pub fn test_longest_word_2() {
-          assert_eq!("apple".to_string(),Solution::longest_word(
-           ["a", "banana", "app", "appl", "ap", "apply", "apple"].into_iter().map(String::from).collect::<Vec<String>>()
-        ));
+        assert_eq!(
+            "apple".to_string(),
+            Solution::longest_word(
+                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
+                    .into_iter()
+                    .map(String::from)
+                    .collect::<Vec<String>>()
+            )
+        );
     }
     #[test]
     pub fn test_longest_word_3() {
-          assert_eq!(String::new(),Solution::longest_word(
-            ["abc", "bc", "ab", "qwe"].into_iter().map(String::from).collect::<Vec<String>>(),
-        ));
+        assert_eq!(
+            String::new(),
+            Solution::longest_word(
+                ["abc", "bc", "ab", "qwe"]
+                    .into_iter()
+                    .map(String::from)
+                    .collect::<Vec<String>>(),
+            )
+        );
     }
 }

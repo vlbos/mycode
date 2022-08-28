@@ -196,7 +196,6 @@ pub mod no_2355_maximum_number_of_books_you_can_take;
 pub mod no_2361_minimum_costs_using_the_train_line;
 pub mod no_2371_minimize_maximum_value_in_a_grid;
 pub mod no_2378_choose_edges_to_maximize_score_in_a_tree;
-pub mod no_2386_find_the_k_sum_of_an_array;
 pub mod no_2387_median_of_a_row_wise_sorted_matrix;
 pub mod no_243_shortest_word_distance;
 pub mod no_244_shortest_word_distance_ii;
