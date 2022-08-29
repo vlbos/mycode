@@ -43,17 +43,23 @@
 // Sort both `nums1` and `nums2`. Then for each `0 <= i < n`, `nums1[i]` is multiplied with `nums2[n - 1 - i]`. In this way, the product sum is minimized.
 
 //     class Solution {
-//         public int minProductSum(int[] nums1, int[] nums2) {
-
-//    List<List<Integer>> findRLEArray(int[][] encoded1, int[][] encoded2)
+//         public int min_product_sum(int[] nums1, int[] nums2) {
 
 #[allow(dead_code)]
 pub struct Solution {}
 use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn min_product_sum(nums1: Vec<i32>, nums2: Vec<i32>) -> i32 {
+        let (mut nums1, mut nums2) = (nums1, nums2);
+        nums1.sort();
+        nums2.sort();
+        nums1
+            .into_iter()
+            .rev()
+            .zip(nums2)
+            .map(|(v1, v2)| v1 * v2)
+            .sum::<i32>()
     }
 }
 
@@ -62,39 +68,17 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_min_product_sum_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            40,
+            Solution::min_product_sum(vec![5, 3, 4, 2], vec![4, 2, 2, 5])
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_min_product_sum_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
-    }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
+            65,
+            Solution::min_product_sum(vec![2, 1, 4, 5, 7], vec![3, 2, 4, 8, 6])
         );
     }
 }

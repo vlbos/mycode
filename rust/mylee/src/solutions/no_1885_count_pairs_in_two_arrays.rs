@@ -49,15 +49,32 @@
 // Create an array `differences` with length `n` such that `differences[i] = nums1[i] - nums2[i]` for all `0 <= i < n`. Sort `differences`. For each `0 <= i < n - 1`, find the minimum `index` such that `differences[index] + differences[i] > 0`, or `index = n` if `differences[n - 1] + differences[i] <= 0`, and the number of `j`’s for the current `i` is `n - index`. In this way, the number of pairs of indices `(i, j)` can be calculated.
 
 //     class Solution {
-//         public long countPairs(int[] nums1, int[] nums2) {
+//         public long count_pairs(int[] nums1, int[] nums2) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn count_pairs(nums1: Vec<i32>, nums2: Vec<i32>) -> i32 {
+        let mut diff: Vec<i32> = nums1
+            .into_iter()
+            .zip(nums2)
+            .map(|(v1, v2)| v1 - v2)
+            .collect();
+        diff.sort();
+        let mut ans = 0;
+        let n = diff.len();
+        for i in 0..n - 1 {
+            let target = -diff[i] + 1;
+            let index = if let Ok(j) | Err(j) = diff[i + 1..].binary_search(&target) {
+                j
+            } else {
+                0
+            } + i
+                + 1;
+            ans += n - index;
+        }
+        ans as _
     }
 }
 
@@ -66,39 +83,14 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_count_pairs_1() {
+        assert_eq!(1, Solution::count_pairs(vec![2, 1, 2, 1], vec![1, 2, 1, 2]));
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_count_pairs_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
-    }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
+            5,
+            Solution::count_pairs(vec![1, 10, 6, 2], vec![1, 4, 1, 5])
         );
     }
 }

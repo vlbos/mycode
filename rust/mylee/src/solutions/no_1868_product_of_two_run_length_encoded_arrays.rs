@@ -54,15 +54,41 @@
 // *   `1 <= val_j, freq_j <= 10^4 for each encoded2[j]`.
 // *   The full arrays that `encoded1` and `encoded2` represent are the same length.
 
-//    List<List<Integer>> findRLEArray(int[][] encoded1, int[][] encoded2)
+//    List<List<Integer>> find_rle_array(int[][] encoded1, int[][] encoded2)
 
 #[allow(dead_code)]
 pub struct Solution {}
 use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn find_rle_array(encoded1: Vec<Vec<i32>>, encoded2: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+        let e1: Vec<i32> = encoded1
+            .into_iter()
+            .map(|x| vec![x[0]; x[1] as usize])
+            .flatten()
+            .collect();
+        let e2: Vec<i32> = encoded2
+            .into_iter()
+            .map(|x| vec![x[0]; x[1] as usize])
+            .flatten()
+            .collect();
+        let e: Vec<i32> = e1.into_iter().zip(e2).map(|(v1, v2)| v1 * v2).collect();
+        let mut ans = Vec::new();
+        let mut pre = e[0];
+        let mut cnt = 0;
+        for &v in &e {
+            if pre == v {
+                cnt += 1;
+            } else {
+                ans.push(vec![pre, cnt]);
+                pre = v;
+                cnt = 1;
+            }
+        }
+        if cnt > 0 {
+            ans.push(vec![pre, cnt]);
+        }
+        ans
     }
 }
 
@@ -71,38 +97,19 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_find_rle_array_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            vec![vec![6, 6]],
+            Solution::find_rle_array(vec![vec![1, 3], vec![2, 3]], vec![vec![6, 3], vec![3, 3]])
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_find_rle_array_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
-    }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
+            vec![vec![2, 3], vec![6, 1], vec![9, 2]],
+            Solution::find_rle_array(
+                vec![vec![1, 3], vec![2, 1], vec![3, 2]],
+                vec![vec![2, 3], vec![3, 3]]
             )
         );
     }

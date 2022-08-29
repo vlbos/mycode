@@ -9,7 +9,8 @@
 // Description[](https://leetcode.ca/2021-07-28-1902-Depth-of-BST-Given-Insertion-Order/#description)
 // --------------------------------------------------------------------------------------------------
 
-// You are given a **0-indexed** integer array `order` of length `n`, a **permutation** of integers from `1` to `n` representing the **order** of insertion into a **binary search tree**.
+// You are given a **0-indexed** integer array `order` of length `n`,
+// a **permutation** of integers from `1` to `n` representing the **order** of insertion into a **binary search tree**.
 
 // A binary search tree is defined as follows:
 
@@ -67,20 +68,41 @@
 
 // Use a TreeMap to store each value’s depth. Initially, value `order[0]` has depth 1.
 
-// Loop over the remaining elements in `order`. For each value `curr`, find the two adjacent values of `curr` in the TreeMap, which are `prev` and `next` such that `prev <= curr <= next`. If both values exist (not `null`), then since both `prev` and `next` come before `curr`, the depth of `curr` is the maximum of the depths of `prev` and `next` plus 1. If only one value exists, then the depth of `curr` is the depth of the existing value plus 1.
+// Loop over the remaining elements in `order`. For each value `curr`, find the two adjacent values of `curr` in the TreeMap,
+// which are `prev` and `next` such that `prev <= curr <= next`.
+// If both values exist (not `null`), then since both `prev` and `next` come before `curr`,
+// the depth of `curr` is the maximum of the depths of `prev` and `next` plus 1.
+// If only one value exists, then the depth of `curr` is the depth of the existing value plus 1.
 
 // Maintain the maximum depth during the process. Finally, return the maximum depth.
 
 //     class Solution {
-//         public int maxDepthBST(int[] order) {
+//         public int max_depth_bst(int[] order) {
 
 #[allow(dead_code)]
 pub struct Solution {}
 use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn max_depth_bst(order: Vec<i32>) -> i32 {
+        let mut tm = std::collections::BTreeMap::from([(order[0], 1)]);
+        let mut ans = 0;
+        for &o in &order {
+            let l = if let Some((_, &v)) = tm.range(..o).next_back() {
+                v
+            } else {
+                0
+            };
+            let r = if let Some((_, &v)) = tm.range(o + 1..).next() {
+                v
+            } else {
+                0
+            };
+            let depth = l.max(r) + 1;
+            ans = ans.max(depth);
+            tm.insert(o, depth);
+        }
+        ans
     }
 }
 
@@ -89,39 +111,15 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_max_depth_bst_1() {
+        assert_eq!(3, Solution::max_depth_bst(vec![2, 1, 4, 3]));
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_max_depth_bst_2() {
+        assert_eq!(3, Solution::max_depth_bst(vec![2, 1, 3, 4]));
     }
     #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_max_depth_bst_3() {
+        assert_eq!(4, Solution::max_depth_bst(vec![1, 2, 3, 4]));
     }
 }
