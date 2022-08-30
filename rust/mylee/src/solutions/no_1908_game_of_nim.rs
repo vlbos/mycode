@@ -68,15 +68,14 @@
 // For the game of Nim, where Alice starts first, Alice can win if and only if the bitwise xor results of all the elements in `piles` is not 0.
 
 //     class Solution {
-//         public boolean nimGame(int[] piles) {
+//         public boolean nim_game(int[] piles) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn nim_game(piles: Vec<i32>) -> bool {
+        piles.into_iter().reduce(|a, b| a ^ b).unwrap() != 0
     }
 }
 
@@ -85,39 +84,15 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_nim_game_1() {
+        assert!(Solution::nim_game(vec![1]));
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_nim_game_2() {
+        assert!(!Solution::nim_game(vec![1, 1]));
     }
     #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_nim_game_3() {
+        assert!(!Solution::nim_game(vec![1, 2, 3]));
     }
 }

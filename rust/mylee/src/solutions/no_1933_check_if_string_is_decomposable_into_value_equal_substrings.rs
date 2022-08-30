@@ -59,15 +59,39 @@
 // If the substrings meet the criteria above, return `true`.
 
 //     class Solution {
-//         public boolean isDecomposable(String s) {
+//         public boolean is_decomposable(String s) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn is_decomposable(s: String) -> bool {
+        let mut pre = s.chars().nth(0).unwrap();
+        let mut cnt = 0;
+        let mut flag = false;
+        for c in s.chars() {
+            if pre == c {
+                cnt += 1;
+            } else {
+                if cnt % 3 == 2 {
+                    if flag {
+                        return false;
+                    }
+                    flag = true;
+                } else if cnt % 3 != 0 {
+                    return false;
+                }
+                cnt = 1;
+                pre = c;
+            }
+        }
+        if cnt % 3 == 2 {
+            if flag {
+                return false;
+            }
+        } else if cnt % 3 != 0 {
+            return false;
+        }
+        flag
     }
 }
 
@@ -76,39 +100,16 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_is_decomposable_1() {
+        assert!(!Solution::is_decomposable("000111000".to_string()));
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_is_decomposable_2() {
+        assert!(Solution::is_decomposable("00011111222".to_string()));
     }
+
     #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_is_decomposable_3() {
+        assert!(!Solution::is_decomposable("011100022233".to_string()));
     }
 }

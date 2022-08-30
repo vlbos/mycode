@@ -66,15 +66,37 @@
 // To count the number of subarrays that have sum less than or equal to `mid`, use sliding window over `nums` and for each index, count the number of subarrays that end at the index with sum less than or equal to `mid`.
 
 //     class Solution {
-//         public int kthSmallestSubarraySum(int[] nums, int k) {
+//         public int kth_smallest_subarray_sum(int[] nums, int k) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn kth_smallest_subarray_sum(nums: Vec<i32>, k: i32) -> i32 {
+        let (mut low, mut high) = (*nums.iter().min().unwrap(), nums.iter().sum::<i32>());
+        let count = |mid: i32| {
+            let mut j = 0;
+            let mut sum = 0;
+            let mut ans = 0;
+            for (i, &v) in nums.iter().enumerate() {
+                sum += v;
+                while sum > mid {
+                    sum -= nums[j];
+                    j += 1;
+                }
+                ans += i + 1 - j;
+            }
+            ans as i32
+        };
+        while low < high {
+            let mid = (low + high) / 2;
+            if count(mid) < k {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+        low
     }
 }
 
@@ -83,39 +105,11 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_kth_smallest_subarray_sum_1() {
+        assert_eq!(3, Solution::kth_smallest_subarray_sum(vec![2, 1, 3], 4));
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
-    }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_kth_smallest_subarray_sum_2() {
+        assert_eq!(10, Solution::kth_smallest_subarray_sum(vec![3, 3, 5, 5], 7));
     }
 }

@@ -9,7 +9,8 @@
 // Description[](https://leetcode.ca/2021-08-08-1940-Longest-Common-Subsequence-Between-Sorted-Arrays/#description)
 // ----------------------------------------------------------------------------------------------------------------
 
-// Given an array of integer arrays `arrays` where each `arrays[i]` is sorted in **strictly increasing** order, return _an integer array representing the **longest common subsequence** between **all** the arrays_.
+// Given an array of integer arrays `arrays` where each `arrays[i]` is sorted in **strictly increasing** order,
+// return _an integer array representing the **longest common subsequence** between **all** the arrays_.
 
 // A **subsequence** is a sequence that can be derived from another sequence by deleting some elements (possibly none) without changing the order of the remaining elements.
 
@@ -50,15 +51,27 @@
 // Then loop over the shortest array among all arrays, and obtain the elements that have numbers of occurrences equal to the number of arrays. These elements form the longest common subsequence.
 
 //     class Solution {
-//         public List<Integer> longestCommomSubsequence(int[][] arrays) {
+//         public List<Integer> longest_commom_subsequence(int[][] arrays) {
 
 #[allow(dead_code)]
 pub struct Solution {}
 use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn longest_commom_subsequence(arrays: Vec<Vec<i32>>) -> Vec<i32> {
+        let mut cnt = std::collections::HashMap::new();
+        for r in &arrays {
+            for &v in r {
+                *cnt.entry(v).or_insert(0) += 1;
+            }
+        }
+        let mut ans: Vec<i32> = cnt
+            .iter()
+            .filter(|(_, &v)| v == arrays.len())
+            .map(|(&k, _)| k)
+            .collect();
+        ans.sort();
+        ans
     }
 }
 
@@ -67,39 +80,28 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_longest_commom_subsequence_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            vec![1, 4],
+            Solution::longest_commom_subsequence(vec![vec![1, 3, 4], vec![1, 4, 7, 9]])
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_longest_commom_subsequence_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            vec![2, 3, 6],
+            Solution::longest_commom_subsequence(vec![
+                vec![2, 3, 6, 8],
+                vec![1, 2, 3, 5, 6, 7, 10],
+                vec![2, 3, 4, 6, 9]
+            ])
         );
     }
     #[test]
-    pub fn test_longest_word_3() {
+    pub fn test_longest_commom_subsequence_3() {
         assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
+            Vec::<i32>::new(),
+            Solution::longest_commom_subsequence(vec![vec![1, 2, 3, 4, 5], vec![6, 7, 8]])
         );
     }
 }
