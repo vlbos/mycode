@@ -9,7 +9,9 @@
 // Description[](https://leetcode.ca/2021-08-16-1966-Binary-Searchable-Numbers-in-an-Unsorted-Array/#description)
 // --------------------------------------------------------------------------------------------------------------
 
-// Consider a function that implements an algorithm **similar** to [Binary Search](https://leetcode.com/explore/learn/card/binary-search/). The function has two input parameters: `sequence` is a sequence of integers, and `target` is an integer value. The purpose of the function is to find if the `target` exists in the `sequence`.
+// Consider a function that implements an algorithm **similar** to [Binary Search](https://leetcode.com/explore/learn/card/binary-search/).
+// The function has two input parameters: `sequence` is a sequence of integers, and `target` is an integer value.
+// The purpose of the function is to find if the `target` exists in the `sequence`.
 
 // The pseudocode of the function is as follows:
 
@@ -78,15 +80,28 @@
 // A value is guaranteed to be found if and only if all elements to the left of the value are less than the value and all elements to the right of the value are greater than the value. Therefore, for each index, calculate the maximum value to the left of the index and the minimum value to the right of the index, with the current index excluded. Then loop over `nums` and for each index, compare the element with the maximum value to the left and the minimum value to the right. If the element is greater than the maximum value to the left and less than the minimum value to the right, then the element is a value that is guaranteed to be found.
 
 //     class Solution {
-//         public int binarySearchableNumbers(int[] nums) {
+//         public int binary_searchable_numbers(int[] nums) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn binary_searchable_numbers(nums: Vec<i32>) -> i32 {
+        let n = nums.len();
+        let mut left_max = vec![i32::MIN; n];
+        for i in (1..n) {
+            left_max[i] = left_max[i - 1].max(nums[i - 1]);
+        }
+        let mut right_min = vec![i32::MAX; n];
+        for i in (0..n - 1).rev() {
+            right_min[i] = right_min[i + 1].min(nums[i + 1]);
+        }
+        let mut ans = 0;
+        for (i, &num) in nums.iter().enumerate() {
+            if num > left_max[i] && num < right_min[i] {
+                ans += 1;
+            }
+        }
+        ans
     }
 }
 
@@ -95,39 +110,11 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_binary_searchable_numbers_1() {
+        assert_eq!(1, Solution::binary_searchable_numbers(vec![7]));
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
-    }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_binary_searchable_numbers_2() {
+        assert_eq!(1, Solution::binary_searchable_numbers(vec![-1, 5, 2]));
     }
 }

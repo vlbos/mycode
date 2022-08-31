@@ -86,15 +86,39 @@
 // Then loop over `0 <= i < n`. For each `i`, let `num = nums[i]`, and the range length with `num` as the smallest element is `range = right[i] - left[i] - 1`. Let `ans[range - 1]` be the maximum of such values of `num`. Then for `i` from `n - 2` to 0, `ans[i]` is the maximum of `ans[i]` and `ans[i + 1]`. Finally, return `ans`.
 
 //     class Solution {
-//         public int[] findMaximums(int[] nums) {
+//         public int[] find_maximums(int[] nums) {
 
 #[allow(dead_code)]
 pub struct Solution {}
 use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn find_maximums(nums: Vec<i32>) -> Vec<i32> {
+        let n = nums.len();
+        let (mut left, mut right) = (vec![0; n], vec![n as i32; n]);
+        let mut min = i32::MAX;
+        let mut s = Vec::new();
+        for (i, &num) in nums.iter().enumerate() {
+            min = min.min(num);
+            while !s.is_empty() && nums[s[s.len() - 1]] >= num {
+                right[s.pop().unwrap()] = i as i32;
+            }
+            left[i] = if let Some(&j) = s.last() {
+                j as i32
+            } else {
+                -1
+            };
+            s.push(i);
+        }
+        let mut maximums = vec![min; n];
+        for (i, &num) in nums.iter().enumerate() {
+            let range = right[i] - left[i] - 1;
+            maximums[range as usize - 1] = maximums[range as usize - 1].max(num);
+        }
+        for i in (0..n - 1) {
+            maximums[i] = maximums[i].max(maximums[i + 1]);
+        }
+        maximums
     }
 }
 
@@ -103,39 +127,14 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_find_maximums_1() {
+        assert_eq!(vec![4, 2, 1, 0], Solution::find_maximums(vec![0, 1, 2, 4]));
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_find_maximums_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
-    }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
+            vec![50, 20, 10, 10],
+            Solution::find_maximums(vec![10, 20, 50, 10])
         );
     }
 }

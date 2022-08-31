@@ -77,56 +77,49 @@
 //     class Solution {
 //         int count = 0;
 
-//         public int equalToDescendants(TreeNode root) {
-
+//         public int equal_to_descendants(TreeNode root) {
+use super::util::tree::TreeNode;
 #[allow(dead_code)]
 pub struct Solution {}
 use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn equal_to_descendants(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+        let mut ans = 0;
+        fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, ans: &mut i32) -> i32 {
+            if root.is_none() {
+                return 0;
+            }
+            let node = root.as_ref().unwrap().borrow();
+            let l = dfs(&node.left, ans);
+            let r = dfs(&node.right, ans);
+            if node.val == l + r {
+                *ans += 1;
+            }
+            node.val + l + r
+        }
+        dfs(&root, &mut ans);
+        ans
     }
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
-
+    use crate::tree;
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_equal_to_descendants_1() {
+        assert_eq!(2, Solution::equal_to_descendants(tree![10, 3, 4, 2, 1]));
+    }
+    #[test]
+    pub fn test_equal_to_descendants_2() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            0,
+            Solution::equal_to_descendants(tree![2, 3, null, 2, null])
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
-    }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_equal_to_descendants_3() {
+        assert_eq!(1, Solution::equal_to_descendants(tree![0]));
     }
 }

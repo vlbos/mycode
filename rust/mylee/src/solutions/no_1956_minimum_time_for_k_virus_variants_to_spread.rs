@@ -1,58 +1,146 @@
-// # [1956. Minimum Time For K Virus Variants to Spread](https://leetcode.com/problems/minimum-time-for-k-virus-variants-to-spread)
+// 1956\. Minimum Time For K Virus Variants to Spread[](https://leetcode.ca/2021-08-13-1956-Minimum-Time-For-K-Virus-Variants-to-Spread/#1956-minimum-time-for-k-virus-variants-to-spread)
+// =======================================================================================================================================================================================
 
-// [中文文档](/solution/1900-1999/1956.Minimum%20Time%20For%20K%20Virus%20Variants%20to%20Spread/README.md)
+// Level[](https://leetcode.ca/2021-08-13-1956-Minimum-Time-For-K-Virus-Variants-to-Spread/#level)
+// -----------------------------------------------------------------------------------------------
 
-// ## Description
+// Hard
 
-// <p>There are <code>n</code> <strong>unique</strong> virus variants in an infinite 2D grid. You are given a 2D array <code>points</code>, where <code>points[i] = [x<sub>i</sub>, y<sub>i</sub>]</code> represents a virus originating at <code>(x<sub>i</sub>, y<sub>i</sub>)</code> on day <code>0</code>. Note that it is possible for <strong>multiple </strong>virus variants to originate at the <strong>same</strong> point.</p>
+// Description[](https://leetcode.ca/2021-08-13-1956-Minimum-Time-For-K-Virus-Variants-to-Spread/#description)
+// -----------------------------------------------------------------------------------------------------------
 
-// <p>Every day, each cell infected with a virus variant will spread the virus to <strong>all </strong>neighboring points in the <strong>four</strong> cardinal directions (i.e. up, down, left, and right). If a cell has multiple variants, all the variants will spread without interfering with each other.</p>
+// There are `n` **unique** virus variants in an infinite 2D grid. You are given a 2D array `points`,
+// where `points[i] = [x_i, y_i]` represents a virus originating at `(x_i, y_i)` on day `0`.
+// Note that it is possible for **multiple** virus variants to originate at the **same** point.
 
-// <p>Given an integer <code>k</code>, return <em>the <strong>minimum integer</strong> number of days for <strong>any</strong> point to contain <strong>at least</strong> </em><code>k</code><em> of the unique virus variants</em>.</p>
+// Every day, each cell infected with a virus variant will spread the virus to **all** neighboring points in the **four** cardinal directions
+// (i.e. up, down, left, and right). If a cell has multiple variants, all the variants will spread without interfering with each other.
 
-// <p>&nbsp;</p>
-// <p><strong>Example 1:</strong></p>
-// <img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1900-1999/1956.Minimum%20Time%20For%20K%20Virus%20Variants%20to%20Spread/images/case-1.png" style="width: 421px; height: 256px;" />
-// <pre>
-// <strong>Input:</strong> points = [[1,1],[6,1]], k = 2
-// <strong>Output:</strong> 3
-// <strong>Explanation:</strong> On day 3, points (3,1) and (4,1) will contain both virus variants.
-// </pre>
+// Given an integer `k`, return _the **minimum integer** number of days for **any** point to contain at least `k` of the unique virus variants_.
 
-// <p><strong>Example 2:</strong></p>
-// <img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1900-1999/1956.Minimum%20Time%20For%20K%20Virus%20Variants%20to%20Spread/images/case-2.png" style="width: 416px; height: 257px;" />
-// <pre>
-// <strong>Input:</strong> points = [[3,3],[1,2],[9,2]], k = 2
-// <strong>Output:</strong> 2
-// <strong>Explanation:</strong> On day 2, points (1,3), (2,3), (2,2), and (3,2) will contain the first two viruses.
-// </pre>
+// **Example 1:**
 
-// <p><strong>Example 3:</strong></p>
-// <img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1900-1999/1956.Minimum%20Time%20For%20K%20Virus%20Variants%20to%20Spread/images/case-2.png" style="width: 416px; height: 257px;" />
-// <pre>
-// <strong>Input:</strong> points = [[3,3],[1,2],[9,2]], k = 3
-// <strong>Output:</strong> 4
-// <strong>Explanation:</strong> On day 4, the point (5,2) will contain all 3 viruses.
-// </pre>
+// ![Image text](https://assets.leetcode.com/uploads/2021/06/30/case-1.png)
 
-// <p>&nbsp;</p>
-// <p><strong>Constraints:</strong></p>
+// **Input:** points = \[\[1,1\],\[6,1\]\], k = 2
 
-// <ul>
-// 	<li><code>n == points.length</code></li>
-// 	<li><code>2 &lt;= n &lt;= 50</code></li>
-// 	<li><code>points[i].length == 2</code></li>
-// 	<li><code>1 &lt;= x<sub>i</sub>, y<sub>i</sub> &lt;= 10<sup>9</sup></code></li>
-// 	<li><code>2 &lt;= k &lt;= n</code></li>
-// </ul>
+// **Output:** 3
 
+// **Explanation:** On day 3, points (3,1) and (4,1) will contain both virus variants.
+
+// **Example 2:**
+
+// ![Image text](https://assets.leetcode.com/uploads/2021/06/30/case-2.png)
+
+// **Input:** points = \[\[3,3\],\[1,2\],\[9,2\]\], k = 2
+
+// **Output:** 2
+
+// **Explanation:** On day 2, points (1,3), (2,3), (2,2), and (3,2) will contain the first two viruses.
+
+// **Example 3:**
+
+// ![Image text](https://assets.leetcode.com/uploads/2021/06/30/case-2.png)
+
+// **Input:** points = \[\[3,3\],\[1,2\],\[9,2\]\], k = 3
+
+// **Output:** 4
+
+// **Explanation:** On day 4, the point (5,2) will contain all 3 viruses.
+
+// **Constraints:**
+
+// *   `n == points.length`
+// *   `2 <= n <= 50`
+// *   `points[i].length == 2`
+// *   `1 <= x_i, y_i <= 10^9`
+// *   `2 <= k <= n`
+
+// Solution[](https://leetcode.ca/2021-08-13-1956-Minimum-Time-For-K-Virus-Variants-to-Spread/#solution)
+// -----------------------------------------------------------------------------------------------------
+
+// Use binary search. For a specific number of days, calculate whether there exists a point that contains at least `k` virus variants.
+
+//     class Solution {
+//         public int min_daysk_variants(int[][] points, int k) {
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn min_daysk_variants(points: Vec<Vec<i32>>, k: i32) -> i64 {
+        let points: Vec<Vec<i32>> = points
+            .into_iter()
+            .map(|x| vec![x[0] + x[1], x[0] - x[1]])
+            .collect();
+        let mm = points
+            .iter()
+            .fold(vec![i32::MAX, i32::MIN, i32::MAX, i32::MIN], |a, p| {
+                vec![
+                    a[0].min(p[0]),
+                    a[1].max(p[0]),
+                    a[2].min(p[1]),
+                    a[3].max(p[1]),
+                ]
+            });
+        let (mut left, mut right) = (0, ((mm[1] - mm[0]) as i64 + (mm[3] - mm[2]) as i64 + 1) / 2);
+        let check = |l: i64| {
+            use std::collections::{HashMap, HashSet};
+            let mut intervals = HashMap::new();
+            let mut y_set = HashSet::new();
+            for p in &points {
+                let (p0, p1) = (p[0] as i64, p[1] as i64);
+                let (x0, y0, x1, y1) = (p0 - l, p1 - l, p0 + l, p1 + l);
+                *intervals
+                    .entry(x0)
+                    .or_insert(HashMap::new())
+                    .entry(y0)
+                    .or_insert(0) += 1;
+                *intervals
+                    .entry(x0)
+                    .or_insert(HashMap::new())
+                    .entry(y1 + 1)
+                    .or_insert(0) -= 1;
+                *intervals
+                    .entry(x1 + 1)
+                    .or_insert(HashMap::new())
+                    .entry(y0)
+                    .or_insert(0) -= 1;
+                *intervals
+                    .entry(x1 + 1)
+                    .or_insert(HashMap::new())
+                    .entry(y1 + 1)
+                    .or_insert(0) += 1;
+                y_set.insert(y0);
+                y_set.insert(y1 + 1);
+            }
+            let mut sorted_x: Vec<i64> = intervals.iter().map(|x| *x.0).collect();
+            sorted_x.sort();
+            let mut sorted_y: Vec<i64> = y_set.iter().cloned().collect();
+            sorted_y.sort();
+            let mut count = HashMap::new();
+            for &x in &sorted_x {
+                for (&y, &c) in intervals.get(&x).unwrap_or(&HashMap::new()) {
+                    *count.entry(y).or_insert(0) += c;
+                }
+                let mut cnt = 0;
+                for &y in &sorted_y {
+                    cnt += *count.get(&y).unwrap_or(&0);
+                    if cnt >= k {
+                        return true;
+                    }
+                }
+            }
+            false
+        };
+        while left <= right {
+            let mid = left + (right - left) / 2;
+            if check(mid) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        left
     }
 }
 
@@ -61,39 +149,24 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_min_daysk_variants_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            3,
+            Solution::min_daysk_variants(vec![vec![1, 1], vec![6, 1]], 2)
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_min_daysk_variants_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            2,
+            Solution::min_daysk_variants(vec![vec![3, 3], vec![1, 2], vec![9, 2]], 2)
         );
     }
     #[test]
-    pub fn test_longest_word_3() {
+    pub fn test_min_daysk_variants_3() {
         assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
+            4,
+            Solution::min_daysk_variants(vec![vec![3, 3], vec![1, 2], vec![9, 2]], 3)
         );
     }
 }
