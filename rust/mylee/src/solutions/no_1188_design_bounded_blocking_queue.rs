@@ -137,7 +137,7 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test__1() {
+    pub fn test_bounded_blocking_queue_1() {
         let k = 1;
         let value = 0;
         let mut obj = BoundedBlockingQueue::new(k);

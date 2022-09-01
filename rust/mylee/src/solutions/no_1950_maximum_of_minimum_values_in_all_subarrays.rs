@@ -90,8 +90,6 @@
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
     pub fn find_maximums(nums: Vec<i32>) -> Vec<i32> {
         let n = nums.len();
@@ -115,7 +113,7 @@ impl Solution {
             let range = right[i] - left[i] - 1;
             maximums[range as usize - 1] = maximums[range as usize - 1].max(num);
         }
-        for i in (0..n - 1) {
+        for i in 0..n - 1 {
             maximums[i] = maximums[i].max(maximums[i + 1]);
         }
         maximums

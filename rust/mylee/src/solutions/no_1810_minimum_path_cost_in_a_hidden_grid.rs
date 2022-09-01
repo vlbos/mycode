@@ -132,7 +132,6 @@ pub struct Solution {}
 impl Solution {
     pub fn find_shortest_path(master: GridMaster) -> i32 {
         let mut master = master;
-        use std::collections::HashSet;
         let max = 100;
         let mut grid = vec![vec![-1; max * 2]; max * 2];
         fn dfs(
@@ -182,7 +181,6 @@ impl Solution {
             &mut master,
             &mut target,
         );
-        let mut steps = 0;
         use std::cmp::Reverse;
         let mut q = std::collections::BinaryHeap::from([Reverse((0, max as i32, max as i32))]);
         grid[max][max] = 0;

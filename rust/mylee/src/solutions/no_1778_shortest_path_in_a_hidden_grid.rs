@@ -141,7 +141,6 @@ pub struct Solution {}
 impl Solution {
     pub fn find_shortest_path(master: GridMaster) -> i32 {
         let mut master = master;
-        use std::collections::HashSet;
         let max = 500;
         let mut grid = vec![vec![-2; max * 2]; max * 2];
         fn dfs(x: i32, y: i32, grid: &mut Vec<Vec<i32>>, master: &mut GridMaster) {

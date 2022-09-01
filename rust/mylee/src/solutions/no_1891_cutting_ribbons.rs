@@ -75,8 +75,6 @@
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
     pub fn max_length(ribbons: Vec<i32>, k: i32) -> i32 {
         let (mut low, mut high) = (0, *ribbons.iter().max().unwrap());

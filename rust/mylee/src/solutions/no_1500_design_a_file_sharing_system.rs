@@ -74,7 +74,6 @@ pub struct FileSharing {
     reused_user_ids: BinaryHeap<Reverse<i32>>,
     u2c: HashMap<i32, HashSet<i32>>,
     c2u: HashMap<i32, HashSet<i32>>,
-    m: i32,
 }
 
 /**
@@ -82,9 +81,8 @@ pub struct FileSharing {
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl FileSharing {
-    pub fn new(m: i32) -> Self {
+    pub fn new(_m: i32) -> Self {
         Self {
-            m,
             curr_user_id: 0,
             reused_user_ids: BinaryHeap::new(),
             u2c: HashMap::new(),

@@ -55,8 +55,6 @@
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
     pub fn longest_commom_subsequence(arrays: Vec<Vec<i32>>) -> Vec<i32> {
         let mut cnt = std::collections::HashMap::new();

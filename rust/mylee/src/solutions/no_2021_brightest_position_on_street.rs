@@ -1,7 +1,9 @@
 // [2021\. Brightest Position on Street (Medium)](https://leetcode.com/problems/brightest-position-on-street/)[](https://leetcode.ca/2021-10-05-2021-Brightest-Position-on-Street/#2021-brightest-position-on-street-medium)
 // =========================================================================================================================================================================================================================
 
-// A perfectly straight street is represented by a number line. The street has street lamp(s) on it and is represented by a 2D integer array `lights`. Each `lights[i] = [positioni, rangei]` indicates that there is a street lamp at position `positioni` that lights up the area from `[positioni - rangei, positioni + rangei]` (**inclusive**).
+// A perfectly straight street is represented by a number line.
+// The street has street lamp(s) on it and is represented by a 2D integer array `lights`.
+// Each `lights[i] = [positioni, rangei]` indicates that there is a street lamp at position `positioni` that lights up the area from `[positioni - rangei, positioni + rangei]` (**inclusive**).
 
 // The **brightness** of a position `p` is defined as the number of street lamp that light up the position `p`.
 
@@ -68,15 +70,30 @@
 //     // Space: O(N)
 //     class Solution {
 //     public:
-//         int brightestPosition(vector<vector<int>>& A) {
+//         int brightest_position(vector<vector<int>>& A) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn brightest_position(a: Vec<Vec<i32>>) -> i32 {
+        let mut a: Vec<(i32, i32)> = a.into_iter().map(|v| (v[0] - v[1], v[0] + v[1])).collect();
+        a.sort();
+        let mut q = std::collections::BinaryHeap::<Reverse<i32>>::new();
+        use std::cmp::Reverse;
+        let mut ans = i32::MIN;
+        let mut len = 0;
+        for &(begin, end) in &a {
+            while !q.is_empty() && q.peek().unwrap().0 < begin {
+                q.pop();
+            }
+            q.push(Reverse(end));
+            if q.len() > len {
+                len = q.len();
+                ans = begin;
+            }
+        }
+        ans
     }
 }
 
@@ -85,39 +102,21 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_brightest_position_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            -1,
+            Solution::brightest_position(vec![vec![-3, 2], vec![1, 2], vec![3, 3]])
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_brightest_position_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            1,
+            Solution::brightest_position(vec![vec![1, 0], vec![0, 1]])
         );
     }
     #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_brightest_position_3() {
+        assert_eq!(-1, Solution::brightest_position(vec![vec![1, 2]]));
     }
 }

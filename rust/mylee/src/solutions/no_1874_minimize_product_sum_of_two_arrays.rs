@@ -47,8 +47,6 @@
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
     pub fn min_product_sum(nums1: Vec<i32>, nums2: Vec<i32>) -> i32 {
         let (mut nums1, mut nums2) = (nums1, nums2);

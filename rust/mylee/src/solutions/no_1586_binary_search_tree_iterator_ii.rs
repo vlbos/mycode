@@ -88,10 +88,10 @@ use super::util::tree::TreeNode;
 
 use std::cell::RefCell;
 use std::rc::Rc;
-struct BSTIterator {
-    s: Vec<Rc<RefCell<TreeNode>>>,
-    p: Vec<Rc<RefCell<TreeNode>>>,
-    index: i32,
+pub struct BSTIterator {
+    pub s: Vec<Rc<RefCell<TreeNode>>>,
+    pub p: Vec<Rc<RefCell<TreeNode>>>,
+    pub index: i32,
 }
 
 /**
@@ -99,7 +99,7 @@ struct BSTIterator {
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl BSTIterator {
-    fn new(root: Option<Rc<RefCell<TreeNode>>>) -> Self {
+    pub fn new(root: Option<Rc<RefCell<TreeNode>>>) -> Self {
         let mut s = Vec::new();
         let mut r = root;
         while let Some(n) = r {
@@ -113,14 +113,14 @@ impl BSTIterator {
         }
     }
 
-    fn prev(&mut self) -> i32 {
+    pub fn prev(&mut self) -> i32 {
         self.index -= 1;
         self.p[self.index as usize].borrow().val
     }
-    fn next(&mut self) -> i32 {
+    pub fn next(&mut self) -> i32 {
         let val;
         let i = (self.index + 1) as usize;
-        if i >= 0 && i < self.p.len() {
+        if i < self.p.len() {
             val = self.p[i].borrow().val;
         } else {
             let node = self.s.pop().unwrap();
@@ -135,10 +135,10 @@ impl BSTIterator {
         self.index += 1;
         val
     }
-    fn has_prev(&self) -> bool {
+    pub fn has_prev(&self) -> bool {
         self.index > 0 && self.index < self.p.len() as i32
     }
-    fn has_next(&self) -> bool {
+    pub fn has_next(&self) -> bool {
         let i = (self.index + 1) as usize;
         if i < self.p.len() {
             return true;

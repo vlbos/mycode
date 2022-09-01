@@ -9,9 +9,11 @@
 // Description[](https://leetcode.ca/2021-09-03-1989-Maximum-Number-of-People-That-Can-Be-Caught-in-Tag/#description)
 // ------------------------------------------------------------------------------------------------------------------
 
-// You are playing a game of tag with your friends. In tag, people are divided into two teams: people who are “it”, and people who are not “it”. The people who are “it” want to catch as many people as possible who are not “it”.
+// You are playing a game of tag with your friends. In tag, people are divided into two teams: people who are “it”, and people who are not “it”.
+// The people who are “it” want to catch as many people as possible who are not “it”.
 
-// You are given a **0-indexed** integer array `team` containing only zeros (denoting people who are not “it”) and ones (denoting people who are “it”), and an integer `dist`. A person who is “it” at index `i` can catch any one person whose index is in the range `[i - dist, i + dist]` (**inclusive**) and is **not** “it”.
+// You are given a **0-indexed** integer array `team` containing only zeros (denoting people who are not “it”) and ones (denoting people who are “it”),
+// and an integer `dist`. A person who is “it” at index `i` can catch any one person whose index is in the range `[i - dist, i + dist]` (**inclusive**) and is **not** “it”.
 
 // Return _the **maximum** number of people that the people who are “it” can catch_.
 
@@ -65,15 +67,40 @@
 // Use a greedy approach. For each element 1, find the leftmost element 0 that is within distance `dist` of the element 1, and the element 0 is caught by the 1. Once an element 0 is caught by an element 1, it can no longer be caught again, so move on to the next element 0. If an element 1 cannot catch any element 0, then move on to the next element 1. Finally, return the number of elements 1 that can catch at least one element 0 each, which is the maximum number of people that can be caught in tag.
 
 //     class Solution {
-//         public int catchMaximumAmountofPeople(int[] team, int dist) {
+//         public int catch_maximum_amountof_people(int[] team, int dist) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn catch_maximum_amountof_people(team: Vec<i32>, dist: i32) -> i32 {
+        let n = team.len();
+        let (mut one, mut zero) = (0, 0);
+        while zero < n && team[zero] != 0 {
+            zero += 1;
+        }
+        while one < n && team[one] != 1 {
+            one += 1;
+        }
+        let mut ans = 0;
+        while zero < n && one < n {
+            while one as i32 - zero as i32 > dist {
+                zero += 1;
+            }
+            let max_index = (one + dist as usize).min(n - 1);
+            while zero <= max_index && team[zero] != 0 {
+                zero += 1;
+            }
+            if zero <= max_index {
+                ans += 1;
+                zero += 1;
+            }
+            one += 1;
+            while one < n && team[one] != 1 {
+                one += 1;
+            }
+        }
+        ans
     }
 }
 
@@ -82,39 +109,18 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_catch_maximum_amountof_people_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            2,
+            Solution::catch_maximum_amountof_people(vec![0, 1, 0, 1, 0], 3)
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_catch_maximum_amountof_people_2() {
+        assert_eq!(0, Solution::catch_maximum_amountof_people(vec![1], 1));
     }
     #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_catch_maximum_amountof_people_3() {
+        assert_eq!(0, Solution::catch_maximum_amountof_people(vec![0], 1));
     }
 }

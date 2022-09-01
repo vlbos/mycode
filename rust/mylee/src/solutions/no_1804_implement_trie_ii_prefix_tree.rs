@@ -60,8 +60,7 @@ pub struct Trie {
     word_count: i32,
     prefix_count: i32,
 }
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Trie {
     pub fn new() -> Self {
         Self {

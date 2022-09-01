@@ -2,74 +2,73 @@
 
 // ## Description
 
-// <p>A <strong>Fibonacci</strong> tree is a binary tree created using the order function <code>order(n)</code>:</p>
+// A Fibonacci tree is a binary tree created using the order function order(n):
 
-// <ul>
-// 	<li><code>order(0)</code> is the empty tree.</li>
-// 	<li><code>order(1)</code> is a binary tree with only <strong>one node</strong>.</li>
-// 	<li><code>order(n)</code> is a binary tree that consists of a root node with the left subtree as <code>order(n - 2)</code> and the right subtree as <code>order(n - 1)</code>.</li>
-// </ul>
+//
+// 	order(0) is the empty tree.
+// 	order(1) is a binary tree with only one node.
+// 	order(n) is a binary tree that consists of a root node with the left subtree as order(n - 2) and the right subtree as order(n - 1).
+//
 
-// <p>Alice and Bob are playing a game with a <strong>Fibonacci</strong> tree with Alice staring first. On each turn, a player selects a node and removes that node <strong>and</strong> its subtree. The player that is forced to delete <code>root</code> loses.</p>
+// Alice and Bob are playing a game with a Fibonacci tree with Alice starting first. On each turn, a player selects a node and removes that node and its subtree. The player that is forced to delete root loses.
 
-// <p>Given the integer <code>n</code>, return <code>true</code> if Alice wins the game or <code>false</code> if Bob wins, assuming both players play optimally.</p>
+// Given the integer n, return true if Alice wins the game or false if Bob wins, assuming both players play optimally.
 
-// <p>A subtree of a binary tree <code>tree</code> is a tree that consists of a node in <code>tree</code> and all of this node&#39;s descendants. The tree <code>tree</code> could also be considered as a subtree of itself.</p>
+// A subtree of a binary tree  is a tree that consists of a node in tree and all of this node's descendants. The tree  could also be considered as a subtree of itself.
 
-// <p>&nbsp;</p>
-// <p><strong>Example 1:</strong><br />
-// <img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2005.Subtree%20Removal%20Game%20with%20Fibonacci%20Tree/images/image-20210914173520-3.png" style="width: 200px; height: 184px;" /></p>
+//
+// Example 1:
+// <img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2005.Subtree%20Removal%20Game%20with%20Fibonacci%20Tree/images/image-20210914173520-3.png" style="width: 200px; height: 184px;" />
 
-// <pre>
-// <strong>Input:</strong> n = 3
-// <strong>Output:</strong> true
-// <strong>Explanation:</strong>
+//
+// Input: n = 3
+// Output: true
+// Explanation:
 // Alice takes the node 1 in the right subtree.
 // Bob takes either the 1 in the left subtree or the 2 in the right subtree.
-// Alice takes whichever node Bob doesn&#39;t take.
+// Alice takes whichever node Bob doesn't take.
 // Bob is forced to take the root node 3, so Bob will lose.
 // Return true because Alice wins.
-// </pre>
+//
 
-// <p><strong>Example 2:</strong><br />
-// <img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2005.Subtree%20Removal%20Game%20with%20Fibonacci%20Tree/images/image-20210914173634-4.png" style="width: 75px; height: 75px;" /></p>
+// Example 2:
+// <img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2005.Subtree%20Removal%20Game%20with%20Fibonacci%20Tree/images/image-20210914173634-4.png" style="width: 75px; height: 75px;" />
 
-// <pre>
-// <strong>Input:</strong> n = 1
-// <strong>Output:</strong> false
-// <strong>Explanation:</strong>
+//
+// Input: n = 1
+// Output: false
+// Explanation:
 // Alice is forced to take the root node 1, so Alice will lose.
 // Return false because Alice loses.
-// </pre>
+//
 
-// <p><strong>Example 3:</strong><br />
-// <img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2005.Subtree%20Removal%20Game%20with%20Fibonacci%20Tree/images/image-20210914173425-1.png" style="width: 100px; height: 106px;" /></p>
+// Example 3:
+// <img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2005.Subtree%20Removal%20Game%20with%20Fibonacci%20Tree/images/image-20210914173425-1.png" style="width: 100px; height: 106px;" />
 
-// <pre>
-// <strong>Input:</strong> n = 2
-// <strong>Output:</strong> true
-// <strong>Explanation:</strong>
+//
+// Input: n = 2
+// Output: true
+// Explanation:
 // Alice takes the node 1.
 // Bob is forced to take the root node 2, so Bob will lose.
 // Return true because Alice wins.
-// </pre>
+//
 
-// <p>&nbsp;</p>
-// <p><strong>Constraints:</strong></p>
+//
+// Constraints:
 
-// <ul>
-// 	<li><code>1 &lt;= n &lt;= 100</code></li>
-// </ul>
+//
+// 	1 <= n <= 100
+//
 
-//  bool findGameWinner(int n) {
+//  bool find_game_winner(int n) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn find_game_winner(n: i32) -> bool {
+        n % 6 != 1
     }
 }
 
@@ -78,39 +77,15 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_find_game_winner_1() {
+        assert!(Solution::find_game_winner(3));
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_find_game_winner_2() {
+        assert!(!Solution::find_game_winner(1));
     }
     #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_find_game_winner_3() {
+        assert!(Solution::find_game_winner(2));
     }
 }

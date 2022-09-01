@@ -88,7 +88,7 @@ impl Solution {
     pub fn binary_searchable_numbers(nums: Vec<i32>) -> i32 {
         let n = nums.len();
         let mut left_max = vec![i32::MIN; n];
-        for i in (1..n) {
+        for i in 1..n {
             left_max[i] = left_max[i - 1].max(nums[i - 1]);
         }
         let mut right_min = vec![i32::MAX; n];

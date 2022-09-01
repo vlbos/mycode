@@ -57,15 +57,35 @@
 
 // If we get positive results for both digits, return the smallest one. For example, we can build 22 and 4 for k == 2 from digits 2 and 4. The result (smallest) is 4.
 
-//     int findInteger(int k, int d1, int d2, long long x = 0) {
+//     int find_integer(int k, int d1, int d2) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn find_integer(k: i32, d1: i32, d2: i32, x: i64) -> i32 {
+        if x > i32::MAX as i64 {
+            return -1;
+        }
+        let x = x as i32;
+        if x > k && x % k == 0 {
+            return x;
+        }
+        let x1 = if x + d1 == 0 {
+            -1
+        } else {
+            Self::find_integer(k, d1, d2, x as i64 * 10 + d1 as i64)
+        };
+        let x2 = if x + d2 == 0 {
+            -1
+        } else {
+            Self::find_integer(k, d1, d2, x as i64 * 10 + d2 as i64)
+        };
+        if x1 > 1 && x2 > 1 {
+            x1.min(x2)
+        } else {
+            x1.max(x2)
+        }
     }
 }
 
@@ -74,39 +94,15 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_find_integer_1() {
+        assert_eq!(20, Solution::find_integer(2, 0, 2, 0));
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_find_integer_2() {
+        assert_eq!(24, Solution::find_integer(3, 4, 2, 0));
     }
     #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_find_integer_3() {
+        assert_eq!(-1, Solution::find_integer(2, 0, 0, 0));
     }
 }

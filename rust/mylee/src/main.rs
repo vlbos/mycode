@@ -1,5 +1,5 @@
 use error_chain::error_chain;
-use std::env;
+// use std::env;
 use std::fs;
 use std::fs::File;
 use std::io;
@@ -37,7 +37,7 @@ fn main() -> Result<()> {
     println!("{:?}", ids_set.len());
     for entry in glob("/Users/lisheng/Downloads/myleetcode/leetcode-repo-master/src-all/Rust/*.rs")?
     {
-        let mut filenamepath = format!("{}", entry?.display());
+        let filenamepath = format!("{}", entry?.display());
         let j = filenamepath.rfind("/").unwrap_or(0);
         let mut filename = filenamepath[j + 1..].to_string();
         let id = filename[1..5].to_string();
@@ -78,9 +78,9 @@ fn deal_solving(filename: &String, new_filename: &String, new_filepath: &String)
 fn main1() -> Result<()> {
     println!("Welcome to leetcode-rust system.\n");
     for entry in glob("/Users/lisheng/Downloads/myleetcode/rusty-leetcode-master/src/**/*.rs")? {
-        let mut filenamepath = format!("{}", entry?.display());
+        let filenamepath = format!("{}", entry?.display());
         let j = filenamepath.rfind("/").unwrap_or(0);
-        let mut filename = filenamepath[j + 1..].to_string();
+        let filename = filenamepath[j + 1..].to_string();
         if let Some(i) = filename.rfind("_") {
             let id = filename[i..filename.len() - 2].to_string();
             let new_filepath = format!(
