@@ -1,7 +1,9 @@
 // [2031\. Count Subarrays With More Ones Than Zeros (Medium)](https://leetcode.com/problems/count-subarrays-with-more-ones-than-zeros/)[](https://leetcode.ca/2021-10-15-2031-Count-Subarrays-With-More-Ones-Than-Zeros/#2031-count-subarrays-with-more-ones-than-zeros-medium)
 // =============================================================================================================================================================================================================================================================================
 
-// You are given a binary array `nums` containing only the integers `0` and `1`. Return _the number of **subarrays** in nums that have **more**_ `1`'_s than_ `0`_'s. Since the answer may be very large, return it **modulo**_ `109 + 7`.
+// You are given a binary array `nums` containing only the integers `0` and `1`.
+// Return _the number of **subarrays** in nums that have **more**_ `1`'_s than_ `0`_'s.
+// Since the answer may be very large, return it **modulo**_ `109 + 7`.
 
 // A **subarray** is a contiguous sequence of elements within an array.
 
@@ -78,15 +80,24 @@
 //             for (++i; i <= N; i += i & -i) bt[i] += val;
 //         }
 //     public:
-//         int subarraysWithMoreZerosThanOnes(vector<int>& A) {
+//         int subarrays_with_more_ones_than_zeros(vector<int>& A) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn subarrays_with_more_ones_than_zeros(a: Vec<i32>) -> i32 {
+        let (mut ans, mut diff, mut cnt) = (0, 0, 0);
+        let n = 200000;
+        let mut bt = vec![0; n + 1];
+        bt[n / 2] = 1;
+        for &v in &a {
+            diff += if v == 0 { -1 } else { 1 };
+            let i = (n as i32 / 2 + diff) as usize;
+            cnt += if v == 0 { -bt[i] } else { bt[i - 1] };
+            ans = (ans + cnt) % 1_000_000_007;
+            bt[i] += 1;
+        }
+        ans
     }
 }
 
@@ -95,39 +106,18 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_subarrays_with_more_ones_than_zeros_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            9,
+            Solution::subarrays_with_more_ones_than_zeros(vec![0, 1, 1, 0, 1])
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_subarrays_with_more_ones_than_zeros_2() {
+        assert_eq!(0, Solution::subarrays_with_more_ones_than_zeros(vec![0]));
     }
     #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_subarrays_with_more_ones_than_zeros_3() {
+        assert_eq!(1, Solution::subarrays_with_more_ones_than_zeros(vec![1]));
     }
 }

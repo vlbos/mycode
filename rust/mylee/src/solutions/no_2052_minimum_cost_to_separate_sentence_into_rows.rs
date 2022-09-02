@@ -2,77 +2,102 @@
 
 // ## Description
 
-// <p>You are given a string <code>sentence</code> containing words separated by spaces, and an integer <code>k</code>. Your task is to separate <code>sentence</code> into <strong>rows</strong> where the number of characters in each row is <strong>at most </strong><code>k</code>. You may assume that <code>sentence</code> does not begin or end with a space, and the words in <code>sentence</code> are separated by a single space.</p>
+// You are given a string sentence containing words separated by spaces, and an integer k.
+// Your task is to separate sentence into rows where the number of characters in each row is at most k.
+//  You may assume that sentence does not begin or end with a space, and the words in sentence are separated by a single space.
 
-// <p>You can split <code>sentence</code> into rows by inserting line breaks between words in <code>sentence</code>. A word <strong>cannot</strong> be split between two rows. Each word must be used exactly once, and the word order cannot be rearranged. Adjacent words in a row should be separated by a single space, and rows should not begin or end with spaces.</p>
+// You can split sentence into rows by inserting line breaks between words in sentence.
+// A word cannot be split between two rows. Each word must be used exactly once, and the word order cannot be rearranged.
+//  Adjacent words in a row should be separated by a single space, and rows should not begin or end with spaces.
 
-// <p>The <strong>cost</strong> of a row with length <code>n</code> is <code>(k - n)<sup>2</sup></code>, and the <strong>total cost</strong> is the sum of the <strong>costs</strong> for all rows <strong>except</strong> the last one.</p>
+// The cost of a row with length n is (k - n)^2, and the total cost is the sum of the costs for all rows except the last one.
 
-// <ul>
-// 	<li>For example if <code>sentence = &quot;i love leetcode&quot;</code> and <code>k = 12</code>:
-//     <ul>
-//     	<li>Separating <code>sentence</code> into <code>&quot;i&quot;</code>, <code>&quot;love&quot;</code>, and <code>&quot;leetcode&quot;</code> has a cost of <code>(12 - 1)<sup>2</sup> + (12 - 4)<sup>2</sup> = 185</code>.</li>
-//     	<li>Separating <code>sentence</code> into <code>&quot;i love&quot;</code>, and <code>&quot;leetcode&quot;</code> has a cost of <code>(12 - 6)<sup>2</sup> = 36</code>.</li>
-//     	<li>Separating <code>sentence</code> into <code>&quot;i&quot;</code>, and <code>&quot;love leetcode&quot;</code> is not possible because the length of <code>&quot;love leetcode&quot;</code> is greater than <code>k</code>.</li>
-//     </ul>
-//     </li>
-// </ul>
+//
+// 	For example if sentence = "i love leetcode" and k = 12:
+//
+//     	Separating sentence into "i", "love", and "leetcode" has a cost of (12 - 1)^2 + (12 - 4)^2 = 185.
+//     	Separating sentence into "i love", and "leetcode" has a cost of (12 - 6)^2 = 36.
+//     	Separating sentence into "i", and "love leetcode" is not possible because the length of "love leetcode" is greater than k.
+//
+//
+//
 
-// <p>Return <em>the <strong>minimum</strong> possible total cost of separating</em><em> </em><code>sentence</code><em> into rows.</em></p>
+// Return the minimum possible total cost of separating sentence into rows.
 
-// <p>&nbsp;</p>
-// <p><strong>Example 1:</strong></p>
+// Example 1:
 
-// <pre>
-// <strong>Input:</strong> sentence = &quot;i love leetcode&quot;, k = 12
-// <strong>Output:</strong> 36
-// <strong>Explanation:</strong>
-// Separating sentence into &quot;i&quot;, &quot;love&quot;, and &quot;leetcode&quot; has a cost of (12 - 1)<sup>2</sup> + (12 - 4)<sup>2</sup> = 185.
-// Separating sentence into &quot;i love&quot;, and &quot;leetcode&quot; has a cost of (12 - 6)<sup>2</sup> = 36.
-// Separating sentence into &quot;i&quot;, &quot;love leetcode&quot; is not possible because &quot;love leetcode&quot; has length 13.
+//
+// Input: sentence = "i love leetcode", k = 12
+// Output: 36
+// Explanation:
+// Separating sentence into "i", "love", and "leetcode" has a cost of (12 - 1)^2 + (12 - 4)^2 = 185.
+// Separating sentence into "i love", and "leetcode" has a cost of (12 - 6)^2 = 36.
+// Separating sentence into "i", "love leetcode" is not possible because "love leetcode" has length 13.
 // 36 is the minimum possible total cost so return it.
-// </pre>
+//
 
-// <p><strong>Example 2:</strong></p>
+// Example 2:
 
-// <pre>
-// <strong>Input:</strong> sentence = &quot;apples and bananas taste great&quot;, k = 7
-// <strong>Output:</strong> 21
-// <strong>Explanation</strong>
-// Separating sentence into &quot;apples&quot;, &quot;and&quot;, &quot;bananas&quot;, &quot;taste&quot;, and &quot;great&quot; has a cost of (7 - 6)<sup>2</sup> + (7 - 3)<sup>2</sup> + (7 - 7)<sup>2</sup> + (7 - 5)<sup>2 </sup>= 21.
+//
+// Input: sentence = "apples and bananas taste great", k = 7
+// Output: 21
+// Explanation
+// Separating sentence into "apples", "and", "bananas", "taste", and "great" has a cost of (7 - 6)^2 + (7 - 3)^2 + (7 - 7)^2 + (7 - 5)^2 = 21.
 // 21 is the minimum possible total cost so return it.
-// </pre>
+//
 
-// <p><strong>Example 3:</strong></p>
+// Example 3:
 
-// <pre>
-// <strong>Input:</strong> sentence = &quot;a&quot;, k = 5
-// <strong>Output:</strong> 0
-// <strong>Explanation:</strong>
+//
+// Input: sentence = "a", k = 5
+// Output: 0
+// Explanation:
 // The cost of the last row is not included in the total cost, and since there is only one row, return 0.
-// </pre>
+//
 
-// <p>&nbsp;</p>
-// <p><strong>Constraints:</strong></p>
+// Constraints:
 
-// <ul>
-// 	<li><code>1 &lt;= sentence.length &lt;= 5000</code></li>
-// 	<li><code>1 &lt;= k &lt;= 5000</code></li>
-// 	<li>The length of each word in <code>sentence</code> is at most <code>k</code>.</li>
-// 	<li><code>sentence</code> consists of only lowercase English letters and spaces.</li>
-// 	<li><code>sentence</code> does not begin or end with a space.</li>
-// 	<li>Words in <code>sentence</code> are separated by a single space.</li>
-// </ul>
+//
+// 	1 <= sentence.length <= 5000
+// 	1 <= k <= 5000
+// 	The length of each word in sentence is at most k.
+// 	sentence consists of only lowercase English letters and spaces.
+// 	sentence does not begin or end with a space.
+// 	Words in sentence are separated by a single space.
+//
 
-//     int minimumCost(string sentence, int k) {
+//     int minimum_cost(string sentence, int k) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn minimum_cost(sentence: String, k: i32) -> i32 {
+        if sentence.len() <= k as usize {
+            return 0;
+        }
+        let words: Vec<&str> = sentence.split_ascii_whitespace().collect();
+        let mut len = words.len();
+
+        let mut dp = vec![0; len + 1];
+        for i in 1..=len {
+            let mut n = words[i - 1].len() as i32;
+            dp[i] = dp[i - 1] + (k - n) * (k - n);
+            for j in (1..i).rev() {
+                n += words[j - 1].len() as i32 + 1;
+                if n > k {
+                    break;
+                }
+                dp[i] = dp[i].min(dp[j - 1] + (k - n) * (k - n));
+            }
+        }
+        let mut last_row_len = words.last().unwrap().len();
+        let mut i = words.len() - 2;
+        while i > 0 && last_row_len + words[i].len() + 1 <= k as usize {
+            last_row_len += words[i - 1].len() + 1;
+            i -= 1;
+        }
+        *dp[i + 1..].iter().min().unwrap()
     }
 }
 
@@ -81,39 +106,21 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_minimum_cost_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            36,
+            Solution::minimum_cost("i love leetcode".to_string(), 12)
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_minimum_cost_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            21,
+            Solution::minimum_cost("apples and bananas taste great".to_string(), 7)
         );
     }
     #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_minimum_cost_3() {
+        assert_eq!(0, Solution::minimum_cost("a".to_string(), 5));
     }
 }

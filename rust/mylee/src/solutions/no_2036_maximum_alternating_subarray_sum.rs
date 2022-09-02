@@ -60,15 +60,34 @@
 
 //     class Solution {
 //     public:
-//         long long maximumAlternatingSubarraySum(vector<int>& nums) {
+//         long long maximum_alternating_subarray_sum(vector<int>& nums) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn maximum_alternating_subarray_sum(nums: Vec<i32>) -> i64 {
+        let (mut ans, mut sum1, mut sum2) = (nums[0] as i64, nums[0] as i64, 0);
+        for (i, &v) in nums[1..].iter().enumerate() {
+            let num = v as i64;
+            if i % 2 > 0 {
+                if sum1 + num > num {
+                    sum1 += num;
+                } else {
+                    sum1 = num;
+                }
+                sum2 -= num;
+            } else {
+                sum1 -= num;
+                if sum2 + num > num {
+                    sum2 += num;
+                } else {
+                    sum2 = num;
+                }
+            }
+            ans = ans.max(sum1);
+            ans = ans.max(sum2);
+        }
+        ans
     }
 }
 
@@ -77,39 +96,21 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_maximum_alternating_subarray_sum_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            5,
+            Solution::maximum_alternating_subarray_sum(vec![3, -1, 1, 2])
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_maximum_alternating_subarray_sum_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            2,
+            Solution::maximum_alternating_subarray_sum(vec![2, 2, 2, 2, 2])
         );
     }
     #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_maximum_alternating_subarray_sum_3() {
+        assert_eq!(1, Solution::maximum_alternating_subarray_sum(vec![1]));
     }
 }

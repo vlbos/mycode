@@ -1,7 +1,8 @@
 // [2046\. Sort Linked List Already Sorted Using Absolute Values (Medium)](https://leetcode.com/problems/sort-linked-list-already-sorted-using-absolute-values/)[](https://leetcode.ca/2021-10-30-2046-Sort-Linked-List-Already-Sorted-Using-Absolute-Values/#2046-sort-linked-list-already-sorted-using-absolute-values-medium)
 // =============================================================================================================================================================================================================================================================================================================================
 
-// Given the `head` of a singly linked list that is sorted in **non-decreasing** order using the **absolute values** of its nodes, return _the list sorted in **non-decreasing** order using the **actual values** of its nodes_.
+// Given the `head` of a singly linked list that is sorted in **non-decreasing** order using the **absolute values** of its nodes,
+// return _the list sorted in **non-decreasing** order using the **actual values** of its nodes_.
 
 // **Example 1:**
 
@@ -54,56 +55,61 @@
 //     // Space: O(1)
 //     class Solution {
 //     public:
-//         ListNode* sortLinkedList(ListNode* head) {
-
+//         ListNode* sort_linked_list(ListNode* head) {
+use super::util::linked_list::ListNode;
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn sort_linked_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        let mut p = head;
+        let mut positive = None;
+        let mut target = &mut positive;
+        let mut negative = None;
+        while let Some(mut node) = p {
+            p = node.next.take();
+            if node.val < 0 {
+                node.next = negative;
+                negative = Some(node);
+            } else {
+                target = &mut target.get_or_insert(node).next;
+            }
+        }
+        if negative.is_some() {
+            let mut target = &mut negative;
+            while target.is_some() && target.as_ref().unwrap().next.is_some() {
+                if let Some(node) = target {
+                    target = &mut node.next;
+                }
+            }
+
+            target.as_mut().unwrap().next = positive;
+            negative
+        } else {
+            positive
+        }
     }
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
-
+    use crate::linked;
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_sort_linked_list_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            linked![-10, -5, 0, 2, 5, 10],
+            Solution::sort_linked_list(linked![0, 2, -5, 5, 10, -10])
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_sort_linked_list_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            linked![0, 1, 2],
+            Solution::sort_linked_list(linked![0, 1, 2])
         );
     }
     #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_sort_linked_list_3() {
+        assert_eq!(linked![1], Solution::sort_linked_list(linked![1]));
     }
 }
