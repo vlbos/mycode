@@ -57,12 +57,12 @@ impl Solution {
             return sum;
         }
         let (min_odd, min_even) = (
-            *nums[n - k..].iter().filter(|&x| x % 2 > 0).min().unwrap(),
-            *nums[n - k..].iter().filter(|&x| x % 2 == 0).min().unwrap(),
+            *nums[n - k..].iter().filter(|&x| x % 2 > 0).min().unwrap_or(&-1),
+            *nums[n - k..].iter().filter(|&x| x % 2 == 0).min().unwrap_or(&-1),
         );
         let (max_odd, max_even) = (
-            *nums[..n-k].iter().filter(|&x| x % 2 > 0).max().unwrap(),
-            *nums[..n-k].iter().filter(|&x| x % 2 == 0).max().unwrap(),
+            *nums[..n-k].iter().filter(|&x| x % 2 > 0).max().unwrap_or(&-1),
+            *nums[..n-k].iter().filter(|&x| x % 2 == 0).max().unwrap_or(&-1),
         );
         let mut ans = -1;
         if max_even >= 0 && min_odd >= 0 {
