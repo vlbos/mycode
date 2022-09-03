@@ -73,26 +73,26 @@ fn deal_solving(filename: &String, new_filename: &String, new_filepath: &String)
         .append(true)
         .open("./src/solutions/mod.rs")
         .unwrap();
-    writeln!(lib_file, "mod {};", new_filename);
+    writeln!(lib_file, "mod {};", new_filename).unwrap();
 }
-fn main1() -> Result<()> {
-    println!("Welcome to leetcode-rust system.\n");
-    for entry in glob("/Users/lisheng/Downloads/myleetcode/rusty-leetcode-master/src/**/*.rs")? {
-        let filenamepath = format!("{}", entry?.display());
-        let j = filenamepath.rfind("/").unwrap_or(0);
-        let filename = filenamepath[j + 1..].to_string();
-        if let Some(i) = filename.rfind("_") {
-            let id = filename[i..filename.len() - 2].to_string();
-            let new_filepath = format!(
-                "./src/solutions/no{}_{}.rs",
-                &filename[i..filename.len() - 3],
-                &filename[..i]
-            );
-            let new_filename = format!("no{}_{}", &filename[i..filename.len() - 3], &filename[..i]);
-            println!("{},{},{}", filenamepath, new_filename, new_filepath);
-            deal_solving(&filenamepath, &new_filename, &new_filepath);
-        }
-    }
+//  fn main1() -> Result<()> {
+//     println!("Welcome to leetcode-rust system.\n");
+//     for entry in glob("/Users/lisheng/Downloads/myleetcode/rusty-leetcode-master/src/**/*.rs")? {
+//         let filenamepath = format!("{}", entry?.display());
+//         let j = filenamepath.rfind("/").unwrap_or(0);
+//         let filename = filenamepath[j + 1..].to_string();
+//         if let Some(i) = filename.rfind("_") {
+//             // let id = filename[i..filename.len() - 2].to_string();
+//             let new_filepath = format!(
+//                 "./src/solutions/no{}_{}.rs",
+//                 &filename[i..filename.len() - 3],
+//                 &filename[..i]
+//             );
+//             let new_filename = format!("no{}_{}", &filename[i..filename.len() - 3], &filename[..i]);
+//             println!("{},{},{}", filenamepath, new_filename, new_filepath);
+//             deal_solving(&filenamepath, &new_filename, &new_filepath);
+//         }
+//     }
 
-    Ok(())
-}
+//     Ok(())
+// }

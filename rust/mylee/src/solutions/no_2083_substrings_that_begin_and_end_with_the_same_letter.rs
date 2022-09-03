@@ -1,7 +1,8 @@
 // [2083\. Substrings That Begin and End With the Same Letter (Medium)](https://leetcode.com/problems/substrings-that-begin-and-end-with-the-same-letter/)[](https://leetcode.ca/2021-12-06-2083-Substrings-That-Begin-and-End-With-the-Same-Letter/#2083-substrings-that-begin-and-end-with-the-same-letter-medium)
 // =================================================================================================================================================================================================================================================================================================================
 
-// You are given a **0-indexed** string `s` consisting of only lowercase English letters. Return _the number of **substrings** in_ `s` _that begin and end with the **same** character._
+// You are given a **0-indexed** string `s` consisting of only lowercase English letters.
+// Return _the number of **substrings** in_ `s` _that begin and end with the **same** character._
 
 // A **substring** is a contiguous non-empty sequence of characters within a string.
 
@@ -55,15 +56,20 @@
 //     // Space: O(1)
 //     class Solution {
 //     public:
-//         long long numberOfSubstrings(string s) {
+//         long long number_of_substrings(string s) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn number_of_substrings(s: String) -> i64 {
+        let mut ans = 0;
+        let mut cnt = std::collections::HashMap::new();
+        for c in s.chars() {
+            *cnt.entry(c).or_insert(0) += 1;
+            ans += cnt[&c];
+        }
+        ans
     }
 }
 
@@ -72,39 +78,15 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_number_of_substrings_1() {
+        assert_eq!(7, Solution::number_of_substrings("abcba".to_string()));
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_number_of_substrings_2() {
+        assert_eq!(9, Solution::number_of_substrings("abacad".to_string()));
     }
     #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_number_of_substrings_3() {
+        assert_eq!(1, Solution::number_of_substrings("a".to_string()));
     }
 }

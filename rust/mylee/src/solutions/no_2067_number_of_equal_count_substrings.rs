@@ -1,67 +1,89 @@
 // # [2067. Number of Equal Count Substrings](https://leetcode.com/problems/number-of-equal-count-substrings)
 
-// [中文文档](/solution/2000-2099/2067.Number%20of%20Equal%20Count%20Substrings/README.md)
-
 // ## Description
 
-// <p>You are given a <strong>0-indexed</strong> string <code>s</code> consisting of only lowercase English letters, and an integer <code>count</code>. A <strong>substring</strong> of <code>s</code> is said to be an <strong>equal count substring</strong> if, for each <strong>unique</strong> letter in the substring, it appears exactly <code>count</code> times in the substring.</p>
+// You are given a 0-indexed string s consisting of only lowercase English letters,
+//  and an integer count. A substring of s is said to be an equal count substring if,
+// for each unique letter in the substring, it appears exactly count times in the substring.
 
-// <p>Return <em>the number of <strong>equal count substrings</strong> in </em><code>s</code>.</p>
+// Return the number of equal count substrings in s.
 
-// <p>A <strong>substring</strong> is a contiguous non-empty sequence of characters within a string.</p>
+// A substring is a contiguous non-empty sequence of characters within a string.
 
-// <p>&nbsp;</p>
-// <p><strong>Example 1:</strong></p>
+// Example 1:
 
-// <pre>
-// <strong>Input:</strong> s = &quot;aaabcbbcc&quot;, count = 3
-// <strong>Output:</strong> 3
-// <strong>Explanation:</strong>
-// The substring that starts at index 0 and ends at index 2 is &quot;aaa&quot;.
-// The letter &#39;a&#39; in the substring appears exactly 3 times.
-// The substring that starts at index 3 and ends at index 8 is &quot;bcbbcc&quot;.
-// The letters &#39;b&#39; and &#39;c&#39; in the substring appear exactly 3 times.
-// The substring that starts at index 0 and ends at index 8 is &quot;aaabcbbcc&quot;.
-// The letters &#39;a&#39;, &#39;b&#39;, and &#39;c&#39; in the substring appear exactly 3 times.
-// </pre>
+//
+// Input: s = "aaabcbbcc", count = 3
+// Output: 3
+// Explanation:
+// The substring that starts at index 0 and ends at index 2 is "aaa".
+// The letter 'a' in the substring appears exactly 3 times.
+// The substring that starts at index 3 and ends at index 8 is "bcbbcc".
+// The letters 'b' and 'c' in the substring appear exactly 3 times.
+// The substring that starts at index 0 and ends at index 8 is "aaabcbbcc".
+// The letters 'a', 'b', and 'c' in the substring appear exactly 3 times.
+//
 
-// <p><strong>Example 2:</strong></p>
+// Example 2:
 
-// <pre>
-// <strong>Input:</strong> s = &quot;abcd&quot;, count = 2
-// <strong>Output:</strong> 0
-// <strong>Explanation:</strong>
+//
+// Input: s = "abcd", count = 2
+// Output: 0
+// Explanation:
 // The number of times each letter appears in s is less than count.
 // Therefore, no substrings in s are equal count substrings, so return 0.
-// </pre>
+//
 
-// <p><strong>Example 3:</strong></p>
+// Example 3:
 
-// <pre>
-// <strong>Input:</strong> s = &quot;a&quot;, count = 5
-// <strong>Output:</strong> 0
-// <strong>Explanation:</strong>
+//
+// Input: s = "a", count = 5
+// Output: 0
+// Explanation:
 // The number of times each letter appears in s is less than count.
-// Therefore, no substrings in s are equal count substrings, so return 0</pre>
+// Therefore, no substrings in s are equal count substrings, so return 0
 
-// <p>&nbsp;</p>
-// <p><strong>Constraints:</strong></p>
+// Constraints:
 
-// <ul>
-// 	<li><code>1 &lt;= s.length &lt;= 3 * 10<sup>4</sup></code></li>
-// 	<li><code>1 &lt;= count &lt;= 3 * 10<sup>4</sup></code></li>
-// 	<li><code>s</code> consists only of lowercase English letters.</li>
-// </ul>
+//
+// 	1 <= s.length <= 3 * 104
+// 	1 <= count <= 3 * 104
+// 	s consists only of lowercase English letters.
+//
 
-//    int equalCountSubstrings(string s, int count) {
+//    int equal_count_substrings(string s, int count) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn equal_count_substrings(s: String, count: i32) -> i32 {
+        use std::collections::{HashMap, HashSet};
+        let ss: HashSet<char> = s.chars().collect();
+        let max = ss.len() as i32;
+        let mut ans = 0;
+        let bs = s.as_bytes();
+        for n in 1..=max {
+            let window_size = n * count;
+            let mut cnt = HashMap::new();
+            let mut unique_count = 0;
+            for (i, c) in s.bytes().enumerate() {
+                *cnt.entry(c).or_insert(0) += 1;
+                if *cnt.get(&c).unwrap() == count {
+                    unique_count += 1;
+                }
+                if i as i32 >= window_size {
+                    cnt.entry(bs[i - window_size as usize])
+                        .and_modify(|c| *c -= 1);
+                    if *cnt.get(&bs[i - window_size as usize]).unwrap() == count - 1 {
+                        unique_count -= 1;
+                    }
+                }
+                if unique_count == n {
+                    ans += 1;
+                }
+            }
+        }
+        ans
     }
 }
 
@@ -70,39 +92,18 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_equal_count_substrings_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            3,
+            Solution::equal_count_substrings("aaabcbbcc".to_string(), 3)
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_equal_count_substrings_2() {
+        assert_eq!(0, Solution::equal_count_substrings("abcd".to_string(), 2));
     }
     #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_equal_count_substrings_3() {
+        assert_eq!(0, Solution::equal_count_substrings("a".to_string(), 5));
     }
 }

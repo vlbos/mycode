@@ -77,7 +77,7 @@ impl Solution {
             return 0;
         }
         let words: Vec<&str> = sentence.split_ascii_whitespace().collect();
-        let mut len = words.len();
+        let len = words.len();
 
         let mut dp = vec![0; len + 1];
         for i in 1..=len {

@@ -1,60 +1,77 @@
 // # [2098. Subsequence of Size K With the Largest Even Sum](https://leetcode.com/problems/subsequence-of-size-k-with-the-largest-even-sum)
 
-// [中文文档](/solution/2000-2099/2098.Subsequence%20of%20Size%20K%20With%20the%20Largest%20Even%20Sum/README.md)
-
 // ## Description
 
-// <p>You are given an integer array <code>nums</code> and an integer <code>k</code>. Find the <strong>largest even sum</strong> of any subsequence of <code>nums</code> that has a length of <code>k</code>.</p>
+// You are given an integer array nums and an integer k. Find the largest even sum of any subsequence of nums that has a length of k.
 
-// <p>Return <em>this sum, or </em><code>-1</code><em> if such a sum does not exist</em>.</p>
+// Return this sum, or -1 if such a sum does not exist.
 
-// <p>A <strong>subsequence</strong> is an array that can be derived from another array by deleting some or no elements without changing the order of the remaining elements.</p>
+// A subsequence is an array that can be derived from another array by deleting some or no elements without changing the order of the remaining elements.
 
-// <p>&nbsp;</p>
-// <p><strong>Example 1:</strong></p>
+// Example 1:
 
-// <pre>
-// <strong>Input:</strong> nums = [4,1,5,3,1], k = 3
-// <strong>Output:</strong> 12
-// <strong>Explanation:</strong>
+//
+// Input: nums = [4,1,5,3,1], k = 3
+// Output: 12
+// Explanation:
 // The subsequence with the largest possible even sum is [4,5,3]. It has a sum of 4 + 5 + 3 = 12.
-// </pre>
+//
 
-// <p><strong>Example 2:</strong></p>
+// Example 2:
 
-// <pre>
-// <strong>Input:</strong> nums = [4,6,2], k = 3
-// <strong>Output:</strong> 12
-// <strong>Explanation:</strong>
+//
+// Input: nums = [4,6,2], k = 3
+// Output: 12
+// Explanation:
 // The subsequence with the largest possible even sum is [4,6,2]. It has a sum of 4 + 6 + 2 = 12.
-// </pre>
+//
 
-// <p><strong>Example 3:</strong></p>
+// Example 3:
 
-// <pre>
-// <strong>Input:</strong> nums = [1,3,5], k = 1
-// <strong>Output:</strong> -1
-// <strong>Explanation:</strong>
+//
+// Input: nums = [1,3,5], k = 1
+// Output: -1
+// Explanation:
 // No subsequence of nums with length 1 has an even sum.
-// </pre>
+//
 
-// <p>&nbsp;</p>
-// <p><strong>Constraints:</strong></p>
+// Constraints:
 
-// <ul>
-// 	<li><code>1 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>
-// 	<li><code>0 &lt;= nums[i] &lt;= 10<sup>5</sup></code></li>
-// 	<li><code>1 &lt;= k &lt;= nums.length</code></li>
-// </ul>
-//  long long largestEvenSum(vector<int>& nums, int k) {
+//
+// 	1 <= nums.length <= 105
+// 	0 <= nums[i] <= 105
+// 	1 <= k <= nums.length
+//
+//  long long largest_even_sum(vector<int>& nums, int k) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn largest_even_sum(nums: Vec<i32>, k: i32) -> i64 {
+        let mut nums: Vec<i64> = nums.into_iter().map(|x| x as i64).collect();
+        nums.sort();
+        let (n, k) = (nums.len(), k as usize);
+        let sum = nums[n - k..].iter().sum::<i64>();
+        if sum % 2 == 0 {
+            return sum;
+        }
+        let (min_odd, min_even) = (
+            *nums[n - k..].iter().filter(|&x| x % 2 > 0).min().unwrap(),
+            *nums[n - k..].iter().filter(|&x| x % 2 == 0).min().unwrap(),
+        );
+        let (max_odd, max_even) = (
+            *nums[..k].iter().filter(|&x| x % 2 > 0).max().unwrap(),
+            *nums[..k].iter().filter(|&x| x % 2 == 0).max().unwrap(),
+        );
+        let mut ans = -1;
+        if max_even >= 0 && min_odd >= 0 {
+            ans = ans.max(sum + max_even - min_odd);
+        }
+        if max_odd >= 0 && min_even >= 0 {
+            ans = ans.max(sum + max_odd - min_even);
+        }
+        ans
     }
 }
 
@@ -63,39 +80,15 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_largest_even_sum_1() {
+        assert_eq!(12, Solution::largest_even_sum(vec![4, 1, 5, 3, 1], 3));
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_largest_even_sum_2() {
+        assert_eq!(12, Solution::largest_even_sum(vec![4, 6, 2], 3));
     }
     #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_largest_even_sum_3() {
+        assert_eq!(-1, Solution::largest_even_sum(vec![1, 3, 5], 1));
     }
 }

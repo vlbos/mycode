@@ -1,63 +1,83 @@
 // # [2077. Paths in Maze That Lead to Same Room](https://leetcode.com/problems/paths-in-maze-that-lead-to-same-room)
 
-// [中文文档](/solution/2000-2099/2077.Paths%20in%20Maze%20That%20Lead%20to%20Same%20Room/README.md)
-
 // ## Description
 
-// <p>A maze consists of <code>n</code> rooms numbered from <code>1</code> to <code>n</code>, and some rooms are connected by corridors. You are given a 2D integer array <code>corridors</code> where <code>corridors[i] = [room1<sub>i</sub>, room2<sub>i</sub>]</code> indicates that there is a corridor connecting <code>room1<sub>i</sub></code> and <code>room2<sub>i</sub></code>, allowing a person in the maze to go from <code>room1<sub>i</sub></code> to <code>room2<sub>i</sub></code> <strong>and vice versa</strong>.</p>
+// A maze consists of n rooms numbered from 1 to n, and some rooms are connected by corridors.
+// You are given a 2D integer array corridors where corridors[i] = [room1i, room2i] indicates that there is a corridor connecting room1i and room2i,
+// allowing a person in the maze to go from room1i to room2i and vice versa.
 
-// <p>The designer of the maze wants to know how confusing the maze is. The <strong>confusion</strong> <strong>score</strong> of the maze is the number of different cycles of <strong>length 3</strong>.</p>
+// The designer of the maze wants to know how confusing the maze is. The confusion score of the maze is the number of different cycles of length 3.
 
-// <ul>
-// 	<li>For example, <code>1 &rarr; 2 &rarr; 3 &rarr; 1</code> is a cycle of length 3, but <code>1 &rarr; 2 &rarr; 3 &rarr; 4</code> and <code>1 &rarr; 2 &rarr; 3 &rarr; 2 &rarr; 1</code> are not.</li>
-// </ul>
+//
+// 	For example, 1-> 2-> 3-> 1 is a cycle of length 3, but 1-> 2-> 3-> 4 and 1-> 2-> 3-> 2-> 1 are not.
+//
 
-// <p>Two cycles are considered to be <strong>different</strong> if one or more of the rooms visited in the first cycle is <strong>not</strong> in the second cycle.</p>
+// Two cycles are considered to be different if one or more of the rooms visited in the first cycle is not in the second cycle.
 
-// <p>Return <em>the</em> <em><strong>confusion</strong><strong> score</strong> of the maze.</em></p>
+// Return the confusion score of the maze.
 
-// <p>&nbsp;</p>
-// <p><strong>Example 1:</strong></p>
+// Example 1:
 // <img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2077.Paths%20in%20Maze%20That%20Lead%20to%20Same%20Room/images/image-20211114164827-1.png" style="width: 440px; height: 350px;" />
-// <pre>
-// <strong>Input:</strong> n = 5, corridors = [[1,2],[5,2],[4,1],[2,4],[3,1],[3,4]]
-// <strong>Output:</strong> 2
-// <strong>Explanation:</strong>
-// One cycle of length 3 is 4 &rarr; 1 &rarr; 3 &rarr; 4, denoted in red.
-// Note that this is the same cycle as 3 &rarr; 4 &rarr; 1 &rarr; 3 or 1 &rarr; 3 &rarr; 4 &rarr; 1 because the rooms are the same.
-// Another cycle of length 3 is 1 &rarr; 2 &rarr; 4 &rarr; 1, denoted in blue.
+//
+// Input: n = 5, corridors = [[1,2],[5,2],[4,1],[2,4],[3,1],[3,4]]
+// Output: 2
+// Explanation:
+// One cycle of length 3 is 4-> 1-> 3-> 4, denoted in red.
+// Note that this is the same cycle as 3-> 4-> 1-> 3 or 1-> 3-> 4-> 1 because the rooms are the same.
+// Another cycle of length 3 is 1-> 2-> 4-> 1, denoted in blue.
 // Thus, there are two different cycles of length 3.
-// </pre>
+//
 
-// <p><strong>Example 2:</strong></p>
+// Example 2:
 // <img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2077.Paths%20in%20Maze%20That%20Lead%20to%20Same%20Room/images/image-20211114164851-2.png" style="width: 329px; height: 250px;" />
-// <pre>
-// <strong>Input:</strong> n = 4, corridors = [[1,2],[3,4]]
-// <strong>Output:</strong> 0
-// <strong>Explanation:</strong>
+//
+// Input: n = 4, corridors = [[1,2],[3,4]]
+// Output: 0
+// Explanation:
 // There are no cycles of length 3.
-// </pre>
+//
 
-// <p>&nbsp;</p>
-// <p><strong>Constraints:</strong></p>
+// Constraints:
 
-// <ul>
-// 	<li><code>2 &lt;= n &lt;= 1000</code></li>
-// 	<li><code>1 &lt;= corridors.length &lt;= 5 * 10<sup>4</sup></code></li>
-// 	<li><code>corridors[i].length == 2</code></li>
-// 	<li><code>1 &lt;= room1<sub>i</sub>, room2<sub>i</sub> &lt;= n</code></li>
-// 	<li><code>room1<sub>i</sub> != room2<sub>i</sub></code></li>
-// 	<li>There are no duplicate corridors.</li>
-// </ul>
-//  int numberOfPaths(int n, vector<vector<int>>& corridors) {
+//
+// 	2 <= n <= 1000
+// 	1 <= corridors.length <= 5 * 104
+// 	corridors[i].length == 2
+// 	1 <= room1i, room2i <= n
+// 	room1i != room2i
+// 	There are no duplicate corridors.
+//
+//  int number_of_paths(int n, vector<vector<int>>& corridors) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn number_of_paths(n: i32, corridors: Vec<Vec<i32>>) -> i32 {
+        use std::collections::{HashMap, HashSet};
+        let mut adj = HashMap::new();
+        for corridor in &corridors {
+            let (u, v) = if corridor[0] > corridor[1] {
+                (corridor[1], corridor[0])
+            } else {
+                (corridor[0], corridor[1])
+            };
+            adj.entry(u).or_insert(HashSet::new()).insert(v);
+        }
+        (1..=n)
+            .map(|i| {
+                adj.get(&i)
+                    .unwrap_or(&HashSet::new())
+                    .iter()
+                    .map(|j| {
+                        adj.get(j)
+                            .unwrap_or(&HashSet::new())
+                            .iter()
+                            .filter(|k| adj.get(&i).unwrap_or(&HashSet::new()).contains(k))
+                            .count() as i32
+                    })
+                    .sum::<i32>()
+            })
+            .sum::<i32>()
     }
 }
 
@@ -66,39 +86,27 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_number_of_paths_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
+            2,
+            Solution::number_of_paths(
+                5,
+                vec![
+                    vec![1, 2],
+                    vec![5, 2],
+                    vec![4, 1],
+                    vec![2, 4],
+                    vec![3, 1],
+                    vec![3, 4]
+                ]
             )
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_number_of_paths_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
-    }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
+            0,
+            Solution::number_of_paths(4, vec![vec![1, 2], vec![3, 4]])
         );
     }
 }

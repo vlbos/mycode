@@ -1,11 +1,16 @@
 // [2093\. Minimum Cost to Reach City With Discounts (Medium)](https://leetcode.com/problems/minimum-cost-to-reach-city-with-discounts/)[](https://leetcode.ca/2021-12-16-2093-Minimum-Cost-to-Reach-City-With-Discounts/#2093-minimum-cost-to-reach-city-with-discounts-medium)
 // =============================================================================================================================================================================================================================================================================
 
-// A series of highways connect `n` cities numbered from `0` to `n - 1`. You are given a 2D integer array `highways` where `highways[i] = [city1i, city2i, tolli]` indicates that there is a highway that connects `city1i` and `city2i`, allowing a car to go from `city1i` to `city2i` **and vice versa** for a cost of `tolli`.
+// A series of highways connect `n` cities numbered from `0` to `n - 1`.
+// You are given a 2D integer array `highways` where `highways[i] = [city1i, city2i, tolli]` indicates that there is a highway that connects `city1i` and `city2i`,
+// allowing a car to go from `city1i` to `city2i` **and vice versa** for a cost of `tolli`.
 
-// You are also given an integer `discounts` which represents the number of discounts you have. You can use a discount to travel across the `ith` highway for a cost of `tolli / 2` (**integer** **division**). Each discount may only be used **once**, and you can only use at most **one** discount per highway.
+// You are also given an integer `discounts` which represents the number of discounts you have.
+// You can use a discount to travel across the `ith` highway for a cost of `tolli / 2` (**integer** **division**).
+// Each discount may only be used **once**, and you can only use at most **one** discount per highway.
 
-// Return _the **minimum total cost** to go from city_ `0` _to city_ `n - 1`_, or_ `-1` _if it is not possible to go from city_ `0` _to city_ `n - 1`_._
+// Return _the **minimum total cost** to go from city_ `0` _to city_ `n - 1`_,
+// or_ `-1` _if it is not possible to go from city_ `0` _to city_ `n - 1`_._
 
 // **Example 1:**
 // ![](https://assets.leetcode.com/uploads/2021/11/29/image-20211129222429-1.png)
@@ -78,15 +83,74 @@
 //     // Space: O(DN + E)
 //     class Solution {
 //     public:
-//         int minimumCost(int n, vector<vector<int>>& E, int d) {
+//         int minimum_cost(int n, vector<vector<int>>& E, int d) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn minimum_cost(n: i32, e: Vec<Vec<i32>>, discounts: i32) -> i32 {
+        use std::cmp::Reverse;
+        use std::collections::{BinaryHeap, HashMap};
+        let mut g = HashMap::new();
+        for a in &e {
+            let (u, v, w) = (a[0], a[1], a[2]);
+            g.entry(u).or_insert(HashMap::new()).entry(v).or_insert(w);
+            g.entry(v).or_insert(HashMap::new()).entry(u).or_insert(w);
+        }
+        let mut dist = HashMap::new();
+        let mut q = BinaryHeap::from([Reverse((0, 0, discounts))]);
+        for i in 0..=discounts {
+            dist.entry(i)
+                .or_insert(HashMap::new())
+                .entry(0)
+                .or_insert(0);
+        }
+        while let Some(Reverse((cost, u, d))) = q.pop() {
+            if cost
+                > *dist
+                    .get(&d)
+                    .unwrap_or(&HashMap::new())
+                    .get(&u)
+                    .unwrap_or(&i32::MAX)
+            {
+                continue;
+            }
+            if u == n - 1 {
+                return cost;
+            }
+            for (&v, &w) in g.get(&u).unwrap_or(&HashMap::new()) {
+                if *dist
+                    .get(&d)
+                    .unwrap_or(&HashMap::new())
+                    .get(&v)
+                    .unwrap_or(&i32::MAX)
+                    > cost + w
+                {
+                    *dist
+                        .entry(d)
+                        .or_insert(HashMap::new())
+                        .entry(v)
+                        .or_insert(0) = cost + w;
+                    q.push(Reverse((dist[&d][&v], v, d)));
+                }
+                if d > 0
+                    && *dist
+                        .get(&(d - 1))
+                        .unwrap_or(&HashMap::new())
+                        .get(&v)
+                        .unwrap_or(&i32::MAX)
+                        > cost + w / 2
+                {
+                    *dist
+                        .entry(d - 1)
+                        .or_insert(HashMap::new())
+                        .entry(v)
+                        .or_insert(0) = cost + w / 2;
+                    q.push(Reverse((dist[&(d - 1)][&v], v, d - 1)));
+                }
+            }
+        }
+        -1
     }
 }
 
@@ -95,39 +159,44 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_minimum_cost_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
+            9,
+            Solution::minimum_cost(
+                5,
+                vec![
+                    vec![0, 1, 4],
+                    vec![2, 1, 3],
+                    vec![1, 4, 11],
+                    vec![3, 2, 3],
+                    vec![3, 4, 2]
+                ],
+                1
             )
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_minimum_cost_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
+            8,
+            Solution::minimum_cost(
+                4,
+                vec![
+                    vec![1, 3, 17],
+                    vec![1, 2, 7],
+                    vec![3, 2, 5],
+                    vec![0, 1, 6],
+                    vec![3, 0, 20]
+                ],
+                20
             )
         );
     }
     #[test]
-    pub fn test_longest_word_3() {
+    pub fn test_minimum_cost_3() {
         assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
+            -1,
+            Solution::minimum_cost(4, vec![vec![0, 1, 3], vec![2, 3, 2]], 0)
         );
     }
 }

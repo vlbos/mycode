@@ -55,7 +55,7 @@ use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
     pub fn number_of_clean_rooms(room: Vec<Vec<i32>>) -> i32 {
-        let (mut m, mut n) = (room.len() as i32, room[0].len() as i32);
+        let (m, n) = (room.len() as i32, room[0].len() as i32);
         let (mut i, mut j) = (0, 0);
         let mut state = 0;
         let mut seen = vec![vec![0; n as usize]; m as usize];
@@ -82,7 +82,6 @@ impl Solution {
             }
             seen[i as usize][j as usize] |= 1 << state;
         }
-        ans
     }
 }
 
