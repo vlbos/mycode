@@ -61,8 +61,8 @@ impl Solution {
             *nums[n - k..].iter().filter(|&x| x % 2 == 0).min().unwrap(),
         );
         let (max_odd, max_even) = (
-            *nums[..k].iter().filter(|&x| x % 2 > 0).max().unwrap(),
-            *nums[..k].iter().filter(|&x| x % 2 == 0).max().unwrap(),
+            *nums[..n-k].iter().filter(|&x| x % 2 > 0).max().unwrap(),
+            *nums[..n-k].iter().filter(|&x| x % 2 == 0).max().unwrap(),
         );
         let mut ans = -1;
         if max_even >= 0 && min_odd >= 0 {
