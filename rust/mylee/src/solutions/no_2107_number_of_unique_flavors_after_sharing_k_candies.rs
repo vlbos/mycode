@@ -1,7 +1,8 @@
 // [2107\. Number of Unique Flavors After Sharing K Candies (Medium)](https://leetcode.com/problems/number-of-unique-flavors-after-sharing-k-candies/)[](https://leetcode.ca/2021-12-30-2107-Number-of-Unique-Flavors-After-Sharing-K-Candies/#2107-number-of-unique-flavors-after-sharing-k-candies-medium)
 // =========================================================================================================================================================================================================================================================================================================
 
-// You are given a **0-indexed** integer array `candies`, where `candies[i]` represents the flavor of the `ith` candy. Your mom wants you to share these candies with your little sister by giving her `k` **consecutive** candies, but you want to keep as many flavors of candies as possible.
+// You are given a **0-indexed** integer array `candies`, where `candies[i]` represents the flavor of the `ith` candy.
+// Your mom wants you to share these candies with your little sister by giving her `k` **consecutive** candies, but you want to keep as many flavors of candies as possible.
 
 // Return _the **maximum** number of **unique** flavors of candy you can keep after sharing_ _with your sister._
 
@@ -58,15 +59,30 @@
 //     // Space: O(N)
 //     class Solution {
 //     public:
-//         int shareCandies(vector<int>& A, int k) {
+//         int share_candies(vector<int>& A, int k) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn share_candies(candies: Vec<i32>, k: i32) -> i32 {
+        let mut cnt = std::collections::HashMap::new();
+        let k = k as usize;
+        for &c in &candies[k..] {
+            *cnt.entry(c).or_insert(0) += 1;
+        }
+        let mut ans = cnt.len();
+        for (i, &c) in candies[k..].iter().enumerate() {
+            *cnt.entry(candies[0]).or_insert(0) += 1;
+            *cnt.entry(c).or_insert(0) -= 1;
+            if *cnt.get(&c).unwrap() == 0 {
+                cnt.remove(&c);
+            }
+            if cnt.len() > ans {
+                ans = cnt.len();
+            }
+        }
+        ans as _
     }
 }
 
@@ -75,39 +91,15 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_share_candies_1() {
+        assert_eq!(3, Solution::share_candies(vec![1, 2, 2, 3, 4, 3], 3));
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_share_candies_2() {
+        assert_eq!(2, Solution::share_candies(vec![2, 2, 2, 2, 3, 3], 2));
     }
     #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_share_candies_3() {
+        assert_eq!(3, Solution::share_candies(vec![2, 4, 5], 0));
     }
 }

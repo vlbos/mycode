@@ -1,61 +1,98 @@
 // # [2123. Minimum Operations to Remove Adjacent Ones in Matrix](https://leetcode.com/problems/minimum-operations-to-remove-adjacent-ones-in-matrix)
 
-// [中文文档](/solution/2100-2199/2123.Minimum%20Operations%20to%20Remove%20Adjacent%20Ones%20in%20Matrix/README.md)
-
 // ## Description
 
-// <p>You are given a <strong>0-indexed</strong> binary matrix <code>grid</code>. In one operation, you can flip any <code>1</code> in <code>grid</code> to be <code>0</code>.</p>
+// You are given a 0-indexed binary matrix grid. In one operation, you can flip any 1 in grid to be 0.
 
-// <p>A binary matrix is <strong>well-isolated</strong> if there is no <code>1</code> in the matrix that is <strong>4-directionally connected</strong> (i.e., horizontal and vertical) to another <code>1</code>.</p>
+// A binary matrix is well-isolated if there is no 1 in the matrix that is 4-directionally connected (i.e., horizontal and vertical) to another 1.
 
-// <p>Return <em>the minimum number of operations to make </em><code>grid</code><em> <strong>well-isolated</strong></em>.</p>
+// Return the minimum number of operations to make grid well-isolated.
 
-// <p>&nbsp;</p>
-// <p><strong>Example 1:</strong></p>
+// Example 1:
 // <img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2100-2199/2123.Minimum%20Operations%20to%20Remove%20Adjacent%20Ones%20in%20Matrix/images/image-20211223181501-1.png" style="width: 644px; height: 250px;" />
-// <pre>
-// <strong>Input:</strong> grid = [[1,1,0],[0,1,1],[1,1,1]]
-// <strong>Output:</strong> 3
-// <strong>Explanation:</strong> Use 3 operations to change grid[0][1], grid[1][2], and grid[2][1] to 0.
-// After, no more 1&#39;s are 4-directionally connected and grid is well-isolated.
-// </pre>
+//
+// Input: grid = [[1,1,0],[0,1,1],[1,1,1]]
+// Output: 3
+// Explanation: Use 3 operations to change grid[0][1], grid[1][2], and grid[2][1] to 0.
+// After, no more 1's are 4-directionally connected and grid is well-isolated.
+//
 
-// <p><strong>Example 2:</strong></p>
+// Example 2:
 // <img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2100-2199/2123.Minimum%20Operations%20to%20Remove%20Adjacent%20Ones%20in%20Matrix/images/image-20211223181518-2.png" style="height: 250px; width: 255px;" />
-// <pre>
-// <strong>Input:</strong> grid = [[0,0,0],[0,0,0],[0,0,0]]
-// <strong>Output:</strong> 0
-// <strong>Explanation:</strong> There are no 1&#39;s in grid and it is well-isolated.
+//
+// Input: grid = [[0,0,0],[0,0,0],[0,0,0]]
+// Output: 0
+// Explanation: There are no 1's in grid and it is well-isolated.
 // No operations were done so return 0.
-// </pre>
+//
 
-// <p><strong>Example 3:</strong></p>
+// Example 3:
 // <img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2100-2199/2123.Minimum%20Operations%20to%20Remove%20Adjacent%20Ones%20in%20Matrix/images/image-20211223181817-3.png" style="width: 165px; height: 167px;" />
-// <pre>
-// <strong>Input:</strong> grid = [[0,1],[1,0]]
-// <strong>Output:</strong> 0
-// <strong>Explanation:</strong> None of the 1&#39;s are 4-directionally connected and grid is well-isolated.
+//
+// Input: grid = [[0,1],[1,0]]
+// Output: 0
+// Explanation: None of the 1's are 4-directionally connected and grid is well-isolated.
 // No operations were done so return 0.
-// </pre>
+//
 
-// <p>&nbsp;</p>
-// <p><strong>Constraints:</strong></p>
+// Constraints:
 
-// <ul>
-// 	<li><code>m == grid.length</code></li>
-// 	<li><code>n == grid[i].length</code></li>
-// 	<li><code>1 &lt;= m, n &lt;= 300</code></li>
-// 	<li><code>grid[i][j]</code> is either <code>0</code> or <code>1</code>.</li>
-// </ul>
-//  int minimumOperations(vector<vector<int>>& grid) {
+//
+// 	m == grid.length
+// 	n == grid[i].length
+// 	1 <= m, n <= 300
+// 	grid[i][j] is either 0 or 1.
+//
+//  int minimum_operations(vector<vector<int>>& grid) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn minimum_operations(grid: Vec<Vec<i32>>) -> i32 {
+        let (m, n) = (grid.len(), grid[0].len());
+        let mut seen = vec![vec![None; n]; m];
+        let mut matches = vec![vec![None; n]; m];
+        let mut ans = 0;
+        for (i, row) in grid.iter().enumerate() {
+            for (j, &v) in row.iter().enumerate() {
+                if v == 0 || matches[i][j].is_some() {
+                    continue;
+                }
+                seen[i][j] = Some((i, j));
+                if dfs((i, j), (i, j), &grid, &mut seen, &mut matches) {
+                    ans += 1;
+                }
+            }
+        }
+        fn dfs(
+            ij: (usize, usize),
+            id: (usize, usize),
+            grid: &Vec<Vec<i32>>,
+            seen: &mut Vec<Vec<Option<(usize, usize)>>>,
+            matches: &mut Vec<Vec<Option<(usize, usize)>>>,
+        ) -> bool {
+            let (m, n) = (grid.len(), grid[0].len());
+            let dirs = [0, 1, 0, -1, 0];
+            let (i, j) = ij;
+            for (&di, &dj) in dirs[1..].iter().zip(&dirs[..dirs.len() - 1]) {
+                let (x, y) = (i as i32 + di, j as i32 + dj);
+                if x < 0 || x == m as i32 || y < 0 || y == n as i32 {
+                    continue;
+                }
+                let (x, y) = (x as usize, y as usize);
+                if grid[x][y] == 0 || seen[x][y] == Some(id) {
+                    continue;
+                }
+                seen[x][y] = Some(id);
+                if matches[x][y].is_none() || dfs(matches[x][y].unwrap(), id, grid, seen, matches) {
+                    matches[x][y] = Some(ij);
+                    matches[i][j] = Some((x, y));
+                    return true;
+                }
+            }
+            false
+        }
+        ans
     }
 }
 
@@ -64,39 +101,24 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_minimum_operations_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            3,
+            Solution::minimum_operations(vec![vec![1, 1, 0], vec![0, 1, 1], vec![1, 1, 1]])
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_minimum_operations_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            0,
+            Solution::minimum_operations(vec![vec![0, 0, 0], vec![0, 0, 0], vec![0, 0, 0]])
         );
     }
     #[test]
-    pub fn test_longest_word_3() {
+    pub fn test_minimum_operations_3() {
         assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
+            0,
+            Solution::minimum_operations(vec![vec![0, 1], vec![1, 0]])
         );
     }
 }

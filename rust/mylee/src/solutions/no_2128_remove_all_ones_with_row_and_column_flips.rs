@@ -60,15 +60,30 @@
 //     // Space: O(1)
 //     class Solution {
 //     public:
-//         bool removeOnes(vector<vector<int>>& A) {
+//         bool remove_ones(vector<vector<int>>& A) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn remove_ones(matrix: Vec<Vec<i32>>) -> bool {
+        let mut matrix = matrix;
+        let (m, n) = (matrix.len(), matrix[0].len());
+        for i in 0..m {
+            if matrix[i][0] > 0 {
+                for j in 0..n {
+                    matrix[i][j] = 1 - matrix[i][j];
+                }
+            }
+            if i > 0 {
+                for j in 0..n {
+                    if matrix[i][j] != matrix[0][j] {
+                        return false;
+                    }
+                }
+            }
+        }
+        true
     }
 }
 
@@ -77,39 +92,23 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_remove_ones_1() {
+        assert!(Solution::remove_ones(vec![
+            vec![0, 1, 0],
+            vec![1, 0, 1],
+            vec![0, 1, 0]
+        ]));
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_remove_ones_2() {
+        assert!(!Solution::remove_ones(vec![
+            vec![1, 1, 0],
+            vec![0, 0, 0],
+            vec![0, 0, 0]
+        ]));
     }
     #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_remove_ones_3() {
+        assert!(Solution::remove_ones(vec![vec![0]]));
     }
 }
