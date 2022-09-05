@@ -1,65 +1,87 @@
 // # [2137. Pour Water Between Buckets to Make Water Levels Equal](https://leetcode.com/problems/pour-water-between-buckets-to-make-water-levels-equal)
 
-// [中文文档](/solution/2100-2199/2137.Pour%20Water%20Between%20Buckets%20to%20Make%20Water%20Levels%20Equal/README.md)
-
 // ## Description
 
-// <p>You have <code>n</code> buckets each containing some gallons of water in it, represented by a <strong>0-indexed</strong> integer array <code>buckets</code>, where the <code>i<sup>th</sup></code> bucket contains <code>buckets[i]</code> gallons of water. You are also given an integer <code>loss</code>.</p>
+// You have n buckets each containing some gallons of water in it, represented by a 0-indexed integer array buckets,
+//  where the ith bucket contains buckets[i] gallons of water. You are also given an integer loss.
 
-// <p>You want to make the amount of water in each bucket equal. You can pour any amount of water from one bucket to another bucket (not necessarily an integer). However, every time you pour <code>k</code> gallons of water, you spill <code>loss</code> <strong>percent</strong> of <code>k</code>.</p>
+// You want to make the amount of water in each bucket equal. You can pour any amount of water from one bucket to another bucket
+//  (not necessarily an integer). However, every time you pour k gallons of water, you spill loss percent of k.
 
-// <p>Return <em>the <strong>maximum</strong> amount of water in each bucket after making the amount of water equal. </em>Answers within <code>10<sup>-5</sup></code> of the actual answer will be accepted.</p>
+// Return the maximum amount of water in each bucket after making the amount of water equal.
+//  Answers within 10-5 of the actual answer will be accepted.
 
-// <p>&nbsp;</p>
-// <p><strong>Example 1:</strong></p>
+// Example 1:
 
-// <pre>
-// <strong>Input:</strong> buckets = [1,2,7], loss = 80
-// <strong>Output:</strong> 2.00000
-// <strong>Explanation:</strong> Pour 5 gallons of water from buckets[2] to buckets[0].
+//
+// Input: buckets = [1,2,7], loss = 80
+// Output: 2.00000
+// Explanation: Pour 5 gallons of water from buckets[2] to buckets[0].
 // 5 * 80% = 4 gallons are spilled and buckets[0] only receives 5 - 4 = 1 gallon of water.
 // All buckets have 2 gallons of water in them so return 2.
-// </pre>
+//
 
-// <p><strong>Example 2:</strong></p>
+// Example 2:
 
-// <pre>
-// <strong>Input:</strong> buckets = [2,4,6], loss = 50
-// <strong>Output:</strong> 3.50000
-// <strong>Explanation:</strong> Pour 0.5 gallons of water from buckets[1] to buckets[0].
+//
+// Input: buckets = [2,4,6], loss = 50
+// Output: 3.50000
+// Explanation: Pour 0.5 gallons of water from buckets[1] to buckets[0].
 // 0.5 * 50% = 0.25 gallons are spilled and buckets[0] only receives 0.5 - 0.25 = 0.25 gallons of water.
 // Now, buckets = [2.25, 3.5, 6].
 // Pour 2.5 gallons of water from buckets[2] to buckets[0].
 // 2.5 * 50% = 1.25 gallons are spilled and buckets[0] only receives 2.5 - 1.25 = 1.25 gallons of water.
 // All buckets have 3.5 gallons of water in them so return 3.5.
-// </pre>
+//
 
-// <p><strong>Example 3:</strong></p>
+// Example 3:
 
-// <pre>
-// <strong>Input:</strong> buckets = [3,3,3,3], loss = 40
-// <strong>Output:</strong> 3.00000
-// <strong>Explanation:</strong> All buckets already have the same amount of water in them.
-// </pre>
+//
+// Input: buckets = [3,3,3,3], loss = 40
+// Output: 3.00000
+// Explanation: All buckets already have the same amount of water in them.
+//
 
-// <p>&nbsp;</p>
-// <p><strong>Constraints:</strong></p>
+// Constraints:
 
-// <ul>
-// 	<li><code>1 &lt;= buckets.length &lt;= 10<sup>5</sup></code></li>
-// 	<li><code>0 &lt;= buckets[i] &lt;= 10<sup>5</sup></code></li>
-// 	<li><code>0 &lt;= loss &lt;= 99</code></li>
-// </ul>
+//
+// 	1 <= buckets.length <= 105
+// 	0 <= buckets[i] <= 105
+// 	0 <= loss <= 99
+//
 
-//  double equalizeWater(vector<int>& A, int loss) {
+//  double equalize_water(vector<int>& A, int loss) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn equalize_water(buckets: Vec<i32>, loss: i32) -> f64 {
+        let rate = (100.0 - loss as f64) / 100.0;
+        let check = |x: f64| {
+            let (mut extra, mut need) = (0.0, 0.0);
+            for &b in &buckets {
+                let b = b as f64;
+                if b >= x {
+                    extra += b - x;
+                } else {
+                    need += x - b;
+                }
+            }
+            extra * rate >= need
+        };
+        let (mut left, mut right) = (
+            *buckets.iter().min().unwrap() as f64,
+            buckets.iter().sum::<i32>() as f64 / buckets.len() as f64,
+        );
+        while left + 0.00001 <= right {
+            let mid = (right + left) / 2.0;
+            if check(mid) {
+                left = mid;
+            } else {
+                right = mid;
+            }
+        }
+        (right * 100000.0) as i64 as f64 / 100000.0
     }
 }
 
@@ -68,39 +90,15 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_equalize_water_1() {
+        assert_eq!(2.00000, Solution::equalize_water(vec![1, 2, 7], 80));
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_equalize_water_2() {
+        assert_eq!(3.50000, Solution::equalize_water(vec![2, 4, 6], 50));
     }
     #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_equalize_water_3() {
+        assert_eq!(3.00000, Solution::equalize_water(vec![3, 3, 3, 3], 40));
     }
 }

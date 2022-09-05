@@ -1,22 +1,21 @@
 // # [2158. Amount of New Area Painted Each Day](https://leetcode.com/problems/amount-of-new-area-painted-each-day)
 
-// [中文文档](/solution/2100-2199/2158.Amount%20of%20New%20Area%20Painted%20Each%20Day/README.md)
-
 // ## Description
 
-// <p>There is a long and thin painting that can be represented by a number line. You are given a <strong>0-indexed</strong> 2D integer array <code>paint</code> of length <code>n</code>, where <code>paint[i] = [start<sub>i</sub>, end<sub>i</sub>]</code>. This means that on the <code>i<sup>th</sup></code> day you need to paint the area <strong>between</strong> <code>start<sub>i</sub></code> and <code>end<sub>i</sub></code>.</p>
+// There is a long and thin painting that can be represented by a number line.
+// You are given a 0-indexed 2D integer array paint of length n, where paint[i] = [starti, endi].
+// This means that on the ith day you need to paint the area between starti and endi.
 
-// <p>Painting the same area multiple times will create an uneven painting so you only want to paint each area of the painting at most <strong>once</strong>.</p>
+// Painting the same area multiple times will create an uneven painting so you only want to paint each area of the painting at most once.
 
-// <p>Return <em>an integer array </em><code>worklog</code><em> of length </em><code>n</code><em>, where </em><code>worklog[i]</code><em> is the amount of <strong>new</strong> area that you painted on the </em><code>i<sup>th</sup></code><em> day.</em></p>
+// Return an integer array worklog of length n, where worklog[i] is the amount of new area that you painted on the ith day.
 
-// <p>&nbsp;</p>
-// <p><strong>Example 1:</strong></p>
+// Example 1:
 // <img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2100-2199/2158.Amount%20of%20New%20Area%20Painted%20Each%20Day/images/screenshot-2022-02-01-at-17-16-16-diagram-drawio-diagrams-net.png" style="height: 300px; width: 620px;" />
-// <pre>
-// <strong>Input:</strong> paint = [[1,4],[4,7],[5,8]]
-// <strong>Output:</strong> [3,3,1]
-// <strong>Explanation:</strong>
+//
+// Input: paint = [[1,4],[4,7],[5,8]]
+// Output: [3,3,1]
+// Explanation:
 // On day 0, paint everything between 1 and 4.
 // The amount of new area painted on day 0 is 4 - 1 = 3.
 // On day 1, paint everything between 4 and 7.
@@ -24,14 +23,14 @@
 // On day 2, paint everything between 7 and 8.
 // Everything between 5 and 7 was already painted on day 1.
 // The amount of new area painted on day 2 is 8 - 7 = 1.
-// </pre>
+//
 
-// <p><strong>Example 2:</strong></p>
+// Example 2:
 // <img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2100-2199/2158.Amount%20of%20New%20Area%20Painted%20Each%20Day/images/screenshot-2022-02-01-at-17-17-45-diagram-drawio-diagrams-net.png" style="width: 604px; height: 300px;" />
-// <pre>
-// <strong>Input:</strong> paint = [[1,4],[5,8],[4,7]]
-// <strong>Output:</strong> [3,3,1]
-// <strong>Explanation:</strong>
+//
+// Input: paint = [[1,4],[5,8],[4,7]]
+// Output: [3,3,1]
+// Explanation:
 // On day 0, paint everything between 1 and 4.
 // The amount of new area painted on day 0 is 4 - 1 = 3.
 // On day 1, paint everything between 5 and 8.
@@ -39,38 +38,63 @@
 // On day 2, paint everything between 4 and 5.
 // Everything between 5 and 7 was already painted on day 1.
 // The amount of new area painted on day 2 is 5 - 4 = 1.
-// </pre>
+//
 
-// <p><strong>Example 3:</strong></p>
+// Example 3:
 // <img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2100-2199/2158.Amount%20of%20New%20Area%20Painted%20Each%20Day/images/screenshot-2022-02-01-at-17-19-49-diagram-drawio-diagrams-net.png" style="width: 423px; height: 275px;" />
-// <pre>
-// <strong>Input:</strong> paint = [[1,5],[2,4]]
-// <strong>Output:</strong> [4,0]
-// <strong>Explanation:</strong>
+//
+// Input: paint = [[1,5],[2,4]]
+// Output: [4,0]
+// Explanation:
 // On day 0, paint everything between 1 and 5.
 // The amount of new area painted on day 0 is 5 - 1 = 4.
 // On day 1, paint nothing because everything between 2 and 4 was already painted on day 0.
 // The amount of new area painted on day 1 is 0.
-// </pre>
+//
 
-// <p>&nbsp;</p>
-// <p><strong>Constraints:</strong></p>
+// Constraints:
 
-// <ul>
-// 	<li><code>1 &lt;= paint.length &lt;= 10<sup>5</sup></code></li>
-// 	<li><code>paint[i].length == 2</code></li>
-// 	<li><code>0 &lt;= start<sub>i</sub> &lt; end<sub>i</sub> &lt;= 5 * 10<sup>4</sup></code></li>
-// </ul>
+//
+// 	1 <= paint.length <= 105
+// 	paint[i].length == 2
+// 	0 <= starti < endi <= 5 * 104
+//
 
-//  public int[] amountPainted(int[][] paint) {
+//  public int[] amount_painted(int[][] paint) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn amount_painted(paint: Vec<Vec<i32>>) -> Vec<i32> {
+        let n = paint.len();
+        let mut ans = vec![0; n];
+        let (min_day, max_day) = (
+            paint.iter().min_by_key(|x| x[0]).unwrap()[0],
+            paint.iter().max_by_key(|x| x[1]).unwrap()[1],
+        );
+        let mut events = Vec::new();
+        let mut running_indices = std::collections::BTreeSet::new();
+        for (i, p) in paint.iter().enumerate() {
+            events.push((p[0], i, 1));
+            events.push((p[1], i, -1));
+        }
+        events.sort_by_key(|x| x.0);
+        let mut i = 0;
+        for day in min_day..max_day {
+            while i < events.len() && events[i].0 == day {
+                if events[i].2 == 1 {
+                    running_indices.insert(events[i].1);
+                } else {
+                    running_indices.remove(&events[i].1);
+                }
+                i += 1;
+            }
+            if !running_indices.is_empty() {
+                ans[*running_indices.iter().next().unwrap()] += 1;
+            }
+        }
+        ans
     }
 }
 
@@ -79,39 +103,24 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_amount_painted_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            vec![3, 3, 1],
+            Solution::amount_painted(vec![vec![1, 4], vec![4, 7], vec![5, 8]])
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_amount_painted_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            vec![3, 3, 1],
+            Solution::amount_painted(vec![vec![1, 4], vec![5, 8], vec![4, 7]])
         );
     }
     #[test]
-    pub fn test_longest_word_3() {
+    pub fn test_amount_painted_3() {
         assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
+            vec![4, 0],
+            Solution::amount_painted(vec![vec![1, 5], vec![2, 4]])
         );
     }
 }

@@ -40,15 +40,31 @@
 //     // Space: O(N^2)
 //     class Solution {
 //     public:
-//         int equalDigitFrequency(string s) {
+//         int equal_digit_frequency(string s) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn equal_digit_frequency(s: String) -> i32 {
+        let mut ans = std::collections::HashSet::new();
+        for (i, b) in s.bytes().enumerate() {
+            let (mut hash, mut max, mut unique) = (0, 0, 0);
+            let mut cnt = vec![0; 10];
+            for (j, bj) in s[i..].bytes().enumerate() {
+                let d = (bj - b'0') as usize;
+                cnt[d] += 1;
+                if cnt[d] == 1 {
+                    unique += 1;
+                }
+                max = max.max(cnt[d]);
+                hash = (hash * 31 + (d as i64) + 1) % 1_000_000_007;
+                if max * unique == (j + 1) as i64 {
+                    ans.insert(hash);
+                }
+            }
+        }
+        ans.len() as _
     }
 }
 
@@ -57,39 +73,11 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_equal_digit_frequency_1() {
+        assert_eq!(5, Solution::equal_digit_frequency("1212".to_string()));
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
-    }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_equal_digit_frequency_2() {
+        assert_eq!(9, Solution::equal_digit_frequency("12321".to_string()));
     }
 }

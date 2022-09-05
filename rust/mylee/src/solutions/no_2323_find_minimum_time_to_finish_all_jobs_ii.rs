@@ -1,51 +1,47 @@
 // # [2323. Find Minimum Time to Finish All Jobs II](https://leetcode.com/problems/find-minimum-time-to-finish-all-jobs-ii)
 
-// [中文文档](/solution/2300-2399/2323.Find%20Minimum%20Time%20to%20Finish%20All%20Jobs%20II/README.md)
-
 // ## Description
 
-// <p>You are given two <strong>0-indexed</strong> integer arrays <code>jobs</code> and <code>workers</code> of <strong>equal</strong> length, where <code>jobs[i]</code> is the amount of time needed to complete the <code>i<sup>th</sup></code> job, and <code>workers[j]</code> is the amount of time the <code>j<sup>th</sup></code> worker can work each day.</p>
+// You are given two 0-indexed integer arrays jobs and workers of equal length, where jobs[i] is the amount of time needed to complete the ith job, and workers[j] is the amount of time the jth worker can work each day.
 
-// <p>Each job should be assigned to <strong>exactly</strong> one worker, such that each worker completes <strong>exactly</strong> one job.</p>
+// Each job should be assigned to exactly one worker, such that each worker completes exactly one job.
 
-// <p>Return <em>the <strong>minimum</strong> number of days needed to complete all the jobs after assignment.</em></p>
+// Return the minimum number of days needed to complete all the jobs after assignment.
 
-// <p>&nbsp;</p>
-// <p><strong>Example 1:</strong></p>
+// Example 1:
 
-// <pre>
-// <strong>Input:</strong> jobs = [5,2,4], workers = [1,7,5]
-// <strong>Output:</strong> 2
-// <strong>Explanation:</strong>
-// - Assign the 2<sup>nd</sup> worker to the 0<sup>th</sup> job. It takes them 1 day to finish the job.
-// - Assign the 0<sup>th</sup> worker to the 1<sup>st</sup> job. It takes them 2 days to finish the job.
-// - Assign the 1<sup>st</sup> worker to the 2<sup>nd</sup> job. It takes them 1 day to finish the job.
+//
+// Input: jobs = [5,2,4], workers = [1,7,5]
+// Output: 2
+// Explanation:
+// - Assign the 2nd worker to the 0th job. It takes them 1 day to finish the job.
+// - Assign the 0th worker to the 1st job. It takes them 2 days to finish the job.
+// - Assign the 1st worker to the 2nd job. It takes them 1 day to finish the job.
 // It takes 2 days for all the jobs to be completed, so return 2.
 // It can be proven that 2 days is the minimum number of days needed.
-// </pre>
+//
 
-// <p><strong>Example 2:</strong></p>
+// Example 2:
 
-// <pre>
-// <strong>Input:</strong> jobs = [3,18,15,9], workers = [6,5,1,3]
-// <strong>Output:</strong> 3
-// <strong>Explanation:</strong>
-// - Assign the 2<sup>nd</sup> worker to the 0<sup>th</sup> job. It takes them 3 days to finish the job.
-// - Assign the 0<sup>th</sup> worker to the 1<sup>st</sup> job. It takes them 3 days to finish the job.
-// - Assign the 1<sup>st</sup> worker to the 2<sup>nd</sup> job. It takes them 3 days to finish the job.
-// - Assign the 3<sup>rd</sup> worker to the 3<sup>rd</sup> job. It takes them 3 days to finish the job.
+//
+// Input: jobs = [3,18,15,9], workers = [6,5,1,3]
+// Output: 3
+// Explanation:
+// - Assign the 2nd worker to the 0th job. It takes them 3 days to finish the job.
+// - Assign the 0th worker to the 1st job. It takes them 3 days to finish the job.
+// - Assign the 1st worker to the 2nd job. It takes them 3 days to finish the job.
+// - Assign the 3rd worker to the 3rd job. It takes them 3 days to finish the job.
 // It takes 3 days for all the jobs to be completed, so return 3.
 // It can be proven that 3 days is the minimum number of days needed.
-// </pre>
+//
 
-// <p>&nbsp;</p>
-// <p><strong>Constraints:</strong></p>
+// Constraints:
 
-// <ul>
-// 	<li><code>n == jobs.length == workers.length</code></li>
-// 	<li><code>1 &lt;= n &lt;= 10<sup>5</sup></code></li>
-// 	<li><code>1 &lt;= jobs[i], workers[i] &lt;= 10<sup>5</sup></code></li>
-// </ul>
+//
+// 	n == jobs.length == workers.length
+// 	1 <= n <= 105
+// 	1 <= jobs[i], workers[i] <= 105
+//
 
 // ## Solutions
 

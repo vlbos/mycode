@@ -1,35 +1,32 @@
 // # [2143. Choose Numbers From Two Arrays in Range](https://leetcode.com/problems/choose-numbers-from-two-arrays-in-range)
 
-// [中文文档](/solution/2100-2199/2143.Choose%20Numbers%20From%20Two%20Arrays%20in%20Range/README.md)
-
 // ## Description
 
-// <p>You are given two <strong>0-indexed</strong> integer arrays <code>nums1</code> and <code>nums2</code> of length <code>n</code>.</p>
+// You are given two 0-indexed integer arrays nums1 and nums2 of length n.
 
-// <p>A range <code>[l, r]</code> (<strong>inclusive</strong>) where <code>0 &lt;= l &lt;= r &lt; n</code> is <strong>balanced</strong> if:</p>
+// A range [l, r] (inclusive) where 0 <= l <= r < n is balanced if:
 
-// <ul>
-// 	<li>For every <code>i</code> in the range <code>[l, r]</code>, you pick either <code>nums1[i]</code> or <code>nums2[i]</code>.</li>
-// 	<li>The sum of the numbers you pick from <code>nums1</code> equals to the sum of the numbers you pick from <code>nums2</code> (the sum is considered to be <code>0</code> if you pick no numbers from an array).</li>
-// </ul>
+//
+// 	For every i in the range [l, r], you pick either nums1[i] or nums2[i].
+// 	The sum of the numbers you pick from nums1 equals to the sum of the numbers you pick from nums2 (the sum is considered to be 0 if you pick no numbers from an array).
+//
 
-// <p>Two <strong>balanced</strong> ranges from <code>[l<sub>1</sub>, r<sub>1</sub>]</code> and <code>[l<sub>2</sub>, r<sub>2</sub>]</code> are considered to be <strong>different</strong> if at least one of the following is true:</p>
+// Two balanced ranges from [l1, r1] and [l2, r2] are considered to be different if at least one of the following is true:
 
-// <ul>
-// 	<li><code>l<sub>1</sub> != l<sub>2</sub></code></li>
-// 	<li><code>r<sub>1</sub> != r<sub>2</sub></code></li>
-// 	<li><code>nums1[i]</code> is picked in the first range, and <code>nums2[i]</code> is picked in the second range or <strong>vice versa</strong> for at least one <code>i</code>.</li>
-// </ul>
+//
+// 	l1 != l2
+// 	r1 != r2
+// 	nums1[i] is picked in the first range, and nums2[i] is picked in the second range or vice versa for at least one i.
+//
 
-// <p>Return <em>the number of <strong>different</strong> ranges that are balanced. </em>Since the answer may be very large, return it <strong>modulo</strong> <code>10<sup>9</sup> + 7</code><em>.</em></p>
+// Return the number of different ranges that are balanced. Since the answer may be very large, return it modulo 109 + 7.
 
-// <p>&nbsp;</p>
-// <p><strong>Example 1:</strong></p>
+// Example 1:
 
-// <pre>
-// <strong>Input:</strong> nums1 = [1,2,5], nums2 = [2,6,3]
-// <strong>Output:</strong> 3
-// <strong>Explanation:</strong> The balanced ranges are:
+//
+// Input: nums1 = [1,2,5], nums2 = [2,6,3]
+// Output: 3
+// Explanation: The balanced ranges are:
 // - [0, 1] where we choose nums2[0], and nums1[1].
 //   The sum of the numbers chosen from nums1 equals the sum of the numbers chosen from nums2: 2 = 2.
 // - [0, 2] where we choose nums1[0], nums2[1], and nums1[2].
@@ -38,14 +35,14 @@
 //   The sum of the numbers chosen from nums1 equals the sum of the numbers chosen from nums2: 1 + 2 = 3.
 // Note that the second and third balanced ranges are different.
 // In the second balanced range, we choose nums2[1] and in the third balanced range, we choose nums1[1].
-// </pre>
+//
 
-// <p><strong>Example 2:</strong></p>
+// Example 2:
 
-// <pre>
-// <strong>Input:</strong> nums1 = [0,1], nums2 = [1,0]
-// <strong>Output:</strong> 4
-// <strong>Explanation:</strong> The balanced ranges are:
+//
+// Input: nums1 = [0,1], nums2 = [1,0]
+// Output: 4
+// Explanation: The balanced ranges are:
 // - [0, 0] where we choose nums1[0].
 //   The sum of the numbers chosen from nums1 equals the sum of the numbers chosen from nums2: 0 = 0.
 // - [1, 1] where we choose nums2[1].
@@ -54,26 +51,47 @@
 //   The sum of the numbers chosen from nums1 equals the sum of the numbers chosen from nums2: 0 = 0.
 // - [0, 1] where we choose nums2[0] and nums1[1].
 //   The sum of the numbers chosen from nums1 equals the sum of the numbers chosen from nums2: 1 = 1.
-// </pre>
+//
 
-// <p>&nbsp;</p>
-// <p><strong>Constraints:</strong></p>
+// Constraints:
 
-// <ul>
-// 	<li><code>n == nums1.length == nums2.length</code></li>
-// 	<li><code>1 &lt;= n &lt;= 100</code></li>
-// 	<li><code>0 &lt;= nums1[i], nums2[i] &lt;= 100</code></li>
-// </ul>
+//
+// 	n == nums1.length == nums2.length
+// 	1 <= n <= 100
+// 	0 <= nums1[i], nums2[i] <= 100
+//
 
-//  int countSubranges(vector<int>& nums1, vector<int>& nums2) {
+//  int count_sub_ranges(vector<int>& nums1, vector<int>& nums2) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn count_sub_ranges(nums1: Vec<i32>, nums2: Vec<i32>) -> i32 {
+        use std::collections::HashMap;
+        let p = 1_000_000_007;
+        let mut ans = 0;
+        let mut dp = HashMap::new();
+        for (&n1, &n2) in nums1.iter().zip(&nums2) {
+            let mut new_dp = HashMap::new();
+            *new_dp.entry(n1).or_insert(0) += 1;
+            *new_dp.entry(-n2).or_insert(0) += 1;
+            for (&v, &c) in &dp {
+                new_dp
+                    .entry((v + n1))
+                    .and_modify(|v| *v = (*v + c) % p)
+                    .or_insert(c % p);
+                new_dp
+                    .entry((v - n2))
+                    .and_modify(|v| *v = (*v + c) % p)
+                    .or_insert(c % p);
+            }
+            dp = new_dp;
+            if let Some(&v) = dp.get(&0) {
+                ans = (ans + v) % p;
+            }
+        }
+        ans
     }
 }
 
@@ -82,39 +100,11 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_count_sub_ranges_1() {
+        assert_eq!(3, Solution::count_sub_ranges(vec![1, 2, 5], vec![2, 6, 3]));
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
-    }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_count_sub_ranges_2() {
+        assert_eq!(4, Solution::count_sub_ranges(vec![0, 1], vec![1, 0]));
     }
 }

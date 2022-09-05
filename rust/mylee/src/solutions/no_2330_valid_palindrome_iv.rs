@@ -1,50 +1,46 @@
 // # [2330. Valid Palindrome IV](https://leetcode.com/problems/valid-palindrome-iv)
 
-// [中文文档](/solution/2300-2399/2330.Valid%20Palindrome%20IV/README.md)
-
 // ## Description
 
-// <p>You are given a <strong>0-indexed</strong> string <code>s</code> consisting of only lowercase English letters. In one operation, you can change <strong>any</strong> character of <code>s</code> to any <strong>other</strong> character.</p>
+// You are given a 0-indexed string s consisting of only lowercase English letters. In one operation, you can change any character of s to any other character.
 
-// <p>Return <code>true</code><em> if you can make </em><code>s</code><em> a palindrome after performing <strong>exactly</strong> one or two operations, or return </em><code>false</code><em> otherwise.</em></p>
+// Return true if you can make s a palindrome after performing exactly one or two operations, or return false otherwise.
 
-// <p>&nbsp;</p>
-// <p><strong>Example 1:</strong></p>
+// Example 1:
 
-// <pre>
-// <strong>Input:</strong> s = &quot;abcdba&quot;
-// <strong>Output:</strong> true
-// <strong>Explanation:</strong> One way to make s a palindrome using 1 operation is:
-// - Change s[2] to &#39;d&#39;. Now, s = &quot;abddba&quot;.
+//
+// Input: s = &quot;abcdba&quot;
+// Output: true
+// Explanation: One way to make s a palindrome using 1 operation is:
+// - Change s[2] to 'd'. Now, s = &quot;abddba&quot;.
 // One operation could be performed to make s a palindrome so return true.
-// </pre>
+//
 
-// <p><strong>Example 2:</strong></p>
+// Example 2:
 
-// <pre>
-// <strong>Input:</strong> s = &quot;aa&quot;
-// <strong>Output:</strong> true
-// <strong>Explanation:</strong> One way to make s a palindrome using 2 operations is:
-// - Change s[0] to &#39;b&#39;. Now, s = &quot;ba&quot;.
-// - Change s[1] to &#39;b&#39;. Now, s = &quot;bb&quot;.
+//
+// Input: s = &quot;aa&quot;
+// Output: true
+// Explanation: One way to make s a palindrome using 2 operations is:
+// - Change s[0] to 'b'. Now, s = &quot;ba&quot;.
+// - Change s[1] to 'b'. Now, s = &quot;bb&quot;.
 // Two operations could be performed to make s a palindrome so return true.
-// </pre>
+//
 
-// <p><strong>Example 3:</strong></p>
+// Example 3:
 
-// <pre>
-// <strong>Input:</strong> s = &quot;abcdef&quot;
-// <strong>Output:</strong> false
-// <strong>Explanation:</strong> It is not possible to make s a palindrome using one or two operations so return false.
-// </pre>
+//
+// Input: s = &quot;abcdef&quot;
+// Output: false
+// Explanation: It is not possible to make s a palindrome using one or two operations so return false.
+//
 
-// <p>&nbsp;</p>
-// <p><strong>Constraints:</strong></p>
+// Constraints:
 
-// <ul>
-// 	<li><code>1 &lt;= s.length &lt;= 10<sup>5</sup></code></li>
-// 	<li><code>s</code> consists only of lowercase English letters.</li>
-// </ul>
+//
+// 	1 <= s.length <= 105
+// 	s consists only of lowercase English letters.
+//
 
 // ## Solutions
 
