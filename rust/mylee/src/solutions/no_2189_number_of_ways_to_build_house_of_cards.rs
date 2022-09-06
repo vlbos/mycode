@@ -76,15 +76,22 @@
 //     // Space: O(N^2)
 //     class Solution {
 //     public:
-//         int houseOfCards(int n) {
+//         int house_of_cards(int n) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn house_of_cards(n: i32) -> i32 {
+        let n = n as usize;
+        let mut dp = vec![0; n + 1];
+        dp[0] = 1;
+        for h in 1..=n / 3 + 1 {
+            let used = 3 * h - 1;
+            for i in (used..=n).rev() {
+                dp[i] += dp[i - used];
+            }
+        }
+        dp[n]
     }
 }
 
@@ -93,39 +100,15 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_house_of_cards_1() {
+        assert_eq!(2, Solution::house_of_cards(16));
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_house_of_cards_2() {
+        assert_eq!(1, Solution::house_of_cards(2));
     }
     #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_house_of_cards_3() {
+        assert_eq!(0, Solution::house_of_cards(4));
     }
 }

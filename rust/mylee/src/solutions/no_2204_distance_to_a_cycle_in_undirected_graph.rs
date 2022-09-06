@@ -2,7 +2,8 @@
 
 // ## Description
 
-// You are given a positive integer n representing the number of nodes in a connected undirected graph containing exactly one cycle. The nodes are numbered from 0 to n - 1 (inclusive).
+// You are given a positive integer n representing the number of nodes in a connected undirected graph containing exactly one cycle.
+// The nodes are numbered from 0 to n - 1 (inclusive).
 
 // You are also given a 2D integer array edges, where edges[i] = [node1i, node2i] denotes that there is a bidirectional edge connecting node1i and node2i in the graph.
 
@@ -57,15 +58,55 @@
 // 	There is at most one edge between any pair of vertices.
 //
 
-// def distanceToCycle(self, n, edges):
+// def distance_to_cycle(self, n, edges):
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn distance_to_cycle(n: i32, edges: Vec<Vec<i32>>) -> Vec<i32> {
+        let n = n as usize;
+        let mut degrees = vec![0; n];
+        let mut g = vec![Vec::new(); n];
+        for e in &edges {
+            let (u, v) = (e[0] as usize, e[1] as usize);
+            degrees[u] += 1;
+            degrees[v] += 1;
+            g[u].push(v);
+            g[v].push(u);
+        }
+        let mut ans = vec![0; n];
+        let mut q: std::collections::VecDeque<usize> = degrees
+            .iter()
+            .enumerate()
+            .filter(|(_, &v)| v == 1)
+            .map(|(i, _)| i)
+            .collect();
+
+        while let Some(u) = q.pop_front() {
+            ans[u] = -1;
+            for &v in &g[u] {
+                degrees[v] -= 1;
+                if degrees[v] == 1 {
+                    q.push_back(v);
+                }
+            }
+        }
+
+        let mut q: std::collections::VecDeque<usize> = ans
+            .iter()
+            .enumerate()
+            .filter(|(_, &v)| v == 0)
+            .map(|(i, _)| i)
+            .collect();
+        while let Some(u) = q.pop_front() {
+            for &v in &g[u] {
+                if ans[v] == -1 {
+                    ans[v] = ans[u] + 1;
+                    q.push_back(v);
+                }
+            }
+        }
+        ans
     }
 }
 
@@ -74,38 +115,40 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_distance_to_cycle_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
+            vec![1, 0, 0, 0, 0, 1, 2],
+            Solution::distance_to_cycle(
+                7,
+                vec![
+                    vec![1, 2],
+                    vec![2, 3],
+                    vec![3, 4],
+                    vec![4, 1],
+                    vec![0, 1],
+                    vec![5, 2],
+                    vec![6, 5]
+                ]
             )
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_distance_to_cycle_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
-    }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
+            vec![0, 0, 0, 1, 2, 2, 1, 2, 2],
+            Solution::distance_to_cycle(
+                9,
+                vec![
+                    vec![0, 1],
+                    vec![1, 2],
+                    vec![0, 2],
+                    vec![2, 6],
+                    vec![6, 7],
+                    vec![6, 8],
+                    vec![1, 3],
+                    vec![3, 4],
+                    vec![3, 5]
+                ]
             )
         );
     }

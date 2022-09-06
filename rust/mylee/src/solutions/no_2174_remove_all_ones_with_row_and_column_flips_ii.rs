@@ -56,15 +56,59 @@
 // 	grid[i][j] is either 0 or 1.
 //
 
-// int removeOnes(vector<vector<int>>& grid) {
+// int remove_ones(vector<vector<int>>& grid) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn remove_ones(grid: Vec<Vec<i32>>) -> i32 {
+        use std::collections::HashSet;
+        let mut one: HashSet<(usize, usize)> =
+            grid.iter()
+                .enumerate()
+                .fold(HashSet::new(), |mut r, (i, row)| {
+                    r = r
+                        .union(
+                            &row.iter()
+                                .enumerate()
+                                .fold(HashSet::new(), |mut c, (j, &v)| {
+                                    if v == 1 {
+                                        c.insert((i, j));
+                                    };
+                                    c
+                                }),
+                        )
+                        .cloned()
+                        .collect();
+                    r
+                });
+        let mut ans = i32::MAX;
+        fn dfs(res: i32, ans: &mut i32, grid: &Vec<Vec<i32>>, one: &mut HashSet<(usize, usize)>) {
+            if one.is_empty() {
+                *ans = res.min(*ans);
+                return;
+            }
+            for (curr_r, curr_c) in one.clone() {
+                let mut deleted = HashSet::new();
+                for c in 0..grid[0].len() {
+                    if one.contains(&(curr_r, c)) {
+                        one.remove(&(curr_r, c));
+                        deleted.insert((curr_r, c));
+                    }
+                }
+                for r in 0..grid.len() {
+                    if one.contains(&(r, curr_c)) {
+                        one.remove(&(r, curr_c));
+                        deleted.insert((r, curr_c));
+                    }
+                }
+                dfs(res + 1, ans, grid, one);
+                *one = one.union(&deleted).cloned().collect();
+            }
+        }
+        dfs(0, &mut ans, &grid, &mut one);
+        ans
     }
 }
 
@@ -73,39 +117,21 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_remove_ones_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            2,
+            Solution::remove_ones(vec![vec![1, 1, 1], vec![1, 1, 1], vec![0, 1, 0]])
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_remove_ones_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            2,
+            Solution::remove_ones(vec![vec![0, 1, 0], vec![1, 0, 1], vec![0, 1, 0]])
         );
     }
     #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_remove_ones_3() {
+        assert_eq!(0, Solution::remove_ones(vec![vec![0, 0], vec![0, 0]]));
     }
 }

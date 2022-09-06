@@ -2,7 +2,8 @@
 
 // ## Description
 
-// You are given a 0-indexed array of positive integers nums. A triplet of three distinct indices (i, j, k) is called a single divisor triplet of nums if nums[i] + nums[j] + nums[k] is divisible by exactly one of nums[i], nums[j], or nums[k].
+// You are given a 0-indexed array of positive integers nums.
+//  A triplet of three distinct indices (i, j, k) is called a single divisor triplet of nums if nums[i] + nums[j] + nums[k] is divisible by exactly one of nums[i], nums[j], or nums[k].
 // Return the number of single divisor triplets of nums.
 
 // Example 1:
@@ -42,7 +43,7 @@
 // Constraints:
 
 //
-// 	3 <= nums.length <= 105
+// 	3 <= nums.length <= 10^5
 // 	1 <= nums[i] <= 100
 //
 
@@ -54,15 +55,41 @@
 
 // ```python
 // class Solution:
-//     def singleDivisorTriplet(self, nums: List[int]) -> int:
+//     def single_divisor_triplet(self, nums: List[int]) -> int:
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn single_divisor_triplet(nums: Vec<i32>) -> i64 {
+        let n = 101;
+        let mut count = vec![0; n];
+        for &num in &nums {
+            count[num as usize] += 1;
+        }
+        let mut ans = 0;
+        for a in 1..n {
+            for b in a..n {
+                for c in b..n {
+                    let sum = a + b + c;
+                    if [sum % a, sum % b, sum % c]
+                        .iter()
+                        .filter(|&x| *x == 0)
+                        .count()
+                        != 1
+                    {
+                        continue;
+                    }
+                    if a == b {
+                        ans += count[a] * (count[a] - 1) / 2 * count[c];
+                    } else if b == c {
+                        ans += count[b] * (count[b] - 1) / 2 * count[a];
+                    } else {
+                        ans += count[a] * count[b] * count[c];
+                    }
+                }
+            }
+        }
+        ans * 6
     }
 }
 
@@ -71,39 +98,15 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_single_divisor_triplet_1() {
+        assert_eq!(12, Solution::single_divisor_triplet(vec![4, 6, 7, 3, 2]));
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_single_divisor_triplet_2() {
+        assert_eq!(6, Solution::single_divisor_triplet(vec![1, 2, 2]));
     }
     #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_single_divisor_triplet_3() {
+        assert_eq!(0, Solution::single_divisor_triplet(vec![1, 1, 1]));
     }
 }
