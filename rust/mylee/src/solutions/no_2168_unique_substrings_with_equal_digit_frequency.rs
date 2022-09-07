@@ -48,7 +48,7 @@ pub struct Solution {}
 impl Solution {
     pub fn equal_digit_frequency(s: String) -> i32 {
         let mut ans = std::collections::HashSet::new();
-        for (i, b) in s.bytes().enumerate() {
+        for i in 0..s.len() {
             let (mut hash, mut max, mut unique) = (0, 0, 0);
             let mut cnt = vec![0; 10];
             for (j, bj) in s[i..].bytes().enumerate() {

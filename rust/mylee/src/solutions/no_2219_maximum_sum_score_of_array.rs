@@ -41,8 +41,8 @@
 
 //
 // 	n == nums.length
-// 	1 <= n <= 105
-// 	-105 <= nums[i] <= 105
+// 	1 <= n <= 10^5
+// 	-10^5 <= nums[i] <= 10^5
 //
 
 // ## Solutions
@@ -53,15 +53,22 @@
 
 // ```python
 // class Solution:
-//     def maximumSumScore(self, nums: List[int]) -> int:
+//     def maximum_sum_score(self, nums: List[int]) -> int:
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn maximum_sum_score(nums: Vec<i32>) -> i64 {
+        let sum = nums.iter().map(|&x| x as i64).sum::<i64>();
+        let mut pre = 0;
+        let mut ans = i64::MIN;
+        for &num in &nums {
+            let suf = sum - pre;
+            pre += num as i64;
+            ans = ans.max(pre.max(suf));
+        }
+        ans
     }
 }
 
@@ -70,39 +77,11 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_maximum_sum_score_1() {
+        assert_eq!(10, Solution::maximum_sum_score(vec![4, 3, -2, 5]));
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
-    }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_maximum_sum_score_2() {
+        assert_eq!(-3, Solution::maximum_sum_score(vec![-3, -5]));
     }
 }

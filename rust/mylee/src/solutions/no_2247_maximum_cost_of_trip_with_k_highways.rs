@@ -2,9 +2,12 @@
 
 // ## Description
 
-// A series of highways connect n cities numbered from 0 to n - 1. You are given a 2D integer array highways where highways[i] = [city1i, city2i, tolli] indicates that there is a highway that connects city1i and city2i, allowing a car to go from city1i to city2i and vice versa for a cost of tolli.
+// A series of highways connect n cities numbered from 0 to n - 1.
+//  You are given a 2D integer array highways where highways[i] = [city1i, city2i, tolli] indicates that there is a highway that connects city1i and city2i,
+// allowing a car to go from city1i to city2i and vice versa for a cost of tolli.
 
-// You are also given an integer k. You are going on a trip that crosses exactly k highways. You may start at any city, but you may only visit each city at most once during your trip.
+// You are also given an integer k. You are going on a trip that crosses exactly k highways.
+//  You may start at any city, but you may only visit each city at most once during your trip.
 
 // Return the maximum cost of your trip. If there is no trip that meets the requirements, return -1.
 
@@ -14,11 +17,11 @@
 // Input: n = 5, highways = [[0,1,4],[2,1,3],[1,4,11],[3,2,3],[3,4,2]], k = 3
 // Output: 17
 // Explanation:
-// One possible trip is to go from 0 -&gt; 1 -&gt; 4 -&gt; 3. The cost of this trip is 4 + 11 + 2 = 17.
-// Another possible trip is to go from 4 -&gt; 1 -&gt; 2 -&gt; 3. The cost of this trip is 11 + 3 + 3 = 17.
+// One possible trip is to go from 0 -> 1 -> 4 -> 3. The cost of this trip is 4 + 11 + 2 = 17.
+// Another possible trip is to go from 4 -> 1 -> 2 -> 3. The cost of this trip is 11 + 3 + 3 = 17.
 // It can be proven that 17 is the maximum possible cost of any valid trip.
 
-// Note that the trip 4 -&gt; 1 -&gt; 0 -&gt; 1 is not allowed because you visit the city 1 twice.
+// Note that the trip 4 -> 1 -> 0 -> 1 is not allowed because you visit the city 1 twice.
 
 //
 
@@ -43,15 +46,53 @@
 // 	There are no duplicate highways.
 //
 
-// int maximumCost(int n, vector<vector<int>>& highways, int k) {
+// int maximum_cost(int n, vector<vector<int>>& highways, int k) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn maximum_cost(n: i32, highways: Vec<Vec<i32>>, k: i32) -> i32 {
+        let n = n as usize;
+        let n1 = 1 << n;
+        let mut g = vec![Vec::new(); n];
+        let mut dp = vec![-1; n1];
+        let mut gct = vec![vec![0; n]; n1];
+        for e in &highways {
+            let (u, v, t) = (e[0] as usize, e[1] as usize, e[2]);
+            g[u].push((v, t));
+            g[v].push((u, t));
+            let state = (1 << u) + (1 << v);
+            dp[state] = t;
+            gct[state][u] += 1;
+            gct[state][v] += 1;
+        }
+        let mut ans = -1;
+        for st1 in 0..n1 {
+            for j in 0..format!("{:b}", st1).len() {
+                if st1 & (1 << j) == 0 {
+                    continue;
+                }
+                let st2 = st1 ^ (1 << j);
+                for &(v, t) in &g[j] {
+                    if st2 & (1 << v) == 0 || dp[st2] == -1 {
+                        continue;
+                    }
+                    if gct[st2][v] + 1 > 2 {
+                        continue;
+                    }
+                    if dp[st2] + t > dp[st1] {
+                        gct[st1] = gct[st2].clone();
+                        gct[st1][j] += 1;
+                        gct[st1][v] += 1;
+                        dp[st1] = dp[st2] + t;
+                    }
+                }
+            }
+            if st1.count_ones() == k as u32 + 1 {
+                ans = ans.max(dp[st1]);
+            }
+        }
+        ans
     }
 }
 
@@ -60,39 +101,27 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_maximum_cost_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
+            17,
+            Solution::maximum_cost(
+                5,
+                vec![
+                    vec![0, 1, 4],
+                    vec![2, 1, 3],
+                    vec![1, 4, 11],
+                    vec![3, 2, 3],
+                    vec![3, 4, 2]
+                ],
+                3
             )
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test__2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
-    }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
+            -1,
+            Solution::maximum_cost(4, vec![vec![0, 1, 3], vec![2, 3, 2]], 2)
         );
     }
 }

@@ -67,7 +67,7 @@ impl Solution {
                 }
             }
         }
-        for h in 2..=height {
+        for _ in 2..=height {
             let mut new_dp = vec![0; n];
             for i in 0..n {
                 for &v in &graph[i] {

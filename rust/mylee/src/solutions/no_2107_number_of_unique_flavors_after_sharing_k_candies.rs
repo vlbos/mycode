@@ -72,7 +72,7 @@ impl Solution {
             *cnt.entry(c).or_insert(0) += 1;
         }
         let mut ans = cnt.len();
-        for (i, &c) in candies[k..].iter().enumerate() {
+        for &c in &candies[k..] {
             *cnt.entry(candies[0]).or_insert(0) += 1;
             *cnt.entry(c).or_insert(0) -= 1;
             if *cnt.get(&c).unwrap() == 0 {

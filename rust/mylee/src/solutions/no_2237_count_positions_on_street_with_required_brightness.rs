@@ -2,9 +2,12 @@
 
 // ## Description
 
-// You are given an integer n. A perfectly straight street is represented by a number line ranging from 0 to n - 1. You are given a 2D integer array lights representing the street lamp(s) on the street. Each lights[i] = [positioni, rangei] indicates that there is a street lamp at position positioni that lights up the area from [max(0, positioni - rangei), min(n - 1, positioni + rangei)] (inclusive).
+// You are given an integer n. A perfectly straight street is represented by a number line ranging from 0 to n - 1.
+// You are given a 2D integer array lights representing the street lamp(s) on the street.
+// Each lights[i] = [positioni, rangei] indicates that there is a street lamp at position positioni that lights up the area from [max(0, positioni - rangei), min(n - 1, positioni + rangei)] (inclusive).
 
-// The brightness of a position p is defined as the number of street lamps that light up the position p. You are given a 0-indexed integer array requirement of size n where requirement[i] is the minimum brightness of the ith position on the street.
+// The brightness of a position p is defined as the number of street lamps that light up the position p.
+// You are given a 0-indexed integer array requirement of size n where requirement[i] is the minimum brightness of the ith position on the street.
 
 // Return the number of positions i on the street between 0 and n - 1 that have a brightness of at least requirement[i].
 
@@ -42,12 +45,12 @@
 // Constraints:
 
 //
-// 	1 <= n <= 105
-// 	1 <= lights.length <= 105
+// 	1 <= n <= 10^5
+// 	1 <= lights.length <= 10^5
 // 	0 <= positioni < n
-// 	0 <= rangei <= 105
+// 	0 <= rangei <= 10^5
 // 	requirement.length == n
-// 	0 <= requirement[i] <= 105
+// 	0 <= requirement[i] <= 10^5
 //
 
 // ## Solutions
@@ -58,17 +61,34 @@
 
 // ```python
 // class Solution:
-//     def meetRequirement(
+//     def meet_requirement(
 //         self, n: int, lights: List[List[int]], requirement: List[int]
 //     ) -> int:
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn meet_requirement(n: i32, lights: Vec<Vec<i32>>, requirement: Vec<i32>) -> i32 {
+        let nn = n as usize;
+        let mut psum = vec![0; nn + 1];
+        for light in &lights {
+            let (l, r) = (
+                0i32.max(light[0] - light[1]) as usize,
+                n.min(light[0] + light[1] + 1) as usize,
+            );
+            psum[l] += 1;
+            psum[r] -= 1;
+        }
+        let mut ans = 0;
+        for i in 0..nn {
+            if i > 0 {
+                psum[i] += psum[i - 1];
+            }
+            if psum[i] >= requirement[i] {
+                ans += 1;
+            }
+        }
+        ans
     }
 }
 
@@ -77,39 +97,18 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_meet_requirement_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
+            4,
+            Solution::meet_requirement(
+                5,
+                vec![vec![0, 1], vec![2, 1], vec![3, 2]],
+                vec![0, 2, 1, 4, 1]
             )
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
-    }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_meet_requirement_2() {
+        assert_eq!(0, Solution::meet_requirement(1, vec![vec![0, 1]], vec![2]));
     }
 }

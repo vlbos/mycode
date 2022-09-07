@@ -57,15 +57,19 @@
 //     // Space: O(1)
 //     class Solution {
 //     public:
-//         bool isConsecutive(vector<int>& A) {
+//         bool is_consecutive(vector<int>& A) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn is_consecutive(nums: Vec<i32>) -> bool {
+        let (min, max) = (*nums.iter().min().unwrap(), *nums.iter().max().unwrap());
+        if max - min >= nums.len() as i32 {
+            return false;
+        }
+        let mut nums = nums;
+        nums.sort();
+        nums.windows(2).all(|x| x[0] + 1 == x[1])
     }
 }
 
@@ -74,39 +78,15 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_is_consecutive_1() {
+        assert!(Solution::is_consecutive(vec![1, 3, 4, 2]));
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_is_consecutive_2() {
+        assert!(!Solution::is_consecutive(vec![1, 3]));
     }
     #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_is_consecutive_3() {
+        assert!(Solution::is_consecutive(vec![3, 5, 4]));
     }
 }

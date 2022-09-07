@@ -66,12 +66,10 @@ impl Solution {
         let n = diff.len();
         for i in 0..n - 1 {
             let target = -diff[i] + 1;
-            let index = if let Ok(j) | Err(j) = diff[i + 1..].binary_search(&target) {
-                j
-            } else {
-                0
-            } + i
-                + 1;
+            let mut index = i + 1;
+            if let Ok(j) | Err(j) = diff[i + 1..].binary_search(&target) {
+                index += j;
+            };
             ans += n - index;
         }
         ans as _
