@@ -46,18 +46,47 @@
 //
 // 	1 <= heights.length <= 400
 // 	1 <= heights[i].length <= 400
-// 	1 <= heights[i][j] <= 105
+// 	1 <= heights[i][j] <= 10^5
 //
 
-// vector<vector<int>> seePeople(vector<vector<int>>& A)
+// vector<vector<int>> see_people(vector<vector<int>>& A)
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn see_people(heights: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+        let (m, n) = (heights.len(), heights[0].len());
+        let mut ans = vec![vec![0; n]; m];
+        let mut s = Vec::new();
+        for (i, row) in heights.iter().enumerate() {
+            s.clear();
+            for (j, &v) in row.iter().enumerate().rev() {
+                let mut seen = 0;
+                while !s.is_empty() && *s.last().unwrap() < v {
+                    seen += 1;
+                    s.pop();
+                }
+                ans[i][j] += seen + if !s.is_empty() { 1 } else { 0 };
+                if s.is_empty() || *s.last().unwrap() != v {
+                    s.push(v);
+                }
+            }
+        }
+        for j in 0..n {
+            s.clear();
+            for i in (0..m).rev() {
+                let mut seen = 0;
+                while !s.is_empty() && *s.last().unwrap() < heights[i][j] {
+                    seen += 1;
+                    s.pop();
+                }
+                ans[i][j] += seen + if !s.is_empty() { 1 } else { 0 };
+                if s.is_empty() || *s.last().unwrap() != heights[i][j] {
+                    s.push(heights[i][j]);
+                }
+            }
+        }
+        ans
     }
 }
 
@@ -66,39 +95,17 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_see_people_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            vec![vec![2, 1, 2, 1, 0]],
+            Solution::see_people(vec![vec![3, 1, 4, 2, 5]])
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_see_people_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
-    }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
+            vec![vec![3, 1], vec![2, 1], vec![1, 0]],
+            Solution::see_people(vec![vec![5, 1], vec![3, 1], vec![4, 1]])
         );
     }
 }

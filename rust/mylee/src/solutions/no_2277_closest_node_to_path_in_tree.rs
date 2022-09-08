@@ -2,9 +2,11 @@
 
 // ## Description
 
-// You are given a positive integer n representing the number of nodes in a tree, numbered from 0 to n - 1 (inclusive). You are also given a 2D integer array edges of length n - 1, where edges[i] = [node1i, node2i] denotes that there is a bidirectional edge connecting node1i and node2i in the tree.
+// You are given a positive integer n representing the number of nodes in a tree, numbered from 0 to n - 1 (inclusive).
+//  You are also given a 2D integer array edges of length n - 1, where edges[i] = [node1i, node2i] denotes that there is a bidirectional edge connecting node1i and node2i in the tree.
 
-// You are given a 0-indexed integer array query of length m where query[i] = [starti, endi, nodei] means that for the ith query, you are tasked with finding the node on the path from starti to endi that is closest to nodei.
+// You are given a 0-indexed integer array query of length m where query[i] = [starti, endi, nodei] means that for the ith query,
+// you are tasked with finding the node on the path from starti to endi that is closest to nodei.
 
 // Return an integer array answer of length m, where answer[i] is the answer to the ith query.
 
@@ -55,16 +57,76 @@
 // 	The graph is a tree.
 //
 
-//  vector<int> closestNode(int n, vector<vector<int>>& edges,
+//  vector<int> closest_node(int n, vector<vector<int>>& edges,
 //                           vector<vector<int>>& query) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn closest_node(n: i32, edges: Vec<Vec<i32>>, query: Vec<Vec<i32>>) -> Vec<i32> {
+        let mut n = n as usize;
+        let mut g = vec![Vec::new(); n];
+        let mut dist = vec![vec![-1; n]; n];
+        for e in &edges {
+            let (u, v) = (e[0] as usize, e[1] as usize);
+            g[u].push(v);
+            g[v].push(u);
+        }
+        fn fill_dist(
+            start: usize,
+            u: usize,
+            d: i32,
+            g: &Vec<Vec<usize>>,
+            dist: &mut Vec<Vec<i32>>,
+        ) {
+            dist[start][u] = d;
+            for &v in &g[u] {
+                if dist[start][v] == -1 {
+                    fill_dist(start, v, d + 1, g, dist);
+                }
+            }
+        }
+        fn find_closest(
+            u: usize,
+            end: usize,
+            node: usize,
+            ans: usize,
+            g: &Vec<Vec<usize>>,
+            dist: &Vec<Vec<i32>>,
+        ) -> i32 {
+            for &v in &g[u] {
+                if dist[v][end] < dist[u][end] {
+                    return find_closest(
+                        v,
+                        end,
+                        node,
+                        if dist[ans][node] < dist[v][node] {
+                            ans
+                        } else {
+                            v
+                        },
+                        g,
+                        dist,
+                    );
+                }
+            }
+            ans as i32
+        }
+        for i in 0..n {
+            fill_dist(i, i, 0, &g, &mut dist);
+        }
+        let mut ans = Vec::new();
+        for q in &query {
+            ans.push(find_closest(
+                q[0] as usize,
+                q[1] as usize,
+                q[2] as usize,
+                q[0] as usize,
+                &g,
+                &dist,
+            ));
+        }
+        ans
     }
 }
 
@@ -73,39 +135,35 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_closest_node_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
+            vec![0, 2],
+            Solution::closest_node(
+                7,
+                vec![
+                    vec![0, 1],
+                    vec![0, 2],
+                    vec![0, 3],
+                    vec![1, 4],
+                    vec![2, 5],
+                    vec![2, 6]
+                ],
+                vec![vec![5, 3, 4], vec![5, 3, 6]]
             )
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_closest_node_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            vec![1],
+            Solution::closest_node(3, vec![vec![0, 1], vec![1, 2]], vec![vec![0, 1, 2]])
         );
     }
     #[test]
-    pub fn test_longest_word_3() {
+    pub fn test_closest_node_3() {
         assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
+            vec![0],
+            Solution::closest_node(3, vec![vec![0, 1], vec![1, 2]], vec![vec![0, 0, 0]])
         );
     }
 }

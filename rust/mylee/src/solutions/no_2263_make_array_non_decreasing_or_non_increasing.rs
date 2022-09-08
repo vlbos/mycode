@@ -53,11 +53,22 @@
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn convert_array(nums: Vec<i32>) -> i32 {
+        let cost = |nums: Vec<i32>| {
+            let mut ans = 0;
+            let mut q = std::collections::BinaryHeap::new();
+            for &num in &nums {
+                if !q.is_empty() && *q.peek().unwrap() > num {
+                    ans += q.pop().unwrap() - num;
+                    q.push(num);
+                }
+                q.push(num);
+            }
+            ans
+        };
+        let nnums: Vec<i32> = nums.iter().map(|&x| -x).collect();
+        cost(nums).min(cost(nnums))
     }
 }
 
@@ -66,39 +77,15 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_convert_array_1() {
+        assert_eq!(4, Solution::convert_array(vec![3, 2, 4, 5, 0]));
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_convert_array_2() {
+        assert_eq!(0, Solution::convert_array(vec![2, 2, 3, 4]));
     }
     #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_convert_array_3() {
+        assert_eq!(0, Solution::convert_array(vec![0]));
     }
 }

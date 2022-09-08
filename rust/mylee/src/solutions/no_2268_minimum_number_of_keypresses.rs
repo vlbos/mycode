@@ -2,15 +2,15 @@
 
 // ## Description
 
-// You have a keypad with 9 buttons, numbered from 1 to 9, each mapped to lowercase English letters. You can choose which characters each button is matched to as long as:
+// You have a keypad with 9 buttons, numbered from 1 to 9, each mapped to lowercase English letters.
+// You can choose which characters each button is matched to as long as:
 
-//
 // 	All 26 lowercase English letters are mapped to.
 // 	Each character is mapped to by exactly 1 button.
 // 	Each button maps to at most 3 characters.
-//
 
-// To type the first character matched to a button, you press the button once. To type the second character, you press the button twice, and so on.
+// To type the first character matched to a button, you press the button once.
+// To type the second character, you press the button twice, and so on.
 
 // Given a string s, return the minimum number of keypresses needed to type s using your keypad.
 
@@ -19,7 +19,7 @@
 // Example 1:
 // <img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2200-2299/2268.Minimum%20Number%20of%20Keypresses/images/image-20220505184346-1.png" style="width: 300px; height: 293px;" />
 //
-// Input: s = &quot;apple&quot;
+// Input: s = "apple"
 // Output: 5
 // Explanation: One optimal way to setup your keypad is shown above.
 // Type 'a' by pressing button 1 once.
@@ -33,7 +33,7 @@
 // Example 2:
 // <img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2200-2299/2268.Minimum%20Number%20of%20Keypresses/images/image-20220505203823-1.png" style="width: 300px; height: 288px;" />
 //
-// Input: s = &quot;abcdefghijkl&quot;
+// Input: s = "abcdefghijkl"
 // Output: 15
 // Explanation: One optimal way to setup your keypad is shown above.
 // The letters 'a' to 'i' can each be typed by pressing a button once.
@@ -46,7 +46,7 @@
 // Constraints:
 
 //
-// 	1 <= s.length <= 105
+// 	1 <= s.length <= 10^5
 // 	s consists of lowercase English letters.
 //
 
@@ -58,15 +58,27 @@
 
 // ```python
 // class Solution:
-//     def minimumKeypresses(self, s: str) -> int:
+//     def minimum_keypresses(self, s: str) -> int:
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn minimum_keypresses(s: String) -> i32 {
+        if s.len() < 10 {
+            return s.len() as i32;
+        }
+        let mut cnt = std::collections::HashMap::new();
+        for c in s.chars() {
+            *cnt.entry(c).or_insert(0) += 1;
+        }
+        let mut cnt: Vec<i32> = cnt.iter().map(|(&k, &v)| v).collect();
+        cnt.sort_by(|a, b| b.cmp(&a));
+        let ans = cnt[..9].iter().sum::<i32>();
+        if cnt.len() > 18 {
+            ans + cnt[9..18].iter().sum::<i32>() * 2 + cnt[18..].iter().sum::<i32>() * 3
+        } else {
+            ans + cnt[9..].iter().sum::<i32>() * 2
+        }
     }
 }
 
@@ -75,39 +87,11 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_minimum_keypresses_1() {
+        assert_eq!(5, Solution::minimum_keypresses("apple".to_string()));
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
-    }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_minimum_keypresses_2() {
+        assert_eq!(15, Solution::minimum_keypresses("abcdefghijkl".to_string()));
     }
 }
