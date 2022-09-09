@@ -2,7 +2,8 @@
 
 // ## Description
 
-// You are given two 0-indexed integer arrays jobs and workers of equal length, where jobs[i] is the amount of time needed to complete the ith job, and workers[j] is the amount of time the jth worker can work each day.
+// You are given two 0-indexed integer arrays jobs and workers of equal length, 
+// where jobs[i] is the amount of time needed to complete the ith job, and workers[j] is the amount of time the jth worker can work each day.
 
 // Each job should be assigned to exactly one worker, such that each worker completes exactly one job.
 
@@ -39,8 +40,8 @@
 
 //
 // 	n == jobs.length == workers.length
-// 	1 <= n <= 105
-// 	1 <= jobs[i], workers[i] <= 105
+// 	1 <= n <= 10^5
+// 	1 <= jobs[i], workers[i] <= 10^5
 //
 
 // ## Solutions
@@ -51,15 +52,16 @@
 
 // ```python
 // class Solution:
-//     def minimumTime(self, jobs: List[int], workers: List[int]) -> int:
+//     def minimum_time(self, jobs: List[int], workers: List[int]) -> int:
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn minimum_time(jobs: Vec<i32>,workers: Vec<i32>) -> i32 {
+        let (mut jobs,mut workers)=(jobs,workers);
+        jobs.sort();
+        workers.sort();
+        jobs.into_iter().zip(workers).map(|(j,w)| (j-1)/w+1).max().unwrap()
     }
 }
 
@@ -68,39 +70,22 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_minimum_time_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
+            2,
+            Solution::minimum_time(
+               vec![5,2,4], vec![1,7,5]
             )
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_minimum_time_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
+            3,
+            Solution::minimum_time(
+                vec![3,18,15,9], vec![6,5,1,3]
             )
         );
     }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
-    }
+    
 }

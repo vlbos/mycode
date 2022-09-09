@@ -2,7 +2,8 @@
 
 // ## Description
 
-// You are given a 2D array of strings equations and an array of real numbers values, where equations[i] = [Ai, Bi] and values[i] means that Ai / Bi = values[i].
+// You are given a 2D array of strings equations and an array of real numbers values, 
+// where equations[i] = [Ai, Bi] and values[i] means that Ai / Bi = values[i].
 
 // Determine if there exists a contradiction in the equations. Return true if there is a contradiction, or false otherwise.
 
@@ -16,7 +17,7 @@
 // Example 1:
 
 //
-// Input: equations = [[&quot;a&quot;,&quot;b&quot;],[&quot;b&quot;,&quot;c&quot;],[&quot;a&quot;,&quot;c&quot;]], values = [3,0.5,1.5]
+// Input: equations = [["a","b"],["b","c"],["a","c"]], values = [3,0.5,1.5]
 // Output: false
 // Explanation:
 // The given equations are: a / b = 3, b / c = 0.5, a / c = 1.5
@@ -27,7 +28,7 @@
 // Example 2:
 
 //
-// Input: equations = [[&quot;le&quot;,&quot;et&quot;],[&quot;le&quot;,&quot;code&quot;],[&quot;code&quot;,&quot;et&quot;]], values = [2,5,0.5]
+// Input: equations = [["le","et"],["le","code"],["code","et"]], values = [2,5,0.5]
 // Output: true
 // Explanation:
 // The given equations are: le / et = 2, le / code = 5, code / et = 0.5
@@ -47,16 +48,44 @@
 // 	values[i] has a maximum of 2 decimal places.
 //
 
-//   bool checkContradictions(vector<vector<string>>& equations,
+//   bool check_contradictions(vector<vector<string>>& equations,
 //                            vector<double>& values) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn check_contradictions(equations: Vec<Vec<String>>,values:Vec<f64>) -> bool {
+       let mut m=std::collections::HashMap::new();
+        for e in &equations{
+           for u in e{
+                let len=m.len();
+                m.entry(u).or_insert(len);
+            }
+        }
+        let mut g=vec![Vec::new();m.len()];
+        let mut seen=vec![0.0;g.len()];
+         for (i,e) in equations.iter().enumerate(){
+            let (u,v)=(*m.get(&e[0]).unwrap() as usize,*m.get(&e[1]).unwrap() as usize);
+            g[u].push((v,values[i]));
+            g[v].push((u,1.0/values[i]));
+            }
+        fn dfs(u:usize,val:f64,g:&Vec<Vec<(usize,f64)>>,seen:&mut Vec<f64>)->bool{
+            if seen[u]>0.00001{
+               return (val/seen[u]-1.0).abs()>0.00001
+            }
+            seen[u]=val;
+            for &(v,w) in &g[u]{
+                if dfs(v,val/w,g,seen){
+                return true}
+            }
+            false
+        }
+          for (i,e) in g.iter().enumerate(){
+                if seen[i]<0.00001 && dfs(i,1.0,&g,&mut seen){
+                return true}
+            }   
+            false
     }
 }
 
@@ -65,39 +94,20 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
+    pub fn test_check_contradictions_1() {
+        assert!(
+            !Solution::check_contradictions(
+                [["a","b"],["b","c"],["a","c"]].into_iter().map(|x| x.into_iter().map(String::from).collect::<Vec<String>>()).collect::<Vec<Vec<String>>>(),  vec![3.0,0.5,1.5]
             )
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
+    pub fn test_check_contradictions_2() {
+       assert!(
+            Solution::check_contradictions(
+                [["le","et"],["le","code"],["code","et"]].into_iter().map(|x| x.into_iter().map(String::from).collect::<Vec<String>>()).collect::<Vec<Vec<String>>>(),  vec![2.0,5.0,0.5]
             )
         );
     }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
-    }
+   
 }

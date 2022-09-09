@@ -2,7 +2,8 @@
 
 // ## Description
 
-// You are given two 0-indexed integer arrays of the same length present and future where present[i] is the current price of the ith stock and future[i] is the price of the ith stock a year in the future. You may buy each stock at most once. You are also given an integer budget representing the amount of money you currently have.
+// You are given two 0-indexed integer arrays of the same length present and future where present[i] is the current price of the ith stock and future[i] is the price of the ith stock a year in the future.
+//  You may buy each stock at most once. You are also given an integer budget representing the amount of money you currently have.
 
 // Return the maximum amount of profit you can make.
 
@@ -55,15 +56,20 @@
 
 // ```python
 // class Solution:
-//     def maximumProfit(self, present: List[int], future: List[int], budget: int) -> int:
+//     def maximum_profit(self, present: List[int], future: List[int], budget: int) -> int:
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn maximum_profit(present: Vec<i32>,future: Vec<i32>,budget:i32) -> i32 {
+        let b = budget as usize;
+        let mut dp=vec![0;b+1];
+        for (i,(&p,&f)) in present.iter().zip(&future).enumerate(){
+            for j in (p as usize..=b).rev(){
+                dp[j]=dp[j].max(f-p+dp[j-p as usize]);
+            }
+        }
+        dp[b]
     }
 }
 
@@ -72,38 +78,29 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_maximum_profit_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
+           6,
+            Solution::maximum_profit(
+               vec![5,4,6,2,3],  vec![8,5,4,3,5],  10
             )
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_maximum_profit_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
+            5,
+            Solution::maximum_profit(
+               vec![2,2,5],  vec![3,4,10],  6
             )
         );
     }
     #[test]
-    pub fn test_longest_word_3() {
+    pub fn test_maximum_profit_3() {
         assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
+            0,
+            Solution::maximum_profit(
+                vec![3,3,12],  vec![0,3,15],  10
             )
         );
     }

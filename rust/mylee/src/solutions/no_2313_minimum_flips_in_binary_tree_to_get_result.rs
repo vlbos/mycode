@@ -20,7 +20,8 @@
 
 // In one operation, you can flip a leaf node, which causes a false node to become true, and a true node to become false.
 
-// Return the minimum number of operations that need to be performed such that the evaluation of root yields result. It can be shown that there is always a way to achieve result.
+// Return the minimum number of operations that need to be performed such that the evaluation of root yields result. 
+// It can be shown that there is always a way to achieve result.
 
 // A leaf node is a node that has zero children.
 
@@ -48,62 +49,84 @@
 // Constraints:
 
 //
-// 	The number of nodes in the tree is in the range [1, 105].
+// 	The number of nodes in the tree is in the range [1, 10^5].
 // 	0 <= Node.val <= 5
 // 	OR, AND, and XOR nodes have 2 children.
 // 	NOT nodes have 1 child.
 // 	Leaf nodes have a value of 0 or 1.
 // 	Non-leaf nodes have a value of 2, 3, 4, or 5.
 //
-
+//   int minimum_flips(TreeNode* root, bool result)
+use super::util::tree::TreeNode;
 #[allow(dead_code)]
 pub struct Solution {}
 use std::cell::RefCell;
 use std::rc::Rc;
+use std::hash::Hash;
+use std::hash::Hasher;
+// #[derive(Hash)]
+#[derive(Eq, PartialEq)]
+pub struct  NodeBool(Option<Rc<RefCell<TreeNode>>>,bool);
+impl Hash for NodeBool {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        if let Some(v)=&self.0{
+        let vv:TreeNode= v.borrow().clone();
+            vv.hash(state);
+        }
+        self.1.hash(state);
+    }
+}
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn minimum_flips(root: Option<Rc<RefCell<TreeNode>>>,result:bool) -> i32 {
+        use std::collections::HashMap;
+        fn dp(root: &Option<Rc<RefCell<TreeNode>>>,target:bool,memo:&mut HashMap<NodeBool,i32>)->i32{
+            if let Some(&v)=memo.get(&NodeBool(root.clone(),target)){
+            return v}
+            let node=root.as_ref().unwrap().borrow();
+            if node.val==0||node.val==1{
+            return if (node.val==1)==target{0}else{1}
+            }
+            if node.val==5{
+                    return dp(if node.left.is_some(){&node.left}else{&node.right},!target,memo)
+                }
+            let next_targets= match node.val{
+                2=>if target{vec![(false,true),(true,false),(true,true)]}else{vec![(false,false)]},
+                3=>if target{vec![(true,true)]}else{vec![(false,true),(true,false),(false,false)]},
+                _=>if target{vec![(false,true),(true,false)]}else{vec![(false,false),(true,true)]},
+            };
+            let mut ans=i32::MAX;
+            for &(l,r) in &next_targets{
+            ans=ans.min(dp(&node.left,l,memo)+dp(&node.right,r,memo));
+            }
+            memo.insert(NodeBool(root.clone(),target),ans);
+            ans
+        }
+        let mut memo=HashMap::new();
+        dp(&root,result,&mut memo)
     }
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
-
+    use crate::tree;
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_minimum_flips_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
+           2,
+            Solution::minimum_flips(
+                tree![3,5,4,2,null,1,1,1,0],true
             )
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_minimum_flips_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
+            0,
+            Solution::minimum_flips(
+                tree![0],false
             )
         );
     }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
-    }
+    
 }
