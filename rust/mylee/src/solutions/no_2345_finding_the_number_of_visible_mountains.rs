@@ -2,7 +2,9 @@
 
 // ## Description
 
-// You are given a 0-indexed 2D integer array peaks where peaks[i] = [xi, yi] states that mountain i has a peak at coordinates (xi, yi). A mountain can be described as a right-angled isosceles triangle, with its base along the x-axis and a right angle at its peak. More formally, the gradients of ascending and descending the mountain are 1 and -1 respectively.
+// You are given a 0-indexed 2D integer array peaks where peaks[i] = [xi, yi] states that mountain i has a peak at coordinates (xi, yi).
+//  A mountain can be described as a right-angled isosceles triangle, with its base along the x-axis and a right angle at its peak.
+//  More formally, the gradients of ascending and descending the mountain are 1 and -1 respectively.
 
 // A mountain is considered visible if its peak does not lie within another mountain (including the border of other mountains).
 
@@ -35,15 +37,39 @@
 // 	peaks[i].length == 2
 // 	1 <= xi, yi <= 105
 //
-// int visibleMountains(vector<vector<int>>& peaks) {
+// int visible_mountains(vector<vector<int>>& peaks) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn visible_mountains(peaks: Vec<Vec<i32>>) -> i32 {
+        let mut cnt = std::collections::HashMap::new();
+        for p in &peaks {
+            *cnt.entry(p.clone()).or_insert(0) += 1;
+        }
+        let mut a = Vec::new();
+        for p in &peaks {
+            if *cnt.get(p).unwrap_or(&0) > 1 {
+                continue;
+            }
+            a.push((p[0] - p[1], p[1], p[0] + p[1]));
+        }
+        a.sort_by(|x, y| {
+            if x.0 == y.0 {
+                y.1.cmp(&x.1)
+            } else {
+                x.0.cmp(&y.0)
+            }
+        });
+        let mut bound = -1;
+        let mut ans = 0;
+        for &(l, h, r) in &a {
+            if bound < r {
+                ans += 1;
+                bound = r;
+            }
+        }
+        ans
     }
 }
 
@@ -52,39 +78,14 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_visible_mountains_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            2,
+            Solution::visible_mountains(vec![vec![2, 2], vec![6, 3], vec![5, 4]])
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
-    }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_visible_mountains_2() {
+        assert_eq!(0, Solution::visible_mountains(vec![vec![1, 3], vec![1, 3]]));
     }
 }

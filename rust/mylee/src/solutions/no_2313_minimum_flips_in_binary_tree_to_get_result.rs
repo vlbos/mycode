@@ -20,7 +20,7 @@
 
 // In one operation, you can flip a leaf node, which causes a false node to become true, and a true node to become false.
 
-// Return the minimum number of operations that need to be performed such that the evaluation of root yields result. 
+// Return the minimum number of operations that need to be performed such that the evaluation of root yields result.
 // It can be shown that there is always a way to achieve result.
 
 // A leaf node is a node that has zero children.
@@ -61,48 +61,79 @@ use super::util::tree::TreeNode;
 #[allow(dead_code)]
 pub struct Solution {}
 use std::cell::RefCell;
-use std::rc::Rc;
 use std::hash::Hash;
 use std::hash::Hasher;
+use std::rc::Rc;
 // #[derive(Hash)]
 #[derive(Eq, PartialEq)]
-pub struct  NodeBool(Option<Rc<RefCell<TreeNode>>>,bool);
+pub struct NodeBool(Option<Rc<RefCell<TreeNode>>>, bool);
 impl Hash for NodeBool {
     fn hash<H: Hasher>(&self, state: &mut H) {
-        if let Some(v)=&self.0{
-        let vv:TreeNode= v.borrow().clone();
+        if let Some(v) = &self.0 {
+            let vv: TreeNode = v.borrow().clone();
             vv.hash(state);
         }
         self.1.hash(state);
     }
 }
 impl Solution {
-    pub fn minimum_flips(root: Option<Rc<RefCell<TreeNode>>>,result:bool) -> i32 {
+    pub fn minimum_flips(root: Option<Rc<RefCell<TreeNode>>>, result: bool) -> i32 {
         use std::collections::HashMap;
-        fn dp(root: &Option<Rc<RefCell<TreeNode>>>,target:bool,memo:&mut HashMap<NodeBool,i32>)->i32{
-            if let Some(&v)=memo.get(&NodeBool(root.clone(),target)){
-            return v}
-            let node=root.as_ref().unwrap().borrow();
-            if node.val==0||node.val==1{
-            return if (node.val==1)==target{0}else{1}
+        fn dp(
+            root: &Option<Rc<RefCell<TreeNode>>>,
+            target: bool,
+            memo: &mut HashMap<NodeBool, i32>,
+        ) -> i32 {
+            if let Some(&v) = memo.get(&NodeBool(root.clone(), target)) {
+                return v;
             }
-            if node.val==5{
-                    return dp(if node.left.is_some(){&node.left}else{&node.right},!target,memo)
+            let node = root.as_ref().unwrap().borrow();
+            if node.val == 0 || node.val == 1 {
+                return if (node.val == 1) == target { 0 } else { 1 };
+            }
+            if node.val == 5 {
+                return dp(
+                    if node.left.is_some() {
+                        &node.left
+                    } else {
+                        &node.right
+                    },
+                    !target,
+                    memo,
+                );
+            }
+            let next_targets = match node.val {
+                2 => {
+                    if target {
+                        vec![(false, true), (true, false), (true, true)]
+                    } else {
+                        vec![(false, false)]
+                    }
                 }
-            let next_targets= match node.val{
-                2=>if target{vec![(false,true),(true,false),(true,true)]}else{vec![(false,false)]},
-                3=>if target{vec![(true,true)]}else{vec![(false,true),(true,false),(false,false)]},
-                _=>if target{vec![(false,true),(true,false)]}else{vec![(false,false),(true,true)]},
+                3 => {
+                    if target {
+                        vec![(true, true)]
+                    } else {
+                        vec![(false, true), (true, false), (false, false)]
+                    }
+                }
+                _ => {
+                    if target {
+                        vec![(false, true), (true, false)]
+                    } else {
+                        vec![(false, false), (true, true)]
+                    }
+                }
             };
-            let mut ans=i32::MAX;
-            for &(l,r) in &next_targets{
-            ans=ans.min(dp(&node.left,l,memo)+dp(&node.right,r,memo));
+            let mut ans = i32::MAX;
+            for &(l, r) in &next_targets {
+                ans = ans.min(dp(&node.left, l, memo) + dp(&node.right, r, memo));
             }
-            memo.insert(NodeBool(root.clone(),target),ans);
+            memo.insert(NodeBool(root.clone(), target), ans);
             ans
         }
-        let mut memo=HashMap::new();
-        dp(&root,result,&mut memo)
+        let mut memo = HashMap::new();
+        dp(&root, result, &mut memo)
     }
 }
 
@@ -113,20 +144,12 @@ mod test {
     #[test]
     pub fn test_minimum_flips_1() {
         assert_eq!(
-           2,
-            Solution::minimum_flips(
-                tree![3,5,4,2,null,1,1,1,0],true
-            )
+            2,
+            Solution::minimum_flips(tree![3, 5, 4, 2, null, 1, 1, 1, 0], true)
         );
     }
     #[test]
     pub fn test_minimum_flips_2() {
-        assert_eq!(
-            0,
-            Solution::minimum_flips(
-                tree![0],false
-            )
-        );
+        assert_eq!(0, Solution::minimum_flips(tree![0], false));
     }
-    
 }

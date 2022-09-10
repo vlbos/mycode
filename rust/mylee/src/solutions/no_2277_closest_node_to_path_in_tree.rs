@@ -64,7 +64,7 @@
 pub struct Solution {}
 impl Solution {
     pub fn closest_node(n: i32, edges: Vec<Vec<i32>>, query: Vec<Vec<i32>>) -> Vec<i32> {
-        let mut n = n as usize;
+        let n = n as usize;
         let mut g = vec![Vec::new(); n];
         let mut dist = vec![vec![-1; n]; n];
         for e in &edges {

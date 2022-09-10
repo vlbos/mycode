@@ -2,7 +2,7 @@
 
 // ## Description
 
-// You are given two 0-indexed integer arrays jobs and workers of equal length, 
+// You are given two 0-indexed integer arrays jobs and workers of equal length,
 // where jobs[i] is the amount of time needed to complete the ith job, and workers[j] is the amount of time the jth worker can work each day.
 
 // Each job should be assigned to exactly one worker, such that each worker completes exactly one job.
@@ -57,11 +57,15 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn minimum_time(jobs: Vec<i32>,workers: Vec<i32>) -> i32 {
-        let (mut jobs,mut workers)=(jobs,workers);
+    pub fn minimum_time(jobs: Vec<i32>, workers: Vec<i32>) -> i32 {
+        let (mut jobs, mut workers) = (jobs, workers);
         jobs.sort();
         workers.sort();
-        jobs.into_iter().zip(workers).map(|(j,w)| (j-1)/w+1).max().unwrap()
+        jobs.into_iter()
+            .zip(workers)
+            .map(|(j, w)| (j - 1) / w + 1)
+            .max()
+            .unwrap()
     }
 }
 
@@ -71,21 +75,13 @@ mod test {
 
     #[test]
     pub fn test_minimum_time_1() {
-        assert_eq!(
-            2,
-            Solution::minimum_time(
-               vec![5,2,4], vec![1,7,5]
-            )
-        );
+        assert_eq!(2, Solution::minimum_time(vec![5, 2, 4], vec![1, 7, 5]));
     }
     #[test]
     pub fn test_minimum_time_2() {
         assert_eq!(
             3,
-            Solution::minimum_time(
-                vec![3,18,15,9], vec![6,5,1,3]
-            )
+            Solution::minimum_time(vec![3, 18, 15, 9], vec![6, 5, 1, 3])
         );
     }
-    
 }

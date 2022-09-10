@@ -1,10 +1,10 @@
 use std::cell::RefCell;
-use std::rc::Rc;
 use std::hash::Hash;
 use std::hash::Hasher;
+use std::rc::Rc;
 // #[derive(Hash)]
 
-#[derive(Debug, PartialEq, Eq,Clone)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 pub struct TreeNode {
     pub val: i32,
     pub left: Option<Rc<RefCell<TreeNode>>>,
@@ -23,12 +23,12 @@ impl TreeNode {
 }
 impl Hash for TreeNode {
     fn hash<H: Hasher>(&self, state: &mut H) {
-        if let Some(v)=&self.left{
-        let vv:TreeNode= v.borrow().clone();
+        if let Some(v) = &self.left {
+            let vv: TreeNode = v.borrow().clone();
             vv.hash(state);
         }
-        if let Some(v)=&self.right{
-        let vv:TreeNode= v.borrow().clone();
+        if let Some(v) = &self.right {
+            let vv: TreeNode = v.borrow().clone();
             vv.hash(state);
         }
         self.val.hash(state);

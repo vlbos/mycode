@@ -2,11 +2,15 @@
 
 // ## Description
 
-// A train line going through a city has two routes, the regular route and the express route. Both routes go through the same n + 1 stops labeled from 0 to n. Initially, you start on the regular route at stop 0.
+// A train line going through a city has two routes, the regular route and the express route.
+// Both routes go through the same n + 1 stops labeled from 0 to n.
+//  Initially, you start on the regular route at stop 0.
 
-// You are given two 1-indexed integer arrays regular and express, both of length n. regular[i] describes the cost it takes to go from stop i - 1 to stop i using the regular route, and express[i] describes the cost it takes to go from stop i - 1 to stop i using the express route.
+// You are given two 1-indexed integer arrays regular and express, both of length n.
+// regular[i] describes the cost it takes to go from stop i - 1 to stop i using the regular route,
+// and express[i] describes the cost it takes to go from stop i - 1 to stop i using the express route.
 
-// You are also given an integer expressCost which represents the cost to transfer from the regular route to the express route.
+// You are also given an integer express Cost which represents the cost to transfer from the regular route to the express route.
 
 // Note that:
 
@@ -55,16 +59,25 @@
 // 	1 <= regular[i], express[i], expressCost <= 105
 //
 
-// vector<long long> minimumCosts(vector<int>& regular, vector<int>& express,
-//                                  int expressCost) {
+// vector<long long> minimum_costs(vector<int>& regular, vector<int>& express,
+//                                  int express_cost) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn minimum_costs(regular: Vec<i32>, express: Vec<i32>, express_cost: i32) -> Vec<i64> {
+        let mut ans = Vec::new();
+        let mut dp = (0, express_cost as i64);
+        for (r, e) in regular.into_iter().zip(express) {
+            let (rdp, edp) = dp;
+            dp = (
+                rdp.min(edp) + r as i64,
+                edp.min(rdp + express_cost as i64) + e as i64,
+            );
+            ans.push(dp.0.min(dp.1));
+        }
+        ans
     }
 }
 
@@ -73,39 +86,17 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_minimum_costs_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            vec![1, 7, 14, 19],
+            Solution::minimum_costs(vec![1, 6, 9, 5], vec![5, 2, 3, 10], 8)
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_minimum_costs_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
-    }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
+            vec![10, 15, 24],
+            Solution::minimum_costs(vec![11, 5, 13], vec![7, 10, 6], 3)
         );
     }
 }

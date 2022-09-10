@@ -61,12 +61,12 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn maximum_profit(present: Vec<i32>,future: Vec<i32>,budget:i32) -> i32 {
+    pub fn maximum_profit(present: Vec<i32>, future: Vec<i32>, budget: i32) -> i32 {
         let b = budget as usize;
-        let mut dp=vec![0;b+1];
-        for (i,(&p,&f)) in present.iter().zip(&future).enumerate(){
-            for j in (p as usize..=b).rev(){
-                dp[j]=dp[j].max(f-p+dp[j-p as usize]);
+        let mut dp = vec![0; b + 1];
+        for (i, (&p, &f)) in present.iter().zip(&future).enumerate() {
+            for j in (p as usize..=b).rev() {
+                dp[j] = dp[j].max(f - p + dp[j - p as usize]);
             }
         }
         dp[b]
@@ -80,28 +80,22 @@ mod test {
     #[test]
     pub fn test_maximum_profit_1() {
         assert_eq!(
-           6,
-            Solution::maximum_profit(
-               vec![5,4,6,2,3],  vec![8,5,4,3,5],  10
-            )
+            6,
+            Solution::maximum_profit(vec![5, 4, 6, 2, 3], vec![8, 5, 4, 3, 5], 10)
         );
     }
     #[test]
     pub fn test_maximum_profit_2() {
         assert_eq!(
             5,
-            Solution::maximum_profit(
-               vec![2,2,5],  vec![3,4,10],  6
-            )
+            Solution::maximum_profit(vec![2, 2, 5], vec![3, 4, 10], 6)
         );
     }
     #[test]
     pub fn test_maximum_profit_3() {
         assert_eq!(
             0,
-            Solution::maximum_profit(
-                vec![3,3,12],  vec![0,3,15],  10
-            )
+            Solution::maximum_profit(vec![3, 3, 12], vec![0, 3, 15], 10)
         );
     }
 }

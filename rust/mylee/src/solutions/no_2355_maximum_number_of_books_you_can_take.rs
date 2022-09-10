@@ -64,15 +64,43 @@
 
 // ```python
 // class Solution:
-//     def maximumBooks(self, books: List[int]) -> int:
+//     def maximum_books(self, books: List[int]) -> int:
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn maximum_books(books: Vec<i32>) -> i64 {
+        let helper =
+            |p: i64, c: i64| (p * (p + 1) - if (p > c) { (p - c) * (p - c + 1) } else { 0 }) / 2;
+        let mut s = Vec::new();
+        let mut ans = 0;
+        let mut now = 0;
+        for (i, &v) in books.iter().enumerate() {
+            while !s.is_empty()
+                && v - books[*s.last().unwrap()] < (i as i32 - *s.last().unwrap() as i32)
+            {
+                let j = s.pop().unwrap();
+                now -= helper(
+                    books[j] as i64,
+                    if s.is_empty() {
+                        j as i64 + 1
+                    } else {
+                        j as i64 - *s.last().unwrap() as i64
+                    },
+                );
+            }
+            now += helper(
+                v as i64,
+                if s.is_empty() {
+                    i as i64 + 1
+                } else {
+                    i as i64 - *s.last().unwrap() as i64
+                },
+            );
+            s.push(i);
+            ans = ans.max(now);
+        }
+        ans
     }
 }
 
@@ -81,39 +109,18 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_maximum_books_1() {
+        assert_eq!(19, Solution::maximum_books(vec![8, 5, 2, 7, 9]));
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_maximum_books_2() {
+        assert_eq!(12, Solution::maximum_books(vec![7, 0, 3, 4, 5]));
     }
     #[test]
-    pub fn test_longest_word_3() {
+    pub fn test_maximum_books_3() {
         assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
+            13,
+            Solution::maximum_books(vec![8, 2, 3, 7, 3, 4, 0, 1, 4, 3])
         );
     }
 }

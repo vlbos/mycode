@@ -41,18 +41,27 @@
 // Constraints:
 
 //
-// 	1 <= nums.length <= 105
-// 	1 <= nums[i] <= 105
+// 	1 <= nums.length <= 10^5
+// 	1 <= nums[i] <= 10^5
 //
-//  int minimumSwaps(vector<int>& nums) {
+//  int minimum_swaps(vector<int>& nums) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn minimum_swaps(nums: Vec<i32>) -> i32 {
+        let max = *nums.iter().max().unwrap();
+        let (mi, xi) = (
+            nums.iter().enumerate().min_by_key(|x| x.1).unwrap().0,
+            nums.iter().rposition(|&x| x == max).unwrap(),
+        );
+
+        let ans = (mi + nums.len() - 1 - xi) as i32;
+        if mi <= xi {
+            ans
+        } else {
+            ans - 1
+        }
     }
 }
 
@@ -61,39 +70,11 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
-        assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
+    pub fn test_minimum_swaps_1() {
+        assert_eq!(6, Solution::minimum_swaps(vec![3, 4, 5, 5, 3, 1]));
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
-    }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_minimum_swaps_2() {
+        assert_eq!(0, Solution::minimum_swaps(vec![9]));
     }
 }
