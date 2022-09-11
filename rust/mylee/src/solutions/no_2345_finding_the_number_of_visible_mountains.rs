@@ -63,7 +63,7 @@ impl Solution {
         });
         let mut bound = -1;
         let mut ans = 0;
-        for &(l, h, r) in &a {
+        for &(_, _, r) in &a {
             if bound < r {
                 ans += 1;
                 bound = r;

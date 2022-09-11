@@ -197,6 +197,8 @@ pub mod no_2361_minimum_costs_using_the_train_line;
 pub mod no_2371_minimize_maximum_value_in_a_grid;
 pub mod no_2378_choose_edges_to_maximize_score_in_a_tree;
 pub mod no_2387_median_of_a_row_wise_sorted_matrix;
+pub mod no_2393_count_strictly_increasing_subarrays;
+pub mod no_2403_minimum_time_to_kill_all_monsters;
 pub mod no_243_shortest_word_distance;
 pub mod no_244_shortest_word_distance_ii;
 pub mod no_245_shortest_word_distance_iii;

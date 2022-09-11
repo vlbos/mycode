@@ -78,8 +78,7 @@
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
     pub fn average_height_of_buildings(buildings: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
         let mut points = Vec::new();

@@ -71,7 +71,7 @@ pub struct Solution {}
 impl Solution {
     pub fn maximum_books(books: Vec<i32>) -> i64 {
         let helper =
-            |p: i64, c: i64| (p * (p + 1) - if (p > c) { (p - c) * (p - c + 1) } else { 0 }) / 2;
+            |p: i64, c: i64| (p * (p + 1) - if p > c { (p - c) * (p - c + 1) } else { 0 }) / 2;
         let mut s = Vec::new();
         let mut ans = 0;
         let mut now = 0;

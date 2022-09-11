@@ -71,7 +71,7 @@ impl Solution {
         for c in s.chars() {
             *cnt.entry(c).or_insert(0) += 1;
         }
-        let mut cnt: Vec<i32> = cnt.iter().map(|(&k, &v)| v).collect();
+        let mut cnt: Vec<i32> = cnt.iter().map(|(_, &v)| v).collect();
         cnt.sort_by(|a, b| b.cmp(&a));
         let ans = cnt[..9].iter().sum::<i32>();
         if cnt.len() > 18 {

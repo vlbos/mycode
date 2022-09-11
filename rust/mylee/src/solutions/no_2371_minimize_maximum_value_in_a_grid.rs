@@ -6,12 +6,11 @@
 
 // You have to replace each integer in the matrix with a positive integer satisfying the following conditions:
 
-//
 // 	The relative order of every two elements that are in the same row or column should stay the same after the replacements.
 // 	The maximum number in the matrix after the replacements should be as small as possible.
-//
 
-// The relative order stays the same if for all pairs of elements in the original matrix such that grid[r1][c1] &gt; grid[r2][c2] where either r1 == r2 or c1 == c2, then it must be true that grid[r1][c1] &gt; grid[r2][c2] after the replacements.
+// The relative order stays the same if for all pairs of elements in the original matrix such that grid[r1][c1] > grid[r2][c2] where either r1 == r2 or c1 == c2,
+// then it must be true that grid[r1][c1] > grid[r2][c2] after the replacements.
 
 // For example, if grid = [[2, 4, 5], [7, 3, 9]] then a good replacement could be either grid = [[1, 2, 3], [2, 1, 4]] or grid = [[1, 2, 3], [3, 1, 4]].
 
@@ -40,20 +39,34 @@
 // 	m == grid.length
 // 	n == grid[i].length
 // 	1 <= m, n <= 1000
-// 	1 <= m * n <= 105
-// 	1 <= grid[i][j] <= 109
+// 	1 <= m * n <= 10^5
+// 	1 <= grid[i][j] <= 10^9
 // 	grid consists of distinct integers.
 //
 
-// vector<vector<int>> minScore(vector<vector<int>>& grid) {
+// vector<vector<int>> min_score(vector<vector<int>>& grid) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn min_score(grid: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+        let (m, n) = (grid.len(), grid[0].len());
+        let mut ans = vec![vec![0; n]; m];
+        let mut arr = Vec::new();
+        for (i, row) in grid.iter().enumerate() {
+            for (j, &v) in row.iter().enumerate() {
+                arr.push((v, i, j));
+            }
+        }
+        arr.sort();
+        let (mut rows, mut cols) = (vec![0; m], vec![0; n]);
+        for &(_, i, j) in &arr {
+            let next = rows[i].max(cols[j]) + 1;
+            ans[i][j] = next;
+            rows[i] = next;
+            cols[j] = next;
+        }
+        ans
     }
 }
 
@@ -62,39 +75,14 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_min_score_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            vec![vec![2, 1], vec![1, 2]],
+            Solution::min_score(vec![vec![3, 1], vec![2, 5]])
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
-    }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_min_score_2() {
+        assert_eq!(vec![vec![1]], Solution::min_score(vec![vec![10]]));
     }
 }

@@ -118,7 +118,7 @@ mod test {
         );
     }
     #[test]
-    pub fn test__2() {
+    pub fn test_maximum_cost_2() {
         assert_eq!(
             -1,
             Solution::maximum_cost(4, vec![vec![0, 1, 3], vec![2, 3, 2]], 2)

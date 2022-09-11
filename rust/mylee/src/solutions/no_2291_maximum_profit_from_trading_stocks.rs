@@ -64,7 +64,7 @@ impl Solution {
     pub fn maximum_profit(present: Vec<i32>, future: Vec<i32>, budget: i32) -> i32 {
         let b = budget as usize;
         let mut dp = vec![0; b + 1];
-        for (i, (&p, &f)) in present.iter().zip(&future).enumerate() {
+        for (&p, &f) in present.iter().zip(&future) {
             for j in (p as usize..=b).rev() {
                 dp[j] = dp[j].max(f - p + dp[j - p as usize]);
             }

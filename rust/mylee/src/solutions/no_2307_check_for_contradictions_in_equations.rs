@@ -85,7 +85,7 @@ impl Solution {
             }
             false
         }
-        for (i, e) in g.iter().enumerate() {
+        for i in 0..g.len() {
             if seen[i] < 0.00001 && dfs(i, 1.0, &g, &mut seen) {
                 return true;
             }

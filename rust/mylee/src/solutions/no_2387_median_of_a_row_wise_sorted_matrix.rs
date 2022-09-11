@@ -1,67 +1,56 @@
-// #  Median of a Row Wise Sorted Matrix
-// ================================
+// # [2387. Median of a Row Wise Sorted Matrix](https://leetcode.com/problems/median-of-a-row-wise-sorted-matrix)
 
-// In this article we will solve the most asked coding interview problem: Median of Row Wise Sorted Matrix
+// ## Description
 
-// **Problem Statement:** Given a row-wise sorted matrix of size r\*c, where r is no. of rows and c is no. of columns, find the median in the given matrix.
+// Given an m x n matrix grid containing an odd number of integers where each row is sorted in non-decreasing order,
+// return the median of the matrix.
 
-// **Assume** – r\*c is odd
+// You must solve the problem in O(m * log(n)) time complexity.
 
-// **Examples:**
+// Example 1:
 
-// **Example 1:**
-// **Input:**
-// r = 3 , c = 3
-// 1 4 9
-// 2 5 6
-// 3 8 7
-// **Output:** Median = 5
-// **Explanation:** If we find the linear sorted array, the array becomes 1 2 3 4 5 6 7 8 9
-// So, median = 5
+// Input: grid = [[1,1,2],[2,3,3],[1,3,4]]
+// Output: 2
+// Explanation: The elements of the matrix in sorted order are 1,1,1,2,2,3,3,3,4. The median is 2.
 
-// **Example 2:**
-// **Input:**
-// r = 3 , c = 3
-// 1 3 8
-// 2 3 4
-// 1 2 5
-// **Output:** Median = 3
-// **Explanation:** If we find the linear sorted array, the array becomes 1 1 2 2 3 3 4 5 7 8
-// So, median = 3
+// Example 2:
 
-// ### **Solution**
+// Input: grid = [[1,1,3,3,4]]
+// Output: 3
+// Explanation: The elements of the matrix in sorted order are 1,1,3,3,4. The median is 3.
 
-// **_Disclaimer_**: _Don’t jump directly to the solution, try it out yourself first._
+// Constraints:
 
-// **Solution 1:**
-
-// **Approach 1**: Brute Force Approach
-
-// The approach is very simple, just fill all elements in a linear array sort the array using the sort function, and then find the middle value (**Median)**.
-
-// For Eg,
-
-// For the given matrix
-
-// 1 3 8
-
-// 2 3 4
-
-// 1 2 5
-
-// We find the sorted linear array as 1 1 2 2 3 3 4 5 8
-
-// Now, the middle element of the array is 3.
-
-// int Findmedian(int arr[3][3], int row, int col)
+// 	m == grid.length
+// 	n == grid[i].length
+// 	1 <= m, n <= 500
+// 	m and n are both odd.
+// 	1 <= grid[i][j] <= 10^6
+// 	grid[i] is sorted in non-decreasing order.
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn find_median(arr: Vec<Vec<i32>>) -> i32 {
+        let (mut l, mut r) = (0, i32::MAX / 2);
+        let mut ans = 0;
+        let med = arr.len() as i64 * arr[0].len() as i64 / 2 + 1;
+        while l <= r {
+            let m = l + (r - l) / 2;
+            let mut now = 0;
+            for a in &arr {
+                let i = a.partition_point(|x| *x < m);
+                now += (a.len() - i) as i64;
+            }
+            if now >= med {
+                ans = ans.max(m);
+                l = m + 1;
+            } else {
+                r = m - 1;
+            }
+        }
+        ans as _
     }
 }
 
@@ -70,39 +59,14 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_find_median_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            2,
+            Solution::find_median(vec![vec![1, 1, 2], vec![2, 3, 3], vec![1, 3, 4]])
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
-        assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
-    }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
-        );
+    pub fn test_find_median_2() {
+        assert_eq!(3, Solution::find_median(vec![vec![1, 1, 3, 3, 4]]));
     }
 }

@@ -78,11 +78,11 @@ impl Solution {
             *new_dp.entry(-n2).or_insert(0) += 1;
             for (&v, &c) in &dp {
                 new_dp
-                    .entry((v + n1))
+                    .entry(v + n1)
                     .and_modify(|v| *v = (*v + c) % p)
                     .or_insert(c % p);
                 new_dp
-                    .entry((v - n2))
+                    .entry(v - n2)
                     .and_modify(|v| *v = (*v + c) % p)
                     .or_insert(c % p);
             }

@@ -4,7 +4,8 @@
 
 // You are given a weighted tree consisting of n nodes numbered from 0 to n - 1.
 
-// The tree is rooted at node 0 and represented with a 2D array edges of size n where edges[i] = [pari, weighti] indicates that node pari is the parent of node i, and the edge between them has a weight equal to weighti. Since the root does not have a parent, you have edges[0] = [-1, -1].
+// The tree is rooted at node 0 and represented with a 2D array edges of size n where edges[i] = [pari, weighti] indicates that node pari is the parent of node i,
+// and the edge between them has a weight equal to weighti. Since the root does not have a parent, you have edges[0] = [-1, -1].
 
 // Choose some edges from the tree such that no two chosen edges are adjacent and the sum of the weights of the chosen edges is maximized.
 
@@ -44,24 +45,41 @@
 
 //
 // 	n == edges.length
-// 	1 <= n <= 105
+// 	1 <= n <= 10^5
 // 	edges[i].length == 2
 // 	par0 == weight0 == -1
-// 	0 <= pari <= n - 1 for all i &gt;= 1.
+// 	0 <= pari <= n - 1 for all i >= 1.
 // 	pari != i
-// 	-106 <= weighti <= 106 for all i &gt;= 1.
+// 	-10^6 <= weighti <= 10^6 for all i >= 1.
 // 	edges represents a valid tree.
 //
 
-//  long long maxScore(vector<vector<int>>& edges) {
+//  long long max_score(vector<vector<int>>& edges) {
 
 #[allow(dead_code)]
 pub struct Solution {}
-use std::cell::RefCell;
-use std::rc::Rc;
+
 impl Solution {
-    pub fn longest_word(words: Vec<String>) -> String {
-        String::new()
+    pub fn max_score(edges: Vec<Vec<i32>>) -> i64 {
+        let n = edges.len();
+        let mut g = vec![Vec::new(); n];
+        for (i, e) in edges.iter().enumerate() {
+            let (p, w) = (e[0], e[1]);
+            if p != -1 {
+                g[p as usize].push((i, w));
+            }
+        }
+        fn dfs(u: usize, g: &Vec<Vec<(usize, i32)>>) -> (i64, i64) {
+            let (mut best_edge, mut not_take_u) = (0, 0);
+            for &(v, w) in &g[u] {
+                let (take_v, not_take_v) = dfs(v, g);
+                best_edge = best_edge.max(w as i64 + not_take_v - take_v);
+                not_take_u += take_v;
+            }
+            (best_edge + not_take_u, not_take_u)
+        }
+        let (take_root, not_take_root) = dfs(0, &g);
+        take_root.max(not_take_root)
     }
 }
 
@@ -70,39 +88,23 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_longest_word_1() {
+    pub fn test_max_score_1() {
         assert_eq!(
-            "kiran".to_string(),
-            Solution::longest_word(
-                ["k", "ki", "kir", "kira", "kiran"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
+            11,
+            Solution::max_score(vec![
+                vec![-1, -1],
+                vec![0, 5],
+                vec![0, 10],
+                vec![2, 6],
+                vec![2, 4]
+            ])
         );
     }
     #[test]
-    pub fn test_longest_word_2() {
+    pub fn test_max_score_2() {
         assert_eq!(
-            "apple".to_string(),
-            Solution::longest_word(
-                ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            )
-        );
-    }
-    #[test]
-    pub fn test_longest_word_3() {
-        assert_eq!(
-            String::new(),
-            Solution::longest_word(
-                ["abc", "bc", "ab", "qwe"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
-            )
+            7,
+            Solution::max_score(vec![vec![-1, -1], vec![0, 5], vec![0, -6], vec![0, 7]])
         );
     }
 }
