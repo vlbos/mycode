@@ -97,7 +97,7 @@ impl Solution {
             candidates |= word;
         }
         let mut min_ab = 0;
-        pub fn dfs(
+        fn dfs(
             dict: &Vec<i32>,
             bit: i32,
             mask: i32,

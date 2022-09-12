@@ -33,14 +33,21 @@
 // use std::collections::HashMap;
 
 impl Solution {
-    pub fn can_win(s: String) -> bool {
-        // let mut memo = HashMap::new();
-        // Solution::can_win_rec(&mut memo, s)
-        for (i, _) in s.as_bytes().windows(2).enumerate().filter(|x| x.1 == b"++") {
+    pub fn can_win(current_state: String) -> bool {
+        for (i, _) in current_state
+            .as_bytes()
+            .windows(2)
+            .enumerate()
+            .filter(|x| x.1 == b"++")
+        {
             if !Self::can_win(format!(
                 "{}--{}",
-                &s[..i],
-                if i + 2 < s.len() { &s[i + 2..] } else { "" }
+                &current_state[..i],
+                if i + 2 < current_state.len() {
+                    &current_state[i + 2..]
+                } else {
+                    ""
+                }
             )) {
                 return true;
             }

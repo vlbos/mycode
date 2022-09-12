@@ -59,55 +59,37 @@ use std::rc::Rc;
 
 impl Solution {
     pub fn closest_k_values(root: Option<Rc<RefCell<TreeNode>>>, target: f64, k: i32) -> Vec<i32> {
-        // let sorted = Solution::inorder_traversal(root);
-        // Solution::find_closest(&sorted, target, k as isize)
-        let mut ans = Vec::new();
-        pub fn in_order(
+        use std::collections::VecDeque;
+        fn inorder(
+            queue: &mut VecDeque<i32>,
             root: &Option<Rc<RefCell<TreeNode>>>,
             target: f64,
-            reverse: bool,
-            stack: &mut Vec<i32>,
+            k: usize,
         ) {
-            if let Some(node) = root {
-                let root = node.borrow();
-                in_order(
-                    if reverse { &root.right } else { &root.left },
-                    target,
-                    reverse,
-                    stack,
-                );
-                let val = root.val as f64;
-                if (reverse && val <= target) || (!reverse && val > target) {
-                    return;
+            if let Some(r) = root {
+                inorder(queue, &r.borrow().left, target, k);
+
+                if queue.len() == k {
+                    if (*queue.front().unwrap() as f64 - target).abs()
+                        > (r.borrow().val as f64 - target).abs()
+                    {
+                        queue.pop_front();
+                        queue.push_back(r.borrow().val);
+                    } else {
+                        return;
+                    }
+                } else {
+                    queue.push_back(r.borrow().val);
                 }
-                stack.push(root.val);
-                in_order(
-                    if reverse { &root.left } else { &root.right },
-                    target,
-                    reverse,
-                    stack,
-                );
+
+                inorder(queue, &r.borrow().right, target, k);
             }
         }
-        let (mut pre, mut suc) = (Vec::new(), Vec::new());
-        in_order(&root, target, false, &mut pre);
-        in_order(&root, target, true, &mut suc);
-        let mut k = k;
-        while k > 0 {
-            ans.push(if pre.is_empty() {
-                pre.pop().unwrap()
-            } else if suc.is_empty() {
-                suc.pop().unwrap()
-            } else if (*pre.last().unwrap() as f64 - target).abs()
-                < (*suc.last().unwrap() as f64 - target).abs()
-            {
-                pre.pop().unwrap()
-            } else {
-                suc.pop().unwrap()
-            });
-            k -= 1;
-        }
-        ans
+        let mut queue = VecDeque::new();
+
+        inorder(&mut queue, &root, target, k as usize);
+
+        queue.into_iter().collect::<Vec<_>>()
     }
 
     // pub fn   find_closest(arr: &[i32], target: f64, k: isize) -> Vec<i32> {
@@ -183,6 +165,58 @@ impl Solution {
     // }
 }
 // @lc code=end
+
+// impl Solution {
+//     pub fn closest_k_values(root: Option<Rc<RefCell<TreeNode>>>, target: f64, k: i32) -> Vec<i32> {
+//         let mut ans = Vec::new();
+//         pub fn in_order(
+//             root: &Option<Rc<RefCell<TreeNode>>>,
+//             target: f64,
+//             reverse: bool,
+//             stack: &mut Vec<i32>,
+//         ) {
+//             if let Some(node) = root {
+//                 let root = node.borrow();
+//                 in_order(
+//                     if reverse { &root.right } else { &root.left },
+//                     target,
+//                     reverse,
+//                     stack,
+//                 );
+//                 let val = root.val as f64;
+//                 if (reverse && val <= target) || (!reverse && val > target) {
+//                     return;
+//                 }
+//                 stack.push(root.val);
+//                 in_order(
+//                     if reverse { &root.left } else { &root.right },
+//                     target,
+//                     reverse,
+//                     stack,
+//                 );
+//             }
+//         }
+//         let (mut pre, mut suc) = (Vec::new(), Vec::new());
+//         in_order(&root, target, false, &mut pre);
+//         in_order(&root, target, true, &mut suc);
+//         let mut k = k;
+//         while k > 0 {
+//             ans.push(if pre.is_empty() {
+//                 pre.pop().unwrap()
+//             } else if suc.is_empty() {
+//                 suc.pop().unwrap()
+//             } else if (*pre.last().unwrap() as f64 - target).abs()
+//                 < (*suc.last().unwrap() as f64 - target).abs()
+//             {
+//                 pre.pop().unwrap()
+//             } else {
+//                 suc.pop().unwrap()
+//             });
+//             k -= 1;
+//         }
+//         ans
+//     }
+// }
 #[allow(dead_code)]
 pub struct Solution;
 
@@ -191,7 +225,8 @@ mod test {
     use super::*;
     use crate::solutions::util::test_tools::assert_equivalent;
     use crate::tree;
-
+    // [1]
+    // 0.000000
     #[test]
     pub fn test_closest_k_values() {
         let tree = tree![4, 2, 5, 1, 3];

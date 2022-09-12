@@ -131,13 +131,41 @@ impl Solution {
 }
 // @lc code=end
 
+// impl Solution {
+//     pub fn valid_word_abbreviation(word: String, abbr: String) -> bool {
+//  let word = word.chars().collect::<Vec<_>>();
+
+//         let mut step = 0;
+//         let mut idx = -1i32 as usize;
+//         for c in abbr.bytes() {
+//             if c == b'0' && step == 0 {
+//                 return false;
+//             }
+//             if c >= b'0' && c <= b'9' {
+//                 step = step * 10 + (c - b'0') as usize;
+//             } else {
+//                 idx += step + 1;
+//                 if idx >= word.len() {
+//                     return false;
+//                 }
+//                 if word[idx] != c as char {
+//                     return false;
+//                 }
+//                 step = 0;
+//             }
+//         }
+//         word.len() == idx + step + 1
+//     }
+// }
+
 #[allow(dead_code)]
 pub struct Solution;
 
 #[cfg(test)]
 mod test {
     use super::*;
-
+    // "a"
+    // "01"
     #[test]
     pub fn test_valid_word_abbreviation_1() {
         assert!(Solution::valid_word_abbreviation(

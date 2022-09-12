@@ -65,8 +65,7 @@
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Facebook](https://leetcode.ca/tags/#Facebook) [Google](https://leetcode.ca/tags/#Google) [Salesforce](https://leetcode.ca/tags/#Salesforce) [Uber](https://leetcode.ca/tags/#Uber) [Zillow](https://leetcode.ca/tags/#Zillow)
 
 // @lc code=start
-use std::collections::HashSet;
-use std::collections::VecDeque;
+use std::collections::{HashSet, VecDeque};
 
 // const UP: (&str, isize, isize) = ("U", 0, -1);
 // const DOWN: (&str, isize, isize) = ("D", 0, 1);

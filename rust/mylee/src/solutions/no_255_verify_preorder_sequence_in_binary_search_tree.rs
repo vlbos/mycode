@@ -43,7 +43,7 @@ pub struct Solution;
 
 impl Solution {
     pub fn verify_preorder(preorder: Vec<i32>) -> bool {
-        pub fn verify_preorder(arr: &[i32]) -> bool {
+        fn verify_preorder(arr: &[i32]) -> bool {
             if arr.is_empty() {
                 return true;
             }

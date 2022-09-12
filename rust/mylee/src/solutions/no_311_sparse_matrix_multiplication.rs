@@ -44,7 +44,7 @@
 // }
 
 impl Solution {
-    pub fn multiply(a: Vec<Vec<i32>>, b: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+    pub fn multiply(mat1: Vec<Vec<i32>>, mat2: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
         // let a_rows = a.len();
         // let multi_lines = b.len();
         // let b_cols = if multi_lines == 0 { 0 } else { b[0].len() };
@@ -66,17 +66,17 @@ impl Solution {
         //     }
         // }
         // res
-        let (m, n) = (a.len(), a[0].len());
-        let nb = b[0].len();
+        let (m, n) = (mat1.len(), mat1[0].len());
+        let nb = mat2[0].len();
         let mut ans = vec![vec![0; nb]; m];
         for i in 0..m {
             for k in 0..n {
-                if a[i][k] == 0 {
+                if mat1[i][k] == 0 {
                     continue;
                 }
                 for j in 0..nb {
-                    if b[k][j] != 0 {
-                        ans[i][j] += a[i][k] * b[k][j];
+                    if mat2[k][j] != 0 {
+                        ans[i][j] += mat1[i][k] * mat2[k][j];
                     }
                 }
             }

@@ -30,11 +30,11 @@
 pub struct Solution;
 // @lc code=start
 impl Solution {
-    pub fn shortest_distance(words: Vec<String>, word1: String, word2: String) -> i32 {
-        // let mut i = -1 - (words.len() as i32);
-        // let mut j = -1 - (words.len() as i32);
+    pub fn shortest_distance(words_dict: Vec<String>, word1: String, word2: String) -> i32 {
+        // let mut i = -1 - (words_dict.len() as i32);
+        // let mut j = -1 - (words_dict.len() as i32);
         // let mut dist = i32::max_value();
-        // for (k, w) in words.iter().enumerate() {
+        // for (k, w) in words_dict.iter().enumerate() {
         //     if *w == word1 {
         //         i = k as i32;
         //     } else if *w == word2 {
@@ -45,10 +45,10 @@ impl Solution {
         //     dist = i32::min(dist, i32::abs(i - j));
         // }
         // dist
-        let n = words.len() as i32;
+        let n = words_dict.len() as i32;
         let (mut i, mut j) = (n, n);
         let mut ans = i32::MAX;
-        for (k, w) in words.iter().enumerate() {
+        for (k, w) in words_dict.iter().enumerate() {
             if *w == word1 {
                 i = k as i32;
                 ans = ans.min((i - j).abs());

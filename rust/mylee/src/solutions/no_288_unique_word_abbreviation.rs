@@ -110,12 +110,55 @@ impl ValidWordAbbr {
     // }
 }
 // @lc code=end
+// use std::collections::{HashMap, HashSet};
+
+// struct ValidWordAbbr {
+//     data: HashMap<String, HashSet<String>>,
+// }
+
+// impl ValidWordAbbr {
+//     fn new(dictionary: Vec<String>) -> Self {
+//         let mut data = HashMap::new();
+
+//         for d in dictionary {
+//             if d.len() <= 2 {
+//                 data.entry(d.clone()).or_insert(HashSet::new()).insert(d);
+//             } else {
+//                 data.entry(format!("{}{}{}", &d[0..1], d.len() - 2, &d[d.len() - 1..]))
+//                     .or_insert(HashSet::new())
+//                     .insert(d);
+//             }
+//         }
+
+//         Self { data }
+//     }
+
+//     fn is_unique(&self, word: String) -> bool {
+//         let w = if word.len() <= 2 {
+//             word.clone()
+//         } else {
+//             format!(
+//                 "{}{}{}",
+//                 &word[0..1],
+//                 word.len() - 2,
+//                 &word[word.len() - 1..]
+//             )
+//         };
+
+//         if let Some(d) = self.data.get(&w) {
+//             d.contains(&word) && d.len() == 1
+//         } else {
+//             true
+//         }
+//     }
+// }
 
 #[cfg(test)]
 mod test {
     use super::*;
     use crate::solutions::util::test_tools::map_to_string;
-
+    // ["ValidWordAbbr","isUnique","isUnique","isUnique","isUnique","isUnique"]
+    // [[["deer","door","cake","card"]],["dear"],["cart"],["cane"],["make"],["cake"]]
     #[test]
     pub fn test_valid_word_abbr() {
         let input = map_to_string(&["deer", "door", "cake", "card"]);

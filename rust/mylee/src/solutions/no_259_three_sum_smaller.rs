@@ -28,7 +28,8 @@
 // [Google](https://leetcode.ca/tags/#Google) [IBM](https://leetcode.ca/tags/#IBM) [Mathworks](https://leetcode.ca/tags/#Mathworks)
 // @lc code=start
 impl Solution {
-    pub fn three_sum_smaller(mut nums: Vec<i32>, target: i32) -> i32 {
+    pub fn three_sum_smaller(nums: Vec<i32>, target: i32) -> i32 {
+        let mut nums = nums;
         nums.sort();
         if nums.len() < 3 {
             return 0;

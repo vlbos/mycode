@@ -33,7 +33,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn generate_possible_next_moves(s: String) -> Vec<String> {
+    pub fn generate_possible_next_moves(current_state: String) -> Vec<String> {
         // let chars = s.chars().collect::<Vec<char>>();
         // let mut res = vec![];
         // for i in 1..chars.len() {
@@ -47,11 +47,15 @@ impl Solution {
         //     }
         // }
         // res
-        let bs = s.as_bytes();
+        let bs = current_state.as_bytes();
         let mut ans = Vec::new();
         for (i, w) in bs.windows(2).enumerate() {
             if w == &[b'+', b'+'] {
-                ans.push(format!("{}--{}", &s[..i], &s[i + 2..]));
+                ans.push(format!(
+                    "{}--{}",
+                    &current_state[..i],
+                    &current_state[i + 2..]
+                ));
             }
         }
         ans

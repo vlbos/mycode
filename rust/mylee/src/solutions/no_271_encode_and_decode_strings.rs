@@ -297,6 +297,35 @@ impl Codec {
         }
         ans
     }
+
+    // pub fn encode(&self, strs: Vec<String>) -> String {
+    //     let mut vec = vec![];
+
+    //     for str in strs.iter() {
+    //         vec.push(format!("{:020}{}", str.len(), str))
+    //     }
+
+    //     vec.join("")
+    // }
+
+    // fn decode(&self, s: String) -> Vec<String> {
+    //      fn helper(s: &str, vec: &mut Vec<String>) {
+    //     if s.len() == 0 {
+    //         return;
+    //     }
+
+    //     let num = (&s[0..20]).parse::<usize>().unwrap();
+    //     let ss = s[20..20+num].to_string();
+    //     vec.push(ss);
+
+    //     helper(&s[20+num..], vec)
+    //         }
+    //     let mut vec = vec![];
+
+    //     helper(&s, &mut vec);
+
+    //     vec
+    // }
 }
 // @lc code=end
 
@@ -304,7 +333,7 @@ impl Codec {
 mod test {
     use super::*;
     use crate::solutions::util::test_tools::map_to_string;
-
+    // ["",""],[""]
     #[test]
     pub fn test_encode_decode() {
         let inputs = map_to_string(&["abc", "acd", "abcde", "efg"]);

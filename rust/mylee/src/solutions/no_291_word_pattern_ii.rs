@@ -38,7 +38,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn word_pattern_match(pattern: String, str: String) -> bool {
+    pub fn word_pattern_match(pattern: String, s: String) -> bool {
         // let (pchars, pdict) = Solution::pattern_analyse(&pattern);
         // let chars = str.chars().collect::<Vec<char>>();
         // Solution::match_rec(&pchars, pdict, &chars, HashSet::new()).0
@@ -78,7 +78,7 @@ impl Solution {
             }
             false
         }
-        back_track(&pattern, &str, 0, 0, &mut m)
+        back_track(&pattern, &s, 0, 0, &mut m)
     }
 
     // // @return is_match, should pruning

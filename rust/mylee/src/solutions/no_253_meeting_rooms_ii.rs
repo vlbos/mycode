@@ -27,11 +27,11 @@
 
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Apple](https://leetcode.ca/tags/#Apple) [Atlassian](https://leetcode.ca/tags/#Atlassian) [Baidu](https://leetcode.ca/tags/#Baidu) [Bloomberg](https://leetcode.ca/tags/#Bloomberg) [Booking.com](https://leetcode.ca/tags/#Booking.com) [Cisco](https://leetcode.ca/tags/#Cisco) [Citrix](https://leetcode.ca/tags/#Citrix) [Drawbridge](https://leetcode.ca/tags/#Drawbridge) [eBay](https://leetcode.ca/tags/#eBay) [Expedia](https://leetcode.ca/tags/#Expedia) [Facebook](https://leetcode.ca/tags/#Facebook) [GoDaddy](https://leetcode.ca/tags/#GoDaddy) [Goldman Sachs](https://leetcode.ca/tags/#Goldman%20Sachs) [Google](https://leetcode.ca/tags/#Google) [Lyft](https://leetcode.ca/tags/#Lyft) [Microsoft](https://leetcode.ca/tags/#Microsoft) [Nutanix](https://leetcode.ca/tags/#Nutanix) [Oracle](https://leetcode.ca/tags/#Oracle) [Paypal](https://leetcode.ca/tags/#Paypal) [Postmates](https://leetcode.ca/tags/#Postmates) [Quora](https://leetcode.ca/tags/#Quora) [Snapchat](https://leetcode.ca/tags/#Snapchat) [Uber](https://leetcode.ca/tags/#Uber) [Visa](https://leetcode.ca/tags/#Visa) [Walmart Labs](https://leetcode.ca/tags/#Walmart%20Labs) [Yelp](https://leetcode.ca/tags/#Yelp)
 // @lc code=start
-use std::cmp::Reverse;
-use std::collections::BinaryHeap;
 
 impl Solution {
     pub fn min_meeting_rooms(intervals: Vec<Vec<i32>>) -> i32 {
+        use std::cmp::Reverse;
+        use std::collections::BinaryHeap;
         let mut intervals = intervals;
         intervals.sort_by_key(|v| v[0]);
         let mut heap = BinaryHeap::<Reverse<i32>>::new();

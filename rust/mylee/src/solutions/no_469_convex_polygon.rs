@@ -86,13 +86,32 @@ impl Solution {
 }
 // @lc code=end
 
+// impl Solution {
+//     pub fn is_convex(points: Vec<Vec<i32>>) -> bool {
+//         let n = points.len();
+//         let mut positive = 0;
+//         let mut negative = 0;
+//         let cross=|a:&Vec<i32>,b:&Vec<i32>,c:&Vec<i32>|{(b[0] - a[0]) * (c[1] - b[1]) - (b[1] - a[1]) * (c[0] - b[0])};
+//         for i in 0..n {
+//             let v = cross(&points[i], &points[(i+1)%n], &points[(i+2)%n]);
+//             if v <= 0 {
+//                 negative += 1;
+//             }
+//             if v >= 0 {
+//                 positive += 1;
+//             }
+//         }
+
+//         positive == n || negative == n
+//     }
+// }
 #[allow(dead_code)]
 pub struct Solution;
 
 #[cfg(test)]
 mod test {
     use super::*;
-
+    // [[0,1907],[6,952],[12,29],[376,23],[1217,10],[2622,2],[9260,5],[9729,33],[9977,111],[9995,3692],[9984,8244],[9963,9092],[9941,9740],[9915,9966],[9754,9992],[9665,9999],[808,9997],[201,9966],[93,9928],[4,9247],[2,7152],[0,4926]]
     #[test]
     pub fn test_is_convex_1() {
         assert!(Solution::is_convex(vec![

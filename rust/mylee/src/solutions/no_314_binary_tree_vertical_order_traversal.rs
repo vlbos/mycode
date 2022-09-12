@@ -155,7 +155,59 @@ impl Solution {
     }
 }
 // @lc code=end
+// Definition for a binary tree node.
+// #[derive(Debug, PartialEq, Eq)]
+// pub struct TreeNode {
+//   pub val: i32,
+//   pub left: Option<Rc<RefCell<TreeNode>>>,
+//   pub right: Option<Rc<RefCell<TreeNode>>>,
+// }
+//
+// impl TreeNode {
+//   #[inline]
+//   pub fn new(val: i32) -> Self {
+//     TreeNode {
+//       val,
+//       left: None,
+//       right: None
+//     }
+//   }
+// }
+// use std::rc::Rc;
+// use std::cell::RefCell;
+// impl Solution {
+//     pub fn vertical_order(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Vec<i32>> {
+//  use std::collections::BTreeMap;
+//        let mut stack = vec![];
 
+//         if let Some(mut r) = root {
+//             let mut mp = BTreeMap::new();
+//             let mut tmp = vec![];
+//             stack.push((r, 0));
+
+//             while stack.len() > 0 {
+//                 for i in 0..stack.len() {
+//                     mp.entry(stack[i].1).or_insert(vec![]).push(stack[i].0.borrow().val);
+
+//                     if let Some(left) = stack[i].0.borrow_mut().left.take() {
+//                         tmp.push((left, stack[i].1 - 1));
+//                     }
+
+//                     if let Some(right) = stack[i].0.borrow_mut().right.take() {
+//                         tmp.push((right, stack[i].1 + 1));
+//                     }
+//                 }
+
+//                 stack = tmp;
+//                 tmp = vec![];
+//             }
+
+//             mp.into_values().collect()
+//         } else {
+//             vec![]
+//         }
+//     }
+// }
 #[allow(dead_code)]
 pub struct Solution;
 

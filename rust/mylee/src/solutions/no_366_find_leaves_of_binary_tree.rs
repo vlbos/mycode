@@ -54,12 +54,12 @@ impl Solution {
     //   let mut res: Vec<Vec<i32>> = vec![];
     //   Solution::find_leaves_recursive(root, &mut res);
     //   res
-       pub fn  dfs(root: &Option<Rc<RefCell<TreeNode>>>,ans:&mut Vec<Vec<i32>> )->i32{
+        fn  dfs(root: &Option<Rc<RefCell<TreeNode>>>,ans:&mut Vec<Vec<i32>> )->i32{
             if let Some(node)=root{
                 let node=node.borrow();
                 let (left,right)=(dfs(&node.left,ans),dfs(&node.right,ans));
                 let i = left.max(right)+1;
-                if i  as usize<ans.len(){
+                if (i  as usize)<ans.len(){
                     ans[i  as usize].push(node.val);
                 }else{
                     ans.push(vec![node.val]);

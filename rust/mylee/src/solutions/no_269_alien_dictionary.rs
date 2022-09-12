@@ -126,6 +126,66 @@ impl Solution {
     // }
 
     pub fn alien_order(words: Vec<String>) -> String {
+        use std::collections::VecDeque;
+        let mut letters = words.iter().fold(vec![false; 256], |mut acc, word| {
+            word.bytes().for_each(|u| acc[u as usize] = true);
+            acc
+        });
+        let k: usize = letters
+            .iter()
+            .fold(0, |acc, &b| acc + (if b { 1 } else { 0 }));
+        let mut edges: Vec<Vec<u8>> = vec![vec![]; 256];
+
+        for w in words.windows(2) {
+            if w[0] == w[1] {
+                continue;
+            }
+            if w[0].starts_with(&w[1]) {
+                return "".to_string();
+            }
+            if let Some((t, h)) = w[0]
+                .bytes()
+                .zip(w[1].bytes())
+                .skip_while(|(t, h)| t == h)
+                .take(1)
+                .next()
+            {
+                edges[t as usize].push(h);
+            }
+        }
+
+        let mut indegree: Vec<usize> = vec![0; 256];
+        for i in 0..256 {
+            for &h in &edges[i] {
+                indegree[h as usize] += 1;
+            }
+        }
+
+        let mut queue: VecDeque<u8> = VecDeque::new();
+        for i in 0..256 {
+            if letters[i] && indegree[i] == 0 {
+                queue.push_back(i as u8);
+            }
+        }
+
+        let mut ans = "".to_string();
+        while let Some(t) = queue.pop_front() {
+            ans.push(t as char);
+            let n = edges[t as usize].len();
+            for i in 0..n {
+                let h = edges[t as usize][i];
+                indegree[h as usize] -= 1;
+                if indegree[h as usize] == 0 {
+                    queue.push_back(h);
+                }
+            }
+        }
+
+        if k == ans.len() {
+            ans
+        } else {
+            "".to_string()
+        }
         // let words = words
         //     .iter()
         //     .map(|s| s.chars().collect::<Vec<char>>())
@@ -164,57 +224,57 @@ impl Solution {
         // } else {
         //     res
         // }
-        if words.is_empty() {
-            return String::new();
-        }
-        if words.len() == 1 {
-            return words[0].clone();
-        }
-        use std::collections::HashMap;
-        use std::collections::HashSet;
-        let mut degree: HashMap<u8, i32> = words
-            .iter()
-            .map(|s| s.bytes().collect::<Vec<u8>>())
-            .flatten()
-            .map(|x| (x, 0))
-            .collect();
-        let mut m = HashMap::new();
-        for w in words.windows(2) {
-            let len = w[0].len().min(w[1].len());
-            let (w1, w2) = (w[0].as_bytes(), w[1].as_bytes());
-            for j in 0..len {
-                let (c1, c2) = (w1[j], w2[j]);
+        // if words.is_empty() {
+        //     return String::new();
+        // }
+        // if words.len() == 1 {
+        //     return words[0].clone();
+        // }
+        // use std::collections::HashMap;
+        // use std::collections::HashSet;
+        // let mut degree: HashMap<u8, i32> = words
+        //     .iter()
+        //     .map(|s| s.bytes().collect::<Vec<u8>>())
+        //     .flatten()
+        //     .map(|x| (x, 0))
+        //     .collect();
+        // let mut m = HashMap::new();
+        // for w in words.windows(2) {
+        //     let len = w[0].len().min(w[1].len());
+        //     let (w1, w2) = (w[0].as_bytes(), w[1].as_bytes());
+        //     for j in 0..len {
+        //         let (c1, c2) = (w1[j], w2[j]);
 
-                if c1 != c2 {
-                    if !m.entry(c1).or_insert(HashSet::new()).contains(&c2) {
-                        m.entry(c1).or_insert(HashSet::new()).insert(c2);
-                        *degree.entry(c2).or_insert(0) += 1;
-                    }
-                    break;
-                }
-            }
-        }
-        let mut q = std::collections::VecDeque::from(
-            degree
-                .iter()
-                .filter(|x| *x.1 == 0)
-                .map(|x| *x.0)
-                .collect::<Vec<u8>>(),
-        );
-        let mut ans = String::new();
-        while let Some(c) = q.pop_front() {
-            ans.push(c as char);
-            for &c2 in m.get(&c).unwrap_or(&HashSet::new()) {
-                *degree.entry(c2).or_insert(0) -= 1;
-                if *degree.get(&c2).unwrap_or(&0) == 0 {
-                    q.push_back(c2);
-                }
-            }
-        }
-        if ans.len() != degree.len() {
-            return String::new();
-        }
-        ans
+        //         if c1 != c2 {
+        //             if !m.entry(c1).or_insert(HashSet::new()).contains(&c2) {
+        //                 m.entry(c1).or_insert(HashSet::new()).insert(c2);
+        //                 *degree.entry(c2).or_insert(0) += 1;
+        //             }
+        //             break;
+        //         }
+        //     }
+        // }
+        // let mut q = std::collections::VecDeque::from(
+        //     degree
+        //         .iter()
+        //         .filter(|x| *x.1 == 0)
+        //         .map(|x| *x.0)
+        //         .collect::<Vec<u8>>(),
+        // );
+        // let mut ans = String::new();
+        // while let Some(c) = q.pop_front() {
+        //     ans.push(c as char);
+        //     for &c2 in m.get(&c).unwrap_or(&HashSet::new()) {
+        //         *degree.entry(c2).or_insert(0) -= 1;
+        //         if *degree.get(&c2).unwrap_or(&0) == 0 {
+        //             q.push_back(c2);
+        //         }
+        //     }
+        // }
+        // if ans.len() != degree.len() {
+        //     return String::new();
+        // }
+        // ans
     }
 }
 
@@ -227,7 +287,7 @@ pub struct Solution;
 mod test {
     use super::*;
     use crate::solutions::util::test_tools::map_to_string;
-
+    // ["abc","ab"]
     #[test]
     pub fn test_alien_order1() {
         let inputs = map_to_string(&["wrt", "wrf", "er", "ett", "rftt"]);

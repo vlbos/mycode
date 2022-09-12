@@ -75,7 +75,7 @@ impl Solution {
                 }
             }
         }
-        dp[n1 - 1] 
+        dp[n1 - 1]
     }
 }
 
