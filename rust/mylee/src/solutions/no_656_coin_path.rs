@@ -46,7 +46,7 @@
 // @star
 // @lc code=start
 impl Solution {
-    pub fn cheapest_jump(a: Vec<i32>, b: i32) -> Vec<i32> {
+     pub fn cheapest_jump(coins: Vec<i32>, max_jump: i32) -> Vec<i32>  {
         //     let n = a.len();
         //     if n == 0 || a[n - 1] < 0 {
         //         return vec![];
@@ -86,24 +86,24 @@ impl Solution {
         //         }
         //         path.into_iter().map(|v| v + 1).collect::<Vec<_>>()
         //     }
-        let n = a.len();
-        if a[n - 1] == -1 {
+        let n = coins.len();
+        if coins[n - 1] == -1 {
             return Vec::new();
         }
         let mut ans = Vec::new();
         let mut dp = vec![i32::MAX; n];
         let mut pos = vec![n; n];
-        dp[n - 1] = a[n - 1];
+        dp[n - 1] = coins[n - 1];
         for i in (0..n - 1).rev() {
-            if a[i] == -1 {
+            if coins[i] == -1 {
                 continue;
             }
-            for j in i + 1..=(n - 1).min(i + b as usize) {
+            for j in i + 1..=(n - 1).min(i + max_jump as usize) {
                 if dp[j] == i32::MAX {
                     continue;
                 }
-                if a[i] + dp[j] < dp[i] {
-                    dp[i] = a[i] + dp[j];
+                if coins[i] + dp[j] < dp[i] {
+                    dp[i] = coins[i] + dp[j];
                     pos[i] = j;
                 }
             }

@@ -81,9 +81,7 @@
 
 impl Solution {
     pub fn are_sentences_similar_two(
-        words1: Vec<String>,
-        words2: Vec<String>,
-        pairs: Vec<Vec<String>>,
+        sentence1: Vec<String>, sentence2: Vec<String>, similar_pairs: Vec<Vec<String>>,
     ) -> bool {
         // if words1.len() != words2.len() {
         //     return false;
@@ -118,12 +116,13 @@ impl Solution {
         //     }
         // }
         // true
-        if words1.len() != words2.len() {
+        //  pub fn are_sentences_similar_two(sentence1: Vec<String>, sentence2: Vec<String>, similar_pairs: Vec<Vec<String>>) -> bool {
+ if sentence1.len() != sentence2.len() {
             return false;
         }
         use std::collections::{HashMap, HashSet};
         let mut m = HashMap::new();
-        for p in &pairs {
+        for p in &similar_pairs {
             m.entry(p[0].clone())
                 .or_insert(HashSet::new())
                 .insert(p[1].clone());
@@ -148,7 +147,7 @@ impl Solution {
             }
             false
         }
-        for (w1, w2) in words1.iter().zip(&words2) {
+        for (w1, w2) in sentence1.iter().zip(&sentence2) {
             let mut visited = HashSet::new();
             if !dfs(&m, w1, w2, &mut visited) {
                 return false;

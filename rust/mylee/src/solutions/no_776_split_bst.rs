@@ -100,20 +100,17 @@ use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
     #[allow(dead_code)]
-    pub fn split_bst(
-        mut root: Option<Rc<RefCell<TreeNode>>>,
-        v: i32,
-    ) -> Vec<Option<Rc<RefCell<TreeNode>>>> {
+     pub fn split_bst(mut root: Option<Rc<RefCell<TreeNode>>>, target: i32) -> Vec<Option<Rc<RefCell<TreeNode>>>> {
         let mut ans = vec![None, None];
         if root.is_none() {
             return ans;
         }
-        if root.as_ref().unwrap().borrow().val <= v {
-            ans = Self::split_bst(root.as_ref().unwrap().borrow().right.clone(), v);
+        if root.as_ref().unwrap().borrow().val <= target {
+            ans = Self::split_bst(root.as_ref().unwrap().borrow().right.clone(), target);
             root.as_mut().unwrap().borrow_mut().right = ans[0].clone();
             ans[0] = root;
         } else {
-            ans = Self::split_bst(root.as_ref().unwrap().borrow().left.clone(), v);
+            ans = Self::split_bst(root.as_ref().unwrap().borrow().left.clone(), target);
             root.as_mut().unwrap().borrow_mut().left = ans[1].clone();
             ans[1] = root;
         }

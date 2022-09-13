@@ -4,41 +4,41 @@
 
 // ## Description
 
-// <p>Given a string <code>s</code> and an integer <code>k</code>, rearrange <code>s</code> such that the same characters are <strong>at least</strong> distance <code>k</code> from each other. If it is not possible to rearrange the string, return an empty string <code>&quot;&quot;</code>.</p>
+// Given a string s and an integer k, rearrange s such that the same characters are at least distance k from each other. If it is not possible to rearrange the string, return an empty string "".
 
-// <p>&nbsp;</p>
-// <p><strong>Example 1:</strong></p>
 
-// <pre>
-// <strong>Input:</strong> s = &quot;aabbcc&quot;, k = 3
-// <strong>Output:</strong> &quot;abcabc&quot;
-// <strong>Explanation:</strong> The same letters are at least a distance of 3 from each other.
-// </pre>
+// Example 1:
 
-// <p><strong>Example 2:</strong></p>
+// 
+// Input: s = "aabbcc", k = 3
+// Output: "abcabc"
+// Explanation: The same letters are at least a distance of 3 from each other.
+// 
 
-// <pre>
-// <strong>Input:</strong> s = &quot;aaabc&quot;, k = 3
-// <strong>Output:</strong> &quot;&quot;
-// <strong>Explanation:</strong> It is not possible to rearrange the string.
-// </pre>
+// Example 2:
 
-// <p><strong>Example 3:</strong></p>
+// 
+// Input: s = "aaabc", k = 3
+// Output: ""
+// Explanation: It is not possible to rearrange the string.
+// 
 
-// <pre>
-// <strong>Input:</strong> s = &quot;aaadbbcc&quot;, k = 2
-// <strong>Output:</strong> &quot;abacabcd&quot;
-// <strong>Explanation:</strong> The same letters are at least a distance of 2 from each other.
-// </pre>
+// Example 3:
 
-// <p>&nbsp;</p>
-// <p><strong>Constraints:</strong></p>
+// 
+// Input: s = "aaadbbcc", k = 2
+// Output: "abacabcd"
+// Explanation: The same letters are at least a distance of 2 from each other.
+// 
 
-// <ul>
-// 	<li><code>1 &lt;= s.length &lt;= 3 * 10<sup>5</sup></code></li>
-// 	<li><code>s</code> consists of only lowercase English letters.</li>
-// 	<li><code>0 &lt;= k &lt;= s.length</code></li>
-// </ul>
+
+// Constraints:
+
+// 
+// 	1 <= s.length <= 3 * 105
+// 	s consists of only lowercase English letters.
+// 	0 <= k <= s.length
+// 
 
 impl Solution {
     pub fn rearrange_string(s: String, k: i32) -> String {

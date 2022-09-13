@@ -134,7 +134,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn pour_water(mut heights: Vec<i32>, v: i32, k: i32) -> Vec<i32> {
+    pub fn pour_water(mut heights: Vec<i32>, volume: i32, k: i32) -> Vec<i32> {
         // let len = heights.len() as i32;
         // let mut v = v;
         // while v > 0 {
@@ -180,7 +180,7 @@ impl Solution {
         //     v -= 1;
         // }
         // heights
-        for _ in 0..v {
+       for _ in 0..volume {
             let mut cur = k as usize;
             while cur > 0 && heights[cur] >= heights[cur - 1] {
                 cur -= 1;

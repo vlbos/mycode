@@ -160,9 +160,68 @@ impl Solution {
 }
 // @lc code=end
 
+// // Definition for a binary tree node.
+// // #[derive(Debug, PartialEq, Eq)]
+// // pub struct TreeNode {
+// //   pub val: i32,
+// //   pub left: Option<Rc<RefCell<TreeNode>>>,
+// //   pub right: Option<Rc<RefCell<TreeNode>>>,
+// // }
+// //
+// // impl TreeNode {
+// //   #[inline]
+// //   pub fn new(val: i32) -> Self {
+// //     TreeNode {
+// //       val,
+// //       left: None,
+// //       right: None
+// //     }
+// //   }
+// // }
+// use std::rc::Rc;
+// use std::cell::RefCell;
+// impl Solution {
+//     pub fn check_equal_tree(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
+//          fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, sum: &mut Vec<i32>) -> i32 {
+//         if let Some(r) = root {
+//             let v = r.borrow().val + dfs(&r.borrow().left, sum) + dfs(&r.borrow().right, sum);
+//             sum.push(v);
+
+//             sum[sum.len() - 1]
+//         } else {
+//             0
+//         }
+//     }
+// let mut sum = vec![];
+//         let total = dfs(&root, &mut sum);
+
+//         if total %2 != 0 {
+//             return false;
+//         }
+
+//         sum.pop();
+
+//         for v in sum {
+//             if v == total / 2 {
+//                 return true;
+//             }
+//         }
+
+//         false
+    
+
+   
+
+//     }
+// }
+
 #[allow(dead_code)]
 pub struct Solution;
-
+// [1,-1]
+// 输出：
+// true
+// 预期结果：
+// false
 #[cfg(test)]
 mod test {
     use super::*;

@@ -54,10 +54,38 @@ impl Solution {
     }
 }
 
+
+// impl Solution {
+//     pub fn minmax_gas_dist(mut stations: Vec<i32>, k: i32) -> f64 {
+//         stations.sort();
+//         let stations = stations.into_iter().map(|x| x as f64).collect::<Vec<_>>();
+//         let mut lo = 0.0;
+//         let mut hi = 1e8;
+
+//         while hi - lo > 1e-6 {
+//             let mid = lo + (hi - lo) / 2.0;
+//             let mut cnt = 0;
+
+//             for i in 1..stations.len() {
+//                 cnt += ((stations[i] - stations[i-1]) / mid) as i32;
+//             }
+
+//             if cnt <= k {
+//                 hi = mid;
+//             } else {
+//                 lo = mid;
+//             }
+//         }
+
+//         lo
+//     }
+// }
+
 #[cfg(test)]
 mod test {
     use super::*;
-
+// [23,24,36,39,46,56,57,65,84,98]
+// 1
     #[test]
     pub fn test_minmax_gas_dist_1() {
         assert!(

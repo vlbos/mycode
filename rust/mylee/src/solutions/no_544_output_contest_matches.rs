@@ -83,7 +83,7 @@ impl Solution {
         //     .pop_front()
         //     .map(|s| s.into_iter().collect::<String>())
         //     .unwrap_or_else(String::new)
-        let mut cur: Vec<String> = (1..n).map(|x| x.to_string()).collect();
+        let mut cur: Vec<String> = (1..=n).map(|x| x.to_string()).collect();
         while cur.len() > 1 {
             let mut next = Vec::new();
             for i in 0..cur.len() / 2 {
@@ -95,6 +95,27 @@ impl Solution {
     }
 }
 // @lc code=end
+
+// impl Solution {
+//     pub fn find_contest_match(n: i32) -> String {
+//         let mut ans = (1..=n).map(|x| x.to_string()).collect::<Vec<_>>();
+//         let mut i = n;
+
+//         while i > 1 {
+//             let mut tmp = vec![];
+//             let n = ans.len();
+
+//             for j in 0..n/2 {
+//                 tmp.push(format!("({},{})", ans[j], ans[n-j-1]));
+//             }
+
+//             ans = tmp;
+//             i /= 2;
+//         }
+
+//         ans[0].clone()
+//     }
+// }
 
 #[allow(dead_code)]
 pub struct Solution;

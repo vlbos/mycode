@@ -31,7 +31,7 @@ impl Solution {
         //     while j + 1 < s.len() && s[j + 1] != ' ' {
         //         j += 1;
         //     }
-        //     let new_i = if j + 1 >= s.len() { j + 1 } else { j + 2 };
+        //     let new_i = if j + 1 <= s.len() { j + 1 } else { j + 2 };
         //     while i < j {
         //         s.swap(i, j);
         //         i += 1;

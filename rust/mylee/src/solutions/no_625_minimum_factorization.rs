@@ -37,7 +37,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn smallest_factorization(a: i32) -> i32 {
+    pub fn smallest_factorization(num: i32) -> i32 {
         // if a < 2 {
         //     return a;
         // }
@@ -56,18 +56,18 @@ impl Solution {
         // } else {
         //     0
         // }
-        if 1 == a {
-            return a;
+       if 1 == num {
+            return num;
         }
-        let mut a = a;
+        let mut num = num;
         let mut ans = String::new();
         for k in (2..=9).rev() {
-            while a % k == 0 {
+            while num % k == 0 {
                 ans = k.to_string() + ans.as_str();
-                a /= k;
+                num /= k;
             }
         }
-        if a > 1 {
+        if num > 1 {
             return 0;
         }
         let ans = ans.parse::<i64>().unwrap();

@@ -119,13 +119,13 @@
 // }
 
 impl Solution {
-    pub fn words_abbreviation(dict: Vec<String>) -> Vec<String> {
-        // let dict = dict
+    pub fn words_abbreviation(words: Vec<String>) -> Vec<String> {
+        // let words = words
         //     .into_iter()
         //     .map(|v| v.chars().collect::<Vec<char>>())
         //     .collect::<Vec<_>>();
         // let mut abbrs = HashMap::<(char, char, usize), Trie>::new();
-        // for d in &dict {
+        // for d in &words {
         //     let inner = &d[1..d.len() - 1];
         //     let ht = (d[0], d[d.len() - 1], inner.len());
         //     abbrs
@@ -137,7 +137,7 @@ impl Solution {
         //             t
         //         });
         // }
-        // dict.into_iter()
+        // words.into_iter()
         //     .map(|d| {
         //         let inner = &d[1..d.len() - 1];
         //         let ht = (d[0], d[d.len() - 1], inner.len());
@@ -161,7 +161,7 @@ impl Solution {
         let mut ans = Vec::new();
         use std::collections::HashMap;
         let mut map = HashMap::new();
-        for (i, s) in dict.iter().enumerate() {
+        for (i, s) in words.iter().enumerate() {
             if s.len() < 4 {
                 ans.push(s.clone());
                 continue;
@@ -171,9 +171,9 @@ impl Solution {
             ans.push(tmp);
         }
         let find_common_prefix = |indices: &Vec<usize>| {
-            let mut prefix = dict[indices[0]].clone();
+            let mut prefix = words[indices[0]].clone();
             for &index in &indices[1..] {
-                let compare = &dict[index];
+                let compare = &words[index];
                 for i in (0..=prefix.len()).rev() {
                     if &prefix[0..i] == &compare[0..i] {
                         prefix = prefix[0..i].to_string();
@@ -196,7 +196,7 @@ impl Solution {
             for (_, indices) in &map {
                 let prefix = find_common_prefix(indices);
                 for &i in indices {
-                    let original = &dict[i];
+                    let original = &words[i];
                     if original.len() <= 3 + prefix.len() {
                         ans[i] = original.clone();
                     } else {

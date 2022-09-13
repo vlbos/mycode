@@ -225,11 +225,62 @@ impl Solution {
 #[allow(dead_code)]
 pub struct Solution;
 
+// // Definition for a binary tree node.
+// // #[derive(Debug, PartialEq, Eq)]
+// // pub struct TreeNode {
+// //   pub val: i32,
+// //   pub left: Option<Rc<RefCell<TreeNode>>>,
+// //   pub right: Option<Rc<RefCell<TreeNode>>>,
+// // }
+// //
+// // impl TreeNode {
+// //   #[inline]
+// //   pub fn new(val: i32) -> Self {
+// //     TreeNode {
+// //       val,
+// //       left: None,
+// //       right: None
+// //     }
+// //   }
+// // }
+// use std::rc::Rc;
+// use std::cell::RefCell;
+// impl Solution {
+//     pub fn boundary_of_binary_tree(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
+//         fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, ans: &mut Vec<i32>, is_left_bound: bool, is_right_bound: bool) {
+//         if let Some(r) = root {
+//             if is_left_bound {
+//                 ans.push(r.borrow().val);
+//             } else if r.borrow().left.is_none() && r.borrow().right.is_none() {
+//                 ans.push(r.borrow().val);
+//                 return;
+//             }
+
+//             dfs(&r.borrow().left, ans, is_left_bound, !is_left_bound && is_right_bound && r.borrow().right.is_none());
+//             dfs(&r.borrow().right, ans, is_left_bound && !is_right_bound && r.borrow().left.is_none(), is_right_bound);
+
+//             if !is_left_bound && is_right_bound {
+//                 ans.push(r.borrow().val);
+//             }
+//         }
+//     }
+//             let mut ans = vec![];
+//         dfs(&root, &mut ans, true, true);
+//         ans
+
+    
+//     }
+// }
+
 #[cfg(test)]
 mod test {
     use super::*;
     use crate::tree;
-
+// [1,2,3,4,5,6,null,null,null,7,8,9,10]
+// 输出：
+// [1,2,4,7,8,9,10,3]
+// 预期结果：
+// [1,2,4,7,8,9,10,6,3]
     #[test]
     pub fn test_boundary_of_binary_tree_1() {
         let tree = tree![1, null, 2, 3, 4];

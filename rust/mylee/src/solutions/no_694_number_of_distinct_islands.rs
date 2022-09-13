@@ -183,11 +183,63 @@ impl Solution {
 #[allow(dead_code)]
 pub struct Solution;
 
+// impl Solution {
+//     pub fn num_distinct_islands(mut grid: Vec<Vec<i32>>) -> i32 {
+//         fn dfs(grid: &mut Vec<Vec<i32>>, path: &mut String, i: usize, j: usize, n: usize, m: usize) {
+//         grid[i][j] = 0;
+
+//         if i > 0 && grid[i - 1][j] == 1 {
+//             path.push('u');
+//             dfs(grid, path, i - 1, j, n, m);
+//         }
+
+//         if j > 0 && grid[i][j - 1] == 1 {
+//             path.push('l');
+//             dfs(grid, path, i, j - 1, n, m);
+//         }
+
+//         if i + 1 < n && grid[i + 1][j] == 1 {
+//             path.push('d');
+//             dfs(grid, path, i + 1, j, n, m);
+//         }
+
+//         if j + 1 < m && grid[i][j + 1] == 1 {
+//             path.push('r');
+//             dfs(grid, path, i, j + 1, n, m);
+//         }
+
+//         path.push('b');
+//     }
+
+// let n = grid.len();
+//         let m = grid[0].len();
+//         let mut uniq = std::collections::HashSet::new();
+
+//         for i in 0..n {
+//             for j in 0..m {
+//                 if grid[i][j] == 1 {
+//                     let mut path = String::new();
+//                     dfs(&mut grid, &mut path, i, j, n, m);
+//                     uniq.insert(path);
+//                 }
+//             }
+//         }
+
+//         uniq.len() as i32
+
+    
+//     }
+// }
+
 #[cfg(test)]
 mod test {
     use super::*;
     use crate::lc_matrix;
-
+// [[0,0,1,0,1,0,1,1,1,0,0,0,0,1,0,0,1,0,0,1,1,1,0,1,1,1,0,0,0,1,1,0,1,1,0,1,0,1,0,1,0,0,0,0,0,1,1,1,1,0],[0,0,1,0,0,1,1,1,0,0,1,0,1,0,0,1,1,0,0,1,0,0,0,1,0,1,1,1,0,0,0,0,0,0,0,1,1,1,0,0,0,1,0,1,1,0,1,0,0,0],[0,1,0,1,0,1,1,1,0,0,1,1,0,0,0,0,1,0,1,0,1,1,1,0,1,1,1,0,0,0,1,0,1,0,1,0,0,0,1,1,1,1,1,0,0,1,0,0,1,0],[1,0,1,0,0,1,0,1,0,0,1,0,0,1,1,1,0,1,0,0,0,0,1,0,1,0,0,1,0,1,1,1,0,1,0,0,0,1,1,1,0,0,0,0,1,1,1,1,1,1]]
+// 输出：
+// 14
+// 预期结果：
+// 15
     #[test]
     pub fn test_num_distinct_islands_1() {
         let grid = lc_matrix![

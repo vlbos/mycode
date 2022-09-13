@@ -181,6 +181,70 @@ impl Solution {
 #[allow(dead_code)]
 pub struct Solution;
 
+// use std::collections::BTreeMap;
+
+// #[derive(Debug)]
+// struct MaxStack {
+//     stack: BTreeMap<usize, i32>,
+//     max: BTreeMap<(i32, usize), usize>
+// }
+
+// /**
+//  * `&self` means the method takes an immutable reference.
+//  * If you need a mutable reference, change it to `&mut self` instead.
+//  */
+// impl MaxStack {
+//     /** initialize your data structure here. */
+//     fn new() -> Self {
+//         Self {
+//             stack: BTreeMap::new(),
+//             max: BTreeMap::new()
+//         }
+//     }
+    
+//     fn push(&mut self, x: i32) {
+//         let last = self.stack.iter().next_back();
+//         let new_index = if let Some((&i, _)) = last { i + 1 } else { 0 };
+//         self.stack.insert(new_index, x);
+//         self.max.insert((x, new_index), new_index);
+//     }
+    
+//     fn pop(&mut self) -> i32 {
+//         let (&i, &v) = self.stack.iter().next_back().unwrap();
+//         self.stack.remove(&i);
+//         self.max.remove(&(v, i));
+//         v
+//     }
+    
+//     fn top(&self) -> i32 {
+//         let (_, &v) = self.stack.iter().next_back().unwrap();
+//         v
+//     }
+    
+//     fn peek_max(&self) -> i32 {
+//         let (&(v, _), _) = self.max.iter().next_back().unwrap();
+//         v
+//     }
+    
+//     fn pop_max(&mut self) -> i32 {
+//         let (&(v, _), &i) = self.max.iter().next_back().unwrap();
+//         self.stack.remove(&i);
+//         self.max.remove(&(v, i));
+//         v
+//     }
+// }
+
+
+// /**
+//  * Your MaxStack object will be instantiated and called as such:
+//  * let obj = MaxStack::new();
+//  * obj.push(x);
+//  * let ret_2: i32 = obj.pop();
+//  * let ret_3: i32 = obj.top();
+//  * let ret_4: i32 = obj.peek_max();
+//  * let ret_5: i32 = obj.pop_max();
+//  */
+
 #[cfg(test)]
 mod test {
     use super::*;

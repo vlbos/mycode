@@ -190,11 +190,67 @@ impl Solution {
 #[allow(dead_code)]
 pub struct Solution;
 
+
+// use std::rc::Rc;
+// use std::cell::RefCell;
+// use std::collections::HashMap;
+// use std::collections::HashSet;
+// use std::collections::VecDeque;
+
+// impl Solution {
+//     fn find_closest_leaf(root: Option<Rc<RefCell<TreeNode>>>, k: i32) -> i32 {
+//         let mut queue = VecDeque::new();
+//         let mut vis = HashSet::new();
+//         let mut nodes  = HashMap::new();
+//         let mut edges = HashMap::new();
+
+//         Self::preorder(&root, None, &mut nodes, &mut edges);
+//         vis.insert(k);
+//         queue.push_back(k);
+
+//         while let Some(u) = queue.pop_front() {
+//             if nodes[&u] {
+//                 return u;
+//             } else {
+//                 for &v in &edges[&u] {
+//                     if vis.insert(v) {
+//                         queue.push_back(v);
+//                     }
+//                 }
+//             }
+//         }
+//         0
+//     }
+
+//     fn preorder(root: &Option<Rc<RefCell<TreeNode>>>, parent: Option<i32>, nodes: &mut HashMap<i32, bool>, edges: &mut HashMap<i32, Vec<i32>>) {
+//         if let Some(r) = root {
+//             *nodes.entry(r.borrow().val).or_default() = r.borrow().left.is_none() && r.borrow().right.is_none();
+
+//             if let Some(parent) = parent {
+//                 edges.entry(parent).or_default().push(r.borrow().val);
+//                 edges.entry(r.borrow().val).or_default().push(parent);
+//             }
+
+//             Self::preorder(&r.borrow().left, Some(r.borrow().val), nodes, edges);
+//             Self::preorder(&r.borrow().right, Some(r.borrow().val), nodes, edges);
+//         }
+//     }
+// }
+
+
 #[cfg(test)]
 mod tests {
     use super::*;
     use crate::tree;
     use std::collections::HashSet;
+
+// [1,3,2]
+// 1
+// 输出
+// 3
+// 预期结果
+// 2
+
     #[test]
     pub fn test_find_closest_leaf_1() {
         let tree = tree![1, 3, 2];

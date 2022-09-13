@@ -27,7 +27,7 @@
 
 // @lc code=start
 impl Solution {
-    pub fn longest_line(m: Vec<Vec<i32>>) -> i32 {
+    pub fn longest_line(mat: Vec<Vec<i32>>) -> i32 {
         // let rows = m.len();
         // let cols = if rows == 0 { 0 } else { m[0].len() };
         // let mut dp_vertical = vec![vec![0; cols]; 2];
@@ -80,8 +80,8 @@ impl Solution {
         //     }
         // }
         // max_line
-        let mut ans = 0;
-        for (i, row) in m.iter().enumerate() {
+let mut ans = 0;
+        for (i, row) in mat.iter().enumerate() {
             for (j, &v) in row.iter().enumerate() {
                 if v == 0 {
                     continue;
@@ -90,10 +90,10 @@ impl Solution {
                     let mut cnt = 0;
                     let (mut x, mut y) = (i as i32, j as i32);
                     while x >= 0
-                        && x < m.len() as i32
+                        && x < mat.len() as i32
                         && y >= 0
                         && y < row.len() as i32
-                        && m[x as usize][y as usize] == 1
+                        && mat[x as usize][y as usize] == 1
                     {
                         x += dx;
                         y += dy;

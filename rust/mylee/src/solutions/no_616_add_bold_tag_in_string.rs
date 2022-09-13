@@ -128,11 +128,64 @@ impl Solution {
 #[allow(dead_code)]
 pub struct Solution;
 
+// impl Solution {
+//     pub fn add_bold_tag(s: String, words: Vec<String>) -> String {
+// let n = s.len();
+//         let mut hightlights = vec![];
+
+//         for word in words {
+//             let mut i = 0;
+//             let m = word.len();
+
+//             while let Some(pos) = s[i..].find(&word) {
+//                 hightlights.push((i + pos, i + pos + m));
+//                 i += pos + 1;
+//             }
+//         }
+
+//         let m = hightlights.len();
+
+//         if m == 0 {
+//             return s;
+//         }
+
+//         hightlights.sort_by(|a, b| a.0.cmp(&b.0));
+//         let mut highlights_merged = vec![hightlights[0]];
+
+//         for i in 1..m {
+//             let last = highlights_merged.len() - 1;
+//             if highlights_merged[last].1 < hightlights[i].0 {
+//                 highlights_merged.push(hightlights[i]);
+//             } else {
+//                 highlights_merged[last].1 = highlights_merged[last].1.max(hightlights[i].1);
+//             }
+//         }
+
+//         let mut prev = 0;
+//         let mut ans = String::new();
+
+//         for (start, end) in highlights_merged {
+//             let plain = &s[prev..start];
+//             let hightlight = &s[start..end];
+//             ans.push_str(&format!("{}<b>{}</b>", plain, hightlight));
+//             prev = end;
+//         }
+
+//         ans.push_str(&s[prev..]);
+
+//         ans
+//     }
+// }
 #[cfg(test)]
 mod test {
     use super::*;
     use crate::lc_vec_s;
-
+// "aaabbcc"
+// ["aaa","aab","bc","aaabbcc"]
+// 输出：
+// "<b>aaabbc</b>c"
+// 预期结果：
+// "<b>aaabbcc</b>"
     #[test]
     pub fn test_add_bold_1tag_1() {
         assert_eq!(

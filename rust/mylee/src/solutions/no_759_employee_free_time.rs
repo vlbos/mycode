@@ -86,6 +86,52 @@ impl Solution {
     }
 }
 
+
+// /*
+// // Definition for an Interval.
+// #[derive(PartialEq, Eq, Clone, Debug)]
+// struct Interval {
+//     pub start:i32,
+//     pub end:i32
+// }
+
+// impl Interval {
+//     #[inline]
+//     fn new(start:i32, end:i32) -> Self{
+//         Interval {
+//             start,
+//             end
+//         }
+//     }
+// }
+// */
+
+// impl Solution {
+//     pub fn employee_free_time(schedule: Vec<Vec<Interval>>) -> Vec<Interval> {
+//         let mut ans = Vec::new();
+//         let mut m = std::collections::BTreeMap::new();
+//         for employee in &schedule {
+//             for interval in employee {
+//                 *m.entry(interval.start).or_insert(0) += 1;
+//                 *m.entry(interval.end).or_insert(0) -= 1;
+//             }
+//         }
+//         let mut cnt = 0;
+//         for (&k, &v) in &m {
+//             cnt += v;
+//             if cnt == 0 {
+//                 ans.push(Interval::new(k, 0));
+//             }
+//             if cnt > 0 && !ans.is_empty() && ans[ans.len() - 1].end== 0 {
+//                 ans.last_mut().unwrap().end = k;
+//             }
+//         }
+//         if !ans.is_empty() {
+//             ans.pop();
+//         }
+//         ans
+//     }
+// }
 #[cfg(test)]
 mod test {
     use super::*;

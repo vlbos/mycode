@@ -37,11 +37,10 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn anagram_mappings(a: Vec<i32>, b: Vec<i32>) -> Vec<i32> {
-        // Vec::new()
-        let bm: std::collections::HashMap<i32, i32> =
-            b.iter().enumerate().map(|(i, &v)| (v, i as i32)).collect();
-        a.into_iter().map(|v| *bm.get(&v).unwrap()).collect()
+      pub fn anagram_mappings(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<i32> {
+    let bm: std::collections::HashMap<i32, i32> =
+            nums2.iter().enumerate().map(|(i, &v)| (v, i as i32)).collect();
+        nums1.into_iter().map(|v| *bm.get(&v).unwrap()).collect()
     }
 }
 

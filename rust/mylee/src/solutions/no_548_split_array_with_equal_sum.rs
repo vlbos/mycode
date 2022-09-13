@@ -112,6 +112,39 @@ impl Solution {
 #[allow(dead_code)]
 pub struct Solution;
 
+// impl Solution {
+//     pub fn split_array(nums: Vec<i32>) -> bool {
+// let n = nums.len();
+
+//         if n < 7 {
+//             return false;
+//         }
+
+//         let mut prefix = vec![nums[0];n];
+
+//         for i in 1..n {
+//             prefix[i] = prefix[i-1] + nums[i];
+//         }
+
+//         for j in 3..n-3 {
+//             let mut s = std::collections::HashSet::new();
+
+//             for i in 1..j-1 {
+//                 if prefix[i-1] == prefix[j-1] - prefix[i] {
+//                     s.insert(prefix[i-1]);
+//                 }
+//             }
+
+//             for k in j+2..n-1 {
+//                 if prefix[n-1]-prefix[k] == prefix[k-1]-prefix[j] && s.contains(&(prefix[k-1]-prefix[j])) {
+//                     return true;
+//                 }
+//             }
+//         }
+
+//         false
+//     }
+// }
 #[cfg(test)]
 mod test {
     use super::*;

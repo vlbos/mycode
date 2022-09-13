@@ -51,7 +51,7 @@
 // use std::collections::HashMap;
 
 impl Solution {
-    pub fn find_black_pixel(picture: Vec<Vec<char>>, n: i32) -> i32 {
+    pub fn find_black_pixel(picture: Vec<Vec<char>>, target: i32) -> i32 {
         // let rows = picture.len();
         // let cols = if rows == 0 { 0 } else { picture[0].len() };
         // if rows == 0 || cols == 0 {
@@ -85,7 +85,7 @@ impl Solution {
         //     }
         // }
         // sum
-        let nn = n;
+        let nn = target;
         let (m, n) = (picture.len(), picture[0].len());
         let (mut rows, mut cols) = (vec![0; m], vec![0; n]);
         picture.iter().enumerate().for_each(|(i, row)| {

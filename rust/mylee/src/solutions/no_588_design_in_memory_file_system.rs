@@ -268,11 +268,154 @@ impl FileSystem {
 
 // @lc code=end
 
+// use std::collections::BTreeMap;
+
+// enum Entry {
+//     Dir(Dir),
+//     File(File),
+// }
+
+// struct Dir {
+//     name: String,
+//     entries: BTreeMap<String, Entry>,
+// }
+
+// impl Dir {
+//     fn new(name: String) -> Self {
+//         Self {
+//             name,
+//             entries: BTreeMap::new(),
+//         }
+//     }
+
+//     fn list(&self) -> Vec<String> {
+//         self.entries.keys().map(|s| s.clone()).collect()
+//     }
+// }
+
+// struct File {
+//     name: String,
+//     contents: Vec<String>,
+// }
+
+// impl File {
+//     fn new(name: String, content: String) -> Self {
+//         Self {
+//             name,
+//             contents: vec![content],
+//         }
+//     }
+
+//     fn name(&self) -> String {
+//         self.name.clone()
+//     }
+
+//     fn append(&mut self, content: String) {
+//         self.contents.push(content);
+//     }
+
+//     fn content(&self) -> String {
+//         self.contents.join("")
+//     }
+// }
+
+// struct FileSystem {
+//     root: Entry,
+// }
+
+// impl FileSystem {
+
+//     fn new() -> Self {
+//         Self {
+//             root: Entry::Dir(Dir::new("".into())),
+//         }
+//     }
+    
+//     fn ls(&self, path: String) -> Vec<String> {
+//         let mut entry = &self.root;
+
+//         for name in path.split('/').filter(|s| !s.is_empty()) {
+//             if let Entry::Dir(dir) = entry {
+//                 entry = &dir.entries[name];
+//             } else {
+//                 panic!();
+//             }
+//         }
+
+//         match entry {
+//             Entry::Dir(dir) => dir.list(),
+//             Entry::File(file) => vec![file.name()],
+//         }
+//     }
+    
+//     fn mkdir(&mut self, path: String) {
+//         let mut entry = &mut self.root;
+
+//         for name in path.split('/').filter(|s| !s.is_empty()) {
+//             if let Entry::Dir(dir) = entry {
+//                 entry = dir.entries.entry(name.into()).or_insert_with(|| Entry::Dir(Dir::new(name.to_string())))
+//             } else {
+//                 panic!();
+//             }
+//         }
+//     }
+    
+//     fn add_content_to_file(&mut self, file_path: String, content: String) {
+//         let mut entry = &mut self.root;
+
+//         for name in file_path.split('/').filter(|s| !s.is_empty()) {
+//             if let Entry::Dir(dir) = entry {
+//                 entry = dir.entries.entry(name.into()).or_insert_with(|| Entry::File(File::new(name.to_string(), "".to_string())))
+//             } else {
+//                 panic!();
+//             }
+//         }
+
+//         if let Entry::File(file) = entry {
+//             file.append(content);
+//         } else {
+//             panic!();
+//         }
+//     }
+    
+//     fn read_content_from_file(&mut self, file_path: String) -> String {
+//         let mut entry = &mut self.root;
+
+//         for name in file_path.split('/').filter(|s| !s.is_empty()) {
+//             if let Entry::Dir(dir) = entry {
+//                 entry = dir.entries.get_mut(name.into()).unwrap();
+//             } else {
+//                 panic!();
+//             }
+//         }
+
+//         if let Entry::File(file) = entry {
+//             file.content()
+//         } else {
+//             panic!()
+//         }
+//     }
+// }
+
+
+// /**
+//  * Your FileSystem object will be instantiated and called as such:
+//  * let obj = FileSystem::new();
+//  * let ret_1: Vec<String> = obj.ls(path);
+//  * obj.mkdir(path);
+//  * obj.add_content_to_file(filePath, content);
+//  * let ret_4: String = obj.read_content_from_file(filePath);
+//  */
 #[cfg(test)]
 mod test {
     use super::*;
     use crate::lc_vec_s;
-
+// ["FileSystem","ls","ls","ls","ls","ls","addContentToFile","readContentFromFile","readContentFromFile","ls"]
+// [[],["/"],["/"],["/"],["/"],["/"],["/bne","kvo"],["/bne"],["/bne"],["/"]]
+// 输出：
+// [null,[],[],[],[],[],null,"kvo","kvo",[]]
+// 预期结果：
+// [null,[],[],[],[],[],null,"kvo","kvo",["bne"]]
     #[test]
     pub fn test_file_system_1() {
         let mut fs = FileSystem::new();
