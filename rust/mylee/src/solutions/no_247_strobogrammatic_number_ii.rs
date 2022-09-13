@@ -33,17 +33,13 @@ pub struct Solution;
 impl Solution {
     #[allow(clippy::needless_range_loop)]
     pub fn find_strobogrammatic(n: i32) -> Vec<String> {
-        
         if n == 0 {
             return Vec::new();
         }
         let mut ans = if n % 2 == 0 {
             vec![String::new()]
         } else {
-            ["0", "1", "8"]
-                .into_iter()
-                .map(String::from)
-                .collect()
+            ["0", "1", "8"].into_iter().map(String::from).collect()
         };
         for i in 0..n / 2 {
             let mut tmp = Vec::new();

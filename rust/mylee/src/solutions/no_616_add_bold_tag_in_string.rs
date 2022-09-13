@@ -180,12 +180,12 @@ pub struct Solution;
 mod test {
     use super::*;
     use crate::lc_vec_s;
-// "aaabbcc"
-// ["aaa","aab","bc","aaabbcc"]
-// 输出：
-// "<b>aaabbc</b>c"
-// 预期结果：
-// "<b>aaabbcc</b>"
+    // "aaabbcc"
+    // ["aaa","aab","bc","aaabbcc"]
+    // 输出：
+    // "<b>aaabbc</b>c"
+    // 预期结果：
+    // "<b>aaabbcc</b>"
     #[test]
     pub fn test_add_bold_1tag_1() {
         assert_eq!(

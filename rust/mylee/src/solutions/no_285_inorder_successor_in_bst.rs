@@ -6,31 +6,29 @@
 
 // The successor of a node p is the node with the smallest key greater than p.val.
 
-
 // Example 1:
 // <img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0200-0299/0285.Inorder%20Successor%20in%20BST/images/285_example_1.png" style="width: 122px; height: 117px;" />
-// 
+//
 // Input: root = [2,1,3], p = 1
 // Output: 2
 // Explanation: 1&#39;s in-order successor node is 2. Note that both p and the return value is of TreeNode type.
-// 
+//
 
 // Example 2:
 // <img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0200-0299/0285.Inorder%20Successor%20in%20BST/images/285_example_2.png" style="width: 246px; height: 229px;" />
-// 
+//
 // Input: root = [5,3,6,2,4,null,null,1], p = 6
 // Output: null
 // Explanation: There is no in-order successor of the current node, so the answer is null.
-// 
-
+//
 
 // Constraints:
 
-// 
+//
 // 	The number of nodes in the tree is in the range [1, 104].
 // 	-105 <= Node.val <= 105
 // 	All Nodes will have unique values.
-// 
+//
 
 // Definition for a binary tree node.
 // #[derive(Debug, PartialEq, Eq)]
@@ -59,12 +57,12 @@ impl Solution {
         root: Option<Rc<RefCell<TreeNode>>>,
         p: Option<Rc<RefCell<TreeNode>>>,
     ) -> Option<Rc<RefCell<TreeNode>>> {
-let mut stack = vec![];
+        let mut stack = vec![];
         let mut node = root;
         let mut prev: Option<Rc<RefCell<TreeNode>>> = None;
 
         while stack.len() > 0 || node.is_some() {
-            while let Some(n) = node  {
+            while let Some(n) = node {
                 node = n.borrow_mut().left.take();
                 stack.push(n);
             }
@@ -81,7 +79,6 @@ let mut stack = vec![];
         }
 
         None
-
     }
 }
 pub struct Solution;

@@ -180,7 +180,7 @@ impl Solution {
         //     v -= 1;
         // }
         // heights
-       for _ in 0..volume {
+        for _ in 0..volume {
             let mut cur = k as usize;
             while cur > 0 && heights[cur] >= heights[cur - 1] {
                 cur -= 1;

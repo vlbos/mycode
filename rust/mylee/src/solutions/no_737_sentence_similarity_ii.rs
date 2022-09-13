@@ -81,7 +81,9 @@
 
 impl Solution {
     pub fn are_sentences_similar_two(
-        sentence1: Vec<String>, sentence2: Vec<String>, similar_pairs: Vec<Vec<String>>,
+        sentence1: Vec<String>,
+        sentence2: Vec<String>,
+        similar_pairs: Vec<Vec<String>>,
     ) -> bool {
         // if words1.len() != words2.len() {
         //     return false;
@@ -117,7 +119,7 @@ impl Solution {
         // }
         // true
         //  pub fn are_sentences_similar_two(sentence1: Vec<String>, sentence2: Vec<String>, similar_pairs: Vec<Vec<String>>) -> bool {
- if sentence1.len() != sentence2.len() {
+        if sentence1.len() != sentence2.len() {
             return false;
         }
         use std::collections::{HashMap, HashSet};

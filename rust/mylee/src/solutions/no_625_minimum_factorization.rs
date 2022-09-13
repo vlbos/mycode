@@ -56,7 +56,7 @@ impl Solution {
         // } else {
         //     0
         // }
-       if 1 == num {
+        if 1 == num {
             return num;
         }
         let mut num = num;

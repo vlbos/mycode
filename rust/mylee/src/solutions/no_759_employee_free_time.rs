@@ -86,7 +86,6 @@ impl Solution {
     }
 }
 
-
 // /*
 // // Definition for an Interval.
 // #[derive(PartialEq, Eq, Clone, Debug)]
@@ -105,7 +104,6 @@ impl Solution {
 //     }
 // }
 // */
-
 // impl Solution {
 //     pub fn employee_free_time(schedule: Vec<Vec<Interval>>) -> Vec<Interval> {
 //         let mut ans = Vec::new();

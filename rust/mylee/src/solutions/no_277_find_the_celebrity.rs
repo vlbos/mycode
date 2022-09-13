@@ -10,33 +10,30 @@
 
 // Return the celebrity&#39;s label if there is a celebrity at the party. If there is no celebrity, return -1.
 
-
 // Example 1:
 // <img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0200-0299/0277.Find%20the%20Celebrity/images/g1.jpg" style="width: 224px; height: 145px;" />
-// 
+//
 // Input: graph = [[1,1,0],[0,1,0],[1,1,1]]
 // Output: 1
 // Explanation: There are three persons labeled with 0, 1 and 2. graph[i][j] = 1 means person i knows person j, otherwise graph[i][j] = 0 means person i does not know person j. The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.
-// 
+//
 
 // Example 2:
 // <img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0200-0299/0277.Find%20the%20Celebrity/images/g2.jpg" style="width: 224px; height: 145px;" />
-// 
+//
 // Input: graph = [[1,0,1],[1,1,0],[0,1,1]]
 // Output: -1
 // Explanation: There is no celebrity.
-// 
-
+//
 
 // Constraints:
 
-// 
+//
 // 	n == graph.length == graph[i].length
 // 	2 <= n <= 100
 // 	graph[i][j] is 0 or 1.
 // 	graph[i][i] == 1
-// 
-
+//
 
 // Follow up: If the maximum number of allowed calls to the API knows is 3 * n, could you find a solution without exceeding the maximum number of calls?
 
@@ -57,7 +54,7 @@ impl Solution {
 
         for i in 0..n {
             if ans != i {
-                if !self.knows(i, ans) || self.knows(ans,i) {
+                if !self.knows(i, ans) || self.knows(ans, i) {
                     return -1;
                 }
             }
@@ -65,8 +62,9 @@ impl Solution {
 
         ans
     }
-    fn  knows(&self,a: i32, b: i32)->bool{  
-    true}
+    fn knows(&self, a: i32, b: i32) -> bool {
+        true
+    }
 }
 pub struct Solution;
 

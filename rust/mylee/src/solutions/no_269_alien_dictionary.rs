@@ -127,7 +127,7 @@ impl Solution {
 
     pub fn alien_order(words: Vec<String>) -> String {
         use std::collections::VecDeque;
-        let mut letters = words.iter().fold(vec![false; 256], |mut acc, word| {
+        let letters = words.iter().fold(vec![false; 256], |mut acc, word| {
             word.bytes().for_each(|u| acc[u as usize] = true);
             acc
         });

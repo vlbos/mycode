@@ -100,7 +100,10 @@ use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
     #[allow(dead_code)]
-     pub fn split_bst(mut root: Option<Rc<RefCell<TreeNode>>>, target: i32) -> Vec<Option<Rc<RefCell<TreeNode>>>> {
+    pub fn split_bst(
+        mut root: Option<Rc<RefCell<TreeNode>>>,
+        target: i32,
+    ) -> Vec<Option<Rc<RefCell<TreeNode>>>> {
         let mut ans = vec![None, None];
         if root.is_none() {
             return ans;

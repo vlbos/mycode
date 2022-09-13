@@ -44,28 +44,22 @@
 pub struct Solution {}
 impl Solution {
     pub fn min_available_duration(
-        slots1: Vec<Vec<i32>>,
-        slots2: Vec<Vec<i32>>,
+        mut slots1: Vec<Vec<i32>>,
+        mut slots2: Vec<Vec<i32>>,
         duration: i32,
     ) -> Vec<i32> {
+        slots1.sort();
+        slots2.sort();
         let (mut i, mut j) = (0, 0);
         while i < slots1.len() && j < slots2.len() {
-            while i < slots1.len() && slots1[i][1] < slots2[j][0] {
-                i += 1;
-            }
-            if i == slots1.len() {
-                break;
-            }
-            while j < slots2.len() && slots2[j][1] < slots1[i][0] {
-                j += 1;
-            }
-            if j == slots2.len() {
-                break;
-            }
             let start = slots1[i][0].max(slots2[j][0]);
             let end = start + duration;
             if end <= slots1[i][1].min(slots2[j][1]) {
                 return vec![start, end];
+            } else if slots1[i][1] < slots2[j][1] {
+                i += 1;
+            } else {
+                j += 1;
             }
         }
 

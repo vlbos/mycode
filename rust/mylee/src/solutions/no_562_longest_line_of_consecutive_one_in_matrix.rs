@@ -80,7 +80,7 @@ impl Solution {
         //     }
         // }
         // max_line
-let mut ans = 0;
+        let mut ans = 0;
         for (i, row) in mat.iter().enumerate() {
             for (j, &v) in row.iter().enumerate() {
                 if v == 0 {

@@ -190,7 +190,6 @@ impl Solution {
 #[allow(dead_code)]
 pub struct Solution;
 
-
 // use std::rc::Rc;
 // use std::cell::RefCell;
 // use std::collections::HashMap;
@@ -237,19 +236,18 @@ pub struct Solution;
 //     }
 // }
 
-
 #[cfg(test)]
 mod tests {
     use super::*;
     use crate::tree;
     use std::collections::HashSet;
 
-// [1,3,2]
-// 1
-// 输出
-// 3
-// 预期结果
-// 2
+    // [1,3,2]
+    // 1
+    // 输出
+    // 3
+    // 预期结果
+    // 2
 
     #[test]
     pub fn test_find_closest_leaf_1() {

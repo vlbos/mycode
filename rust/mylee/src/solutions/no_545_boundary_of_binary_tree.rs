@@ -268,7 +268,6 @@ pub struct Solution;
 //         dfs(&root, &mut ans, true, true);
 //         ans
 
-    
 //     }
 // }
 
@@ -276,11 +275,11 @@ pub struct Solution;
 mod test {
     use super::*;
     use crate::tree;
-// [1,2,3,4,5,6,null,null,null,7,8,9,10]
-// 输出：
-// [1,2,4,7,8,9,10,3]
-// 预期结果：
-// [1,2,4,7,8,9,10,6,3]
+    // [1,2,3,4,5,6,null,null,null,7,8,9,10]
+    // 输出：
+    // [1,2,4,7,8,9,10,3]
+    // 预期结果：
+    // [1,2,4,7,8,9,10,6,3]
     #[test]
     pub fn test_boundary_of_binary_tree_1() {
         let tree = tree![1, null, 2, 3, 4];

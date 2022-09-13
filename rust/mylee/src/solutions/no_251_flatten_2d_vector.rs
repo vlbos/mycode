@@ -57,7 +57,11 @@ impl Vector2D {
         //     i: 0,
         //     j: 0,
         // }
-        Self { vec, row: 0, col: 0 }
+        Self {
+            vec,
+            row: 0,
+            col: 0,
+        }
     }
 
     pub fn next(&mut self) -> i32 {

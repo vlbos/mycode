@@ -208,9 +208,6 @@ impl Solution {
 //         }
 
 //         false
-    
-
-   
 
 //     }
 // }
@@ -229,27 +226,14 @@ mod test {
 
     #[test]
     pub fn test_check_equal_tree_1() {
-        assert_eq!(
-            Solution::check_equal_tree(tree![5, 10, 10, null, null, 2, 3]),
-            true
-        );
+        assert!(Solution::check_equal_tree(tree![
+            5, 10, 10, null, null, 2, 3
+        ]));
     }
 
     #[test]
     pub fn test_check_equal_tree_2() {
         let tree = tree![1, 2, 10, null, null, 2, 20];
-        assert_eq!(Solution::check_equal_tree(tree), false);
-    }
-
-    #[test]
-    pub fn test_check_equal_tree_3() {
-        let tree = tree![1, null, 2, 2];
-        assert_eq!(Solution::check_equal_tree(tree), false);
-    }
-
-    #[test]
-    pub fn test_check_equal_tree_4() {
-        let tree = tree![2, 1, 3, 0, 2, null, null, null, null, 2, null, 1, null, null, 1];
-        assert_eq!(Solution::check_equal_tree(tree), true);
+        assert!(!Solution::check_equal_tree(tree));
     }
 }

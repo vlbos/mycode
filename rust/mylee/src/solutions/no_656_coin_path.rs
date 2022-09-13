@@ -46,7 +46,7 @@
 // @star
 // @lc code=start
 impl Solution {
-     pub fn cheapest_jump(coins: Vec<i32>, max_jump: i32) -> Vec<i32>  {
+    pub fn cheapest_jump(coins: Vec<i32>, max_jump: i32) -> Vec<i32> {
         //     let n = a.len();
         //     if n == 0 || a[n - 1] < 0 {
         //         return vec![];

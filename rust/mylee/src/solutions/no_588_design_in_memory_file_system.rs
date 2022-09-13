@@ -330,7 +330,7 @@ impl FileSystem {
 //             root: Entry::Dir(Dir::new("".into())),
 //         }
 //     }
-    
+
 //     fn ls(&self, path: String) -> Vec<String> {
 //         let mut entry = &self.root;
 
@@ -347,7 +347,7 @@ impl FileSystem {
 //             Entry::File(file) => vec![file.name()],
 //         }
 //     }
-    
+
 //     fn mkdir(&mut self, path: String) {
 //         let mut entry = &mut self.root;
 
@@ -359,7 +359,7 @@ impl FileSystem {
 //             }
 //         }
 //     }
-    
+
 //     fn add_content_to_file(&mut self, file_path: String, content: String) {
 //         let mut entry = &mut self.root;
 
@@ -377,7 +377,7 @@ impl FileSystem {
 //             panic!();
 //         }
 //     }
-    
+
 //     fn read_content_from_file(&mut self, file_path: String) -> String {
 //         let mut entry = &mut self.root;
 
@@ -397,7 +397,6 @@ impl FileSystem {
 //     }
 // }
 
-
 // /**
 //  * Your FileSystem object will be instantiated and called as such:
 //  * let obj = FileSystem::new();
@@ -410,12 +409,12 @@ impl FileSystem {
 mod test {
     use super::*;
     use crate::lc_vec_s;
-// ["FileSystem","ls","ls","ls","ls","ls","addContentToFile","readContentFromFile","readContentFromFile","ls"]
-// [[],["/"],["/"],["/"],["/"],["/"],["/bne","kvo"],["/bne"],["/bne"],["/"]]
-// 输出：
-// [null,[],[],[],[],[],null,"kvo","kvo",[]]
-// 预期结果：
-// [null,[],[],[],[],[],null,"kvo","kvo",["bne"]]
+    // ["FileSystem","ls","ls","ls","ls","ls","addContentToFile","readContentFromFile","readContentFromFile","ls"]
+    // [[],["/"],["/"],["/"],["/"],["/"],["/bne","kvo"],["/bne"],["/bne"],["/"]]
+    // 输出：
+    // [null,[],[],[],[],[],null,"kvo","kvo",[]]
+    // 预期结果：
+    // [null,[],[],[],[],[],null,"kvo","kvo",["bne"]]
     #[test]
     pub fn test_file_system_1() {
         let mut fs = FileSystem::new();
