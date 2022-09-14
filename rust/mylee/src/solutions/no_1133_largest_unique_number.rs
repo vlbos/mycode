@@ -39,8 +39,8 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn largest_unique_number(a: Vec<i32>) -> i32 {
-        let mut a = a;
+    pub fn largest_unique_number(nums: Vec<i32>) -> i32 {
+ let mut a = nums;
         a.sort();
         let mut pre = a[a.len() - 1];
         let mut cnt = 0;
@@ -59,10 +59,30 @@ impl Solution {
     }
 }
 
+// impl Solution {
+//     pub fn largest_unique_number(nums: Vec<i32>) -> i32 {
+//     let mut btm = std::collections::BTreeMap::new();
+//         for i in nums {
+//             *btm.entry(i).or_insert(0) += 1;
+//         }
+    
+//         for (&k, &v) in btm.iter().rev() {
+//             if v == 1 {
+//                 return k
+//             }
+//         }
+//         -1
+//     }
+// }
+
 #[cfg(test)]
 mod test {
     use super::*;
-
+// [99]
+// 输出：
+// -1
+// 预期结果：
+// 99
     #[test]
     pub fn test_largest_unique_number_1() {
         assert_eq!(

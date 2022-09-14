@@ -92,8 +92,8 @@ impl Solution {
                 (33 - bit_len(start & -start)).max(33 - bit_len(n.into()))
             };
             ans.push(format!("{}/{}", to_ip_str(start), mask));
-            start += (1 << (32 - mask));
-            n -= (1 << (32 - mask));
+            start += 1 << (32 - mask);
+            n -= 1 << (32 - mask);
         }
 
         ans

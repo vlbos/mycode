@@ -72,10 +72,22 @@ impl Solution {
     }
 }
 
+// impl Solution {
+//     pub fn confusing_number(n: i32) -> bool {
+//     n != n.to_string().chars().map(|c| {
+//             match c.to_digit(10).unwrap() {
+//                 2 | 3 | 4 | 5 | 7 => ' ',
+//                 6 => '9',
+//                 9 => '6',
+//                 _ => c,
+//             }
+//         }).rev().collect::<String>().parse::<i32>().unwrap_or(n)
+//     }
+// }
 #[cfg(test)]
 mod test {
     use super::*;
-
+// 916
     #[test]
     pub fn test_confusing_number_1() {
         assert!(Solution::confusing_number(6));

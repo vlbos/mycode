@@ -105,7 +105,7 @@ impl Solution {
             }
 
             for j in 0..num {
-                if (ans >= n) {
+                if ans >= n {
                     return ans;
                 }
 

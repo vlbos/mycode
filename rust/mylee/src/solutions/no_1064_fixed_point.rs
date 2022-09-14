@@ -44,8 +44,8 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn fixed_point(a: Vec<i32>) -> i32 {
-        for (i, &v) in a.iter().enumerate() {
+    pub fn fixed_point(arr: Vec<i32>) -> i32 {
+        for (i, &v) in arr.iter().enumerate() {
             if i as i32 == v {
                 return v;
             }

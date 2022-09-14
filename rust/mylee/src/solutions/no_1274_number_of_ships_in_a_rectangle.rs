@@ -25,3 +25,38 @@ Constraints:
 
 
 */
+/**
+ * // This is Sea's API interface.
+ * // You should not implement it, or speculate about its implementation
+ * struct Sea;
+ * impl Sea {
+ *    pub fn hasShips(topRight: Vec<i32>,bottomLeft: Vec<i32>)->bool{}
+ * }
+ */
+ pub struct Sea;
+ impl Sea {
+    pub fn hasShips(&self,topRight: Vec<i32>,bottomLeft: Vec<i32>)->bool{true}
+ }
+pub struct Solution ;
+impl Solution {
+    pub fn count_ships(sea: &Sea, topRight: Vec<i32>, bottomLeft: Vec<i32>) -> i32 {
+let x1 = topRight[0];
+        let y1 = topRight[1];
+        let x2 = bottomLeft[0];
+        let y2 = bottomLeft[1];
+
+        if x1 < x2 || y1 < y2 || !sea.hasShips(topRight, bottomLeft) {
+            return 0
+        }
+
+        if x1 == x2 || y1 == y2 {
+            return 1
+        }
+
+        let mx = (x1 + x2) / 2;
+        let my = (y1 + y2) / 2;
+
+        Self::count_ships(sea, vec![mx, my], vec![x2, y2]) + Self::count_ships(sea, vec![mx, y1], vec![x2, my + 1]) + Self::count_ships(sea, vec![x1, my], vec![mx + 1, y2]) + Self::count_ships(sea, vec![x1, y1], vec![mx + 1, my + 1])
+    }
+}
+

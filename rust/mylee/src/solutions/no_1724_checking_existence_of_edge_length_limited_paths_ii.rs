@@ -55,44 +55,126 @@
 
 //     public boolean query(int p, int q, int limit)
 
-use std::collections::{HashMap, HashSet, VecDeque};
+// use std::collections::{HashMap, HashSet, VecDeque};
+// #[allow(dead_code)]
+// pub struct DistanceLimitedPathsExist {
+//     g: HashMap<i32, Vec<(i32, i32)>>,
+// }
+// impl DistanceLimitedPathsExist {
+//     pub fn new(_n: i32, edge_list: Vec<Vec<i32>>) -> Self {
+//         let mut g = HashMap::new();
+//         for e in &edge_list {
+//             g.entry(e[0]).or_insert(Vec::new()).push((e[1], e[2]));
+//             g.entry(e[1]).or_insert(Vec::new()).push((e[0], e[2]));
+//         }
+//         Self { g }
+//     }
+//     pub fn query(&self, p: i32, q: i32, limit: i32) -> bool {
+//         let g = &self.g;
+//         let mut que = VecDeque::from([p]);
+//         let mut visited = HashSet::new();
+//         let mut dis = 0;
+//         while let Some(u) = que.pop_front() {
+//             for &(v, d) in g.get(&u).unwrap_or(&Vec::new()) {
+//                 if visited.contains(&v) {
+//                     continue;
+//                 }
+//                 if dis + d >= limit {
+//                     continue;
+//                 }
+//                 if v == q {
+//                     return true;
+//                 }
+//                 dis += d;
+//                 visited.insert(v);
+//                 que.push_back(v);
+//             }
+//         }
+//         false
+//     }
+// }
+
+
+use std::collections::BTreeMap;
+#[allow(dead_code)]
+pub struct UnionFind {
+     id: Vec<BTreeMap<i32, i32>>,
+}
+impl UnionFind {
+    fn new(n:i32)->Self{
+        Self{id:(0..n).map(|x|BTreeMap::from([(0,x)])).collect()}
+    }
+    fn unite(&mut self,u:i32,v:i32,limit:i32){
+        let (i,j)=(self.find(u,limit),self.find(v,limit));
+        if i==j{
+        return}
+        self.id[i as usize].insert(limit,j);
+    }
+    fn find(&mut self,u:i32,limit:i32)->i32{
+        let i = *self.id[u as usize].range(..=limit).next_back().unwrap().1;
+        if i==u{
+        return u
+        }
+        let j = self.find(i,limit);
+        self.id[u as usize].insert(limit,j);
+        j
+    }
+}
 #[allow(dead_code)]
 pub struct DistanceLimitedPathsExist {
-    g: HashMap<i32, Vec<(i32, i32)>>,
+     uf:UnionFind,
 }
 impl DistanceLimitedPathsExist {
-    pub fn new(_n: i32, edge_list: Vec<Vec<i32>>) -> Self {
-        let mut g = HashMap::new();
-        for e in &edge_list {
-            g.entry(e[0]).or_insert(Vec::new()).push((e[1], e[2]));
-            g.entry(e[1]).or_insert(Vec::new()).push((e[0], e[2]));
+    pub fn new(n: i32, mut edge_list: Vec<Vec<i32>>) -> Self {
+        let mut uf=UnionFind::new(n);
+        edge_list.sort_by_key(|x|x[2]);
+        for e in &edge_list{
+            uf.unite(e[0],e[1],e[2]);
         }
-        Self { g }
+        Self{uf}
     }
-    pub fn query(&self, p: i32, q: i32, limit: i32) -> bool {
-        let g = &self.g;
-        let mut que = VecDeque::from([p]);
-        let mut visited = HashSet::new();
-        let mut dis = 0;
-        while let Some(u) = que.pop_front() {
-            for &(v, d) in g.get(&u).unwrap_or(&Vec::new()) {
-                if visited.contains(&v) {
-                    continue;
-                }
-                if dis + d >= limit {
-                    continue;
-                }
-                if v == q {
-                    return true;
-                }
-                dis += d;
-                visited.insert(v);
-                que.push_back(v);
-            }
-        }
-        false
+
+    pub fn query(&mut self, p: i32, q: i32, limit: i32) -> bool {
+        self.uf.find(p,limit-1)==self.uf.find(q,limit-1)
     }
+    
 }
+
+// use std::collections::BTreeMap;
+// #[allow(dead_code)]
+// pub struct DistanceLimitedPathsExist {
+//      g: BTreeMap<i32, Vec<i32>>,
+// }
+// impl DistanceLimitedPathsExist {
+//     pub fn new(n: i32, edge_list: Vec<Vec<i32>>) -> Self {
+//         let mut v:Vec<i32>= (0..n).collect();
+//         let mut el= edge_list;
+//         el.sort_by_key(|x|x[2]);
+//         let mut g =BTreeMap::new();
+//         for e in &el {
+//             let (x,y)=(Self::find(e[0],&mut v),Self::find(e[1],&mut v));
+//             v[x as usize]=y;
+//             g.insert(e[2],v.clone());
+//         }
+//         Self { g}
+//     }
+
+//     pub fn query(&mut self, p: i32, q: i32, limit: i32) -> bool {
+//         if  self.g.range(..limit).count()<2{
+//         return false
+//         }
+//         let i =*self.g.range(..limit).next_back().unwrap().0;
+//         let mut v = self.g.get_mut(&i).unwrap();
+//         Self::find(p,&mut v)== Self::find(q,&mut v)
+//     }
+//     pub fn find(mut x:i32,v:&mut Vec<i32>)->i32{
+//                 while  v[x as usize]!=x{
+//                      v[x as usize]= v[v[x as usize] as usize];
+//                     x= v[x as usize];
+//                 }
+//             x
+//     }
+// }
 
 #[cfg(test)]
 mod test {
@@ -100,7 +182,7 @@ mod test {
 
     #[test]
     pub fn test_check_equivalence_1() {
-        let d = DistanceLimitedPathsExist::new(
+        let mut d = DistanceLimitedPathsExist::new(
             6,
             vec![
                 vec![0, 2, 4],

@@ -34,35 +34,60 @@
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Goldman Sachs](https://leetcode.ca/tags/#Goldman%20Sachs)
 #[allow(dead_code)]
 pub struct Solution {}
+// impl Solution {
+//     pub fn high_five(items: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+//         let mut cnt = std::collections::HashMap::<i32, (i32, i32)>::new();
+//         for item in &items {
+//             cnt.entry(item[0])
+//                 .and_modify(|mut x| {
+//                     x.0 += item[1];
+//                     x.1 += 1;
+//                 })
+//                 .or_insert((item[1], 1));
+//         }
+//         let mut average_scores: Vec<(i32, i32)> =
+//             cnt.into_iter().map(|(k, v)| (-v.0 / v.1, k)).collect();
+//         average_scores.sort();
+//         (if average_scores.len() > 5 {
+//             &average_scores[..5]
+//         } else {
+//             &average_scores[..]
+//         })
+//         .iter()
+//         .map(|x| vec![x.1, -x.0])
+//         .collect()
+//     }
+// }
+
 impl Solution {
-    pub fn high_five(items: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-        let mut cnt = std::collections::HashMap::<i32, (i32, i32)>::new();
-        for item in &items {
-            cnt.entry(item[0])
-                .and_modify(|mut x| {
-                    x.0 += item[1];
-                    x.1 += 1;
-                })
-                .or_insert((item[1], 1));
+    pub fn high_five(mut items: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+        items.sort_by(|a, b| if a[0] == b[0] { b[1].cmp(&a[1]) } else { a[0].cmp(&b[0]) } );
+
+        let mut i = 0;
+        let mut id = 0;
+        let mut ans = vec![];
+
+        while i <= items.len() - 5 {
+            if id != items[i][0] {
+                id = items[i][0];
+                let sum: i32 = items[i..i+5].iter().map(|x| x[1]).sum();
+                ans.push(vec![items[i][0], sum / 5]);
+                i += 4;
+            }
+            i += 1;
         }
-        let mut average_scores: Vec<(i32, i32)> =
-            cnt.into_iter().map(|(k, v)| (-v.0 / v.1, k)).collect();
-        average_scores.sort();
-        (if average_scores.len() > 5 {
-            &average_scores[..5]
-        } else {
-            &average_scores[..]
-        })
-        .iter()
-        .map(|x| vec![x.1, -x.0])
-        .collect()
+
+        ans
     }
 }
-
 #[cfg(test)]
 mod test {
     use super::*;
-
+// [[1,91],[1,92],[2,93],[2,97],[1,60],[2,77],[1,65],[1,87],[1,100],[2,100],[2,76]]
+// 输出：
+// [[2,88],[1,82]]
+// 预期结果：
+// [[1,87],[2,88]]
     #[test]
     pub fn test_high_five_1() {
         assert_eq!(

@@ -78,7 +78,6 @@ impl Solution {
                         t.push(cur);
                     }
                     if is_confusing_num(cur) {
-                        println!("=={},{},{}", cur, cur, cur);
                         ans += 1;
                     }
                 }

@@ -54,14 +54,14 @@ pub struct Solution {}
 impl Solution {
     pub fn number_of_ways(num_people: i32) -> i32 {
         let n = num_people as usize;
-        let mut dp = vec![0; n + 1];
+        let mut dp = vec![0i64; n + 1];
         dp[0] = 1;
         for i in (2..=n).step_by(2) {
             for j in (2..=i).step_by(2) {
                 dp[i] = (dp[i] + dp[j - 2] * dp[i - j]) % 1_000_000_007;
             }
         }
-        dp[n]
+        dp[n] as _
     }
 }
 #[cfg(test)]

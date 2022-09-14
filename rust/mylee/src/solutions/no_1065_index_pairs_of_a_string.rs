@@ -43,11 +43,12 @@ impl Solution {
         let mut ans = Vec::new();
         for i in 0..text.len() {
             for word in &words {
-                if &text[i..word.len()] == &word[..] {
+                if  i + word.len() <= text.len() &&  &text[i..i+word.len()] == &word[..] {
                     ans.push(vec![i as i32, (i + word.len()) as i32 - 1]);
                 }
             }
         }
+        ans.sort();
         ans
     }
 }
@@ -55,7 +56,9 @@ impl Solution {
 #[cfg(test)]
 mod test {
     use super::*;
-
+// "ababa"
+// ["aba","ab"]
+// [[0,1],[0,2],[2,3],[2,4]]
     #[test]
     pub fn test_index_pairs_1() {
         assert_eq!(

@@ -57,8 +57,8 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn smallest_equivalent_string(a: String, b: String, s: String) -> String {
-        use std::collections::{HashMap, HashSet};
+    pub fn smallest_equivalent_string(s1: String, s2: String, base_str: String) -> String {
+ use std::collections::{HashMap, HashSet};
         let mut g = HashMap::new();
         let mut seen = HashSet::new();
         pub fn dfs(
@@ -79,11 +79,11 @@ impl Solution {
             }
             ans
         }
-        for (ac, bc) in a.chars().zip(b.chars()) {
+        for (ac, bc) in s1.chars().zip(s2.chars()) {
             g.entry(ac).or_insert(Vec::new()).push(bc);
             g.entry(bc).or_insert(Vec::new()).push(ac);
         }
-        s.chars()
+        base_str.chars()
             .map(|c| {
                 seen.clear();
                 dfs(c, c, &g, &mut seen)

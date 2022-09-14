@@ -67,10 +67,119 @@ impl Solution {
     }
 }
 
+
+//         use std::collections::{HashMap,BTreeSet};
+
+// impl Solution {
+//     pub fn generate_sentences(synonyms: Vec<Vec<String>>, text: String) -> Vec<String> {
+// let mut bts = BTreeSet::new();
+
+//         for s in &synonyms {
+//             bts.insert(s[0].to_string());
+//             bts.insert(s[1].to_string());
+//         }
+
+//         for s in text.split_whitespace() {
+//             bts.insert(s.to_string());
+//         }
+
+//         let n = bts.len();
+//         let mut uf = UnionFind::new(n);
+//         let mut words = vec![];
+//         let mut ids = HashMap::new();
+
+//         for (i, s) in bts.iter().enumerate() {
+//             words.push(s.to_string());
+//             ids.insert(s.to_string(), i);
+//         }
+
+//         for s in synonyms {
+//             uf.union(ids[&s[0]], ids[&s[1]]);
+//         }
+
+//         let all_groups = uf.groups();
+//         let mut groups = vec![];
+
+//         for s in text.split_whitespace() {
+//             let wid = ids[s];
+//             let gid = uf.find(wid);
+//             let group = all_groups[&gid].to_vec();
+//             groups.push(group);
+//         }
+
+//         let m = groups.len();
+//         let mut ans = vec![];
+//         fn dfs(groups: &Vec<Vec<usize>>, words: &Vec<String>, selected: &mut Vec<usize>, ans: &mut Vec<String>, begin: usize) {
+//         if begin == groups.len() {
+//             let s = selected.iter().map(|&i| words[i].to_string()).collect::<Vec<String>>();
+//             ans.push(s.join(" "));
+//         } else {
+//             for &i in &groups[begin] {
+//                 selected.push(i);
+//                 dfs(groups, words, selected, ans, begin + 1);
+//                 selected.pop();
+//             }
+//         }
+//     }
+//         dfs(&groups, &words, &mut Vec::new(), &mut ans, 0);
+
+//         ans
+//     }
+
+    
+// }
+
+// struct UnionFind {
+//     parent: Vec<usize>,
+//     n: usize,
+// }
+
+// impl UnionFind {
+//     fn new(n: usize) -> Self {
+//         Self { 
+//             parent: (0..n).collect(), 
+//             n,
+//         }
+//     }
+
+//     fn find(&mut self, i: usize) -> usize {
+//         if i != self.parent[i] {
+//             self.parent[i] = self.find(self.parent[i]);
+//         }
+
+//         self.parent[i]
+//     }
+
+//     fn union(&mut self, i: usize, j: usize) {
+//         let x = self.find(i);
+//         let y = self.find(j);
+
+//         if x != y {
+//             self.parent[x] = y;
+//         }
+//     }
+
+//     fn groups(&mut self) -> HashMap<usize, Vec<usize>> {
+//         let mut mp = HashMap::new();
+
+//         for i in 0..self.n {
+//             let j = self.find(i);
+//             mp.entry(j).or_insert(vec![]).push(i);
+//         }
+
+//         mp
+//     }
+// }
+
 #[cfg(test)]
 mod test {
     use super::*;
-
+// [["a","b"],["b","c"],["d","e"],["c","d"]]
+// "a b"
+// 输出：
+// ["a a","a b","a c","a d","b a","b b","b c","b d","c a","c b","c c","c d","d a","d b","d c","d d"]
+// 预期结果：
+// ["a a","a b","a c","a d","a e","b a","b b","b c","b d","b e","c a","c b","c c","c d","c e","d a","d b","d c","d d","d e","e a","e b","e c","e d","e e"]
     #[test]
     pub fn test_generate_sentences_1() {
         assert_eq!(

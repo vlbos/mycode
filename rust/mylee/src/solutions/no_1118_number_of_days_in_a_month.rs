@@ -37,14 +37,14 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn number_of_days(y: i32, m: i32) -> i32 {
-        if m == 2 {
-            if y % 4 == 0 && (y % 100 > 0 || y % 400 == 0) {
+    pub fn number_of_days(year: i32, month: i32) -> i32 {
+        if month == 2 {
+            if year % 4 == 0 && (year % 100 > 0 || year % 400 == 0) {
                 29
             } else {
                 28
             }
-        } else if (m % 2 == 0) ^ (m < 8) {
+        } else if (month % 2 == 0) ^ (month < 8) {
             31
         } else {
             30

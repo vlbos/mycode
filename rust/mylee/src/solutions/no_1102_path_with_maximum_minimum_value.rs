@@ -50,10 +50,10 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn maximum_minimum_path(a: Vec<Vec<i32>>) -> i32 {
-        let (m, n) = (a.len(), a[0].len());
+    pub fn maximum_minimum_path(grid: Vec<Vec<i32>>) -> i32 {
+        let (m, n) = (grid.len(), grid[0].len());
         let mut visited = vec![vec![false; n]; m];
-        let mut q = std::collections::BinaryHeap::from([(a[0][0], 0, 0)]);
+        let mut q = std::collections::BinaryHeap::from([(grid[0][0], 0, 0)]);
         let dirs = [0, 1, 0, -1, 0];
         while let Some((c, i, j)) = q.pop() {
             if i == m - 1 && j == n - 1 {
@@ -67,7 +67,8 @@ impl Solution {
                 }
                 let (x, y) = (x as usize, y as usize);
                 if !visited[x][y] {
-                    q.push((a[x][y].min(c), x, y));
+                    q.push((grid[x][y].min(c), x, y));
+                    visited[x][y] = true;
                 }
             }
         }
@@ -75,6 +76,38 @@ impl Solution {
     }
 }
 
+// impl Solution {
+//     pub fn maximum_minimum_path(grid: Vec<Vec<i32>>) -> i32 {
+//  let n = grid.len();
+//         let m = grid[0].len();
+//         let mut vis = vec![vec![false;m];n];
+//         let dirs = [(1,0),(-1,0),(0,1),(0,-1)];
+//         let mut queue = std::collections::BinaryHeap::new();
+//         vis[0][0] = true;
+//         queue.push((grid[0][0], 0, 0));
+//         let mut ans = i32::MAX;
+
+//         while let Some((v, i, j)) = queue.pop() {
+//             ans = ans.min(v);
+
+//             if i == n - 1 && j == m - 1 {
+//                 break;
+//             }
+
+//             for k in 0..4 {
+//                 let x = (i as i32 + dirs[k].0) as usize;
+//                 let y = (j as i32 + dirs[k].1) as usize;
+
+//                 if x < n && y < m && !vis[x][y] {
+//                     queue.push((grid[x][y], x, y));
+//                     vis[x][y] = true;
+//                 }
+//             }
+//         }
+
+//         ans
+//     }
+// }
 #[cfg(test)]
 mod test {
     use super::*;

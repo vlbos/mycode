@@ -181,6 +181,9 @@ impl Solution {
             &mut master,
             &mut target,
         );
+        if target.is_empty(){
+        return -1
+        }
         use std::cmp::Reverse;
         let mut q = std::collections::BinaryHeap::from([Reverse((0, max as i32, max as i32))]);
         grid[max][max] = 0;
@@ -218,7 +221,7 @@ mod test {
             (2, 0),
             (0, 2),
         );
-        assert_eq!(4, Solution::find_shortest_path(master));
+        assert_eq!(9, Solution::find_shortest_path(master));
     }
     #[test]
     pub fn test_find_shortest_path_3() {

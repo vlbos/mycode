@@ -49,10 +49,61 @@ impl Solution {
     }
 }
 
+
+// // Definition for a binary tree node.
+// // #[derive(Debug, PartialEq, Eq)]
+// // pub struct TreeNode {
+// //   pub val: i32,
+// //   pub left: Option<Rc<RefCell<TreeNode>>>,
+// //   pub right: Option<Rc<RefCell<TreeNode>>>,
+// // }
+// //
+// // impl TreeNode {
+// //   #[inline]
+// //   pub fn new(val: i32) -> Self {
+// //     TreeNode {
+// //       val,
+// //       left: None,
+// //       right: None
+// //     }
+// //   }
+// // }
+// use std::rc::Rc;
+// use std::cell::RefCell;
+// impl Solution {
+//     pub fn maximum_average_subtree(root: Option<Rc<RefCell<TreeNode>>>) -> f64 {
+
+//     fn post_order(root: &Option<Rc<RefCell<TreeNode>>>, ans: &mut f64) -> (i32, i32) {
+//         if let Some(r) = root {
+//             let (sum_left, cnt_left) = post_order(&r.borrow().left, ans);
+//             let (sum_right, cnt_right) = post_order(&r.borrow().right, ans);
+//             let mut sum = r.borrow().val + sum_left + sum_right;
+//             let mut cnt = cnt_left + cnt_right + 1;
+
+//             *ans = (*ans).max(sum as f64 / cnt as f64);
+
+//             (sum, cnt)
+//         } else {
+//             (0, 0)
+//         }
+//     }
+// let mut ans = f64::MIN;
+
+//         post_order(&root, &mut ans);
+
+//         ans
+//     }
+
+// }
+
 #[cfg(test)]
 mod test {
     use super::*;
-
+// [2,null,1]
+// 输出：
+// 2.00000
+// 预期结果：
+// 1.5
     #[test]
     pub fn test_can_divide_into_subsequences_1() {
         assert!(Solution::can_divide_into_subsequences(
