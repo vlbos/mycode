@@ -78,7 +78,6 @@ impl Solution {
     }
 }
 
-
 // impl Solution {
 //     pub fn find_smallest_region(regions: Vec<Vec<String>>, region1: String, region2: String) -> String {
 //  use std::collections::HashMap;
@@ -98,8 +97,6 @@ impl Solution {
 //         a.clone()
 //     }
 // }
-
-
 
 // impl Solution {
 //     fn find_smallest_region(regions: Vec<Vec<String>>, region1: String, region2: String) -> String {
@@ -130,7 +127,7 @@ impl Solution {
 
 //         while let Some(next) = parents.get(r2) {
 //             r2 = next;
-            
+
 //             if path.contains(r2) {
 //                 return r2.to_string();
 //             }
@@ -143,11 +140,11 @@ impl Solution {
 #[cfg(test)]
 mod test {
     use super::*;
-// [["Earth", "North America", "South America"],["North America", "United States", "Canada"],["United States", "New York", "Boston"],["Canada", "Ontario", "Quebec"],["South America", "Brazil"]]
-// "Canada"
-// "South America"
+    // [["Earth", "North America", "South America"],["North America", "United States", "Canada"],["United States", "New York", "Boston"],["Canada", "Ontario", "Quebec"],["South America", "Brazil"]]
+    // "Canada"
+    // "South America"
 
-// "Earth"
+    // "Earth"
     #[test]
     pub fn test_find_smallest_region_1() {
         assert_eq!(

@@ -39,8 +39,8 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-       pub fn two_sum_less_than_k(nums: Vec<i32>, k: i32) -> i32 {
- let mut ans = -1;
+    pub fn two_sum_less_than_k(nums: Vec<i32>, k: i32) -> i32 {
+        let mut ans = -1;
         for i in 0..nums.len() {
             for j in i + 1..nums.len() {
                 let s = nums[i] + nums[j];

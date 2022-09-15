@@ -65,7 +65,6 @@ impl Solution {
     }
 }
 
-
 // impl Solution {
 //     pub fn remove_interval(intervals: Vec<Vec<i32>>, to_be_removed: Vec<i32>) -> Vec<Vec<i32>> {
 //  let mut ans = vec![];
@@ -90,12 +89,12 @@ impl Solution {
 #[cfg(test)]
 mod test {
     use super::*;
-// [[0,100]]
-// [0,50]
-// 输出：
-// [[0,0],[50,100]]
-// 预期结果：
-// [[50,100]]
+    // [[0,100]]
+    // [0,50]
+    // 输出：
+    // [[0,0],[50,100]]
+    // 预期结果：
+    // [[50,100]]
     #[test]
     pub fn test_remove_interval_1() {
         assert_eq!(

@@ -66,7 +66,6 @@ impl Solution {
     }
 }
 
-
 // impl Solution {
 //     pub fn string_shift(s: String, shift: Vec<Vec<i32>>) -> String {
 //  let mut count = 0;
@@ -76,7 +75,7 @@ impl Solution {
 //             }
 //             else {
 //                 count -= v[1];
-//             }       
+//             }
 //         }
 //         let size = s.len() as i32;
 //         count = (count % size + size) % size;
@@ -90,8 +89,8 @@ impl Solution {
 #[cfg(test)]
 mod test {
     use super::*;
-// "a"
-// [[1,1],[1,1],[0,2],[1,3],[0,0]]
+    // "a"
+    // [[1,1],[1,1],[0,2],[1,3],[0,0]]
     #[test]
     pub fn test_string_shift_1() {
         assert_eq!(

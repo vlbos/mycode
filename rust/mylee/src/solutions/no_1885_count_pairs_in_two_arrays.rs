@@ -75,9 +75,52 @@ impl Solution {
     }
 }
 
+// impl Solution {
+//     pub fn count_pairs(nums1: Vec<i32>, nums2: Vec<i32>) -> i64 {
+//  let n = nums1.len();
+//         let mut nums = vec![0;n];
+
+//         for i in 0..n {
+//             nums[i] = nums1[i] - nums2[i];
+//         }
+
+//         nums.sort();
+
+//         let mut ans = 0;
+
+//         for i in 0..n-1 {
+//             let mut lo = i + 1;
+//             let mut hi = n - 1;
+//             let mut pos = n;
+
+//             while lo <= hi && hi < n {
+//                 let mid = lo + (hi - lo) / 2;
+
+//                 if nums[i] + nums[mid] > 0 {
+//                     pos = mid;
+//                     hi = mid - 1;
+//                 } else {
+//                     lo = mid + 1;
+//                 }
+//             }
+
+//             ans += n - pos;
+//         }
+
+//         ans as i64
+//     }
+// }
+
 #[cfg(test)]
 mod test {
     use super::*;
+
+    // [5,1,1,15,3,14,19,1,9,12,6,8,2,4,19,17,19,5]
+    // [1,16,5,3,7,9,19,3,7,2,13,4,4,17,13,12,19,16]
+    // 输出：
+    // 70
+    // 预期结果：
+    // 71
 
     #[test]
     pub fn test_count_pairs_1() {

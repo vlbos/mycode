@@ -112,7 +112,6 @@ impl Solution {
             }
             path1 = path2;
         }
-        println!("{:?}", &path1);
         let min = dp[pn - 1].iter().enumerate().min_by_key(|x| x.1).unwrap();
         path1[min.0].clone()
     }

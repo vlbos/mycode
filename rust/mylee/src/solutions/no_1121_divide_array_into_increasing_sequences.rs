@@ -49,7 +49,6 @@ impl Solution {
     }
 }
 
-
 // // Definition for a binary tree node.
 // // #[derive(Debug, PartialEq, Eq)]
 // // pub struct TreeNode {
@@ -99,11 +98,11 @@ impl Solution {
 #[cfg(test)]
 mod test {
     use super::*;
-// [2,null,1]
-// 输出：
-// 2.00000
-// 预期结果：
-// 1.5
+    // [2,null,1]
+    // 输出：
+    // 2.00000
+    // 预期结果：
+    // 1.5
     #[test]
     pub fn test_can_divide_into_subsequences_1() {
         assert!(Solution::can_divide_into_subsequences(

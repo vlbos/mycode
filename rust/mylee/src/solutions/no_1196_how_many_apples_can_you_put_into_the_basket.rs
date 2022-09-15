@@ -38,7 +38,7 @@
 pub struct Solution {}
 impl Solution {
     pub fn max_number_of_apples(weight: Vec<i32>) -> i32 {
-     let mut arr = weight;
+        let mut arr = weight;
         arr.sort();
         let mut ans = 0;
         let mut sum = 0;

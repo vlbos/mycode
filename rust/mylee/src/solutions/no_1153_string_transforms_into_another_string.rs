@@ -87,7 +87,7 @@ impl Solution {
 //         let empty = "".to_string();
 //         let mut max = 0;
 //         let mut ans = (&empty, &empty, &empty);
-        
+
 //         for (k, v) in seq {
 //             if v.len() > max || (v.len() == max && k < ans){
 //                 max = v.len();
@@ -102,13 +102,13 @@ impl Solution {
 mod test {
     use super::*;
 
-// ["zkiikgv","zkiikgv","zkiikgv","zkiikgv"]
-// [436363475,710406388,386655081,797150921]
-// ["wnaaxbfhxp","mryxsjc","oz","wlarkzzqht"]
-// 输出：
-// ["oz","wnaaxbfhxp","mryxsjc"]
-// 预期结果：
-// ["oz","mryxsjc","wlarkzzqht"]
+    // ["zkiikgv","zkiikgv","zkiikgv","zkiikgv"]
+    // [436363475,710406388,386655081,797150921]
+    // ["wnaaxbfhxp","mryxsjc","oz","wlarkzzqht"]
+    // 输出：
+    // ["oz","wnaaxbfhxp","mryxsjc"]
+    // 预期结果：
+    // ["oz","mryxsjc","wlarkzzqht"]
     #[test]
     pub fn test_can_convert_1() {
         assert!(Solution::can_convert(

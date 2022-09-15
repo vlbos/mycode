@@ -67,7 +67,6 @@ impl Solution {
     }
 }
 
-
 //         use std::collections::{HashMap,BTreeSet};
 
 // impl Solution {
@@ -126,7 +125,6 @@ impl Solution {
 //         ans
 //     }
 
-    
 // }
 
 // struct UnionFind {
@@ -136,8 +134,8 @@ impl Solution {
 
 // impl UnionFind {
 //     fn new(n: usize) -> Self {
-//         Self { 
-//             parent: (0..n).collect(), 
+//         Self {
+//             parent: (0..n).collect(),
 //             n,
 //         }
 //     }
@@ -174,12 +172,12 @@ impl Solution {
 #[cfg(test)]
 mod test {
     use super::*;
-// [["a","b"],["b","c"],["d","e"],["c","d"]]
-// "a b"
-// 输出：
-// ["a a","a b","a c","a d","b a","b b","b c","b d","c a","c b","c c","c d","d a","d b","d c","d d"]
-// 预期结果：
-// ["a a","a b","a c","a d","a e","b a","b b","b c","b d","b e","c a","c b","c c","c d","c e","d a","d b","d c","d d","d e","e a","e b","e c","e d","e e"]
+    // [["a","b"],["b","c"],["d","e"],["c","d"]]
+    // "a b"
+    // 输出：
+    // ["a a","a b","a c","a d","b a","b b","b c","b d","c a","c b","c c","c d","d a","d b","d c","d d"]
+    // 预期结果：
+    // ["a a","a b","a c","a d","a e","b a","b b","b c","b d","b e","c a","c b","c c","c d","c e","d a","d b","d c","d d","d e","e a","e b","e c","e d","e e"]
     #[test]
     pub fn test_generate_sentences_1() {
         assert_eq!(

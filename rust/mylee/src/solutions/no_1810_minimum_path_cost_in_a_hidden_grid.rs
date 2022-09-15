@@ -181,8 +181,8 @@ impl Solution {
             &mut master,
             &mut target,
         );
-        if target.is_empty(){
-        return -1
+        if target.is_empty() {
+            return -1;
         }
         use std::cmp::Reverse;
         let mut q = std::collections::BinaryHeap::from([Reverse((0, max as i32, max as i32))]);

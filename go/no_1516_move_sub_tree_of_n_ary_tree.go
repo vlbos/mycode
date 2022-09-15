@@ -62,3 +62,58 @@ Constraints:
 
 
 */
+/**
+ * Definition for a Node.
+ * type Node struct {
+ *     Val int
+ *     Children []*Node
+ * }
+ */
+
+func moveSubTree(root *Node, p *Node, q *Node) *Node {
+    var findP func(root, p *Node) *Node
+	findP = func(root, p *Node) *Node {
+		if root == p {
+			return nil
+		}
+		for _, child := range root.Children {
+			if child == p  {
+				return root
+			}
+			if temp := findP(child, p); temp != nil {
+				return temp
+			}
+		}
+		return nil
+	}
+	remove := func(parent, target *Node) {
+		for i, child := range parent.Children {
+			if child == target {
+				copy(parent.Children[i:], parent.Children[i+1:])
+				parent.Children = parent.Children[:len(parent.Children)-1]
+				return
+			}
+		}
+	}
+	if parent := findP(p, q); parent != nil {
+		remove(parent, q)
+		pp := findP(root, p)
+		if pp != nil {
+			for i, child := range pp.Children {
+				if child == p{
+					pp.Children[i] = q
+				}
+			}
+		} else {
+			root = q
+		}
+		q.Children = append(q.Children, p)
+		return root
+	}
+	parent := findP(root, p)
+	if parent != q {
+		remove(parent, p)
+		q.Children = append(q.Children, p)
+	}
+	return root
+}

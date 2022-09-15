@@ -47,8 +47,6 @@
 #[allow(dead_code)]
 pub struct Solution {}
 
-
-
 // impl Solution {
 //     pub fn longest_repeating_substring(s: String) -> i32 {
 //         let mut pre = ' ';
@@ -68,21 +66,20 @@ pub struct Solution {}
 
 impl Solution {
     pub fn longest_repeating_substring(s: String) -> i32 {
+        let search = |mid: usize| {
+            let mut seen = std::collections::HashSet::new();
+            for i in 0..(s.len() - mid + 1) {
+                let tmp = &s[i..i + mid];
 
-    let  search=|mid: usize|{
-        let mut seen = std::collections::HashSet::new();
-        for i in 0..(s.len() - mid + 1) {
-            let tmp = &s[i..i+mid];
+                if seen.contains(tmp) {
+                    return true;
+                }
 
-            if seen.contains(tmp) {
-                return true
+                seen.insert(tmp);
             }
 
-            seen.insert(tmp);
-        }
-
-        false
-    };
+            false
+        };
         let mut lo = 1;
         let mut hi = s.len() as i32;
 
@@ -98,13 +95,12 @@ impl Solution {
 
         lo - 1
     }
-
 }
 #[cfg(test)]
 mod test {
     use super::*;
-// "aabcaabdaab"
-// 3
+    // "aabcaabdaab"
+    // 3
     #[test]
     pub fn test_longest_repeating_substring_1() {
         assert_eq!(

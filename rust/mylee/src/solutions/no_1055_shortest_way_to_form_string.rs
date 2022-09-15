@@ -86,8 +86,8 @@ impl Solution {
 #[cfg(test)]
 mod test {
     use super::*;
-// "aaaaa"
-// "aaaaaaaaaaaaa"
+    // "aaaaa"
+    // "aaaaaaaaaaaaa"
     #[test]
     pub fn test_shortest_way_1() {
         assert_eq!(

@@ -89,7 +89,6 @@ impl Solution {
                 .chars()
                 .map(|c| font_info.get_width(font, c))
                 .sum::<i32>();
-            println!("{},{},{},{}", font_info.get_height(font), h, w, sum_width);
             font_info.get_height(font) <= h && sum_width <= w
         };
         let (mut low, mut high) = (0, fonts.len() as i32 - 1);

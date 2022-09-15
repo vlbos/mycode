@@ -87,7 +87,7 @@ impl Solution {
 #[cfg(test)]
 mod test {
     use super::*;
-// 916
+    // 916
     #[test]
     pub fn test_confusing_number_1() {
         assert!(Solution::confusing_number(6));

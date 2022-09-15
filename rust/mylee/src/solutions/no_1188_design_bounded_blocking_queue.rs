@@ -125,12 +125,12 @@ impl BoundedBlockingQueue {
 // class BoundedBlockingQueue {
 //     int maxSize;
 //     mutex mx;
-//     condition_variable cv;                                      
+//     condition_variable cv;
 //     queue<int> q;
 // public:
 //     BoundedBlockingQueue(int capacity)
 //         : maxSize(capacity){}
-    
+
 //     void enqueue(int element) {
 //         unique_lock ul(mx);
 //         cv.wait(ul, [&](){return q.size() < maxSize;});
@@ -138,7 +138,7 @@ impl BoundedBlockingQueue {
 //         ul.unlock();
 //         cv.notify_one();
 //     }
-    
+
 //     int dequeue() {
 //         unique_lock ul(mx);
 //         cv.wait(ul, [&](){return q.size() > 0;});
@@ -148,7 +148,7 @@ impl BoundedBlockingQueue {
 //         cv.notify_one();
 //         return ret;
 //     }
-    
+
 //     int size() {
 //         return q.size();
 //     }
@@ -157,7 +157,6 @@ impl BoundedBlockingQueue {
 // import threading
 
 // class BoundedBlockingQueue(object):
-   
 
 //     def __init__(self, capacity: int):
 //         self.capacity = capacity
@@ -166,14 +165,12 @@ impl BoundedBlockingQueue {
 //         self.not_full = Condition(self.mutex)
 //         self.not_empty = Condition(self.mutex)
 
-        
 //     def enqueue(self, element: int) -> None:
 //         with self.not_full:
 //             while self.size() >= self.capacity:
 //                 self.not_full.wait()
 //             self.queue.appendleft(element)
 //             self.not_empty.notify_all()
-
 
 //     def dequeue(self) -> int:
 //         with self.not_empty:

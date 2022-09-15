@@ -78,11 +78,7 @@ impl Solution {
         let mut freq = HashMap::new();
         dfs(&root1, 1, &mut freq);
         dfs(&root2, -1, &mut freq);
-        if freq.values().any(|v| *v > 0) {
-            false
-        } else {
-            true
-        }
+        freq.values().all(|v| *v == 0)
     }
 }
 

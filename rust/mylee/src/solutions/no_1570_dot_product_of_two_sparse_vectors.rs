@@ -58,8 +58,11 @@ impl SparseVector {
     pub fn new(nums: Vec<i32>) -> Self {
         Self { nums }
     }
-    pub fn dot_product(&self, nums: Vec<i32>) -> i32 {
-        self.nums.iter().zip(&nums).fold(0, |c, (a, b)| c + a * b)
+    pub fn dot_product(&self, vec: SparseVector) -> i32 {
+        self.nums
+            .iter()
+            .zip(&vec.nums)
+            .fold(0, |c, (a, b)| c + a * b)
     }
 }
 
@@ -71,21 +74,24 @@ mod test {
     pub fn test_dot_product_1() {
         assert_eq!(
             8,
-            SparseVector::new(vec![1, 0, 0, 2, 3]).dot_product(vec![0, 3, 0, 4, 0])
+            SparseVector::new(vec![1, 0, 0, 2, 3])
+                .dot_product(SparseVector::new(vec![0, 3, 0, 4, 0]))
         );
     }
     #[test]
     pub fn test_dot_product_2() {
         assert_eq!(
             0,
-            SparseVector::new(vec![0, 1, 0, 0, 0]).dot_product(vec![0, 0, 0, 0, 2])
+            SparseVector::new(vec![0, 1, 0, 0, 0])
+                .dot_product(SparseVector::new(vec![0, 0, 0, 0, 2]))
         );
     }
     #[test]
     pub fn test_dot_product_3() {
         assert_eq!(
             6,
-            SparseVector::new(vec![0, 1, 0, 0, 2, 0, 0]).dot_product(vec![1, 0, 0, 0, 3, 0, 4])
+            SparseVector::new(vec![0, 1, 0, 0, 2, 0, 0])
+                .dot_product(SparseVector::new(vec![1, 0, 0, 0, 3, 0, 4]))
         );
     }
 }

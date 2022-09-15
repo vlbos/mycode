@@ -84,6 +84,31 @@ impl Solution {
     }
 }
 
+// impl Solution {
+//     pub fn bad_sensor(sensor1: Vec<i32>, sensor2: Vec<i32>) -> i32 {
+//  let n = sensor1.len() - 1;
+//         let mut i = 0;
+
+//         while sensor1[i] == sensor2[i] && i < n {
+//             i += 1;
+//         }
+
+//         let s11 = &sensor1[i..n];
+//         let s12 = &sensor1[i+1..=n];
+//         let s21 = &sensor2[i..n];
+//         let s22 = &sensor2[i+1..=n];
+
+//         if s11 == s22 && s12 != s21 {
+//             return 1;
+//         }
+
+//         if s21 == s12 && s22 != s11 {
+//             return 2;
+//         }
+
+//         -1
+//     }
+// }
 #[cfg(test)]
 mod test {
     use super::*;

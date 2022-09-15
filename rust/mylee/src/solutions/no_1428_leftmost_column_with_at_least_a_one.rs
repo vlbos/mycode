@@ -53,19 +53,19 @@ Constraints:
  *     fn dimensions() -> Vec<i32>;
  * };
  */
-  pub struct BinaryMatrix;
-  impl BinaryMatrix {
-     pub fn get(&self,row: i32, col: i32) -> i32{
-            0
-        }
-     pub fn dimensions(&self) -> Vec<i32>{
+pub struct BinaryMatrix;
+impl BinaryMatrix {
+    pub fn get(&self, row: i32, col: i32) -> i32 {
+        0
+    }
+    pub fn dimensions(&self) -> Vec<i32> {
         vec![]
-        }
- }
-pub struct Solution ;
+    }
+}
+pub struct Solution;
 impl Solution {
     pub fn left_most_column_with_one(binaryMatrix: &BinaryMatrix) -> i32 {
-         let vec = binaryMatrix.dimensions();
+        let vec = binaryMatrix.dimensions();
         let n = vec[0];
         let m = vec[1];
 
@@ -77,7 +77,7 @@ impl Solution {
 
             while lo <= hi {
                 let mid = lo + (hi - lo) / 2;
-                
+
                 if binaryMatrix.get(i, mid) == 1 {
                     hi = mid - 1;
                     ans = ans.min(mid);

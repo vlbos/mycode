@@ -73,9 +73,6 @@ pub mod no_1430_check_if_a_string_is_a_valid_sequence_from_root_to_leaves_path_i
 pub mod no_1469_find_all_the_lonely_nodes;
 pub mod no_1474_delete_n_nodes_after_m_nodes_of_a_linked_list;
 pub mod no_1500_design_a_file_sharing_system;
-pub mod no_1506_find_root_of_n_ary_tree;
-pub mod no_1516_move_sub_tree_of_n_ary_tree;
-pub mod no_1522_diameter_of_n_ary_tree;
 pub mod no_1533_find_the_index_of_the_large_integer;
 pub mod no_1538_guess_the_majority_in_a_hidden_array;
 pub mod no_1548_the_most_similar_path_in_a_graph;

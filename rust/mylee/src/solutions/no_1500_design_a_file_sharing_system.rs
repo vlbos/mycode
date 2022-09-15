@@ -142,10 +142,77 @@ impl FileSharing {
  * let ret_3: Vec<i32> = obj.request(userID, chunkID);
  */
 
+// use std::cmp::Reverse;
+// use std::collections::{BinaryHeap, HashMap, BTreeSet};
+// pub struct FileSharing {
+//     q: BinaryHeap<Reverse<i32>>,
+//     u2c: HashMap<i32, Vec<i32>>,
+//     c2u: Vec<BTreeSet<i32>>,
+// }
+
+// /**
+//  * `&self` means the method takes an immutable reference.
+//  * If you need a mutable reference, change it to `&mut self` instead.
+//  */
+// impl FileSharing {
+//     pub fn new(m: i32) -> Self {
+//         Self {
+//             q: (1..=m).map(|x|Reverse(x)).collect(),
+//             u2c: HashMap::new(),
+//             c2u: vec![BTreeSet::new();m as usize+1],
+//         }
+//     }
+
+//     pub fn join(&mut self, owned_chunks: Vec<i32>) -> i32 {
+//         let id = if let Some(Reverse(v)) = self.q.pop() {
+//             v
+//         } else {
+//            0
+//         };
+//         for &c in &owned_chunks {
+//             self.c2u[c as usize].insert(id);
+//         }
+//         self.u2c.insert(id,owned_chunks);
+//         id
+//     }
+
+//     pub fn leave(&mut self, user_id: i32) {
+//         self.q.push(Reverse(user_id));
+//         for &c in self.u2c.get(&user_id).unwrap_or(&Vec::new()) {
+//             self.c2u[c as usize].remove(&user_id);
+//         }
+//     }
+
+//     pub fn request(&mut self, user_id: i32, chunk_id: i32) -> Vec<i32> {
+//         let ans: Vec<i32>  = self
+//             .c2u[chunk_id as usize].iter().cloned().collect();
+//         if !ans.is_empty(){
+//             self.u2c
+//             .entry(user_id)
+//             .or_insert(Vec::new())
+//             .push(chunk_id);
+//         self.c2u[chunk_id as usize].insert(user_id);
+//         }
+//         ans
+//     }
+// }
+
 #[cfg(test)]
 mod test {
     use super::*;
+    // ["FileSharing","join","join","join","join","join","request","request","request","request","request"]
+    // [[9],[[9,1,8,2,4,5,7,3,6]],[[7,8,9]],[[7,8,3,9,5,1,2,4,6]],[[2,9]],[[]],[1,4],[3,3],[4,8],[2,7],[2,7]]
+    // 输出：
+    // [null,1,2,3,4,5,[1,3],[3,1],[1,2,3],[1,2,3],[1,2,3]]
+    // 预期结果：
+    // [null,1,2,3,4,5,[1,3],[1,3],[1,2,3],[1,2,3],[1,2,3]]
 
+    // ["FileSharing","join","join","join","join","join","request","request","request","request","request","request","request","request","request","request","request","request","request","request","request"]
+    // [[40],[[35,20,14,40,3,24,10,7,4,31,12,5,39,27,17,36,2,32,37,1,23,30,15,22]],[[33,35,23,15,8,24,3,34,28,19,36,31]],[[]],[[27,18,37,16,9,31,13,22,4,34,36,10,28,26,38]],[[40,39,35,30,16,7,33,32,18,15,25,23,11,22,36,4,8,2,1,29,17,28,3,10,20,37,38,24]],[4,1],[4,27],[2,28],[2,30],[2,26],[3,29],[3,19],[4,6],[4,6],[4,38],[1,33],[5,29],[4,19],[4,26],[5,16]]
+    // 输出：
+    // [null,1,2,3,4,5,[1,5],[1,4],[2,4,5],[1,5],[4],[5],[2],[],[4],[4,5],[2,5],[3,5],[2,3],[2,4],[4,5]]
+    // 预期结果：
+    // [null,1,2,3,4,5,[1,5],[1,4],[2,4,5],[1,5],[4],[5],[2],[],[],[4,5],[2,5],[3,5],[2,3],[2,4],[4,5]]
     #[test]
     pub fn test_file_sharing_1() {
         let mut obj = FileSharing::new(4);

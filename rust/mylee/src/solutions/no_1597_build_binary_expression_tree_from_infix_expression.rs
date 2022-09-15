@@ -177,3 +177,46 @@ mod test {
         );
     }
 }
+
+// # Definition for a binary tree node.
+// # class Node(object):
+// #     def __init__(self, val=" ", left=None, right=None):
+// #         self.val = val
+// #         self.left = left
+// #         self.right = right
+// class Solution:
+//     def expTree(self, s: str) -> 'Node':
+//         priority = {"(":0, "*":1, "/":1, "+":2, "-":2}
+//         nums, opts = [], []
+//         cur = 0
+//         while cur < len(s):
+//             #所有入栈的元素都是节点
+//             if s[cur].isnumeric():  #数字直接入栈
+//                 temp = cur
+//                 while cur < len(s) and s[cur].isnumeric():
+//                     cur += 1
+//                 nums.append(Node(val = s[temp:cur]))
+//                 continue
+//             elif s[cur] == '(':  #左括号直接入栈
+//                 opts.append(Node(val = "("))
+//             elif s[cur] == ')':   #把括号内的全部算完
+//                 while len(opts) > 0 and priority[opts[-1].val] > 0:
+//                     y, x, opt = nums.pop(), nums.pop(), opts.pop()
+//                     opt.left, opt.right = x, y
+//                     nums.append(opt)
+//                 opts.pop()   #去掉左括号
+//             else:
+//                 #把上一个左括号前优先级比自己大或等于自己的算完
+//                 while len(opts) > 0 and opts[-1].val != '(' and priority[opts[-1].val] <= priority[s[cur]]:
+//                     y, x, opt = nums.pop(), nums.pop(), opts.pop()
+//                     opt.left, opt.right = x, y
+//                     nums.append(opt)
+//                 opts.append(Node(val = s[cur]))
+//             cur += 1
+
+//         #按序处理剩下的
+//         while len(opts) > 0:
+//             y, x, opt = nums.pop(), nums.pop(), opts.pop()
+//             opt.left, opt.right = x, y
+//             nums.append(opt)
+//         return nums[0]

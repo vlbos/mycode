@@ -61,7 +61,13 @@ pub struct Solution {}
 
 impl Solution {
     pub fn high_five(mut items: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-        items.sort_by(|a, b| if a[0] == b[0] { b[1].cmp(&a[1]) } else { a[0].cmp(&b[0]) } );
+        items.sort_by(|a, b| {
+            if a[0] == b[0] {
+                b[1].cmp(&a[1])
+            } else {
+                a[0].cmp(&b[0])
+            }
+        });
 
         let mut i = 0;
         let mut id = 0;
@@ -70,7 +76,7 @@ impl Solution {
         while i <= items.len() - 5 {
             if id != items[i][0] {
                 id = items[i][0];
-                let sum: i32 = items[i..i+5].iter().map(|x| x[1]).sum();
+                let sum: i32 = items[i..i + 5].iter().map(|x| x[1]).sum();
                 ans.push(vec![items[i][0], sum / 5]);
                 i += 4;
             }
@@ -83,11 +89,11 @@ impl Solution {
 #[cfg(test)]
 mod test {
     use super::*;
-// [[1,91],[1,92],[2,93],[2,97],[1,60],[2,77],[1,65],[1,87],[1,100],[2,100],[2,76]]
-// 输出：
-// [[2,88],[1,82]]
-// 预期结果：
-// [[1,87],[2,88]]
+    // [[1,91],[1,92],[2,93],[2,97],[1,60],[2,77],[1,65],[1,87],[1,100],[2,100],[2,76]]
+    // 输出：
+    // [[2,88],[1,82]]
+    // 预期结果：
+    // [[1,87],[2,88]]
     #[test]
     pub fn test_high_five_1() {
         assert_eq!(

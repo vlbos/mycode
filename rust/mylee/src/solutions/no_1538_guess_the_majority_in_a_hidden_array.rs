@@ -44,3 +44,93 @@ Constraints:
 
 
 */
+/**
+ * // This is the ArrayReader's API interface.
+ * // You should not implement it, or speculate about its implementation
+ * struct ArrayReader;
+ * impl ArrayReader {
+ *     // Compares 4 different elements in the array
+ *     // return 4 if the values of the 4 elements are the same (0 or 1).
+ *     // return 2 if three elements have a value equal to 0 and one element has value equal to 1 or vice versa.
+ *     // return 0 : if two element have a value equal to 0 and two elements have a value equal to 1.
+ *     pub fn query(a: i32, b: i32, c: i32, d: i32) -> i32 {}
+ *
+ *     // Returns the length of the array
+ *     pub fn length() -> i32 {}
+ * };
+ */
+/**
+ * // This is the ArrayReader's API interface.
+ * // You should not implement it, or speculate about its implementation
+ * struct ArrayReader;
+ * impl ArrayReader {
+ *     // Compares 4 different elements in the array
+ *     // return 4 if the values of the 4 elements are the same (0 or 1).
+ *     // return 2 if three elements have a value equal to 0 and one element has value equal to 1 or vice versa.
+ *     // return 0 : if two element have a value equal to 0 and two elements have a value equal to 1.
+ *     pub fn query(a: i32, b: i32, c: i32, d: i32) -> i32 {}
+ *
+ *     // Returns the length of the array
+ *     pub fn length() -> i32 {}
+ * };
+ */
+pub struct ArrayReader;
+impl ArrayReader {
+    pub fn query(&self, a: i32, b: i32, c: i32, d: i32) -> i32 {
+        0
+    }
+    // Compares the sum of arr[l..r] with the sum of arr[x..y]
+    // return 1 if sum(arr[l..r]) > sum(arr[x..y])
+    // return 0 if sum(arr[l..r]) == sum(arr[x..y])
+    // return -1 if sum(arr[l..r]) < sum(arr[x..y])
+    // Returns the length of the array
+    pub fn length(&self) -> i32 {
+        0
+    }
+}
+
+pub struct Solution;
+impl Solution {
+    pub fn get_majority(reader: &ArrayReader) -> i32 {
+        let n = reader.length();
+        let mut v = vec![0; n as usize];
+        v[0] = 1;
+        let q0123 = reader.query(0, 1, 2, 3);
+        let q0124 = reader.query(0, 1, 2, 4);
+        let q0134 = reader.query(0, 1, 3, 4);
+        let q0234 = reader.query(0, 2, 3, 4);
+        let q1234 = reader.query(1, 2, 3, 4);
+        if q0234 == q1234 {
+            v[1] = 1;
+        }
+        if q0134 == q1234 {
+            v[2] = 1;
+        }
+        if q0124 == q1234 {
+            v[3] = 1;
+        }
+        if q0123 == q1234 {
+            v[4] = 1;
+        }
+        let mut prev = q1234;
+        for i in 5..n {
+            let curr = reader.query(i - 3, i - 2, i - 1, i);
+            v[i as usize] = if prev == curr {
+                v[i as usize - 4]
+            } else {
+                1 - v[i as usize - 4]
+            };
+            prev = curr;
+        }
+        let sum = v.iter().sum::<i32>();
+        if sum * 2 == n as i32 {
+            return -1;
+        }
+        let j = if sum * 2 < n as i32 { 0 } else { 1 };
+        if let Some(i) = v.into_iter().position(|x| x == j) {
+            i as i32
+        } else {
+            -1
+        }
+    }
+}

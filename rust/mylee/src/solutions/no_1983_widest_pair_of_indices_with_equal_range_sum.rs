@@ -98,9 +98,40 @@ impl Solution {
     }
 }
 
+// impl Solution {
+//     pub fn widest_pair_of_indices(nums1: Vec<i32>, nums2: Vec<i32>) -> i32 {
+
+//         let mut diff = std::collections::HashMap::from([(0,-1)]);
+//         let mut ans = 0;
+//         let (mut sum1,mut sum2) = (0,0);
+//         for (i, (num1,num2)) in nums1
+//             .into_iter()
+//             .zip(nums2).enumerate() {
+//               let i  =      i as i32;
+//             sum1 += num1;
+//               sum2 += num2;
+//             if let Some(&j) = diff.get(&(sum1-sum2)) {
+//                 if i -j >ans{
+//                       ans = i  - j;
+//                 }
+
+//             } else {
+//                 diff.insert(sum1-sum2, i );
+//             }
+//         }
+//         ans as _
+//     }
+// }
 #[cfg(test)]
 mod test {
     use super::*;
+
+    // [0]
+    // [0]
+    // 输出：
+    // 0
+    // 预期结果：
+    // 1
 
     #[test]
     pub fn test_widest_pair_of_indices_1() {

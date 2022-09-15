@@ -94,50 +94,51 @@
 //     }
 // }
 
-
 use std::collections::BTreeMap;
 #[allow(dead_code)]
 pub struct UnionFind {
-     id: Vec<BTreeMap<i32, i32>>,
+    id: Vec<BTreeMap<i32, i32>>,
 }
 impl UnionFind {
-    fn new(n:i32)->Self{
-        Self{id:(0..n).map(|x|BTreeMap::from([(0,x)])).collect()}
-    }
-    fn unite(&mut self,u:i32,v:i32,limit:i32){
-        let (i,j)=(self.find(u,limit),self.find(v,limit));
-        if i==j{
-        return}
-        self.id[i as usize].insert(limit,j);
-    }
-    fn find(&mut self,u:i32,limit:i32)->i32{
-        let i = *self.id[u as usize].range(..=limit).next_back().unwrap().1;
-        if i==u{
-        return u
+    fn new(n: i32) -> Self {
+        Self {
+            id: (0..n).map(|x| BTreeMap::from([(0, x)])).collect(),
         }
-        let j = self.find(i,limit);
-        self.id[u as usize].insert(limit,j);
+    }
+    fn unite(&mut self, u: i32, v: i32, limit: i32) {
+        let (i, j) = (self.find(u, limit), self.find(v, limit));
+        if i == j {
+            return;
+        }
+        self.id[i as usize].insert(limit, j);
+    }
+    fn find(&mut self, u: i32, limit: i32) -> i32 {
+        let i = *self.id[u as usize].range(..=limit).next_back().unwrap().1;
+        if i == u {
+            return u;
+        }
+        let j = self.find(i, limit);
+        self.id[u as usize].insert(limit, j);
         j
     }
 }
 #[allow(dead_code)]
 pub struct DistanceLimitedPathsExist {
-     uf:UnionFind,
+    uf: UnionFind,
 }
 impl DistanceLimitedPathsExist {
     pub fn new(n: i32, mut edge_list: Vec<Vec<i32>>) -> Self {
-        let mut uf=UnionFind::new(n);
-        edge_list.sort_by_key(|x|x[2]);
-        for e in &edge_list{
-            uf.unite(e[0],e[1],e[2]);
+        let mut uf = UnionFind::new(n);
+        edge_list.sort_by_key(|x| x[2]);
+        for e in &edge_list {
+            uf.unite(e[0], e[1], e[2]);
         }
-        Self{uf}
+        Self { uf }
     }
 
     pub fn query(&mut self, p: i32, q: i32, limit: i32) -> bool {
-        self.uf.find(p,limit-1)==self.uf.find(q,limit-1)
+        self.uf.find(p, limit - 1) == self.uf.find(q, limit - 1)
     }
-    
 }
 
 // use std::collections::BTreeMap;

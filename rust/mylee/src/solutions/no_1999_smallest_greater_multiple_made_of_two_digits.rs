@@ -63,29 +63,32 @@
 pub struct Solution {}
 
 impl Solution {
-    pub fn find_integer(k: i32, d1: i32, d2: i32, x: i64) -> i32 {
-        if x > i32::MAX as i64 {
-            return -1;
+    pub fn find_integer(k: i32, digit1: i32, digit2: i32) -> i32 {
+        fn find_integer_internal(k: i32, d1: i32, d2: i32, x: i64) -> i32 {
+            if x > i32::MAX as i64 {
+                return -1;
+            }
+            let x = x as i32;
+            if x > k && x % k == 0 {
+                return x;
+            }
+            let x1 = if x + d1 == 0 {
+                -1
+            } else {
+                find_integer_internal(k, d1, d2, x as i64 * 10 + d1 as i64)
+            };
+            let x2 = if x + d2 == 0 {
+                -1
+            } else {
+                find_integer_internal(k, d1, d2, x as i64 * 10 + d2 as i64)
+            };
+            if x1 > 1 && x2 > 1 {
+                x1.min(x2)
+            } else {
+                x1.max(x2)
+            }
         }
-        let x = x as i32;
-        if x > k && x % k == 0 {
-            return x;
-        }
-        let x1 = if x + d1 == 0 {
-            -1
-        } else {
-            Self::find_integer(k, d1, d2, x as i64 * 10 + d1 as i64)
-        };
-        let x2 = if x + d2 == 0 {
-            -1
-        } else {
-            Self::find_integer(k, d1, d2, x as i64 * 10 + d2 as i64)
-        };
-        if x1 > 1 && x2 > 1 {
-            x1.min(x2)
-        } else {
-            x1.max(x2)
-        }
+        find_integer_internal(k, digit1, digit2, 0)
     }
 }
 
@@ -95,14 +98,14 @@ mod test {
 
     #[test]
     pub fn test_find_integer_1() {
-        assert_eq!(20, Solution::find_integer(2, 0, 2, 0));
+        assert_eq!(20, Solution::find_integer(2, 0, 2));
     }
     #[test]
     pub fn test_find_integer_2() {
-        assert_eq!(24, Solution::find_integer(3, 4, 2, 0));
+        assert_eq!(24, Solution::find_integer(3, 4, 2));
     }
     #[test]
     pub fn test_find_integer_3() {
-        assert_eq!(-1, Solution::find_integer(2, 0, 0, 0));
+        assert_eq!(-1, Solution::find_integer(2, 0, 0));
     }
 }

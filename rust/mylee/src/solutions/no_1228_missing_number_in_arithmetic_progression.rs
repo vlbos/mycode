@@ -53,7 +53,6 @@ impl Solution {
     }
 }
 
-
 // impl Solution {
 //     pub fn missing_number(arr: Vec<i32>) -> i32 {
 //         (arr[0] + arr[arr.len()-1]) * (arr.len() as i32 + 1) / 2 - arr.iter().sum::<i32>()
@@ -62,11 +61,11 @@ impl Solution {
 #[cfg(test)]
 mod test {
     use super::*;
-// [0,0,0,0,0]
-// 输出：
-// -1
-// 预期结果：
-// 0
+    // [0,0,0,0,0]
+    // 输出：
+    // -1
+    // 预期结果：
+    // 0
     #[test]
     pub fn test_missing_number_1() {
         assert_eq!(9, Solution::missing_number(vec![5, 7, 11, 13]));

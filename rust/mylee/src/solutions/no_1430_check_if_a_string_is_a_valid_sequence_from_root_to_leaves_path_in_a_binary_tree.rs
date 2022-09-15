@@ -58,17 +58,19 @@ use std::rc::Rc;
 impl Solution {
     pub fn is_valid_sequence(root: Option<Rc<RefCell<TreeNode>>>, arr: Vec<i32>) -> bool {
         fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, arr: &Vec<i32>, i: usize) -> bool {
-            if root.is_none()||arr[i] !=  root.as_ref().unwrap().borrow().val {
-                return  false ;
+            if root.is_none() || arr[i] != root.as_ref().unwrap().borrow().val {
+                return false;
             }
-            let node =root.as_ref().unwrap().borrow();
-            if i == arr.len() - 1  {
-                    if  node.left.is_none() && node.right.is_none()
-                {true}else{false}
-            }else{
+            let node = root.as_ref().unwrap().borrow();
+            if i == arr.len() - 1 {
+                if node.left.is_none() && node.right.is_none() {
+                    true
+                } else {
+                    false
+                }
+            } else {
                 dfs(&node.left, arr, i + 1) || dfs(&node.right, arr, i + 1)
             }
-            
         }
         dfs(&root, &arr, 0)
     }
@@ -77,12 +79,12 @@ impl Solution {
 mod test {
     use super::*;
     use crate::tree;
-// [8,3,null,2,1,5,4]
-// [8]
-// 输出：
-// true
-// 预期结果：
-// false
+    // [8,3,null,2,1,5,4]
+    // [8]
+    // 输出：
+    // true
+    // 预期结果：
+    // false
     #[test]
     pub fn test_is_valid_sequence_1() {
         assert!(Solution::is_valid_sequence(

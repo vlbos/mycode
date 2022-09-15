@@ -52,7 +52,6 @@ impl Solution {
     }
 }
 
-
 // impl Solution {
 //     pub fn probability_of_heads(prob: Vec<f64>, target: i32) -> f64 {
 //        let mut ans = vec![0.0; target as usize + 1];
@@ -69,12 +68,12 @@ impl Solution {
 #[cfg(test)]
 mod test {
     use super::*;
-// [0.2,0.8,0,0.3,0.5]
-// 3
-// 输出：
-// 0.00000
-// 预期结果：
-// 0.182
+    // [0.2,0.8,0,0.3,0.5]
+    // 3
+    // 输出：
+    // 0.00000
+    // 预期结果：
+    // 0.182
     #[test]
     pub fn test_probability_of_heads_1() {
         assert_eq!(0.4, Solution::probability_of_heads(vec![0.4], 1));

@@ -67,7 +67,7 @@
 pub struct Solution {}
 
 impl Solution {
-    pub fn min_daysk_variants(points: Vec<Vec<i32>>, k: i32) -> i64 {
+    pub fn min_daysk_variants(points: Vec<Vec<i32>>, k: i32) -> i32 {
         let points: Vec<Vec<i32>> = points
             .into_iter()
             .map(|x| vec![x[0] + x[1], x[0] - x[1]])
@@ -140,13 +140,21 @@ impl Solution {
                 left = mid + 1;
             }
         }
-        left
+        left as _
     }
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
+
+    // 输入：
+    // [[1,1],[1,2],[2,2],[2,1]]
+    // 4
+    // 输出：
+    // 1
+    // 预期结果：
+    // 2
 
     #[test]
     pub fn test_min_daysk_variants_1() {

@@ -113,7 +113,7 @@ impl Solution {
             let range = right[i] - left[i] - 1;
             maximums[range as usize - 1] = maximums[range as usize - 1].max(num);
         }
-        for i in 0..n - 1 {
+        for i in (0..n - 1).rev() {
             maximums[i] = maximums[i].max(maximums[i + 1]);
         }
         maximums
@@ -123,7 +123,11 @@ impl Solution {
 #[cfg(test)]
 mod test {
     use super::*;
-
+    // [10,2,8,3,2,7,6,4,10,8]
+    // 输出：
+    // [10,8,2,4,4,2,2,2,2,2]
+    // 预期结果：
+    // [10,8,4,4,4,2,2,2,2,2]
     #[test]
     pub fn test_find_maximums_1() {
         assert_eq!(vec![4, 2, 1, 0], Solution::find_maximums(vec![0, 1, 2, 4]));

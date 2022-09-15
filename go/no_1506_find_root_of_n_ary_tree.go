@@ -37,3 +37,29 @@ Constraints:
 
 
 */
+/**
+ * Definition for a Node.
+ * type Node struct {
+ *     Val int
+ *     Children []*Node
+ * }
+ */
+
+func findRoot(tree []*Node) *Node {
+    m:=make(map[*Node]int)   
+    for _,node:=range tree{
+        if _,ok:=m[node];!ok{
+            m[node]=0
+        }
+        for _,child:=range node.Children{
+            m[child]++
+        }
+    }
+
+    for node,cnt:=range m{
+        if cnt==0{
+            return node
+        }
+    }
+    return nil
+}

@@ -95,9 +95,34 @@ impl Solution {
     }
 }
 
+// impl Solution {
+//     pub fn is_decomposable(s: String) -> bool {
+//         let bs=s.as_bytes();
+// let mut i =0;
+//         let mut two = 0;
+
+//         while i< bs.len(){
+//             let mut j = i+1;
+//             while j<bs.len() && bs[j]==bs[i]{
+//                 j+=1;
+//             }
+//             if (j-i)%3==1{
+//                 return false
+//             }
+//              if (j-i)%3==2{
+//                 two+=1;
+//             }
+//                     i=j;
+//             }
+//         two==1
+
+//     }
+// }
+
 #[cfg(test)]
 mod test {
     use super::*;
+    // "66666666666677722"
 
     #[test]
     pub fn test_is_decomposable_1() {
