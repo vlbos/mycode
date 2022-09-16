@@ -86,9 +86,9 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn minimum_health(damages: Vec<i32>, armor: i32) -> i64 {
-        1 + damages.iter().map(|&x| x as i64).sum::<i64>()
-            - armor.min(*damages.iter().max().unwrap()) as i64
+    pub fn minimum_health(damage: Vec<i32>, armor: i32) -> i64 {
+        1 + damage.iter().map(|&x| x as i64).sum::<i64>()
+            - armor.min(*damage.iter().max().unwrap()) as i64
     }
 }
 

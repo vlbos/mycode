@@ -73,10 +73,43 @@ impl Solution {
     }
 }
 
+
+// impl Solution {
+//     pub fn visible_mountains(peaks: Vec<Vec<i32>>) -> i32 {
+//         if peaks.len()==1{
+//             return 1
+//         }
+//         let mut a:Vec<Vec<i32>>=peaks.into_iter().map(|x| vec![x[0]-x[1],x[0]+x[1]]).collect();
+//         a.sort_by_key(|x| (x[0],-x[1]));
+
+//         let mut ans = 1;
+
+//         if a.len()>1 && a[0]==a[1]{
+//             ans-=1;
+//         }
+//                 let mut curr = a[0][1];
+
+//         for r in &a[1..] {
+//             if curr< r[1] {
+//                 ans += 1;
+//                 curr= r[1];
+//             }
+//         }
+//         ans
+//     }
+// }
+
 #[cfg(test)]
 mod test {
     use super::*;
+// [[2,2],[2,2],[3,1]]
 
+// [[32,37]]
+
+
+// [[1,3],[1,3]]
+
+// [[2,2],[6,3],[5,4]]
     #[test]
     pub fn test_visible_mountains_1() {
         assert_eq!(

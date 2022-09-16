@@ -85,12 +85,12 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn subarrays_with_more_ones_than_zeros(a: Vec<i32>) -> i32 {
+    pub fn subarrays_with_more_ones_than_zeros(nums: Vec<i32>) -> i32 {
         let (mut ans, mut diff, mut cnt) = (0, 0, 0);
         let n = 200000;
         let mut bt = vec![0; n + 1];
         bt[n / 2] = 1;
-        for &v in &a {
+        for &v in &nums {
             diff += if v == 0 { -1 } else { 1 };
             let i = (n as i32 / 2 + diff) as usize;
             cnt += if v == 0 { -bt[i] } else { bt[i - 1] };

@@ -66,18 +66,18 @@ pub struct Solution {}
 
 impl Solution {
     pub fn share_candies(candies: Vec<i32>, k: i32) -> i32 {
-        let mut cnt = std::collections::HashMap::new();
+      let mut cnt = std::collections::HashMap::new();
         let k = k as usize;
         for &c in &candies[k..] {
             *cnt.entry(c).or_insert(0) += 1;
         }
         let mut ans = cnt.len();
-        for &c in &candies[k..] {
-            *cnt.entry(candies[0]).or_insert(0) += 1;
+        for (i,&c) in candies[k..].iter().enumerate() {
             *cnt.entry(c).or_insert(0) -= 1;
             if *cnt.get(&c).unwrap() == 0 {
                 cnt.remove(&c);
             }
+            *cnt.entry(candies[i]).or_insert(0) += 1;
             if cnt.len() > ans {
                 ans = cnt.len();
             }

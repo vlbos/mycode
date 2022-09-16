@@ -156,17 +156,18 @@ impl VideoSharingPlatform {
         *self.video_id2dislikes.entry(video_id).or_insert(0) += 1;
     }
     pub fn get_likes_and_dislikes(&self, video_id: i32) -> Vec<i32> {
-        if let Some(&cnt) = self.video_id2likes.get(&video_id) {
-            vec![cnt, *self.video_id2dislikes.get(&video_id).unwrap_or(&0)]
-        } else {
+         if  self.video_id2video.get(&video_id).is_none(){
             vec![-1]
+        }else{
+       vec![*self.video_id2likes.get(&video_id).unwrap_or(&0),*self.video_id2dislikes.get(&video_id).unwrap_or(&0)]
         }
+      
     }
     pub fn get_views(&self, video_id: i32) -> i32 {
-        if let Some(&cnt) = self.video_id2views.get(&video_id) {
-            cnt
-        } else {
+        if  self.video_id2video.get(&video_id).is_none() {
             -1
+        }else{
+            * self.video_id2views.get(&video_id).unwrap_or(&0)
         }
     }
 }
@@ -175,6 +176,13 @@ impl VideoSharingPlatform {
 mod test {
     use super::*;
 
+// 输入：
+// ["VideoSharingPlatform","upload","upload","upload","getLikesAndDislikes","like","dislike"]
+// [[],["28"],["27"],["9728"],[0],[1],[0]]
+// 输出：
+// [null,0,1,2,[-1],null,null]
+// 预期结果：
+// [null,0,1,2,[0,0],null,null]
     #[test]
     pub fn test_video_sharing_platform_1() {
         let mut vsp = VideoSharingPlatform::new();

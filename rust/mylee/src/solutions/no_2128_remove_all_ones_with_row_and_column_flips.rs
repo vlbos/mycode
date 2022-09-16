@@ -66,8 +66,8 @@
 pub struct Solution {}
 
 impl Solution {
-    pub fn remove_ones(matrix: Vec<Vec<i32>>) -> bool {
-        let mut matrix = matrix;
+    pub fn remove_ones(grid: Vec<Vec<i32>>) -> bool {
+        let mut matrix = grid;
         let (m, n) = (matrix.len(), matrix[0].len());
         for i in 0..m {
             if matrix[i][0] > 0 {

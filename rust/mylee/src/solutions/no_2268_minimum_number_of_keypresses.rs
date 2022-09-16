@@ -64,7 +64,7 @@
 pub struct Solution {}
 impl Solution {
     pub fn minimum_keypresses(s: String) -> i32 {
-        if s.len() < 10 {
+       if s.len() < 10 {
             return s.len() as i32;
         }
         let mut cnt = std::collections::HashMap::new();
@@ -73,11 +73,12 @@ impl Solution {
         }
         let mut cnt: Vec<i32> = cnt.iter().map(|(_, &v)| v).collect();
         cnt.sort_by(|a, b| b.cmp(&a));
-        let ans = cnt[..9].iter().sum::<i32>();
+        let i = cnt.len().min(9);
+        let ans = cnt[..i].iter().sum::<i32>();
         if cnt.len() > 18 {
             ans + cnt[9..18].iter().sum::<i32>() * 2 + cnt[18..].iter().sum::<i32>() * 3
         } else {
-            ans + cnt[9..].iter().sum::<i32>() * 2
+            ans + cnt[i..].iter().sum::<i32>() * 2
         }
     }
 }
@@ -85,7 +86,7 @@ impl Solution {
 #[cfg(test)]
 mod test {
     use super::*;
-
+// "aaaaaaaabbbbbbbbcccccccc"
     #[test]
     pub fn test_minimum_keypresses_1() {
         assert_eq!(5, Solution::minimum_keypresses("apple".to_string()));

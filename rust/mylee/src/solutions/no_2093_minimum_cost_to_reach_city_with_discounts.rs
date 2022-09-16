@@ -88,11 +88,11 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn minimum_cost(n: i32, e: Vec<Vec<i32>>, discounts: i32) -> i32 {
+    pub fn minimum_cost(n: i32, highways: Vec<Vec<i32>>, discounts: i32) -> i32 {
         use std::cmp::Reverse;
         use std::collections::{BinaryHeap, HashMap};
         let mut g = HashMap::new();
-        for a in &e {
+        for a in &highways {
             let (u, v, w) = (a[0], a[1], a[2]);
             g.entry(u).or_insert(HashMap::new()).entry(v).or_insert(w);
             g.entry(v).or_insert(HashMap::new()).entry(u).or_insert(w);

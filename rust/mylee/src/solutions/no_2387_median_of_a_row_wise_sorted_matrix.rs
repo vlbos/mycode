@@ -32,14 +32,14 @@
 pub struct Solution {}
 
 impl Solution {
-    pub fn find_median(arr: Vec<Vec<i32>>) -> i32 {
-        let (mut l, mut r) = (0, i32::MAX / 2);
+    pub fn matrix_median(grid: Vec<Vec<i32>>) -> i32 {
+let (mut l, mut r) = (0, i32::MAX / 2);
         let mut ans = 0;
-        let med = arr.len() as i64 * arr[0].len() as i64 / 2 + 1;
+        let med = grid.len() as i64 * grid[0].len() as i64 / 2 + 1;
         while l <= r {
             let m = l + (r - l) / 2;
             let mut now = 0;
-            for a in &arr {
+            for a in &grid {
                 let i = a.partition_point(|x| *x < m);
                 now += (a.len() - i) as i64;
             }
@@ -59,14 +59,14 @@ mod test {
     use super::*;
 
     #[test]
-    pub fn test_find_median_1() {
+    pub fn test_matrix_median_1() {
         assert_eq!(
             2,
-            Solution::find_median(vec![vec![1, 1, 2], vec![2, 3, 3], vec![1, 3, 4]])
+            Solution::matrix_median(vec![vec![1, 1, 2], vec![2, 3, 3], vec![1, 3, 4]])
         );
     }
     #[test]
-    pub fn test_find_median_2() {
-        assert_eq!(3, Solution::find_median(vec![vec![1, 1, 3, 3, 4]]));
+    pub fn test_matrix_median_2() {
+        assert_eq!(3, Solution::matrix_median(vec![vec![1, 1, 3, 3, 4]]));
     }
 }

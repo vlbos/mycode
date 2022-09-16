@@ -45,7 +45,7 @@
 pub struct Solution {}
 impl Solution {
     pub fn build_wall(height: i32, width: i32, bricks: Vec<i32>) -> i32 {
-        let mut rows = Vec::new();
+       let mut rows = Vec::new();
         fn build_rows(width: i32, bricks: &Vec<i32>, path: i32, rows: &mut Vec<i32>) {
             for &brick in bricks {
                 if brick == width {
@@ -71,13 +71,13 @@ impl Solution {
             let mut new_dp = vec![0; n];
             for i in 0..n {
                 for &v in &graph[i] {
-                    new_dp[i] += dp[v];
+                    new_dp[i] += dp[v] as i64;
                     new_dp[i] %= 1_000_000_007;
                 }
             }
             dp = new_dp;
         }
-        dp.into_iter().sum::<i32>() % 1_000_000_007
+        (dp.into_iter().sum::<i64>() % 1_000_000_007) as _
     }
 }
 

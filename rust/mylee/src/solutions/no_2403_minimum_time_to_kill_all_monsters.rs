@@ -62,16 +62,16 @@
 pub struct Solution {}
 
 impl Solution {
-    pub fn minimum_time(power: Vec<i32>) -> i32 {
-        let n1 = 1 << power.len();
-        let mut dp = vec![i32::MAX; n1];
+    pub fn minimum_time(power: Vec<i32>) -> i64 {
+       let n1 = 1 << power.len();
+        let mut dp = vec![i64::MAX ; n1];
         dp[0] = 0;
 
         for mask in 1..n1 {
-            let cnt = mask.count_ones() as i32;
+            let cnt = mask.count_ones() as i64;
             for (i, &v) in power.iter().enumerate() {
                 if mask & (1 << i) > 0 {
-                    dp[mask] = dp[mask].min(dp[mask ^ (1 << i)] + (v + cnt - 1) / cnt);
+                    dp[mask] = dp[mask].min(dp[mask ^ (1 << i)] + (v as i64 + cnt - 1) / cnt);
                 }
             }
         }
