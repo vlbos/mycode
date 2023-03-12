@@ -73,7 +73,6 @@ impl Solution {
     }
 }
 
-
 // impl Solution {
 //     pub fn visible_mountains(peaks: Vec<Vec<i32>>) -> i32 {
 //         if peaks.len()==1{
@@ -102,14 +101,13 @@ impl Solution {
 #[cfg(test)]
 mod test {
     use super::*;
-// [[2,2],[2,2],[3,1]]
+    // [[2,2],[2,2],[3,1]]
 
-// [[32,37]]
+    // [[32,37]]
 
+    // [[1,3],[1,3]]
 
-// [[1,3],[1,3]]
-
-// [[2,2],[6,3],[5,4]]
+    // [[2,2],[6,3],[5,4]]
     #[test]
     pub fn test_visible_mountains_1() {
         assert_eq!(

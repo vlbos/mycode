@@ -45,7 +45,7 @@
 pub struct Solution {}
 impl Solution {
     pub fn build_wall(height: i32, width: i32, bricks: Vec<i32>) -> i32 {
-       let mut rows = Vec::new();
+        let mut rows = Vec::new();
         fn build_rows(width: i32, bricks: &Vec<i32>, path: i32, rows: &mut Vec<i32>) {
             for &brick in bricks {
                 if brick == width {

@@ -84,6 +84,45 @@ impl Solution {
     }
 }
 
+// impl Solution {
+//     pub fn most_visited_pattern(username: Vec<String>, timestamp: Vec<i32>, website: Vec<String>) -> Vec<String> {
+// use std::collections::{HashMap,HashSet};
+//        let n = username.len();
+//         let mut mp = HashMap::new();
+//         let mut seq = HashMap::new();
+
+//         for i in (0..n) {
+//             mp.entry(&username[i]).or_insert(vec![]).push((timestamp[i], &website[i]));
+//         }
+
+//         for (u, v) in mp.iter_mut() {
+//             v.sort_by(|a, b| a.0.cmp(&b.0));
+//             let n = v.len();
+
+//             for i in 0..n {
+//                 for j in i+1..n {
+//                     for k in j+1..n {
+//                         seq.entry((v[i].1, v[j].1, v[k].1)).or_insert(HashSet::new()).insert(u);
+//                     }
+//                 }
+//             }
+//         }
+
+//         let empty = "".to_string();
+//         let mut max = 0;
+//         let mut ans = (&empty, &empty, &empty);
+
+//         for (k, v) in seq {
+//             if v.len() > max || (v.len() == max && k < ans){
+//                 max = v.len();
+//                 ans = k;
+//             }
+//         }
+
+//         vec![ans.0.to_string(), ans.1.to_string(), ans.2.to_string()]
+//     }
+// }
+
 #[cfg(test)]
 mod test {
     use super::*;

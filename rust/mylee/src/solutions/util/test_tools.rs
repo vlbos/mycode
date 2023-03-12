@@ -46,6 +46,12 @@ macro_rules! assert_feq {
         assert_feq!($p, $q, 1e-64f);
     };
     ($p: expr, $q: expr, $sub: expr) => {
-        assert!(f64::abs( $p - $q) < $sub, "assert_feq {:?} {:?} {:?} failed", $p, $q, $sub);
+        assert!(
+            f64::abs($p - $q) < $sub,
+            "assert_feq {:?} {:?} {:?} failed",
+            $p,
+            $q,
+            $sub
+        );
     };
 }

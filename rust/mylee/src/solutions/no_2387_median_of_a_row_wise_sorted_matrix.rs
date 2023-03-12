@@ -33,7 +33,7 @@ pub struct Solution {}
 
 impl Solution {
     pub fn matrix_median(grid: Vec<Vec<i32>>) -> i32 {
-let (mut l, mut r) = (0, i32::MAX / 2);
+        let (mut l, mut r) = (0, i32::MAX / 2);
         let mut ans = 0;
         let med = grid.len() as i64 * grid[0].len() as i64 / 2 + 1;
         while l <= r {

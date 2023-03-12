@@ -76,8 +76,11 @@
 pub struct Solution {}
 
 impl Solution {
-   pub fn brightest_position(lights: Vec<Vec<i32>>) -> i32 {
- let mut a: Vec<(i32, i32)> = lights.into_iter().map(|v| (v[0] - v[1], v[0] + v[1])).collect();
+    pub fn brightest_position(lights: Vec<Vec<i32>>) -> i32 {
+        let mut a: Vec<(i32, i32)> = lights
+            .into_iter()
+            .map(|v| (v[0] - v[1], v[0] + v[1]))
+            .collect();
         a.sort();
         let mut q = std::collections::BinaryHeap::<Reverse<i32>>::new();
         use std::cmp::Reverse;

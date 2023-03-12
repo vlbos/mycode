@@ -1,3 +1,5 @@
+
+
 // 2408. Design SQL
 
 // You are given n tables represented with two arrays names and columns, where names[i] is the name of the ith table and columns[i] is the number of columns of the ith table.
@@ -13,6 +15,7 @@
 // void insertRow(String name, String[] row) Adds a row to the table name. It is guaranteed that the table will exist, and the size of the array row is equal to the number of columns in the table.
 // void deleteRow(String name, int rowId) Removes the row rowId from the table name. It is guaranteed that the table and row will exist.
 // String selectCell(String name, int rowId, int columnId) Returns the value of the cell in the row rowId and the column columnId from the table name.
+ 
 
 // Example 1:
 
@@ -29,6 +32,7 @@
 // sql.insertRow("two", ["fourth", "fifth", "sixth"]); // adds another row to the table "two". Its id is 2.
 // sql.deleteRow("two", 1); // deletes the first row of the table "two". Note that the second row will still have the id 2.
 // sql.selectCell("two", 2, 2); // return "fifth", finds the value of the second column in the row with id 2 of the table "two".
+ 
 
 // Constraints:
 
@@ -50,51 +54,45 @@
  * obj.delete_row(name, rowId);
  * let ret_3: String = obj.select_cell(name, rowId, columnId);
  */
-use std::collections::{BTreeMap, HashMap};
+
+use std::collections::{HashMap,BTreeMap};
 struct SQL {
-    tables: HashMap<String, (i32, BTreeMap<i32, Vec<String>>)>,
+ tables:HashMap<String,(i32,BTreeMap<i32,Vec<String>>)>,
 }
+
 
 /**
  * `&self` means the method takes an immutable reference.
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl SQL {
+
     fn new(names: Vec<String>, columns: Vec<i32>) -> Self {
-        Self {
-            tables: names
-                .into_iter()
-                .map(|name| (name, (0, BTreeMap::new())))
-                .collect(),
-        }
+        Self{tables:names.into_iter().map(|name| (name,(0,BTreeMap::new()))).collect()}
     }
-
+    
     fn insert_row(&mut self, name: String, row: Vec<String>) {
-        self.tables.entry(name).and_modify(|(rows, records)| {
-            *rows += 1;
-            records.insert(*rows, row);
-        });
+        self.tables.entry(name).and_modify(|(rows,records)| {*rows+=1; records.insert(*rows,row);});
     }
-
+    
     fn delete_row(&mut self, name: String, row_id: i32) {
-        self.tables.entry(name).and_modify(|(_, records)| {
-            records.remove(&row_id);
-        });
+        self.tables.entry(name).and_modify(|(_,records)| {records.remove(&row_id);});
     }
-
+    
     fn select_cell(&self, name: String, row_id: i32, column_id: i32) -> String {
-        if let Some(table) = self.tables.get(&name) {
-            if let Some(records) = table.1.get(&row_id) {
-                if column_id <= records.len() as i32 {
-                    records[column_id as usize - 1].clone()
-                } else {
+        if let Some(table)= self.tables.get(&name){
+            if let Some(records)=table.1.get(&row_id){
+                if column_id<=records.len() as i32{
+                    records[column_id as usize-1].clone()
+                }else{
                     String::new()
                 }
-            } else {
-                String::new()
-            }
-        } else {
+            }else{
+                    String::new()
+                }
+        }else{
             String::new()
         }
     }
 }
+

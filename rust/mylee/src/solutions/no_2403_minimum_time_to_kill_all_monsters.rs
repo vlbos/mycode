@@ -63,8 +63,8 @@ pub struct Solution {}
 
 impl Solution {
     pub fn minimum_time(power: Vec<i32>) -> i64 {
-       let n1 = 1 << power.len();
-        let mut dp = vec![i64::MAX ; n1];
+        let n1 = 1 << power.len();
+        let mut dp = vec![i64::MAX; n1];
         dp[0] = 0;
 
         for mask in 1..n1 {
