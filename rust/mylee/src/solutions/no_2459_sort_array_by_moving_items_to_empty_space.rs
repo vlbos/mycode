@@ -1,9 +1,12 @@
 // # [2459. Sort Array by Moving Items to Empty Space](https://leetcode.com/problems/sort-array-by-moving-items-to-empty-space)
 // ## Description
 
-//  You are given an integer array  nums  of size  n  containing  each  element from  0  to  n - 1  ( inclusive ). Each of the elements from  1  to  n - 1  represents an item, and the element  0  represents an empty space.
+//  You are given an integer array  nums  of size  n  containing  each  element from  0  to  n - 1  ( inclusive ).
+//  Each of the elements from  1  to  n - 1  represents an item, and the element  0  represents an empty space.
 
-//  In one operation, you can move  any  item to the empty space.  nums  is considered to be sorted if the numbers of all the items are in  ascending  order and the empty space is either at the beginning or at the end of the array.
+//  In one operation, you can move  any  item to the empty space.
+// nums  is considered to be sorted if the numbers of all the items are in  ascending  order
+// and the empty space is either at the beginning or at the end of the array.
 
 //  For example, if  n = 4 ,  nums  is sorted if:
 
@@ -52,26 +55,32 @@ pub struct Solution;
 
 impl Solution {
     pub fn sort_array(nums: Vec<i32>) -> i32 {
-        let (mut i, mut j) = (0, nums.len() - 1);
-        let (mut a, mut b) = (nums[i], nums[j]);
-        let mut ans = 0;
-        while i < j {
-            if a < b {
-                i += 1;
-                a += nums[i];
-                ans += 1;
-            } else if a > b {
-                j -= 1;
-                b += nums[j];
-                ans += 1;
-            } else {
-                i += 1;
-                j -= 1;
-                a = nums[i];
-                b = nums[j];
+        let n = nums.len();
+        let f = |nums: &Vec<i32>, k: i32| {
+            let mut vis = vec![false; n];
+            let mut cnt = 0;
+            for (i, &v) in nums.iter().enumerate() {
+                if v == i as i32 || vis[i] {
+                    continue;
+                }
+                cnt += 1;
+                let mut j = i;
+                while !vis[j] {
+                    vis[j] = true;
+                    cnt += 1;
+                    j = nums[j] as usize;
+                }
             }
-        }
-        ans
+            cnt - if nums[k as usize] == k { 0 } else { 2 }
+        };
+        let nn = n as i32;
+        f(&nums, 0).min(f(
+            &nums
+                .iter()
+                .map(|&v| (v - 1 + nn) % nn)
+                .collect::<Vec<i32>>(),
+            nn - 1,
+        ))
     }
 }
 

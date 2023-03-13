@@ -5,9 +5,11 @@
 
 //  You can apply the following operation on the string  any  number of times:
 
-// 	 Choose any substring of size  k  from  s  and  flip  all its characters, that is, turn all  1 &#39;s into  0 &#39;s, and all  0 &#39;s into  1 &#39;s.
+// 	 Choose any substring of size  k  from  s  and  flip  all its characters,
+// that is, turn all  1 's into  0 's, and all  0 's into  1 's.
 
-//  Return  the number of  distinct  strings you can obtain . Since the answer may be too large, return it  modulo   10 9  + 7 .
+//  Return  the number of  distinct  strings you can obtain .
+// Since the answer may be too large, return it  modulo   10^9  + 7 .
 
 //   Note  that:
 
@@ -45,7 +47,7 @@ pub struct Solution;
 
 impl Solution {
     pub fn count_distinct_strings(s: String, k: i32) -> i32 {
-        0
+        (0..=s.len() - k as usize).fold(1, |a, _| (a * 2) % 1_000_000_007)
     }
 }
 

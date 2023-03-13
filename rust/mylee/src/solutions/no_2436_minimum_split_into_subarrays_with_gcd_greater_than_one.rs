@@ -40,23 +40,19 @@ pub struct Solution;
 
 impl Solution {
     pub fn minimum_splits(nums: Vec<i32>) -> i32 {
-        let (mut i, mut j) = (0, nums.len() - 1);
-        let (mut a, mut b) = (nums[i], nums[j]);
-        let mut ans = 0;
-        while i < j {
-            if a < b {
-                i += 1;
-                a += nums[i];
-                ans += 1;
-            } else if a > b {
-                j -= 1;
-                b += nums[j];
-                ans += 1;
+        let (mut ans, mut x) = (1, nums[0]);
+        fn gcd(a: i32, b: i32) -> i32 {
+            if b == 0 {
+                a
             } else {
-                i += 1;
-                j -= 1;
-                a = nums[i];
-                b = nums[j];
+                gcd(b, a % b)
+            }
+        }
+        for &v in &nums {
+            x = gcd(x, v);
+            if x == 1 {
+                x = v;
+                ans += 1;
             }
         }
         ans

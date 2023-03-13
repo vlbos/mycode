@@ -50,26 +50,37 @@ pub struct Solution;
 
 impl Solution {
     pub fn valid_subarray_split(nums: Vec<i32>) -> i32 {
-        let (mut i, mut j) = (0, nums.len() - 1);
-        let (mut a, mut b) = (nums[i], nums[j]);
-        let mut ans = 0;
-        while i < j {
-            if a < b {
-                i += 1;
-                a += nums[i];
-                ans += 1;
-            } else if a > b {
-                j -= 1;
-                b += nums[j];
-                ans += 1;
+        fn gcd(a: i32, b: i32) -> i32 {
+            if b == 0 {
+                a
             } else {
-                i += 1;
-                j -= 1;
-                a = nums[i];
-                b = nums[j];
+                gcd(b, a % b)
             }
         }
-        ans
+        fn dfs(i: usize, nums: &Vec<i32>, f: &mut Vec<i32>) -> i32 {
+            let n = nums.len();
+            if i >= n {
+                return 0;
+            }
+            if f[i] > 0 {
+                return f[i];
+            }
+            let mut ans = i32::MAX;
+            for j in i..n {
+                if gcd(nums[i], nums[j]) > 1 {
+                    ans = ans.min(1 + dfs(j + 1, nums, f));
+                }
+            }
+            f[i] = ans;
+            ans
+        }
+        let mut f = vec![0; nums.len()];
+        let ans = dfs(0, &nums, &mut f);
+        if ans == i32::MAX {
+            -1
+        } else {
+            ans
+        }
     }
 }
 
