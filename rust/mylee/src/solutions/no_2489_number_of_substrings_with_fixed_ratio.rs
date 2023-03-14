@@ -2,13 +2,10 @@
 // ## Description
 
 //  You are given a binary string  s , and two integers  num1  and  num2 .  num1  and  num2  are coprime numbers.
-
-//  A  ratio substring  is a substring of s where the ratio between the number of  0 &#39;s and the number of  1 &#39;s in the substring is exactly  num1 : num2 .
-
+//  A  ratio substring  is a substring of s where the ratio between the number of  0 's
+// and the number of  1 's in the substring is exactly  num1 : num2 .
 // 	 For example, if  num1 = 2  and  num2 = 3 , then  "01011"  and  "1110000111"  are ratio substrings, while  "11000"  is not.
-
 //  Return  the number of  non-empty  ratio substrings of   s .
-
 //   Note  that:
 
 // 	 A  substring  is a contiguous sequence of characters within a string.
@@ -19,10 +16,10 @@
 //  Input:  s = "0110011", num1 = 1, num2 = 2
 //  Output:  4
 //  Explanation:  There exist 4 non-empty ratio substrings.
-// - The substring s[0..2]: " 011 0011". It contains one 0 and two 1&#39;s. The ratio is 1 : 2.
-// - The substring s[1..4]: "0 110 011". It contains one 0 and two 1&#39;s. The ratio is 1 : 2.
-// - The substring s[4..6]: "0110 011 ". It contains one 0 and two 1&#39;s. The ratio is 1 : 2.
-// - The substring s[1..6]: "0 110011 ". It contains two 0&#39;s and four 1&#39;s. The ratio is 2 : 4 == 1 : 2.
+// - The substring s[0..2]: " 011 0011". It contains one 0 and two 1's. The ratio is 1 : 2.
+// - The substring s[1..4]: "0 110 011". It contains one 0 and two 1's. The ratio is 1 : 2.
+// - The substring s[4..6]: "0110 011 ". It contains one 0 and two 1's. The ratio is 1 : 2.
+// - The substring s[1..6]: "0 110011 ". It contains two 0's and four 1's. The ratio is 2 : 4 == 1 : 2.
 // It can be shown that there are no more ratio substrings.
 
 //  Example 2:
@@ -43,7 +40,16 @@ pub struct Solution;
 
 impl Solution {
     pub fn fixed_ratio(s: String, num1: i32, num2: i32) -> i64 {
-        0
+        let mut n = vec![0; 2];
+        let mut ans = 0;
+        let mut cnt = std::collections::HashMap::from([(0, 1)]);
+        for b in s.bytes() {
+            n[(b - b'0') as usize] += 1;
+            let x = n[1] * num1 - n[0] * num2;
+            ans += *cnt.get(&x).unwrap_or(&0);
+            *cnt.entry(x).or_insert(0) += 1;
+        }
+        ans
     }
 }
 

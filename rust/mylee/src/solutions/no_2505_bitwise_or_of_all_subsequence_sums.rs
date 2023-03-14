@@ -1,9 +1,11 @@
 // # [2505. Bitwise OR of All Subsequence Sums](https://leetcode.com/problems/bitwise-or-of-all-subsequence-sums)
 // ## Description
 
-//  Given an integer array  nums , return  the value of the bitwise   OR   of the sum of all possible  subsequences  in the array .
+//  Given an integer array  nums ,
+// return  the value of the bitwise   OR   of the sum of all possible  subsequences  in the array .
 
-//  A  subsequence  is a sequence that can be derived from another sequence by removing zero or more elements without changing the order of the remaining elements.
+//  A  subsequence  is a sequence that can be derived from another sequence
+// by removing zero or more elements without changing the order of the remaining elements.
 
 //  Example 1:
 
@@ -29,7 +31,22 @@ pub struct Solution;
 
 impl Solution {
     pub fn subsequence_sum_or(nums: Vec<i32>) -> i64 {
-        0
+        let mut cnt = vec![0; 64];
+        let mut ans = 0;
+        for &v in &nums {
+            for i in 0..31 {
+                if v >> i & 1 > 0 {
+                    cnt[i] += 1;
+                }
+            }
+        }
+        for i in 0..63 {
+            if cnt[i] > 0 {
+                ans |= 1 << i;
+            }
+            cnt[i + 1] += cnt[i] / 2;
+        }
+        ans
     }
 }
 

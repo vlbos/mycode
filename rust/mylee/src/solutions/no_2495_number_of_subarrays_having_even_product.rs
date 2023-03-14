@@ -1,7 +1,8 @@
 // # [2495. Number of Subarrays Having Even Product](https://leetcode.com/problems/number-of-subarrays-having-even-product)
 // ## Description
 
-//  Given a  0-indexed  integer array  nums , return  the number of <span data-keyword="subarray-nonempty">subarrays  of   nums   having an even product .
+//  Given a  0-indexed  integer array  nums ,
+// return  the number of subarrays  of   nums   having an even product .
 
 //  Example 1:
 
@@ -32,7 +33,14 @@ pub struct Solution;
 
 impl Solution {
     pub fn even_product(nums: Vec<i32>) -> i64 {
-        0
+        let (mut ans, mut last) = (0, -1);
+        for (i, v) in nums.into_iter().enumerate() {
+            if v % 2 == 0 {
+                last = i as i64;
+            }
+            ans += last + 1;
+        }
+        ans
     }
 }
 
