@@ -6,15 +6,15 @@
 //  A binary string is  good  if it satisfies the following conditions:
 
 // 	 The length of the string is in the range  [minLength, maxLength] .
-// 	 The size of each block of consecutive  1 &#39;s is a multiple of  oneGroup .
+// 	 The size of each block of consecutive  1 's is a multiple of  oneGroup .
 
 // 		 For example in a binary string  00 11 0 1111 00  sizes of each block of consecutive ones are  [2,4] .
 
-// 	 The size of each block of consecutive  0 &#39;s is a multiple of  zeroGroup .
+// 	 The size of each block of consecutive  0 's is a multiple of  zeroGroup .
 
 // 		 For example, in a binary string   00 11 0 1111 00   sizes of each block of consecutive ones are  [2,1,2] .
 
-//  Return  the number of  good  binary strings . Since the answer may be too large, return it  modulo   10 9  + 7 .
+//  Return  the number of  good  binary strings . Since the answer may be too large, return it  modulo   10^9  + 7 .
 
 //   Note  that  0  is considered a multiple of all the numbers.
 
@@ -48,7 +48,22 @@ impl Solution {
         one_group: i32,
         zero_group: i32,
     ) -> i32 {
-        0
+        let m = 1_000_000_007;
+        let mut f = vec![0; max_length as usize + 1];
+        f[0] = 1;
+        for i in 1..=max_length {
+            if i - one_group >= 0 {
+                f[i as usize] += f[(i - one_group) as usize];
+                f[i as usize] %= m;
+            }
+            if i - zero_group >= 0 {
+                f[i as usize] += f[(i - zero_group) as usize];
+                f[i as usize] %= m;
+            }
+        }
+        f[min_length as usize..]
+            .iter()
+            .fold(0, |mut a, x| (a + x) % m) as _
     }
 }
 

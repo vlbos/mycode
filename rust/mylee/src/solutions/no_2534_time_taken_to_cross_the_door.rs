@@ -1,9 +1,13 @@
 // # [2534. Time Taken to Cross the Door](https://leetcode.com/problems/time-taken-to-cross-the-door)
 // ## Description
 
-//  There are  n  persons numbered from  0  to  n - 1  and a door. Each person can enter or exit through the door once, taking one second.
+//  There are  n  persons numbered from  0  to  n - 1  and a door.
+// Each person can enter or exit through the door once, taking one second.
 
-//  You are given a  non-decreasing  integer array  arrival  of size  n , where  arrival[i]  is the arrival time of the  i th   person at the door. You are also given an array  state  of size  n , where  state[i]  is  0  if person  i  wants to enter through the door or  1  if they want to exit through the door.
+//  You are given a  non-decreasing  integer array  arrival  of size  n ,
+// where  arrival[i]  is the arrival time of the  i th   person at the door.
+// You are also given an array  state  of size  n ,
+//  where  state[i]  is  0  if person  i  wants to enter through the door or  1  if they want to exit through the door.
 
 //  If two or more persons want to use the door at the  same  time, they follow the following rules:
 
@@ -25,8 +29,10 @@
 //  Output:  [0,3,1,2,4]
 //  Explanation:  At each second we have the following:
 // - At t = 0: Person 0 is the only one who wants to enter, so they just enter through the door.
-// - At t = 1: Person 1 wants to exit, and person 2 wants to enter. Since the door was used the previous second for entering, person 2 enters.
-// - At t = 2: Person 1 still wants to exit, and person 3 wants to enter. Since the door was used the previous second for entering, person 3 enters.
+// - At t = 1: Person 1 wants to exit, and person 2 wants to enter.
+// Since the door was used the previous second for entering, person 2 enters.
+// - At t = 2: Person 1 still wants to exit, and person 3 wants to enter.
+//  Since the door was used the previous second for entering, person 3 enters.
 // - At t = 3: Person 1 is the only one who wants to exit, so they just exit through the door.
 // - At t = 4: Person 4 is the only one who wants to exit, so they just exit through the door.
 
@@ -35,8 +41,11 @@
 //  Input:  arrival = [0,0,0], state = [1,0,1]
 //  Output:  [0,2,1]
 //  Explanation:  At each second we have the following:
-// - At t = 0: Person 1 wants to enter while persons 0 and 2 want to exit. Since the door was not used in the previous second, the persons who want to exit get to go first. Since person 0 has a smaller index, they exit first.
-// - At t = 1: Person 1 wants to enter, and person 2 wants to exit. Since the door was used in the previous second for exiting, person 2 exits.
+// - At t = 0: Person 1 wants to enter while persons 0 and 2 want to exit.
+// Since the door was not used in the previous second, the persons who want to exit get to go first.
+// Since person 0 has a smaller index, they exit first.
+// - At t = 1: Person 1 wants to enter, and person 2 wants to exit.
+// Since the door was used in the previous second for exiting, person 2 exits.
 // - At t = 2: Person 1 is the only one who wants to enter, so they just enter through the door.
 
 //   Constraints:
@@ -53,7 +62,32 @@ pub struct Solution;
 
 impl Solution {
     pub fn time_taken(arrival: Vec<i32>, state: Vec<i32>) -> Vec<i32> {
-        vec![]
+        let mut ans = vec![0; arrival.len()];
+        let mut qs = vec![std::collections::VecDeque::new(); 2];
+        let mut d = 1;
+        let mut cur = 0;
+        for (i, a) in arrival.into_iter().enumerate() {
+            while a > cur && qs.iter().any(|q| !q.is_empty()) {
+                if qs[d].is_empty() {
+                    d = 1 - d;
+                }
+                ans[qs[d].pop_front().unwrap()] = cur;
+                cur += 1;
+            }
+            if cur < a {
+                cur = a;
+                d = 1;
+            }
+            qs[state[i] as usize].push_back(i);
+        }
+        while qs.iter().any(|q| !q.is_empty()) {
+            if qs[d].is_empty() {
+                d = 1 - d;
+            }
+            ans[qs[d].pop_front().unwrap()] = cur;
+            cur += 1;
+        }
+        ans
     }
 }
 

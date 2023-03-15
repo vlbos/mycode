@@ -1,7 +1,8 @@
 // # [2548. Maximum Price to Fill a Bag](https://leetcode.com/problems/maximum-price-to-fill-a-bag)
 // ## Description
 
-//  You are given a 2D integer array  items  where  items[i] = [price i , weight i ]  denotes the price and weight of the  i th   item, respectively.
+//  You are given a 2D integer array  items  where  items[i] = [price i ,
+// weight i ]  denotes the price and weight of the  i th   item, respectively.
 
 //  You are also given a  positive  integer  capacity .
 
@@ -10,7 +11,9 @@
 // 	 The weight of the first item is  weight i  * part1  and the price of the first item is  price i  * part1 .
 // 	 Similarly, the weight of the second item is  weight i  * part2  and the price of the second item is  price i  * part2 .
 
-//  Return   the maximum total price  to fill a bag of capacity   capacity   with given items . If it is impossible to fill a bag return  -1 . Answers within  10 -5   of the  actual answer  will be considered accepted.
+//  Return   the maximum total price  to fill a bag of capacity   capacity   with given items .
+//  If it is impossible to fill a bag return  -1 .
+// Answers within  10^-5   of the  actual answer  will be considered accepted.
 
 //  Example 1:
 
@@ -41,8 +44,19 @@
 pub struct Solution;
 
 impl Solution {
-    pub fn max_price(items: Vec<Vec<i32>>, capacity: i32) -> f64 {
-        0.0
+    pub fn max_price(mut items: Vec<Vec<i32>>, mut capacity: i32) -> f64 {
+        let mut ans = 0.0;
+        items.sort_by(|a, b| (a[1] * b[0]).cmp(&(a[0] * b[1])));
+        for item in &items {
+            let v = item[1].min(capacity);
+            ans += (v as f64) / (item[1] as f64) * item[0] as f64;
+            capacity -= v;
+        }
+        if capacity > 0 {
+            -1.0
+        } else {
+            ans
+        }
     }
 }
 

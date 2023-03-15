@@ -3,7 +3,8 @@
 
 //  A  subsequence  of a string is good if it is not empty and the frequency of each one of its characters is the same.
 
-//  Given a string  s , return  the number of good subsequences of   s . Since the answer may be too large, return it modulo  10 9  + 7 .
+//  Given a string  s , return  the number of good subsequences of   s .
+//  Since the answer may be too large, return it modulo  10 9  + 7 .
 
 //  A  subsequence  is a string that can be derived from another string by deleting some or no characters without changing the order of the remaining characters.
 
@@ -11,19 +12,23 @@
 
 //  Input:  s = "aabb"
 //  Output:  11
-//  Explanation:  The total number of subsequences is  2 4 .  There are five subsequences which are not good: "  aab  b", "a  abb  ", "  a  a  bb  ", "  aa  b  b  ", and the empty subsequence. Hence, the number of good subsequences is  2 4 -5 = 11 .
+//  Explanation:  The total number of subsequences is  2 4 .
+// There are five subsequences which are not good: "  aab  b", "a  abb  ", "  a  a  bb  ", "  aa  b  b  ",
+// and the empty subsequence. Hence, the number of good subsequences is  2 4 -5 = 11 .
 
 //  Example 2:
 
 //  Input:  s = "leet"
 //  Output:  12
-//  Explanation:  There are four subsequences which are not good: "  l  ee  t", "l  eet  ", "  leet  ", and the empty subsequence. Hence, the number of good subsequences is  2 4 -4 = 12 .
+//  Explanation:  There are four subsequences which are not good: "  l  ee  t", "l  eet  ", "  leet  ", and the empty subsequence.
+//  Hence, the number of good subsequences is  2 4 -4 = 12 .
 
 //  Example 3:
 
 //  Input:  s = "abcd"
 //  Output:  15
-//  Explanation:  All of the non-empty subsequences are good subsequences. Hence, the number of good subsequences is  2 4 -1 = 15 .
+//  Explanation:  All of the non-empty subsequences are good subsequences.
+// Hence, the number of good subsequences is  2 4 -1 = 15 .
 
 //   Constraints:
 
@@ -36,7 +41,43 @@ pub struct Solution;
 
 impl Solution {
     pub fn count_good_subsequences(s: String) -> i32 {
-        0
+        let n = s.len();
+        let m = 1_000_000_007;
+        let qmi = |mut a: i64, mut k: i64| {
+            let mut ans = 1;
+            while k != 0 {
+                if k % 2 != 0 {
+                    ans = ans * a % m;
+                }
+                k /= 2;
+                a = a * a % m;
+            }
+            ans
+        };
+        let (mut f, mut g) = (vec![1; n + 1], vec![1; n + 1]);
+        f[0] = 1;
+        g[0] = 1;
+        for i in 1..=n {
+            f[i] = f[i - 1] * (i as i64) % m;
+            g[i] = qmi(f[i], m - 2);
+        }
+        let comb = |i: usize, j: usize| f[i] * g[j] % m * g[i - j] % m;
+        let mut cnt = std::collections::HashMap::new();
+        for b in s.bytes() {
+            *cnt.entry(b - b'a').or_insert(0) += 1;
+        }
+        let mut mx = *cnt.values().max().unwrap();
+        let mut ans = 0;
+        for i in 1..=mx {
+            let mut x = 1;
+            for &j in cnt.values() {
+                if j >= i {
+                    x = x * (comb(j, i) + 1) % m;
+                }
+            }
+            ans = (ans + x - 1) % m;
+        }
+        ans as _
     }
 }
 
