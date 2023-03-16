@@ -1,6 +1,7 @@
 // # [2557. Maximum Number of Integers to Choose From a Range II](https://leetcode.com/problems/maximum-number-of-integers-to-choose-from-a-range-ii)
 
-// You are given an integer array banned and two integers n and maxSum. You are choosing some number of integers following the below rules:
+// You are given an integer array banned and two integers n and maxSum.
+// You are choosing some number of integers following the below rules:
 
 // 	The chosen integers have to be in the range [1, n].
 // 	Each integer can be chosen at most once.
@@ -25,17 +26,37 @@
 
 // Constraints:
 
-// 	1 <= banned.length <= 105
-// 	1 <= banned[i] <= n <= 109
-// 	1 <= maxSum <= 1015
+// 	1 <= banned.length <= 10^5
+// 	1 <= banned[i] <= n <= 10^9
+// 	1 <= maxSum <= 10^15
 //   int max_count(vector<int>& banned, int n, long long max_sum) {
 
 #[allow(dead_code)]
 pub struct Solution;
 
 impl Solution {
-    pub fn max_count(banned: Vec<i32>, n: i32, max_sum: i64) -> i32 {
-        0
+    pub fn max_count(mut banned: Vec<i32>, n: i32, mut max_sum: i64) -> i32 {
+        banned.extend(vec![0, n + 1]);
+        banned.sort();
+        let mut ans = 0;
+        for w in banned.windows(2) {
+            let (l, r) = (w[0] as i64, w[1] as i64);
+            let (mut left, mut right) = (0, r - l - 1);
+            while left < right {
+                let mid = (left + right + 1) / 2;
+                if (l + 1 + l + mid) * mid / 2 <= max_sum {
+                    left = mid;
+                } else {
+                    right = mid - 1;
+                }
+            }
+            ans += left;
+            max_sum -= (l + 1 + l + left) * left / 2;
+            if max_sum <= 0 {
+                break;
+            }
+        }
+        ans as _
     }
 }
 
