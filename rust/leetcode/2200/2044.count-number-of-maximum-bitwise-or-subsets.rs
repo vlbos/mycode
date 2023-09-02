@@ -28,3 +28,22 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn count_max_or_subsets(nums: Vec<i32>) -> i32 {
+        fn dfs(pos:usize,val:i32,nums: &Vec<i32>,ans:&mut Vec<i32>){
+            if pos==nums.len(){
+                if val>ans[1]{
+                    *ans=vec![1,val];
+                }else if val==ans[1]{
+                    ans[0]+=1;
+                }
+                return
+            }
+            dfs(pos+1,val|nums[pos],nums,ans);
+            dfs(pos+1,val,nums,ans);
+        }
+        let mut ans=vec![0;2];
+        dfs(0,0,&nums,&mut ans);
+        ans[0]
+    }
+}

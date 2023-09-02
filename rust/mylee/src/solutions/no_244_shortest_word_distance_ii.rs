@@ -39,7 +39,7 @@ pub struct WordDistance {
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl WordDistance {
-    pub fn new(wordsDict: Vec<String>) -> Self {
+    pub fn new(words_dict: Vec<String>) -> Self {
         // let mut dict: HashMap<String, Vec<usize>> = HashMap::new();
         // for (i, w) in words.iter().cloned().enumerate() {
         //     dict.entry(w)
@@ -48,7 +48,7 @@ impl WordDistance {
         // }
         //  WordDistance { dict }
         let mut k2i = HashMap::new();
-        for (i, w) in wordsDict.iter().enumerate() {
+        for (i, w) in words_dict.iter().enumerate() {
             k2i.entry(w.clone()).or_insert(Vec::new()).push(i as i32);
         }
         Self { k2i }

@@ -39,3 +39,44 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn min_cost_connect_points(points: Vec<Vec<i32>>) -> i32 {
+        let n=points.len();
+        let mut parent:Vec<usize>=(0..n).collect();
+        fn find(x:usize,parent:&mut Vec<usize>)->usize{
+            let px=parent[x];
+            if px!=x{
+                parent[x]=find(px,parent);
+            }
+            parent[x]
+        }
+        let unite=|x:usize,y:usize,parent:&mut Vec<usize>|{
+            let (px,py)=(find(x,parent),find(y,parent));
+            if px!=py{
+                parent[px]=py;
+                return true
+            }
+            false
+        };
+        let dist=|x:usize,y:usize|{(points[x][0]-points[y][0]).abs()+(points[x][1]-points[y][1]).abs()};
+        let mut edges=Vec::new();
+        for i in 0..n{
+            for j in i+1..n{
+                edges.push((dist(i,j),i,j));
+            }
+        }
+        edges.sort();
+        let mut ans=0;
+        let mut cnt=1;
+        for &(length,i,j) in &edges{
+            if unite(i,j,&mut parent){
+                ans+=length;
+                cnt+=1;
+                if cnt==n{
+                    break
+                }
+            }
+        }
+        ans
+    }
+}

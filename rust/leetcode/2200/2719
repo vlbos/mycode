@@ -1,0 +1,36 @@
+impl Solution {
+    pub fn count(num1: String, num2: String, min_sum: i32, max_sum: i32) -> i32 {
+        let calu=|num: &[u8], min_sum: i32, max_sum: i32|{
+            let n=num.len();
+            let mut dp=vec![vec![vec![0;2];max_sum as usize+1];n+1];
+            dp[0][0][0]=1;
+            for i in 1..=n{
+                let upper=(num[i-1]-b'0') as i32;
+                for j in 0..=max_sum{
+                    for k in 0..2{
+                        let limit=if k==0{upper}else{9};
+                        for d in 0..=limit{
+                            let new_sum=j+d;
+                            let new_k=if k>0||(d<upper) {1}else{0};
+                            if new_sum<=max_sum{
+                                dp[i][new_sum as usize][new_k]=(dp[i][new_sum as usize][new_k]+dp[i-1][j as usize][k])%1_000_000_007;
+
+                            }
+                        }
+                    }
+                }
+            }
+            let mut ans=0;
+            for k in 0..2{
+                for j in min_sum..=max_sum{
+                    ans=(ans+dp[n][j as usize][k])%1_000_000_007;
+                }
+            }
+            ans
+        };
+        let (x,y)=(calu(num1.as_bytes(),min_sum,max_sum),calu(num2.as_bytes(),min_sum,max_sum));
+        let sum=num1.bytes().map(|b|(b-b'0') as i32).sum::<i32>();
+        let t=if sum>=min_sum && sum<=max_sum{1}else{0};
+        (y-x+t+1_000_000_007)%1_000_000_007
+    }
+}

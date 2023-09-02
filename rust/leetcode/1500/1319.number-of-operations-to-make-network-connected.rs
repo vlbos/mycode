@@ -36,3 +36,30 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn make_connected(n: i32, connections: Vec<Vec<i32>>) -> i32 {
+        if n>1+connections.len() as i32{
+            return -1
+        }
+        let mut parent:Vec<i32>=(0..n).collect();
+        let mut ans=n;
+        fn find(x:i32,parent:&mut Vec<i32>)->i32{
+            let px=parent[x as usize];
+            if px!=x{
+                parent[x as usize]=find(px,parent);
+            }
+            parent[x as usize]
+        }
+        let unite=|x:i32,y:i32,parent:&mut Vec<i32>,ans:&mut i32|{
+            let (px,py)=(find(x,parent),find(y,parent));
+            if px!=py{
+                parent[px as usize]=py;
+                *ans-=1;
+            }
+        };
+        for c in &connections{
+            unite(c[0],c[1],&mut parent,&mut ans);
+        }
+        ans-1
+    }
+}

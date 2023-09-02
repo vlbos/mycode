@@ -46,3 +46,31 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn push_dominoes(dominoes: String) -> String {
+        let n=dominoes.len();
+        let mut dp=vec![0;n];
+        for (i,c) in dominoes.chars().enumerate(){
+            if c=='L'{
+                dp[i]=-1;
+            }else if c=='R'{
+                dp[i]=1;
+            }
+        }
+        for i in 0..n{
+            if dp[i]>0 && i+1<n && dp[i+1]==0{
+                dp[i+1]=dp[i]+1;
+            }
+            let mut j=i;
+            while dp[j]<0 && j>0 && (dp[j-1]==0||dp[j]+dp[j-1]>0){
+                if dp[j]+dp[j-1]==1{
+                    dp[j-1]=0;
+                    break
+                }
+                dp[j-1]=dp[j]-1;
+                j-=1;
+            }
+        }
+        dp.into_iter().map(|x| if x>0{'R'}else if x<0{'L'}else{'.'}).collect()
+    }
+}

@@ -155,3 +155,63 @@ impl Solution {
     }
 }
 // @lc code=end
+
+
+
+impl Solution {
+    pub fn find_critical_and_pseudo_critical_edges(n: i32, mut edges: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+        for (i,e) in edges.iter_mut().enumerate(){
+            e.push(i as i32);
+        }
+        edges.sort_by_key(|e|e[2]);
+        let mut parent:Vec<i32>=(0..n).collect();
+        fn find(x:i32,parent:&mut Vec<i32>)->i32{
+            let px=parent[x as usize];
+            if px!=x{
+                parent[x as usize]=find(px,parent);
+            }
+            parent[x as usize]
+        }
+        let unite=| x:i32,y:i32,parent:&mut Vec<i32>|{
+            let (px,py)=(find(x,parent),find(y,parent));
+            if px!=py{
+                parent[px as usize]=py;
+                return true
+            }
+            false
+        };
+        let mut value=0;
+        for e in &edges{
+            if unite(e[0],e[1],&mut parent){
+                value+=e[2];
+            }
+        }
+        let mut ans=vec![vec![];2];
+        for (i,e) in edges.iter().enumerate(){
+            let mut parent:Vec<i32>=(0..n).collect();
+            let mut v=0;
+            for (j,e) in edges.iter().enumerate(){
+                    if i!=j && unite(e[0],e[1],&mut parent){
+                            v+=e[2];
+                        }
+            }
+            let cnt= parent.iter().enumerate().filter(|&(i,&x)|  x== i as i32).count();
+            if  cnt!=1 ||(cnt==1 && v>value){
+                ans[0].push(e[3]);
+                continue
+            }
+            let mut parent:Vec<i32>=(0..n).collect();
+            unite(e[0],e[1],&mut parent);
+            let mut v=e[2];
+            for (j,e) in edges.iter().enumerate(){
+                    if i!=j && unite(e[0],e[1],&mut parent){
+                            v+=e[2];
+                        }
+            }
+            if  v==value{
+                ans[1].push(e[3]);
+            }
+        }
+        ans
+    }
+}

@@ -48,3 +48,47 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn max_distance(grid: Vec<Vec<i32>>) -> i32 {
+        let n=grid.len();
+        let mut f=vec![vec![0;n];n];
+        for i in 0..n{
+            for j in 0..n{
+                f[i][j]=if grid[i][j]==0{i32::MAX/2}else{0};
+            }
+        }
+        for i in 0..n{
+            for j in 0..n{
+                if grid[i][j]==1{
+                    continue
+                }
+                if i>0{
+                    f[i][j]=f[i][j].min(f[i-1][j]+1);
+                }
+                if j>0{
+                    f[i][j]=f[i][j].min(f[i][j-1]+1);
+                }
+            }
+        }
+        for i in (0..n).rev(){
+            for j in (0..n).rev(){
+                if grid[i][j]==1{
+                    continue
+                }
+                if i+1<n{
+                    f[i][j]=f[i][j].min(f[i+1][j]+1);
+                }
+                if j+1<n{
+                    f[i][j]=f[i][j].min(f[i][j+1]+1);
+                }
+            }
+        }
+        let mut ans=-1;
+        for i in 0..n{
+            for j in 0..n{
+                if grid[i][j]==0{ans=ans.max(f[i][j])};
+            }
+        }
+        if ans==i32::MAX/2{-1}else{ans}
+    }
+}

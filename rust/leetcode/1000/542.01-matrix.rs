@@ -48,3 +48,37 @@ impl Solution {
 }
 // @lc code=end
 
+impl Solution {
+    pub fn update_matrix(mat: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+        let (m,n)=(mat.len(),mat[0].len());
+        let mut ans=vec![vec![i32::MAX/2;n];m];
+        for i in 0..m{
+            for j in 0..n{
+                if mat[i][j]==0{
+                    ans[i][j]=0;
+                }
+            }
+        }
+        for i in 0..m{
+            for j in 0..n{
+                if i>0{
+                    ans[i][j]=ans[i][j].min(ans[i-1][j]+1);
+                }
+                if j>0{
+                    ans[i][j]=ans[i][j].min(ans[i][j-1]+1);
+                }
+            }
+        } 
+         for i in (0..m).rev(){
+            for j in (0..n).rev(){
+                if i+1<m{
+                    ans[i][j]=ans[i][j].min(ans[i+1][j]+1);
+                }
+                if j+1<n{
+                    ans[i][j]=ans[i][j].min(ans[i][j+1]+1);
+                }
+            }
+        } 
+        ans
+    }
+}

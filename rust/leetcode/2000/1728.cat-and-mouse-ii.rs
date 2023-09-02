@@ -174,3 +174,85 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn can_mouse_win(grid: Vec<String>, cat_jump: i32, mouse_jump: i32) -> bool {
+        let mut xy=vec![0;6];
+        for (i,row) in grid.iter().enumerate(){
+            for (j,c) in row.chars().enumerate(){
+                if c=='M'{
+                    xy[0]=i;
+                    xy[1]=j;
+                }else if c=='C'{
+                    xy[2]=i;
+                    xy[3]=j;
+                }else if c=='F'{
+                    xy[4]=i;
+                    xy[5]=j;
+                }
+            }
+        }
+        fn dfs(x:usize,y:usize,p:usize,q:usize,k:usize,tx:usize,ty:usize,f:&mut Vec<Vec<i32>>,grid: &Vec<String>, cat_jump: i32, mouse_jump: i32)->i32{
+            let state=(x<<9)|(y<<6)|(p<<3)|q;
+            if k==999{
+                f[state][k]=1;
+                return f[state][k]
+            }
+            if x==p && y==q{
+                f[state][k]=1;
+                return f[state][k]
+            }
+            if x==tx && y==ty{
+                f[state][k]=0;
+                return f[state][k]
+            }
+             if tx==p && ty==q{
+                f[state][k]=1;
+                return f[state][k]
+            }
+            if f[state][k]!=-1{
+                return f[state][k]
+            }
+            let (m,n)=(grid.len() as i32,grid[0].len() as i32);
+            if k%2==0{
+                for d in [0,1,0,-1,0].windows(2){
+                    for i in 0..=mouse_jump{
+                        let (nx,ny)=(x as i32+d[0]*i,y as i32+d[1]*i);
+                        if nx<0||nx>=m||ny<0||ny>=n{
+                            break
+                        }
+                        let (nx,ny)=(nx as usize,ny as usize);
+                        if grid[nx].as_bytes()[ny]==b'#'{
+                            break
+                        }
+                        if dfs(nx,ny,p,q,k+1,tx,ty,f,grid,cat_jump,mouse_jump)==0{
+                             f[state][k]=0;
+                            return f[state][k]
+                        }
+                    }
+                }
+                  f[state][k]=1;
+                return f[state][k]
+            }
+             for d in [0,1,0,-1,0].windows(2){
+                    for i in 0..=cat_jump{
+                        let (np,nq)=(p as i32+d[0]*i,q as i32+d[1]*i);
+                        if np<0||np>=m||nq<0||nq>=n{
+                            break
+                        }
+                        let (np,nq)=(np as usize,nq as usize);
+                        if grid[np].as_bytes()[nq]==b'#'{
+                            break
+                        }
+                        if dfs(x,y,np,nq,k+1,tx,ty,f,grid,cat_jump,mouse_jump)==1{
+                             f[state][k]=1;
+                            return f[state][k]
+                        }
+                    }
+                }
+                  f[state][k]=0;
+              f[state][k]
+        }
+        let mut f=vec![vec![-1;1000];1<<12];
+        dfs(xy[0],xy[1],xy[2],xy[3],0,xy[4],xy[5],&mut f,&grid,cat_jump,mouse_jump)==0
+    }
+}

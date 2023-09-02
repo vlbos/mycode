@@ -31,3 +31,24 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn min_taps(n: i32, ranges: Vec<i32>) -> i32 {
+        let mut intervals=Vec::new();
+        for (i,&v) in ranges.iter().enumerate(){
+            let i=i as i32;
+            intervals.push((0i32.max(i-v),n.min(i+v)));
+        }
+        intervals.sort();
+        let mut dp=vec![i32::MAX;n as usize+1];
+        dp[0]=0;
+        for &(start,end) in &intervals{
+            if dp[start as usize]==i32::MAX{
+                return -1
+            }
+            for j in start..=end{
+                dp[j as usize]=dp[j as usize].min(dp[start as usize]+1);
+            }
+        }
+        dp[n as usize]
+    }
+}

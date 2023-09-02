@@ -1,0 +1,21 @@
+impl Solution {
+    pub fn smallest_number(pattern: String) -> String {
+        let mut ans="9".repeat(pattern.len()+1);
+        fn dfs(idx:usize,mut path:String,pb:&[u8],ans:&mut String){
+            if idx==pb.len()+1{
+                *ans=(*ans).clone().min(path);
+                return
+            }
+            for i in 1..10{
+                if path.contains(&i.to_string()){
+                    continue
+                }
+                if idx==0 || (pb[idx-1]==b'I' && i>path.bytes().last().unwrap()-b'0'|| pb[idx-1]==b'D' && i<path.bytes().last().unwrap()-b'0'){
+                    dfs(idx+1,path.clone()+i.to_string().as_str(),pb,ans);
+                }
+            }
+        }
+        dfs(0,String::new(),pattern.as_bytes(),&mut ans);
+        ans
+    }
+}

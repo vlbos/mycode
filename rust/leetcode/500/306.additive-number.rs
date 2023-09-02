@@ -37,3 +37,52 @@ impl Solution {
 }
 // @lc code=end
 
+impl Solution {
+    pub fn is_additive_number(num: String) -> bool {
+        fn dfs(i:usize,num: &String,list:&mut Vec<Vec<u8>>)-> bool{
+            let n=num.len();
+            if i==n{
+                return list.len()>2
+            }
+            let bn=num.as_bytes();
+            let m=if bn[i]==b'0'{i+1}else{n};
+            let mut cur=Vec::new();
+            for j in i..m{
+                cur.insert(0,bn[j]-b'0');
+                if list.len()<2||check(&list[list.len()-2],&list[list.len()-1],&cur){
+                    list.push(cur.clone());
+                    if dfs(j+1,num,list){
+                        return true
+                    }
+                    list.pop();
+                }
+            }
+    
+            false
+        }
+        fn check(a:&Vec<u8>,b:&Vec<u8>,c:&Vec<u8>)->bool{
+            let mut carry=0;
+            let mut ans=Vec::new();
+            for i in 0..a.len().max(b.len()){
+                if i<a.len(){
+                    carry+=a[i];
+                }
+                if i<b.len(){
+                    carry+=b[i];
+                }
+                ans.push(carry%10);
+                carry/=10;
+            }
+            if carry>0{
+                ans.push(1);
+            }
+            if ans.len()!=c.len(){
+                false
+            }else{
+                ans.iter().zip(c).all(|(&x,&y)| x==y)
+            }
+        }
+        let mut list=Vec::new();
+        dfs(0,&num,&mut list)
+    }
+}

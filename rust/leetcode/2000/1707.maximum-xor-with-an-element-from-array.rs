@@ -62,3 +62,49 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn maximize_xor(mut nums: Vec<i32>, mut queries: Vec<Vec<i32>>) -> Vec<i32> {
+        nums.sort();
+        queries=queries.into_iter().enumerate().map(|(i,mut v)|{ v.push(i as i32);v}).collect();
+        queries.sort_by_key(|q|q[1]);
+        let mut ans=vec![-1;queries.len()];
+        #[derive(Default)]
+        struct Trie{
+            children:[Option<Box<Trie>>;2]
+        }
+        fn insert(mut node:&mut Trie,val:i32){
+             for i in (0..30).rev(){
+                 let bit=((val>>i)&1) as usize;
+                 node=node.children[bit].get_or_insert(Box::new(Trie::default()));
+             }
+        }
+         fn get_max_xor(mut node:&Trie,val:i32)->i32{
+             let mut ans=0;
+             for i in (0..30).rev(){
+                 let mut bit=((val>>i)&1) as usize;
+                 if node.children[1^bit].is_some(){
+                     ans|=1<<i;
+                     bit^=1;
+                 }
+                 if let Some(child)=&node.children[bit]{
+                     node=child;
+                 }
+             }
+             ans
+        }
+        let mut trie=Trie::default();
+        let mut idx=0;
+        let n=nums.len();
+        for q in &queries{
+            let (x,m,i)=(q[0],q[1],q[2]);
+            while idx<n && nums[idx]<=m{
+                insert(&mut trie,nums[idx]);
+                idx+=1;
+            }
+           ans[i as usize]= if idx==0{
+                -1
+            }else{get_max_xor(&trie,x)};
+        }
+        ans
+    }
+}

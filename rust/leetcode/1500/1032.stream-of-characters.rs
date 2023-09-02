@@ -69,3 +69,60 @@ impl StreamChecker {
          * let ret_1: bool = obj.query(letter);
          */
 // @lc code=end
+struct StreamChecker {
+s:Vec<u8>,
+trie:Trie,
+}
+
+
+/** 
+ * `&self` means the method takes an immutable reference.
+ * If you need a mutable reference, change it to `&mut self` instead.
+ */
+impl StreamChecker {
+
+    fn new(words: Vec<String>) -> Self {
+        let mut trie=Trie::default();
+        for word in &words{
+            let mut node=&mut trie;
+            for b in word.bytes().rev(){
+                if node.children.is_empty(){
+                    node.children=vec![None;26];
+                }
+                node=node.children[(b-b'a') as usize].get_or_insert(Trie::default());
+            }
+            node.is_end=true;
+        }
+        Self{trie,s:Vec::default()}
+    }
+    
+    fn query(&mut self, letter: char) -> bool {
+         self.s.insert(0,letter as u8);
+         if self.s.len()>200{
+             self.s.pop();
+         }
+        let mut node=&self.trie;
+        for b in &self.s{
+            if let Some(child)=&node.children[(b-b'a') as usize]{
+                    if child.is_end{
+                        return true
+                    }
+                    node=child;
+            }else{
+                return false
+            }
+        }
+        false
+    }
+}
+
+/**
+ * Your StreamChecker object will be instantiated and called as such:
+ * let obj = StreamChecker::new(words);
+ * let ret_1: bool = obj.query(letter);
+ */
+#[derive(Clone,Default)]
+ struct Trie{
+    children:Vec<Option<Trie>>,
+    is_end:bool,
+ }

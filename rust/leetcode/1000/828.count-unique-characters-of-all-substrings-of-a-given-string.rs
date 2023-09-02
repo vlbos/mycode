@@ -28,3 +28,18 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn unique_letter_string(s: String) -> i32 {
+        let (n,mut ans,mut cur)=(s.len(),0,0);
+        let (mut a,mut b)=(vec![-1;26],vec![-1;26]);
+        let bs=s.as_bytes();
+        for i in 0..n{
+            let u=(bs[i]-b'A') as usize;
+            cur+=i as i32-b[u]-(b[u]-a[u]);
+            ans+=cur;
+            a[u]=b[u];
+            b[u]=i as i32;
+        }
+        ans
+    }
+}

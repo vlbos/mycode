@@ -48,3 +48,43 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn swim_in_water(grid: Vec<Vec<i32>>) -> i32 {
+        let n=grid.len();
+        let nn=n*n;
+        
+        let mut ids=vec![(0,0);nn];
+        for i in 0..n{
+            for j in 0..n{
+                ids[grid[i][j] as usize]=(i,j);
+            }
+        }
+        let mut parent:Vec<usize>=(0..nn).collect();
+        fn find(x:usize,parent:&mut Vec<usize>)->usize{
+            let px=parent[x];
+            if px!=x{
+                parent[x]=find(px,parent);
+            }
+            parent[x]
+        }
+        let unite=|x:usize,y:usize,parent:&mut Vec<usize>|{
+            let (px,py)=(find(x,parent),find(y,parent));
+            if px!=py{
+                parent[px]=py;
+            }
+        };
+        for k in 0..nn{
+            let (i,j)=ids[k];
+            for d in [0,1,0,-1,0].windows(2){
+                let (ni,nj)=(i as i32+d[0],j as i32+d[1]);
+                if ni>=0 && ni<n as i32 && nj>=0 && nj<n as i32&& grid[ni as usize][nj as usize]<=k as i32{
+                    unite(i*n+j,ni as usize*n+nj as usize,&mut parent);
+                }
+            }
+            if find(0,&mut parent)==find(nn-1,&mut parent){
+                return k as _
+            }
+        }
+        -1
+    }
+}

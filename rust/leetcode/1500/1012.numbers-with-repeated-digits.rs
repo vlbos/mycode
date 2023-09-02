@@ -43,3 +43,29 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn num_dup_digits_at_most_n(n: i32) -> i32 {
+        fn f(i:usize,mask:usize,is_same:bool,s:&[u8],dp:&mut Vec<Vec<i32>>)->i32{
+            if i==s.len(){
+                return 1
+            }
+            if !is_same && dp[i][mask]>=0{
+                return dp[i][mask]
+            }
+            let mut ans=0;
+            let t=if is_same{s[i]-b'0'}else{9};
+            for k in 0..=t{
+                if mask&(1<<k)==0{
+                    ans+=f(i+1,if mask==0 && k==0{mask}else{mask|(1<<k)},is_same&& k==t,s,dp);
+                }
+            }
+            if !is_same{
+                dp[i][mask]=ans
+            }
+            ans
+        }
+        let s=n.to_string();
+        let mut dp=vec![vec![-1;1<<10];s.len()];
+        n+1-f(0,0,true,s.as_bytes(),&mut dp)
+    }
+}

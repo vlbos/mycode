@@ -23,3 +23,21 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn integer_replacement(n: i32) -> i32 {
+        let s=format!("{:b}",n);
+        let bits=s.as_bytes();
+        let (mut dp0,mut dp1)=(0,1);
+        for i in 1..bits.len(){
+            let low=bits[i]-b'0';
+            if low==0{
+                dp1=dp0.min(dp1)+2;
+                dp0+=1;
+            }else{
+                dp0=dp0.min(dp1)+2;
+                dp1+=1;
+            }
+        }
+        dp0
+    }
+}

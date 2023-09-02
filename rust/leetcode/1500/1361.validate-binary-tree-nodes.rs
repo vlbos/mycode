@@ -46,3 +46,43 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn validate_binary_tree_nodes(n: i32, left_child: Vec<i32>, right_child: Vec<i32>) -> bool {
+        let mut parent:Vec<i32>=(0..n).collect();
+        let mut father=vec![-1;n as usize];
+        fn find(x:i32,parent:&mut Vec<i32>)->i32{
+            let px=parent[x as usize];
+            if px!=x{
+                parent[x as usize]=find(px,parent);
+            }
+            parent[x as usize]
+        }
+        let unite=|x:i32,y:i32,parent:&mut Vec<i32>,father:&mut Vec<i32>,cnt:&mut i32|{
+                if y==-1{
+                    return true
+                }
+                if father[y as usize]!=-1{
+                    return false
+                }
+                let (px,py)=(find(x,parent),find(y,parent));
+                if px==py{
+                    return false
+                }
+                parent[px as usize]=py;
+                father[y as usize]=x;
+                *cnt-=1;
+                true
+        };
+        let mut cnt=n;
+        for (i,(l,r)) in left_child.into_iter().zip(right_child).enumerate(){
+            if l==r&& l!=-1{
+                return false
+            }
+            let i=i as i32;
+            if !unite(i,l,&mut parent,&mut father,&mut cnt)||!unite(i,r,&mut parent,&mut father,&mut cnt){
+                return false
+            }
+        }
+        cnt==1
+    }
+}

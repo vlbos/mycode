@@ -57,3 +57,50 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn count_pairs(nums: Vec<i32>, low: i32, high: i32) -> i32 {
+        #[derive(Default)]
+        struct Trie{
+            children:[Option<Box<Trie>>;2],
+            sum:i32,
+        }
+        let insert=|mut node:&mut Trie,num:i32|{
+            for i in (0..15).rev(){
+                let bit=((num>>i)&1) as usize;
+                node=node.children[bit].get_or_insert(Box::new(Trie::default()));
+                node.sum+=1;
+            }
+        };
+        let sum=|mut node:&Trie,num:i32,x:i32|{
+            let mut ans=0;
+            for i in (0..15).rev(){
+                let mut bit=((num>>i)&1) as usize;
+                if (x>>i&1)>0{
+                         if let Some(child)=&node.children[bit]{
+                                    ans+=child.sum;
+                        }
+                                bit^=1;
+                }
+                  if let Some(child)=&node.children[bit]{
+                                    node=child;
+                                }else{
+                                    return ans
+                                }
+                
+
+            }
+            ans+=node.sum;
+            ans
+        };
+        let f=|x:i32|{
+            let mut ans=0;
+            let mut trie=Trie::default();
+            for w in nums.windows(2){
+                insert(&mut trie,w[0]);
+                ans+=sum(&trie,w[1],x);
+            }
+            ans
+        };
+        f(high)-f(low-1)
+    }
+}

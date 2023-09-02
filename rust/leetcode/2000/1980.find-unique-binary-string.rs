@@ -19,3 +19,26 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn find_different_binary_string(nums: Vec<String>) -> String {
+        use std::collections::HashSet;
+        let nums:HashSet<String>=nums.into_iter().collect();
+        fn back_track(idx:usize,s:&mut Vec<char>,nums:&HashSet<String>,ans:&mut String){
+            if !nums.contains(&s.iter().collect::<String>()){
+                *ans=s.iter().collect();
+                return
+            }
+            for i in idx..s.len(){
+                s[i]='1';
+                back_track(i+1,s,nums,ans);
+                if !ans.is_empty(){
+                    return
+                }
+                s[i]='0';
+            }
+        }
+        let mut ans=String::new();
+        back_track(0,&mut vec!['0';nums.len()],&nums,&mut ans);
+        ans
+    }
+}

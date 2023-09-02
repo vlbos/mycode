@@ -22,3 +22,18 @@ impl Solution {
 }
 // @lc code=end
 
+impl Solution {
+    pub fn jump(nums: Vec<i32>) -> i32 {
+     let n=nums.len();
+        let mut dp=vec![i32::MAX/2;n];
+        dp[0]=0;
+        for i in 1..n{
+            for j in 0..i{
+                if nums[j] as usize+j>=i{
+                    dp[i]=dp[i].min(dp[j]+1);
+                }
+            }
+        }
+        dp[n-1]
+    }
+}

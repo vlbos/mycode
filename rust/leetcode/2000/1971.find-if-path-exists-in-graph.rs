@@ -23,3 +23,25 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn valid_path(n: i32, edges: Vec<Vec<i32>>, source: i32, destination: i32) -> bool {
+        let mut parent:Vec<i32>=(0..n).collect();
+        fn find(x:i32,parent:&mut Vec<i32>)->i32{
+            let px=parent[x as usize];
+            if px!=x{
+                parent[x as usize]=find(px,parent);
+            }
+             parent[x as usize]
+        }
+        let unite=|x:i32,y:i32,parent:&mut Vec<i32>|{
+            let (px,py)=(find(x,parent),find(y,parent));
+            if px!=py{
+                parent[px as usize]=py;
+            }
+        };
+        for e in &edges{
+            unite(e[0],e[1],&mut parent);
+        }
+        find(source,&mut parent)==find(destination,&mut parent)
+    }
+}

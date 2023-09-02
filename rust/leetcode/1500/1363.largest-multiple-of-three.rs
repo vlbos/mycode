@@ -47,3 +47,34 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn largest_multiple_of_three(mut digits: Vec<i32>) -> String {
+        digits.sort();
+        let n=digits.len();
+        let mut dp=vec![vec![0;3];n+1];
+        dp[0][1]=i32::MIN/2;
+        dp[0][2]=i32::MIN/2;
+        for i in 1..=n{
+            for j in (0..3).rev(){
+                dp[i][j]=dp[i-1][j].max(dp[i-1][((j as i32-digits[i-1]%3+3)%3) as usize]+1);
+            }
+        }
+        if dp[n][0]<=0{
+           
+            return String::new()
+        }
+        let mut ans=String::new();
+        let mut digit=0;
+        for i in (1..=n).rev(){
+            if dp[i][digit]==dp[i-1][((digit as i32-digits[i-1]%3+3)%3) as usize]+1{
+                ans.push((b'0'+digits[i-1] as u8) as char);
+                digit=((digit as i32-digits[i-1]%3+3)%3) as usize;
+                if ans.as_str()=="0"{
+                    return ans
+                }
+            }
+        }
+        
+        ans
+    }
+}

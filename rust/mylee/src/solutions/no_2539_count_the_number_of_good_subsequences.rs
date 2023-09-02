@@ -4,7 +4,7 @@
 //  A  subsequence  of a string is good if it is not empty and the frequency of each one of its characters is the same.
 
 //  Given a string  s , return  the number of good subsequences of   s .
-//  Since the answer may be too large, return it modulo  10 9  + 7 .
+//  Since the answer may be too large, return it modulo  10^9  + 7 .
 
 //  A  subsequence  is a string that can be derived from another string by deleting some or no characters without changing the order of the remaining characters.
 
@@ -66,7 +66,7 @@ impl Solution {
         for b in s.bytes() {
             *cnt.entry(b - b'a').or_insert(0) += 1;
         }
-        let mut mx = *cnt.values().max().unwrap();
+        let mx = *cnt.values().max().unwrap();
         let mut ans = 0;
         for i in 1..=mx {
             let mut x = 1;

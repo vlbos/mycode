@@ -61,9 +61,7 @@ impl Solution {
                 f[i as usize] %= m;
             }
         }
-        f[min_length as usize..]
-            .iter()
-            .fold(0, |mut a, x| (a + x) % m) as _
+        f[min_length as usize..].iter().fold(0, |a, x| (a + x) % m) as _
     }
 }
 

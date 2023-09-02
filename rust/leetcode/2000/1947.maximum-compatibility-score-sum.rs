@@ -32,3 +32,32 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn max_compatibility_sum(students: Vec<Vec<i32>>, mentors: Vec<Vec<i32>>) -> i32 {
+        let m=students.len();
+        let mut score=vec![vec![0;m];m];
+        for (i,s) in students.iter().enumerate(){
+            for (j,t) in mentors.iter().enumerate(){
+                score[i][j]=s.iter().zip(t).filter(|(a,b)| a==b).count() as i32;
+            }
+        }
+        fn dfs(i:usize,cur:i32,score:&Vec<Vec<i32>>,used:&mut Vec<bool>,ans:&mut i32){
+                if i==score.len(){
+                    *ans=cur.max(*ans);
+                    return
+                }
+                for (j,&s) in score[i].iter().enumerate(){
+                    if used[j]{
+                        continue
+                    }
+                        used[j]=true;
+                        dfs(i+1,cur+s,score,used,ans);
+                        used[j]=false;
+                }
+        }
+        let mut ans=0;
+        let mut used=vec![false;m];
+        dfs(0,0,&score,&mut used,&mut ans);
+        ans
+    }
+}

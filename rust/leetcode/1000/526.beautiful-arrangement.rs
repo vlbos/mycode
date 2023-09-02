@@ -23,3 +23,33 @@ impl Solution {
 }
 // @lc code=end
 
+impl Solution {
+    pub fn count_arrangement(n: i32) -> i32 {
+        let n=n as usize;
+        let mut vis=vec![false;n+1];
+        let mut matches=vec![vec![];n+1];
+        for i in 1..=n{
+            for j in 1..=n{
+                if i%j==0||j%i==0{
+                    matches[i].push(j);
+                }
+            }
+        }
+        fn back_track(i:usize,vis:&mut Vec<bool>,matches:&Vec<Vec<usize>>,ans:&mut i32){
+            if i==vis.len(){
+                *ans+=1;
+                return
+            }
+            for &j in &matches[i]{
+                if !vis[j]{
+                    vis[j]=true;
+                     back_track(i+1,vis,matches,ans);
+                    vis[j]=false;
+                }
+            }
+        }
+        let mut ans=0;
+        back_track(1,&mut vis,&matches,&mut ans);
+        ans
+    }
+}

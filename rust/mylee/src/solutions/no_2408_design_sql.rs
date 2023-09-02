@@ -51,6 +51,7 @@
  * let ret_3: String = obj.select_cell(name, rowId, columnId);
  */
 use std::collections::{BTreeMap, HashMap};
+#[allow(dead_code)]
 struct SQL {
     tables: HashMap<String, (i32, BTreeMap<i32, Vec<String>>)>,
 }
@@ -59,8 +60,9 @@ struct SQL {
  * `&self` means the method takes an immutable reference.
  * If you need a mutable reference, change it to `&mut self` instead.
  */
+#[allow(dead_code)]
 impl SQL {
-    fn new(names: Vec<String>, columns: Vec<i32>) -> Self {
+    fn new(names: Vec<String>, _columns: Vec<i32>) -> Self {
         Self {
             tables: names
                 .into_iter()
@@ -69,20 +71,20 @@ impl SQL {
         }
     }
 
-    fn insert_row(&mut self, name: String, row: Vec<String>) {
+    pub fn insert_row(&mut self, name: String, row: Vec<String>) {
         self.tables.entry(name).and_modify(|(rows, records)| {
             *rows += 1;
             records.insert(*rows, row);
         });
     }
 
-    fn delete_row(&mut self, name: String, row_id: i32) {
+    pub fn delete_row(&mut self, name: String, row_id: i32) {
         self.tables.entry(name).and_modify(|(_, records)| {
             records.remove(&row_id);
         });
     }
 
-    fn select_cell(&self, name: String, row_id: i32, column_id: i32) -> String {
+    pub fn select_cell(&self, name: String, row_id: i32, column_id: i32) -> String {
         if let Some(table) = self.tables.get(&name) {
             if let Some(records) = table.1.get(&row_id) {
                 if column_id <= records.len() as i32 {

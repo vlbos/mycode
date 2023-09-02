@@ -1,0 +1,37 @@
+impl Solution {
+    pub fn count_quadruplets(nums: Vec<i32>) -> i64 {
+  let n=nums.len();
+        let mut tree=vec![0;4010];
+        let update=|mut i:i32,val:i64,tree:&mut Vec<i64>|{
+            while i<tree.len() as i32{
+                tree[i as usize]+=val;
+                i+=-i&i;
+            }
+        };
+        let query=|mut i:i32,tree:&Vec<i64>|{
+            let mut ans=0;
+            while i>0{
+                ans+=tree[i as usize];
+                i&=i-1;
+            }
+            ans
+        };
+        let mut ans=0;
+        for (i,&v) in nums.iter().enumerate(){
+            update(v,1,&mut tree);
+            for &num in nums[i+1..].iter().rev(){
+                update(num,10000,&mut tree);
+            }
+            for &num in nums[i+1..].iter(){
+                update(num,-10000,&mut tree);
+                if v>num{
+                    let (l,r)=((query(n as i32,&tree)-query(v,&tree))/10000,query(num-1,&tree)%10000);
+                    ans+=l*r;
+                }
+            }
+               
+            
+        }
+        ans
+    }
+}

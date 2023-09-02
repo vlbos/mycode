@@ -39,3 +39,31 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn is_bipartite(graph: Vec<Vec<i32>>) -> bool {
+        let n=graph.len();
+        let mut parent:Vec<usize>=(0..n).collect();
+        fn find(x:usize,parent:&mut Vec<usize>)->usize{
+            let px=parent[x];
+            if px!=x{
+                parent[x]=find(px,parent);
+            }
+            parent[x]
+        }
+        let mut unite=|x:usize,y:usize,parent:&mut Vec<usize>|{
+            let (px,py)=(find(x,parent),find(y,parent));
+            if px!=py{
+                parent[px]=py;
+            }
+        };
+        for (u,adjacent) in graph.iter().enumerate(){
+            for &v in adjacent{
+                if find(u,&mut parent)==find(v as usize,&mut parent){
+                    return false
+                }
+                unite(adjacent[0] as usize,v as usize,&mut parent);
+            }
+        }
+        true
+    }
+}

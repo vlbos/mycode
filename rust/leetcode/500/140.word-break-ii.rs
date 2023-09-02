@@ -47,3 +47,50 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn word_break(s: String, word_dict: Vec<String>) -> Vec<String> {
+        let mut trie=Trie::new();
+        for w in &word_dict{
+            trie.insert(w);
+        }
+        fn dfs(idx:usize,mut res:String,s:&String,trie:&Trie,ans:&mut Vec<String> ){
+            if idx==s.len(){
+                res.pop();
+                ans.push(res);
+                return
+            }
+            let mut node=trie;
+            let bs=s.as_bytes();
+            for i in idx..bs.len(){
+                if let Some(child)=node.children.get(&bs[i]){
+                        if child.is_end{
+                            dfs(i+1,res.clone()+&s[idx..=i]+" ",s,trie,ans);
+                        }
+                        node=child;
+                }else{
+                    return
+                }
+            }
+        }
+        let mut ans=Vec::new();
+        dfs(0,String::new(),&s,&trie,&mut ans);
+        ans
+    }
+}
+use std::collections::HashMap;
+struct Trie{
+    children:HashMap<u8,Trie>,
+    is_end:bool,
+}
+impl Trie{
+    fn new()->Self{
+        Self{children:HashMap::new(),is_end:false}
+    }
+    fn insert(&mut self,word:&String) {
+        let mut node=self;
+       for b in word.bytes(){
+           node=node.children.entry(b).or_insert(Trie::new());
+       }
+       node.is_end=true;
+    }
+}

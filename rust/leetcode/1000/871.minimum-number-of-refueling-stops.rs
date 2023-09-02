@@ -30,3 +30,17 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn min_refuel_stops(target: i32, start_fuel: i32, stations: Vec<Vec<i32>>) -> i32 {
+        let mut dp=vec![0;stations.len()+1];
+        dp[0]=start_fuel;
+        for (i,v) in stations.iter().enumerate(){
+            for j in (0..=i).rev(){
+                if dp[j]>=v[0]{
+                    dp[j+1]=dp[j+1].max(dp[j]+v[1]);
+                }
+            }
+        }
+        dp.into_iter().enumerate().filter_map(|(i,v)| if v>=target{Some(i as i32)}else{None}).next().unwrap_or(-1)
+    }
+}

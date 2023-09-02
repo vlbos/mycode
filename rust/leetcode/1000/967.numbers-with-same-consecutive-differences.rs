@@ -30,3 +30,25 @@ impl Solution {
 }
 // @lc code=end
 
+impl Solution {
+    pub fn nums_same_consec_diff(n: i32, k: i32) -> Vec<i32> {
+        use std::collections::HashSet;
+        let mut ans=HashSet::new();
+        fn dfs(num:i32,bit:i32,cur:i32,n: i32, k: i32,ans:&mut HashSet<i32>){
+            if bit==n{
+                ans.insert(num);
+                return
+            }
+            if cur+k<=9{
+                dfs(num*10+cur+k,bit+1,cur+k,n,k,ans);
+            }
+            if cur-k>=0{
+                dfs(num*10+cur-k,bit+1,cur-k,n,k,ans);
+            }
+        }
+        for i in 1..=9{
+            dfs(i,1,i,n,k,&mut ans);
+        }
+        ans.into_iter().collect()
+    }
+}

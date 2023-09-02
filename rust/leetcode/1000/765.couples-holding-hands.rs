@@ -41,3 +41,31 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn min_swaps_couples(row: Vec<i32>) -> i32 {
+        let n=row.len();
+        let mut parent:Vec<usize>=(0..n/2).collect();
+        fn find(x:usize,parent:&mut Vec<usize>)->usize{
+            let px=parent[x];
+            if px!=x{
+                parent[x]=find(px,parent);
+            }
+            parent[x]
+        }
+        let unite=|x:usize,y:usize,parent:&mut Vec<usize>|{
+            let (px,py)=(find(x,parent),find(y,parent));
+            if px!=py{
+                parent[px]=py;
+            }
+        };
+        for w in row.chunks(2){
+            let (l,r)=(w[0] as usize/2,w[1] as usize/2);
+            unite(l,r,&mut parent);
+        }
+        let mut m=std::collections::HashMap::new();
+        for i in 0..n/2{
+            *m.entry(find(i,&mut parent)).or_insert(0)+=1;
+        }
+        m.values().sum::<i32>()-m.len() as i32
+    }
+}

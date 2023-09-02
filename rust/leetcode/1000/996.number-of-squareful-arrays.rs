@@ -60,3 +60,49 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn num_squareful_perms(nums: Vec<i32>) -> i32 {
+        let n=nums.len();
+       
+        let n1=1<<n;
+        let mut f=vec![vec![0;n];n1];
+        for i in 0..n{
+            f[1<<i][i]=1;
+        }
+        let check=|x:i32|{
+            let t= (x as f64).sqrt() as i32;
+            t*t==x
+        };
+        for i in 0..n1{
+            for j in 0..n{
+                if i>>j&1==0{
+                    continue
+                }
+                for k in 0..n{
+                    if k==j||i>>k==0{
+                        continue
+                    }
+                    if check(nums[k]+nums[j]){
+                        f[i][j]+=f[i^(1<<j)][k];
+                    }
+                }
+            }
+        }
+         let mut ans=(0..n).map(|i| f[n1-1][i]).sum::<i32>();
+         let mut m=std::collections::HashMap::new();
+         for &x in &nums{
+             *m.entry(x).or_insert(0)+=1;
+         }
+         let fact=|x:i32|{
+             let mut ans=1;
+             for i in 1..=x{
+                 ans*=i;
+             }
+             ans
+         };
+         for &x in m.values(){
+             ans/=fact(x);
+         }
+        ans
+    }
+}

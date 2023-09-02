@@ -65,3 +65,45 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn calc_equation(equations: Vec<Vec<String>>, values: Vec<f64>, queries: Vec<Vec<String>>) -> Vec<f64> {
+        let mut id=std::collections::HashMap::new();
+        for equation in &equations{
+            for e in equation{
+                let i=id.len();
+                id.entry(e.clone()).or_insert(i);
+            }
+        }
+        let n=id.len();
+        let mut f:Vec<usize>=(0..n).collect();
+        let mut w=vec![1.0;n];
+        fn find(x:usize,f:&mut Vec<usize>,w:&mut Vec<f64>)->usize{
+            let px=f[x];
+            if px!=x{
+                let fx=find(px,f,w);
+                w[x]*=w[f[x]];
+                f[x]=fx;
+            }
+            f[x]
+        }
+        let unite=|x:usize,y:usize,val:f64,f:&mut Vec<usize>,w:&mut Vec<f64>|{
+            let (px,py)=(find(x,f,w),find(y,f,w));
+            if px!=py{
+                f[px]=py;
+                w[px]=val*w[y]/w[x];
+            }
+        };
+        for (e,&v) in equations.iter().zip(&values){
+            unite(id[&e[0] ],id[&e[1]],v,&mut f,&mut w);
+        }
+        let mut ans=vec![-1.0;queries.len()];
+        for (i,q) in queries.iter().enumerate(){
+            if let (Some(&x),Some(&y))=(id.get(&q[0]),id.get(&q[1])){
+                if find(x,&mut f,&mut w)==find(y,&mut f,&mut w){
+                    ans[i]=w[x]/w[y];
+                }
+            }
+        }
+        ans
+    }
+}

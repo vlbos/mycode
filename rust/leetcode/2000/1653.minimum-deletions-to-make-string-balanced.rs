@@ -27,3 +27,16 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn minimum_deletions(s: String) -> i32 {
+        let (mut ans,mut b)=(0,0);
+        for c in s.chars(){
+            if c=='b'{
+                b+=1;
+            }else{
+                ans=b.min(ans+1);
+            }
+        }
+        ans
+    }
+}

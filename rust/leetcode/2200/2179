@@ -1,0 +1,95 @@
+impl Solution {
+    pub fn good_triplets(nums1: Vec<i32>, nums2: Vec<i32>) -> i64 {
+        let n = nums1.len();   
+        let mut p=nums1.into_iter().enumerate().fold(vec![0;n],|mut a,(i,v)|{a[v as usize]=i as i64;a});
+        let mut ans=0;
+        let mut tree=vec![0;n+1];
+        for i in 1..n-1{
+                let mut j=p[nums2[i-1] as usize]+1;
+                while j<=n as i64{
+                    tree[j as usize]+=1;
+                    j+=-j&j;
+                }
+                let y=p[nums2[i] as usize];
+                let mut less=0;
+                j=y;
+                while j!=0{
+                    less+=tree[j as usize];
+                    j&=j-1;
+                }
+                ans+=less*(n as i64-1-y-(i as i64-less));
+        }
+        ans
+    }
+}
+
+impl Solution {
+    pub fn good_triplets(nums1: Vec<i32>, nums2: Vec<i32>) -> i64 {
+        let n = nums1.len();   
+        let mut ans=0;
+        let mut tree=vec![vec![0;3];n*4];
+        fn build(i:i32,l:i32,r:i32,tree:&mut Vec<Vec<i32>>){
+            tree[i as usize]=vec![l,r,0];
+            if l==r{
+                return 
+            }
+            let mid=(l+r)/2;
+            build(i*2,l,mid,tree);
+            build(i*2+1,mid+1,r,tree);
+        }
+        fn update(i:i32,x:i32,tree:&mut Vec<Vec<i32>>){
+            if tree[i as usize][0]<=x && x<= tree[i as usize][1]{
+                tree[i as usize][2] +=1;
+            }
+            if tree[i as usize][0]==tree[i as usize][1]{
+                return 
+            }
+            let mid=(tree[i as usize][0]+tree[i as usize][1])/2;
+            if x<=mid{
+                update(i*2,x,tree);
+            }else{
+                update(i*2+1,x,tree);
+            }
+        }
+        fn query(i:i32,l:i32,r:i32,tree:&Vec<Vec<i32>>)->i32{
+            if l>r{
+                return 0
+            }
+            if l<=tree[i as usize][0] && tree[i as usize][1]<=r{
+                return tree[i as usize][2]
+            }
+          
+            let mid=(tree[i as usize][0]+tree[i as usize][1])/2;
+            let mut ans=0;
+            if l<=mid{
+                ans+=query(i*2,l,r,tree);
+            }
+            if mid<r{
+               ans+=query(i*2+1,l,r,tree);
+            }
+            ans
+        }
+        let mut idx2:std::collections::HashMap<i32,i32>=nums2.iter().enumerate().map(|(i,&v)|(v,i as i32)).collect();
+        let mut t=vec![0;n];
+        for i in 0..n{
+            t[i]=idx2[&nums1[i]];
+        }
+        let (mut l,mut r)=(vec![0;n+2],vec![0;n+2]);
+        build(1,0,n as i32-1,&mut tree);
+
+        for i in  0..n{
+            l[i+1]=query(1,0,t[i]-1,&tree);
+                update(1,t[i],&mut tree);
+        }
+        build(1,0,n as i32-1,&mut tree);
+
+        for i in  (0..n).rev(){
+            r[i+1]=query(1,t[i]+1,n as i32-1,&tree);
+                update(1,t[i],&mut tree);
+        }
+        for i in 1..=n{
+            ans+=l[i] as i64*r[i] as i64;
+        }
+        ans
+    }
+}

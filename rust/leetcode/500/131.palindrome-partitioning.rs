@@ -41,3 +41,31 @@ impl Solution {
 }
 // @lc code=end
 
+impl Solution {
+    pub fn partition(s: String) -> Vec<Vec<String>> {
+        let n=s.len();
+        let bs=s.as_bytes();
+        let mut f=vec![vec![true;n];n];
+        for i in (0..n).rev(){
+            for j in i+1..n{
+                f[i][j]=(bs[i]==bs[j])&&f[i+1][j-1];
+            }
+        }
+        fn dfs(i:usize,f:&Vec<Vec<bool>>,s: &String,tmp:&mut Vec<String>,ans:&mut Vec<Vec<String>>){
+            if i==f.len(){
+                ans.push(tmp.clone());
+                return
+            }
+            for j in i..f.len(){
+                if f[i][j]{
+                    tmp.push(s[i..=j].to_string());
+                    dfs(j+1,f,s,tmp,ans);
+                    tmp.pop();
+                }
+            }
+        }
+        let mut ans=Vec::new();
+        dfs(0,&f,&s,&mut Vec::new(),&mut ans);
+        ans
+    }
+}

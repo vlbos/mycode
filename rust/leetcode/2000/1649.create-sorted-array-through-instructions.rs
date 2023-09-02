@@ -36,3 +36,40 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn create_sorted_array(instructions: Vec<i32>) -> i32 {
+        let m=(*instructions.iter().max().unwrap()) as usize;
+        let mut tree=vec![0;m*4];
+        fn update(i:i32,l:i32,r:i32,x:i32,tree:&mut Vec<i32>){
+            if l>x || r<x{
+                return 
+            }
+            tree[i as usize]+=1;
+            if l==r{
+                return
+            }
+            let mid=(l+r)/2;
+
+            update(i*2+1,l,mid,x,tree);
+            update(i*2+2,mid+1,r,x,tree);
+        }
+        fn query(mut i:i32,l:i32,r:i32,ql:i32,qr:i32,tree:& Vec<i32>)->i32{
+             if l>qr || r<ql{
+                return 0
+            }
+            if ql<=l && r<=qr{
+                return tree[i as usize]
+            }
+            let mid=(l+r)/2;
+
+            query(i*2+1,l,mid,ql,qr,tree)+
+            query(i*2+2,mid+1,r,ql,qr,tree)
+        }
+       (instructions.iter().enumerate().fold(0,|mut ans,(i,&x)|{
+                ans+=query(0,1,m as i32,1,x-1,&tree).min(query(0,1,m as i32,x+1,m as i32,&tree)) as i64;
+               update(0,1,m as i32,x,&mut tree);
+               ans
+        })
+       %1_000_000_007) as _
+    }
+}

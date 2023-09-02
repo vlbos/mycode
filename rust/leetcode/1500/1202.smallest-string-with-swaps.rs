@@ -52,3 +52,35 @@ impl Solution {
     }
 }
 // @lc code=end
+
+
+impl Solution {
+    pub fn smallest_string_with_swaps(s: String, pairs: Vec<Vec<i32>>) -> String {
+        let n=s.len();
+        let mut parent:Vec<usize>=(0..n).collect();
+        fn find(x:usize,parent:&mut Vec<usize>)->usize{
+            let px=parent[x];
+            if px!=x{
+                parent[x]=find(px,parent);
+            }
+            parent[x]
+        }
+        let unite=|x:usize,y:usize,parent:&mut Vec<usize>|{
+            let (px,py)=(find(x,parent),find(y,parent));
+            if px!=py{
+                parent[px]=py;
+            }
+        };
+        for p in &pairs{
+            unite(p[0] as usize,p[1] as usize,&mut parent);
+        }
+        let mut mp=std::collections::HashMap::new();
+        for (i,c) in s.chars().enumerate(){
+            mp.entry(find(i,&mut parent)).or_insert(Vec::new()).push(c);
+        }
+        for v in mp.values_mut(){
+            v.sort_by(|a,b| b.cmp(&a));
+        }
+         (0..s.len()).map(|i|mp.get_mut(&find(i,&mut parent)).unwrap().pop().unwrap()).collect()
+    }
+}

@@ -24,3 +24,19 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn subarray_bitwise_o_rs(mut arr: Vec<i32>) -> i32 {
+        let mut set=std::collections::HashSet::new();
+        for i in 0..arr.len(){
+            set.insert(arr[i]);
+            for j in (0..i).rev(){
+                if arr[i]|arr[j]==arr[j]{
+                    break
+                }
+                arr[j]|=arr[i];
+                set.insert(arr[j]);
+            }
+        }
+        set.len() as _
+    }
+}

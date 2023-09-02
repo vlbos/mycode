@@ -51,3 +51,41 @@ impl Solution {
     }
 }
 // @lc code=end
+
+// Definition for a binary tree node.
+// #[derive(Debug, PartialEq, Eq)]
+// pub struct TreeNode {
+//   pub val: i32,
+//   pub left: Option<Rc<RefCell<TreeNode>>>,
+//   pub right: Option<Rc<RefCell<TreeNode>>>,
+// }
+// 
+// impl TreeNode {
+//   #[inline]
+//   pub fn new(val: i32) -> Self {
+//     TreeNode {
+//       val,
+//       left: None,
+//       right: None
+//     }
+//   }
+// }
+use std::rc::Rc;
+use std::cell::RefCell;
+impl Solution {
+    pub fn all_possible_fbt(n: i32) -> Vec<Option<Rc<RefCell<TreeNode>>>> {
+        let n=n as  usize;
+        let mut f=vec![vec![];n+1];
+        f[1]=vec![Some(Rc::new(RefCell::new(TreeNode::new(0))))];
+        for i in (3..=n).step_by(2){
+            for j in (1..i).step_by(2){
+                for l in &f[j].clone(){
+                    for r in &f[i-j-1].clone(){
+                        f[i].push(Some(Rc::new(RefCell::new(TreeNode{val:0,left:l.clone(),right:r.clone()}))));
+                    }
+                }
+            }
+        }
+        f[n].clone()
+    }
+}

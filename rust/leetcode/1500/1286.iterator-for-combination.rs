@@ -57,3 +57,52 @@ impl CombinationIterator {
  */
 // @lc code=end
 
+struct CombinationIterator {
+vt:Vec<String>,
+index:usize,
+}
+
+
+/** 
+ * `&self` means the method takes an immutable reference.
+ * If you need a mutable reference, change it to `&mut self` instead.
+ */
+impl CombinationIterator {
+
+    fn new(characters: String, combinationLength: i32) -> Self {
+        fn back_track(i:usize,len:usize,cb:&[u8],tmp:&mut String,ans:&mut Vec<String>){
+            if tmp.len()==len{
+                ans.push(tmp.clone());
+                return 
+            }
+            for j in i..cb.len(){
+                tmp.push(cb[j] as char);
+                back_track(j+1,len,cb,tmp,ans);
+                tmp.pop();
+            }
+        }
+        let mut vt=Vec::new();
+        back_track(0,combinationLength as usize,characters.as_bytes(),&mut String::new(),&mut vt);
+        Self{vt,index:0}
+    }
+    
+    fn next(&mut self) -> String {
+        self.index+=1;
+        if self.index>self.vt.len(){
+            return String::new()
+        }
+        self.vt[self.index-1].clone()
+        
+    }
+    
+    fn has_next(&self) -> bool {
+        self.index<self.vt.len()
+    }
+}
+
+/**
+ * Your CombinationIterator object will be instantiated and called as such:
+ * let obj = CombinationIterator::new(characters, combinationLength);
+ * let ret_1: String = obj.next();
+ * let ret_2: bool = obj.has_next();
+ */

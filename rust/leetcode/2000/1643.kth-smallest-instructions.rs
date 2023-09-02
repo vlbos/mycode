@@ -39,3 +39,34 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn kth_smallest_path(destination: Vec<i32>, mut k: i32) -> String {
+        let (m,n)=(destination[0] as usize+1,destination[1] as usize+1);
+        let mut dp=vec![vec![0;n];m];
+        dp[m-1][n-1]=1;
+        for i in 0..m-1{
+            dp[i][n-1]=1;
+        }
+        dp[m-1]=vec![1;n];
+        for i in (0..m-1).rev(){
+            for j in (0..n-1).rev(){
+                dp[i][j]=dp[i+1][j]+dp[i][j+1];
+            }
+        }
+        let mut ans=String::new();
+        let (mut i,mut j)=(0,0);
+        while i<m-1 && j<n-1{
+            if dp[i][j+1]>=k{
+                ans.push('H');
+                j+=1;
+            }else{
+                ans.push('V');
+                k-=dp[i][j+1];
+                i+=1;
+            }
+        }
+        ans.push_str("H".repeat(n-1-j).as_str());
+        ans.push_str("V".repeat(m-1-i).as_str());
+        ans
+    }
+}

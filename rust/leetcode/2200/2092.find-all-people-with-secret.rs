@@ -52,3 +52,47 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn find_all_people(n: i32,mut meetings: Vec<Vec<i32>>, first_person: i32) -> Vec<i32> {
+        meetings.sort_by_key(|x|x[2]);
+        let mut parent:Vec<i32>=(0..n).collect();
+        fn find(x:i32,parent:&mut Vec<i32>)->i32{
+            let px=parent[x as usize];
+            if px!=x{
+                parent[x as usize]=find(px,parent);
+            }
+            parent[x as usize]
+        }
+        let unite=|x:i32,y:i32,parent:&mut Vec<i32>|{
+            let (px,py)=(find(x,parent),find(y,parent));
+            if px!=py{
+                parent[px as usize]=py;
+            }
+        };
+        unite(first_person,0,&mut parent);
+        let mut m=meetings.len();
+        let mut i=0;
+        while i<m {
+           
+            let mut j=i+1;
+            while j<m{
+                if meetings[i][2]!=meetings[j][2]{
+                    break
+                }
+                j+=1;
+            }
+            for k in i..j{
+                unite(meetings[k][0],meetings[k][1],&mut parent);
+            }
+            for k in i..j{
+                if find(meetings[k][0],&mut parent)!=find(0,&mut parent){
+                    parent[meetings[k][0] as usize]=meetings[k][0];
+                    parent[meetings[k][1] as usize]=meetings[k][1];
+                }
+            }
+            i=j;
+        }
+        let zero=find(0,&mut parent);
+        (0..n).filter(|&x| find(x,&mut parent)==zero).collect()
+    }
+}

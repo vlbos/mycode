@@ -62,7 +62,7 @@ impl Solution {
 
         ans
     }
-    fn knows(&self, a: i32, b: i32) -> bool {
+    fn knows(&self, _a: i32, _b: i32) -> bool {
         true
     }
 }
@@ -70,7 +70,7 @@ pub struct Solution;
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    // use super::*;
     // use crate::tree;
     #[test]
     pub fn test_read() {

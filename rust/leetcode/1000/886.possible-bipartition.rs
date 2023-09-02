@@ -40,3 +40,44 @@ impl Solution {
     }
 }
 // @lc code=end
+
+
+impl Solution {
+    pub fn possible_bipartition(n: i32, dislikes: Vec<Vec<i32>>) -> bool {
+        let n=n as usize;
+        let mut parent:Vec<usize>=(0..n).collect();
+        let mut rank=vec![1;n];
+        fn find(x:usize,parent:&mut Vec<usize>)->usize{
+             let px=parent[x];
+            if px!=x{
+                parent[x]=find(px,parent);
+            }
+            parent[x]
+        }
+        let unite=|x:usize,y:usize,parent:&mut Vec<usize>,rank:&mut Vec<usize>|{
+            let (px,py)=(find(x,parent),find(y,parent));
+            if px!=py{
+               let (px,py)= if rank[px]<rank[py]{
+                    (py,px)
+                }else{(px,py)};
+                rank[px]+=rank[py];
+                parent[py]=px;
+            }
+        };
+        let mut g=vec![vec![];n];
+        for dislike in &dislikes{
+            let (x,y)=(dislike[0] as usize-1,dislike[1] as usize-1);
+            g[x].push(y);
+            g[y].push(x);
+        }
+        for (x,nodes) in g.iter().enumerate(){
+            for &y in nodes{
+                    unite(nodes[0],y,&mut parent,&mut rank);
+                    if find(x,&mut parent)==find(y,&mut parent){
+                        return false
+                    }
+            }
+        }
+        true
+    }
+}

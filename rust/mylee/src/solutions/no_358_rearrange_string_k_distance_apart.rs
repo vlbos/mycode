@@ -1,7 +1,5 @@
 // # [358. Rearrange String k Distance Apart](https://leetcode.com/problems/rearrange-string-k-distance-apart)
 
-// [中文文档](/solution/0300-0399/0358.Rearrange%20String%20k%20Distance%20Apart/README.md)
-
 // ## Description
 
 // Given a string s and an integer k, rearrange s such that the same characters are at least distance k from each other. If it is not possible to rearrange the string, return an empty string "".
@@ -40,7 +38,6 @@
 
 impl Solution {
     pub fn rearrange_string(s: String, k: i32) -> String {
-        use std::cmp::Reverse;
         use std::collections::{BinaryHeap, VecDeque};
 
         if k == 0 {
@@ -88,7 +85,7 @@ pub struct Solution;
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    // use super::*;
     // use crate::tree;
     #[test]
     pub fn test_read() {

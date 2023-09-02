@@ -25,3 +25,19 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn trap(height: Vec<i32>) -> i32 {
+        let n=height.len();
+        let mut left_max=vec![0;n];
+        left_max[0]=height[0];
+        for i in 1..n{
+            left_max[i]=left_max[i-1].max(height[i]);
+        }
+        let mut right_max=vec![0;n];
+        right_max[n-1]=height[n-1];
+        for i in (0..n-1).rev(){
+            right_max[i]=right_max[i+1].max(height[i]);
+        }
+        left_max.into_iter().zip(right_max).zip(height).map(|((l,r),h)| l.min(r)-h).sum::<i32>()
+    }
+}

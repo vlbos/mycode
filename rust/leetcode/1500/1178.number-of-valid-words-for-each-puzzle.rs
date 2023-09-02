@@ -41,3 +41,47 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn find_num_of_valid_words(words: Vec<String>, puzzles: Vec<String>) -> Vec<i32> {
+        #[derive(Default)]
+        struct Trie{
+            children:[Option<Box<Trie>>;26],
+            frequency:i32,
+        }
+        fn insert(mut node:&mut Trie,word:&[u8]){
+            for &b in word{
+                node=node.children[(b-b'a') as usize].get_or_insert(Box::new(Trie::default()));            
+                }
+                node.frequency+=1;
+        }
+        fn find(node:&Trie,pos:usize,required:u8,puzzle:&[u8])->i32{
+            if pos==7{
+                return node.frequency
+            }
+            let mut ans=if let Some(child)=&node.children[(puzzle[pos]-b'a') as usize]{
+                find(child,pos+1,required,puzzle)
+            }else{0};
+            if puzzle[pos]!=required{
+                ans+=find(node,pos+1,required,puzzle);
+            }
+            ans
+        }
+       let mut trie=Trie::default();
+        let mut ans=Vec::new();
+        for word in &words{
+            let mut w:Vec<u8>=word.bytes().collect();
+            w.sort();
+            w.dedup();
+            insert(&mut trie,&w);
+        }
+        for puzzle in &puzzles{
+             let mut p:Vec<u8>=puzzle.bytes().collect();
+              let required=p[0];
+              p.sort();
+            ans.push(find(&trie,0,required,&p));
+        }
+                   
+
+        ans
+    }
+}

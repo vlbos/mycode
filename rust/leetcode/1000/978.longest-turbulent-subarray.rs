@@ -28,3 +28,23 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn max_turbulence_size(arr: Vec<i32>) -> i32 {
+        let mut ans=1;
+        let (mut dp0,mut dp1)=(1,1);
+        for i in 1..arr.len(){
+            if arr[i-1]>arr[i]{
+                dp0=dp1+1;
+                dp1=1;
+            }else if arr[i-1]<arr[i]{
+                dp1=dp0+1;
+                dp0=1;
+            }else{
+                dp0=1;
+                dp1=1;
+            }
+            ans=ans.max(dp0.max(dp1));
+        }
+        ans
+    }
+}

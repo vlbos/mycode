@@ -20,3 +20,15 @@ impl Solution {
 }
 // @lc code=end
 
+impl Solution {
+    pub fn get_row(row_index: i32) -> Vec<i32> {
+        let n=row_index as usize+1;
+        let mut ans=vec![1;n];
+        for i in 2..n{
+            for j in (1..i).rev(){
+                ans[j]+=ans[j-1];
+            }
+        }
+        ans
+    }
+}

@@ -24,3 +24,26 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn can_jump(nums: Vec<i32>) -> bool {
+        let n=nums.len();
+        if n==1{
+            return true
+        }
+        if nums[0]==0{
+            return false
+        }
+        let mut dp=vec![0;n];
+        dp[0]=nums[0] as usize;
+        for i in 1..n-1{
+            dp[i]=dp[i-1].max(nums[i] as usize+i);
+            if dp[i]>=n-1{
+                return true
+            }
+            if dp[i]==i{
+                return false
+            }
+        }
+        true
+    }
+}

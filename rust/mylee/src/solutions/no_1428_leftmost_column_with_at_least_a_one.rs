@@ -3,7 +3,7 @@
 
 A binary matrix means that all elements are 0 or 1. For each individual row of the matrix, this row is sorted in non-decreasing order.
 
-Given a row-sorted binary matrix binaryMatrix, return leftmost column index(0-indexed) with at least a 1 in it. If such index doesn't exist, return -1.
+Given a row-sorted binary matrix binary_matrix, return leftmost column index(0-indexed) with at least a 1 in it. If such index doesn't exist, return -1.
 
 You can't access the Binary Matrix directly.  You may only access the matrix using a BinaryMatrix interface:
 
@@ -55,7 +55,7 @@ Constraints:
  */
 pub struct BinaryMatrix;
 impl BinaryMatrix {
-    pub fn get(&self, row: i32, col: i32) -> i32 {
+    pub fn get(&self, _row: i32, _col: i32) -> i32 {
         0
     }
     pub fn dimensions(&self) -> Vec<i32> {
@@ -64,8 +64,8 @@ impl BinaryMatrix {
 }
 pub struct Solution;
 impl Solution {
-    pub fn left_most_column_with_one(binaryMatrix: &BinaryMatrix) -> i32 {
-        let vec = binaryMatrix.dimensions();
+    pub fn left_most_column_with_one(binary_matrix: &BinaryMatrix) -> i32 {
+        let vec = binary_matrix.dimensions();
         let n = vec[0];
         let m = vec[1];
 
@@ -78,7 +78,7 @@ impl Solution {
             while lo <= hi {
                 let mid = lo + (hi - lo) / 2;
 
-                if binaryMatrix.get(i, mid) == 1 {
+                if binary_matrix.get(i, mid) == 1 {
                     hi = mid - 1;
                     ans = ans.min(mid);
                 } else {

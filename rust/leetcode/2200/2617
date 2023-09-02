@@ -1,0 +1,41 @@
+impl Solution {
+    pub fn minimum_visited_cells(grid: Vec<Vec<i32>>) -> i32 {
+        let (m,n)=(grid.len(),grid[0].len());
+        let mut col_st:Vec<Vec<usize>>=vec![(0..=m).collect();n];
+        let mut row_st:Vec<Vec<usize>>=vec![(0..=n).collect();m];
+        fn find(x:usize,parent:&mut Vec<usize>)->usize{
+            let px=parent[x];
+            if px!=x{
+                parent[x]=find(px,parent);
+            }
+            parent[x]
+        }
+        let unite=|x:usize,parent:&mut Vec<usize>|{
+            parent[x]=x+1;
+        };
+        let mut q=std::collections::VecDeque::from([(1,0,0)]);
+        while let Some((d,x,y))=q.pop_front(){
+            if x==m-1 && y==n-1{
+                return d
+            }
+let g=grid[x][y] as usize;
+        loop{
+            let ny=find(y+1,&mut row_st[x]);
+            if ny>(n-1).min(g+y){
+                break
+            }
+            unite(ny,&mut row_st[x]);
+            q.push_back((d+1,x,ny))
+        }
+         loop{
+            let nx=find(x+1,&mut col_st[y]);
+            if nx>(m-1).min(g+x){
+                break
+            }
+            unite(nx,&mut col_st[y]);
+            q.push_back((d+1,nx,y))
+        }
+        }
+        -1
+    }
+}

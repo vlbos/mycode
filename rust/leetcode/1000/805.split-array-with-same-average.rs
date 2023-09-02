@@ -84,3 +84,27 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn split_array_same_average(nums: Vec<i32>) -> bool {
+        let n=nums.len();
+        let m=n/2;
+        let s=nums.iter().sum::<i32>();
+        if (1..=m).all(|i|  s*i as i32%n as i32>0){
+            return false
+        }
+        let mut dp=vec![std::collections::HashSet::new();m+1];
+        dp[0].insert(0);
+        for &num in &nums{
+            for i in (1..=m).rev(){
+                for &x in &dp[i-1].clone(){
+                    let curr=x+num;
+                    if curr*n as i32==s*i as i32{
+                        return true
+                    }
+                    dp[i].insert(curr);
+                }
+            }
+        }
+        false
+    }
+}

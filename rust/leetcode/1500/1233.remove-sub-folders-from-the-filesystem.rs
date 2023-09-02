@@ -25,3 +25,34 @@ impl Solution {
 }
 // @lc code=end
 
+impl Solution {
+    pub fn remove_subfolders(folder: Vec<String>) -> Vec<String> {
+        use std::collections::HashMap;
+        #[derive(Default)]
+        struct Trie{
+            children:HashMap<String,Trie>,
+            idx:i32,
+        }
+        let mut trie=Trie::default();
+
+        for (i,path) in folder.iter().enumerate(){
+            let mut node=&mut trie;
+            for name in path.split('/'){
+                node=node.children.entry(name.to_string()).or_insert(Trie::default());
+            }
+            node.idx=i as i32+1;
+        }
+        let mut ans=Vec::new();
+        fn dfs(node:&Trie,folder: &Vec<String>,ans:&mut Vec<String>){
+            if node.idx!=0{
+                ans.push(folder[node.idx as usize-1].clone());
+                return
+            }
+            for child in node.children.values(){
+                dfs(child,folder,ans);
+            }
+        }
+        dfs(&trie,&folder,&mut ans);
+        ans
+    }
+}

@@ -1,0 +1,226 @@
+struct BookMyShow {
+n:i32,
+    m:i32,
+    seats:Vec<i32>,
+    c1:Vec<i64>,
+    c2:Vec<i32>,
+    first_row:i32,
+}
+
+fn lowbit(i:i32)->i32{-i&i}
+fn update1(mut i:i32,v:i32,c1:&mut Vec<i64>){
+    while i <c1.len() as i32{
+        c1[i as usize]+=v as i64;
+        i+=lowbit(i);
+    }
+}
+fn query1(mut i:i32,c1:& Vec<i64>)->i64{
+    let mut ans=0;
+    while i >0{
+        ans+=c1[i as usize];
+        i&=i-1;
+    }
+    ans
+}
+
+fn update2(mut i:i32,v:i32,c2:&mut Vec<i32>,seats:&mut Vec<i32>){
+    seats[i as usize]=v;
+    while i <c2.len() as i32{
+        c2[i as usize]=seats[i as usize];
+        let delta=lowbit(i);
+        let mut j=1;
+        while j<delta{
+            c2[i as usize]=c2[i as usize].max(c2[(i-j) as usize]);
+            j*=2;
+        }
+        i+=delta;
+    }
+}
+fn query2(mut i:i32,c2:& Vec<i32>)->i32{
+    let mut ans=i32::MIN;
+    while i >0{
+        ans=ans.max(c2[i as usize]);
+        i&=i-1;
+    }
+    ans
+}
+
+/** 
+ * `&self` means the method takes an immutable reference.
+ * If you need a mutable reference, change it to `&mut self` instead.
+ */
+impl BookMyShow {
+
+    fn new(n: i32, m: i32) -> Self {
+        let n1= n as usize+1;
+        let seats=vec![m;n1];
+        let c2=vec![m;n1];
+        let mut c1=vec![0;n1];
+        for i in 1..n1{
+            c1[i] +=seats[i] as i64;
+            let forward=i+lowbit(i as i32) as usize;
+            if forward<n1{
+                c1[forward]+=c1[i];
+            }
+        }
+        Self{n,m,seats,c1,c2,first_row:1}
+    }
+    
+    fn gather(&mut self, k: i32, max_row: i32) -> Vec<i32> {
+        if query2(max_row+1,&self.c2)<k{
+            return Vec::new()
+        }
+        let (mut left,mut right)=(self.first_row,max_row+1);
+        while left<right{
+            let mid=(left+right)/2;
+            if query2(mid,&self.c2)<k{
+                left=mid+1;
+            }else{
+                right=mid;
+            }
+        }
+        let mut ans=vec![left-1,self.m-self.seats[left as usize]];
+       update1(left,-k,&mut self.c1);
+       update2(left,self.seats[left as usize]-k,&mut self.c2,&mut self.seats);
+        ans
+    }
+    
+    fn scatter(&mut self, mut k: i32, max_row: i32) -> bool {
+         if query1(max_row+1,&self.c1)<k as i64{
+            return false
+        }
+        let (mut left,mut right)=(self.first_row,max_row+1);
+        while left<right{
+            let mid=(left+right)/2;
+            if query1(mid,&self.c1)<k as i64{
+                left=mid+1;
+            }else{
+                right=mid;
+            }
+        }
+        let mut scatter_seats=0;
+        while self.first_row<left{
+            scatter_seats+=self.seats[self.first_row as usize];
+                update1(self.first_row,-self.seats[self.first_row as usize],&mut self.c1);
+       update2(self.first_row,0,&mut self.c2,&mut self.seats);
+            self.first_row+=1;
+        }
+        let remain=k-scatter_seats;
+       update1(left,-remain,&mut self.c1);
+       update2(left,self.seats[left as usize]-remain,&mut self.c2,&mut self.seats);
+        true
+    }
+}
+
+/**
+ * Your BookMyShow object will be instantiated and called as such:
+ * let obj = BookMyShow::new(n, m);
+ * let ret_1: Vec<i32> = obj.gather(k, maxRow);
+ * let ret_2: bool = obj.scatter(k, maxRow);
+ */
+
+
+
+struct BookMyShow {
+n:i32,
+    m:i32,
+    min:Vec<i32>,
+    sum:Vec<i64>,
+}
+
+
+/** 
+ * `&self` means the method takes an immutable reference.
+ * If you need a mutable reference, change it to `&mut self` instead.
+ */
+impl BookMyShow {
+
+    fn new(n: i32, m: i32) -> Self {
+        let n1= n as usize*4;
+        let min=vec![0;n1];
+        let sum=vec![0;n1];
+        
+        Self{n,m,min,sum}
+    }
+    fn update(&mut self,i:i32,l:i32,r:i32,idx:i32,val:i32){
+        if l==r{
+            self.min[i as usize]+=val;
+            self.sum[i as usize]+=val as i64;
+            return
+        }
+        let mid=(l+r)/2;
+        if idx<=mid{
+            self.update(i*2,l,mid,idx,val);
+        }else{
+            self.update(i*2+1,mid+1,r,idx,val);
+        }
+        self.min[i as usize]=self.min[i as usize*2].min(self.min[i as usize*2+1]);
+        self.sum[i as usize]=self.sum[i as usize*2]+self.sum[i as usize*2+1];
+    }
+    fn query_sum(&self,i:i32,l:i32,r:i32,ll:i32,rr:i32)->i64{
+        if ll<=l && r<=rr{
+            return  self.sum[i as usize]
+        }
+        let mut sum=0;
+        let mid=(l+r)/2;
+        if ll<=mid{
+            sum+=self.query_sum(i*2,l,mid,ll,rr);
+        }
+        if mid<rr{
+            sum+=self.query_sum(i*2+1,mid+1,r,ll,rr);
+        }
+       sum
+    }
+    fn index(&self,i:i32,l:i32,r:i32,rr:i32,val:i32)->i32{
+        if self.min[i as usize]>val{
+            return 0
+        }
+        if l==r{
+            return l
+        }
+        let mid=(l+r)/2;
+        if self.min[i as usize*2]<=val{
+            self.index(i*2,l,mid,rr,val)
+        }else if mid<rr{
+            self.index(i*2+1,mid+1,r,rr,val)
+        }else{
+            0
+        }
+    }
+    fn gather(&mut self, k: i32, max_row: i32) -> Vec<i32> {
+        let i=self.index(1,1,self.n,max_row+1,self.m-k);
+
+        if i==0{
+            return Vec::new()
+        }
+       let seats=self.query_sum(1,1,self.n,i,i);
+       self.update(1,1,self.n,i,k);
+        vec![i-1,seats as i32]
+    }
+    
+    fn scatter(&mut self, k: i32, max_row: i32) -> bool {
+        let mut k=k as i64;
+         if (max_row+1) as i64*self.m as i64-self.query_sum(1,1,self.n,1,max_row+1)<k{
+            return false
+        }
+        let mut i=self.index(1,1,self.n,max_row+1,self.m-1);
+        loop{
+            let left_seats=self.m as i64-self.query_sum(1,1,self.n,i,i);
+            if k<=left_seats{
+                self.update(1,1,self.n,i,k as i32);
+                break
+            }
+            k-=left_seats;
+            self.update(1,1,self.n,i,left_seats as i32);
+            i+=1;
+        }
+        true
+    }
+}
+
+/**
+ * Your BookMyShow object will be instantiated and called as such:
+ * let obj = BookMyShow::new(n, m);
+ * let ret_1: Vec<i32> = obj.gather(k, maxRow);
+ * let ret_2: bool = obj.scatter(k, maxRow);
+ */

@@ -1,0 +1,76 @@
+impl Solution {
+    pub fn length_of_lis(nums: Vec<i32>, k: i32) -> i32 {
+        let n1 =100009;
+        let mut a=vec![0;n1];
+        let mut h=vec![0;n1];
+        let update=|i:i32,h:&mut Vec<i32>,a:&Vec<i32>|{
+            let mut j=i;
+            while j<h.len() as i32{
+                h[j as usize]=h[j as usize].max(a[i as usize]);
+                j+=-j&j;
+            }
+
+        };
+         let query=|i:i32,mut j:i32,h:&Vec<i32>,a:&Vec<i32>|{
+            let mut ans=0;
+            while j>=i{
+                ans=ans.max(a[j as usize]);
+                j-=1;
+                while j&j-1>=i{
+                    ans=ans.max(h[j as usize]);
+                    j&=j-1;
+                }
+            }
+            ans
+        };
+        for &v in &nums{
+            a[v as usize]=a[v as usize].max(query(1i32.max(v-k),v-1,&h,&a)+1);
+            update(v,&mut h,&a);
+        }
+        query(1,n1 as i32-1,&h,&a)
+    }
+}
+
+
+impl Solution {
+    pub fn length_of_lis(nums: Vec<i32>, k: i32) -> i32 {
+        let n1 =*nums.iter().max().unwrap();
+        let mut a=vec![0;n1 as usize*4];
+        fn update(i:i32,l:i32,r:i32,idx:i32,val:i32,a:&mut Vec<i32>){
+            if l==r{
+                a[i as usize]=val;
+                return
+            }
+            let mid=(l+r)/2;
+            if idx<=mid{
+                update(i*2,l,mid,idx,val,a);
+            }else{
+                update(i*2+1,mid+1,r,idx,val,a);
+            }
+            a[i as usize]=a[i as usize*2].max(a[i as usize*2+1]);
+        }
+         fn query(i:i32,l:i32,r:i32,ll:i32,rr:i32,a:&Vec<i32>)->i32{
+            if ll<=l && r<=rr{
+                return a[i as usize]
+            }
+            let mid=(l+r)/2;
+            let mut ans=0;
+            if ll<=mid{
+                ans=query(i*2,l,mid,ll,rr,a);
+            }
+             if mid<rr{
+                ans=ans.max(query(i*2+1,mid+1,r,ll,rr,a));
+            }
+            ans
+        }
+        for &v in &nums{
+            if v==1{
+                update(1,1,n1,1,1,&mut a);
+            }else{
+                let ans=1+query(1,1,n1,1i32.max(v-k),v-1,&a);
+                update(1,1,n1,v,ans,&mut a);
+            }
+        }
+        a[1]
+    }
+}

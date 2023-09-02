@@ -32,3 +32,25 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn get_happy_string(n: i32, k: i32) -> String {
+        fn dfs(mut curr:String,temp:String,n:usize,ans:&mut Vec<String>){
+                if curr.len()==n{
+                    ans.push(curr);
+                    return 
+                }
+                for t in temp.chars(){
+                    let next:String="abc".chars().filter(|&c|c!=t).collect();
+                    dfs(curr.clone()+t.to_string().as_str(),next,n,ans);
+                }
+
+        }
+        let mut ans=Vec::new();
+        dfs(String::new(),"abc".to_string(),n as usize,&mut ans);
+        if k>ans.len() as i32{
+            String::new()
+        }else{
+            ans[k as usize-1].clone()
+        }
+    }
+}

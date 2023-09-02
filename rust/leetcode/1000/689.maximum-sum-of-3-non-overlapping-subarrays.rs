@@ -43,3 +43,29 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn max_sum_of_three_subarrays(nums: Vec<i32>, k: i32) -> Vec<i32> {
+        let (n,k)=(nums.len(),k as usize);
+        let mut sum:Vec<i32>=nums.iter().scan(0,|a,&x| {*a+=x;Some(*a)}).collect();
+        sum.insert(0,0);
+        let mut f=vec![vec![0;4];n+10];
+        for i in (1..=n-k+1).rev(){
+            for j in 1..4{
+                f[i][j]=f[i+1][j].max(f[i+k][j-1]+sum[i+k-1]-sum[i-1]);
+            }
+        }
+        let mut ans=vec![0;3];
+        let (mut i,mut j,mut idx)=(1,3,0);
+        while j>0{
+            if f[i+1][j]>f[i+k][j-1]+sum[i+k-1]-sum[i-1]{
+                i+=1;
+            }else{
+                ans[idx]=i as i32-1;
+                idx+=1;
+                i+=k;
+                j-=1;
+            }
+        }
+        ans
+    }
+}

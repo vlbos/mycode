@@ -1,0 +1,20 @@
+impl Solution {
+    pub fn minimum_partition(s: String, k: i32) -> i32 {
+        let n=s.len();
+        let mut f=vec![i32::MAX/2;n+1];
+        f[0]=0;
+        let bs=s.as_bytes();
+        for i in 1..=n{
+            let (mut now,mut p)=(0,1);
+            for j in (0..i).rev(){
+                now+=p*(bs[j]-b'0') as i64;
+                p*=10;
+                if now>k as i64{
+                    break
+                }
+                f[i]=f[i].min(f[j]+1);
+            }
+        }
+        if f[n]==i32::MAX/2{-1}else{f[n]}
+    }
+}

@@ -43,3 +43,39 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn has_valid_path(grid: Vec<Vec<i32>>) -> bool {
+        let (m,n)=(grid.len() as i32,grid[0].len() as i32);
+        let mut parent:Vec<i32>=(0..m*n).collect();
+        fn find(x:i32,parent:&mut Vec<i32>)->i32{
+            let px=parent[x as usize];
+            if px!=x{
+                parent[x as usize]=find(px,parent);
+            }
+            parent[x as usize]
+        }
+        let unite=|x:i32,y:i32,parent:&mut Vec<i32>|{
+            let (px,py)=(find(x,parent),find(y,parent));
+            if px!=py{
+                parent[px as usize]=py;
+            }
+        };
+        let patterns=[0,0b1010,0b0101,0b1100,0b0110,0b1001,0b0011];
+        for (i,row) in grid.iter().enumerate(){
+            for (j,&v ) in row.iter().enumerate(){
+                let (i,j)=(i as i32,j as i32);
+                let p =patterns[v as usize];
+                 for (k,d) in [-1,0,1,0,-1].windows(2).enumerate(){
+                     if  p&(1<<k)==0{
+                         continue
+                     }
+                     let (ni,nj)=(i+d[0],j+d[1]);
+                     if ni>=0 && ni<m && nj>=0 && nj<n && patterns[grid[ni as usize][nj as usize] as usize]&(1<<((k+2)%4))!=0{
+                         unite(i*n+j,ni*n+nj,&mut parent);
+                     }
+                 }
+            }
+        }
+        find(0,&mut parent)==find(m*n-1,&mut parent)
+    }
+}

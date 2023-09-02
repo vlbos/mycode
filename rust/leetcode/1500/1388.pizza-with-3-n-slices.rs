@@ -37,3 +37,19 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn max_size_slices(slices: Vec<i32>) -> i32 {
+        let calculate=|slices:&[i32]|{
+            let n=slices.len();
+            let m=(n+1)/3;
+            let mut dp=vec![vec![0;m+1];n+1];
+            for i in 1..=n{
+                for j in 1..=m{
+                    dp[i][j]=dp[i-1][j].max( if i>1{dp[i-2][j-1]}else{0}+slices[i-1]);
+                }
+            }
+            dp[n][m]
+        };
+        calculate(&slices[1..]).max(calculate(&slices[..slices.len()-1]))
+    }
+}

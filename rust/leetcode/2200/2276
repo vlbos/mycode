@@ -1,0 +1,57 @@
+
+struct CountIntervals {
+l:Option<Box<CountIntervals>>,
+r:Option<Box<CountIntervals>>,
+left:i32,
+right:i32,
+cnt:i32,
+}
+
+
+/** 
+ * `&self` means the method takes an immutable reference.
+ * If you need a mutable reference, change it to `&mut self` instead.
+ */
+impl CountIntervals {
+
+    fn new() -> Self {
+        Self{left:1,right:1_000_000_000,l:None,r:None,cnt:0}
+    }
+    fn init(left: i32,  right: i32) -> Self {
+        Self{left,right,l:None,r:None,cnt:0}
+    }
+    fn add(&mut self, left: i32, right: i32) {
+        if self.cnt==self.right-self.left+1{
+            return 
+        }
+        if left<=self.left && self.right<=right{
+            self.cnt=self.right-self.left+1;
+            return 
+        }
+        let  mid=(self.left+self.right)/2;
+        if self.l.is_none(){
+            self.l=Some(Box::new(Self::init(self.left,mid)));
+        }
+         if self.r.is_none(){
+            self.r=Some(Box::new(Self::init(mid+1,self.right)));
+        }
+        if left <=mid{
+            self.l.as_mut().unwrap().add(left,right);
+        }
+        if mid <right{
+            self.r.as_mut().unwrap().add(left,right);
+        }
+        self.cnt=self.l.as_ref().unwrap().cnt+self.r.as_ref().unwrap().cnt;
+    }
+    
+    fn count(&self) -> i32 {
+        self.cnt
+    }
+}
+
+/**
+ * Your CountIntervals object will be instantiated and called as such:
+ * let obj = CountIntervals::new();
+ * obj.add(left, right);
+ * let ret_2: i32 = obj.count();
+ */

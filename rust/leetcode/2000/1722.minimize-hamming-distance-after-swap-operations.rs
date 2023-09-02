@@ -61,3 +61,46 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn minimum_hamming_distance(source: Vec<i32>, target: Vec<i32>, allowed_swaps: Vec<Vec<i32>>) -> i32 {
+        let n=source.len();
+        let mut parent:Vec<usize>=(0..n).collect();
+        fn find(x:usize,parent:&mut Vec<usize>)->usize{
+            let px=parent[x];
+            if px!=x{
+                parent[x]=find(px,parent);
+            }
+            parent[x]
+        }
+        let unite=|x:usize,y:usize,parent:&mut Vec<usize>|{
+                let (px,py)=(find(x,parent),find(y,parent));
+                if px!=py{
+                    parent[px]=py;
+                }
+        };
+        for a in &allowed_swaps{
+            unite(a[0] as usize,a[1] as usize,&mut parent);
+        }
+        use std::collections::HashMap;
+        let mut dic=HashMap::new();
+        for i in 0..n{
+            let a=find(i,&mut parent);
+            dic.entry(a).or_insert(Vec::new()).push(i);
+        }
+        let mut ans=0;
+        for (&k,v) in &dic{
+            let mut b=v.iter().fold(HashMap::new(),|mut a,&i| {*a.entry(target[i]).or_insert(0)+=1;a});
+            for  &i in v{
+                let c=source[i];
+                let x=*b.get(&c).unwrap_or(&0);
+                    if x>0{
+                        b.insert(c,x-1);
+                    }else{
+                        ans+=1;
+                    }
+              
+            }
+        }
+        ans
+    }
+}

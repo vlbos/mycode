@@ -38,3 +38,22 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn count_substrings(s: String) -> i32 {
+        let n=s.len();
+        let mut dp=vec![vec![false;n];n];
+        let bs=s.as_bytes();
+        let mut ans=0;
+        for i in (0..n).rev(){
+            for j in i..n{
+                if bs[i]==bs[j]{
+                    if j-i<2|| dp[i+1][j-1]{
+                        ans+=1;
+                        dp[i][j]=true;
+                    }
+                }
+            }
+        }
+        ans
+    }
+}

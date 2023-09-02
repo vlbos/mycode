@@ -24,3 +24,16 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn num_of_subarrays(arr: Vec<i32>) -> i32 {
+        let mut dp=arr[0]%2;
+        let mut ans=dp as i64;
+        for i in 1..arr.len(){
+            if arr[i]%2==1{
+                dp=1+i as i32-dp ;
+            }
+            ans=(ans+dp as i64)%1_000_000_007;
+        }
+        ans as _
+    }
+}

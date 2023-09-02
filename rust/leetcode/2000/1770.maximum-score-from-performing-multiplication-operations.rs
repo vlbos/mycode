@@ -32,3 +32,25 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn maximum_score(nums: Vec<i32>, multipliers: Vec<i32>) -> i32 {
+        let (m,n)=(multipliers.len(),nums.len());
+        let mut dp=vec![vec![0;n+1];m+1];
+        let mut ans=i32::MIN;
+        for j in 1..=m{
+            for i in 0..=j{
+                if i==0{
+                    dp[i][j-i]=dp[i][j-i-1]+nums[n+i-j]*multipliers[j-1];
+                }else if i==j{
+                    dp[i][j-i]=dp[i-1][j-i]+nums[i-1]*multipliers[j-1];
+                }else{
+                    dp[i][j-i]=(dp[i][j-i-1]+nums[n+i-j]*multipliers[j-1]).max(dp[i-1][j-i]+nums[i-1]*multipliers[j-1]);
+                }
+                if j==m{
+                    ans=ans.max(dp[i][j-i]);
+                }
+            }
+        }
+        ans
+    }
+}

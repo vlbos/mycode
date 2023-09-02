@@ -61,3 +61,48 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn get_probability(balls: Vec<i32>) -> f64 {
+        let (k,n)=(balls.len(),balls.iter().sum::<i32>() as usize/2);
+        let mut fact=vec![1.0];
+        for i in 1..=2*n{
+            let v=fact[i-1]* i as f64;
+            fact.push(v);
+        }
+        let mut total=fact[2*n];
+        for &b in &balls{
+            total/=fact[b as usize] as f64;
+        }
+        let mut dp=vec![vec![0.0;2*k+1];2*n+1];
+        dp[0][k]=1.0;
+        let mut num=0;
+        for &b in &balls{
+            let b= b as usize;
+             let mut new_dp=vec![vec![0.0;2*k+1];2*n+1];
+             for j in 0..=b{
+                 let mut trans=0;
+                 if j==0{
+                     trans=-1;
+                 }
+                 if j==b{
+                     trans=1;
+                 }
+                 for front in 0..=2*n{
+                     for color in 0..=2*k{
+                         if dp[front][color]<0.00001{
+                             continue
+                         }
+                         let mut ways=dp[front][color];
+                         ways*=fact[front+j]/(fact[front]*fact[j]);
+                         ways*=fact[num-front+b-j]/(fact[num-front]*fact[b-j]);
+                         
+                         new_dp[front+j][(color as i32+trans) as usize]+=ways;
+                     }
+                 }
+             }
+             dp=new_dp;
+             num+=b;
+        }
+        dp[n][k]/total
+    }
+}

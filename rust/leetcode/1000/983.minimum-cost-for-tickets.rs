@@ -30,3 +30,22 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn mincost_tickets(days: Vec<i32>, costs: Vec<i32>) -> i32 {
+        let n=days.len();
+        let (mn,mx)=(days[0],days[n-1]);
+        let mut dp=vec![0;mx as usize+31];
+        let mut i=n-1;
+        for d in (mn..=mx).rev(){
+            let dd=d as usize;
+            if d==days[i]{
+                dp[dd]=(dp[dd +1]+costs[0]).min(dp[dd+7]+costs[1]);
+                dp[dd]=dp[dd].min(dp[dd+30]+costs[2]);
+                i-=1;
+            }else{
+                dp[dd]=dp[dd+1];
+            }
+        }
+        dp[mn as usize]
+    }
+}

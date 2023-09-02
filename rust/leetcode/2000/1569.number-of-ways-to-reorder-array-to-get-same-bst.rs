@@ -126,3 +126,67 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn num_of_ways(nums: Vec<i32>) -> i32 {
+        let n=nums.len();
+        if n==1{
+            return 0
+        }
+
+        use std::{rc::Rc,cell::RefCell};
+        struct TreeNode{
+            left:Option<Rc<RefCell<TreeNode>>>,
+            right:Option<Rc<RefCell<TreeNode>>>,
+            value:i32,
+            size:i32,
+            ans:i32,
+        }
+        let insert=|root:&Option<Rc<RefCell<TreeNode>>>,val:i32| {
+            let mut cur=root.clone();
+            loop{
+                cur.as_mut().unwrap().borrow_mut().size+=1;
+                if val<cur.as_mut().unwrap().borrow_mut().value{
+                    if cur.as_mut().unwrap().borrow_mut().left.is_none(){
+                        cur.as_mut().unwrap().borrow_mut().left=Some(Rc::new(RefCell::new(TreeNode{left:None,right:None,value:val,size:1,ans:0})));
+                        return
+                    }
+                    let node=cur.as_mut().unwrap().borrow_mut().left.clone();
+                    cur=node;
+                }else{
+                    if cur.as_mut().unwrap().borrow_mut().right.is_none(){
+                        cur.as_mut().unwrap().borrow_mut().right=Some(Rc::new(RefCell::new(TreeNode{left:None,right:None,value:val,size:1,ans:0})));
+                        return
+                    }
+                    let node=cur.as_mut().unwrap().borrow_mut().right.clone();
+                    cur=node;
+                }
+
+            }
+
+        };
+        let mut root=Some(Rc::new(RefCell::new(TreeNode{left:None,right:None,value:nums[0],size:1,ans:0})));
+        for &val in &nums[1..]{
+            insert(&root,val);
+        }
+        let mut c=vec![vec![0;n];n];
+        c[0][0]=1;
+        for i in 1..n{
+            c[i][0]=1;
+            for j in 1..n{
+                c[i][j]=((c[i-1][j-1] as i64+c[i-1][j] as i64)%1_000_000_007) as  i32;
+            }
+        }
+        fn dfs(mut root:Option<Rc<RefCell<TreeNode>>>,c:&Vec<Vec<i32>>){
+            if root.is_none(){
+                return
+            }
+            dfs(root.as_ref().unwrap().borrow().left.clone(),c);
+            dfs(root.as_ref().unwrap().borrow().right.clone(),c);
+            let ((lsize,lans),(rsize,rans))=(if let Some(node)=&root.as_ref().unwrap().borrow().left{(node.borrow().size,node.borrow().ans)}else{(0,1)},if let Some(node)=&root.as_ref().unwrap().borrow().right{(node.borrow().size,node.borrow().ans)}else{(0,1)});
+            root.as_mut().unwrap().borrow_mut().ans=(c[(lsize+rsize) as usize][lsize as usize] as i64*lans  as i64%1_000_000_007*rans  as i64%1_000_000_007) as i32;
+        }
+        dfs(root.clone(),&c);
+        let ans=root.as_ref().unwrap().borrow().ans as i64;
+        ((ans-1+1_000_000_007)%1_000_000_007) as _
+    }
+}

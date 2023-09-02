@@ -33,3 +33,57 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn tiling_rectangle(n: i32, m: i32) -> i32 {
+        if n==m{
+            return 1
+        }
+        let mut ans=n*m;
+
+        let (n,m)=(n as usize, m as usize);
+        let mut covered=vec![vec![false;m];n];
+        fn dfs(cur:i32,covered:&mut Vec<Vec<bool>>,ans:&mut i32){
+            if cur>=*ans{
+                return
+            }
+            let (n,m)=(covered.len(), covered[0].len());
+            let (mut r,mut c)=(n,m);
+            for (i,row) in covered.iter().enumerate(){
+                if let Some(j)=row.iter().position(|&x|!x){
+                    r=i;
+                    c=j;
+                    break
+                }
+            }
+            if r==n {
+                *ans=(*ans).min(cur);
+                return 
+            }
+            for len in (1..=(n-r).min(m-c)).rev(){
+                let mut is_empty=true;
+                 for (i,row) in covered[r..r+len].iter().enumerate(){
+                        if row[c..c+len].iter().any(|&x|x){
+                            is_empty=false;
+                            break
+                        }
+                 }
+                 if !is_empty{
+                     continue
+                 }
+                 for i in r..r+len{
+                     for j in c..c+len{
+                         covered[i][j]=true;
+                     }
+                 }  
+                 dfs(cur+1,covered,ans);
+                 for i in r..r+len{
+                     for j in c..c+len{
+                         covered[i][j]=false;
+                     }
+                 } 
+            }
+        }
+        dfs(0,&mut covered,&mut ans);
+        ans
+    }
+}

@@ -1,0 +1,28 @@
+impl Solution {
+    pub fn distribute_cookies(mut cookies: Vec<i32>, k: i32) -> i32 {
+        cookies.sort();
+        fn back_tracking(start:usize,cookies: &Vec<i32>,bucket:&mut Vec<i32>,ans:&mut i32){
+            if start==0{
+                *ans=(*ans).min(*bucket.iter().max().unwrap());
+                return
+            }
+            if bucket.iter().filter(|&x| *x==0).count() as usize  > start{
+                return
+            }
+            if bucket.iter().any(|&x|x>*ans){
+                return
+            }
+            for i in 0..bucket.len(){
+                if start==cookies.len() && i>0{
+                    return
+                }
+                bucket[i]+=cookies[start-1];
+                back_tracking(start-1,cookies,bucket,ans);
+                bucket[i]-=cookies[start-1];
+            }
+        }
+        let mut ans=i32::MAX;
+        back_tracking(cookies.len(),&cookies,&mut vec![0;k as usize],&mut ans);
+        ans
+    }
+}

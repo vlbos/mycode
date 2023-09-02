@@ -26,3 +26,46 @@ impl Solution {
 }
 // @lc code=end
 
+impl Solution {
+    pub fn longest_common_prefix(strs: Vec<String>) -> String {
+        let mut trie=Trie::new();
+        for str in &strs{
+            trie.insert(str);
+        }
+        trie.find()
+    }
+}
+use std::collections::HashMap;
+struct Trie{
+children:HashMap<char,Trie>,
+is_end:bool,
+}
+
+impl Trie{
+  fn new()->Self{
+      Self{children:HashMap::new(),is_end:false}
+  }
+  fn insert(&mut self,word:&String){
+      let mut node=self;
+      for c in word.chars(){
+          node=node.children.entry(c).or_insert(Trie::new());
+      }
+      node.is_end=true;
+  }
+  fn find(&self)->String{
+      let mut node=self;
+      let mut ans=String::new();
+      if node.children.len()>1||node.is_end{
+                return ans
+            }
+      while let Some((&c,children))=node.children.iter().next()
+      {
+           ans.push(c);
+            node=children;
+              if node.children.len()>1||node.is_end{
+                break
+            }
+      }
+      ans
+  }
+}

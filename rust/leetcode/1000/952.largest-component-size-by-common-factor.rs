@@ -63,3 +63,37 @@ impl Solution {
     }
 }
 // @lc code=end
+
+
+impl Solution {
+    pub fn largest_component_size(nums: Vec<i32>) -> i32 {
+        let n=*nums.iter().max().unwrap()+1;
+        let mut parent:Vec<i32>=(0..n).collect();
+        let mut rank=vec![0;n as usize];
+        fn find(x:i32,parent:&mut Vec<i32>)->i32{
+            let px=parent[x as usize];
+            if px!=x{
+                parent[x as usize]=find(px,parent);
+            }
+            parent[x as usize]
+        }
+        let unite=|x:i32,y:i32,parent:&mut Vec<i32>,rank:&mut Vec<i32>|{
+            let (x,y)=(find(x,parent),find(y,parent));
+            if x!=y{
+                let (x,y)=if rank[x as usize]<rank[y as usize]{(y,x)}else{ if rank[x as usize]==rank[y as usize]{rank[x as usize]+=1;} (x,y)};
+                parent[x as usize]=y;
+            }
+        };
+        for &num in &nums{
+            let mut i=2;
+            while i*i<=num{
+                if num%i==0{
+                    unite(num,i,&mut parent,&mut rank);
+                    unite(num,num/i,&mut parent,&mut rank);
+                }
+                i+=1;
+            }
+        }
+        *nums.into_iter().fold(std::collections::HashMap::new(),|mut a,num| {*a.entry(find(num,&mut parent)).or_insert(0)+=1;a}).values().max().unwrap()
+    }
+}

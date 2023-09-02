@@ -51,3 +51,57 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn remove_invalid_parentheses(s: String) -> Vec<String> {
+        let (mut l,mut r)=(0,0);
+        for c in s.chars(){
+            if c=='('{
+                l+=1;
+            }else if c==')'{
+                if l>0{
+                    l-=1;
+                }else{
+                    r+=1;
+                }
+            }
+        }
+        fn helper(i:usize,s:String,l:i32,r:i32,ans:&mut Vec<String> ){
+            if l==0 && r==0{
+                let mut cnt=0;
+                 for c in s.chars(){
+                    if c=='('{
+                cnt+=1;
+            }else if c==')'{
+                cnt-=1;
+                if cnt<0{
+                    break
+                }
+            }
+                     }
+                if cnt==0{
+                    ans.push(s);
+                }
+                return
+            }
+            let bs=s.as_bytes();
+            let n=s.len();
+            for j in i..n{
+                if j>i && bs[j]==bs[j-1]{
+                    continue
+                }
+                if l+r>(n-j) as i32{
+                    break
+                }
+                if l>0 && bs[j]==b'('{
+                    helper(j,s[..j].to_string()+&s[j+1..],l-1,r,ans);
+                }
+                if r>0 && bs[j]==b')'{
+                    helper(j,s[..j].to_string()+&s[j+1..],l,r-1,ans);
+                }
+            }
+        }
+        let mut ans=Vec::new();
+        helper(0,s,l,r,&mut ans);
+        ans
+    }
+}

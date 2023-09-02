@@ -1,0 +1,38 @@
+
+impl Solution {
+    pub fn sum_prefix_scores(words: Vec<String>) -> Vec<i32> {
+        #[derive(Default)]
+        struct Trie{
+            children:[Option<Box<Trie>>;26],
+            score:i32,
+        }
+        let insert=|mut node:&mut Trie,word:&[u8]|{
+            for b in word{
+                node=node.children[(b-b'a') as usize].get_or_insert(Box::new(Trie::default()));
+                node.score+=1;
+            }
+        };
+        let query=|mut node:&Trie,word:&[u8]|{
+            let mut ans=0;
+            for b in word{
+                if let Some(child)=&node.children[(b-b'a') as usize]{
+                    node=child;
+                    ans+=node.score;
+                }else{
+                    break
+                }
+            }
+            ans
+        };
+        let mut trie=Trie::default();
+        for w in &words{
+            insert(&mut trie,w.as_bytes());
+        }
+        let mut ans=Vec::new();
+        for w in &words{
+            ans.push(query(&trie,w.as_bytes()));
+        }
+        ans
+    }
+}
+

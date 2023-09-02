@@ -1,0 +1,58 @@
+impl Solution {
+    pub fn magnificent_sets(n: i32, edges: Vec<Vec<i32>>) -> i32 {
+        let mut parent:Vec<i32>=(0..=n).collect();
+        fn find(x:i32,parent:&mut Vec<i32>)->i32{
+            let px=parent[x as usize];
+            if px!=x{
+                parent[x as usize]=find(px,parent);
+            }
+            parent[x as usize]
+        }
+        let unite=|x:i32,y:i32,parent:&mut Vec<i32>|{
+            let (px,py)=(find(x,parent),find(y,parent));
+            if px!=py{
+                parent[px as usize]=py;
+            }
+        };
+        let mut g=vec![vec![];n as usize+1];
+        for e in &edges{
+            g[e[0] as usize].push(e[1]);
+            g[e[1] as usize].push(e[0]);
+            unite(e[0],e[1],&mut parent);
+        }
+        let mut groups=vec![1;n as usize+1];
+        for i in 1..=n{
+            let mut dp=vec![-1;n as usize+1];
+            let mut color=vec![true;n as usize+1];
+            let mut q=std::collections::VecDeque::from([i]);
+            dp[i as usize]=0;
+            color[i as usize]=false;
+            let mut level=0;
+            while let Some(u)=q.pop_front(){
+                level=level.max(dp[u as usize]);
+                    for &v in &g[u as usize]{
+                        if dp[v as usize]==-1{
+                                q.push_back(v);
+                                dp[v as usize]=dp[u as usize]+1;
+                                color[v as usize]=!color[u as usize];
+                        }else if  color[v as usize]==color[u as usize]{
+                                            
+                                                    return -1
+                        }
+                        
+                    }
+                }
+            
+            let p=find(i,&mut parent);
+            groups[p as usize]= groups[p as usize].max(level+1);
+
+        }
+        let mut ans=0;
+        for i in 1..=n{
+             let p=find(i,&mut parent);
+            ans+=groups[p as usize];
+            groups[p as usize]=0;
+        }
+        ans
+    }
+}

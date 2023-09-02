@@ -32,3 +32,41 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn shortest_path_length(graph: Vec<Vec<i32>>) -> i32 {
+        let n=graph.len();
+        let mut d=vec![vec![n+1;n];n];
+        for i in 0..n{
+            for &j in &graph[i]{
+                d[i][j as usize]=1;
+            }
+        }
+        for k in 0..n{
+            for i in 0..n{
+                for j in 0..n{
+                    d[i][j]=d[i][j].min(d[i][k]+d[k][j]);
+                }
+            }
+        }
+        let n1=1<<n;
+        let mut f=vec![vec![i32::MAX/2;n1];n];
+        for mask in 1..n1{
+            if mask&(mask-1)==0{
+                let u=mask.trailing_zeros() as usize;
+                f[u][mask]=0;
+                continue
+            }
+            for u in 0..n{
+                if mask&(1<<u)==0{
+                    continue
+                }
+                for v in 0..n{
+                    if mask&(1<<v)>0 && u!=v{
+                        f[u][mask]=f[u][mask].min(f[v][mask^(1<<u)]+d[v][u] as i32);
+                    }
+                }
+            }
+        }
+        (0..n).map(|u| f[u][n1-1]).min().unwrap()
+    }
+}

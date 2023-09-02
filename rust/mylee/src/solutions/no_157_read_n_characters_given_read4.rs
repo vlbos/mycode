@@ -116,7 +116,7 @@ impl Solution {
 
         ans
     }
-    fn read4(&self, buf4: &mut [char]) -> i32 {
+    fn read4(&self, _buf4: &mut [char]) -> i32 {
         0
     }
 }
@@ -124,7 +124,7 @@ pub struct Solution;
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    // use super::*;
     // use crate::tree;
     #[test]
     pub fn test_read() {

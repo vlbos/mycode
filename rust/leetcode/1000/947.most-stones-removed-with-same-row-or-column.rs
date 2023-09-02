@@ -41,3 +41,37 @@ impl Solution {
 }
 // @lc code=end
 
+impl Solution {
+    pub fn remove_stones(stones: Vec<Vec<i32>>) -> i32 {
+        use std::collections::HashMap;
+        fn find(x:i32,parent:&mut HashMap<i32,i32>,rank:&mut HashMap<i32,i32>)->i32{
+            if let Some(&px)=parent.get(&x){
+                 if px!=x{
+                     let pa=find(px,parent,rank);
+                     parent.insert(x,pa);
+                 }
+            }else{
+                parent.insert(x,x);
+                rank.insert(x,1);
+            }
+            parent[&x]
+        }
+        let unite=|x:i32,y:i32,parent:&mut HashMap<i32,i32>,rank:&mut HashMap<i32,i32>|{
+            let (px,py)=(find(x,parent,rank),find(y,parent,rank));
+            if px!=py{
+                let (px,py)=if rank[&px]<rank[&py]{
+                    (py,px)
+                }else{(px,py)};
+                let ranky=rank[&py];
+                rank.entry(px).and_modify(|mut r| *r+=ranky);
+                parent.insert(py,px);
+            }
+        };
+        let mut parent=HashMap::new();
+        let mut rank=HashMap::new();
+        for s in &stones{
+            unite(s[0],s[1]+10001,&mut parent,&mut rank);
+        }
+        stones.len() as i32-parent.iter().filter(|(&k,&v)| k==v).count() as i32
+    }
+}

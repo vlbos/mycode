@@ -30,3 +30,15 @@ impl Solution {
 }
 // @lc code=end
 
+impl Solution {
+    pub fn generate(num_rows: i32) -> Vec<Vec<i32>> {
+        let n=num_rows as usize;
+        let mut dp:Vec<Vec<i32>> = (0..n).map(|i| vec![1;i+1]).collect();
+        for i in 2..n{
+            for j in 1..i{
+                dp[i][j]=dp[i-1][j-1]+dp[i-1][j];
+            }
+        }
+        dp
+    }
+}

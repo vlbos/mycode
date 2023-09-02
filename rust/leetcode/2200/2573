@@ -1,0 +1,65 @@
+impl Solution {
+    pub fn find_the_string(lcp: Vec<Vec<i32>>) -> String {
+        let (mut i,n)=(0,lcp.len());
+        let mut parent:Vec<usize>=(0..n).collect();
+        fn find(x:usize,parent:&mut Vec<usize>)->usize{
+            let px=parent[x];
+            if px!=x{
+                parent[x]=find(px,parent);
+            }
+            parent[x]
+        }
+        let unite=|x:usize,y:usize,parent:&mut Vec<usize>|{
+            let (px,py)=(find(x,parent),find(y,parent));
+            if px!=py{
+                parent[px]=py;
+            }
+        };
+        for i in 0..n{
+            for j in 0..n{
+                if lcp[i][j]>(n-i).min(n-j) as i32{
+                    return String::new()
+                }
+                if lcp[i][j]>0{
+                    unite(i,j,&mut parent);
+                }
+            }
+        }
+        if parent.iter().enumerate().filter(|&(i,v)| *v==i).count()>26{
+            return String::new()
+        }
+        let mut r=vec![vec![];n];
+        for (i,&v) in parent.iter().enumerate(){
+            r[v].push(i);
+        }
+
+        let mut ans=vec![' ';n];
+        let mut cur='a';
+        for i in 0..n{
+            if  ans[i]==' '{
+                let rt=find(i,&mut parent);
+                for &rr in &r[rt]{
+                    ans[rr]=cur;
+                }
+                cur=(cur as u8+1) as char;
+            }
+        }
+        for i in (0..n).rev(){
+            for j in (0..n).rev(){
+                     let actual_lcp= if ans[i]!=ans[j]{0}
+                     else{
+                    if i==n-1||j==n-1{
+                     1}
+                    else{
+                        lcp[i+1][j+1]+1
+                    }
+                    };
+                    if actual_lcp!=lcp[i][j]{
+                        return String::new()
+                    }
+            }
+        }
+
+        ans.iter().collect()
+    }
+}

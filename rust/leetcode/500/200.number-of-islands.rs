@@ -38,3 +38,44 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn num_islands(grid: Vec<Vec<char>>) -> i32 {
+        let (m,n)=(grid.len(),grid[0].len());
+        let mn=m*n;
+        let mut parent:Vec<usize>=(0..mn).collect();
+        fn find(x:usize,parent:&mut Vec<usize>)->usize{
+            let px=parent[x];
+            if px!=x{
+                parent[x]=find(px,parent);
+            }
+            parent[x]
+        }
+        let unite=|x:usize,y:usize,parent:&mut Vec<usize>|{
+            let (px,py)=(find(x,parent),find(y,parent));
+            if px!=py{
+                parent[px]=py;
+            }
+        };
+        for i in 0..m{
+            for j in 0..n{
+                if grid[i][j]=='0'{
+                    continue
+                }
+                for d in [0,1,0,-1,0].windows(2){
+                    let (ni,nj)=(i as i32+d[0],j as i32+d[1]);
+                    if ni>=0 && ni<m as i32 && nj>=0 && nj<n as i32 && grid[ni as usize][nj as usize]=='1'{
+                        unite(i*n+j,ni as usize*n+nj as usize,&mut parent);
+                    }
+                }
+            }
+        }
+        let mut s=std::collections::HashSet::new();
+        for i in 0..m{
+            for j in 0..n{
+                if grid[i][j]=='1'{
+                    s.insert(find(i*n+j,&mut parent));
+                }
+            }}
+            s.len() as _
+    }
+}

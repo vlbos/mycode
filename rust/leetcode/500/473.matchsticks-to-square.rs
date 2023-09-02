@@ -49,3 +49,53 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn makesquare(matchsticks: Vec<i32>) -> bool {
+        let sum=matchsticks.iter().sum::<i32>();
+        if sum%4>0{
+            return false
+        }
+        let side=sum/4;
+        let mut dp=vec![-1;1<<matchsticks.len()];
+        dp[0]=0;
+        for s in 1..dp.len(){
+            for (k,&v) in matchsticks.iter().enumerate(){
+                if s&(1<<k)==0{
+                    continue
+                }
+                let s1=s&(!(1<<k));
+                if dp[s1]>=0 && dp[s1]+v <=side{
+                    dp[s]=(dp[s1]+v)%side;
+                    break
+                }
+            }
+        }
+        dp[dp.len()-1]==0
+    }
+}
+
+impl Solution {
+    pub fn makesquare(mut matchsticks: Vec<i32>) -> bool {
+        let mut len=matchsticks.iter().sum::<i32>();
+        if len%4>0{
+            return false
+        }
+        len/=4;
+        matchsticks.sort_by_key(|x|-x);
+        fn dfs(idx:usize,len:i32,matchsticks: &Vec<i32>,edges:&mut Vec<i32>)->bool{
+            if idx==matchsticks.len(){
+                return true
+            }
+            for i in 0..4{
+                edges[i]+=matchsticks[idx];
+                if edges[i]<=len && dfs(idx+1,len,matchsticks,edges){
+                    return true
+                }
+                edges[i]-=matchsticks[idx];
+            }
+            false
+        }
+        let mut edges=vec![0;4];
+        dfs(0,len,&matchsticks,&mut edges)
+    }
+}

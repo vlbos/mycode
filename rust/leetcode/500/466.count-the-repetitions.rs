@@ -51,3 +51,26 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn get_max_repetitions(s1: String, n1: i32, s2: String, n2: i32) -> i32 {
+        let (len1,len2)=(s1.len(),s2.len());
+        let (bs1,bs2)=(s1.as_bytes(),s2.as_bytes());
+        let mut dp=vec![0;len2];
+        for i in 0..len2{
+            let mut j=i;
+            for k in  0..len1{
+                if bs1[k]==bs2[j]{
+                    j=(j+1)%len2;
+                    dp[i]+=1;
+                }
+            }
+        }
+        let (mut cnt,mut j)=(0,0);
+        for _ in 0..n1{
+            let add=dp[j] as usize;
+            j=(j+add)%len2;
+            cnt+=add;
+        }
+        ((cnt/len2) as i32 )/n2
+    }
+}

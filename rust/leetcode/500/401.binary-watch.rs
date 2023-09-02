@@ -37,3 +37,36 @@ impl Solution {
 }
 // @lc code=end
 
+impl Solution {
+    pub fn read_binary_watch(turned_on: i32) -> Vec<String> {
+        let nums=[1,2,4,8,1,2,4,8,16,32];
+        let mut ans=Vec::new();
+        let mut visited=vec![false;10];
+        fn dfs(start:usize,step:i32,turned_on: i32,nums:&[i32],visited:&mut Vec<bool>,ans:&mut Vec<String>){
+            let handle_date=|visited:&Vec<bool>|{
+                let mut ans=vec![0;2];
+                for (i,&v) in nums.iter().enumerate(){
+                    if visited[i]{
+                        ans[if i<4{0}else{1}]+=v;
+                    }
+                }
+                ans
+            };
+            if step==turned_on{
+                let date=handle_date(&visited);
+                ans.push(format!("{}:{:02}",date[0],date[1]));
+                return 
+            }
+            for i  in start..nums.len(){
+                    visited[i]=true;
+                    let date=handle_date(&visited);
+                    if date[0]>=0 && date[0]<=11 && date[1]>=0 && date[1]<=59{
+                        dfs(i+1,step+1,turned_on,nums,visited,ans);
+                    }
+                    visited[i]=false;
+            }
+        }
+        dfs(0,0,turned_on,&nums,&mut visited,&mut ans);
+        ans
+    }
+}

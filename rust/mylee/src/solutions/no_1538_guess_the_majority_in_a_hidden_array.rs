@@ -76,7 +76,7 @@ Constraints:
  */
 pub struct ArrayReader;
 impl ArrayReader {
-    pub fn query(&self, a: i32, b: i32, c: i32, d: i32) -> i32 {
+    pub fn query(&self, _a: i32, _b: i32, _c: i32, _d: i32) -> i32 {
         0
     }
     // Compares the sum of arr[l..r] with the sum of arr[x..y]

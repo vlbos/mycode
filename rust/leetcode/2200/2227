@@ -1,0 +1,74 @@
+use std::collections::HashMap;
+struct Trie{
+    children:HashMap<char,Trie>,
+    is_end:bool,
+}
+impl Trie{
+    fn new()->Self{
+        Self{children:HashMap::new(),is_end:false}
+    }
+    fn insert(&mut self,word:&String){
+        let mut node=self;
+        for c in word.chars(){
+            node=node.children.entry(c).or_insert(Trie::new());
+        }
+        node.is_end=true;
+    }
+}
+struct Encrypter {
+encrypt_map:HashMap<char,String>,
+decrypt_map:HashMap<String,Vec<char>>,
+trie:Trie,
+}
+
+
+/** 
+ * `&self` means the method takes an immutable reference.
+ * If you need a mutable reference, change it to `&mut self` instead.
+ */
+impl Encrypter {
+
+    fn new(keys: Vec<char>, values: Vec<String>, dictionary: Vec<String>) -> Self {
+        let decrypt_map=keys.iter().zip(&values).fold(HashMap::new(),|mut a,(&k,v)|{a.entry(v.clone()).or_insert(Vec::new()).push(k);a});
+        let encrypt_map=keys.into_iter().zip(values).collect();
+        let mut trie=Trie::new();
+        for w in &dictionary{
+           trie.insert(w);
+        }
+        Self{encrypt_map,decrypt_map,trie}
+    }
+    
+    fn encrypt(&self, word1: String) -> String {
+        let mut ans=String::new();
+        for c in word1.chars(){
+            ans.push_str(self.encrypt_map.get(&c).unwrap_or(&String::new()).as_str());
+        }
+        ans
+    }
+    
+    fn decrypt(&self, word2: String) -> i32 {
+        fn back_tracking(idx:usize,word2:&[u8],decrypt_map:&HashMap<String,Vec<char>>,node:&Trie)->i32{
+            if idx==word2.len(){
+                return if node.is_end{1}else{0}
+            }
+            let mut ans=0;
+            if let Some(characters)=decrypt_map.get(&String::from_utf8(word2[idx..idx+2].to_vec()).unwrap()){
+                for c in characters{
+                        if let Some(child)=node.children.get(c){
+                            ans+=back_tracking(idx+2,word2,decrypt_map,child);
+                        }
+                }
+            }
+            ans
+
+        }
+        back_tracking(0,word2.as_bytes(),&self.decrypt_map,&self.trie)
+    }
+}
+
+/**
+ * Your Encrypter object will be instantiated and called as such:
+ * let obj = Encrypter::new(keys, values, dictionary);
+ * let ret_1: String = obj.encrypt(word1);
+ * let ret_2: i32 = obj.decrypt(word2);
+ */

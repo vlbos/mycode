@@ -35,3 +35,25 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn find_number_of_lis(nums: Vec<i32>) -> i32 {
+        let (mut d,mut cnt)=(Vec::<Vec<i32>>::new(),Vec::<Vec<i32>>::new());
+        for &v in &nums{
+            let i  = d.partition_point(|x| *x.last().unwrap()<v);
+            let mut c=1;
+            if i>0{
+                let k=d[i-1].partition_point(|x| *x>=v);
+                c=*cnt[i-1].last().unwrap()-cnt[i-1][k];
+            }
+            if i==d.len(){
+                d.push(vec![v]);
+                cnt.push(vec![0,c]);
+            }else{
+                d[i].push(v);
+                let last=*cnt[i].last().unwrap()+c;
+                cnt[i].push(last);
+            }
+        }
+        *cnt.last().unwrap().last().unwrap()
+    }
+}

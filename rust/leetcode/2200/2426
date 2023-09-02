@@ -1,0 +1,82 @@
+impl Solution {
+    pub fn number_of_pairs(nums1: Vec<i32>, nums2: Vec<i32>, diff: i32) -> i64 {
+        let a: Vec<i32>=nums1.into_iter().zip(nums2).map(|(v1,v2)| v1-v2).collect();
+        let mut b=a.clone();
+        b.sort();
+        b.dedup();
+        let  update=|mut i:i32,t:&mut Vec<i64>|{
+            while i<t.len() as i32{
+                t[i as usize]+=1;
+                i+=-i&i;
+            }
+        };
+        let query=|mut i:i32,t:& Vec<i64>|{
+            let mut ans=0;
+            while i>0{
+                ans+=t[i as usize];
+                i&=i-1;
+            }
+            ans
+        };
+        let mut ans=0;
+        let mut t=vec![0;b.len()+1];
+        for &num in &a{
+            let i=b.partition_point(|&x| x<=num+diff);
+            ans+=query(i as i32,&t);
+
+             let i=b.partition_point(|&x| x<num);
+            update(i as i32+1,&mut t);
+        }
+        ans 
+    }
+}
+
+
+impl Solution {
+    pub fn number_of_pairs(nums1: Vec<i32>, nums2: Vec<i32>, diff: i32) -> i64 {
+        fn  update( i:i32,l:i32,r:i32,val:i32,t:&mut Vec<i64>){
+            if l==r{
+                t[i as usize]+=1;
+                return 
+            }
+            let mid=(l+r)/2;
+            if val<=mid{
+                update(i*2,l,mid,val,t);
+            }else{
+                 update(i*2+1,mid+1,r,val,t);
+            }
+            t[i as usize]=t[i as usize*2]+t[i as usize*2+1];
+        }
+        fn query (i:i32,l:i32,r:i32,ll:i32,rr:i32,t:& Vec<i64>)->i64{
+            if l==ll && r==rr{
+                return t[i as usize]
+            }
+            let mid=(l+r)/2;
+            if rr<=mid{
+                query(i*2,l,mid,ll,rr,t)
+            }else if mid<=ll{
+                 query(i*2+1,mid+1,r,ll,rr,t)
+            }else{query(i*2,l,mid,ll,mid,t)+query(i*2+1,mid+1,r,mid+1,rr,t)}
+        };
+        let mut a: Vec<i32>=nums1.into_iter().zip(nums2).map(|(v1,v2)| v1-v2).collect();
+        let (mut min_num,mut max_num)=(*a.iter().min().unwrap(),*a.iter().max().unwrap());
+        a=a.into_iter().map(|x|x-min_num).collect();
+        max_num-=min_num;
+        min_num=0;
+        if diff<0{
+            a=a.into_iter().map(|x|x-diff).collect();
+            min_num=-diff;
+            max_num-=diff;
+        }
+        let mut ans=0;
+        let mut t=vec![0;(max_num as usize+10)*4];
+        for &num in &a{
+            let (ll,rr)=(min_num,max_num.min(num+diff));
+            if ll<=rr{
+                ans+=query(1,min_num,max_num,ll,rr,&t);            
+            }
+            update(1,min_num,max_num,num,&mut t);
+        }
+        ans
+    }
+}

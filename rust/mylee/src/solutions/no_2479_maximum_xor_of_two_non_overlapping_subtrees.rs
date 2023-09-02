@@ -87,7 +87,7 @@ impl Trie {
 pub struct Solution;
 
 impl Solution {
-    pub fn max_xor(n: i32, edges: Vec<Vec<i32>>, values: Vec<i32>) -> i64 {
+    pub fn max_xor(_n: i32, edges: Vec<Vec<i32>>, values: Vec<i32>) -> i64 {
         fn dfs1(
             i: i32,
             fa: i32,

@@ -74,7 +74,7 @@ Constraints:
 
 pub struct ArrayReader;
 impl ArrayReader {
-    pub fn compareSub(&self, l: i32, r: i32, x: i32, y: i32) -> i32 {
+    pub fn compare_sub(&self, _l: i32, _r: i32, _x: i32, _y: i32) -> i32 {
         0
     }
     // Compares the sum of arr[l..r] with the sum of arr[x..y]
@@ -97,7 +97,7 @@ impl Solution {
         while lo < hi {
             let mid_lo = lo + (hi - lo) / 2;
             let mid_hi = lo + (hi - lo) / 2 + (hi - lo) % 2;
-            let r = reader.compareSub(lo, mid_lo, mid_hi, hi);
+            let r = reader.compare_sub(lo, mid_lo, mid_hi, hi);
 
             if r == 0 {
                 return mid_lo;

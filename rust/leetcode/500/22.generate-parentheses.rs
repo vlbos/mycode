@@ -31,3 +31,24 @@ impl Solution {
 }
 // @lc code=end
 
+impl Solution {
+    pub fn generate_parenthesis(n: i32) -> Vec<String> {
+        if n==0{
+            return Vec::new()
+        }
+        let n=n as usize;
+        let mut ans=vec![vec![String::new()],vec!["()".to_string()]];
+        for i in 2..=n{
+            let mut seq=Vec::new();
+            for j in 0..i{
+                for k1 in &ans[j]{
+                    for k2 in &ans[i-1-j]{
+                        seq.push(format!("({}){}",k1,k2));
+                    }
+                }
+            }
+            ans.push(seq);
+        }
+        ans[n].clone()
+    }
+}

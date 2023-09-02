@@ -16,3 +16,12 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn min_number_operations(target: Vec<i32>) -> i32 {
+        let mut dp=target[0];
+        for w in target.windows(2){
+            dp+=if w[1]>w[0]{w[1]-w[0]}else{0};
+        }
+        dp
+    }
+}

@@ -68,3 +68,58 @@ impl WordFilter {
  * let ret_1: i32 = obj.f(prefix, suffix);
  */
 // @lc code=end
+struct WordFilter {
+trie:Trie,
+}
+
+
+/** 
+ * `&self` means the method takes an immutable reference.
+ * If you need a mutable reference, change it to `&mut self` instead.
+ */
+impl WordFilter {
+
+    fn new(words: Vec<String>) -> Self {
+        let mut trie=Trie::new();
+        for (i,word) in  words.iter().enumerate(){
+            let w=word.to_string()+"#"+word;
+            for j in 0..word.len(){
+                             let mut node=&mut trie;
+                    for c in w[j..].chars(){
+                    node=node.children.entry(c).or_insert(Trie::new());
+                    node.weight=i as i32;
+                    }
+            }
+        }
+        Self{trie}
+    }
+    
+    fn f(&self, pref: String, suff: String) -> i32 {
+        let k=suff+"#"+&pref;
+        let mut node=&self.trie;
+        for c in k.chars(){
+            if let Some(child)=node.children.get(&c){
+                node=child;
+            }else{
+                return -1
+            }
+        }
+        node.weight
+    }
+}
+
+/**
+ * Your WordFilter object will be instantiated and called as such:
+ * let obj = WordFilter::new(words);
+ * let ret_1: i32 = obj.f(pref, suff);
+ */
+ use std::collections::HashMap;
+ struct Trie{
+     children:HashMap<char,Trie>,
+     weight:i32,
+ }
+ impl Trie{
+     fn new()->Self{
+         Self{children:HashMap::new(),weight:0}
+     }
+ }

@@ -41,3 +41,21 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn longest_valid_parentheses(s: String) -> i32 {
+        let mut ans=0;
+        let mut dp=vec![0;s.len()];
+        let bs=s.as_bytes();
+        for i in 1..bs.len(){
+            if bs[i]==b')'{
+                if bs[i-1]==b'('{
+                    dp[i]=2+if i<2{0}else{dp[i-2]};
+                }else if i>dp[i-1] && bs[i-dp[i-1]-1]==b'('{
+                    dp[i]=2+dp[i-1]+if i-dp[i-1]<2{0}else{dp[i-dp[i-1]-2]};
+                }
+                ans=ans.max(dp[i]);
+            }
+        }
+        ans as _
+    }
+}

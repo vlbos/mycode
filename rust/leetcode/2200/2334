@@ -1,0 +1,26 @@
+impl Solution {
+    pub fn valid_subarray_size(nums: Vec<i32>, threshold: i32) -> i32 {
+        let n =nums.len();
+        let mut parent:Vec<usize>=(0..=n).collect();
+        let mut sz=vec![0;n+1];
+        fn find(x:usize,parent:&mut Vec<usize>)->usize{
+            let px=parent[x];
+            if px!=x{
+                parent[x]=find(px,parent);
+            }
+            parent[x]
+        }
+        let mut nums:Vec<(usize,i32)>=nums.into_iter().enumerate().collect();
+        nums.sort_by_key(|x|-x.1);
+        for &(i,num) in &nums{
+            let j=find(i+1,&mut parent);
+            parent[i]=j;
+            sz[j]+=sz[i]+1;
+            if num>threshold/sz[j]{
+                return sz[j]
+            }
+        }
+
+        -1
+    }
+}

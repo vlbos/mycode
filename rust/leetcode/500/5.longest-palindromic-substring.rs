@@ -40,3 +40,31 @@ impl Solution {
 }
 // @lc code=end
 
+impl Solution {
+    pub fn longest_palindrome(s: String) -> String {
+        let n=s.len();
+        if n<2{
+            return s
+        }
+        let mut dp=vec![vec![false;n];n];
+        for i in 0..n{
+            dp[i][i]=true;
+        }
+        let bs=s.as_bytes();
+        let (mut begin,mut end)=(0,0);
+        for len in 2..=n{
+            for i in 0..n{
+                let j=i+len-1;
+                if j>=n{
+                    break
+                }
+                dp[i][j]=if bs[i]==bs[j]{ if j-i<3{true}else{dp[i+1][j-1]}}else{false};
+                if dp[i][j] && j-i>end-begin{
+                    begin=i;
+                    end=j;
+                }
+            }
+        }
+        s[begin..=end].to_string()
+    }
+}

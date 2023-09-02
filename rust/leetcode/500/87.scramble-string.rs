@@ -55,3 +55,32 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn is_scramble(s1: String, s2: String) -> bool {
+        let n=s1.len();
+        let (bs1,bs2)=(s1.as_bytes(),s2.as_bytes());
+        let mut dp=vec![vec![vec![false;n+1];n];n];
+        for i in 0..n{
+            for j in 0..n{
+                dp[i][j][1]=bs1[i]==bs2[j];
+            }
+        }
+        for  len in 2..=n{
+            for i in 0..=n-len{
+                for j in 0..=n-len{
+                    for k in 1..len{
+                        if dp[i][j][k] && dp[i+k][j+k][len-k]{
+                            dp[i][j][len]=true;
+                            break
+                        }
+                        if dp[i][j+len-k][k] && dp[i+k][j][len-k]{
+                            dp[i][j][len]=true;
+                            break
+                        }
+                    }
+                }
+            }
+        }
+        dp[0][0][n]
+    }
+}

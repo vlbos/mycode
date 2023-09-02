@@ -1,0 +1,33 @@
+impl Solution {
+    pub fn count_pairs(n: i32, edges: Vec<Vec<i32>>) -> i64 {
+        let mut parent:Vec<i32>=(0..n).collect();
+        let mut size=vec![1;n as usize]; 
+        fn find(x:i32,parent:&mut Vec<i32>)->i32{
+            let px=parent[x as usize];
+            if px!=x{
+                parent[x as usize]=find(px,parent);
+            }
+            parent[x as usize]
+        }
+        let unite=|x:i32,y:i32,parent:&mut Vec<i32>,size:&mut Vec<i32>|{
+            let (px,py)=(find(x,parent),find(y,parent));
+            if px!=py{
+                parent[px as usize]=py;
+                size[py as usize]+=size[px as usize];
+            }
+        };
+        for e in &edges{
+            unite(e[0],e[1],&mut parent,&mut size);
+        }
+        let mut s=std::collections::HashSet::new();
+        let mut ans=Vec::new();
+        for i in 0..n{
+            let p=find(i ,&mut parent);
+            if !s.contains(&p){
+                ans.push(size[p as usize] as i64);
+            }
+            s.insert(p);
+        }
+        ans.into_iter().map(|x|x*(n as i64-x)).sum::<i64>()/2
+    }
+}

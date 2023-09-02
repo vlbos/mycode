@@ -95,3 +95,72 @@ impl Solution {
     }
 }
 // @lc code=end
+
+
+impl Solution {
+    pub fn rectangle_area(rectangles: Vec<Vec<i32>>) -> i32 {
+        let mut hbound:Vec<i32>=rectangles.iter().map(|x| vec![x[1],x[3]]).flatten().collect();
+        hbound.sort();
+        hbound.dedup();
+        let m=hbound.len();
+        let mut tree=vec![vec![0;3];m*4+1];
+        init(1,1,m as i32-1,&mut tree,&hbound);
+        fn init(idx:i32,l:i32,r:i32,tree:&mut Vec<Vec<i32>>,hbound:&Vec<i32>){
+            tree[idx as usize][..2].fill(0);
+            if l==r{
+                tree[idx as usize][2]=hbound[l as usize]-hbound[l as usize-1];
+                return
+            }
+            let mid=(l+r)/2;
+            init(idx*2,l,mid,tree,hbound);
+            init(idx*2+1,mid+1,r,tree,hbound);
+            tree[idx as usize][2]=tree[idx as usize*2][2]+tree[idx as usize*2+1][2];
+        }
+         fn update(idx:i32,l:i32,r:i32,ul:i32,ur:i32,d:i32,tree:&mut Vec<Vec<i32>>,hbound:&Vec<i32>){
+            if l>ur|| ul>r{
+                return
+            }
+             if l>=ul&&  ur>=r{
+                tree[idx as usize][0]+=d;
+                pushup(idx,l,r,tree);
+                return
+            }
+            let mid=(l+r)/2;
+            update(idx*2,l,mid,ul,ur,d,tree,hbound);
+            update(idx*2+1,mid+1,r,ul,ur,d,tree,hbound);
+            pushup(idx,l,r,tree);
+        }
+        fn pushup(idx:i32,l:i32,r:i32,tree:&mut Vec<Vec<i32>>){
+            tree[idx as usize][1]=if  tree[idx as usize][0]>0{
+                tree[idx as usize][2]
+            }else if l==r{
+                    0
+            }else{
+                 tree[idx as usize*2][1]+ tree[idx as usize*2+1][1]
+            }
+           ;
+        }
+        let mut sweep:Vec<Vec<i32>>=rectangles.iter().enumerate().map(|(i,x)| vec![vec![x[0],i as i32,1],vec![x[2],i as i32,-1]]).flatten().collect();
+        sweep.sort();
+        let mut ans=0;
+        let sn=sweep.len();
+        let mut i=0;
+        while i<sn{
+            let mut j=i;
+            while j+1<sn && sweep[i][0]==sweep[j+1][0]{
+                j+=1;
+            }
+            if j+1==sn{
+                break
+            }
+            for k in i..=j{
+                let (idx,diff)=(sweep[k][1],sweep[k][2]);
+                let (left,right)=(hbound.partition_point(|&x| x<rectangles[idx as usize][1]) as i32+1,hbound.partition_point(|&x| x<rectangles[idx  as usize][3]) as i32);
+                update(1,1,m as i32-1,left,right,diff,&mut tree,&hbound);
+            }
+            ans+=(tree[1][1] as i64)*(sweep[j+1][0]-sweep[j][0]) as i64;
+            i=j+1;
+        }
+        (ans%1_000_000_007) as _
+    }
+}

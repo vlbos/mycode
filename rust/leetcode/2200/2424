@@ -1,0 +1,184 @@
+struct LUPrefix {
+c:Vec<i32>,
+}
+
+
+/** 
+ * `&self` means the method takes an immutable reference.
+ * If you need a mutable reference, change it to `&mut self` instead.
+ */
+impl LUPrefix {
+
+    fn new(n: i32) -> Self {
+        Self{c:vec![0;n as usize+1]}
+    }
+    
+    fn upload(&mut self, video: i32) {
+        let mut i=video;
+        while i<self.c.len() as i32{
+            self.c[i as usize]+=1;
+            i+=-i&i
+        }
+    }
+    
+    fn longest(&self) -> i32 {
+        let query=|mut i:i32,c:&Vec<i32>|{
+            let mut ans=0;
+            while i>0{
+                ans+=c[i as usize];
+                i&=i-1;
+            }
+            ans
+        };
+        let (mut left,mut right)=(0,self.c.len() as i32-1);
+        let mut ans=0;
+        while left<=right{
+            let mid=(left+right)/2;
+            if query(mid,&self.c)==mid{
+                ans=mid;
+                left=mid+1;
+            }else{
+                right=mid-1;
+            }
+        }
+        ans
+    }
+}
+
+/**
+ * Your LUPrefix object will be instantiated and called as such:
+ * let obj = LUPrefix::new(n);
+ * obj.upload(video);
+ * let ret_2: i32 = obj.longest();
+ */
+
+
+
+
+struct LUPrefix {
+c:Vec<i32>,
+n:i32,
+}
+
+
+/** 
+ * `&self` means the method takes an immutable reference.
+ * If you need a mutable reference, change it to `&mut self` instead.
+ */
+impl LUPrefix {
+
+    fn new(n: i32) -> Self {
+        Self{c:vec![0;n as usize*4],n}
+    }
+    
+    fn upload(&mut self, video: i32) {
+        fn update(i:i32,l:i32,r:i32,idx:i32,val:i32,c:&mut Vec<i32>){
+            if l==r{
+                c[i as usize]+=val;
+                return
+            }
+            let mid=(l+r)/2;
+            if idx<=mid{
+                update(i*2,l,mid,idx,val,c);
+            }else{
+                update(i*2+1,mid+1,r,idx,val,c);
+            }
+            c[i as usize]=c[i as usize*2]+c[i as usize*2+1];
+
+        }
+        update(1,1,self.n,video,1,&mut self.c);
+    }
+    
+    fn longest(&self) -> i32 {
+        fn query(i:i32,l:i32,r:i32,ll:i32,rr:i32,c:&Vec<i32>)->i32{
+            if ll<=l && r<=rr{
+                return c[i as usize]
+            }
+            let mid=(l+r)/2;
+            let mut ans=0;
+            if ll<=mid{
+                ans+=query(i*2,l,mid,ll,rr,c);
+            }
+            if mid<rr{
+                ans+=query(i*2+1,mid+1,r,ll,rr,c);
+            }
+            ans
+        };
+        let (mut left,mut right)=(0,self.n);
+        while left<right{
+            let mid=(left+right+1)/2;
+            if mid==0 || query(1,1,self.n,1,mid,&self.c)==mid{
+                left=mid;
+            }else{
+                right=mid-1;
+            }
+        }
+        left
+    }
+}
+
+/**
+ * Your LUPrefix object will be instantiated and called as such:
+ * let obj = LUPrefix::new(n);
+ * obj.upload(video);
+ * let ret_2: i32 = obj.longest();
+ */
+
+
+
+struct LUPrefix {
+parent:Vec<i32>,
+sz:Vec<i32>,
+videos:Vec<bool>,
+}
+
+     fn find(x:i32,parent:&mut Vec<i32>)->i32{
+            let px=parent[x as usize];
+            if px!=x{
+                parent[x as usize]=find(px,parent);
+            }
+            parent[x as usize]
+        }
+/** 
+ * `&self` means the method takes an immutable reference.
+ * If you need a mutable reference, change it to `&mut self` instead.
+ */
+impl LUPrefix {
+
+    fn new(n: i32) -> Self {
+        Self{videos:vec![false;n as usize],sz:vec![1;n as usize],parent:(0..n).collect()}
+    }
+    
+    fn upload(&mut self, video: i32) {
+        let i=video as usize-1;
+        self.videos[i]=true;
+   
+        let unite=|x:i32,y:i32,parent:&mut Vec<i32>,sz:&mut Vec<i32>|{
+            let (px,py)=(find(x,parent),find(y,parent));
+            if px!=py{
+                parent[px as usize]=py;
+                sz[py as usize]+=sz[px as usize];
+            }
+
+        };
+        if i>0 && self.videos[i-1]{
+            unite(i as i32,i as i32-1,&mut self.parent,&mut self.sz);
+        }
+        if i+1<self.parent.len() && self.videos[i+1]{
+            unite(i as i32+1,i as i32,&mut self.parent,&mut self.sz);
+        }
+    }
+    
+    fn longest(&mut self) -> i32 {
+        if self.videos[0]{
+            self.sz[find(0,&mut self.parent) as usize]
+        }else{0}
+    }
+}
+
+/**
+ * Your LUPrefix object will be instantiated and called as such:
+ * let obj = LUPrefix::new(n);
+ * obj.upload(video);
+ * let ret_2: i32 = obj.longest();
+ */

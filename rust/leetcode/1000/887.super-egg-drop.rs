@@ -44,3 +44,23 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn super_egg_drop(k: i32, n: i32) -> i32 {
+        let n=n as usize;
+        let mut dp:Vec<usize>=(0..=n).collect();
+        for _ in 2..k+1{
+            let mut dp2=vec![0;n+1];
+            let mut x=1;
+            for m in 1..=n{
+                while x<m && dp[x-1].max(dp2[m-x])>=dp[x].max(dp2[m-x-1]){
+                    x+=1;
+                }
+                dp2[m]=dp[x-1].max(dp2[m-x])+1;
+            }
+            dp=dp2;
+        }
+        
+        dp[n] as _
+
+    }
+}

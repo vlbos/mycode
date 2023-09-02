@@ -131,3 +131,32 @@ mod test {
         );
     }
 }
+#[allow(dead_code)]
+pub struct Solution2;
+impl Solution2 {
+    pub fn smallest_equivalent_string(s1: String, s2: String, base_str: String) -> String {
+        let mut parent: Vec<u8> = (0..26).collect();
+        fn find(x: u8, parent: &mut Vec<u8>) -> u8 {
+            let px = parent[x as usize];
+            if px != x {
+                parent[x as usize] = find(px, parent);
+            }
+            parent[x as usize]
+        }
+        let unite = |x: u8, y: u8, parent: &mut Vec<u8>| {
+            let (px, py) = (find(x, parent), find(y, parent));
+            if px != py {
+                let (px, py) = if px < py { (py, px) } else { (px, py) };
+                parent[px as usize] = py;
+            }
+        };
+        for (b1, b2) in s1.bytes().zip(s2.bytes()) {
+            unite(b1 - b'a', b2 - b'a', &mut parent);
+        }
+
+        base_str
+            .bytes()
+            .map(|b| (find(b - b'a', &mut parent) + b'a') as char)
+            .collect()
+    }
+}

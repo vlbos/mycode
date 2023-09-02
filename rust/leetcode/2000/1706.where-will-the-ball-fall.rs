@@ -27,3 +27,26 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn find_ball(grid: Vec<Vec<i32>>) -> Vec<i32> {
+        let (m,n)=(grid.len(),grid[0].len());
+        let mut dp:Vec<i32>=(0..n as i32).collect();
+        for i in 0..m{
+            for j in 0..n{
+                let tmp=dp[j];
+                if tmp==-1{
+                    continue
+                }
+                let k=tmp as usize;
+                if k<n-1 && grid[i][k]==1 && grid[i][k+1]==1{
+                    dp[j]+=1;
+                }else if k>0  && grid[i][k]==-1 && grid[i][k-1]==-1{
+                    dp[j]-=1;
+                }else{
+                    dp[j]=-1;
+                }
+            }
+        }
+        dp
+    }
+}

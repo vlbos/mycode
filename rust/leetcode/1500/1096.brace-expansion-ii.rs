@@ -40,3 +40,25 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn brace_expansion_ii(expression: String) -> Vec<String> {
+        use std::collections::HashSet;
+        fn dfs(expression: String,ans:&mut HashSet<String>){
+            if let Some(j)=expression.find('}'){
+                 let i=expression[..j].rfind('{').unwrap();
+                 let (a,c)=(&expression[..i],&expression[j+1..]);
+                 for b in expression[i+1..j].split(','){
+                     dfs(a.to_string()+b+c,ans);
+                 }
+            }else{
+                ans.insert(expression);
+            }
+
+        }
+        let mut ans=HashSet::new();
+        dfs(expression,&mut ans);
+        let mut ans:Vec<String>=ans.into_iter().collect();
+        ans.sort();
+        ans
+    }
+}

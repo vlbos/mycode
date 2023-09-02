@@ -33,3 +33,38 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn maximum_good(statements: Vec<Vec<i32>>) -> i32 {
+        use std::collections::HashSet;
+        fn back_tracking(idx:usize,statements: &Vec<Vec<i32>>,good:HashSet<usize>,mut bad:HashSet<usize>,ans:&mut i32){
+            if idx==statements.len(){
+                *ans=(*ans).max(good.len() as i32);
+                return
+            }
+            for i in idx..statements.len(){
+                if bad.contains(&i){
+                    continue
+                }
+                let mut new_good:HashSet<usize>=statements[i].iter().enumerate().filter_map(|(k,&x)| if x==1{Some(k)}else{None}).collect();
+                new_good.insert(i);
+                let mut new_bad:HashSet<usize>=statements[i].iter().enumerate().filter_map(|(k,&x)| if x==0{Some(k)}else{None}).collect();
+                new_good=new_good.difference(&good).cloned().collect();
+                new_bad=new_bad.difference(&bad).cloned().collect();
+                let all_good:HashSet<_>=new_good.union(&good).cloned().collect();
+                let all_bad:HashSet<_>=new_bad.union(&bad).cloned().collect();
+                if all_good.intersection(&all_bad).count()==0{
+                    back_tracking(idx+1,statements,all_good,all_bad,ans);
+                }
+                if !bad.contains(&i){
+                    bad.insert(i);
+                }
+            }
+                if good.intersection(&bad).count()==0{
+                   *ans=(*ans).max(good.len() as i32);
+                }
+        }
+        let mut ans=0;
+        back_tracking(0,&statements,HashSet::new(),HashSet::new(),&mut ans);
+        ans
+    }
+}

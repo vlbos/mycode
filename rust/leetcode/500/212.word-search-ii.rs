@@ -87,3 +87,56 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn find_words(mut board: Vec<Vec<char>>, words: Vec<String>) -> Vec<String> {
+        let mut trie=Trie::new();
+        for w in &words{
+            trie.insert(w);
+        }
+        fn dfs(mut node:&Trie,i:usize,j:usize,board: &mut Vec<Vec<char>>,ans:&mut HashSet<String>){
+             let ch=board[i][j];
+            if let Some(child)=node.children.get(&ch){
+                node=child;
+            }else{
+                return
+            }
+           if !node.word.is_empty(){
+               ans.insert(node.word.clone());
+           }
+           board[i][j]='#';
+           let (m,n)=(board.len() as i32,board[0].len() as i32);
+           for d in [0,1,0,-1,0].windows(2){
+               let (ni,nj)=(i as i32+d[0],j as i32+d[1]);
+               if ni>=0 && ni<m &&  nj>=0 && nj<n{
+                   dfs(node,ni as usize,nj as usize,board,ans);
+               }
+           }
+           board[i][j]=ch;
+        }
+        let (m,n)=(board.len(),board[0].len());
+        let mut ans=HashSet::new();
+        for i in 0..m{
+            for j in 0..n{
+                dfs(&trie,i,j,&mut board,&mut ans);
+            }
+        }
+        ans.into_iter().collect()
+    }
+}
+use std::collections::{HashMap,HashSet};
+struct Trie{
+    children:HashMap<char,Trie>,
+    word:String,
+}
+impl Trie{
+    fn new()->Self{
+        Self{children:HashMap::new(),word:String::new()}
+    }
+    fn insert(&mut self,word:&String){
+        let mut node=self;
+        for c in word.chars(){
+            node=node.children.entry(c).or_insert(Trie::new());
+        }
+        node.word=word.clone();
+    }
+}

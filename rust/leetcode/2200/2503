@@ -1,0 +1,50 @@
+impl Solution {
+    pub fn max_points(mut grid: Vec<Vec<i32>>, mut queries: Vec<i32>) -> Vec<i32> {
+        let (m,n)=(grid.len(),grid[0].len());
+        let mn=m*n;
+        let mut parent:Vec<usize>=(0..mn).collect();
+        let mut size=vec![1;mn];
+        fn find(x:usize,parent:&mut Vec<usize>)->usize{
+            let px=parent[x];
+            if px!=x{
+                parent[x]=find(px,parent);
+            }
+            parent[x]
+        }
+        let unite=|x:usize,y:usize,parent:&mut Vec<usize>,size:&mut Vec<i32>|{
+            let (px,py)=(find(x,parent),find(y,parent));
+            if px!=py{
+                parent[px]=py;
+                size[py]+=size[px];
+            }
+        };
+        let mut q=Vec::new();
+        for (i,row) in grid.iter().enumerate(){
+            for (j,&v) in row.iter().enumerate(){
+                q.push((v,i,j));
+            }
+        }
+        q.sort();
+        let mut queries:Vec<(usize,i32)>=queries.into_iter().enumerate().collect();
+        queries.sort_by_key(|x|x.1);
+        let mut ans=vec![0;queries.len()];
+        let mut j=0;
+        for &(i,v) in &queries{
+           while  j<mn && q[j].0<v{
+               let (_,x,y)=q[j];
+               for d in [0,1,0,-1,0].windows(2){
+                   let (nx,ny)=(x as i32+d[0],y as i32+d[1]);
+                   if nx>=0 && nx<m as i32&& ny>=0 && ny<n  as i32 && grid[nx as usize][ny as usize]<v{
+                       unite(x*n+y,nx as usize*n+ny as usize,&mut parent,&mut size);
+                   }
+               }
+               j+=1;
+           }
+           if grid[0][0]<v{
+                ans[i]=size[find(0,&mut parent)];
+           }
+        }
+        ans
+
+    }
+}

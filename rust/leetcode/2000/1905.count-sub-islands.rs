@@ -53,3 +53,53 @@ impl Solution {
     }
 }
 // @lc code=end
+impl Solution {
+    pub fn count_sub_islands(grid1: Vec<Vec<i32>>, grid2: Vec<Vec<i32>>) -> i32 {
+        let (m,n)=(grid1.len(),grid1[0].len());
+        let mut parent:Vec<usize>=(0..m*n).collect();
+        fn find(x:usize,parent:&mut Vec<usize>)->usize{
+            let px=parent[x];
+            if px!=x{
+                parent[x]=find(px,parent);
+            }
+            parent[x]
+        }
+        let unite=|x:usize,y:usize,parent:&mut Vec<usize>|{
+            let (px,py)=(find(x,parent),find(y,parent));
+            if px!=py{
+                parent[px]=py;
+            }
+        };
+        for (i,row) in grid2.iter().enumerate(){
+            for (j,&v) in row.iter().enumerate(){
+                if v==0{
+                    continue
+                }
+                if i>0 && grid2[i-1][j]==1{
+                    unite(i*n+j,(i-1)*n+j,&mut parent);
+                }
+                if j>0 && grid2[i][j-1]==1{
+                    unite(i*n+j,i*n+j-1,&mut parent);
+                }
+            }
+        }
+        let mut candidate=std::collections::HashMap::new();
+        for (i,row) in grid2.iter().enumerate(){
+            for (j,&v) in row.iter().enumerate(){
+                if v==0{
+                    continue
+                }
+                let c=find(i*n+j,&mut parent);
+                if !*candidate.get(&c).unwrap_or(&true){
+                    continue
+                }
+                if  grid1[i][j]==0{
+                    candidate.insert(c,false);
+                    continue
+                }
+                candidate.entry(c).or_insert(true);
+            }
+        }
+        candidate.values().filter(|&x|*x).count() as _
+    }
+}
