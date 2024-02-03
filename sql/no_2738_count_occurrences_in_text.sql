@@ -49,8 +49,8 @@ Output:
 | bear | 2     | 
 +------+-------+
 Explanation: 
-- The word &quot;bull&quot; appears 1 time in &quot;draft1.txt&quot;, 1 time in &quot;draft2.txt&quot;, and 1 time in &quot;draft3.txt&quot;. Therefore, the total number of occurrences for the word &quot;bull&quot; is 3.
-- The word &quot;bear&quot; appears 1 time in &quot;draft2.txt&quot;, and 1 time in &quot;draft3.txt&quot;. Therefore, the total number of occurrences for the word &quot;bear&quot; is 2.
+- The word "bull" appears 1 time in "draft1.txt", 1 time in "draft2.txt", and 1 time in "draft3.txt". Therefore, the total number of occurrences for the word "bull" is 3.
+- The word "bear" appears 1 time in "draft2.txt", and 1 time in "draft3.txt". Therefore, the total number of occurrences for the word "bear" is 2.
 
 
 

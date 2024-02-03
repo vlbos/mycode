@@ -110,9 +110,7 @@ impl Solution {
                         continue;
                     }
                     let (x, y) = (x as usize, y as usize);
-                    if !vis[x][y]
-                        && (land[x][y].as_str() == "." || land[x][y].as_str() == "S")
-                    {
+                    if !vis[x][y] && (land[x][y].as_str() == "." || land[x][y].as_str() == "S") {
                         vis[x][y] = true;
                         q.push_back((x, y));
                     }

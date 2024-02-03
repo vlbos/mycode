@@ -48,7 +48,7 @@ Output:
 | Sia        | 1           | 
 +------------+-------------+ 
 
-Explanation: The count of occurrences is listed in descending order under the column name &quot;occurrences&quot;. If the number of occurrences is the same, the artist&#39;s names are sorted in ascending order.
+Explanation: The count of occurrences is listed in descending order under the column name "occurrences". If the number of occurrences is the same, the artist&#39;s names are sorted in ascending order.
 
 
 ## Solutions

@@ -1,23 +1,19 @@
 // # [2832. Maximal Range That Each Element Is Maximum in It](https://leetcode.com/problems/maximal-range-that-each-element-is-maximum-in-it)
 
-
 // ## Description
 
 // You are given a 0-indexed array nums of distinct integers.
 
 // Let us define a 0-indexed array ans of the same length as nums in the following way:
 
-
 // 	ans[i] is the maximum length of a subarray nums[l..r], such that the maximum element in that subarray is equal to nums[i].
-
 
 // Return the array ans.
 
 // Note that a subarray is a contiguous part of the array.
 
-//  
+//
 // ### Example 1:
-
 
 // Input: nums = [1,5,4,3,6]
 // Output: [1,4,2,1,5]
@@ -27,23 +23,18 @@
 // For nums[3] the longest subarray in which 3 is the maximum is nums[3..3] so ans[3] = 1.
 // For nums[4] the longest subarray in which 6 is the maximum is nums[0..4] so ans[4] = 5.
 
-
 // ### Example 2:
-
 
 // Input: nums = [1,2,3,4,5]
 // Output: [1,2,3,4,5]
 // Explanation: For nums[i] the longest subarray in which it's the maximum is nums[0..i] so ans[i] = i + 1.
 
-
-//  
+//
 // Constraints:
-
 
 // 	1 <= nums.length <= 105
 // 	1 <= nums[i] <= 105
 // 	All elements in nums are distinct.
-
 
 // ## Solutions
 
@@ -54,16 +45,37 @@
 // public:
 //     vector<int> maximum_length_of_ranges(vector<int>& nums) {
 
-
 #[allow(dead_code)]
 pub struct Solution {}
 
 impl Solution {
     pub fn maximum_length_of_ranges(nums: Vec<i32>) -> Vec<i32> {
-        let mut max = 0;
-        let mut ans = Vec::new();
-       
-        ans
+        let n = nums.len();
+        let (mut left, mut right) = (vec![-1; n], vec![n; n]);
+        let mut st = vec![];
+        for (i, &x) in nums.iter().enumerate() {
+            while !st.is_empty() && nums[st[st.len() - 1]] <= x {
+                st.pop();
+            }
+            if !st.is_empty() {
+                left[i] = st[st.len() - 1] as i32;
+            }
+            st.push(i);
+        }
+        st = vec![];
+        for (i, &x) in nums.iter().enumerate().rev() {
+            while !st.is_empty() && nums[st[st.len() - 1]] <= x {
+                st.pop();
+            }
+            if !st.is_empty() {
+                right[i] = st[st.len() - 1];
+            }
+            st.push(i);
+        }
+        left.into_iter()
+            .zip(right)
+            .map(|(l, r)| r as i32 - l - 1)
+            .collect()
     }
 }
 
@@ -73,13 +85,16 @@ mod test {
 
     #[test]
     pub fn test_maximum_length_of_ranges_1() {
-        assert_eq!(vec![1,4,2,1,5], Solution::maximum_length_of_ranges(vec![1,5,4,3,6]));
+        assert_eq!(
+            vec![1, 4, 2, 1, 5],
+            Solution::maximum_length_of_ranges(vec![1, 5, 4, 3, 6])
+        );
     }
     #[test]
     pub fn test_maximum_length_of_ranges_2() {
         assert_eq!(
-            vec![1,2,3,4,5],
-            Solution::maximum_length_of_ranges(vec![1,2,3,4,5])
+            vec![1, 2, 3, 4, 5],
+            Solution::maximum_length_of_ranges(vec![1, 2, 3, 4, 5])
         );
     }
 }

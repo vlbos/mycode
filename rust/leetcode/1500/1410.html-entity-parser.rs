@@ -8,7 +8,7 @@
 impl Solution {
     pub fn entity_parser(text: String) -> String {
         let mut text = text;
-        let ra = vec![vec!["&quot;","\""],vec!["&apos;","'"],vec!["&gt;",">"],vec!["&lt;","<"],vec!["&frasl;","/"],vec!["&amp;","&"]];
+        let ra = vec![vec!["&quot;","\""],vec!["&apos;","'"],vec!["&gt;",">"],vec![" <","<"],vec!["&frasl;","/"],vec!["&amp;","&"]];
         for r in &ra{
             text =text.replace(r[0],r[1]);
         }

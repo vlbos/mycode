@@ -51,7 +51,7 @@ Output:
 +---------+
 Explanation: 
 - User with user_id 5 has only one transaction, so he is not an active user.
-- User with user_id 6 has two transaction his first transaction was on 2021-09-10 and second transation was on 2021-09-14. The distance between the first and second transactions date is &lt;= 7 days. So he is an active user. 
+- User with user_id 6 has two transaction his first transaction was on 2021-09-10 and second transation was on 2021-09-14. The distance between the first and second transactions date is  <= 7 days. So he is an active user. 
 - User with user_id 8 has only one transaction, so he is not an active user.  
 - User with user_id 4 has two transaction his first transaction was on 2021-09-02 and second transation was on 2021-09-13. The distance between the first and second transactions date is > 7 days. So he is not an active user. 
 

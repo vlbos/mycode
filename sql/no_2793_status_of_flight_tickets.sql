@@ -40,8 +40,8 @@ Each row of this table contains passenger id, booking time, and their flight id.
 
 <p>The query result format is in the following example.</p>
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+<p> </p>
+<p>Example 1:</strong></p>
 
 <pre>
 <strong>Input:</strong> 

@@ -17,7 +17,7 @@
 Each row of this table contains name of the voter and their candidate. 
 </pre>
 
-<p>The election is conducted in a city where everyone can vote for <strong>one or more</strong> candidates or choose <strong>not</strong> to vote. Each person has <code>1</code><strong> vote</strong> so if they vote for multiple candidates, their vote gets equally split across them. For example, if a person votes for <code>2</code> candidates, these candidates receive an equivalent of <code>0.5</code>&nbsp;votes each.</p>
+<p>The election is conducted in a city where everyone can vote for <strong>one or more</strong> candidates or choose <strong>not</strong> to vote. Each person has <code>1</code><strong> vote</strong> so if they vote for multiple candidates, their vote gets equally split across them. For example, if a person votes for <code>2</code> candidates, these candidates receive an equivalent of <code>0.5</code> votes each.</p>
 
 <p>Write an SQL query to find <code>candidate</code> who got the most votes and won the election. Output the name of the <strong>candidate</strong> or If multiple candidates have an <strong>equal number</strong> of votes, display the names of all of them.</p>
 
@@ -25,8 +25,8 @@ Each row of this table contains name of the voter and their candidate.
 
 <p>The query result format is in the following example.</p>
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+<p> </p>
+<p>Example 1:</strong></p>
 
 <pre>
 <strong>Input:</strong> 
