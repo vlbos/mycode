@@ -19,7 +19,7 @@ There is no primary key in this table. The table may contain duplicate records.
 Each row includes the user ID, the purchased item, the date of purchase, and the purchase amount.
 
 
-Write an SQL query that&#39;ll identify active users. An active user is a user that has made a second purchase within 7 days of any other of their purchases.
+Write an SQL query that 'll identify active users. An active user is a user that has made a second purchase within 7 days of any other of their purchases.
 
 For example, if the ending date is May 31, 2023. So any date between May 31, 2023, and June 7, 2023 (inclusive) would be considered  "within 7 days " of May 31, 2023.
 

@@ -11,9 +11,9 @@
 // 	int at(long long index): Returns the value of nums[i].
 // 	void size(): Returns nums.length.
 
-// Let&#39;s partition the array into maximal blocks such that each block contains equal values. Return the number of these blocks.
+// Let 's partition the array into maximal blocks such that each block contains equal values. Return the number of these blocks.
 
-// Note that if you want to test your solution using a custom test, behavior for tests with nums.length &gt; 10 is undefined.
+// Note that if you want to test your solution using a custom test, behavior for tests with nums.length > 10 is undefined.
 
 //
 // Example 1:

@@ -18,7 +18,7 @@ Table: Activities
 | time_spent    | decimal |
 +---------------+---------+
 activity_id is column of unique values for this table.
-activity_type is an ENUM (category) type of (&#39;send&#39;, &#39;open&#39;). 
+activity_type is an ENUM (category) type of ( 'send ',  'open '). 
 This table contains activity id, user id, activity type and time spent.
 
 
@@ -32,7 +32,7 @@ Table: Age
 | age_bucket  | enum |
 +-------------+------+
 user_id is the column of unique values for this table.
-age_bucket is an ENUM (category) type of (&#39;21-25&#39;, &#39;26-30&#39;, &#39;31-35&#39;). 
+age_bucket is an ENUM (category) type of ( '21-25 ',  '26-30 ',  '31-35 '). 
 This table contains user id and age group.
 
 Write a solution to calculate the percentage of the total time spent on sending and opening snaps for each age group. Precentage should be rounded to 2 decimal places.
@@ -41,7 +41,7 @@ Return the result table in any order.
 
 The result format is in the following example.
 
-&nbsp;
+ 
 Example 1:
 
 

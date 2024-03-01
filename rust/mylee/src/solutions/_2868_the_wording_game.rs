@@ -7,8 +7,8 @@
 // They are playing a wording game with the following rules:
 
 //
-// 	On each turn, the current player should play a word from their list such that the new word is closely greater than the last played word; then it&#39;s the other player&#39;s turn.
-// 	If a player can&#39;t play a word on their turn, they lose.
+// 	On each turn, the current player should play a word from their list such that the new word is closely greater than the last played word; then it 's the other player 's turn.
+// 	If a player can 't play a word on their turn, they lose.
 //
 
 // Alice starts the game by playing her lexicographically smallest word.
@@ -31,8 +31,8 @@
 //
 // Input: a = ["avokado","dabar"], b = ["brazil"]
 // Output: false
-// Explanation: Alice must start the game by playing the word "avokado" since it&#39;s her smallest word, then Bob plays his only word, "brazil", which he can play because its first letter, &#39;b&#39;, is the letter after Alice&#39;s word&#39;s first letter, &#39;a&#39;.
-// Alice can&#39;t play a word since the first letter of the only word left is not equal to &#39;b&#39; or the letter after &#39;b&#39;, &#39;c&#39;.
+// Explanation: Alice must start the game by playing the word "avokado" since it 's her smallest word, then Bob plays his only word, "brazil", which he can play because its first letter,  'b ', is the letter after Alice 's word 's first letter,  'a '.
+// Alice can 't play a word since the first letter of the only word left is not equal to  'b ' or the letter after  'b ',  'c '.
 // So, Alice loses, and the game ends.
 
 // Example 2:
@@ -41,7 +41,7 @@
 // Input: a = ["ananas","atlas","banana"], b = ["albatros","cikla","nogomet"]
 // Output: true
 // Explanation: Alice must start the game by playing the word "ananas".
-// Bob can&#39;t play a word since the only word he has that starts with the letter &#39;a&#39; or &#39;b&#39; is "albatros", which is smaller than Alice&#39;s word.
+// Bob can 't play a word since the only word he has that starts with the letter  'a ' or  'b ' is "albatros", which is smaller than Alice 's word.
 // So Alice wins, and the game ends.
 
 // Example 3:
@@ -50,7 +50,7 @@
 // Input: a = ["hrvatska","zastava"], b = ["bijeli","galeb"]
 // Output: true
 // Explanation: Alice must start the game by playing the word "hrvatska".
-// Bob can&#39;t play a word since the first letter of both of his words are smaller than the first letter of Alice&#39;s word, &#39;h&#39;.
+// Bob can 't play a word since the first letter of both of his words are smaller than the first letter of Alice 's word,  'h '.
 // So Alice wins, and the game ends.
 //
 

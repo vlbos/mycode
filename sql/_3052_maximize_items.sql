@@ -36,7 +36,7 @@ Return the result table ordered by item count in ascending order.
 
 The result format is in the following example.
 
-&nbsp;
+ 
 Example 1:
 
 

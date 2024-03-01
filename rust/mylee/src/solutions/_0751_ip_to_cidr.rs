@@ -2,7 +2,7 @@
 
 // ## Description
 
-// An IP address is a formatted 32-bit unsigned integer where each group of 8 bits is printed as a decimal number and the dot character &#39;.&#39; splits the groups.
+// An IP address is a formatted 32-bit unsigned integer where each group of 8 bits is printed as a decimal number and the dot character  '. ' splits the groups.
 
 // 	For example, the binary number 00001111 10001000 11111111 01101011 (spaces added for clarity) formatted as an IP address would be "15.136.255.107".
 

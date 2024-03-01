@@ -8,7 +8,7 @@
 
 // You are given a helper function bool knows(a, b) that tells you whether A knows B. Implement a function int findCelebrity(n). There will be exactly one celebrity if they are at the party.
 
-// Return the celebrity&#39;s label if there is a celebrity at the party. If there is no celebrity, return -1.
+// Return the celebrity 's label if there is a celebrity at the party. If there is no celebrity, return -1.
 
 // Example 1:
 // <img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0200-0299/0277.Find%20the%20Celebrity/images/g1.jpg" style="width: 224px; height: 145px;" />

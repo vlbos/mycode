@@ -13,7 +13,7 @@
 // Notes
 
 //
-// 	The health of a hero doesn&#39;t get reduced after defeating a monster.
+// 	The health of a hero doesn 't get reduced after defeating a monster.
 // 	Multiple heroes can defeat a monster, but each monster can be defeated by a given hero only once.
 //
 

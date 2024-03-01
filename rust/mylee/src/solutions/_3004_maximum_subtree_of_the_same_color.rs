@@ -17,7 +17,7 @@
 
 // Input: edges = [[0,1],[0,2],[0,3]], colors = [1,1,2,3]
 // Output: 1
-// Explanation: Each color is represented as: 1 -&gt; Red, 2 -&gt; Green, 3 -&gt; Blue. We can see that the subtree rooted at node 0 has children with different colors. Any other subtree is of the same color and has a size of 1. Hence, we return 1.
+// Explanation: Each color is represented as: 1 -> Red, 2 -> Green, 3 -> Blue. We can see that the subtree rooted at node 0 has children with different colors. Any other subtree is of the same color and has a size of 1. Hence, we return 1.
 
 // Example 2:
 
@@ -31,7 +31,7 @@
 
 // Input: edges = [[0,1],[0,2],[2,3],[2,4]], colors = [1,2,3,3,3]
 // Output: 3
-// Explanation: Each color is represented as: 1 -&gt; Red, 2 -&gt; Green, 3 -&gt; Blue. We can see that the subtree rooted at node 0 has children with different colors. Any other subtree is of the same color, but the subtree rooted at node 2 has a size of 3 which is the maximum. Hence, we return 3.
+// Explanation: Each color is represented as: 1 -> Red, 2 -> Green, 3 -> Blue. We can see that the subtree rooted at node 0 has children with different colors. Any other subtree is of the same color, but the subtree rooted at node 2 has a size of 3 which is the maximum. Hence, we return 3.
 
 //
 // Constraints:

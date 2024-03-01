@@ -53,8 +53,8 @@ Sessions table:
 <strong>Explanation</strong>
 - user_id 101, initiated their initial session as a viewer on 2023-11-06 at 13:53:42, followed by two subsequent sessions as a Streamer, the count will be 2.
 - user_id 102, although there are two sessions, the initial session was as a Streamer, so this user will be excluded.
-- user_id 103 participated in only one session, which was as a Streamer, hence, it won&#39;t be considered.
-- User_id 104 commenced their first session as a viewer but didn&#39;t have any subsequent sessions, therefore, they won&#39;t be included in the final count. 
+- user_id 103 participated in only one session, which was as a Streamer, hence, it won 't be considered.
+- User_id 104 commenced their first session as a viewer but didn 't have any subsequent sessions, therefore, they won 't be included in the final count. 
 Output table is ordered by sessions count and user_id in descending order.
 </pre>
 

@@ -23,13 +23,13 @@ session_type is an ENUM (category) type of (Viewer, Streamer).
 This table contains user id, session start, session end, session id and session type.
 
 
-Write a solution to find the the users who have had at least one consecutive session of the same type (either &#39;Viewer&#39; or &#39;Streamer&#39;) with a maximum gap of 12 hours between sessions.
+Write a solution to find the the users who have had at least one consecutive session of the same type (either  'Viewer ' or  'Streamer ') with a maximum gap of 12 hours between sessions.
 
 Return the result table ordered by user_id in ascending order.
 
 The result format is in the following example.
 
-&nbsp;
+ 
 Example:
 
 

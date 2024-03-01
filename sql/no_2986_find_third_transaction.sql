@@ -51,8 +51,8 @@ Transactions table:
 +---------+-------------------------+------------------------+
 <strong>Explanation</strong>
 - For user_id 1, their third transaction occurred on 2023-11-18 at 13:49:42 with an amount of $65.56, surpassing the expenditures of the previous two transactions which were $7.44 on 2023-11-02 at 12:15:23 and $49.78 on 2023-11-12 at 00:13:46. Thus, this third transaction will be included in the output table.
-- user_id 2 only has a total of 2 transactions, so there isn&#39;t a third transaction to consider.
-- For user_id 3, the amount of $7.0 for their third transaction is less than that of the preceding two transactions, so it won&#39;t be included.
+- user_id 2 only has a total of 2 transactions, so there isn 't a third transaction to consider.
+- For user_id 3, the amount of $7.0 for their third transaction is less than that of the preceding two transactions, so it won 't be included.
 Output table is ordered by user_id in ascending order.
 
 </pre>

@@ -12,7 +12,7 @@
 
 // If we pick items with indices i, j and k satisfying the above condition, the profit would be profits[i] + profits[j] + profits[k].
 
-// Return the maximum profit we can get, and -1 if it&#39;s not possible to pick three items with the given condition.
+// Return the maximum profit we can get, and -1 if it 's not possible to pick three items with the given condition.
 
 //
 // Example 1:
@@ -20,8 +20,8 @@
 //
 // Input: prices = [10,2,3,4], profits = [100,2,7,10]
 // Output: 19
-// Explanation: We can&#39;t pick the item with index i=0 since there are no indices j and k such that the condition holds.
-// So the only triplet we can pick, are the items with indices 1, 2 and 3 and it&#39;s a valid pick since prices[1]  < prices[2]  < prices[3].
+// Explanation: We can 't pick the item with index i=0 since there are no indices j and k such that the condition holds.
+// So the only triplet we can pick, are the items with indices 1, 2 and 3 and it 's a valid pick since prices[1]  < prices[2]  < prices[3].
 // The answer would be sum of their profits which is 2 + 7 + 10 = 19.
 
 // Example 2:
@@ -38,7 +38,7 @@
 //
 // Input: prices = [4,3,2,1], profits = [33,20,19,87]
 // Output: -1
-// Explanation: We can&#39;t select any triplet of indices such that the condition holds, so we return -1.
+// Explanation: We can 't select any triplet of indices such that the condition holds, so we return -1.
 //
 
 //

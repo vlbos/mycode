@@ -28,7 +28,7 @@ Return the result table ordered by state in ascending order, fraud_score in desc
 
 The result format is in the following example.
 
-&nbsp;
+ 
 Example 1:
 
 

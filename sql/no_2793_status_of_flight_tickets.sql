@@ -32,7 +32,7 @@ booking_time column contains distinct values.
 Each row of this table contains passenger id, booking time, and their flight id.
 </pre>
 
-<p>Passengers book tickets for flights in advance. If a passenger books a ticket for a flight and there are still empty seats available on the flight, the passenger&#39;s ticket will be <strong>confirmed</strong>. However, the passenger will be on a <strong>waitlist</strong> if the flight is already at full capacity.</p>
+<p>Passengers book tickets for flights in advance. If a passenger books a ticket for a flight and there are still empty seats available on the flight, the passenger 's ticket will be <strong>confirmed</strong>. However, the passenger will be on a <strong>waitlist</strong> if the flight is already at full capacity.</p>
 
 <p>Write an SQL query to determine the current status of flight tickets for each passenger.</p>
 

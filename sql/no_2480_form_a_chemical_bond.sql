@@ -15,7 +15,7 @@
 -- +-------------+---------+
 -- symbol is the primary key for this table.
 -- Each row of this table contains information of one element.
--- type is an ENUM of type (&#39;Metal&#39;, &#39;Nonmetal&#39;, &#39;Noble&#39;)
+-- type is an ENUM of type ( 'Metal ',  'Nonmetal ',  'Noble ')
 --  - If type is Noble, electrons is 0.
 --  - If type is Metal, electrons is the number of electrons that one atom of this element can give.
 --  - If type is Nonmetal, electrons is the number of electrons that one atom of this element needs.
@@ -23,7 +23,7 @@
 
  
 
--- Two elements can form a bond if one of them is &#39;Metal&#39; and the other is &#39;Nonmetal&#39;.
+-- Two elements can form a bond if one of them is  'Metal ' and the other is  'Nonmetal '.
 
 -- Write an SQL query to find all the pairs of elements that can form a bond.
 

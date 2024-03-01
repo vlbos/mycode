@@ -17,23 +17,23 @@ Table: Triangles
 | C           | int  |
 +-------------+------+
 (A, B, C) is the primary key for this table.
-Each row include the lengths of each of a triangle&#39;s three sides.
+Each row include the lengths of each of a triangle 's three sides.
 
 
 Write a query to find the type of triangle. Output one of the following for each row:
 
 
-	Equilateral: It&#39;s a triangle with 3 sides of equal length.
-	Isosceles: It&#39;s a triangle with 2 sides of equal length.
-	Scalene: It&#39;s a triangle with 3 sides of differing lengths.
-	Not A Triangle: The given values of A, B, and C don&#39;t form a triangle.
+	Equilateral: It 's a triangle with 3 sides of equal length.
+	Isosceles: It 's a triangle with 2 sides of equal length.
+	Scalene: It 's a triangle with 3 sides of differing lengths.
+	Not A Triangle: The given values of A, B, and C don 't form a triangle.
 
 
 Return the result table in any order.
 
 The result format is in the following example.
 
-&nbsp;
+ 
 Example 1:
 
 

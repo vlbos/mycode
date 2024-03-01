@@ -19,7 +19,7 @@
 -- Each row contains information about food delivery to a customer that makes an order at some date and specifies a preferred delivery date (on the order date or after it).
 
 
--- If the customer&#39;s preferred delivery date is the same as the order date, then the order is called immediate, otherwise, it is scheduled.
+-- If the customer 's preferred delivery date is the same as the order date, then the order is called immediate, otherwise, it is scheduled.
 
 -- Write an SQL query to find the percentage of immediate orders on each unique order_date, rounded to 2 decimal places. 
 

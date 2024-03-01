@@ -20,7 +20,7 @@
 // Explanation: Take the subarray [7,6,5,4,3,2,1,6].
 // The first element is 7 and the last one is 6 so the condition is met.
 // Hence, the answer would be the length of the subarray or 8.
-// It can be shown that there aren&#39;t any subarrays with the given condition with a length greater than 8.
+// It can be shown that there aren 't any subarrays with the given condition with a length greater than 8.
 //
 
 // Example 2:
@@ -31,7 +31,7 @@
 // Explanation: Take the subarray [61,58,63,59,64,60].
 // The first element is 61 and the last one is 60 so the condition is met.
 // Hence, the answer would be the length of the subarray or 6.
-// It can be shown that there aren&#39;t any subarrays with the given condition with a length greater than 6.
+// It can be shown that there aren 't any subarrays with the given condition with a length greater than 6.
 //
 
 // Example 3:

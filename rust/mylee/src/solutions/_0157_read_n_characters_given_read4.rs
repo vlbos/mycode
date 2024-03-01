@@ -24,9 +24,9 @@
 // Below is a high-level example of how read4 works:
 // <img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0157.Read%20N%20Characters%20Given%20Read4/images/157_example.png" style="width: 600px; height: 403px;" />
 //
-// File file("abcde"); // File is "abcde", initially file pointer (fp) points to &#39;a&#39;
+// File file("abcde"); // File is "abcde", initially file pointer (fp) points to  'a '
 // char[] buf4 = new char[4]; // Create buffer with enough space to store characters
-// read4(buf4); // read4 returns 4. Now buf4 = "abcd", fp points to &#39;e&#39;
+// read4(buf4); // read4 returns 4. Now buf4 = "abcd", fp points to  'e '
 // read4(buf4); // read4 returns 1. Now buf4 = "e", fp points to end of file
 // read4(buf4); // read4 returns 0. Now buf4 = "", fp points to end of file
 //
@@ -60,7 +60,7 @@
 // Input: file = "abc", n = 4
 // Output: 3
 // Explanation: After calling your read method, buf should contain "abc". We read a total of 3 characters from the file, so return 3.
-// Note that "abc" is the file&#39;s content, not buf. buf is the destination buffer that you will have to write the results to.
+// Note that "abc" is the file 's content, not buf. buf is the destination buffer that you will have to write the results to.
 //
 
 // Example 2:

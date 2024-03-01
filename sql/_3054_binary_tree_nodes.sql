@@ -31,7 +31,7 @@ Return the result table ordered by node value in ascending order.
 
 The result format is in the following example.
 
-&nbsp;
+ 
 Example 1:
 
 
@@ -62,7 +62,7 @@ Output:
 +---+-------+
 Explanation: 
 - Node 5 is the root node since it has no parent node.
-- Nodes 1, 3, 6, and 8 are leaf nodes because they don&#39;t have any child nodes.
+- Nodes 1, 3, 6, and 8 are leaf nodes because they don 't have any child nodes.
 - Nodes 2, 4, and 7 are inner nodes as they serve as parents to some of the nodes in the structure.
 
 

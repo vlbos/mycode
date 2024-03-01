@@ -41,7 +41,7 @@ Return the result table ordered by employee_id, project_id in ascending order.
 
 The result format is in the following example.
 
-&nbsp;
+ 
 Example 1:
 
 
@@ -72,10 +72,10 @@ Output:
 | 4           | 2          | Doe           | 68               | 
 +-------------+------------+---------------+------------------+
 Explanation: 
-- Employee with ID 1 has a project workload of 45 and belongs to Team A, where the average workload is 56.50. Since his project workload does not exceed the team&#39;s average workload, he will be excluded.
-- Employee with ID 2 has a project workload of 90 and belongs to Team B, where the average workload is 51.00. Since his project workload does exceed the team&#39;s average workload, he will be included.
-- Employee with ID 3 has a project workload of 12 and belongs to Team B, where the average workload is 51.00. Since his project workload does not exceed the team&#39;s average workload, he will be excluded.
-- Employee with ID 4 has a project workload of 68 and belongs to Team A, where the average workload is 56.50. Since his project workload does exceed the team&#39;s average workload, he will be included.
+- Employee with ID 1 has a project workload of 45 and belongs to Team A, where the average workload is 56.50. Since his project workload does not exceed the team 's average workload, he will be excluded.
+- Employee with ID 2 has a project workload of 90 and belongs to Team B, where the average workload is 51.00. Since his project workload does exceed the team 's average workload, he will be included.
+- Employee with ID 3 has a project workload of 12 and belongs to Team B, where the average workload is 51.00. Since his project workload does not exceed the team 's average workload, he will be excluded.
+- Employee with ID 4 has a project workload of 68 and belongs to Team A, where the average workload is 56.50. Since his project workload does exceed the team 's average workload, he will be included.
 Result table orderd by employee_id, project_id in ascending order.
 
 

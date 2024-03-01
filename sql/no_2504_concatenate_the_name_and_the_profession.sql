@@ -14,13 +14,13 @@
 -- | profession  | ENUM    |
 -- +-------------+---------+
 -- person_id is the primary key for this table.
--- Each row in this table contains a person&#39;s ID, name, and profession.
--- The profession   column in an enum of the type (&#39;Doctor&#39;, &#39;Singer&#39;, &#39;Actor&#39;, &#39;Player&#39;, &#39;Engineer&#39;, or &#39;Lawyer&#39;)
+-- Each row in this table contains a person 's ID, name, and profession.
+-- The profession   column in an enum of the type ( 'Doctor ',  'Singer ',  'Actor ',  'Player ',  'Engineer ', or  'Lawyer ')
 
 
  
 
--- Write an SQL query to report each person&#39;s name followed by the first letter of their profession enclosed in parentheses.
+-- Write an SQL query to report each person 's name followed by the first letter of their profession enclosed in parentheses.
 
 -- Return the result table ordered by person_id in descending order.
 

@@ -25,14 +25,14 @@ Note:
 
 
 	Do not include the pizzas where a topping is repeated. For example, &lsquo;Pepperoni, Pepperoni, Onion Pizza&rsquo;.
-	Toppings must be listed in alphabetical order. For example, &#39;Chicken, Onions, Sausage&#39;. &#39;Onion, Sausage, Chicken&#39; is not acceptable.
+	Toppings must be listed in alphabetical order. For example,  'Chicken, Onions, Sausage '.  'Onion, Sausage, Chicken ' is not acceptable.
 
 
 Return the result table ordered by total cost in descending order and combination of toppings in ascending order.
 
 The result format is in the following example.
 
-&nbsp;
+ 
 Example 1:
 
 

@@ -19,7 +19,7 @@ id is column of unique values for this table.
 This table contains id, country, points, and winery.
 </pre>
 
-<p>Write a solution to find the <strong>top three wineries</strong> in <strong>each</strong> <strong>country</strong> based on their <strong>total points</strong>. If <strong>multiple wineries</strong> have the <strong>same</strong> total points, order them by <code>winery</code> name in <strong>ascending</strong> order. If there&#39;s <strong>no second winery</strong>, output &#39;No Second Winery,&#39; and if there&#39;s <strong>no third winery</strong>, output &#39;No Third Winery.&#39;</p>
+<p>Write a solution to find the <strong>top three wineries</strong> in <strong>each</strong> <strong>country</strong> based on their <strong>total points</strong>. If <strong>multiple wineries</strong> have the <strong>same</strong> total points, order them by <code>winery</code> name in <strong>ascending</strong> order. If there 's <strong>no second winery</strong>, output  'No Second Winery, ' and if there 's <strong>no third winery</strong>, output  'No Third Winery. '</p>
 
 <p>Return <em>the result table ordered by </em><code>country</code><em> in <strong>ascending</strong> order</em><em>.</em></p>
 
@@ -39,7 +39,7 @@ Sessions table:
 | 848 | Australia | 100    | HarmonyHill     | 
 | 222 | Hungary   | 60     | MoonlitCellars  | 
 | 116 | USA       | 47     | RoyalVines      | 
-| 124 | USA       | 45     | Eagle&#39;sNest     | 
+| 124 | USA       | 45     | Eagle 'sNest     | 
 | 648 | India     | 69     | SunsetVines     | 
 | 894 | USA       | 39     | RoyalVines      |  
 | 677 | USA       | 9      | PacificCrest    |  
@@ -51,7 +51,7 @@ Sessions table:
 | Australia | HarmonyHill (100)   | GrapesGalore (85) | WhisperingPines (84) |
 | Hungary   | MoonlitCellars (60) | No second winery  | No third winery      | 
 | India     | SunsetVines (69)    | No second winery  | No third winery      |  
-| USA       | RoyalVines (86)     | Eagle&#39;sNest (45)  | PacificCrest (9)     | 
+| USA       | RoyalVines (86)     | Eagle 'sNest (45)  | PacificCrest (9)     | 
 +-----------+---------------------+-------------------+----------------------+
 <strong>Explanation</strong>
 For Australia
@@ -64,7 +64,7 @@ For India
  - SunsetVines is the sole winery, earning 69 points, making it the top winery. There is no second or third winery.
 For the USA
  - RoyalVines Wines accumulates a total of 47 + 39 = 86 points, claiming the highest position in the USA.
- - Eagle&#39;sNest has a total of 45 points, securing the second-highest position in the USA.
+ - Eagle 'sNest has a total of 45 points, securing the second-highest position in the USA.
  - PacificCrest accumulates 9 points, ranking as the third-highest winery in the USA
 Output table is ordered by country in ascending order.
 </pre>

@@ -8,7 +8,7 @@
 
 //
 // 	You can go from cell [x1, y1] to cell [x2, y2] if either x1 == x2 or y1 == y2.
-// 	Note that you can&#39;t move to the cell you are already in e.g. x1 == x2 and y1 == y2.
+// 	Note that you can 't move to the cell you are already in e.g. x1 == x2 and y1 == y2.
 //
 
 // Return the number of ways you can reach dest from source by moving through the grid exactly k times.
@@ -22,8 +22,8 @@
 // Input: n = 3, m = 2, k = 2, source = [1,1], dest = [2,2]
 // Output: 2
 // Explanation: There are 2 possible sequences of reaching [2,2] from [1,1]:
-// - [1,1] -&gt; [1,2] -&gt; [2,2]
-// - [1,1] -&gt; [2,1] -&gt; [2,2]
+// - [1,1] -> [1,2] -> [2,2]
+// - [1,1] -> [2,1] -> [2,2]
 //
 
 // Example 2:
@@ -32,15 +32,15 @@
 // Input: n = 3, m = 4, k = 3, source = [1,2], dest = [2,3]
 // Output: 9
 // Explanation: There are 9 possible sequences of reaching [2,3] from [1,2]:
-// - [1,2] -&gt; [1,1] -&gt; [1,3] -&gt; [2,3]
-// - [1,2] -&gt; [1,1] -&gt; [2,1] -&gt; [2,3]
-// - [1,2] -&gt; [1,3] -&gt; [3,3] -&gt; [2,3]
-// - [1,2] -&gt; [1,4] -&gt; [1,3] -&gt; [2,3]
-// - [1,2] -&gt; [1,4] -&gt; [2,4] -&gt; [2,3]
-// - [1,2] -&gt; [2,2] -&gt; [2,1] -&gt; [2,3]
-// - [1,2] -&gt; [2,2] -&gt; [2,4] -&gt; [2,3]
-// - [1,2] -&gt; [3,2] -&gt; [2,2] -&gt; [2,3]
-// - [1,2] -&gt; [3,2] -&gt; [3,3] -&gt; [2,3]
+// - [1,2] -> [1,1] -> [1,3] -> [2,3]
+// - [1,2] -> [1,1] -> [2,1] -> [2,3]
+// - [1,2] -> [1,3] -> [3,3] -> [2,3]
+// - [1,2] -> [1,4] -> [1,3] -> [2,3]
+// - [1,2] -> [1,4] -> [2,4] -> [2,3]
+// - [1,2] -> [2,2] -> [2,1] -> [2,3]
+// - [1,2] -> [2,2] -> [2,4] -> [2,3]
+// - [1,2] -> [3,2] -> [2,2] -> [2,3]
+// - [1,2] -> [3,2] -> [3,3] -> [2,3]
 //
 
 //

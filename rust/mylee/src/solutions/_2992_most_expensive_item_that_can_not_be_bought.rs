@@ -2,7 +2,7 @@
 
 // ## Description
 
-// Given an integer n, return the number of permutations of the 1-indexed array nums = [1, 2, ..., n], such that it&#39;s self-divisible.
+// Given an integer n, return the number of permutations of the 1-indexed array nums = [1, 2, ..., n], such that it 's self-divisible.
 
 // A 1-indexed array a of length n is self-divisible if for every 1  <= i  <= n, <span data-keyword="gcd-function">gcd(a[i], i) == 1.
 

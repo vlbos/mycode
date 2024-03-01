@@ -25,7 +25,7 @@ Return the result table orderd by email domains in ascending order.
 
 The result format is in the following example.
 
-&nbsp;
+ 
 Example 1:
 
 
@@ -49,7 +49,7 @@ Output:
 | yahoo.com    | 1     |  
 +--------------+-------+
 Explanation: 
-- The valid domains ending with &quot;.com&quot; are only &quot;outlook.com&quot; and &quot;yahoo.com&quot;, with respective counts of 2 and 1.
+- The valid domains ending with ".com" are only "outlook.com" and "yahoo.com", with respective counts of 2 and 1.
 Output table is ordered by email_domains in ascending order.
 
 

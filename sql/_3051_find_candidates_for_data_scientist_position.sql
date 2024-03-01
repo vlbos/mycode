@@ -25,7 +25,7 @@ Return the result table ordered by candidate_id in ascending order.
 
 The result format is in the following example.
 
-&nbsp;
+ 
 Example 1:
 
 
