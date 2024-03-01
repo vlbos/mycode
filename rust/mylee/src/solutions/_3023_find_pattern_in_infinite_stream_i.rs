@@ -60,10 +60,7 @@ mod test {
     use super::*;
     #[test]
     pub fn test_find_pattern_1() {
-        assert_eq!(
-            3,
-            Solution::find_pattern(InfiniteStream, vec![0, 1])
-        );
+        assert_eq!(3, Solution::find_pattern(InfiniteStream, vec![0, 1]));
     }
     #[test]
     pub fn test_find_pattern_2() {
@@ -71,9 +68,6 @@ mod test {
     }
     #[test]
     pub fn test_find_pattern_3() {
-        assert_eq!(
-            2,
-            Solution::find_pattern(InfiniteStream, vec![1, 1, 0, 1])
-        );
+        assert_eq!(2, Solution::find_pattern(InfiniteStream, vec![1, 1, 0, 1]));
     }
 }

@@ -1,5 +1,5 @@
 use error_chain::error_chain;
-// use std::env;
+use std::env;
 use std::fs;
 use std::fs::File;
 use std::io;
@@ -17,37 +17,42 @@ error_chain! {
 
 fn main() -> Result<()> {
     println!("Welcome to leetcode-rust system.\n");
-    let lines: Vec<Vec<i32>> = io::BufReader::new(File::open("./ids.txt").unwrap())
-        .lines()
-        .map(|x| {
-            let xa = x
-                .unwrap()
-                .split(",")
-                .filter(|c| !c.is_empty())
-                .map(|b| b.parse::<i32>().unwrap())
-                .collect::<Vec<i32>>();
-            if xa.len() == 2 {
-                (xa[0]..=xa[1]).collect::<Vec<i32>>()
-            } else {
-                xa
-            }
-        })
-        .collect();
-    let ids_set: std::collections::HashSet<i32> = lines.into_iter().flatten().collect();
-    println!("{:?}", ids_set.len());
-    for entry in glob("/Users/lisheng/Downloads/myleetcode/leetcode-repo-master/src-all/Rust/*.rs")?
-    {
+    // let lines: Vec<Vec<i32>> = io::BufReader::new(File::open("./ids.txt").unwrap())
+    //     .lines()
+    //     .map(|x| {
+    //         let xa = x
+    //             .unwrap()
+    //             .split(",")
+    //             .filter(|c| !c.is_empty())
+    //             .map(|b| b.parse::<i32>().unwrap())
+    //             .collect::<Vec<i32>>();
+    //         if xa.len() == 2 {
+    //             (xa[0]..=xa[1]).collect::<Vec<i32>>()
+    //         } else {
+    //             xa
+    //         }
+    //     })
+    //     .collect();
+    // let ids_set: std::collections::HashSet<i32> = lines.into_iter().flatten().collect();
+    // println!("{:?}", ids_set.len());
+    let path = env::current_dir().unwrap();
+    println!("The current directory is {}", path.display());
+    for entry in glob(&(path.to_str().unwrap().to_owned() + "/solutions/*.rs"))? {
         let filenamepath = format!("{}", entry?.display());
         let j = filenamepath.rfind("/").unwrap_or(0);
         let mut filename = filenamepath[j + 1..].to_string();
-        let id = filename[1..5].to_string();
-        if !ids_set.contains(&id.parse::<i32>().unwrap()) {
+        if &filename == "mod.rs" {
             continue;
         }
-        filename = filename.replace("-", "_");
+        // let end = filename[3..].find('_').unwrap() + 3;
+        // let id: i32 = filename[3..end].to_string().parse().unwrap();
+        // if !ids_set.contains(&id.parse::<i32>().unwrap()) {
+        //     continue;
+        // }
+        // filename = filename.replace("-", "_");
 
-        let new_filepath = format!("./src/solutions/no_{}{}", id, &filename[5..],);
-        let new_filename = format!("no_{}{}", id, &filename[5..filename.len() - 3]);
+        let new_filepath = format!("./solutions/_{}", &filename);
+        let new_filename = format!("_{}", &filename);
         println!("{},{},{}", filenamepath, new_filename, new_filepath);
         deal_solving(&filenamepath, &new_filename, &new_filepath);
     }
@@ -67,13 +72,17 @@ fn deal_solving(filename: &String, new_filename: &String, new_filepath: &String)
         println!("solution_path no exist :{:?}", solution_path);
         return;
     }
+    println!(
+        "rename file_path :{:?},solution_path :{:?}",
+        file_path, solution_path
+    );
     // rename/move file
     fs::rename(file_path, solution_path).unwrap();
-    let mut lib_file = fs::OpenOptions::new()
-        .append(true)
-        .open("./src/solutions/mod.rs")
-        .unwrap();
-    writeln!(lib_file, "mod {};", new_filename).unwrap();
+    // let mut lib_file = fs::OpenOptions::new()
+    //     .append(true)
+    //     .open("./src/solutions/mod.rs")
+    //     .unwrap();
+    // writeln!(lib_file, "mod {};", new_filename).unwrap();
 }
 //  fn main1() -> Result<()> {
 //     println!("Welcome to leetcode-rust system.\n");
