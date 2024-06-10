@@ -1,5 +1,8 @@
 use tokio::net::TcpListener;
-
+ use tokio::io::AsyncWriteExt;
+use tokio::net::TcpStream;
+use tokio::io::AsyncReadExt;
+// use tokio::fs::read;
 // TODO: write an echo server that accepts incoming TCP connections and
 //  echoes the received data back to the client.
 //  `echo` should not return when it finishes processing a connection, but should
@@ -11,7 +14,24 @@ use tokio::net::TcpListener;
 // - `tokio::net::TcpStream::split` to obtain a reader and a writer from the socket
 // - `tokio::io::copy` to copy data from the reader to the writer
 pub async fn echo(listener: TcpListener) -> Result<(), anyhow::Error> {
-    todo!()
+  loop {
+        // Asynchronously wait for an inbound socket.
+        let (mut socket, _) = listener.accept().await?;
+
+        // And this is where much of the magic of this server happens. We
+        // crucially want all clients to make progress concurrently, rather than
+        // blocking one on completion of another. To achieve this we use the
+        // `tokio::spawn` function to execute the work in the background.
+        //
+        // Essentially here we're executing a new task to run concurrently,
+        // which will allow all of our clients to be processed concurrently.
+
+        tokio::spawn(async move {
+            let (mut reader,mut writer)=socket.split();
+            tokio.io.copy(&mut read,&mut write);
+        });
+    }
+        Ok(())
 }
 
 #[cfg(test)]

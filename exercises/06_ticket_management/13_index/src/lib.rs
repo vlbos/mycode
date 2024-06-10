@@ -1,13 +1,28 @@
 // TODO: Implement `Index<&TicketId>` and `Index<TicketId>` for `TicketStore`.
 
 use ticket_fields::{TicketDescription, TicketTitle};
-
+use std::ops::Index;
 #[derive(Clone)]
 pub struct TicketStore {
     tickets: Vec<Ticket>,
     counter: u64,
 }
+ impl Index<TicketId> for TicketStore
+{
+    type Output=Ticket;
 
+    fn index(&self, index: TicketId) -> &Self::Output{
+        self.tickets.iter().filter(|t|t.id==index).next().unwrap()
+    }
+}
+impl Index<&TicketId> for TicketStore
+{
+    type Output=Ticket;
+
+    fn index(&self, index: &TicketId) -> &Self::Output{
+        self.tickets.iter().filter(|t|t.id==*index).next().unwrap()
+    }
+}
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct TicketId(u64);
 

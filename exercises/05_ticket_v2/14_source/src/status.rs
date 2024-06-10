@@ -30,7 +30,7 @@ pub struct ParseStatusError {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::convert::TryFrom;
+    // use std::convert::TryFrom;
 
     #[test]
     fn test_try_from_string() {

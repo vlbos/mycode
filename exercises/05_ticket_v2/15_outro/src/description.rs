@@ -1,9 +1,28 @@
 // TODO: Implement `TryFrom<String>` and `TryFrom<&str>` for the `TicketDescription` type,
 //   enforcing that the description is not empty and is not longer than 500 bytes.
 //   Implement the traits required to make the tests pass too.
-
+ #[derive(Debug,PartialEq,Clone)]
 pub struct TicketDescription(String);
-
+impl TryFrom<String> for TicketDescription{
+    type Error=String;
+    fn try_from(v:String)->Result<Self,Self::Error>{
+            if v.is_empty(){
+            return Err("The description cannot be empty".to_string())}
+ if v.len()>500{
+            return Err("The description cannot be longer than 500 bytes".to_string())}
+            Ok(Self(v))
+    }
+}
+impl TryFrom<&str> for TicketDescription{
+    type Error=String;
+    fn try_from(v:&str)->Result<Self,Self::Error>{
+            if v.is_empty(){
+            return Err("The description cannot be empty".to_string())}
+ if v.len()>500{
+            return Err("The description cannot be longer than 500 bytes".to_string())}
+            Ok(Self(v.to_owned()))
+    }
+}
 #[cfg(test)]
 mod tests {
     use super::*;

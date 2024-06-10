@@ -7,11 +7,31 @@ enum Status {
     InProgress,
     Done,
 }
-
+// use std::convert::TryFrom;
+impl TryFrom<String> for Status{
+  type Error=();
+    fn try_from(value:String)->Result<Self, Self::Error>{
+       match value.to_ascii_lowercase().as_str(){
+        "todo"=>Ok(Self::ToDo),
+        "inprogress"=>Ok(Self::InProgress),
+        "done"=>Ok(Self::Done),
+        _=>Err(())}
+    }
+}
+impl TryFrom<&str> for Status{
+    type Error=();
+    fn try_from(value:&str)->Result<Self, Self::Error>{
+        match value.to_ascii_lowercase().as_str(){
+        "todo"=>Ok(Self::ToDo),
+        "inprogress"=>Ok(Self::InProgress),
+        "done"=>Ok(Self::Done),
+        _=>Err(())}
+    }
+}
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::convert::TryFrom;
+    // use std::convert::TryFrom;
 
     #[test]
     fn test_try_from_string() {

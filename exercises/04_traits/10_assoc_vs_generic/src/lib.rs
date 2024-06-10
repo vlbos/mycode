@@ -12,7 +12,24 @@
 // interested in learning more about it.
 // You don't have to though: it's perfectly okay to write three separate
 // implementations manually. Venture further only if you're curious.
-
+trait Power<T>{
+    fn power(&self,p:T)->u32;
+}
+impl Power<u32> for u32{
+    fn power(&self,p:u32)->u32{
+          (0..p).fold(1,| s,_| s*self)
+    }
+}
+impl Power<&u32> for u32{
+    fn power(&self,p:&u32)->u32{
+        (0..*p).fold(1,| s,_| s*self)
+    }
+}
+impl Power<u16> for u32{
+    fn power(&self,p:u16)->u32{
+        (0..p).fold(1,| s,_| s*self)
+    }
+}
 #[cfg(test)]
 mod tests {
     use super::Power;
