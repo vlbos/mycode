@@ -2,7 +2,9 @@
 
 // ## Description
 
-// You are given two integers n and m which represent the size of a 1-indexed grid. You are also given an integer k, a 1-indexed integer array source and a 1-indexed integer array dest, where source and dest are in the form [x, y] representing a cell on the given grid.
+// You are given two integers n and m which represent the size of a 1-indexed grid.
+// You are also given an integer k, a 1-indexed integer array source and a 1-indexed integer array dest,
+// where source and dest are in the form [x, y] representing a cell on the given grid.
 
 // You can move through the grid in the following way:
 
@@ -61,7 +63,31 @@ pub struct Solution;
 
 impl Solution {
     pub fn number_of_ways(n: i32, m: i32, k: i32, source: Vec<i32>, dest: Vec<i32>) -> i32 {
-        0
+        let modulo = 1_000_000_007;
+        let mut f = [0; 4];
+        f[0] = 1;
+        let (m, n) = (m as i64, n as i64);
+        for _ in 0..k {
+            f = [
+                (f[1] * (n - 1) + f[2] * (m - 1)) % modulo,
+                (f[0] + f[1] * (n - 2) + f[3] * (m - 1)) % modulo,
+                (f[0] + f[2] * (m - 2) + f[3] * (n - 1)) % modulo,
+                (f[1] + f[2] + f[3] * (n - 2) + f[3] * (m - 2)) % modulo,
+            ];
+        }
+        (if source[0] == dest[0] {
+            if source[1] == dest[1] {
+                f[0]
+            } else {
+                f[2]
+            }
+        } else {
+            if source[1] == dest[1] {
+                f[1]
+            } else {
+                f[3]
+            }
+        }) as _
     }
 }
 

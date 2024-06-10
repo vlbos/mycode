@@ -2,17 +2,22 @@
 
 // ## Description
 
-// Given a 1-indexed integer array prices, where prices[i] is the price of a particular stock on the ith day, your task is to select some of the elements of prices such that your selection is linear.
+// Given a 1-indexed integer array prices, where prices[i] is the price of a particular stock on the ith day,
+// your task is to select some of the elements of prices such that your selection is linear.
 
-// A selection indexes, where indexes is a 1-indexed integer array of length k which is a subsequence of the array [1, 2, ..., n], is linear if:
+// A selection indexes,
+// where indexes is a 1-indexed integer array of length k which is a subsequence of the array [1, 2, ..., n],
+// is linear if:
 
 //
 // 	For every 1  < j  <= k, prices[indexes[j]] - prices[indexes[j - 1]] == indexes[j] - indexes[j - 1].
 //
 
-// A subsequence is an array that can be derived from another array by deleting some or no elements without changing the order of the remaining elements.
+// A subsequence is an array that can be derived from another array by deleting some or no elements
+// without changing the order of the remaining elements.
 
-// The score of a selection indexes, is equal to the sum of the following array: [prices[indexes[1]], prices[indexes[2]], ..., prices[indexes[k]].
+// The score of a selection indexes, is equal to the sum of the following array:
+// [prices[indexes[1]], prices[indexes[2]], ..., prices[indexes[k]].
 
 // Return the maximum score that a linear selection can have.
 
@@ -38,7 +43,8 @@
 //
 // Input: prices = [5,6,7,8,9]
 // Output: 35
-// Explanation: We can select all of the indexes [1,2,3,4,5]. Since each element has a difference of exactly 1 from its previous element, our selection is linear.
+// Explanation: We can select all of the indexes [1,2,3,4,5].
+// Since each element has a difference of exactly 1 from its previous element, our selection is linear.
 // The sum of all the elements is 35 which is the maximum possible some out of every selection.
 
 //
@@ -64,7 +70,11 @@ pub struct Solution;
 
 impl Solution {
     pub fn max_score(prices: Vec<i32>) -> i64 {
-        0
+        let mut cnt = std::collections::HashMap::new();
+        for (i, x) in prices.into_iter().enumerate() {
+            *cnt.entry(x - i as i32).or_insert(0) += x as i64;
+        }
+        *cnt.values().max().unwrap()
     }
 }
 

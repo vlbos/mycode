@@ -2,11 +2,13 @@
 
 // ## Description
 
-// You are given a 0-indexed string s, and a 2D array of integers queries, where queries[i] = [li, ri] indicates a substring of s starting from the index li and ending at the index ri (both inclusive), i.e. s[li..ri].
+// You are given a 0-indexed string s, and a 2D array of integers queries, 
+// where queries[i] = [li, ri] indicates a substring of s starting from the index li and ending at the index ri (both inclusive), i.e. s[li..ri].
 
 // Return an array ans where ans[i] is the number of same-end substrings of queries[i].
 
-// A 0-indexed string t of length n is called same-end if it has the same character at both of its ends, i.e., t[0] == t[n - 1].
+// A 0-indexed string t of length n is called same-end if it has the same character at both of its ends, i.e.,
+// t[0] == t[n - 1].
 
 // A substring is a contiguous non-empty sequence of characters within a string.
 
@@ -48,7 +50,22 @@ pub struct Solution;
 
 impl Solution {
     pub fn same_end_substring_count(s: String, queries: Vec<Vec<i32>>) -> Vec<i32> {
-        vec![]
+        let n=s.len();
+        let mut cnt=vec![vec![0;n+1];26];
+        for (i,b) in s.bytes().enumerate(){
+            let j=(b-b'a') as usize;
+            for k in 0..26{
+                cnt[k][i+1]=cnt[k][i];
+            }
+            cnt[j][i+1]+=1;
+        }
+        queries.into_iter().map(|q| {
+            q[1]-q[0]+1+(0..26).map(|i|{
+                let x=cnt[i][q[1] as usize+1]-cnt[i][q[0] as usize];
+                x*(x-1)/2
+            }).sum::<i32>()
+        }).collect()
+       
     }
 }
 

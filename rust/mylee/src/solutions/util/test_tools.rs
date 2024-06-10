@@ -1,7 +1,7 @@
 use std::collections::{BTreeSet, HashSet};
 use std::fmt::Debug;
 use std::hash::Hash;
-use std::iter::FromIterator;
+// use std::iter::FromIterator;
 
 pub fn assert_equivalent<T: Eq + Ord + Hash + Debug + Clone>(left: &[T], right: &[T]) {
     let left = left.iter().cloned().collect::<HashSet<_>>();

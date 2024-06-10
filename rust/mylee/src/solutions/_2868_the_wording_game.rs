@@ -7,7 +7,8 @@
 // They are playing a wording game with the following rules:
 
 //
-// 	On each turn, the current player should play a word from their list such that the new word is closely greater than the last played word; then it 's the other player 's turn.
+// 	On each turn, the current player should play a word from their list such that the new word is closely greater than the last played word;
+// then it 's the other player 's turn.
 // 	If a player can 't play a word on their turn, they lose.
 //
 
@@ -23,7 +24,10 @@
 // 	For example, the word "care" is closely greater than "book" and "car", but is not closely greater than "ant" or "cook".
 //
 
-// A string s is lexicographically greater than a string t if in the first position where s and t differ, string s has a letter that appears later in the alphabet than the corresponding letter in t. If the first min(s.length, t.length) characters do not differ, then the longer string is the lexicographically greater one.
+// A string s is lexicographically greater than a string t if in the first position where s and t differ,
+// string s has a letter that appears later in the alphabet than the corresponding letter in t.
+// If the first min(s.length, t.length) characters do not differ,
+// then the longer string is the lexicographically greater one.
 
 //
 // Example 1:
@@ -71,7 +75,31 @@
 pub struct Solution;
 impl Solution {
     pub fn can_alice_win(a: Vec<String>, b: Vec<String>) -> bool {
-        false
+        let (mut i, mut j, m, n, mut inturn, mut w) =
+            (1, 0, a.len(), b.len(), true, a[0].as_bytes());
+        loop {
+            if inturn {
+                if j == n {
+                    return true;
+                }
+                let bj = b[j].as_bytes();
+                if (w[0] == bj[0] && w < bj) || (w[0] + 1 == bj[0]) {
+                    w = bj;
+                    inturn = !inturn;
+                }
+                j += 1;
+            } else {
+                if i == m {
+                    return false;
+                }
+                let ai = a[i].as_bytes();
+                if (w[0] == ai[0] && w < ai) || (w[0] + 1 == ai[0]) {
+                    w = ai;
+                    inturn = !inturn;
+                }
+                i += 1;
+            }
+        }
     }
 }
 // @lc code=end

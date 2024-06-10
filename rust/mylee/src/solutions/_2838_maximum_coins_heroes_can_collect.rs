@@ -2,22 +2,22 @@
 
 // ## Description
 
-// There is a battle and n heroes are trying to defeat m monsters. You are given two 1-indexed arrays of positive integers <font face="monospace">heroes and <font face="monospace">monsters of length n and m, respectively. <font face="monospace">heroes[i] is the power of ith hero, and <font face="monospace">monsters[i] is the power of ith monster.
+// There is a battle and n heroes are trying to defeat m monsters.
+// You are given two 1-indexed arrays of positive integers heroes and monsters of length n and m,
+// respectively. heroes[i] is the power of ith hero, and monsters[i] is the power of ith monster.
 
 // The ith hero can defeat the jth monster if monsters[j]  <= heroes[i].
 
-// You are also given a 1-indexed array coins of length m consisting of positive integers. coins[i] is the number of coins that each hero earns after defeating the ith monster.
+// You are also given a 1-indexed array coins of length m consisting of positive integers.
+//  coins[i] is the number of coins that each hero earns after defeating the ith monster.
 
 // Return an array ans of length n where ans[i] is the maximum number of coins that the ith hero can collect from this battle.
 
 // Notes
 
-//
 // 	The health of a hero doesn 't get reduced after defeating a monster.
 // 	Multiple heroes can defeat a monster, but each monster can be defeated by a given hero only once.
-//
 
-//
 // Example 1:
 
 //
@@ -62,7 +62,23 @@ pub struct Solution;
 
 impl Solution {
     pub fn maximum_coins(heroes: Vec<i32>, monsters: Vec<i32>, coins: Vec<i32>) -> Vec<i64> {
-        vec![]
+        let m = monsters.len();
+        let mut idx: Vec<_> = (0..m).collect();
+        idx.sort_unstable_by_key(|&i| monsters[i]);
+        let mut pre_sum: Vec<i64> = idx
+            .iter()
+            .scan(0, |s, &i| {
+                *s += coins[i] as i64;
+                Some(*s)
+            })
+            .collect();
+        pre_sum.insert(0, 0);
+        let mut ans = vec![];
+        for &h in &heroes {
+            let j = idx.partition_point(|&i| monsters[i] <= h);
+            ans.push(pre_sum[j]);
+        }
+        ans
     }
 }
 

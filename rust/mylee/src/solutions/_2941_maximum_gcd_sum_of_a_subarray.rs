@@ -42,7 +42,30 @@ pub struct Solution;
 
 impl Solution {
     pub fn max_gcd_sum(nums: Vec<i32>, k: i32) -> i64 {
-        0
+        fn gcd(a:i32,b:i32)->i32{
+        if b==0{
+a}else{gcd(b,a%b)}}
+        let mut s:Vec<_>=nums.iter().scan(0,|mut sum,&x| {*sum+=x;Some(*sum)}).collect();
+        s.insert(0,0);
+        let mut f=vec![];
+        let mut ans=0;
+        for (i,v) in nums.into_iter().enumerate(){
+            let mut g:Vec<(usize,i32)>=vec![];
+            for &(j,x) in &f{
+                let y=gcd(x,v);
+                if g.is_empty()||g.last().unwrap().1!=y{
+                    g.push((j,y));
+                }
+            }
+            f=g;
+            f.push((i,v));
+            for &(j,x) in &f{
+                if i-j+1>=k as usize{
+                    ans=ans.max((s[i+1]-s[j]) as i64*x as i64);
+                }
+            }
+        }
+        ans
     }
 }
 

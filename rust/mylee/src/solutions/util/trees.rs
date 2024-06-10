@@ -171,7 +171,7 @@ macro_rules! lc_tree {
 #[cfg(test)]
 mod test {
     use super::*;
-    use crate::{lc_tree, lc_tree_vec, tree_leaf, tree_node};
+    // use crate::{lc_tree, lc_tree_vec, tree_leaf, tree_node};
 
     #[test]
     pub fn test_lc_tree_vec_macro_1() {

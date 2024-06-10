@@ -5,7 +5,10 @@
 // Given an integer array nums and an integer k, you can perform the following operation on the array any number of times:
 
 //
-// 	Select two adjacent elements of the array like x and y, such that x * y  <= k, and replace both of them with a single element with value x * y (e.g. in one operation the array [1, 2, 2, 3] with k = 5 can become [1, 4, 3] or [2, 2, 3], but can 't become [1, 2, 6]).
+// 	Select two adjacent elements of the array like x and y, such that x * y  <= k,
+//  and replace both of them with a single element with value x * y
+// (e.g. in one operation the array [1, 2, 2, 3] with k = 5 can become [1, 4, 3] or [2, 2, 3],
+// but can 't become [1, 2, 6]).
 //
 
 // Return the minimum possible length of nums after any number of operations.
@@ -48,7 +51,19 @@ pub struct Solution;
 
 impl Solution {
     pub fn min_array_length(nums: Vec<i32>, k: i32) -> i32 {
-        0
+        let (mut ans, mut y) = (1, nums[0]);
+        for &x in &nums[1..] {
+            if x == 0 {
+                return 1;
+            }
+            if y * x <= k {
+                y *= x;
+            } else {
+                y = x;
+                ans += 1;
+            }
+        }
+        ans
     }
 }
 

@@ -85,7 +85,8 @@
 
 // Input: word = "asdf"
 // Output: 6
-// Explanation: The table above contains the details about every substring of word, and we can see that 6 of them are divisible.
+// Explanation: The table above contains the details about every substring of word, 
+// and we can see that 6 of them are divisible.
 
 // Example 2:
 
@@ -121,8 +122,44 @@
 pub struct Solution;
 
 impl Solution {
-    pub fn count_divisible_substrings(word: String) -> i32 {
-        0
+        pub fn count_divisible_substrings(word: String) -> i32 {
+        let c2i=|b:u8|{
+            let i=(b-b'a') as i32+1;
+            i/3+1
+        };
+        let n=word.len();
+        let mut ans=0;
+        for i in 1..10{
+            let mut cnt=std::collections::HashMap::from([(0,1)]);
+            let mut sum=0;
+            for b in word.bytes(){
+                sum+=c2i(b)-i;
+                if let Some(&v)=cnt.get(&sum){
+                    ans+=v;
+                }
+                *cnt.entry(sum).or_default()+=1;
+            }
+        }
+        ans
+    }
+    pub fn count_divisible_substrings1(word: String) -> i32 {
+        let c2i=|b:u8|{
+            let i=(b-b'a') as i32+1;
+            i/3+1
+        };
+        let w=word.as_bytes();
+        let n=w.len();
+        let mut ans=0;
+        for i in 0..n{
+            let mut sum=0;
+            for j in i..n{
+                sum+=c2i(w[j]);
+                if sum%((j-i+1) as i32)==0{
+                ans+=1;
+                }
+            }
+        }
+        ans
     }
 }
 

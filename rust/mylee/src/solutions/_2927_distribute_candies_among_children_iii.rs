@@ -11,7 +11,8 @@
 
 // Input: n = 5, limit = 2
 // Output: 3
-// Explanation: There are 3 ways to distribute 5 candies such that no child gets more than 2 candies: (1, 2, 2), (2, 1, 2) and (2, 2, 1).
+// Explanation: There are 3 ways to distribute 5 candies such that no child gets more than 2 candies:
+// (1, 2, 2), (2, 1, 2) and (2, 2, 1).
 
 // Example 2:
 
@@ -33,7 +34,19 @@ pub struct Solution;
 
 impl Solution {
     pub fn distribute_candies(n: i32, limit: i32) -> i64 {
-        0
+        let comb2 = |n: i64| n * (n - 1) / 2;
+        if n > 3 * limit {
+            return 0;
+        }
+        let (n, limit) = (n as i64, limit as i64);
+        let mut ans = comb2(n + 2);
+        if n > limit {
+            ans -= 3 * comb2(n - limit + 1);
+        }
+        if n - 2 >= 2 * limit {
+            ans += 3 * comb2(n - 2 * limit);
+        }
+        ans
     }
 }
 

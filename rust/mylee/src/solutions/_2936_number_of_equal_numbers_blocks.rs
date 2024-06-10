@@ -4,7 +4,9 @@
 
 // You are given a 0-indexed array of integers, nums. The following property holds for nums:
 
-// 	All occurrences of a value are adjacent. In other words, if there are two indices i  < j such that nums[i] == nums[j], then for every index k that i  < k  < j, nums[k] == nums[i].
+// 	All occurrences of a value are adjacent.
+// In other words, if there are two indices i  < j such that nums[i] == nums[j],
+// then for every index k that i  < k  < j, nums[k] == nums[i].
 
 // Since nums is a very large array, you are given an instance of the class BigArray which has the following functions:
 
@@ -20,7 +22,8 @@
 
 // Input: nums = [3,3,3,3,3]
 // Output: 1
-// Explanation: There is only one block here which is the whole array (because all numbers are equal) and that is: [3,3,3,3,3]. So the answer would be 1.
+// Explanation: There is only one block here which is the whole array (because all numbers are equal) and that is:
+// [3,3,3,3,3]. So the answer would be 1.
 
 // Example 2:
 
@@ -38,7 +41,8 @@
 
 // Input: nums = [1,2,3,4,5,6,7]
 // Output: 7
-// Explanation: Since all numbers are distinct, there are 7 blocks here and each element representing one block. So the answer would be 7.
+// Explanation: Since all numbers are distinct, there are 7 blocks here and each element representing one block.
+// So the answer would be 7.
 
 //
 // Constraints:
@@ -50,12 +54,66 @@
 
 //     int count_blocks(BigArray* nums) {
 
+//  Definition for BigArray.
+struct BigArray {
+    elements: Vec<i32>,
+}
+impl BigArray {
+    pub fn new(elements: Vec<i32>) -> Self {
+        Self { elements }
+    }
+    pub fn at(&self, index: i64) -> i32 {
+        self.elements[index as usize]
+    }
+    pub fn size(&self) -> i64 {
+        self.elements.len() as _
+    }
+}
+
 #[allow(dead_code)]
 pub struct Solution;
 
 impl Solution {
-    pub fn count_blocks(nums: Vec<i32>) -> i32 {
-        0
+    pub fn count_blocks(nums: BigArray) -> i32 {
+        fn f(mut l: i64, mut r: i64, nums: &BigArray) -> i32 {
+            if nums.at(l) == nums.at(r) {
+                return 1;
+            }
+
+            let mid = (l + r) / 2;
+            let a = f(l, mid, nums);
+            let b = f(mid + 1, r, nums);
+            a + b
+                - if nums.at(mid) == nums.at(mid + 1) {
+                    1
+                } else {
+                    0
+                }
+        }
+        f(0, nums.size() - 1,&nums)
+    }
+    pub fn count_blocks1(nums: BigArray) -> i32 {
+        let mut ans = 0;
+        let n = nums.size();
+        let search = |mut l| {
+            let mut r = n;
+            let x = nums.at(l);
+            while l < r {
+                let mid = (l + r) / 2;
+                if nums.at(mid) != x {
+                    r = mid;
+                } else {
+                    l = mid + 1;
+                }
+            }
+            l
+        };
+        let mut i = 0;
+        while i < n {
+            i = search(i);
+            ans += 1;
+        }
+        ans
     }
 }
 
@@ -64,17 +122,23 @@ mod test {
     use super::*;
     #[test]
     pub fn test_count_blocks_1() {
-        assert_eq!(1, Solution::count_blocks(vec![3, 3, 3, 3, 3]));
+        assert_eq!(
+            1,
+            Solution::count_blocks(BigArray::new(vec![3, 3, 3, 3, 3]))
+        );
     }
     #[test]
     pub fn test_count_blocks_2() {
         assert_eq!(
             5,
-            Solution::count_blocks(vec![1, 1, 1, 3, 9, 9, 9, 2, 10, 10])
+            Solution::count_blocks(BigArray::new(vec![1, 1, 1, 3, 9, 9, 9, 2, 10, 10]))
         );
     }
     #[test]
     pub fn test_count_blocks_3() {
-        assert_eq!(7, Solution::count_blocks(vec![1, 2, 3, 4, 5, 6, 7]));
+        assert_eq!(
+            7,
+            Solution::count_blocks(BigArray::new(vec![1, 2, 3, 4, 5, 6, 7]))
+        );
     }
 }

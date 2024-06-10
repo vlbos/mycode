@@ -56,8 +56,17 @@
 pub struct Solution;
 
 impl Solution {
-    pub fn max_subarray_length(grid: Vec<i32>) -> i32 {
-        0
+    pub fn max_subarray_length(nums: Vec<i32>) -> i32 {
+        let mut cnt = std::collections::BTreeMap::new();
+        for (i, x) in nums.into_iter().enumerate() {
+            cnt.entry(x).or_insert(vec![]).push(i as i32);
+        }
+        let (mut ans, mut k) = (0, i32::MAX / 2);
+        for i in cnt.values().rev() {
+            ans = ans.max(*i.last().unwrap() - k + 1);
+            k = k.min(i[0]);
+        }
+        ans
     }
 }
 

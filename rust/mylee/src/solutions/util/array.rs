@@ -48,7 +48,7 @@ macro_rules! lc_vec_s {
 
 #[cfg(test)]
 mod test {
-    use crate::{lc_matrix, lc_matrix_s, lc_vec_s};
+    // use crate::{lc_matrix, lc_matrix_s, lc_vec_s};
 
     #[test]
     pub fn test_matrix_macro_1() {
