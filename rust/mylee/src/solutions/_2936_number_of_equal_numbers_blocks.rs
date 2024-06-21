@@ -90,7 +90,7 @@ impl Solution {
                     0
                 }
         }
-        f(0, nums.size() - 1,&nums)
+        f(0, nums.size() - 1, &nums)
     }
     pub fn count_blocks1(nums: BigArray) -> i32 {
         let mut ans = 0;
