@@ -39,26 +39,14 @@ pub struct Solution;
 
 impl Solution {
     pub fn divisible_triplet_count(nums: Vec<i32>, d: i32) -> i32 {
-        use std::collections::HashMap;
-        let (mut pre, mut suf) = (HashMap::new(), HashMap::new());
+        let mut pre = std::collections::HashMap::new();
         let nums: Vec<_> = nums.into_iter().map(|x| x % d).collect();
-        for (i, &x) in nums.iter().enumerate().rev() {
-            suf.entry(x).or_insert(vec![]).push(i);
-        }
         let mut ans = 0;
         for (i, &x) in nums.iter().enumerate() {
-            if let Some(s) = suf.get_mut(&x) {
-                while !s.is_empty() && *s.last().unwrap() <= i {
-                    s.pop();
-                }
-                if s.is_empty() {
-                    suf.remove(&x);
-                }
-            }
-            for (&y, &c) in &pre {
-                ans += c * suf
-                    .get(&((d - (x + y) % d) % d))
-                    .map_or(0, |idx| idx.len() as i32);
+            for &y in &nums[i+1..] {
+                ans +=*pre
+                    .get(&((d - (x + y) % d) % d)).
+                    unwrap_or(&0);
             }
             *pre.entry(x).or_insert(0) += 1;
         }
