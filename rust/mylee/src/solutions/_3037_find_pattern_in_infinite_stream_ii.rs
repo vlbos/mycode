@@ -42,18 +42,48 @@
 // 	The input is generated such that the pattern 's start index exists in the first 105 bits of the stream.
 
 #[allow(dead_code)]
-pub struct InfiniteStream;
+pub struct InfiniteStream {
+    s: Vec<u8>,
+    i: usize,
+}
 impl InfiniteStream {
-    pub fn next() -> i32 {
-        0
+    pub fn new(s: Vec<u8>) -> Self {
+        Self { s, i: 0 }
+    }
+    pub fn next(&mut self) -> i64 {
+        self.i += 1;
+        self.s[self.i - 1] as _
     }
 }
+
 #[allow(dead_code)]
 pub struct Solution;
 
 impl Solution {
-    pub fn find_pattern(stream: InfiniteStream, pattern: Vec<i32>) -> i32 {
-        0
+    pub fn find_pattern(mut stream: InfiniteStream, pattern: Vec<i32>) -> i32 {
+        let (mut a, mut b) = (0, 0);
+        let m = pattern.len();
+        let half = m >> 1;
+        let (mask1, mask2) = ((1 << half) - 1, (1 << (m - half)) - 1);
+        for i in 0..half {
+            a |= (pattern[i] as i64) << (half - 1 - i);
+        }
+        for i in half..m {
+            b |= (pattern[i] as i64) << (m - 1 - i);
+        }
+        let (mut x, mut y) = (0, 0);
+        for i in 1.. {
+            let mut v = stream.next();
+            y = y << 1 | v;
+            v = y >> (m - half) & 1;
+            y &= mask2;
+            x = x << 1 | v;
+            x &= mask1;
+            if i >= m && a == x && b == y {
+                return (i - m) as _;
+            }
+        }
+        -1
     }
 }
 
@@ -62,14 +92,17 @@ mod test {
     use super::*;
     #[test]
     pub fn test_find_pattern_1() {
-        assert_eq!(3, Solution::find_pattern(InfiniteStream, vec![0, 1]));
+        let is = InfiniteStream::new(vec![1, 1, 1, 0, 1, 1, 1]);
+        assert_eq!(3, Solution::find_pattern(is, vec![0, 1]));
     }
     #[test]
     pub fn test_find_pattern_2() {
-        assert_eq!(0, Solution::find_pattern(InfiniteStream, vec![0]));
+        let is = InfiniteStream::new(vec![0, 0, 0, 0]);
+        assert_eq!(0, Solution::find_pattern(is, vec![0]));
     }
     #[test]
     pub fn test_find_pattern_3() {
-        assert_eq!(2, Solution::find_pattern(InfiniteStream, vec![1, 1, 0, 1]));
+        let is = InfiniteStream::new(vec![1, 0, 1, 1, 0, 1, 1, 0, 1]);
+        assert_eq!(2, Solution::find_pattern(is, vec![1, 1, 0, 1]));
     }
 }

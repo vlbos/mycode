@@ -6,7 +6,7 @@
 
 // You can do the following operation at the beginning at most once:
 
-// 	Replace nums with a <span data-keyword="subsequence-array">subsequence of nums.
+// 	Replace nums with a subsequence of nums.
 
 // We start processing queries in the given order; for each query, we do the following:
 
@@ -67,7 +67,40 @@ pub struct Solution;
 
 impl Solution {
     pub fn maximum_processable_queries(nums: Vec<i32>, queries: Vec<i32>) -> i32 {
-        0
+        let n = nums.len();
+        let mut f = vec![vec![0; n]; n];
+        let m = queries.len();
+        for i in 0..n {
+            for j in (i..n).rev() {
+                if i > 0 {
+                    f[i][j] = f[i][j].max(
+                        f[i - 1][j]
+                            + if nums[i - 1] >= queries[f[i - 1][j]] {
+                                1
+                            } else {
+                                0
+                            },
+                    );
+                }
+                if j + 1 < n {
+                    f[i][j] = f[i][j].max(
+                        f[i][j + 1]
+                            + if nums[j + 1] >= queries[f[i][j + 1]] {
+                                1
+                            } else {
+                                0
+                            },
+                    );
+                }
+                if f[i][j] == m {
+                    return m as _;
+                }
+            }
+        }
+        (0..n)
+            .map(|i| f[i][i] + if nums[i] >= queries[f[i][i]] { 1 } else { 0 })
+            .max()
+            .unwrap() as _
     }
 }
 

@@ -376,7 +376,7 @@ pub mod _2955_number_of_same_end_substrings;
 pub mod _2964_number_of_divisible_triplet_sums;
 pub mod _2969_minimum_number_of_coins_for_fruits_ii;
 pub mod _2979_most_expensive_item_that_can_not_be_bought;
-pub mod _2992_most_expensive_item_that_can_not_be_bought;
+pub mod _2992_number_of_self_divisible_permutations;
 pub mod _3004_maximum_subtree_of_the_same_color;
 pub mod _3009_maximum_number_of_intersections_on_the_chart;
 pub mod _3018_maximum_number_of_removal_queries_that_can_be_processed_i;

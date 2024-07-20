@@ -2,11 +2,15 @@
 
 // ## Description
 
-// You are given a 2D integer array edges representing a tree with n nodes, numbered from 0 to n - 1, rooted at node 0, where edges[i] = [ui, vi] means there is an edge between the nodes vi and ui.
+// You are given a 2D integer array edges representing a tree with n nodes,
+// numbered from 0 to n - 1, rooted at node 0,
+// where edges[i] = [ui, vi] means there is an edge between the nodes vi and ui.
 
-// You are also given a 0-indexed integer array colors of size n, where colors[i] is the color assigned to node i.
+// You are also given a 0-indexed integer array colors of size n,
+// where colors[i] is the color assigned to node i.
 
-// We want to find a node v such that every node in the <span data-keyword="subtree-of-node">subtree of v has the same color.
+// We want to find a node v such that every node in the
+// subtree of v has the same color.
 
 // Return the size of such subtree with the maximum number of nodes possible.
 
@@ -17,13 +21,17 @@
 
 // Input: edges = [[0,1],[0,2],[0,3]], colors = [1,1,2,3]
 // Output: 1
-// Explanation: Each color is represented as: 1 -> Red, 2 -> Green, 3 -> Blue. We can see that the subtree rooted at node 0 has children with different colors. Any other subtree is of the same color and has a size of 1. Hence, we return 1.
+// Explanation: Each color is represented as: 1 -> Red, 2 -> Green, 3 -> Blue.
+// We can see that the subtree rooted at node 0 has children with different colors.
+// Any other subtree is of the same color and has a size of 1. Hence, we return 1.
 
 // Example 2:
 
 // Input: edges = [[0,1],[0,2],[0,3]], colors = [1,1,1,1]
 // Output: 4
-// Explanation: The whole tree has the same color, and the subtree rooted at node 0 has the most number of nodes which is 4. Hence, we return 4.
+// Explanation: The whole tree has the same color,
+// and the subtree rooted at node 0 has the most number of nodes which is 4.
+//  Hence, we return 4.
 
 // <img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/3000-3099/3004.Maximum%20Subtree%20of%20the%20Same%20Color/images/20231216-134017.png" style="padding: 10px; background: rgb(255, 255, 255); border-radius: 0.5rem; width: 221px; height: 221px;" />
 
@@ -31,7 +39,10 @@
 
 // Input: edges = [[0,1],[0,2],[2,3],[2,4]], colors = [1,2,3,3,3]
 // Output: 3
-// Explanation: Each color is represented as: 1 -> Red, 2 -> Green, 3 -> Blue. We can see that the subtree rooted at node 0 has children with different colors. Any other subtree is of the same color, but the subtree rooted at node 2 has a size of 3 which is the maximum. Hence, we return 3.
+// Explanation: Each color is represented as: 1 -> Red, 2 -> Green, 3 -> Blue.
+// We can see that the subtree rooted at node 0 has children with different colors.
+// Any other subtree is of the same color, but the subtree rooted at node 2 has a size of 3 which is the maximum.
+// Hence, we return 3.
 
 //
 // Constraints:
@@ -51,7 +62,35 @@ pub struct Solution;
 
 impl Solution {
     pub fn maximum_subtree_size(edges: Vec<Vec<i32>>, colors: Vec<i32>) -> i32 {
-        0
+        use std::collections::HashMap;
+        let mut g = HashMap::new();
+        for e in edges {
+            g.entry(e[0]).or_insert(vec![]).push(e[1]);
+            g.entry(e[1]).or_insert(vec![]).push(e[0]);
+        }
+        fn dfs(
+            u: i32,
+            p: i32,
+            g: &HashMap<i32, Vec<i32>>,
+            colors: &Vec<i32>,
+            ans: &mut i32,
+        ) -> (bool, i32) {
+            let (mut flag, mut size) = (true, 1);
+            for &v in g.get(&u).unwrap_or(&vec![]) {
+                if v != p {
+                    let (sub_flag, sub_size) = dfs(v, u, g, colors, ans);
+                    flag = flag && sub_flag && (colors[u as usize] == colors[v as usize]);
+                    size += sub_size;
+                }
+            }
+            if flag {
+                *ans = (*ans).max(size);
+            }
+            (flag, size)
+        }
+        let mut ans = 0;
+        dfs(0, -1, &g, &colors, &mut ans);
+        ans
     }
 }
 

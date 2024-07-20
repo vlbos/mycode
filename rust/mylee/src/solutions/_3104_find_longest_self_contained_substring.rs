@@ -58,8 +58,9 @@
 pub struct Solution;
 
 impl Solution {
-
-    pub fn max_substring_length(s: String) -> i32 {0}
+    pub fn max_substring_length(s: String) -> i32 {
+        0
+    }
 }
 
 #[cfg(test)]

@@ -39,7 +39,38 @@ pub struct Solution;
 
 impl Solution {
     pub fn number_count(a: i32, b: i32) -> i32 {
-        0
+        fn dfs(pos: usize, mask: i32, limit: bool, num: &[u8], f: &mut Vec<Vec<i32>>) -> i32 {
+            if pos >= num.len() {
+                return if mask > 0 { 1 } else { 0 };
+            }
+            if !limit && f[pos][mask as usize] != -1 {
+                return f[pos][mask as usize];
+            }
+            let up = if limit { (num[pos] - b'0') as usize } else { 9 };
+            let mut ans = 0;
+            for i in 0..=up {
+                if mask >> i & 1 == 1 {
+                    continue;
+                }
+                let nxt = if mask == 0 && i == 0 {
+                    0
+                } else {
+                    mask | 1 << i
+                };
+                ans += dfs(pos + 1, nxt, limit && i == up, num, f);
+            }
+            if !limit {
+                f[pos][mask as usize] = ans;
+            }
+            ans
+        }
+        let num = (a - 1).to_string();
+        let mut f = vec![vec![-1; 1 << 10]; num.len()];
+        let x = dfs(0, 0, true, num.as_bytes(), &mut f);
+        let num = b.to_string();
+        let mut f = vec![vec![-1; 1 << 10]; num.len()];
+        let y = dfs(0, 0, true, num.as_bytes(), &mut f);
+        y - x
     }
 }
 

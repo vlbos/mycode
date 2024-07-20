@@ -64,11 +64,11 @@ impl Solution {
 mod test {
     use super::*;
     #[test]
-    pub fn test_maximum_processable_queries_1() {
+    pub fn test_get_permutation_index_1() {
         assert_eq!(0, Solution::get_permutation_index(vec![1, 2]));
     }
     #[test]
-    pub fn test_maximum_processable_queries_2() {
+    pub fn test_get_permutation_index_2() {
         assert_eq!(4, Solution::get_permutation_index(vec![3, 1, 2]));
     }
 }

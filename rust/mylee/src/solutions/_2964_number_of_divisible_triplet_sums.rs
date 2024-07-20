@@ -43,10 +43,8 @@ impl Solution {
         let nums: Vec<_> = nums.into_iter().map(|x| x % d).collect();
         let mut ans = 0;
         for (i, &x) in nums.iter().enumerate() {
-            for &y in &nums[i+1..] {
-                ans +=*pre
-                    .get(&((d - (x + y) % d) % d)).
-                    unwrap_or(&0);
+            for &y in &nums[i + 1..] {
+                ans += *pre.get(&((d - (x + y) % d) % d)).unwrap_or(&0);
             }
             *pre.entry(x).or_insert(0) += 1;
         }

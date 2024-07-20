@@ -4,14 +4,14 @@
 
 // You are at a fruit market with different types of exotic fruits on display.
 
-// You are given a 1-indexed array prices, 
+// You are given a 1-indexed array prices,
 // where prices[i] denotes the number of coins needed to purchase the ith fruit.
 
 // The fruit market has the following offer:
 
 // 	If you purchase the ith fruit at prices[i] coins, you can get the next i fruits for free.
 
-// Note that even if you can take fruit j for free, 
+// Note that even if you can take fruit j for free,
 // you can still purchase it for prices[j] coins to receive a new offer.
 
 // Return the minimum number of coins needed to acquire all the fruits.
@@ -25,7 +25,7 @@
 // - Purchase the 1st fruit with 3 coins, and you are allowed to take the 2nd fruit for free.
 // - Purchase the 2nd fruit with 1 coin, and you are allowed to take the 3rd fruit for free.
 // - Take the 3rd fruit for free.
-// Note that even though you were allowed to take the 2nd fruit for free, 
+// Note that even though you were allowed to take the 2nd fruit for free,
 // you purchased it because it is more optimal.
 // It can be proven that 4 is the minimum number of coins needed to acquire all the fruits.
 
@@ -53,17 +53,17 @@ pub struct Solution;
 
 impl Solution {
     pub fn minimum_coins(mut prices: Vec<i32>) -> i32 {
-        let n=prices.len();
-        let mut q=std::collections::VecDeque::new();
-        for i in (1..=n).rev(){
-            while !q.is_empty() && *q.front().unwrap()>i*2+1{
+        let n = prices.len();
+        let mut q = std::collections::VecDeque::new();
+        for i in (1..=n).rev() {
+            while !q.is_empty() && *q.front().unwrap() > i * 2 + 1 {
                 q.pop_front();
             }
-            if i*2+1<=n{
-                prices[i-1]+=prices[*q.front().unwrap()-1];
+            if i * 2 + 1 <= n {
+                prices[i - 1] += prices[*q.front().unwrap() - 1];
             }
-            
-            while !q.is_empty() && prices[*q.back().unwrap()-1]>=prices[i-1]{
+
+            while !q.is_empty() && prices[*q.back().unwrap() - 1] >= prices[i - 1] {
                 q.pop_back();
             }
             q.push_back(i);
