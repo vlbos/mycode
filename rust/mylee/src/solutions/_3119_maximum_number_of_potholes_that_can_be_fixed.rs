@@ -4,7 +4,9 @@
 
 //
 
-// You are given a string road, consisting only of characters "x" and ".", where each "x" denotes a pothole and each "." denotes a smooth road, and an integer budget.
+// You are given a string road, consisting only of characters "x" and ".",
+// where each "x" denotes a pothole and each "." denotes a smooth road,
+// and an integer budget.
 
 // In one repair operation, you can repair n consecutive potholes for a price of n + 1.
 
@@ -59,8 +61,43 @@
 //     int max_potholes(string road, int budget) {
 
 impl Solution {
-    pub fn max_potholes(road: String, budget: i32) -> i32 {
-        0
+    pub fn max_potholes(mut road: String, mut budget: i32) -> i32 {
+        let mut cnt = std::collections::BTreeMap::new();
+        road.push('.');
+        let mut k = 0;
+        for c in road.chars() {
+            if c == 'x' {
+                k += 1;
+            } else if k > 0 {
+                *cnt.entry(k).or_insert(0) += 1;
+                k = 0;
+            }
+        }
+        println!("{cnt:?}");
+        let mut ans = 0;
+        let mut carry = 0;
+        for (k, v) in cnt.into_iter().rev() {
+            if budget < k + 1 {
+                ans += budget - 1;
+                break;
+            }
+            if budget <= v * (k + 1) {
+                ans += budget / (k + 1) * k
+                    + if budget % (k + 1) > 1 {
+                        budget % (k + 1) - 1
+                    } else {
+                        0
+                    };
+                break;
+            }
+            let t = v.min(budget / (k + 1));
+            ans += t * k;
+            budget -= t;
+            if budget == 0 {
+                break;
+            }
+        }
+        ans
     }
 }
 // @lc code=end

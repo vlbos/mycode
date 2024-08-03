@@ -13,7 +13,8 @@
 
 // for each data center respectively.
 
-// Return an array answer, where for each data center, the corresponding element in answer represents the maximum number of servers that can be upgraded.
+// Return an array answer, where for each data center,
+//  the corresponding element in answer represents the maximum number of servers that can be upgraded.
 
 // Note that the money from one data center cannot be used for another data center.
 
@@ -54,7 +55,13 @@ impl Solution {
         sell: Vec<i32>,
         money: Vec<i32>,
     ) -> Vec<i32> {
-        vec![]
+        count
+            .into_iter()
+            .zip(upgrade)
+            .zip(sell)
+            .zip(money)
+            .map(|(((cnt, cost), income), cash)| cnt.min((cnt * income + cash) / (cost + income)))
+            .collect()
     }
 }
 

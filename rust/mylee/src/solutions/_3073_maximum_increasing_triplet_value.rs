@@ -16,7 +16,8 @@
 
 // Output:  8
 
-// Explanation:  We only have one choice for an increasing triplet and that is choosing all three elements. The value of this triplet would be 5 - 6 + 9 = 8.
+// Explanation:  We only have one choice for an increasing triplet and that is choosing all three elements.
+// The value of this triplet would be 5 - 6 + 9 = 8.
 //
 
 // Example 2:
@@ -51,7 +52,23 @@ pub struct Solution;
 
 impl Solution {
     pub fn maximum_triplet_value(nums: Vec<i32>) -> i32 {
-        0
+        let n = nums.len();
+        let mut right = vec![nums[n - 1]; n];
+        for (i, &x) in nums.iter().enumerate().rev().skip(1) {
+            right[i] = right[i + 1].max(x);
+        }
+        let mut ans = 0;
+        let mut sl = std::collections::BTreeSet::from([nums[0]]);
+        for j in 1..n - 1 {
+            if right[j + 1] > nums[j] {
+                let i = sl.range(..nums[j]).next_back();
+                if let Some(i) = i {
+                    ans = ans.max(i - nums[j] + right[j + 1]);
+                }
+            }
+            sl.insert(nums[j]);
+        }
+        ans
     }
 }
 
@@ -60,10 +77,10 @@ mod test {
     use super::*;
     #[test]
     pub fn test_maximum_triplet_value_1() {
-        assert_eq!(4, Solution::maximum_triplet_value(vec![5, 6, 9]));
+        assert_eq!(8, Solution::maximum_triplet_value(vec![5, 6, 9]));
     }
     #[test]
     pub fn test_maximum_triplet_value_2() {
-        assert_eq!(3, Solution::maximum_triplet_value(vec![1, 5, 3, 6]));
+        assert_eq!(4, Solution::maximum_triplet_value(vec![1, 5, 3, 6]));
     }
 }

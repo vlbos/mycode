@@ -2,7 +2,8 @@
 
 // ## Description
 
-// Given two strings initial and target, your task is to modify initial by performing a series of operations to make it equal to target.
+// Given two strings initial and target,
+// your task is to modify initial by performing a series of operations to make it equal to target.
 
 // In one operation, you can add or remove one character only at the beginning or the end of the string initial.
 
@@ -71,7 +72,18 @@ pub struct Solution {}
 
 impl Solution {
     pub fn min_operations(initial: String, target: String) -> i32 {
-        0
+        let (m, n) = (initial.len(), target.len());
+        let mut f = vec![vec![0; n + 1]; m + 1];
+        let mut mx = 0;
+        for (i, a) in initial.chars().enumerate() {
+            for (j, b) in target.chars().enumerate() {
+                if a == b {
+                    f[i + 1][j + 1] = f[i][j] + 1;
+                    mx = mx.max(f[i + 1][j + 1]);
+                }
+            }
+        }
+        (m + n) as i32 - mx * 2
     }
 }
 

@@ -4,7 +4,9 @@
 
 //
 
-// Given a 2D array rooks of length n, where rooks[i] = [xi, yi] indicates the position of a rook on an n x n chess board. Your task is to move the rooks 1 cell at a time vertically or horizontally (to an adjacent cell) such that the board becomes peaceful.
+// Given a 2D array rooks of length n,
+// where rooks[i] = [xi, yi] indicates the position of a rook on an n x n chess board.
+//  Your task is to move the rooks 1 cell at a time vertically or horizontally (to an adjacent cell) such that the board becomes peaceful.
 
 // A board is peaceful if there is exactly one rook in each row and each column.
 
@@ -49,7 +51,19 @@ pub struct Solution;
 
 impl Solution {
     pub fn min_moves(mut rooks: Vec<Vec<i32>>) -> i32 {
-        0
+        rooks.sort_unstable();
+        let mut ans = rooks
+            .iter()
+            .enumerate()
+            .map(|(i, x)| x[0].abs_diff(i as i32))
+            .sum::<u32>();
+        rooks.sort_unstable_by_key(|x| x[1]);
+        ans += rooks
+            .iter()
+            .enumerate()
+            .map(|(i, x)| x[1].abs_diff(i as i32))
+            .sum::<u32>();
+        ans as _
     }
 }
 

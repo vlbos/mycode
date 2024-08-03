@@ -2,7 +2,9 @@
 
 // ## Description
 
-// You are given a string compressed representing a compressed version of a string. The format is a character followed by its frequency. For example, "a3b1a1c2" is a compressed version of the string "aaabacc".
+// You are given a string compressed representing a compressed version of a string.
+// The format is a character followed by its frequency.
+//  For example, "a3b1a1c2" is a compressed version of the string "aaabacc".
 
 // We seek a better compression with the following conditions:
 
@@ -50,7 +52,27 @@
 
 impl Solution {
     pub fn better_compression(expression: String) -> String {
-        String::new()
+        let mut m = std::collections::BTreeMap::new();
+        let mut cnt = 0;
+        let mut letter = ' ';
+        for c in expression.chars() {
+            if c.is_ascii_digit() {
+                cnt = cnt * 10 + c.to_digit(10).unwrap();
+                continue;
+            }
+            if cnt > 0 {
+                *m.entry(letter).or_insert(0) += cnt;
+            }
+            letter = c;
+            cnt = 0;
+        }
+        if cnt > 0 {
+            *m.entry(letter).or_insert(0) += cnt;
+        }
+        m.into_iter()
+            .map(|(k, v)| format!("{k}{v}"))
+            .collect::<Vec<_>>()
+            .concat()
     }
 }
 // @lc code=end

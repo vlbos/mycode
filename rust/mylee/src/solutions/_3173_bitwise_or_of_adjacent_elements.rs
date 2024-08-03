@@ -2,7 +2,8 @@
 
 // ## Description
 
-// Given an array nums of length n, return an array answer of length n - 1 such that answer[i] = nums[i] | nums[i + 1] where | is the bitwise OR operation.
+// Given an array nums of length n,
+// return an array answer of length n - 1 such that answer[i] = nums[i] | nums[i + 1] where | is the bitwise OR operation.
 
 //
 // Example 1:
@@ -36,7 +37,7 @@ pub struct Solution {}
 
 impl Solution {
     pub fn or_array(nums: Vec<i32>) -> Vec<i32> {
-        vec![]
+        nums.windows(2).map(|w| w[0] | w[1]).collect()
     }
 }
 

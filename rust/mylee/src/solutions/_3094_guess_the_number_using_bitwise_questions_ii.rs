@@ -6,7 +6,10 @@
 
 // There is a number n between 0 and 230 - 1 (both inclusive) that you have to find.
 
-// There is a pre-defined API int commonBits(int num) that helps you with your mission. But here is the challenge, every time you call this function, n changes in some way. But keep in mind, that you have to find the initial value of n.
+// There is a pre-defined API int commonBits(int num) that helps you with your mission.
+// But here is the challenge, every time you call this function,
+//  n changes in some way.
+// But keep in mind, that you have to find the initial value of n.
 
 // commonBits(int num) acts as follows:
 
@@ -18,7 +21,8 @@
 
 // Return the number n.
 
-// Note: In this world, all numbers are between 0 and 230 - 1 (both inclusive), thus for counting common bits, we see only the first 30 bits of those numbers.
+// Note: In this world, all numbers are between 0 and 230 - 1 (both inclusive),
+//  thus for counting common bits, we see only the first 30 bits of those numbers.
 
 //
 // Constraints:
@@ -33,29 +37,40 @@
 
 //  * Definition of commonBits API.
 //  * int commonBits(int num);
-
+fn common_set_bits(num: i32) -> i32 {
+    0
+}
 #[allow(dead_code)]
 pub struct Solution;
 
 impl Solution {
     pub fn find_number() -> i32 {
-        0
+        (0..32)
+            .map(|i| {
+                let (count1, count2) = (common_set_bits(1 << i), common_set_bits(1 << i));
+                if count1 > count2 {
+                    1 << i
+                } else {
+                    0
+                }
+            })
+            .sum()
     }
 }
 
-// #[cfg(test)]
-// mod test {
-//     use super::*;
-//     #[test]
-//     pub fn test_find_number_1() {
-//         assert_eq!(3, Solution::find_number(InfiniteStream, vec![0, 1]));
-//     }
-//     #[test]
-//     pub fn test_find_number_2() {
-//         assert_eq!(0, Solution::find_number(InfiniteStream, vec![0]));
-//     }
-//     #[test]
-//     pub fn test_find_number_3() {
-//         assert_eq!(2, Solution::find_number(InfiniteStream, vec![1, 1, 0, 1]));
-//     }
-// }
+#[cfg(test)]
+mod test {
+    use super::*;
+    #[test]
+    pub fn test_find_number_1() {
+        assert_eq!(3, Solution::find_number());
+    }
+    #[test]
+    pub fn test_find_number_2() {
+        assert_eq!(0, Solution::find_number());
+    }
+    #[test]
+    pub fn test_find_number_3() {
+        assert_eq!(2, Solution::find_number());
+    }
+}

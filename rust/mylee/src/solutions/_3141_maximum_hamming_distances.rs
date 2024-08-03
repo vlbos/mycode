@@ -4,7 +4,10 @@
 
 //
 
-// Given an array nums and an integer m, with each element nums[i] satisfying 0 <= nums[i] < 2m, return an array answer. The answer array should be of the same length as nums, where each element answer[i] represents the maximum Hamming distance between nums[i] and any other element nums[j] in the array.
+// Given an array nums and an integer m,
+// with each element nums[i] satisfying 0 <= nums[i] < 2m, return an array answer.
+// The answer array should be of the same length as nums,
+//  where each element answer[i] represents the maximum Hamming distance between nums[i] and any other element nums[j] in the array.
 
 // The Hamming distance between two binary integers is defined as the number of positions at which the corresponding bits differ (add leading zeroes if needed).
 
@@ -67,7 +70,29 @@ pub struct Solution {}
 
 impl Solution {
     pub fn max_hamming_distances(nums: Vec<i32>, m: i32) -> Vec<i32> {
-        vec![]
+        let mut dist = vec![-1; 1 << m as usize];
+        for &x in &nums {
+            dist[x as usize] = 0;
+        }
+        let mut q: std::collections::VecDeque<_> = nums.iter().cloned().collect();
+        let mut k = 1;
+        while !q.is_empty() {
+            let len = q.len();
+            for _ in 0..len {
+                let x = q.pop_front().unwrap();
+                for i in 0..m {
+                    let y = x ^ (1 << i as usize);
+                    if dist[y as usize] == -1 {
+                        q.push_back(y);
+                        dist[y as usize] = k;
+                    }
+                }
+            }
+            k += 1;
+        }
+        nums.into_iter()
+            .map(|x| m - dist[(x ^ ((1 << m as usize) - 1)) as usize])
+            .collect()
     }
 }
 

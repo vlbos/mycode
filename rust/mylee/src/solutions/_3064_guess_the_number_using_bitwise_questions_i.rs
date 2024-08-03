@@ -48,7 +48,15 @@ pub struct Solution;
 
 impl Solution {
     pub fn find_number() -> i32 {
-        0
+        (0..32)
+            .map(|i| {
+                if common_set_bits(1 << i) > 0 {
+                    1 << i
+                } else {
+                    0
+                }
+            })
+            .sum()
     }
 }
 

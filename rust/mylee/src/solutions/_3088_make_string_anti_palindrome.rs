@@ -65,7 +65,26 @@ pub struct Solution {}
 
 impl Solution {
     pub fn make_anti_palindrome(s: String) -> String {
-        String::new()
+        let mut bs = s.into_bytes();
+        bs.sort_unstable();
+        let n = bs.len();
+        let m = n / 2;
+        if bs[m] == bs[m - 1] {
+            let mut i = m;
+            while i < n && bs[i] == bs[i - 1] {
+                i += 1;
+            }
+            let mut j = m;
+            while j < n && bs[j] == bs[n - j - 1] {
+                if i >= n {
+                    return String::from("-1");
+                }
+                bs.swap(i, j);
+                i += 1;
+                j += 1;
+            }
+        }
+        String::from_utf8(bs).unwrap()
     }
 }
 

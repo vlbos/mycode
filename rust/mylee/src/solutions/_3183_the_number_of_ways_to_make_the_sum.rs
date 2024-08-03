@@ -5,11 +5,8 @@
 //
 
 // You have an infinite number of coins with values 1, 2, and 6, and only 2 coins with value 4.
-
 // Given an integer n, return the number of ways to make the sum of n with the coins you have.
-
 // Since the answer may be very large, return it modulo 109 + 7.
-
 // Note that the order of the coins doesn't matter and [2, 2, 3] is the same as [2, 3, 2].
 
 //
@@ -63,7 +60,22 @@ pub struct Solution;
 
 impl Solution {
     pub fn number_of_ways(n: i32) -> i32 {
-        0
+        let n = n as usize;
+        let mut f = vec![0; n + 1];
+        f[0] = 1;
+        for x in [1, 2, 6] {
+            for y in x..=n {
+                f[y] = (f[y] + f[y - x]) % 1_000_000_007;
+            }
+        }
+        let mut ans = f[n];
+        if n >= 4 {
+            ans = (ans + f[n - 4]) % 1_000_000_007;
+        }
+        if n >= 8 {
+            ans = (ans + f[n - 8]) % 1_000_000_007;
+        }
+        ans
     }
 }
 

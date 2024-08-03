@@ -107,7 +107,26 @@ use crate::solutions::util::linked_list::ListNode;
 
 impl Solution {
     pub fn game_result(mut head: Option<Box<ListNode>>) -> String {
-        String::new()
+        let mut p = &head;
+        let (mut odd, mut even) = (0, 0);
+        while let Some(node) = p {
+            let next = &node.next;
+            let next_value = next.as_ref().unwrap().val;
+            if node.val > next_value {
+                even += 1;
+            } else if node.val < next_value {
+                odd += 1;
+            }
+            p = &next.as_ref().unwrap().next;
+        }
+        (if even == odd {
+            "Tie"
+        } else if even > odd {
+            "Even"
+        } else {
+            "Odd"
+        })
+        .to_owned()
     }
 }
 

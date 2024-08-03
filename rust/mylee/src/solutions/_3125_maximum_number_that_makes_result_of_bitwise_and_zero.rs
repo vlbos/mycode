@@ -4,7 +4,8 @@
 
 //
 
-// Given an integer n, return the maximum integer x such that x <= n, and the bitwise AND of all the numbers in the range [x, n] is 0.
+// Given an integer n, return the maximum integer x such that x <= n,
+// and the bitwise AND of all the numbers in the range [x, n] is 0.
 
 //
 // Example 1:
@@ -59,8 +60,8 @@
 pub struct Solution;
 
 impl Solution {
-    pub fn max_number(n: i32) -> i32 {
-        0
+    pub fn max_number(n: i64) -> i64 {
+        (1i64 << (63 - n.leading_zeros())) - 1
     }
 }
 

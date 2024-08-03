@@ -59,7 +59,32 @@ pub struct Solution;
 
 impl Solution {
     pub fn max_substring_length(s: String) -> i32 {
-        0
+        let n = s.len();
+        let (mut first, mut last) = (vec![n; 26], vec![n; 26]);
+        for (i, b) in s.bytes().enumerate() {
+            let j = (b - b'a') as usize;
+            if first[j] == n {
+                first[j] = i;
+            }
+            last[j] = i;
+        }
+        let bs = s.as_bytes();
+        let mut ans = -1;
+        for (c, &i) in first.iter().enumerate() {
+            let mut mx = last[c];
+            for j in i..n {
+                let k = (bs[j] - b'a') as usize;
+                let (a, b) = (first[k], last[k]);
+                if a < i {
+                    break;
+                }
+                mx = mx.max(b);
+                if mx == j && (j - i + 1) < n {
+                    ans = ans.max((j - i + 1) as i32);
+                }
+            }
+        }
+        ans
     }
 }
 

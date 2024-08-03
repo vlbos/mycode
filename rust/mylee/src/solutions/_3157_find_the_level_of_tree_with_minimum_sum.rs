@@ -4,7 +4,8 @@
 
 //
 
-// Given the root of a binary tree root where each node has a value, return the level of the tree that has the minimum sum of values among all the levels (in case of a tie, return the lowest level).
+// Given the root of a binary tree root where each node has a value,
+//  return the level of the tree that has the minimum sum of values among all the levels (in case of a tie, return the lowest level).
 
 // Note that the root of the tree is at level 1 and the level of any other node is its distance from the root + 1.
 
@@ -18,9 +19,6 @@
 
 // Explanation:
 
-//
-//
-
 // Example 2:
 
 //
@@ -30,9 +28,6 @@
 
 // Explanation:
 
-//
-//
-
 // Example 3:
 
 //
@@ -41,9 +36,6 @@
 // Output: 1
 
 // Explanation:
-
-//
-//
 
 //
 // Constraints:
@@ -76,7 +68,29 @@ use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
     pub fn minimum_level(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-        0
+        let mut q = std::collections::VecDeque::from([root.clone()]);
+        let (mut ans, mut mn) = (0, i32::MAX);
+        let mut level = 1;
+        while !q.is_empty() {
+            let len = q.len();
+            let mut sum = 0;
+            for _ in 0..len {
+                let node = q.pop_front().unwrap();
+                sum += node.as_ref().unwrap().borrow().val;
+                if node.as_ref().unwrap().borrow().left.is_some() {
+                    q.push_back(node.as_ref().unwrap().borrow().left.clone());
+                }
+                if node.as_ref().unwrap().borrow().right.is_some() {
+                    q.push_back(node.as_ref().unwrap().borrow().right.clone());
+                }
+            }
+            if mn > sum {
+                ans = level;
+                mn = sum;
+            }
+            level += 1;
+        }
+        ans
     }
 }
 

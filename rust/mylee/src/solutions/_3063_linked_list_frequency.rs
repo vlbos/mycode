@@ -8,11 +8,11 @@
 // Example 1:
 
 // Input:   head = [1,1,1,2,2,3]
-
 // Output:   [3,2,1]
 
 // Explanation:  There are 3 distinct elements in the list.
-// The frequency of 1 is 3, the frequency of 2 is 2 and the frequency of 3 is 1. Hence, we return 3 -> 2 -> 1.
+// The frequency of 1 is 3, the frequency of 2 is 2 and the frequency of 3 is 1.
+// Hence, we return 3 -> 2 -> 1.
 
 // Note that 1 -> 2 -> 3, 1 -> 3 -> 2, 2 -> 1 -> 3, 2 -> 3 -> 1, and 3 -> 1 -> 2 are also valid answers.
 
@@ -77,7 +77,18 @@ use crate::solutions::util::linked_list::ListNode;
 
 impl Solution {
     pub fn frequencies_of_elements(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-        None
+        let mut freq = std::collections::HashMap::new();
+        let mut p = &head;
+        while let Some(node) = p {
+            *freq.entry(node.val).or_insert(0) += 1;
+            p = &node.next;
+        }
+        let mut ans = None;
+        let mut tail = &mut ans;
+        for &x in freq.values() {
+            tail = &mut tail.get_or_insert(Box::new(ListNode::new(x))).next;
+        }
+        ans
     }
 }
 
