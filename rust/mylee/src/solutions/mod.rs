@@ -402,4 +402,12 @@ pub mod _3167_better_compression_of_string;
 pub mod _3173_bitwise_or_of_adjacent_elements;
 pub mod _3183_the_number_of_ways_to_make_the_sum;
 pub mod _3189_minimum_moves_to_get_a_peaceful_board;
+pub mod _3199_count_triplets_with_even_xor_set_bits_i;
+pub mod _3205_maximum_array_hopping_score_i;
+pub mod _3215_count_triplets_with_even_xor_set_bits_ii;
+pub mod _3221_maximum_array_hopping_score_ii;
+pub mod _3231_minimum_number_of_increasing_subsequence_to_be_removed;
+pub mod _3237_alt_and_tab_simulation;
+pub mod _3247_number_of_subsequences_with_odd_sum;
+
 pub mod util;
