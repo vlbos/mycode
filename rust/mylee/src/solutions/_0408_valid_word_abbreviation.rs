@@ -38,13 +38,97 @@
 // @lc code=start
 
 // #[derive(Debug)]
-// enum AbbrType {
-//     Char(char),
-//     Num(i32),
-// }
 
 impl Solution {
     pub fn valid_word_abbreviation(word: String, abbr: String) -> bool {
+        let word = word.chars().collect::<Vec<_>>();
+
+        let mut step = 0;
+        let mut idx = -1i32 as usize;
+        for c in abbr.bytes() {
+            if c == b'0' && step == 0 {
+                return false;
+            }
+            if c >= b'0' && c <= b'9' {
+                step = step * 10 + (c - b'0') as usize;
+            } else {
+                idx += step + 1;
+                if idx >= word.len() {
+                    return false;
+                }
+                if word[idx] != c as char {
+                    return false;
+                }
+                step = 0;
+            }
+        }
+        word.len() == idx + step + 1
+    }
+    pub fn valid_word_abbreviation2(word: String, abbr: String) -> bool {
+        enum AbbrType {
+            Char(char),
+            Num(i32),
+        }
+        fn validate_and_transform_num(num_chars: Vec<char>) -> (i32, bool) {
+            let str: String = num_chars.iter().collect();
+            let num = str.parse::<i32>().unwrap();
+            (num, num != 0 && num.to_string() == str)
+        }
+
+        let mut achars: Vec<AbbrType> = vec![];
+        let mut current_num: Option<Vec<char>> = None;
+        for a in abbr.chars() {
+            if a.is_digit(10) {
+                current_num = match &mut current_num {
+                    Some(ref mut v) => {
+                        v.push(a);
+                        current_num
+                    }
+                    None => Some(vec![a]),
+                }
+            } else {
+                if let Some(v) = current_num {
+                    let (num, valid_num) = validate_and_transform_num(v);
+                    if !valid_num {
+                        return false;
+                    }
+                    achars.push(AbbrType::Num(num));
+                    current_num = None;
+                }
+                achars.push(AbbrType::Char(a));
+            }
+        }
+        if let Some(v) = current_num {
+            let (num, valid_num) = validate_and_transform_num(v);
+            if !valid_num {
+                return false;
+            }
+            achars.push(AbbrType::Num(num));
+        }
+        let mut i = 0;
+        let wchars = word.chars().collect::<Vec<char>>();
+        let wlen = wchars.len() as i32;
+        for a in achars {
+            i += match a {
+                AbbrType::Char(ch) => {
+                    if i >= wlen || ch != wchars[i as usize] {
+                        return false;
+                    }
+                    1
+                }
+                AbbrType::Num(num) => {
+                    for j in 0..num {
+                        if i + j >= wlen {
+                            return false;
+                        }
+                    }
+                    num
+                }
+            }
+        }
+        i == wlen
+    }
+    pub fn valid_word_abbreviationerror(word: String, abbr: String) -> bool {
         let (bw, ba) = (word.as_bytes(), abbr.as_bytes());
         let (mut i, mut j) = (0, 0);
         while i < bw.len() && j < ba.len() {
@@ -68,95 +152,10 @@ impl Solution {
             j += 1;
         }
         true
-        // let mut achars: Vec<AbbrType> = vec![];
-        // let mut current_num: Option<Vec<char>> = None;
-        // for a in abbr.chars() {
-        //     if a.is_digit(10) {
-        //         current_num = match &mut current_num {
-        //             Some(ref mut v) => {
-        //                 v.push(a);
-        //                 current_num
-        //             }
-        //             None => Some(vec![a]),
-        //         }
-        //     } else {
-        //         if let Some(v) = current_num {
-        //             let (num, valid_num) = Solution::validate_and_transform_num(v);
-        //             if !valid_num {
-        //                 return false;
-        //             }
-        //             achars.push(AbbrType::Num(num));
-        //             current_num = None;
-        //         }
-        //         achars.push(AbbrType::Char(a));
-        //     }
-        // }
-        // if let Some(v) = current_num {
-        //     let (num, valid_num) = Solution::validate_and_transform_num(v);
-        //     if !valid_num {
-        //         return false;
-        //     }
-        //     achars.push(AbbrType::Num(num));
-        // }
-        // let mut i = 0;
-        // let wchars = word.chars().collect::<Vec<char>>();
-        // let wlen = wchars.len() as i32;
-        // println!("{:?}", achars);
-        // for a in achars {
-        //     i += match a {
-        //         AbbrType::Char(ch) => {
-        //             if i >= wlen || ch != wchars[i as usize] {
-        //                 return false;
-        //             }
-        //             1
-        //         }
-        //         AbbrType::Num(num) => {
-        //             for j in 0..num {
-        //                 if i + j >= wlen {
-        //                     return false;
-        //                 }
-        //             }
-        //             num
-        //         }
-        //     }
-        // }
-        // i == wlen
     }
-
-    //pub fn  validate_and_transform_num(num_chars: Vec<char>) -> (i32, bool) {
-    //     let str: String = num_chars.iter().collect();
-    //     let num = str.parse::<i32>().unwrap();
-    //     (num, num != 0 && num.to_string() == str)
-    // }
 }
+
 // @lc code=end
-
-// impl Solution {
-//     pub fn valid_word_abbreviation(word: String, abbr: String) -> bool {
-//  let word = word.chars().collect::<Vec<_>>();
-
-//         let mut step = 0;
-//         let mut idx = -1i32 as usize;
-//         for c in abbr.bytes() {
-//             if c == b'0' && step == 0 {
-//                 return false;
-//             }
-//             if c >= b'0' && c <= b'9' {
-//                 step = step * 10 + (c - b'0') as usize;
-//             } else {
-//                 idx += step + 1;
-//                 if idx >= word.len() {
-//                     return false;
-//                 }
-//                 if word[idx] != c as char {
-//                     return false;
-//                 }
-//                 step = 0;
-//             }
-//         }
-//         word.len() == idx + step + 1
-//     }
-// }
 
 #[allow(dead_code)]
 pub struct Solution;

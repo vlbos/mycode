@@ -35,7 +35,7 @@
 pub struct Solution {}
 impl Solution {
     #[allow(dead_code)]
-    pub fn minmax_gas_dist(stations: Vec<i32>, k: i32) -> f64 {
+    pub fn minmax_gas_dist_error(stations: Vec<i32>, k: i32) -> f64 {
         let (mut left, mut right) = (0.0, 1e8);
         while right - left > 1e-6 {
             let mid = (right + left) / 2.0;
@@ -52,33 +52,31 @@ impl Solution {
         }
         right / 2.0
     }
+
+    pub fn minmax_gas_dist(mut stations: Vec<i32>, k: i32) -> f64 {
+        stations.sort_unstable();
+        let stations = stations.into_iter().map(|x| x as f64).collect::<Vec<_>>();
+        let mut lo = 0.0;
+        let mut hi = 1e8;
+
+        while hi - lo > 1e-6 {
+            let mid = lo + (hi - lo) / 2.0;
+            let mut cnt = 0;
+
+            for i in 1..stations.len() {
+                cnt += ((stations[i] - stations[i - 1]) / mid) as i32;
+            }
+
+            if cnt <= k {
+                hi = mid;
+            } else {
+                lo = mid;
+            }
+        }
+
+        lo
+    }
 }
-
-// impl Solution {
-//     pub fn minmax_gas_dist(mut stations: Vec<i32>, k: i32) -> f64 {
-//         stations.sort();
-//         let stations = stations.into_iter().map(|x| x as f64).collect::<Vec<_>>();
-//         let mut lo = 0.0;
-//         let mut hi = 1e8;
-
-//         while hi - lo > 1e-6 {
-//             let mid = lo + (hi - lo) / 2.0;
-//             let mut cnt = 0;
-
-//             for i in 1..stations.len() {
-//                 cnt += ((stations[i] - stations[i-1]) / mid) as i32;
-//             }
-
-//             if cnt <= k {
-//                 hi = mid;
-//             } else {
-//                 lo = mid;
-//             }
-//         }
-
-//         lo
-//     }
-// }
 
 #[cfg(test)]
 mod test {

@@ -260,42 +260,39 @@ impl Codec {
         let strs: Vec<String> = strs
             .into_iter()
             .map(|mut x| {
-                x = x.replace("|", "||");
-                x
+                if x.is_empty() {
+                    String::from(".")
+                } else {
+                    x.bytes()
+                        .map(|b| format!("{:02x}", b))
+                        .collect::<Vec<_>>()
+                        .concat()
+                }
             })
             .collect();
-        strs.join("|")
+
+        strs.join(",")
     }
 
     pub fn decode(&self, s: String) -> Vec<String> {
         // let trie = TrieTree::deserialize(&s);
         // trie.retrieve()
-        let mut ans = Vec::new();
-        let mut j = 0;
-        let mut k = 0;
-        let mut indices = Vec::new();
-        for (i, _) in s.match_indices("|") {
-            if i == j + 1 {
-                k += 1;
-            } else {
-                if k % 2 == 0 {
-                    indices.push(i);
+        s.split(",")
+            .map(|x| {
+                if x == "." {
+                    String::new()
+                } else {
+                    x.as_bytes()
+                        .chunks(2)
+                        .map(|w| {
+                            ((w[0] as char).to_digit(16).unwrap() as u8 * 16
+                                + (w[1] as char).to_digit(16).unwrap() as u8)
+                                as char
+                        })
+                        .collect::<String>()
                 }
-                k = 0;
-            }
-            j = i;
-        }
-        j = 0;
-        for &i in &indices {
-            let ss = s[j..i].replace("||", "|");
-            ans.push(ss.to_string());
-            j = i + 1;
-        }
-        if j < s.len() {
-            let ss = s[j..].replace("||", "|");
-            ans.push(ss.to_string());
-        }
-        ans
+            })
+            .collect()
     }
 
     // pub fn encode(&self, strs: Vec<String>) -> String {

@@ -39,39 +39,9 @@
 // 3.  The number of `1`s in the grid will be at most `6000`.
 
 // @lc code=start
-// use std::collections::HashMap;
 
 impl Solution {
     pub fn count_corner_rectangles(grid: Vec<Vec<i32>>) -> i32 {
-        // let rows = grid.len();
-        // let cols = if rows == 0 { 0 } else { grid[0].len() };
-        // if rows * cols == 0 {
-        //     return 0;
-        // }
-        // let mut dict = HashMap::<(usize, usize), usize>::new();
-        // for i in 0..rows {
-        //     let mut exists = grid[i]
-        //         .iter()
-        //         .enumerate()
-        //         .filter(|(_, &v)| v != 0)
-        //         .map(|(j, _)| j)
-        //         .collect::<Vec<_>>();
-        //     let e_len = exists.len();
-        //     if e_len <= 1 {
-        //         continue;
-        //     }
-        //     exists.sort();
-        //     for i in 0..e_len {
-        //         for j in (i + 1)..e_len {
-        //             dict.entry((exists[i], exists[j]))
-        //                 .and_modify(|v| *v += 1)
-        //                 .or_insert(1);
-        //         }
-        //     }
-        // }
-        // dict.into_iter()
-        //     .map(|(_, v)| v * (v - 1) / 2)
-        //     .fold(0usize, |acc, curr| acc + curr) as i32
         let (m, n) = (grid.len(), grid[0].len());
         let mut ans = 0;
         for i in 0..m {
@@ -86,6 +56,39 @@ impl Solution {
             }
         }
         ans
+    }
+
+    pub fn count_corner_rectangles2(grid: Vec<Vec<i32>>) -> i32 {
+        use std::collections::HashMap;
+        let rows = grid.len();
+        let cols = if rows == 0 { 0 } else { grid[0].len() };
+        if rows * cols == 0 {
+            return 0;
+        }
+        let mut dict = HashMap::<(usize, usize), usize>::new();
+        for i in 0..rows {
+            let mut exists = grid[i]
+                .iter()
+                .enumerate()
+                .filter(|(_, &v)| v != 0)
+                .map(|(j, _)| j)
+                .collect::<Vec<_>>();
+            let e_len = exists.len();
+            if e_len <= 1 {
+                continue;
+            }
+            exists.sort();
+            for i in 0..e_len {
+                for j in (i + 1)..e_len {
+                    dict.entry((exists[i], exists[j]))
+                        .and_modify(|v| *v += 1)
+                        .or_insert(1);
+                }
+            }
+        }
+        dict.into_iter()
+            .map(|(_, v)| v * (v - 1) / 2)
+            .fold(0usize, |acc, curr| acc + curr) as i32
     }
 }
 // @lc code=end

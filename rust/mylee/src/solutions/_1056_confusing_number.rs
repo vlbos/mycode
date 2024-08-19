@@ -70,20 +70,23 @@ impl Solution {
             == 0
             && ns.chars().filter(|x| "69".chars().any(|c| c == *x)).count() > 0
     }
+    pub fn confusing_number2(n: i32) -> bool {
+        n != n
+            .to_string()
+            .chars()
+            .map(|c| match c.to_digit(10).unwrap() {
+                2 | 3 | 4 | 5 | 7 => ' ',
+                6 => '9',
+                9 => '6',
+                _ => c,
+            })
+            .rev()
+            .collect::<String>()
+            .parse::<i32>()
+            .unwrap_or(n)
+    }
 }
 
-// impl Solution {
-//     pub fn confusing_number(n: i32) -> bool {
-//     n != n.to_string().chars().map(|c| {
-//             match c.to_digit(10).unwrap() {
-//                 2 | 3 | 4 | 5 | 7 => ' ',
-//                 6 => '9',
-//                 9 => '6',
-//                 _ => c,
-//             }
-//         }).rev().collect::<String>().parse::<i32>().unwrap_or(n)
-//     }
-// }
 #[cfg(test)]
 mod test {
     use super::*;

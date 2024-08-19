@@ -42,18 +42,8 @@
 
 // @lc code=start
 
-// #[derive(Clone, Debug)]
-// enum StringIteratorState {
-//     Unknown,
-//     Current { content: char, repeat: usize },
-//     Empty,
-// }
-
 #[derive(Clone, Debug)]
 pub struct StringIterator {
-    // source: Vec<char>,
-    // cursor: usize,
-    // state: StringIteratorState,
     s: Vec<char>,
     t: Vec<i32>,
     idx: usize,
@@ -66,13 +56,6 @@ pub struct StringIterator {
  */
 impl StringIterator {
     pub fn new(compressed_string: String) -> Self {
-        // let mut source = compressed_string.chars().collect::<Vec<_>>();
-        // source.push('#');
-        // Self {
-        //     source,
-        //     cursor: 0,
-        //     state: StringIteratorState::Unknown,
-        // }
         let s: Vec<char> = compressed_string
             .split(char::is_numeric)
             .filter(|x| !x.is_empty())
@@ -87,51 +70,7 @@ impl StringIterator {
         Self { s, t, idx: 0, i: 0 }
     }
 
-    // pub fn   consume_next(&mut self) {
-    //     // if let StringIteratorState::Unknown = self.state {
-    //     //     let mut i = self.cursor;
-    //     //     let ch = self.source[i];
-    //     //     self.state = if ch == '#' {
-    //     //         StringIteratorState::Empty
-    //     //     } else {
-    //     //         let content = ch;
-    //     //         let mut num_str = String::new();
-    //     //         while i < self.source.len() {
-    //     //             i += 1;
-    //     //             let c = self.source[i];
-    //     //             if c.is_digit(10) {
-    //     //                 num_str.push(c);
-    //     //             } else {
-    //     //                 break;
-    //     //             }
-    //     //         }
-    //     //         self.cursor = i;
-    //     //         StringIteratorState::Current {
-    //     //             content,
-    //     //             repeat: num_str.parse::<usize>().unwrap(),
-    //     //         }
-    //     //     };
-    //     // }
-    // }
-
     pub fn next(&mut self) -> char {
-        // self.consume_next();
-        // let res = match self.state {
-        //     StringIteratorState::Empty => ' ',
-        //     StringIteratorState::Current { content, repeat: _ } => content,
-        //     _ => unreachable!(),
-        // };
-        // if let StringIteratorState::Current { content, repeat } = self.state {
-        //     self.state = if repeat == 1 {
-        //         StringIteratorState::Unknown
-        //     } else {
-        //         StringIteratorState::Current {
-        //             content,
-        //             repeat: repeat - 1,
-        //         }
-        //     };
-        // };
-        // res
         if self.idx == self.s.len() {
             return ' ';
         }
@@ -148,16 +87,99 @@ impl StringIterator {
     }
 
     pub fn has_next(&mut self) -> bool {
-        // self.consume_next();
-        // match self.state {
-        //     StringIteratorState::Empty => false,
-        //     StringIteratorState::Current {
-        //         content: _,
-        //         repeat: _,
-        //     } => true,
-        //     _ => unreachable!(),
-        // }
         self.idx + 1 < self.s.len() || (self.idx + 1 == self.s.len() && self.i < self.t[self.idx])
+    }
+}
+
+mod sol2 {
+
+    #[derive(Clone, Debug)]
+    enum StringIteratorState {
+        Unknown,
+        Current { content: char, repeat: usize },
+        Empty,
+    }
+
+    #[derive(Clone, Debug)]
+    pub struct StringIterator {
+        source: Vec<char>,
+        cursor: usize,
+        state: StringIteratorState,
+    }
+
+    /**
+     * `&self` means the method takes an immutable reference.
+     * If you need a mutable reference, change it to `&mut self` instead.
+     */
+    impl StringIterator {
+        pub fn new(compressed_string: String) -> Self {
+            let mut source = compressed_string.chars().collect::<Vec<_>>();
+            source.push('#');
+            Self {
+                source,
+                cursor: 0,
+                state: StringIteratorState::Unknown,
+            }
+        }
+
+        pub fn consume_next(&mut self) {
+            if let StringIteratorState::Unknown = self.state {
+                let mut i = self.cursor;
+                let ch = self.source[i];
+                self.state = if ch == '#' {
+                    StringIteratorState::Empty
+                } else {
+                    let content = ch;
+                    let mut num_str = String::new();
+                    while i < self.source.len() {
+                        i += 1;
+                        let c = self.source[i];
+                        if c.is_digit(10) {
+                            num_str.push(c);
+                        } else {
+                            break;
+                        }
+                    }
+                    self.cursor = i;
+                    StringIteratorState::Current {
+                        content,
+                        repeat: num_str.parse::<usize>().unwrap(),
+                    }
+                };
+            }
+        }
+
+        pub fn next(&mut self) -> char {
+            self.consume_next();
+            let res = match self.state {
+                StringIteratorState::Empty => ' ',
+                StringIteratorState::Current { content, repeat: _ } => content,
+                _ => unreachable!(),
+            };
+            if let StringIteratorState::Current { content, repeat } = self.state {
+                self.state = if repeat == 1 {
+                    StringIteratorState::Unknown
+                } else {
+                    StringIteratorState::Current {
+                        content,
+                        repeat: repeat - 1,
+                    }
+                };
+            };
+            res
+        }
+
+        pub fn has_next(&mut self) -> bool {
+            self.consume_next();
+            match self.state {
+                StringIteratorState::Empty => false,
+                StringIteratorState::Current {
+                    content: _,
+                    repeat: _,
+                } => true,
+                _ => unreachable!(),
+            }
+        }
     }
 }
 

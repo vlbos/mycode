@@ -36,17 +36,55 @@
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Google](https://leetcode.ca/tags/#Google) [Snapchat](https://leetcode.ca/tags/#Snapchat) [Twitter](https://leetcode.ca/tags/#Twitter)
 
 // @lc code=start
-// use std::collections::BTreeMap;
-// use std::ops::Bound::Included;
+mod errorsol1 {
+    use std::collections::HashMap;
+    pub struct LogSystem {
+        id2tm: HashMap<i32, String>,
+        granularities: HashMap<String, usize>,
+    }
 
-// const STARTS: [&'static str; 6] = ["0000", "00", "00", "00", "00", "00"];
-// const ENDS: [&'static str; 6] = ["9999", "12", "31", "23", "59", "59"];
+    /**
+     * `&self` means the method takes an immutable reference.
+     * If you need a mutable reference, change it to `&mut self` instead.
+     */
+    impl LogSystem {
+        pub fn new() -> Self {
+            Self {
+                id2tm: HashMap::new(),
+                granularities: ["Year", "Month", "Day", "Hour", "Minute", "Second"]
+                    .iter()
+                    .enumerate()
+                    .map(|(i, v)| (v.to_string(), i + 1))
+                    .collect(),
+            }
+        }
 
-use std::collections::HashMap;
+        pub fn put(&mut self, id: i32, timestamp: String) {
+            self.id2tm.insert(id, timestamp);
+        }
+
+        pub fn retrieve(&self, start: String, end: String, granularity: String) -> Vec<i32> {
+            let mut ans = Vec::new();
+            let i = *self.granularities.get(&granularity).unwrap() * 3 + 1;
+            for (&id, tm) in &self.id2tm {
+                let (pre, start, end) = (&tm[..i], &start[..i], &end[..i]);
+                if pre >= start && pre <= end {
+                    ans.push(id);
+                }
+            }
+            ans
+        }
+    }
+}
+
+use std::collections::BTreeMap;
+use std::ops::Bound::Included;
+
+const STARTS: [&'static str; 6] = ["0000", "00", "00", "00", "00", "00"];
+const ENDS: [&'static str; 6] = ["9999", "12", "31", "23", "59", "59"];
+
 pub struct LogSystem {
-    // logs: BTreeMap<u64, i32>,
-    id2tm: HashMap<i32, String>,
-    granularities: HashMap<String, usize>,
+    logs: BTreeMap<u64, i32>,
 }
 
 /**
@@ -55,86 +93,68 @@ pub struct LogSystem {
  */
 impl LogSystem {
     pub fn new() -> Self {
-        // Self {
-        //     logs: BTreeMap::new(),
-        // }
         Self {
-            id2tm: HashMap::new(),
-            granularities: ["Year", "Month", "Day", "Hour", "Minute", "Second"]
-                .iter()
-                .enumerate()
-                .map(|(i, v)| (v.to_string(), i + 1))
-                .collect(),
+            logs: BTreeMap::new(),
         }
     }
 
     pub fn put(&mut self, id: i32, timestamp: String) {
-        // self.logs.insert(LogSystem::to_timestamp(&timestamp), id);
-        self.id2tm.insert(id, timestamp);
+        self.logs.insert(LogSystem::to_timestamp(&timestamp), id);
     }
 
     pub fn retrieve(&self, start: String, end: String, granularity: String) -> Vec<i32> {
-        // let level = LogSystem::granularity_to_level(&granularity);
-        // let from = LogSystem::to_start_timestamp(&start, level);
-        // let to = LogSystem::to_end_timestamp(&end, level);
-        // self.logs
-        //     .range((Included(&from), Included(&to)))
-        //     .map(|(_, v)| *v)
-        //     .collect()
-        let mut ans = Vec::new();
-        let i = *self.granularities.get(&granularity).unwrap() * 3 + 1;
-        for (&id, tm) in &self.id2tm {
-            let (pre, start, end) = (&tm[..i], &start[..i], &end[..i]);
-            if pre >= start && pre <= end {
-                ans.push(id);
-            }
-        }
-        ans
+        let level = LogSystem::granularity_to_level(&granularity);
+        let from = LogSystem::to_start_timestamp(&start, level);
+        let to = LogSystem::to_end_timestamp(&end, level);
+        self.logs
+            .range((Included(&from), Included(&to)))
+            .map(|(_, v)| *v)
+            .collect()
     }
 
-    //pub fn  timestamp_to_chunks<'a>(ts: &'a str) -> Vec<&'a str> {
-    //     ts.split(":").collect::<Vec<_>>()
-    // }
+    pub fn timestamp_to_chunks<'a>(ts: &'a str) -> Vec<&'a str> {
+        ts.split(":").collect::<Vec<_>>()
+    }
 
-    //pub fn  granularity_to_level(granularity: &str) -> usize {
-    //     match granularity {
-    //         "Year" => 1,
-    //         "Month" => 2,
-    //         "Day" => 3,
-    //         "Hour" => 4,
-    //         "Minute" => 5,
-    //         "Second" => 6,
-    //         _ => unreachable!(),
-    //     }
-    // }
+    pub fn granularity_to_level(granularity: &str) -> usize {
+        match granularity {
+            "Year" => 1,
+            "Month" => 2,
+            "Day" => 3,
+            "Hour" => 4,
+            "Minute" => 5,
+            "Second" => 6,
+            _ => unreachable!(),
+        }
+    }
 
-    //pub fn  to_timestamp(ts: &str) -> u64 {
-    //     ts.replace(":", "").parse::<u64>().unwrap()
-    // }
+    pub fn to_timestamp(ts: &str) -> u64 {
+        ts.replace(":", "").parse::<u64>().unwrap()
+    }
 
-    //pub fn  to_start_timestamp(ts: &str, level: usize) -> u64 {
-    //     let chunks = LogSystem::timestamp_to_chunks(ts);
-    //     let mut res = String::new();
-    //     for i in 0..level {
-    //         res += chunks[i];
-    //     }
-    //     for i in level..chunks.len() {
-    //         res += STARTS[i];
-    //     }
-    //     res.parse::<u64>().unwrap()
-    // }
+    pub fn to_start_timestamp(ts: &str, level: usize) -> u64 {
+        let chunks = LogSystem::timestamp_to_chunks(ts);
+        let mut res = String::new();
+        for i in 0..level {
+            res += chunks[i];
+        }
+        for i in level..chunks.len() {
+            res += STARTS[i];
+        }
+        res.parse::<u64>().unwrap()
+    }
 
-    //pub fn  to_end_timestamp(ts: &str, level: usize) -> u64 {
-    //     let chunks = LogSystem::timestamp_to_chunks(ts);
-    //     let mut res = String::new();
-    //     for i in 0..level {
-    //         res += chunks[i];
-    //     }
-    //     for i in level..chunks.len() {
-    //         res += ENDS[i];
-    //     }
-    //     res.parse::<u64>().unwrap()
-    // }
+    pub fn to_end_timestamp(ts: &str, level: usize) -> u64 {
+        let chunks = LogSystem::timestamp_to_chunks(ts);
+        let mut res = String::new();
+        for i in 0..level {
+            res += chunks[i];
+        }
+        for i in level..chunks.len() {
+            res += ENDS[i];
+        }
+        res.parse::<u64>().unwrap()
+    }
 }
 
 // @lc code=end
@@ -143,6 +163,15 @@ impl LogSystem {
 mod test {
     use super::*;
     use std::collections::HashSet;
+
+    // ["LogSystem","put","put","retrieve","retrieve", "retrieve"]
+    // [[],[1,"2017:01:01:00:00:00"],[1,"2015:01:01:00:00:00"],["2015:01:01:00:00:00","2017:01:01:01:00:00","Year"],["2015:01:01:00:00:00","2015:01:01:00:00:01","Year"], ["2017:01:01:00:00:00","2017:01:01:00:00:01","Year"]]
+
+    // Use Testcase
+    // Output
+    // [null,null,null,[1],[1],[]]
+    // Expected
+    // [null,null,null,[1,1],[1],[1]]
     #[test]
     pub fn test_log_system_1() {
         let mut ls = LogSystem::new();

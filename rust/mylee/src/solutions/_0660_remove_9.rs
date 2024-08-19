@@ -29,20 +29,22 @@
 // @lc code=start
 impl Solution {
     pub fn new_integer(mut n: i32) -> i32 {
-        // let mut res = 0;
-        // let mut times = 0;
-        // while n > 0 {
-        //     res += (n % 9) * i32::pow(10, times);
-        //     n /= 9;
-        //     times += 1;
-        // }
-        // res
         let mut ans = String::new();
         while n > 0 {
             ans = (n % 9).to_string() + ans.as_str();
             n /= 9;
         }
         ans.parse::<i32>().unwrap()
+    }
+    pub fn new_integer2(mut n: i32) -> i32 {
+        let mut res = 0;
+        let mut times = 0;
+        while n > 0 {
+            res += (n % 9) * i32::pow(10, times);
+            n /= 9;
+            times += 1;
+        }
+        res
     }
 }
 // @lc code=end

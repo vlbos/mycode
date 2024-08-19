@@ -35,26 +35,6 @@
 // @lc code=start
 impl Solution {
     pub fn find_max_average(nums: Vec<i32>, k: i32) -> f64 {
-        // let len = nums.len();
-        // let k = k as usize;
-        // if len == 0 || k > len || k == 0 {
-        //     return 0f64;
-        // }
-        // let mut min_val = nums.iter().cloned().min().unwrap() as f64;
-        // let mut max_val = nums.iter().cloned().max().unwrap() as f64;
-        // let mut prev_mid = max_val;
-        // let mut error = i32::max_value() as f64;
-        // while error > 0.00001 {
-        //     let mid = (min_val + max_val) / 2.0;
-        //     if Solution::has_k_more_average(&nums, mid, k) {
-        //         min_val = mid;
-        //     } else {
-        //         max_val = mid;
-        //     }
-        //     error = f64::abs(prev_mid - mid);
-        //     prev_mid = mid;
-        // }
-        // min_val
         let k = k as usize;
         let (mut left, mut right) = (
             *nums.iter().min().unwrap() as f64,
@@ -84,26 +64,49 @@ impl Solution {
         left
     }
 
-    //pub fn  has_k_more_average(nums: &[i32], ave: f64, k: usize) -> bool {
-    //     let mut min_sum = 0f64;
-    //     let mut sum = 0f64;
-    //     for i in 0..k {
-    //         sum += (nums[i] as f64) - ave;
-    //     }
-    //     if sum > 0f64 {
-    //         return true;
-    //     }
-    //     let mut prev = 0f64;
-    //     for i in k..nums.len() {
-    //         sum += (nums[i] as f64) - ave;
-    //         prev += (nums[i - k] as f64) - ave;
-    //         min_sum = f64::min(prev, min_sum);
-    //         if sum - min_sum > 0.0 {
-    //             return true;
-    //         }
-    //     }
-    //     false
-    // }
+    pub fn find_max_average2(nums: Vec<i32>, k: i32) -> f64 {
+        let len = nums.len();
+        let k = k as usize;
+        if len == 0 || k > len || k == 0 {
+            return 0f64;
+        }
+        let mut min_val = nums.iter().cloned().min().unwrap() as f64;
+        let mut max_val = nums.iter().cloned().max().unwrap() as f64;
+        let mut prev_mid = max_val;
+        let mut error = i32::max_value() as f64;
+
+        fn has_k_more_average(nums: &[i32], ave: f64, k: usize) -> bool {
+            let mut min_sum = 0f64;
+            let mut sum = 0f64;
+            for i in 0..k {
+                sum += (nums[i] as f64) - ave;
+            }
+            if sum > 0f64 {
+                return true;
+            }
+            let mut prev = 0f64;
+            for i in k..nums.len() {
+                sum += (nums[i] as f64) - ave;
+                prev += (nums[i - k] as f64) - ave;
+                min_sum = f64::min(prev, min_sum);
+                if sum - min_sum > 0.0 {
+                    return true;
+                }
+            }
+            false
+        }
+        while error > 0.00001 {
+            let mid = (min_val + max_val) / 2.0;
+            if has_k_more_average(&nums, mid, k) {
+                min_val = mid;
+            } else {
+                max_val = mid;
+            }
+            error = f64::abs(prev_mid - mid);
+            prev_mid = mid;
+        }
+        min_val
+    }
 }
 // @lc code=end
 

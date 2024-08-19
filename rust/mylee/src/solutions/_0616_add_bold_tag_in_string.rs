@@ -38,65 +38,11 @@
 
 // [Facebook](https://leetcode.ca/tags/#Facebook) [Google](https://leetcode.ca/tags/#Google)
 // @lc code=start
-// const OPEN_TAG: &'static str = "<b>";
-// const CLOSE_TAG: &'static str = "</b>";
 
 impl Solution {
-    pub fn add_bold_tag(s: String, dict: Vec<String>) -> String {
-        // let mut ranges = vec![];
-        // let len = s.len();
-        // if dict.is_empty() {
-        //     return s;
-        // }
-        // for d in dict {
-        //     let dlen = d.len();
-        //     if len >= dlen {
-        //         for i in 0..(len - dlen + 1) {
-        //             if &d == &s[i..(i + dlen)] {
-        //                 ranges.push((i, i + dlen));
-        //             }
-        //         }
-        //     }
-        // }
-        // ranges.sort();
-        // let mut merged: Vec<(usize, usize)> = vec![];
-        // for r in ranges {
-        //     let last = merged.pop();
-        //     if let None = last {
-        //         merged.push(r);
-        //     } else {
-        //         let l = last.unwrap();
-        //         if l.1 >= r.0 {
-        //             merged.push((l.0, usize::max(l.1, r.1)));
-        //         } else {
-        //             merged.push(l);
-        //             merged.push(r);
-        //         }
-        //     }
-        // }
-        // if merged.is_empty() {
-        //     return s;
-        // }
-
-        // let mut res = String::new();
-        // for i in 0..merged.len() {
-        //     let curr = &merged[i];
-        //     if i >= 1 {
-        //         let last = &merged[i - 1];
-        //         res += &s[last.1..curr.0];
-        //     } else {
-        //         res += &s[0..curr.0];
-        //     }
-        //     res += OPEN_TAG;
-        //     res += &s[curr.0..curr.1];
-        //     res += CLOSE_TAG;
-        // }
-        // if let Some(&(_, to)) = merged.last() {
-        //     res += &s[to..];
-        // }
-        // res
+    pub fn add_bold_tagerror(s: String, words: Vec<String>) -> String {
         let mut pairs = Vec::new();
-        for w in &dict {
+        for w in &words {
             let i = s.find(w).unwrap();
             pairs.push(vec![i, i + w.len()]);
         }
@@ -122,64 +68,126 @@ impl Solution {
         }
         s
     }
+    pub fn add_bold_tag(s: String, words: Vec<String>) -> String {
+        const OPEN_TAG: &'static str = "<b>";
+        const CLOSE_TAG: &'static str = "</b>";
+        let mut ranges = vec![];
+        let len = s.len();
+        if words.is_empty() {
+            return s;
+        }
+        for d in words {
+            let dlen = d.len();
+            if len >= dlen {
+                for i in 0..(len - dlen + 1) {
+                    if &d == &s[i..(i + dlen)] {
+                        ranges.push((i, i + dlen));
+                    }
+                }
+            }
+        }
+        ranges.sort();
+        let mut merged: Vec<(usize, usize)> = vec![];
+        for r in ranges {
+            let last = merged.pop();
+            if let None = last {
+                merged.push(r);
+            } else {
+                let l = last.unwrap();
+                if l.1 >= r.0 {
+                    merged.push((l.0, usize::max(l.1, r.1)));
+                } else {
+                    merged.push(l);
+                    merged.push(r);
+                }
+            }
+        }
+        if merged.is_empty() {
+            return s;
+        }
+
+        let mut res = String::new();
+        for i in 0..merged.len() {
+            let curr = &merged[i];
+            if i >= 1 {
+                let last = &merged[i - 1];
+                res += &s[last.1..curr.0];
+            } else {
+                res += &s[0..curr.0];
+            }
+            res += OPEN_TAG;
+            res += &s[curr.0..curr.1];
+            res += CLOSE_TAG;
+        }
+        if let Some(&(_, to)) = merged.last() {
+            res += &s[to..];
+        }
+        res
+    }
+    pub fn add_bold_tag3(s: String, words: Vec<String>) -> String {
+        let n = s.len();
+        let mut hightlights = vec![];
+
+        for word in words {
+            let mut i = 0;
+            let m = word.len();
+
+            while let Some(pos) = s[i..].find(&word) {
+                hightlights.push((i + pos, i + pos + m));
+                i += pos + 1;
+            }
+        }
+
+        let m = hightlights.len();
+
+        if m == 0 {
+            return s;
+        }
+
+        hightlights.sort_by(|a, b| a.0.cmp(&b.0));
+        let mut highlights_merged = vec![hightlights[0]];
+
+        for i in 1..m {
+            let last = highlights_merged.len() - 1;
+            if highlights_merged[last].1 < hightlights[i].0 {
+                highlights_merged.push(hightlights[i]);
+            } else {
+                highlights_merged[last].1 = highlights_merged[last].1.max(hightlights[i].1);
+            }
+        }
+
+        let mut prev = 0;
+        let mut ans = String::new();
+
+        for (start, end) in highlights_merged {
+            let plain = &s[prev..start];
+            let hightlight = &s[start..end];
+            ans.push_str(&format!("{}<b>{}</b>", plain, hightlight));
+            prev = end;
+        }
+
+        ans.push_str(&s[prev..]);
+
+        ans
+    }
 }
 // @lc code=end
 
 #[allow(dead_code)]
 pub struct Solution;
 
-// impl Solution {
-//     pub fn add_bold_tag(s: String, words: Vec<String>) -> String {
-// let n = s.len();
-//         let mut hightlights = vec![];
-
-//         for word in words {
-//             let mut i = 0;
-//             let m = word.len();
-
-//             while let Some(pos) = s[i..].find(&word) {
-//                 hightlights.push((i + pos, i + pos + m));
-//                 i += pos + 1;
-//             }
-//         }
-
-//         let m = hightlights.len();
-
-//         if m == 0 {
-//             return s;
-//         }
-
-//         hightlights.sort_by(|a, b| a.0.cmp(&b.0));
-//         let mut highlights_merged = vec![hightlights[0]];
-
-//         for i in 1..m {
-//             let last = highlights_merged.len() - 1;
-//             if highlights_merged[last].1 < hightlights[i].0 {
-//                 highlights_merged.push(hightlights[i]);
-//             } else {
-//                 highlights_merged[last].1 = highlights_merged[last].1.max(hightlights[i].1);
-//             }
-//         }
-
-//         let mut prev = 0;
-//         let mut ans = String::new();
-
-//         for (start, end) in highlights_merged {
-//             let plain = &s[prev..start];
-//             let hightlight = &s[start..end];
-//             ans.push_str(&format!("{}<b>{}</b>", plain, hightlight));
-//             prev = end;
-//         }
-
-//         ans.push_str(&s[prev..]);
-
-//         ans
-//     }
-// }
 #[cfg(test)]
 mod test {
     use super::*;
     use crate::lc_vec_s;
+    // s =
+    // "aaabbb"
+    // words =
+    // ["aa","b"]
+    // Output
+    // "<b>aa</b>a<b>b</b>bb"
+    // Expected
+    // "<b>aaabbb</b>"
     // "aaabbcc"
     // ["aaa","aab","bc","aaabbcc"]
     // 输出：

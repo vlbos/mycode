@@ -52,91 +52,9 @@
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Apple](https://leetcode.ca/tags/#Apple) [Bloomberg](https://leetcode.ca/tags/#Bloomberg) [Facebook](https://leetcode.ca/tags/#Facebook) [Google](https://leetcode.ca/tags/#Google) [Lyft](https://leetcode.ca/tags/#Lyft) [Microsoft](https://leetcode.ca/tags/#Microsoft) [Uber](https://leetcode.ca/tags/#Uber)
 
 // @lc code=start
-// use std::collections::{HashMap, HashSet};
-
-// pub  struct UnionFind {
-//     sz: Vec<usize>,
-//     id: Vec<usize>,
-//     count: usize,
-// }
-
-// impl UnionFind {
-//     pub fn   new(size: usize) -> Self {
-//         Self {
-//             sz: vec![0; size],
-//             id: (0..size).collect(),
-//             count: size,
-//         }
-//     }
-
-//     pub fn   find(&self, mut p: usize) -> usize {
-//         while self.id[p] != p {
-//             p = self.id[p];
-//         }
-//         p
-//     }
-
-//     pub fn   connected(&self, p: usize, q: usize) -> bool {
-//         let pid = self.find(p);
-//         let qid = self.find(q);
-//         pid == qid
-//     }
-
-//     pub fn   union(&mut self, p: usize, q: usize) {
-//         let pid = self.find(p);
-//         let qid = self.find(q);
-//         if pid == qid {
-//             return;
-//         }
-//         if self.sz[pid] > self.sz[qid] {
-//             self.id[qid] = self.id[pid];
-//         } else {
-//             self.id[pid] = self.id[qid];
-//         }
-//     }
-// }
 
 impl Solution {
-    pub fn num_distinct_islands(grid: Vec<Vec<i32>>) -> i32 {
-        // let rows = grid.len();
-        // let cols = if rows == 0 { 0 } else { grid[0].len() };
-        // if rows * cols == 0 {
-        //     return 0;
-        // }
-        // let mut uf = UnionFind::new(rows * cols);
-        // for i in 0..rows {
-        //     for j in 0..cols {
-        //         if grid[i][j] == 1 {
-        //             let k = i * cols + j;
-        //             if i > 0 && grid[i - 1][j] == 1 {
-        //                 let k_up = k - cols;
-        //                 uf.union(k, k_up);
-        //             }
-        //             if j > 0 && grid[i][j - 1] == 1 {
-        //                 let k_left = k - 1;
-        //                 uf.union(k, k_left);
-        //             }
-        //         }
-        //     }
-        // }
-        // let mut islands = HashMap::<usize, Vec<i32>>::new();
-        // for i in 0..rows * cols {
-        //     let r = i / cols;
-        //     let c = i % cols;
-        //     if grid[r][c] == 1 {
-        //         let id = uf.find(i);
-        //         let relative = (i as i32) - (id as i32);
-        //         islands
-        //             .entry(id)
-        //             .and_modify(|v| v.push(relative))
-        //             .or_insert_with(|| vec![relative]);
-        //     }
-        // }
-        // islands
-        //     .into_iter()
-        //     .map(|(_, v)| v)
-        //     .collect::<HashSet<_>>()
-        //     .len() as i32
+    pub fn num_distinct_islandserror(grid: Vec<Vec<i32>>) -> i32 {
         use std::collections::HashSet;
         pub fn dfs(
             i: usize,
@@ -177,58 +95,147 @@ impl Solution {
         }
         ans
     }
+
+    pub fn num_distinct_islands(grid: Vec<Vec<i32>>) -> i32 {
+        use std::collections::{HashMap, HashSet};
+
+        pub struct UnionFind {
+            sz: Vec<usize>,
+            id: Vec<usize>,
+            count: usize,
+        }
+
+        impl UnionFind {
+            pub fn new(size: usize) -> Self {
+                Self {
+                    sz: vec![0; size],
+                    id: (0..size).collect(),
+                    count: size,
+                }
+            }
+
+            pub fn find(&self, mut p: usize) -> usize {
+                while self.id[p] != p {
+                    p = self.id[p];
+                }
+                p
+            }
+
+            pub fn connected(&self, p: usize, q: usize) -> bool {
+                let pid = self.find(p);
+                let qid = self.find(q);
+                pid == qid
+            }
+
+            pub fn union(&mut self, p: usize, q: usize) {
+                let pid = self.find(p);
+                let qid = self.find(q);
+                if pid == qid {
+                    return;
+                }
+                if self.sz[pid] > self.sz[qid] {
+                    self.id[qid] = self.id[pid];
+                } else {
+                    self.id[pid] = self.id[qid];
+                }
+            }
+        }
+        let rows = grid.len();
+        let cols = if rows == 0 { 0 } else { grid[0].len() };
+        if rows * cols == 0 {
+            return 0;
+        }
+        let mut uf = UnionFind::new(rows * cols);
+        for i in 0..rows {
+            for j in 0..cols {
+                if grid[i][j] == 1 {
+                    let k = i * cols + j;
+                    if i > 0 && grid[i - 1][j] == 1 {
+                        let k_up = k - cols;
+                        uf.union(k, k_up);
+                    }
+                    if j > 0 && grid[i][j - 1] == 1 {
+                        let k_left = k - 1;
+                        uf.union(k, k_left);
+                    }
+                }
+            }
+        }
+        let mut islands = HashMap::<usize, Vec<i32>>::new();
+        for i in 0..rows * cols {
+            let r = i / cols;
+            let c = i % cols;
+            if grid[r][c] == 1 {
+                let id = uf.find(i);
+                let relative = (i as i32) - (id as i32);
+                islands
+                    .entry(id)
+                    .and_modify(|v| v.push(relative))
+                    .or_insert_with(|| vec![relative]);
+            }
+        }
+        islands
+            .into_iter()
+            .map(|(_, v)| v)
+            .collect::<HashSet<_>>()
+            .len() as i32
+    }
+
+    pub fn num_distinct_islands3(mut grid: Vec<Vec<i32>>) -> i32 {
+        fn dfs(
+            grid: &mut Vec<Vec<i32>>,
+            path: &mut String,
+            i: usize,
+            j: usize,
+            n: usize,
+            m: usize,
+        ) {
+            grid[i][j] = 0;
+
+            if i > 0 && grid[i - 1][j] == 1 {
+                path.push('u');
+                dfs(grid, path, i - 1, j, n, m);
+            }
+
+            if j > 0 && grid[i][j - 1] == 1 {
+                path.push('l');
+                dfs(grid, path, i, j - 1, n, m);
+            }
+
+            if i + 1 < n && grid[i + 1][j] == 1 {
+                path.push('d');
+                dfs(grid, path, i + 1, j, n, m);
+            }
+
+            if j + 1 < m && grid[i][j + 1] == 1 {
+                path.push('r');
+                dfs(grid, path, i, j + 1, n, m);
+            }
+
+            path.push('b');
+        }
+
+        let n = grid.len();
+        let m = grid[0].len();
+        let mut uniq = std::collections::HashSet::new();
+
+        for i in 0..n {
+            for j in 0..m {
+                if grid[i][j] == 1 {
+                    let mut path = String::new();
+                    dfs(&mut grid, &mut path, i, j, n, m);
+                    uniq.insert(path);
+                }
+            }
+        }
+
+        uniq.len() as i32
+    }
 }
 // @lc code=end
 
 #[allow(dead_code)]
 pub struct Solution;
-
-// impl Solution {
-//     pub fn num_distinct_islands(mut grid: Vec<Vec<i32>>) -> i32 {
-//         fn dfs(grid: &mut Vec<Vec<i32>>, path: &mut String, i: usize, j: usize, n: usize, m: usize) {
-//         grid[i][j] = 0;
-
-//         if i > 0 && grid[i - 1][j] == 1 {
-//             path.push('u');
-//             dfs(grid, path, i - 1, j, n, m);
-//         }
-
-//         if j > 0 && grid[i][j - 1] == 1 {
-//             path.push('l');
-//             dfs(grid, path, i, j - 1, n, m);
-//         }
-
-//         if i + 1 < n && grid[i + 1][j] == 1 {
-//             path.push('d');
-//             dfs(grid, path, i + 1, j, n, m);
-//         }
-
-//         if j + 1 < m && grid[i][j + 1] == 1 {
-//             path.push('r');
-//             dfs(grid, path, i, j + 1, n, m);
-//         }
-
-//         path.push('b');
-//     }
-
-// let n = grid.len();
-//         let m = grid[0].len();
-//         let mut uniq = std::collections::HashSet::new();
-
-//         for i in 0..n {
-//             for j in 0..m {
-//                 if grid[i][j] == 1 {
-//                     let mut path = String::new();
-//                     dfs(&mut grid, &mut path, i, j, n, m);
-//                     uniq.insert(path);
-//                 }
-//             }
-//         }
-
-//         uniq.len() as i32
-
-//     }
-// }
 
 #[cfg(test)]
 mod test {

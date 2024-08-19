@@ -54,7 +54,20 @@ pub struct Solution;
 
 impl Solution {
     pub fn max_score(nums: Vec<i32>) -> i64 {
-        0
+        let mut s = vec![];
+
+        for (i, &x) in nums.iter().enumerate() {
+            while s.last().map_or(false, |&j| nums[j] <= x) {
+                s.pop();
+            }
+            s.push(i);
+        }
+        let (mut ans, mut i) = (0, 0);
+        for j in s {
+            ans += nums[j] as i64 * (j - i) as i64;
+            i = j;
+        }
+        ans
     }
 }
 

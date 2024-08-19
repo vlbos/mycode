@@ -49,30 +49,9 @@
 // [Alibaba](https://leetcode.ca/tags/#Alibaba)
 
 // @lc code=start
-// use std::collections::{HashMap, HashSet};
 
 impl Solution {
     pub fn path_sum(nums: Vec<i32>) -> i32 {
-        // if nums.is_empty() {
-        //     return 0;
-        // }
-        // let mut tree = HashMap::<(i32, i32), i32>::new();
-        // let mut parents = HashSet::<(i32, i32)>::new();
-        // tree.insert((-1, 0), 0);
-        // for n in nums {
-        //     let num = n - 110;
-        //     let layer = num / 100;
-        //     let index = (num - layer * 100) / 10;
-        //     let value = num - layer * 100 - index * 10;
-        //     let parent = (layer - 1, index / 2);
-        //     let parent_value = tree[&parent];
-        //     parents.insert(parent);
-        //     tree.insert((layer, index), parent_value + value);
-        // }
-        // tree.into_iter()
-        //     .filter(|(k, _)| !parents.contains(k))
-        //     .map(|(_, v)| v)
-        //     .fold(0, |acc, curr| acc + curr)
         if nums.is_empty() {
             return 0;
         }
@@ -99,6 +78,30 @@ impl Solution {
         let mut ans = 0;
         dfs(nums[0] / 10, 0, &nodes, &mut ans);
         ans
+    }
+
+    pub fn path_sum2(nums: Vec<i32>) -> i32 {
+        use std::collections::{HashMap, HashSet};
+        if nums.is_empty() {
+            return 0;
+        }
+        let mut tree = HashMap::<(i32, i32), i32>::new();
+        let mut parents = HashSet::<(i32, i32)>::new();
+        tree.insert((-1, 0), 0);
+        for n in nums {
+            let num = n - 110;
+            let layer = num / 100;
+            let index = (num - layer * 100) / 10;
+            let value = num - layer * 100 - index * 10;
+            let parent = (layer - 1, index / 2);
+            let parent_value = tree[&parent];
+            parents.insert(parent);
+            tree.insert((layer, index), parent_value + value);
+        }
+        tree.into_iter()
+            .filter(|(k, _)| !parents.contains(k))
+            .map(|(_, v)| v)
+            .fold(0, |acc, curr| acc + curr)
     }
 }
 // @lc code=end

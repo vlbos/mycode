@@ -115,6 +115,7 @@ pub mod _0694_number_of_distinct_islands;
 pub mod _0711_number_of_distinct_islands_ii;
 pub mod _0716_max_stack;
 pub mod _0723_candy_crush;
+pub mod _0727_minimum_window_subsequence;
 pub mod _0734_sentence_similarity;
 pub mod _0737_sentence_similarity_ii;
 pub mod _0742_closest_leaf_in_a_binary_tree;

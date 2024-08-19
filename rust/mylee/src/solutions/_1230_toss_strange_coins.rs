@@ -50,21 +50,19 @@ impl Solution {
         }
         ans
     }
+    pub fn probability_of_heads2(prob: Vec<f64>, target: i32) -> f64 {
+        let mut ans = vec![0.0; target as usize + 1];
+        ans[0] = 1.0;
+        for (i, &p) in prob.iter().enumerate() {
+            for j in (1..=(i + 1).min(target as usize)).rev() {
+                ans[j] = ans[j] * (1.0 - p) + ans[j - 1] * p;
+            }
+            ans[0] = ans[0] * (1.0 - p);
+        }
+        ans[target as usize]
+    }
 }
 
-// impl Solution {
-//     pub fn probability_of_heads(prob: Vec<f64>, target: i32) -> f64 {
-//        let mut ans = vec![0.0; target as usize + 1];
-//         ans[0] = 1.0;
-//         for (i, &p) in prob.iter().enumerate() {
-//             for j in (1..=(i + 1).min(target as usize)).rev() {
-//                 ans[j] = ans[j] * (1.0 - p) + ans[j - 1] * p;
-//             }
-//             ans[0] = ans[0] * (1.0 - p);
-//         }
-//         ans[target as usize]
-//     }
-// }
 #[cfg(test)]
 mod test {
     use super::*;

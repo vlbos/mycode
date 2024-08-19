@@ -38,7 +38,6 @@ pub enum NestedInteger {
     Int(i32),
     List(Vec<NestedInteger>),
 }
-
 // @lc code=start
 // use std::collections::VecDeque;
 
@@ -74,6 +73,7 @@ impl Solution {
         //     }
         // }
         // sum
+
         fn dfsh(nested_list: &Vec<NestedInteger>) -> i32 {
             nested_list.into_iter().fold(0, |acc, x| {
                 acc.max(match x {

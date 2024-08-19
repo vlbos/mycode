@@ -59,29 +59,26 @@ impl Solution {
         }
         ans
     }
+    pub fn shortest_way2(source: String, target: String) -> i32 {
+        let s = source.as_bytes();
+        let t = target.as_bytes();
+        let mut j = 0;
+        let mut ans = 0;
+        while j < t.len() {
+            let start = j;
+            for &c in s {
+                if j < t.len() && c == t[j] {
+                    j += 1;
+                }
+            }
+            if start == j {
+                return -1;
+            }
+            ans += 1;
+        }
+        ans
+    }
 }
-
-// impl Solution {
-//     pub fn shortest_way(source: String, target: String) -> i32 {
-//         let s=source.as_bytes();
-//         let t = target.as_bytes();
-//         let mut j = 0;
-//         let mut ans = 0;
-//         while j < t.len() {
-//             let start = j;
-//             for &c in s {
-//                 if j < t.len() && c == t[j] {
-//                     j += 1;
-//                 }
-//             }
-//             if start == j {
-//                 return -1;
-//             }
-//             ans += 1;
-//         }
-//         ans
-//     }
-// }
 
 #[cfg(test)]
 mod test {

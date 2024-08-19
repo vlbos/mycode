@@ -47,23 +47,6 @@
 #[allow(dead_code)]
 pub struct Solution {}
 
-// impl Solution {
-//     pub fn longest_repeating_substring(s: String) -> i32 {
-//         let mut pre = ' ';
-//         let mut cnt = 0;
-//         let mut ans = 0;
-//         for c in s.chars() {
-//             if pre == c {
-//                 cnt += 1;
-//             } else if cnt > 0 {
-//                 ans = ans.max(cnt + 1);
-//             }
-//             pre = c;
-//         }
-//         ans
-//     }
-// }
-
 impl Solution {
     pub fn longest_repeating_substring(s: String) -> i32 {
         let search = |mid: usize| {
@@ -94,6 +77,21 @@ impl Solution {
         }
 
         lo - 1
+    }
+
+    pub fn longest_repeating_substring2(s: String) -> i32 {
+        let mut pre = ' ';
+        let mut cnt = 0;
+        let mut ans = 0;
+        for c in s.chars() {
+            if pre == c {
+                cnt += 1;
+            } else if cnt > 0 {
+                ans = ans.max(cnt + 1);
+            }
+            pre = c;
+        }
+        ans
     }
 }
 #[cfg(test)]

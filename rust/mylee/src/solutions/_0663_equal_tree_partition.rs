@@ -80,13 +80,8 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 impl Solution {
-    pub fn check_equal_tree(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
-        // let root_sum = Solution::sum_tree_rec(root.clone());
-        // if root_sum.is_none() || root_sum.unwrap() % 2 == 1 {
-        //     return false;
-        // }
-        // Solution::check_equal_tree_rec(root, &root_sum).1
-        pub fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, parent_sum: i32, ans: &mut bool) -> i32 {
+    pub fn check_equal_treeerror(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
+        fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, parent_sum: i32, ans: &mut bool) -> i32 {
             if root.is_none() {
                 return 0;
             }
@@ -111,106 +106,88 @@ impl Solution {
         dfs(&root, 0, &mut ans);
         ans
     }
+    pub fn check_equal_tree(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
+        fn sum_tree_rec(root: Option<Rc<RefCell<TreeNode>>>) -> Option<i32> {
+            match root {
+                None => None,
+                Some(node_ref) => {
+                    let node = node_ref.borrow();
+                    let left = sum_tree_rec(node.left.clone());
+                    let right = sum_tree_rec(node.right.clone());
+                    if left.is_none() && right.is_none() {
+                        Some(node.val)
+                    } else {
+                        Some(left.unwrap_or(0) + node.val + right.unwrap_or(0))
+                    }
+                }
+            }
+        }
 
-    //pub fn  sum_tree_rec(root: Option<Rc<RefCell<TreeNode>>>) -> Option<i32> {
-    //     match root {
-    //         None => None,
-    //         Some(node_ref) => {
-    //             let node = node_ref.borrow();
-    //             let left = Solution::sum_tree_rec(node.left.clone());
-    //             let right = Solution::sum_tree_rec(node.right.clone());
-    //             if left.is_none() && right.is_none() {
-    //                 Some(node.val)
-    //             } else {
-    //                 Some(left.unwrap_or(0) + node.val + right.unwrap_or(0))
-    //             }
-    //         }
-    //     }
-    // }
+        fn check_equal_tree_rec(
+            root: Option<Rc<RefCell<TreeNode>>>,
+            root_sum: &Option<i32>,
+        ) -> (Option<i32>, bool) {
+            match root {
+                None => (None, false),
+                Some(node_ref) => {
+                    let node = node_ref.borrow();
+                    let (left, left_success) = check_equal_tree_rec(node.left.clone(), &root_sum);
+                    let (right, right_success) =
+                        check_equal_tree_rec(node.right.clone(), &root_sum);
+                    if left_success || right_success {
+                        (None, true)
+                    } else if left.is_none() && right.is_none() {
+                        (Some(node.val), false)
+                    } else {
+                        let clip_left = left == Some(root_sum.unwrap_or(0) - left.unwrap_or(0));
+                        let clip_right = Some(root_sum.unwrap_or(0) - right.unwrap_or(0)) == right;
+                        let sum = Some(left.unwrap_or(0) + node.val + right.unwrap_or(0));
+                        if clip_left || clip_right {
+                            (sum, true)
+                        } else {
+                            (sum, false)
+                        }
+                    }
+                }
+            }
+        }
+        let root_sum = sum_tree_rec(root.clone());
+        if root_sum.is_none() || root_sum.unwrap() % 2 == 1 {
+            return false;
+        }
+        check_equal_tree_rec(root, &root_sum).1
+    }
 
-    //pub fn  check_equal_tree_rec(
-    //     root: Option<Rc<RefCell<TreeNode>>>,
-    //     root_sum: &Option<i32>,
-    // ) -> (Option<i32>, bool) {
-    //     match root {
-    //         None => (None, false),
-    //         Some(node_ref) => {
-    //             let node = node_ref.borrow();
-    //             let (left, left_success) =
-    //                 Solution::check_equal_tree_rec(node.left.clone(), &root_sum);
-    //             let (right, right_success) =
-    //                 Solution::check_equal_tree_rec(node.right.clone(), &root_sum);
-    //             if left_success || right_success {
-    //                 (None, true)
-    //             } else if left.is_none() && right.is_none() {
-    //                 (Some(node.val), false)
-    //             } else {
-    //                 let clip_left = left == Some(root_sum.unwrap_or(0) - left.unwrap_or(0));
-    //                 let clip_right = Some(root_sum.unwrap_or(0) - right.unwrap_or(0)) == right;
-    //                 let sum = Some(left.unwrap_or(0) + node.val + right.unwrap_or(0));
-    //                 if clip_left || clip_right {
-    //                     (sum, true)
-    //                 } else {
-    //                     (sum, false)
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+    pub fn check_equal_tree3(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
+        fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, sum: &mut Vec<i32>) -> i32 {
+            if let Some(r) = root {
+                let v = r.borrow().val + dfs(&r.borrow().left, sum) + dfs(&r.borrow().right, sum);
+                sum.push(v);
+
+                sum[sum.len() - 1]
+            } else {
+                0
+            }
+        }
+        let mut sum = vec![];
+        let total = dfs(&root, &mut sum);
+
+        if total % 2 != 0 {
+            return false;
+        }
+
+        sum.pop();
+
+        for v in sum {
+            if v == total / 2 {
+                return true;
+            }
+        }
+
+        false
+    }
 }
 // @lc code=end
-
-// // Definition for a binary tree node.
-// // #[derive(Debug, PartialEq, Eq)]
-// // pub struct TreeNode {
-// //   pub val: i32,
-// //   pub left: Option<Rc<RefCell<TreeNode>>>,
-// //   pub right: Option<Rc<RefCell<TreeNode>>>,
-// // }
-// //
-// // impl TreeNode {
-// //   #[inline]
-// //   pub fn new(val: i32) -> Self {
-// //     TreeNode {
-// //       val,
-// //       left: None,
-// //       right: None
-// //     }
-// //   }
-// // }
-// use std::rc::Rc;
-// use std::cell::RefCell;
-// impl Solution {
-//     pub fn check_equal_tree(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
-//          fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, sum: &mut Vec<i32>) -> i32 {
-//         if let Some(r) = root {
-//             let v = r.borrow().val + dfs(&r.borrow().left, sum) + dfs(&r.borrow().right, sum);
-//             sum.push(v);
-
-//             sum[sum.len() - 1]
-//         } else {
-//             0
-//         }
-//     }
-// let mut sum = vec![];
-//         let total = dfs(&root, &mut sum);
-
-//         if total %2 != 0 {
-//             return false;
-//         }
-
-//         sum.pop();
-
-//         for v in sum {
-//             if v == total / 2 {
-//                 return true;
-//             }
-//         }
-
-//         false
-
-//     }
-// }
 
 #[allow(dead_code)]
 pub struct Solution;

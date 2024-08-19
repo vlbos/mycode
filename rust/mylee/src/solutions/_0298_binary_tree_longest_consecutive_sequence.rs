@@ -55,7 +55,7 @@ use std::rc::Rc;
 impl Solution {
     pub fn longest_consecutive(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
         // Solution::longest_consecutive_rec(&root).2 as i32
-        pub fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, ans: &mut i32) -> i32 {
+        fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, ans: &mut i32) -> i32 {
             if let Some(node) = root {
                 let node = node.borrow();
                 let l = dfs(&node.left, ans);

@@ -36,6 +36,25 @@
 // [Amazon](https://leetcode.ca/tags/#Amazon)
 
 // Definition for a binary tree node
+
+// Definition for a binary tree node.
+// #[derive(Debug, PartialEq, Eq)]
+// pub struct TreeNode {
+//   pub val: i32,
+//   pub left: Option<Rc<RefCell<TreeNode>>>,
+//   pub right: Option<Rc<RefCell<TreeNode>>>,
+// }
+//
+// impl TreeNode {
+//   #[inline]
+//   pub fn new(val: i32) -> Self {
+//     TreeNode {
+//       val,
+//       left: None,
+//       right: None
+//     }
+//   }
+// }
 use super::util::tree::TreeNode;
 #[allow(dead_code)]
 pub struct Solution {}
@@ -65,74 +84,54 @@ impl Solution {
                 || Self::two_sum_bs_ts(root1.clone(), node2.right.clone(), target)
         }
     }
+
+    pub fn two_sum_bs_ts2(
+        root1: Option<Rc<RefCell<TreeNode>>>,
+        root2: Option<Rc<RefCell<TreeNode>>>,
+        target: i32,
+    ) -> bool {
+        fn in_order(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
+            let mut res = vec![];
+            let mut stack = vec![];
+            let mut node = root;
+
+            while !stack.is_empty() || node.is_some() {
+                while let Some(n) = node {
+                    node = n.borrow_mut().left.take();
+                    stack.push(n);
+                }
+
+                if let Some(n) = stack.pop() {
+                    res.push(n.borrow().val);
+                    node = n.borrow_mut().right.take();
+                }
+            }
+
+            res
+        }
+        let v1 = in_order(root1);
+        let v2 = in_order(root2);
+        let n = v1.len();
+        let m = v2.len();
+        let mut i = 0;
+        let mut j = m - 1;
+
+        while i < n && j < m {
+            if v1[i] + v2[j] == target {
+                return true;
+            }
+
+            if v1[i] + v2[j] < target {
+                i += 1;
+            } else {
+                j -= 1;
+            }
+        }
+
+        false
+    }
 }
 
-// // Definition for a binary tree node.
-// // #[derive(Debug, PartialEq, Eq)]
-// // pub struct TreeNode {
-// //   pub val: i32,
-// //   pub left: Option<Rc<RefCell<TreeNode>>>,
-// //   pub right: Option<Rc<RefCell<TreeNode>>>,
-// // }
-// //
-// // impl TreeNode {
-// //   #[inline]
-// //   pub fn new(val: i32) -> Self {
-// //     TreeNode {
-// //       val,
-// //       left: None,
-// //       right: None
-// //     }
-// //   }
-// // }
-// use std::rc::Rc;
-// use std::cell::RefCell;
-// impl Solution {
-//     pub fn two_sum_bs_ts(root1: Option<Rc<RefCell<TreeNode>>>, root2: Option<Rc<RefCell<TreeNode>>>, target: i32) -> bool {
-
-//     fn in_order(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
-//         let mut res = vec![];
-//         let mut stack = vec![];
-//         let mut node = root;
-
-//         while !stack.is_empty() || node.is_some() {
-//             while let Some(n) = node {
-//                 node = n.borrow_mut().left.take();
-//                 stack.push(n);
-//             }
-
-//             if let Some(n) = stack.pop() {
-//                 res.push(n.borrow().val);
-//                 node = n.borrow_mut().right.take();
-//             }
-//         }
-
-//         res
-
-//     }
-//         let v1 = in_order(root1);
-//         let v2 = in_order(root2);
-//         let n = v1.len();
-//         let m = v2.len();
-//         let mut i = 0;
-//         let mut j = m - 1;
-
-//         while i < n && j < m {
-//             if v1[i] + v2[j] == target {
-//                 return true;
-//             }
-
-//             if v1[i] + v2[j] < target {
-//                 i += 1;
-//             } else {
-//                 j -= 1;
-//             }
-//         }
-
-//         false
-//     }
-
-// }
 #[cfg(test)]
 mod test {
     use super::*;

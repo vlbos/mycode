@@ -51,13 +51,11 @@ impl Solution {
         }
         -1
     }
+    pub fn missing_number2(arr: Vec<i32>) -> i32 {
+        (arr[0] + arr[arr.len() - 1]) * (arr.len() as i32 + 1) / 2 - arr.iter().sum::<i32>()
+    }
 }
 
-// impl Solution {
-//     pub fn missing_number(arr: Vec<i32>) -> i32 {
-//         (arr[0] + arr[arr.len()-1]) * (arr.len() as i32 + 1) / 2 - arr.iter().sum::<i32>()
-//     }
-// }
 #[cfg(test)]
 mod test {
     use super::*;

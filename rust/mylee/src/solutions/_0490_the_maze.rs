@@ -126,7 +126,7 @@ impl Solution {
         //     }
         // }
         // false
-        pub fn dfs(maze: &mut Vec<Vec<i32>>, start: &Vec<i32>, destination: &Vec<i32>) -> bool {
+        fn dfs(maze: &mut Vec<Vec<i32>>, start: &Vec<i32>, destination: &Vec<i32>) -> bool {
             if start == destination {
                 return true;
             }

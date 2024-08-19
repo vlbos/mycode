@@ -4,7 +4,8 @@
 
 //
 
-// Given an array nums, you have to get the maximum score starting from index 0 and hopping until you reach the last element of the array.
+// Given an array nums,
+// you have to get the maximum score starting from index 0 and hopping until you reach the last element of the array.
 
 // In each hop, you can jump from index i to an index j  > i, and you get a score of (j - i) * nums[j].
 
@@ -55,7 +56,17 @@ pub struct Solution;
 
 impl Solution {
     pub fn max_score(nums: Vec<i32>) -> i32 {
-        0
+        fn dfs(i: usize, nums: &Vec<i32>, f: &mut Vec<i32>) -> i32 {
+            if f[i] > 0 {
+                return f[i];
+            }
+            for j in i + 1..nums.len() {
+                f[i] = f[i].max(nums[j] * (j - i) as i32 + dfs(j, nums, f));
+            }
+            f[i]
+        }
+        let mut f = vec![0; nums.len()];
+        dfs(0, &nums, &mut f)
     }
 }
 

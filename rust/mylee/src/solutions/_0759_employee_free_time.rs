@@ -44,39 +44,41 @@
 // ### Company:
 
 // [Airbnb](https://leetcode.ca/tags/#Airbnb) [Amazon](https://leetcode.ca/tags/#Amazon) [Bloomberg](https://leetcode.ca/tags/#Bloomberg) [DoorDash](https://leetcode.ca/tags/#DoorDash) [Google](https://leetcode.ca/tags/#Google) [Intuit](https://leetcode.ca/tags/#Intuit) [Microsoft](https://leetcode.ca/tags/#Microsoft) [Pinterest](https://leetcode.ca/tags/#Pinterest) [Uber](https://leetcode.ca/tags/#Uber) [Wayfair](https://leetcode.ca/tags/#Wayfair)
+
+// Definition for an Interval.
+#[derive(PartialEq, Eq, Clone, Debug)]
+struct Interval {
+    pub start: i32,
+    pub end: i32,
+}
+
+impl Interval {
+    #[inline]
+    fn new(start: i32, end: i32) -> Self {
+        Interval { start, end }
+    }
+}
+
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn employee_free_time(schedule: Vec<Vec<Vec<i32>>>) -> Vec<Vec<i32>> {
-        //    let mut schedule:Vec<Vec<i32>> =schedule.into_iter().flatten().collect();
-        //     let mut ans=Vec::new();
-        //     schedule.sort_by_key(|x|x[0]);
-        //     let mut t= schedule[0].clone();
-        //     for s in &schedule{
-        //         if t[1]<s[0]{
-        //         ans.push(vec![t[1],s[0]]);
-        //         }
-        //         if t[1]<s[1]{
-        //            t=s.clone();
-        //         }
-        //     }
-        //     ans
+    pub fn employee_free_time1(schedule: Vec<Vec<Interval>>) -> Vec<Interval> {
         let mut ans = Vec::new();
         let mut m = std::collections::BTreeMap::new();
         for employee in &schedule {
             for interval in employee {
-                *m.entry(interval[0]).or_insert(0) += 1;
-                *m.entry(interval[1]).or_insert(0) -= 1;
+                *m.entry(interval.start).or_insert(0) += 1;
+                *m.entry(interval.end).or_insert(0) -= 1;
             }
         }
         let mut cnt = 0;
         for (&k, &v) in &m {
             cnt += v;
             if cnt == 0 {
-                ans.push(vec![k, 0]);
+                ans.push(Interval::new(k, 0));
             }
-            if cnt > 0 && !ans.is_empty() && ans[ans.len() - 1][1] == 0 {
-                ans.last_mut().unwrap()[1] = k;
+            if cnt > 0 && !ans.is_empty() && ans[ans.len() - 1].end == 0 {
+                ans.last_mut().unwrap().end = k;
             }
         }
         if !ans.is_empty() {
@@ -84,52 +86,24 @@ impl Solution {
         }
         ans
     }
+
+    pub fn employee_free_time(schedule: Vec<Vec<Vec<i32>>>) -> Vec<Vec<i32>> {
+        let mut schedule: Vec<Vec<i32>> = schedule.into_iter().flatten().collect();
+        let mut ans = Vec::new();
+        schedule.sort_by_key(|x| x[0]);
+        let mut t = schedule[0].clone();
+        for s in &schedule {
+            if t[1] < s[0] {
+                ans.push(vec![t[1], s[0]]);
+            }
+            if t[1] < s[1] {
+                t = s.clone();
+            }
+        }
+        ans
+    }
 }
 
-// /*
-// // Definition for an Interval.
-// #[derive(PartialEq, Eq, Clone, Debug)]
-// struct Interval {
-//     pub start:i32,
-//     pub end:i32
-// }
-
-// impl Interval {
-//     #[inline]
-//     fn new(start:i32, end:i32) -> Self{
-//         Interval {
-//             start,
-//             end
-//         }
-//     }
-// }
-// */
-// impl Solution {
-//     pub fn employee_free_time(schedule: Vec<Vec<Interval>>) -> Vec<Interval> {
-//         let mut ans = Vec::new();
-//         let mut m = std::collections::BTreeMap::new();
-//         for employee in &schedule {
-//             for interval in employee {
-//                 *m.entry(interval.start).or_insert(0) += 1;
-//                 *m.entry(interval.end).or_insert(0) -= 1;
-//             }
-//         }
-//         let mut cnt = 0;
-//         for (&k, &v) in &m {
-//             cnt += v;
-//             if cnt == 0 {
-//                 ans.push(Interval::new(k, 0));
-//             }
-//             if cnt > 0 && !ans.is_empty() && ans[ans.len() - 1].end== 0 {
-//                 ans.last_mut().unwrap().end = k;
-//             }
-//         }
-//         if !ans.is_empty() {
-//             ans.pop();
-//         }
-//         ans
-//     }
-// }
 #[cfg(test)]
 mod test {
     use super::*;

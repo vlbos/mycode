@@ -55,7 +55,7 @@
 //     int count_blocks(BigArray* nums) {
 
 //  Definition for BigArray.
-struct BigArray {
+pub struct BigArray {
     elements: Vec<i32>,
 }
 impl BigArray {

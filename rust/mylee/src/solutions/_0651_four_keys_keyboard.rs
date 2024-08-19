@@ -50,22 +50,24 @@
 // @lc code=start
 impl Solution {
     pub fn max_a(n: i32) -> i32 {
-        // let n = n as usize;
-        // let mut dp = vec![0usize, 1];
-        // for k in 2..=n {
-        //     let mut m = usize::min_value();
-        //     for x in 0..k - 1 {
-        //         m = usize::max(dp[x] * (k - x - 1), m);
-        //     }
-        //     m = usize::max(dp[dp.len() - 1] + 1, m);
-        //     dp.push(m);
-        // }
-        // dp[n] as i32
         let mut ans = n;
         for i in 1..n - 2 {
             ans = ans.max(Self::max_a(i) * (n - 1 - i));
         }
         ans
+    }
+    pub fn max_a2(n: i32) -> i32 {
+        let n = n as usize;
+        let mut dp = vec![0usize, 1];
+        for k in 2..=n {
+            let mut m = usize::min_value();
+            for x in 0..k - 1 {
+                m = usize::max(dp[x] * (k - x - 1), m);
+            }
+            m = usize::max(dp[dp.len() - 1] + 1, m);
+            dp.push(m);
+        }
+        dp[n] as i32
     }
 }
 // @lc code=end

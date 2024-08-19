@@ -72,58 +72,9 @@
 
 // @lc code=start
 
-// const A_CHAR_CODE: usize = 'A' as u8 as usize;
-
-// #[derive(Clone)]
-// pub  struct ExcelNode {
-//     value: i32,
-//     watches: Vec<Vec<(usize, usize)>>,
-//     observers: HashMap<(usize, usize), usize>,
-// }
-
-// impl ExcelNode {
-//     pub fn   new(value: i32) -> Self {
-//         Self {
-//             value,
-//             watches: vec![],
-//             observers: HashMap::new(),
-//         }
-//     }
-
-//     pub fn   watches_to_vec(&self) -> Vec<(usize, usize)> {
-//         let mut res = vec![];
-//         for s in &self.watches {
-//             if s.len() == 1 {
-//                 res.push(s[0]);
-//             } else {
-//                 let (fr, fc) = s[0];
-//                 let (tr, tc) = s[1];
-//                 for r in fr..=tr {
-//                     for c in fc..=tc {
-//                         res.push((r, c));
-//                     }
-//                 }
-//             }
-//         }
-//         res
-//     }
-
-//     pub fn   observers_to_vec(&self) -> Vec<(usize, usize)> {
-//         let mut res = vec![];
-//         for (&k, &v) in &self.observers {
-//             for _ in 0..v {
-//                 res.push(k);
-//             }
-//         }
-//         res
-//     }
-// }
 use std::collections::HashMap;
 
 pub struct Excel {
-    // values: Vec<Vec<ExcelNode>>,
-    // rows: usize,
-    // cols: usize,
     mat: Vec<Vec<i32>>,
     m: HashMap<(i32, char), Vec<String>>,
 }
@@ -134,13 +85,6 @@ pub struct Excel {
  */
 impl Excel {
     pub fn new(h: i32, w: char) -> Self {
-        // let cols = h as usize;
-        // let rows = Excel::col_c2i(w as u8) + 1;
-        // Self {
-        //     values: vec![vec![ExcelNode::new(0); cols]; rows],
-        //     rows,
-        //     cols,
-        // }
         Self {
             mat: vec![vec![0; h as usize]; (w as u8 - b'A') as usize + 1],
             m: HashMap::new(),
@@ -148,10 +92,6 @@ impl Excel {
     }
 
     pub fn set(&mut self, r: i32, c: char, v: i32) {
-        // let col = Excel::col_c2i(c as u8);
-        // let row = Excel::row_i2i(r);
-        // self.set_impl(row, col, v);
-        // self.clear_watches(row, col);
         if self.m.contains_key(&(r, c)) {
             self.m.remove(&(r, c));
         }
@@ -159,9 +99,6 @@ impl Excel {
     }
 
     pub fn get(&mut self, r: i32, c: char) -> i32 {
-        // let col = Excel::col_c2i(c as u8);
-        // let row = Excel::row_i2i(r);
-        // self.retrieve(row, col).value
         let flag = self.m.get(&(r, c)).is_some();
         if flag {
             let strs = self.m.get(&(r, c)).unwrap().clone();
@@ -172,12 +109,6 @@ impl Excel {
     }
 
     pub fn sum(&mut self, r: i32, c: char, strs: Vec<String>) -> i32 {
-        // let col = Excel::col_c2i(c as u8);
-        // let row = Excel::row_i2i(r);
-        // self.set_impl(row, col, 0);
-        // self.clear_watches(row, col);
-        // self.add_watches(row, col, strs);
-        // self.retrieve(row, col).value
         let mut ans = 0;
         for str in &strs {
             if let Some(k) = str.rfind(":") {
@@ -204,97 +135,192 @@ impl Excel {
         self.m.insert((r, c), strs);
         ans
     }
+}
 
-    //pub fn  set_impl(&mut self, row: usize, col: usize, v: i32) {
-    //     let sub_v = v - self.retrieve(row, col).value;
-    //     let mut stack = vec![(row, col)];
-    //     while let Some((r, c)) = stack.pop() {
-    //         let mut node = self.retrieve_mut(r, c);
-    //         node.value += sub_v;
-    //         stack.extend(node.observers_to_vec().into_iter());
-    //     }
-    // }
+mod sol2 {
 
-    //pub fn  retrieve_mut(&mut self, r: usize, c: usize) -> &mut ExcelNode {
-    //     &mut self.values[r][c]
-    // }
+    const A_CHAR_CODE: usize = 'A' as u8 as usize;
 
-    //pub fn  retrieve(&self, r: usize, c: usize) -> &ExcelNode {
-    //     &self.values[r][c]
-    // }
+    #[derive(Clone)]
+    pub struct ExcelNode {
+        value: i32,
+        watches: Vec<Vec<(usize, usize)>>,
+        observers: HashMap<(usize, usize), usize>,
+    }
 
-    //pub fn  clear_watches(&mut self, row: usize, col: usize) {
-    //     let node = self.retrieve_mut(row, col);
-    //     let watches = node.watches_to_vec();
-    //     node.watches = vec![];
+    impl ExcelNode {
+        pub fn new(value: i32) -> Self {
+            Self {
+                value,
+                watches: vec![],
+                observers: HashMap::new(),
+            }
+        }
 
-    //     let node_index = (row, col);
-    //     for (r, c) in watches {
-    //         let another = self.retrieve_mut(r, c);
-    //         if another.observers[&node_index] == 1 {
-    //             another.observers.remove(&node_index);
-    //         } else {
-    //             *another.observers.get_mut(&node_index).unwrap() -= 1;
-    //         }
-    //     }
-    // }
+        pub fn watches_to_vec(&self) -> Vec<(usize, usize)> {
+            let mut res = vec![];
+            for s in &self.watches {
+                if s.len() == 1 {
+                    res.push(s[0]);
+                } else {
+                    let (fr, fc) = s[0];
+                    let (tr, tc) = s[1];
+                    for r in fr..=tr {
+                        for c in fc..=tc {
+                            res.push((r, c));
+                        }
+                    }
+                }
+            }
+            res
+        }
 
-    //pub fn  add_watches(&mut self, row: usize, col: usize, strs: Vec<String>) {
-    //     let node = self.retrieve_mut(row, col);
-    //     for s in strs {
-    //         let splits = s.split(":").collect::<Vec<_>>();
-    //         if splits.len() == 1 {
-    //             let sp = Excel::colrow_to_index(&splits[0]);
-    //             node.watches.push(vec![sp]);
-    //         } else {
-    //             let fp = Excel::colrow_to_index(&splits[0]);
-    //             let tp = Excel::colrow_to_index(&splits[1]);
-    //             node.watches.push(vec![fp, tp]);
-    //         }
-    //     }
-    //     let watches = node.watches_to_vec();
-    //     let node_index = (row, col);
-    //     let mut sum = 0;
-    //     for (r, c) in watches {
-    //         let another = self.retrieve_mut(r, c);
-    //         another
-    //             .observers
-    //             .entry(node_index)
-    //             .and_modify(|v| *v += 1)
-    //             .or_insert(1);
-    //         sum += another.value;
-    //     }
-    //     self.set_impl(row, col, sum);
-    // }
+        pub fn observers_to_vec(&self) -> Vec<(usize, usize)> {
+            let mut res = vec![];
+            for (&k, &v) in &self.observers {
+                for _ in 0..v {
+                    res.push(k);
+                }
+            }
+            res
+        }
+    }
+    use std::collections::HashMap;
 
-    // #[inline]
-    //pub fn  col_c2i(c: u8) -> usize {
-    //     c as usize - A_CHAR_CODE
-    // }
+    pub struct Excel {
+        values: Vec<Vec<ExcelNode>>,
+        rows: usize,
+        cols: usize,
+    }
 
-    // #[inline]
-    //pub fn  row_s2i(c: &str) -> usize {
-    //     c.parse::<usize>().unwrap() - 1
-    // }
+    /**
+     * `&self` means the method takes an immutable reference.
+     * If you need a mutable reference, change it to `&mut self` instead.
+     */
+    impl Excel {
+        pub fn new(h: i32, w: char) -> Self {
+            let cols = h as usize;
+            let rows = Excel::col_c2i(w as u8) + 1;
+            Self {
+                values: vec![vec![ExcelNode::new(0); cols]; rows],
+                rows,
+                cols,
+            }
+        }
 
-    // #[inline]
-    //pub fn  row_i2i(i: i32) -> usize {
-    //     (i - 1) as usize
-    // }
+        pub fn set(&mut self, r: i32, c: char, v: i32) {
+            let col = Excel::col_c2i(c as u8);
+            let row = Excel::row_i2i(r);
+            self.set_impl(row, col, v);
+            self.clear_watches(row, col);
+        }
 
-    // #[inline]
-    //pub fn  colrow_to_index(colrow: &str) -> (usize, usize) {
-    //     let col = Excel::col_c2i(colrow.as_bytes()[0]);
-    //     let row = Excel::row_s2i(&colrow[1..]);
-    //     (row, col)
-    // }
+        pub fn get(&mut self, r: i32, c: char) -> i32 {
+            let col = Excel::col_c2i(c as u8);
+            let row = Excel::row_i2i(r);
+            self.retrieve(row, col).value
+        }
 
-    //pub fn  to_matrix(&self) -> Vec<Vec<i32>> {
-    //     self.values
-    //         .iter()
-    //         .map(|v| v.iter().map(|n| n.value).collect::<Vec<i32>>())
-    //         .collect::<Vec<_>>()
-    // }
+        pub fn sum(&mut self, r: i32, c: char, strs: Vec<String>) -> i32 {
+            let col = Excel::col_c2i(c as u8);
+            let row = Excel::row_i2i(r);
+            self.set_impl(row, col, 0);
+            self.clear_watches(row, col);
+            self.add_watches(row, col, strs);
+            self.retrieve(row, col).value
+        }
+
+        pub fn set_impl(&mut self, row: usize, col: usize, v: i32) {
+            let sub_v = v - self.retrieve(row, col).value;
+            let mut stack = vec![(row, col)];
+            while let Some((r, c)) = stack.pop() {
+                let mut node = self.retrieve_mut(r, c);
+                node.value += sub_v;
+                stack.extend(node.observers_to_vec().into_iter());
+            }
+        }
+
+        pub fn retrieve_mut(&mut self, r: usize, c: usize) -> &mut ExcelNode {
+            &mut self.values[r][c]
+        }
+
+        pub fn retrieve(&self, r: usize, c: usize) -> &ExcelNode {
+            &self.values[r][c]
+        }
+
+        pub fn clear_watches(&mut self, row: usize, col: usize) {
+            let node = self.retrieve_mut(row, col);
+            let watches = node.watches_to_vec();
+            node.watches = vec![];
+
+            let node_index = (row, col);
+            for (r, c) in watches {
+                let another = self.retrieve_mut(r, c);
+                if another.observers[&node_index] == 1 {
+                    another.observers.remove(&node_index);
+                } else {
+                    *another.observers.get_mut(&node_index).unwrap() -= 1;
+                }
+            }
+        }
+
+        pub fn add_watches(&mut self, row: usize, col: usize, strs: Vec<String>) {
+            let node = self.retrieve_mut(row, col);
+            for s in strs {
+                let splits = s.split(":").collect::<Vec<_>>();
+                if splits.len() == 1 {
+                    let sp = Excel::colrow_to_index(&splits[0]);
+                    node.watches.push(vec![sp]);
+                } else {
+                    let fp = Excel::colrow_to_index(&splits[0]);
+                    let tp = Excel::colrow_to_index(&splits[1]);
+                    node.watches.push(vec![fp, tp]);
+                }
+            }
+            let watches = node.watches_to_vec();
+            let node_index = (row, col);
+            let mut sum = 0;
+            for (r, c) in watches {
+                let another = self.retrieve_mut(r, c);
+                another
+                    .observers
+                    .entry(node_index)
+                    .and_modify(|v| *v += 1)
+                    .or_insert(1);
+                sum += another.value;
+            }
+            self.set_impl(row, col, sum);
+        }
+
+        #[inline]
+        pub fn col_c2i(c: u8) -> usize {
+            c as usize - A_CHAR_CODE
+        }
+
+        #[inline]
+        pub fn row_s2i(c: &str) -> usize {
+            c.parse::<usize>().unwrap() - 1
+        }
+
+        #[inline]
+        pub fn row_i2i(i: i32) -> usize {
+            (i - 1) as usize
+        }
+
+        #[inline]
+        pub fn colrow_to_index(colrow: &str) -> (usize, usize) {
+            let col = Excel::col_c2i(colrow.as_bytes()[0]);
+            let row = Excel::row_s2i(&colrow[1..]);
+            (row, col)
+        }
+
+        pub fn to_matrix(&self) -> Vec<Vec<i32>> {
+            self.values
+                .iter()
+                .map(|v| v.iter().map(|n| n.value).collect::<Vec<i32>>())
+                .collect::<Vec<_>>()
+        }
+    }
 }
 // @lc code=end
 

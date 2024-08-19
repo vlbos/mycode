@@ -49,90 +49,6 @@
 // @lc code=start
 impl Solution {
     pub fn candy_crush(mut board: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-        // let rows = board.len();
-        // let cols = if rows == 0 { 0 } else { board[0].len() };
-        // if rows * cols == 0 {
-        //     return board;
-        // }
-        // loop {
-        //     let mut crush_size = 0;
-        //     // crush by row
-        //     for i in 0..rows {
-        //         let mut same_count = (0, 0);
-        //         for j in 0..=cols {
-        //             let current = if j == cols {
-        //                 i32::max_value()
-        //             } else {
-        //                 board[i][j]
-        //             };
-        //             let (last, count) = same_count;
-        //             if last == i32::abs(current) && current != 0 {
-        //                 same_count.1 += 1;
-        //             } else {
-        //                 if count >= 3 && last != 0 {
-        //                     for k in (j - count)..j {
-        //                         let b = board[i][k];
-        //                         board[i][k] = if b > 0 {
-        //                             crush_size += 1;
-        //                             0 - b
-        //                         } else {
-        //                             b
-        //                         }
-        //                     }
-        //                 }
-        //                 same_count.0 = i32::abs(current);
-        //                 same_count.1 = 1;
-        //             }
-        //         }
-        //     }
-        //     // crush by col
-        //     for j in 0..cols {
-        //         let mut same_count = (0, 0);
-        //         for i in 0..=rows {
-        //             let current = if i == rows {
-        //                 i32::max_value()
-        //             } else {
-        //                 board[i][j]
-        //             };
-        //             let (last, count) = same_count;
-        //             if last == i32::abs(current) && current != 0 {
-        //                 same_count.1 += 1;
-        //             } else {
-        //                 if count >= 3 && last != 0 {
-        //                     for k in (i - count)..i {
-        //                         let b = board[k][j];
-        //                         board[k][j] = if b > 0 {
-        //                             crush_size += 1;
-        //                             0 - b
-        //                         } else {
-        //                             b
-        //                         }
-        //                     }
-        //                 }
-        //                 same_count.0 = i32::abs(current);
-        //                 same_count.1 = 1;
-        //             }
-        //         }
-        //     }
-        //     // drop by col
-        //     for j in 0..cols {
-        //         let mut k = (rows - 1) as i32;
-        //         for i in (0..rows).rev() {
-        //             let b = board[i][j];
-        //             if b > 0 {
-        //                 board[k as usize][j] = board[i][j];
-        //                 k -= 1;
-        //             }
-        //         }
-        //         for i in (0..=k).rev() {
-        //             board[i as usize][j] = 0;
-        //         }
-        //     }
-        //     if crush_size == 0 {
-        //         break;
-        //     }
-        // }
-        // return board;
         let (m, n) = (board.len(), board[0].len());
         let mut crush = false;
 
@@ -175,74 +91,99 @@ impl Solution {
             board
         }
     }
+
+    pub fn candy_crush2(mut board: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+        let rows = board.len();
+        let cols = if rows == 0 { 0 } else { board[0].len() };
+        if rows * cols == 0 {
+            return board;
+        }
+        loop {
+            let mut crush_size = 0;
+            // crush by row
+            for i in 0..rows {
+                let mut same_count = (0, 0);
+                for j in 0..=cols {
+                    let current = if j == cols {
+                        i32::max_value()
+                    } else {
+                        board[i][j]
+                    };
+                    let (last, count) = same_count;
+                    if last == i32::abs(current) && current != 0 {
+                        same_count.1 += 1;
+                    } else {
+                        if count >= 3 && last != 0 {
+                            for k in (j - count)..j {
+                                let b = board[i][k];
+                                board[i][k] = if b > 0 {
+                                    crush_size += 1;
+                                    0 - b
+                                } else {
+                                    b
+                                }
+                            }
+                        }
+                        same_count.0 = i32::abs(current);
+                        same_count.1 = 1;
+                    }
+                }
+            }
+            // crush by col
+            for j in 0..cols {
+                let mut same_count = (0, 0);
+                for i in 0..=rows {
+                    let current = if i == rows {
+                        i32::max_value()
+                    } else {
+                        board[i][j]
+                    };
+                    let (last, count) = same_count;
+                    if last == i32::abs(current) && current != 0 {
+                        same_count.1 += 1;
+                    } else {
+                        if count >= 3 && last != 0 {
+                            for k in (i - count)..i {
+                                let b = board[k][j];
+                                board[k][j] = if b > 0 {
+                                    crush_size += 1;
+                                    0 - b
+                                } else {
+                                    b
+                                }
+                            }
+                        }
+                        same_count.0 = i32::abs(current);
+                        same_count.1 = 1;
+                    }
+                }
+            }
+            // drop by col
+            for j in 0..cols {
+                let mut k = (rows - 1) as i32;
+                for i in (0..rows).rev() {
+                    let b = board[i][j];
+                    if b > 0 {
+                        board[k as usize][j] = board[i][j];
+                        k -= 1;
+                    }
+                }
+                for i in (0..=k).rev() {
+                    board[i as usize][j] = 0;
+                }
+            }
+            if crush_size == 0 {
+                break;
+            }
+        }
+        return board;
+    }
 }
 // @lc code=end
 
 #[allow(dead_code)]
 pub struct Solution;
 
-// use std::collections::BTreeMap;
-
-// #[derive(Debug)]
-// struct MaxStack {
-//     stack: BTreeMap<usize, i32>,
-//     max: BTreeMap<(i32, usize), usize>
-// }
-
-// /**
-//  * `&self` means the method takes an immutable reference.
-//  * If you need a mutable reference, change it to `&mut self` instead.
-//  */
-// impl MaxStack {
-//     /** initialize your data structure here. */
-//     fn new() -> Self {
-//         Self {
-//             stack: BTreeMap::new(),
-//             max: BTreeMap::new()
-//         }
-//     }
-
-//     fn push(&mut self, x: i32) {
-//         let last = self.stack.iter().next_back();
-//         let new_index = if let Some((&i, _)) = last { i + 1 } else { 0 };
-//         self.stack.insert(new_index, x);
-//         self.max.insert((x, new_index), new_index);
-//     }
-
-//     fn pop(&mut self) -> i32 {
-//         let (&i, &v) = self.stack.iter().next_back().unwrap();
-//         self.stack.remove(&i);
-//         self.max.remove(&(v, i));
-//         v
-//     }
-
-//     fn top(&self) -> i32 {
-//         let (_, &v) = self.stack.iter().next_back().unwrap();
-//         v
-//     }
-
-//     fn peek_max(&self) -> i32 {
-//         let (&(v, _), _) = self.max.iter().next_back().unwrap();
-//         v
-//     }
-
-//     fn pop_max(&mut self) -> i32 {
-//         let (&(v, _), &i) = self.max.iter().next_back().unwrap();
-//         self.stack.remove(&i);
-//         self.max.remove(&(v, i));
-//         v
-//     }
-// }
-
-// /**
-//  * Your MaxStack object will be instantiated and called as such:
-//  * let obj = MaxStack::new();
-//  * obj.push(x);
-//  * let ret_2: i32 = obj.pop();
-//  * let ret_3: i32 = obj.top();
-//  * let ret_4: i32 = obj.peek_max();
-//  * let ret_5: i32 = obj.pop_max();
-//  */
 #[cfg(test)]
 mod test {
     use super::*;

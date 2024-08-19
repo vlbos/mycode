@@ -57,23 +57,20 @@ impl Solution {
         }
         -1
     }
+    pub fn largest_unique_number2(nums: Vec<i32>) -> i32 {
+        let mut btm = std::collections::BTreeMap::new();
+        for i in nums {
+            *btm.entry(i).or_insert(0) += 1;
+        }
+
+        for (&k, &v) in btm.iter().rev() {
+            if v == 1 {
+                return k;
+            }
+        }
+        -1
+    }
 }
-
-// impl Solution {
-//     pub fn largest_unique_number(nums: Vec<i32>) -> i32 {
-//     let mut btm = std::collections::BTreeMap::new();
-//         for i in nums {
-//             *btm.entry(i).or_insert(0) += 1;
-//         }
-
-//         for (&k, &v) in btm.iter().rev() {
-//             if v == 1 {
-//                 return k
-//             }
-//         }
-//         -1
-//     }
-// }
 
 #[cfg(test)]
 mod test {

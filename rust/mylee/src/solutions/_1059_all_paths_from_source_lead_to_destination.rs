@@ -106,42 +106,44 @@ impl Solution {
         let mut visited = HashSet::new();
         dfs(&g, &mut visited, source, destination)
     }
+    pub fn leads_to_destination2(
+        n: i32,
+        edges: Vec<Vec<i32>>,
+        source: i32,
+        destination: i32,
+    ) -> bool {
+        let mut g = vec![vec![]; n as usize];
+        let mut d = vec![0; n as usize];
+
+        for edge in edges {
+            g[edge[1] as usize].push(edge[0] as usize);
+            d[edge[0] as usize] += 1;
+        }
+
+        if d[destination as usize] != 0 {
+            return false;
+        }
+
+        let mut queue = std::collections::VecDeque::new();
+        queue.push_back(destination as usize);
+
+        while let Some(cur) = queue.pop_front() {
+            if cur == source as usize {
+                return true;
+            }
+
+            for &v in &g[cur] {
+                d[v] -= 1;
+
+                if d[v] == 0 {
+                    queue.push_back(v);
+                }
+            }
+        }
+
+        false
+    }
 }
-
-// impl Solution {
-//     pub fn leads_to_destination(n: i32, edges: Vec<Vec<i32>>, source: i32, destination: i32) -> bool {
-//  let mut g = vec![vec![];n as usize];
-//         let mut d = vec![0; n as usize];
-
-//         for edge in edges {
-//             g[edge[1] as usize].push(edge[0] as usize);
-//             d[edge[0] as usize] += 1;
-//         }
-
-//         if d[destination as usize] != 0 {
-//             return false;
-//         }
-
-//         let mut queue = std::collections::VecDeque::new();
-//         queue.push_back(destination as usize);
-
-//         while let Some(cur) = queue.pop_front() {
-//             if cur == source as usize {
-//                 return true;
-//             }
-
-//             for &v in &g[cur] {
-//                 d[v] -= 1;
-
-//                 if d[v] == 0 {
-//                     queue.push_back(v);
-//                 }
-//             }
-//         }
-
-//         false
-//     }
-// }
 
 #[cfg(test)]
 mod test {

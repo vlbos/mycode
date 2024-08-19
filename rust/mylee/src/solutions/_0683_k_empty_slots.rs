@@ -48,30 +48,9 @@
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Google](https://leetcode.ca/tags/#Google)
 
 // @lc code=start
-// use std::collections::BTreeSet;
-// use std::ops::Bound::{Excluded, Unbounded};
 
 impl Solution {
     pub fn k_empty_slots(bulbs: Vec<i32>, k: i32) -> i32 {
-        // let mut opened = BTreeSet::<i32>::new();
-        // for i in 0..bulbs.len() {
-        //     let index = bulbs[i] - 1;
-        //     let day = i as i32 + 1;
-        //     opened.insert(index);
-        //     let before = opened.range((Unbounded, Excluded(&index))).rev().next();
-        //     let after = opened.range((Excluded(&index), Unbounded)).next();
-        //     if let Some(&b) = before {
-        //         if i32::abs(index - b) == k + 1 {
-        //             return day;
-        //         }
-        //     }
-        //     if let Some(&a) = after {
-        //         if i32::abs(index - a) == k + 1 {
-        //             return day;
-        //         }
-        //     }
-        // }
-        // -1
         let mut days = vec![0; bulbs.len()];
         for (i, &v) in bulbs.iter().enumerate() {
             days[v as usize - 1] = i as i32 + 1;
@@ -95,6 +74,30 @@ impl Solution {
         } else {
             ans
         }
+    }
+
+    pub fn k_empty_slots2(bulbs: Vec<i32>, k: i32) -> i32 {
+        use std::collections::BTreeSet;
+        use std::ops::Bound::{Excluded, Unbounded};
+        let mut opened = BTreeSet::<i32>::new();
+        for i in 0..bulbs.len() {
+            let index = bulbs[i] - 1;
+            let day = i as i32 + 1;
+            opened.insert(index);
+            let before = opened.range((Unbounded, Excluded(&index))).rev().next();
+            let after = opened.range((Excluded(&index), Unbounded)).next();
+            if let Some(&b) = before {
+                if i32::abs(index - b) == k + 1 {
+                    return day;
+                }
+            }
+            if let Some(&a) = after {
+                if i32::abs(index - a) == k + 1 {
+                    return day;
+                }
+            }
+        }
+        -1
     }
 }
 // @lc code=end

@@ -17,7 +17,7 @@ func inorderSuccessor(node *Node) *Node {
 		return findRoot(cur.Parent)
 	}
 	root := findRoot(node)
-	//fmt.Printf("root=%d\n",root.Val)
+
 	var findMostLeft func(cur *Node) *Node
 	findMostLeft = func(cur *Node) *Node {
 		if cur == nil || cur.Left == nil {

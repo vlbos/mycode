@@ -6,24 +6,24 @@
  * }
  */
 
-func insert(head *Node, insertVal int) *Node {
-    node := &Node{Val: insertVal}
-    if head == nil {
+func inserterror(head *Node, x int) *Node {
+    node := &Node{Val: x}
+    if aNode == nil {
         node.Next = node
         return node
     }
-    if head.Next == head {
-        head.Next = node
-        node.Next = head
-        return head
+    if aNode.Next == aNode {
+        aNode.Next = node
+        aNode.Next = aNode
+        return aNode
     }
-    curr, next := head, head.Next
-    for next != head {
-        if insertVal >= curr.Val && insertVal <= next.Val {
+    curr, next := aNode, aNode.Next
+    for next != aNode {
+        if x >= curr.Val && x <= next.Val {
             break
         }
         if curr.Val > next.Val {
-            if insertVal > curr.Val || insertVal < next.Val {
+            if x > curr.Val || x < next.Val {
                 break
             }
         }
@@ -32,5 +32,47 @@ func insert(head *Node, insertVal int) *Node {
     }
     curr.Next = node
     node.Next = next
-    return head
+    return aNode
 }
+
+
+func insert(aNode *Node, x int) *Node {
+	n := &Node{
+		Val: x,
+	}
+
+	// no node
+	if aNode == nil {
+		n.Next = n
+		aNode = n
+	} else  {
+		node := aNode
+		for node.Next != aNode {
+			if node.Val <= node.Next.Val {
+				if node.Val <= x && x <= node.Next.Val {
+					break
+				}
+			} else {
+				if node.Val <= x || x <= node.Next.Val {
+					break
+				}
+			}
+			node = node.Next
+		}
+		
+		node.Next, n.Next = n, node.Next
+	}
+	
+	return aNode
+}
+
+// head =
+// [1]
+// insertVal =
+// 0
+
+// Use Testcase
+// Output
+// [1]
+// Expected
+// [1,0]

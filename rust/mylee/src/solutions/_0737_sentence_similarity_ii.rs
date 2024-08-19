@@ -34,50 +34,6 @@
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Bloomberg](https://leetcode.ca/tags/#Bloomberg) [Google](https://leetcode.ca/tags/#Google)
 
 // @lc code=start
-// use std::collections::HashMap;
-
-// pub  struct UnionFind {
-//     sz: Vec<usize>,
-//     id: Vec<usize>,
-//     size: usize,
-// }
-
-// impl UnionFind {
-//     pub fn   new(size: usize) -> Self {
-//         Self {
-//             sz: vec![1usize; size],
-//             id: (0usize..size).collect(),
-//             size,
-//         }
-//     }
-
-//     pub fn   find(&self, mut p: usize) -> usize {
-//         while self.id[p] != p {
-//             p = self.id[p];
-//         }
-//         p
-//     }
-
-//     pub fn   connected(&self, p: usize, q: usize) -> bool {
-//         self.find(p) == self.find(q)
-//     }
-
-//     pub fn   union(&mut self, p: usize, q: usize) {
-//         let pid = self.find(p);
-//         let qid = self.find(q);
-//         if pid == qid {
-//             return;
-//         }
-//         if self.sz[pid] >= self.sz[qid] {
-//             self.id[qid] = self.id[pid];
-//             self.sz[pid] += self.sz[qid];
-//         } else {
-//             self.id[pid] = self.id[qid];
-//             self.sz[qid] = self.sz[pid];
-//         }
-//         self.size -= 1;
-//     }
-// }
 
 impl Solution {
     pub fn are_sentences_similar_two(
@@ -85,40 +41,6 @@ impl Solution {
         sentence2: Vec<String>,
         similar_pairs: Vec<Vec<String>>,
     ) -> bool {
-        // if words1.len() != words2.len() {
-        //     return false;
-        // }
-        // let mut dict = HashMap::<&str, usize>::new();
-        // for p in pairs.iter() {
-        //     for i in p {
-        //         let size = dict.len();
-        //         dict.entry(i as &str).or_insert_with(|| size);
-        //     }
-        // }
-        // let mut uf = UnionFind::new(dict.len());
-        // for p in pairs.iter() {
-        //     let pid = dict[&p[0] as &str];
-        //     let qid = dict[&p[1] as &str];
-        //     uf.union(pid, qid);
-        // }
-        // let len = words2.len();
-        // for i in 0..len {
-        //     let p = &words1[i] as &str;
-        //     let q = &words2[i] as &str;
-        //     if p != q {
-        //         let pid_opt = dict.get(p);
-        //         let qid_opt = dict.get(q);
-        //         if let (Some(&pid), Some(&qid)) = (pid_opt, qid_opt) {
-        //             if !uf.connected(pid, qid) {
-        //                 return false;
-        //             }
-        //         } else {
-        //             return false;
-        //         }
-        //     }
-        // }
-        // true
-        //  pub fn are_sentences_similar_two(sentence1: Vec<String>, sentence2: Vec<String>, similar_pairs: Vec<Vec<String>>) -> bool {
         if sentence1.len() != sentence2.len() {
             return false;
         }
@@ -156,6 +78,91 @@ impl Solution {
             }
         }
 
+        true
+    }
+
+    pub fn are_sentences_similar_two2(
+        sentence1: Vec<String>,
+        sentence2: Vec<String>,
+        similar_pairs: Vec<Vec<String>>,
+    ) -> bool {
+        let (words1, words2, pairs) = (sentence1, sentence2, similar_pairs);
+        use std::collections::HashMap;
+
+        pub struct UnionFind {
+            sz: Vec<usize>,
+            id: Vec<usize>,
+            size: usize,
+        }
+
+        impl UnionFind {
+            pub fn new(size: usize) -> Self {
+                Self {
+                    sz: vec![1usize; size],
+                    id: (0usize..size).collect(),
+                    size,
+                }
+            }
+
+            pub fn find(&self, mut p: usize) -> usize {
+                while self.id[p] != p {
+                    p = self.id[p];
+                }
+                p
+            }
+
+            pub fn connected(&self, p: usize, q: usize) -> bool {
+                self.find(p) == self.find(q)
+            }
+
+            pub fn union(&mut self, p: usize, q: usize) {
+                let pid = self.find(p);
+                let qid = self.find(q);
+                if pid == qid {
+                    return;
+                }
+                if self.sz[pid] >= self.sz[qid] {
+                    self.id[qid] = self.id[pid];
+                    self.sz[pid] += self.sz[qid];
+                } else {
+                    self.id[pid] = self.id[qid];
+                    self.sz[qid] = self.sz[pid];
+                }
+                self.size -= 1;
+            }
+        }
+        if words1.len() != words2.len() {
+            return false;
+        }
+        let mut dict = HashMap::<&str, usize>::new();
+        for p in pairs.iter() {
+            for i in p {
+                let size = dict.len();
+                dict.entry(i as &str).or_insert_with(|| size);
+            }
+        }
+        let mut uf = UnionFind::new(dict.len());
+        for p in pairs.iter() {
+            let pid = dict[&p[0] as &str];
+            let qid = dict[&p[1] as &str];
+            uf.union(pid, qid);
+        }
+        let len = words2.len();
+        for i in 0..len {
+            let p = &words1[i] as &str;
+            let q = &words2[i] as &str;
+            if p != q {
+                let pid_opt = dict.get(p);
+                let qid_opt = dict.get(q);
+                if let (Some(&pid), Some(&qid)) = (pid_opt, qid_opt) {
+                    if !uf.connected(pid, qid) {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            }
+        }
         true
     }
 }

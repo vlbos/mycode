@@ -105,11 +105,34 @@ use crate::solutions::util::tree::TreeNode;
 //   }
 // }
 use std::cell::RefCell;
-// use std::collections::{hash_map::HashMap, VecDeque};
+
 use std::rc::Rc;
 
 impl Solution {
     pub fn vertical_order(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Vec<i32>> {
+        use std::collections::{HashMap, VecDeque};
+        let mut levels: HashMap<i32, Vec<i32>> = HashMap::new();
+        let mut queue = VecDeque::new();
+        queue.push_back((0, root));
+        while let Some((level, node_op)) = queue.pop_front() {
+            if let Some(node_ref) = node_op {
+                let mut node = node_ref.borrow_mut();
+                let value = node.val;
+                levels
+                    .entry(level)
+                    .and_modify(|arr| {
+                        arr.push(value);
+                    })
+                    .or_insert(vec![value]);
+                queue.push_back((level - 1, node.left.take()));
+                queue.push_back((level + 1, node.right.take()));
+            }
+        }
+        let mut ret = levels.into_iter().collect::<Vec<(i32, Vec<i32>)>>();
+        ret.sort_by_key(|(k, _)| *k);
+        ret.into_iter().map(|(_, v)| v).collect()
+    }
+    pub fn vertical_ordererror(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Vec<i32>> {
         //     let mut levels: HashMap<i32, Vec<i32>> = HashMap::new();
         //     let mut queue = VecDeque::new();
         //     queue.push_back((0, root));

@@ -76,66 +76,78 @@ impl Solution {
         }
         String::new()
     }
+    pub fn find_smallest_region2(
+        regions: Vec<Vec<String>>,
+        region1: String,
+        region2: String,
+    ) -> String {
+        use std::collections::HashMap;
+        let mut tab = HashMap::with_capacity(regions.len() << 2);
+        for r in regions.into_iter() {
+            let mut cur = r.into_iter();
+            let master = cur.next().unwrap();
+            for c in cur {
+                tab.insert(c, master.clone());
+            }
+        }
+        let mut a = &region1;
+        let mut b = &region2;
+        while a != b {
+            a = if let Some(t) = tab.get(a) {
+                t
+            } else {
+                &region2
+            };
+            b = if let Some(t) = tab.get(b) {
+                t
+            } else {
+                &region1
+            };
+        }
+        a.clone()
+    }
+    #[allow(dead_code)]
+    fn find_smallest_region3(
+        regions: Vec<Vec<String>>,
+        region1: String,
+        region2: String,
+    ) -> String {
+        let mut parents = std::collections::HashMap::new();
+
+        for list in &regions {
+            let n = list.len();
+
+            for i in 1..n {
+                parents.insert(&list[i], &list[0]);
+            }
+        }
+
+        let mut path = std::collections::HashSet::new();
+        let mut r1 = &region1;
+        let mut r2 = &region2;
+
+        path.insert(r1);
+
+        while let Some(next) = parents.get(r1) {
+            r1 = next;
+            path.insert(r1);
+        }
+
+        if path.contains(r2) {
+            return r2.to_string();
+        }
+
+        while let Some(next) = parents.get(r2) {
+            r2 = next;
+
+            if path.contains(r2) {
+                return r2.to_string();
+            }
+        }
+
+        "".to_string()
+    }
 }
-
-// impl Solution {
-//     pub fn find_smallest_region(regions: Vec<Vec<String>>, region1: String, region2: String) -> String {
-//  use std::collections::HashMap;
-//         let mut tab = HashMap::with_capacity(regions.len() << 2);
-//         for r in regions.into_iter() {
-//             let mut cur = r.into_iter();
-//             let master = cur.next().unwrap();
-//             for c in cur {
-//                 tab.insert(c, master.clone());
-//             }
-//         }
-//         let mut a = &region1; let mut b = &region2;
-//         while a != b {
-//             a = if let Some(t) = tab.get(a) {t} else {&region2};
-//             b = if let Some(t) = tab.get(b) {t} else {&region1};
-//         }
-//         a.clone()
-//     }
-// }
-
-// impl Solution {
-//     fn find_smallest_region(regions: Vec<Vec<String>>, region1: String, region2: String) -> String {
-//         let mut parents = std::collections::HashMap::new();
-
-//         for list in &regions {
-//             let n = list.len();
-
-//             for i in 1..n {
-//                 parents.insert(&list[i], &list[0]);
-//             }
-//         }
-
-//         let mut path = std::collections::HashSet::new();
-//         let mut r1 = &region1;
-//         let mut r2 = &region2;
-
-//         path.insert(r1);
-
-//         while let Some(next) = parents.get(r1) {
-//             r1 = next;
-//             path.insert(r1);
-//         }
-
-//         if path.contains(r2) {
-//             return r2.to_string();
-//         }
-
-//         while let Some(next) = parents.get(r2) {
-//             r2 = next;
-
-//             if path.contains(r2) {
-//                 return r2.to_string();
-//             }
-//         }
-
-//         "".to_string()
-//     }
-// }
 
 #[cfg(test)]
 mod test {

@@ -47,355 +47,390 @@
 // [Airbnb](https://leetcode.ca/tags/#Airbnb) [Amazon](https://leetcode.ca/tags/#Amazon) [Baidu](https://leetcode.ca/tags/#Baidu)
 
 // @lc code=start
-// use std::cell::RefCell;
-// use std::rc::Rc;
 
-// #[derive(Debug)]
-// enum FSNode {
-//     Directory {
-//         children: BTreeMap<String, Rc<RefCell<FSNode>>>,
-//     },
-//     File {
-//         address: usize,
-//     },
-// }
-
-// impl FSNode {
-//     pub fn   new_directory() -> Self {
-//         FSNode::Directory {
-//             children: BTreeMap::new(),
-//         }
-//     }
-
-//     pub fn   new_file(address: usize) -> Self {
-//         FSNode::File { address }
-//     }
-// }
-use std::collections::{BTreeSet, HashMap};
-
-#[derive(Debug)]
-pub struct FileSystem {
-    // vfs: Rc<RefCell<FSNode>>,
-    // files: Vec<String>,
-    dirs: HashMap<String, BTreeSet<String>>,
-    files: HashMap<String, String>,
-}
-
-/**
- * `&self` means the method takes an immutable reference.
- * If you need a mutable reference, change it to `&mut self` instead.
- */
-impl FileSystem {
-    pub fn new() -> Self {
-        // Self {
-        //     vfs: Rc::new(RefCell::new(FSNode::new_directory())),
-        //     files: vec![],
-        // }
-        Self {
-            dirs: HashMap::new(),
-            files: HashMap::new(),
-        }
+mod error {
+    use std::collections::{BTreeSet, HashMap};
+    #[derive(Debug)]
+    pub struct FileSystem {
+        dirs: HashMap<String, BTreeSet<String>>,
+        files: HashMap<String, String>,
     }
 
-    //pub fn  vcd(&self, ps: &[&str]) -> Option<(String, Rc<RefCell<FSNode>>)> {
-    //     let mut curr = self.vfs.clone();
-    //     let mut key = String::new();
-    //     for p in ps {
-    //         curr = {
-    //             let mut curr_node = curr.borrow_mut();
-    //             match *curr_node {
-    //                 FSNode::Directory { ref mut children } => children[*p].clone(),
-    //                 _ => {
-    //                     return None;
-    //                 }
-    //             }
-    //         };
-    //         key = p.to_string();
-    //     }
-    //     Some((key, curr))
-    // }
+    /**
+     * `&self` means the method takes an immutable reference.
+     * If you need a mutable reference, change it to `&mut self` instead.
+     */
+    impl FileSystem {
+        pub fn new() -> Self {
+            Self {
+                dirs: HashMap::new(),
+                files: HashMap::new(),
+            }
+        }
 
-    pub fn ls(&self, path: String) -> Vec<String> {
-        // let ps = path
-        //     .split("/")
-        //     .skip(1)
-        //     .filter(|s| !s.is_empty())
-        //     .collect::<Vec<_>>();
-        // let directory_op = self.vcd(&ps[0..ps.len()]);
-        // if let Some((key, directory)) = directory_op {
-        //     let directory_node = directory.borrow_mut();
-        //     match *directory_node {
-        //         FSNode::Directory { ref children } => children
-        //             .iter()
-        //             .map(|(k, _)| k.clone())
-        //             .collect::<Vec<String>>(),
-        //         _ => vec![key],
-        //     }
-        // } else {
-        //     vec![]
-        // }
-        if self.files.contains_key(&path) {
-            return vec![if let Some(i) = path.rfind("/") {
-                path[i + 1..].to_string()
+        pub fn ls(&self, path: String) -> Vec<String> {
+            if self.files.contains_key(&path) {
+                return vec![if let Some(i) = path.rfind("/") {
+                    path[i + 1..].to_string()
+                } else {
+                    path
+                }];
+            }
+            if let Some(df) = self.dirs.get(&path) {
+                df.iter().cloned().collect()
             } else {
-                path
-            }];
+                Vec::new()
+            }
         }
-        if let Some(df) = self.dirs.get(&path) {
-            df.iter().cloned().collect()
-        } else {
-            Vec::new()
-        }
-    }
 
-    pub fn mkdir(&mut self, path: String) {
-        // let ps = path
-        //     .split("/")
-        //     .skip(1)
-        //     .filter(|s| !s.is_empty())
-        //     .collect::<Vec<_>>();
-        // let mut curr = self.vfs.clone();
-        // for p in ps {
-        //     curr = {
-        //         let mut curr_node = curr.borrow_mut();
-        //         match *curr_node {
-        //             FSNode::Directory { ref mut children } => {
-        //                 if children.contains_key(p) {
-        //                     children[p].clone()
-        //                 } else {
-        //                     let new_node = Rc::new(RefCell::new(FSNode::new_directory()));
-        //                     children.insert(String::from(p), new_node.clone());
-        //                     new_node
-        //                 }
-        //             }
-        //             _ => unreachable!(),
-        //         }
-        //     };
-        // }
-        let mut dir = String::from("/");
-        for s in path.split("/") {
-            if s.is_empty() {
-                continue;
+        pub fn mkdir(&mut self, path: String) {
+            let mut dir = String::from("/");
+            for s in path.split("/") {
+                if s.is_empty() {
+                    continue;
+                }
+                self.dirs
+                    .entry(dir.clone())
+                    .or_insert(BTreeSet::new())
+                    .insert(s.to_string());
+                if dir.len() > 1 {
+                    dir += "/";
+                }
+                dir += s;
+            }
+        }
+
+        pub fn add_content_to_file(&mut self, file_path: String, content: String) {
+            let (dir, file) = if let Some(i) = file_path.rfind("/") {
+                (file_path[..i].to_string(), file_path[i + 1..].to_string())
+            } else {
+                (String::from("/"), file_path.clone())
+            };
+            if !self.dirs.contains_key(&dir) {
+                self.mkdir(dir.clone());
             }
             self.dirs
                 .entry(dir.clone())
                 .or_insert(BTreeSet::new())
-                .insert(s.to_string());
-            if dir.len() > 1 {
-                dir += "/";
+                .insert(file);
+            self.files
+                .entry(file_path)
+                .or_insert(String::new())
+                .push_str(content.as_str());
+        }
+
+        pub fn read_content_from_file(&self, file_path: String) -> String {
+            self.files.get(&file_path).unwrap_or(&String::new()).clone()
+        }
+    }
+}
+
+mod sol1 {
+    use std::cell::RefCell;
+    use std::collections::BTreeMap;
+    use std::rc::Rc;
+    #[derive(Debug)]
+    enum FSNode {
+        Directory {
+            children: BTreeMap<String, Rc<RefCell<FSNode>>>,
+        },
+        File {
+            address: usize,
+        },
+    }
+
+    impl FSNode {
+        pub fn new_directory() -> Self {
+            FSNode::Directory {
+                children: BTreeMap::new(),
             }
-            dir += s;
+        }
+
+        pub fn new_file(address: usize) -> Self {
+            FSNode::File { address }
         }
     }
 
-    pub fn add_content_to_file(&mut self, file_path: String, content: String) {
-        // let ps = file_path
-        //     .split("/")
-        //     .skip(1)
-        //     .filter(|s| !s.is_empty())
-        //     .collect::<Vec<_>>();
-        // if ps.len() == 0 {
-        //     return;
-        // }
-        // let directory = self.vcd(&ps[0..ps.len() - 1]).unwrap().1;
-        // let file_name = ps[ps.len() - 1];
-        // let mut directory_node = directory.borrow_mut();
-        // match *directory_node {
-        //     FSNode::Directory { ref mut children } => {
-        //         let file_ref = if children.contains_key(file_name) {
-        //             children[file_name].clone()
-        //         } else {
-        //             let new_address = self.files.len();
-        //             self.files.push(String::new());
-        //             let new_node = Rc::new(RefCell::new(FSNode::new_file(new_address)));
-        //             children.insert(String::from(file_name), new_node.clone());
-        //             new_node
-        //         };
-        //         let file_node = file_ref.borrow();
-        //         match *file_node {
-        //             FSNode::File { address } => {
-        //                 self.files[address] += &content;
-        //             }
-        //             _ => unreachable!(),
-        //         };
-        //     }
-        //     _ => unreachable!(),
-        // }
-        let (dir, file) = if let Some(i) = file_path.rfind("/") {
-            (file_path[..i].to_string(), file_path[i + 1..].to_string())
-        } else {
-            (String::from("/"), file_path.clone())
-        };
-        if !self.dirs.contains_key(&dir) {
-            self.mkdir(dir.clone());
-        }
-        self.dirs
-            .entry(dir.clone())
-            .or_insert(BTreeSet::new())
-            .insert(file);
-        self.files
-            .entry(file_path)
-            .or_insert(String::new())
-            .push_str(content.as_str());
+    #[derive(Debug)]
+    pub struct FileSystem {
+        vfs: Rc<RefCell<FSNode>>,
+        files: Vec<String>,
     }
 
-    pub fn read_content_from_file(&self, file_path: String) -> String {
-        // let ps = file_path
-        //     .split("/")
-        //     .skip(1)
-        //     .filter(|s| !s.is_empty())
-        //     .collect::<Vec<_>>();
-        // if ps.len() == 0 {
-        //     return String::new();
-        // }
-        // let directory = self.vcd(&ps[0..ps.len() - 1]).unwrap().1;
-        // let file_name = ps[ps.len() - 1];
-        // let directory_node = directory.borrow_mut();
-        // match *directory_node {
-        //     FSNode::Directory { ref children } => {
-        //         let file_ref = children[file_name].clone();
-        //         let file_node = file_ref.borrow();
-        //         match *file_node {
-        //             FSNode::File { address } => self.files[address].clone(),
-        //             _ => unreachable!(),
-        //         }
-        //     }
-        //     _ => unreachable!(),
-        // }
-        self.files.get(&file_path).unwrap_or(&String::new()).clone()
+    /**
+     * `&self` means the method takes an immutable reference.
+     * If you need a mutable reference, change it to `&mut self` instead.
+     */
+    impl FileSystem {
+        pub fn new() -> Self {
+            Self {
+                vfs: Rc::new(RefCell::new(FSNode::new_directory())),
+                files: vec![],
+            }
+        }
+
+        pub fn vcd(&self, ps: &[&str]) -> Option<(String, Rc<RefCell<FSNode>>)> {
+            let mut curr = self.vfs.clone();
+            let mut key = String::new();
+            for p in ps {
+                curr = {
+                    let mut curr_node = curr.borrow_mut();
+                    match *curr_node {
+                        FSNode::Directory { ref mut children } => children[*p].clone(),
+                        _ => {
+                            return None;
+                        }
+                    }
+                };
+                key = p.to_string();
+            }
+            Some((key, curr))
+        }
+
+        pub fn ls(&self, path: String) -> Vec<String> {
+            let ps = path
+                .split("/")
+                .skip(1)
+                .filter(|s| !s.is_empty())
+                .collect::<Vec<_>>();
+            let directory_op = self.vcd(&ps[0..ps.len()]);
+            if let Some((key, directory)) = directory_op {
+                let directory_node = directory.borrow_mut();
+                match *directory_node {
+                    FSNode::Directory { ref children } => children
+                        .iter()
+                        .map(|(k, _)| k.clone())
+                        .collect::<Vec<String>>(),
+                    _ => vec![key],
+                }
+            } else {
+                vec![]
+            }
+        }
+
+        pub fn mkdir(&mut self, path: String) {
+            let ps = path
+                .split("/")
+                .skip(1)
+                .filter(|s| !s.is_empty())
+                .collect::<Vec<_>>();
+            let mut curr = self.vfs.clone();
+            for p in ps {
+                curr = {
+                    let mut curr_node = curr.borrow_mut();
+                    match *curr_node {
+                        FSNode::Directory { ref mut children } => {
+                            if children.contains_key(p) {
+                                children[p].clone()
+                            } else {
+                                let new_node = Rc::new(RefCell::new(FSNode::new_directory()));
+                                children.insert(String::from(p), new_node.clone());
+                                new_node
+                            }
+                        }
+                        _ => unreachable!(),
+                    }
+                };
+            }
+        }
+
+        pub fn add_content_to_file(&mut self, file_path: String, content: String) {
+            let ps = file_path
+                .split("/")
+                .skip(1)
+                .filter(|s| !s.is_empty())
+                .collect::<Vec<_>>();
+            if ps.len() == 0 {
+                return;
+            }
+            let directory = self.vcd(&ps[0..ps.len() - 1]).unwrap().1;
+            let file_name = ps[ps.len() - 1];
+            let mut directory_node = directory.borrow_mut();
+            match *directory_node {
+                FSNode::Directory { ref mut children } => {
+                    let file_ref = if children.contains_key(file_name) {
+                        children[file_name].clone()
+                    } else {
+                        let new_address = self.files.len();
+                        self.files.push(String::new());
+                        let new_node = Rc::new(RefCell::new(FSNode::new_file(new_address)));
+                        children.insert(String::from(file_name), new_node.clone());
+                        new_node
+                    };
+                    let file_node = file_ref.borrow();
+                    match *file_node {
+                        FSNode::File { address } => {
+                            self.files[address] += &content;
+                        }
+                        _ => unreachable!(),
+                    };
+                }
+                _ => unreachable!(),
+            }
+        }
+
+        pub fn read_content_from_file(&self, file_path: String) -> String {
+            let ps = file_path
+                .split("/")
+                .skip(1)
+                .filter(|s| !s.is_empty())
+                .collect::<Vec<_>>();
+            if ps.len() == 0 {
+                return String::new();
+            }
+            let directory = self.vcd(&ps[0..ps.len() - 1]).unwrap().1;
+            let file_name = ps[ps.len() - 1];
+            let directory_node = directory.borrow_mut();
+            match *directory_node {
+                FSNode::Directory { ref children } => {
+                    let file_ref = children[file_name].clone();
+                    let file_node = file_ref.borrow();
+                    match *file_node {
+                        FSNode::File { address } => self.files[address].clone(),
+                        _ => unreachable!(),
+                    }
+                }
+                _ => unreachable!(),
+            }
+        }
     }
 }
 
 // @lc code=end
 
-// use std::collections::BTreeMap;
+use std::collections::BTreeMap;
 
-// enum Entry {
-//     Dir(Dir),
-//     File(File),
-// }
+enum Entry {
+    Dir(Dir),
+    File(File),
+}
+#[allow(dead_code)]
+struct Dir {
+    name: String,
+    entries: BTreeMap<String, Entry>,
+}
 
-// struct Dir {
-//     name: String,
-//     entries: BTreeMap<String, Entry>,
-// }
+impl Dir {
+    fn new(name: String) -> Self {
+        Self {
+            name,
+            entries: BTreeMap::new(),
+        }
+    }
 
-// impl Dir {
-//     fn new(name: String) -> Self {
-//         Self {
-//             name,
-//             entries: BTreeMap::new(),
-//         }
-//     }
+    fn list(&self) -> Vec<String> {
+        self.entries.keys().map(|s| s.clone()).collect()
+    }
+}
 
-//     fn list(&self) -> Vec<String> {
-//         self.entries.keys().map(|s| s.clone()).collect()
-//     }
-// }
+struct File {
+    name: String,
+    contents: Vec<String>,
+}
 
-// struct File {
-//     name: String,
-//     contents: Vec<String>,
-// }
+impl File {
+    fn new(name: String, content: String) -> Self {
+        Self {
+            name,
+            contents: vec![content],
+        }
+    }
 
-// impl File {
-//     fn new(name: String, content: String) -> Self {
-//         Self {
-//             name,
-//             contents: vec![content],
-//         }
-//     }
+    fn name(&self) -> String {
+        self.name.clone()
+    }
 
-//     fn name(&self) -> String {
-//         self.name.clone()
-//     }
+    fn append(&mut self, content: String) {
+        self.contents.push(content);
+    }
 
-//     fn append(&mut self, content: String) {
-//         self.contents.push(content);
-//     }
+    fn content(&self) -> String {
+        self.contents.join("")
+    }
+}
 
-//     fn content(&self) -> String {
-//         self.contents.join("")
-//     }
-// }
+struct FileSystem {
+    root: Entry,
+}
 
-// struct FileSystem {
-//     root: Entry,
-// }
+impl FileSystem {
+    fn new() -> Self {
+        Self {
+            root: Entry::Dir(Dir::new("".into())),
+        }
+    }
 
-// impl FileSystem {
+    fn ls(&self, path: String) -> Vec<String> {
+        let mut entry = &self.root;
 
-//     fn new() -> Self {
-//         Self {
-//             root: Entry::Dir(Dir::new("".into())),
-//         }
-//     }
+        for name in path.split('/').filter(|s| !s.is_empty()) {
+            if let Entry::Dir(dir) = entry {
+                entry = &dir.entries[name];
+            } else {
+                panic!();
+            }
+        }
 
-//     fn ls(&self, path: String) -> Vec<String> {
-//         let mut entry = &self.root;
+        match entry {
+            Entry::Dir(dir) => dir.list(),
+            Entry::File(file) => vec![file.name()],
+        }
+    }
 
-//         for name in path.split('/').filter(|s| !s.is_empty()) {
-//             if let Entry::Dir(dir) = entry {
-//                 entry = &dir.entries[name];
-//             } else {
-//                 panic!();
-//             }
-//         }
+    fn mkdir(&mut self, path: String) {
+        let mut entry = &mut self.root;
 
-//         match entry {
-//             Entry::Dir(dir) => dir.list(),
-//             Entry::File(file) => vec![file.name()],
-//         }
-//     }
+        for name in path.split('/').filter(|s| !s.is_empty()) {
+            if let Entry::Dir(dir) = entry {
+                entry = dir
+                    .entries
+                    .entry(name.into())
+                    .or_insert_with(|| Entry::Dir(Dir::new(name.to_string())))
+            } else {
+                panic!();
+            }
+        }
+    }
 
-//     fn mkdir(&mut self, path: String) {
-//         let mut entry = &mut self.root;
+    fn add_content_to_file(&mut self, file_path: String, content: String) {
+        let mut entry = &mut self.root;
 
-//         for name in path.split('/').filter(|s| !s.is_empty()) {
-//             if let Entry::Dir(dir) = entry {
-//                 entry = dir.entries.entry(name.into()).or_insert_with(|| Entry::Dir(Dir::new(name.to_string())))
-//             } else {
-//                 panic!();
-//             }
-//         }
-//     }
+        for name in file_path.split('/').filter(|s| !s.is_empty()) {
+            if let Entry::Dir(dir) = entry {
+                entry = dir
+                    .entries
+                    .entry(name.into())
+                    .or_insert_with(|| Entry::File(File::new(name.to_string(), "".to_string())))
+            } else {
+                panic!();
+            }
+        }
 
-//     fn add_content_to_file(&mut self, file_path: String, content: String) {
-//         let mut entry = &mut self.root;
+        if let Entry::File(file) = entry {
+            file.append(content);
+        } else {
+            panic!();
+        }
+    }
 
-//         for name in file_path.split('/').filter(|s| !s.is_empty()) {
-//             if let Entry::Dir(dir) = entry {
-//                 entry = dir.entries.entry(name.into()).or_insert_with(|| Entry::File(File::new(name.to_string(), "".to_string())))
-//             } else {
-//                 panic!();
-//             }
-//         }
+    fn read_content_from_file(&mut self, file_path: String) -> String {
+        let mut entry = &mut self.root;
 
-//         if let Entry::File(file) = entry {
-//             file.append(content);
-//         } else {
-//             panic!();
-//         }
-//     }
+        for name in file_path.split('/').filter(|s| !s.is_empty()) {
+            if let Entry::Dir(dir) = entry {
+                entry = dir.entries.get_mut(name.into()).unwrap();
+            } else {
+                panic!();
+            }
+        }
 
-//     fn read_content_from_file(&mut self, file_path: String) -> String {
-//         let mut entry = &mut self.root;
-
-//         for name in file_path.split('/').filter(|s| !s.is_empty()) {
-//             if let Entry::Dir(dir) = entry {
-//                 entry = dir.entries.get_mut(name.into()).unwrap();
-//             } else {
-//                 panic!();
-//             }
-//         }
-
-//         if let Entry::File(file) = entry {
-//             file.content()
-//         } else {
-//             panic!()
-//         }
-//     }
-// }
+        if let Entry::File(file) = entry {
+            file.content()
+        } else {
+            panic!()
+        }
+    }
+}
 
 // /**
 //  * Your FileSystem object will be instantiated and called as such:

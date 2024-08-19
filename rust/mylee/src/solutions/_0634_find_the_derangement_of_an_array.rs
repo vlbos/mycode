@@ -29,21 +29,9 @@
 // [Amazon](https://leetcode.ca/tags/#Amazon) [IXL](https://leetcode.ca/tags/#IXL)
 
 // @lc code=start
-// const MOD: i64 = (1e9 as i64) + 7;
 
 impl Solution {
     pub fn find_derangement(n: i32) -> i32 {
-        // let n = n as i64;
-        // if n <= 1 {
-        //     return 0;
-        // }
-        // let mut mul = 1i64;
-        // let mut sum = 0i64;
-        // for i in (0..=n).rev() {
-        //     sum = (sum + MOD + mul * (if i % 2 == 0 { 1 } else { -1 })) % MOD;
-        //     mul = (mul * i) % MOD;
-        // }
-        // sum as i32
         if n < 2 {
             return 0;
         }
@@ -53,6 +41,20 @@ impl Solution {
             ans = (i * ans + if i % 2 == 0 { 1 } else { -1 }) % 1_000_000_007;
         }
         ans as _
+    }
+    pub fn find_derangement2(n: i32) -> i32 {
+        const MOD: i64 = (1e9 as i64) + 7;
+        let n = n as i64;
+        if n <= 1 {
+            return 0;
+        }
+        let mut mul = 1i64;
+        let mut sum = 0i64;
+        for i in (0..=n).rev() {
+            sum = (sum + MOD + mul * (if i % 2 == 0 { 1 } else { -1 })) % MOD;
+            mul = (mul * i) % MOD;
+        }
+        sum as i32
     }
 }
 // @lc code=end

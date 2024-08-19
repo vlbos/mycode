@@ -49,7 +49,8 @@ impl Solution {
             return val;
         }
         let cval = Self::closest_value(t, target);
-        if (val as f64 - target).abs() < (cval as f64 - target).abs() {
+        let (a, b) = ((val as f64 - target).abs(), (cval as f64 - target).abs());
+        if a < b || (a * 1_000_000.0) as i32 == (b * 1_000_000.0) as i32 && val < cval {
             val
         } else {
             cval

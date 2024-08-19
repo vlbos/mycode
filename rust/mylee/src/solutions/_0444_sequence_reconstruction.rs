@@ -91,7 +91,7 @@
 //     }
 // }
 impl Solution {
-    pub fn sequence_reconstruction(org: Vec<i32>, seqs: Vec<Vec<i32>>) -> bool {
+    pub fn sequence_reconstruction(nums: Vec<i32>, sequences: Vec<Vec<i32>>) -> bool {
         // use std::collections::{HashMap, HashSet};
         // let mut org_set = org
         //     .iter()
@@ -169,13 +169,13 @@ impl Solution {
         //     }
         // }
         // true
-        let n = org.len();
+        let n = nums.len();
         let mut to_match = n as i32 - 1;
         use std::collections::{HashMap, HashSet};
-        let pos: HashMap<i32, usize> = org.iter().enumerate().map(|(i, &v)| (v, i)).collect();
+        let pos: HashMap<i32, usize> = nums.iter().enumerate().map(|(i, &v)| (v, i)).collect();
         let mut num = HashSet::new();
         let mut flags = HashSet::new();
-        for seq in &seqs {
+        for seq in &sequences {
             num.insert(seq[0]);
             for w in seq.windows(2) {
                 let (x, y) = (w[0], w[1]);

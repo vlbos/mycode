@@ -34,30 +34,6 @@
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Goldman Sachs](https://leetcode.ca/tags/#Goldman%20Sachs)
 #[allow(dead_code)]
 pub struct Solution {}
-// impl Solution {
-//     pub fn high_five(items: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-//         let mut cnt = std::collections::HashMap::<i32, (i32, i32)>::new();
-//         for item in &items {
-//             cnt.entry(item[0])
-//                 .and_modify(|mut x| {
-//                     x.0 += item[1];
-//                     x.1 += 1;
-//                 })
-//                 .or_insert((item[1], 1));
-//         }
-//         let mut average_scores: Vec<(i32, i32)> =
-//             cnt.into_iter().map(|(k, v)| (-v.0 / v.1, k)).collect();
-//         average_scores.sort();
-//         (if average_scores.len() > 5 {
-//             &average_scores[..5]
-//         } else {
-//             &average_scores[..]
-//         })
-//         .iter()
-//         .map(|x| vec![x.1, -x.0])
-//         .collect()
-//     }
-// }
 
 impl Solution {
     pub fn high_five(mut items: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
@@ -84,6 +60,29 @@ impl Solution {
         }
 
         ans
+    }
+
+    pub fn high_five2(items: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+        let mut cnt = std::collections::HashMap::<i32, (i32, i32)>::new();
+        for item in &items {
+            cnt.entry(item[0])
+                .and_modify(|mut x| {
+                    x.0 += item[1];
+                    x.1 += 1;
+                })
+                .or_insert((item[1], 1));
+        }
+        let mut average_scores: Vec<(i32, i32)> =
+            cnt.into_iter().map(|(k, v)| (-v.0 / v.1, k)).collect();
+        average_scores.sort();
+        (if average_scores.len() > 5 {
+            &average_scores[..5]
+        } else {
+            &average_scores[..]
+        })
+        .iter()
+        .map(|x| vec![x.1, -x.0])
+        .collect()
     }
 }
 #[cfg(test)]

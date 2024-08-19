@@ -63,29 +63,26 @@ impl Solution {
         }
         ans
     }
+    pub fn remove_interval2(intervals: Vec<Vec<i32>>, to_be_removed: Vec<i32>) -> Vec<Vec<i32>> {
+        let mut ans = vec![];
+
+        for interval in intervals {
+            if interval[1] < to_be_removed[0] || interval[0] > to_be_removed[1] {
+                ans.push(interval);
+            } else {
+                if interval[0] < to_be_removed[0] {
+                    ans.push(vec![interval[0], interval[1].min(to_be_removed[0])]);
+                }
+                if interval[1] > to_be_removed[1] {
+                    ans.push(vec![interval[0].max(to_be_removed[1]), interval[1]]);
+                }
+            }
+        }
+
+        ans
+    }
 }
 
-// impl Solution {
-//     pub fn remove_interval(intervals: Vec<Vec<i32>>, to_be_removed: Vec<i32>) -> Vec<Vec<i32>> {
-//  let mut ans = vec![];
-
-//         for interval in intervals {
-//             if interval[1] < to_be_removed[0] || interval[0] > to_be_removed[1] {
-//                 ans.push(interval);
-//             } else {
-//                 if interval[0] < to_be_removed[0] {
-//                     ans.push(vec![interval[0], interval[1].min(to_be_removed[0])]);
-//                 }
-//                 if interval[1] > to_be_removed[1] {
-//                     ans.push(vec![interval[0].max(to_be_removed[1]), interval[1]]);
-//                 }
-//             }
-//         }
-
-//         ans
-
-//     }
-// }
 #[cfg(test)]
 mod test {
     use super::*;

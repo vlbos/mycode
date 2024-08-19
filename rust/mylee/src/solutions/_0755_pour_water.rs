@@ -135,51 +135,6 @@
 // @lc code=start
 impl Solution {
     pub fn pour_water(mut heights: Vec<i32>, volume: i32, k: i32) -> Vec<i32> {
-        // let len = heights.len() as i32;
-        // let mut v = v;
-        // while v > 0 {
-        //     let mut i = k - 1;
-        //     let mut left_low = k;
-        //     while i >= -1 {
-        //         let h = if i >= 0 {
-        //             heights[i as usize]
-        //         } else {
-        //             i32::max_value()
-        //         };
-        //         let prev_i = (i + 1) as usize;
-        //         let prev_h = heights[prev_i];
-        //         if h > prev_h {
-        //             break;
-        //         } else if h < prev_h {
-        //             left_low = i;
-        //         }
-        //         i -= 1;
-        //     }
-        //     if left_low == k {
-        //         let mut i = k + 1;
-        //         let mut right_low = k;
-        //         while i <= len {
-        //             let h = if i < len {
-        //                 heights[i as usize]
-        //             } else {
-        //                 i32::max_value()
-        //             };
-        //             let prev_i = i as usize - 1;
-        //             let prev_h = heights[prev_i];
-        //             if h > prev_h {
-        //                 break;
-        //             } else if h < prev_h {
-        //                 right_low = i;
-        //             }
-        //             i += 1;
-        //         }
-        //         heights[right_low as usize] += 1;
-        //     } else {
-        //         heights[left_low as usize] += 1;
-        //     }
-        //     v -= 1;
-        // }
-        // heights
         for _ in 0..volume {
             let mut cur = k as usize;
             while cur > 0 && heights[cur] >= heights[cur - 1] {
@@ -192,6 +147,54 @@ impl Solution {
                 cur -= 1;
             }
             heights[cur] += 1;
+        }
+        heights
+    }
+
+    pub fn pour_water2(mut heights: Vec<i32>, volume: i32, k: i32) -> Vec<i32> {
+        let len = heights.len() as i32;
+        let mut v = volume;
+        while v > 0 {
+            let mut i = k - 1;
+            let mut left_low = k;
+            while i >= -1 {
+                let h = if i >= 0 {
+                    heights[i as usize]
+                } else {
+                    i32::max_value()
+                };
+                let prev_i = (i + 1) as usize;
+                let prev_h = heights[prev_i];
+                if h > prev_h {
+                    break;
+                } else if h < prev_h {
+                    left_low = i;
+                }
+                i -= 1;
+            }
+            if left_low == k {
+                let mut i = k + 1;
+                let mut right_low = k;
+                while i <= len {
+                    let h = if i < len {
+                        heights[i as usize]
+                    } else {
+                        i32::max_value()
+                    };
+                    let prev_i = i as usize - 1;
+                    let prev_h = heights[prev_i];
+                    if h > prev_h {
+                        break;
+                    } else if h < prev_h {
+                        right_low = i;
+                    }
+                    i += 1;
+                }
+                heights[right_low as usize] += 1;
+            } else {
+                heights[left_low as usize] += 1;
+            }
+            v -= 1;
         }
         heights
     }

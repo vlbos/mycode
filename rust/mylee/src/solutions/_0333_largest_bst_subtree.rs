@@ -69,7 +69,7 @@ use std::rc::Rc;
 impl Solution {
     pub fn largest_bst_subtree(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
         // Solution::largest_bst_subtree_recursive(root).max_bst as i32
-        pub fn dfs(root: &Option<Rc<RefCell<TreeNode>>>) -> (i32, bool, i32, i32) {
+        fn dfs(root: &Option<Rc<RefCell<TreeNode>>>) -> (i32, bool, i32, i32) {
             if let Some(node) = root {
                 let node = node.borrow();
                 let l = dfs(&node.left);

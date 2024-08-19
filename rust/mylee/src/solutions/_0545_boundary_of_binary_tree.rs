@@ -174,8 +174,44 @@ impl Solution {
     //         }
     //     }
     // }
-
     pub fn boundary_of_binary_tree(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
+        fn dfs(
+            root: &Option<Rc<RefCell<TreeNode>>>,
+            ans: &mut Vec<i32>,
+            is_left_bound: bool,
+            is_right_bound: bool,
+        ) {
+            if let Some(r) = root {
+                if is_left_bound {
+                    ans.push(r.borrow().val);
+                } else if r.borrow().left.is_none() && r.borrow().right.is_none() {
+                    ans.push(r.borrow().val);
+                    return;
+                }
+
+                dfs(
+                    &r.borrow().left,
+                    ans,
+                    is_left_bound,
+                    !is_left_bound && is_right_bound && r.borrow().right.is_none(),
+                );
+                dfs(
+                    &r.borrow().right,
+                    ans,
+                    is_left_bound && !is_right_bound && r.borrow().left.is_none(),
+                    is_right_bound,
+                );
+
+                if !is_left_bound && is_right_bound {
+                    ans.push(r.borrow().val);
+                }
+            }
+        }
+        let mut ans = vec![];
+        dfs(&root, &mut ans, true, true);
+        ans
+    }
+    pub fn boundary_of_binary_treeerror(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
         // let mut res = vec![];
         // Solution::boundary_of_binary_tree_recursive(root, BoundaryState::Root, &mut res);
         // res
@@ -245,31 +281,7 @@ pub struct Solution;
 // // }
 // use std::rc::Rc;
 // use std::cell::RefCell;
-// impl Solution {
-//     pub fn boundary_of_binary_tree(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
-//         fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, ans: &mut Vec<i32>, is_left_bound: bool, is_right_bound: bool) {
-//         if let Some(r) = root {
-//             if is_left_bound {
-//                 ans.push(r.borrow().val);
-//             } else if r.borrow().left.is_none() && r.borrow().right.is_none() {
-//                 ans.push(r.borrow().val);
-//                 return;
-//             }
-
-//             dfs(&r.borrow().left, ans, is_left_bound, !is_left_bound && is_right_bound && r.borrow().right.is_none());
-//             dfs(&r.borrow().right, ans, is_left_bound && !is_right_bound && r.borrow().left.is_none(), is_right_bound);
-
-//             if !is_left_bound && is_right_bound {
-//                 ans.push(r.borrow().val);
-//             }
-//         }
-//     }
-//             let mut ans = vec![];
-//         dfs(&root, &mut ans, true, true);
-//         ans
-
-//     }
-// }
+impl Solution {}
 
 #[cfg(test)]
 mod test {

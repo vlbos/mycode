@@ -1,9 +1,9 @@
 use error_chain::error_chain;
 use std::env;
 use std::fs;
-use std::fs::File;
-use std::io;
-use std::io::{BufRead, Write};
+// use std::fs::File;
+// use std::io;
+// use std::io::{BufRead, Write};
 use std::path::Path;
 
 use glob::glob;
@@ -40,7 +40,7 @@ fn main() -> Result<()> {
     for entry in glob(&(path.to_str().unwrap().to_owned() + "/solutions/*.rs"))? {
         let filenamepath = format!("{}", entry?.display());
         let j = filenamepath.rfind("/").unwrap_or(0);
-        let mut filename = filenamepath[j + 1..].to_string();
+        let filename = filenamepath[j + 1..].to_string();
         if &filename == "mod.rs" {
             continue;
         }
@@ -60,7 +60,7 @@ fn main() -> Result<()> {
     Ok(())
 }
 
-fn deal_solving(filename: &String, new_filename: &String, new_filepath: &String) {
+fn deal_solving(filename: &String, _new_filename: &String, new_filepath: &String) {
     let file_path = Path::new(filename);
     if !file_path.exists() {
         println!("file_path no exist:{:?}", file_path);

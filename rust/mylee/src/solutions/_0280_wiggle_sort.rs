@@ -33,7 +33,7 @@
 
 impl Solution {
     pub fn wiggle_sort(nums: &mut Vec<i32>) {
-        nums.sort();
+        nums.sort_unstable();
         let mut i = 1;
 
         while i < nums.len() - 1 {

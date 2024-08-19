@@ -73,42 +73,38 @@ impl Solution {
         }
         ans
     }
+
+    pub fn tree_diameter2(edges: Vec<Vec<i32>>) -> i32 {
+        fn dfs(graph: &Vec<Vec<usize>>, vis: &mut Vec<bool>, ans: &mut usize, cur: usize) -> usize {
+            vis[cur] = true;
+            let mut depth = 0;
+
+            for &g in &graph[cur] {
+                if !vis[g] {
+                    let d = dfs(graph, vis, ans, g);
+                    *ans = (*ans).max(d + depth);
+                    depth = depth.max(d);
+                }
+            }
+
+            depth + 1
+        }
+        let n = edges.len() + 1;
+        let mut graph = vec![vec![]; n];
+
+        for edge in edges {
+            graph[edge[0] as usize].push(edge[1] as usize);
+            graph[edge[1] as usize].push(edge[0] as usize);
+        }
+
+        let mut vis = vec![false; n];
+        let mut ans = 0;
+
+        dfs(&mut graph, &mut vis, &mut ans, 0);
+
+        ans as i32
+    }
 }
-
-// impl Solution {
-//     pub fn tree_diameter(edges: Vec<Vec<i32>>) -> i32 {
-
-//     fn dfs(graph: &Vec<Vec<usize>>, vis: &mut Vec<bool>, ans: &mut usize, cur: usize) -> usize {
-//         vis[cur] = true;
-//         let mut depth = 0;
-
-//         for &g in &graph[cur] {
-//             if !vis[g] {
-//                 let d = dfs(graph, vis, ans, g);
-//                 *ans = (*ans).max(d + depth);
-//                 depth = depth.max(d);
-//             }
-//         }
-
-//         depth + 1
-//     }
-//   let n = edges.len() + 1;
-//         let mut graph = vec![vec![];n];
-
-//         for edge in edges {
-//             graph[edge[0] as usize].push(edge[1] as usize);
-//             graph[edge[1] as usize].push(edge[0] as usize);
-//         }
-
-//         let mut vis = vec![false;n];
-//         let mut ans = 0;
-
-//         dfs(&mut graph, &mut vis, &mut ans, 0);
-
-//         ans as i32
-//     }
-
-// }
 
 #[cfg(test)]
 mod test {

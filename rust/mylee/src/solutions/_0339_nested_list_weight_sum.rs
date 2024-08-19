@@ -50,7 +50,7 @@ impl Solution {
         //     }
         // }
         // sum
-        pub fn dfs(nested_list: &Vec<NestedInteger>, level: i32) -> i32 {
+        fn dfs(nested_list: &Vec<NestedInteger>, level: i32) -> i32 {
             nested_list.into_iter().fold(0, |acc, x| {
                 acc + match x {
                     NestedInteger::Int(v) => *v * level,

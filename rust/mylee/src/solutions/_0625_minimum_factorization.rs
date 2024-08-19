@@ -38,24 +38,6 @@
 // @lc code=start
 impl Solution {
     pub fn smallest_factorization(num: i32) -> i32 {
-        // if a < 2 {
-        //     return a;
-        // }
-        // let mut a = a as i64;
-        // let mut res = 0i64;
-        // let mut mul = 1i64;
-        // for i in (2..=9).rev() {
-        //     while a % i == 0 {
-        //         a /= i;
-        //         res = i * mul + res;
-        //         mul *= 10;
-        //     }
-        // }
-        // if a < 2 && res <= (i32::max_value() as i64) {
-        //     res as i32
-        // } else {
-        //     0
-        // }
         if 1 == num {
             return num;
         }
@@ -75,6 +57,27 @@ impl Solution {
             0
         } else {
             ans as _
+        }
+    }
+
+    pub fn smallest_factorization2(num: i32) -> i32 {
+        if num < 2 {
+            return num;
+        }
+        let mut a = num as i64;
+        let mut res = 0i64;
+        let mut mul = 1i64;
+        for i in (2..=9).rev() {
+            while a % i == 0 {
+                a /= i;
+                res = i * mul + res;
+                mul *= 10;
+            }
+        }
+        if a < 2 && res <= (i32::max_value() as i64) {
+            res as i32
+        } else {
+            0
         }
     }
 }

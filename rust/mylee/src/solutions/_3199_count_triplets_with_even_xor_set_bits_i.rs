@@ -3,7 +3,8 @@
 
 //
 
-// Given three integer arrays a, b, and c, return the number of triplets (a[i], b[j], c[k]), such that the bitwise XOR of the elements of each triplet has an even number of set bits.
+// Given three integer arrays a, b, and c, return the number of triplets (a[i], b[j], c[k]),
+// such that the bitwise XOR of the elements of each triplet has an even number of set bits.
 
 //
 // Example 1:
@@ -52,7 +53,29 @@ pub struct Solution;
 
 impl Solution {
     pub fn triplet_count(a: Vec<i32>, b: Vec<i32>, c: Vec<i32>) -> i32 {
-        0
+        let cnt1 = a.into_iter().fold([0; 2], |mut s, x| {
+            s[(x.count_ones() & 1) as usize] += 1;
+            s
+        });
+        let cnt2 = b.into_iter().fold([0; 2], |mut s, x| {
+            s[(x.count_ones() & 1) as usize] += 1;
+            s
+        });
+        let cnt3 = c.into_iter().fold([0; 2], |mut s, x| {
+            s[(x.count_ones() & 1) as usize] += 1;
+            s
+        });
+        let mut ans = 0;
+        for i in 0..2 {
+            for j in 0..2 {
+                for k in 0..2 {
+                    if (i + j + k) % 2 == 0 {
+                        ans += cnt1[i] * cnt2[j] * cnt3[k];
+                    }
+                }
+            }
+        }
+        ans
     }
 }
 
