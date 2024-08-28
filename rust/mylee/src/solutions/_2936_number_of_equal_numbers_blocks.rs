@@ -55,27 +55,17 @@
 //     int count_blocks(BigArray* nums) {
 
 //  Definition for BigArray.
-pub struct BigArray {
-    elements: Vec<i32>,
-}
-impl BigArray {
-    pub fn new(elements: Vec<i32>) -> Self {
-        Self { elements }
-    }
-    pub fn at(&self, index: i64) -> i32 {
-        self.elements[index as usize]
-    }
-    pub fn size(&self) -> i64 {
-        self.elements.len() as _
-    }
-}
-
-#[allow(dead_code)]
-pub struct Solution;
-
+/**
+ * Definition for BigArray.
+ * impl BigArray {
+ *     pub fn new(elements: Vec<i32>) -> Self {}
+ *     pub fn at(&self, usize) -> i32 {}
+ *     pub fn size(&self) -> usize {}
+ * }
+ */
 impl Solution {
     pub fn count_blocks(nums: BigArray) -> i32 {
-        fn f(mut l: i64, mut r: i64, nums: &BigArray) -> i32 {
+        fn f(l: usize, r: usize, nums: &BigArray) -> i32 {
             if nums.at(l) == nums.at(r) {
                 return 1;
             }
@@ -92,30 +82,69 @@ impl Solution {
         }
         f(0, nums.size() - 1, &nums)
     }
-    pub fn count_blocks1(nums: BigArray) -> i32 {
-        let mut ans = 0;
-        let n = nums.size();
-        let search = |mut l| {
-            let mut r = n;
-            let x = nums.at(l);
-            while l < r {
-                let mid = (l + r) / 2;
-                if nums.at(mid) != x {
-                    r = mid;
-                } else {
-                    l = mid + 1;
-                }
-            }
-            l
-        };
-        let mut i = 0;
-        while i < n {
-            i = search(i);
-            ans += 1;
-        }
-        ans
+}
+
+pub struct BigArray {
+    elements: Vec<i32>,
+}
+impl BigArray {
+    pub fn new(elements: Vec<i32>) -> Self {
+        Self { elements }
+    }
+    pub fn at(&self, index: usize) -> i32 {
+        self.elements[index]
+    }
+    pub fn size(&self) -> usize {
+        self.elements.len()
     }
 }
+
+#[allow(dead_code)]
+pub struct Solution;
+
+// impl Solution {
+//     pub fn count_blocks(nums: BigArray) -> i32 {
+//         fn f( l: i64,  r: i64, nums: &BigArray) -> i32 {
+//             if nums.at(l) == nums.at(r) {
+//                 return 1;
+//             }
+
+//             let mid = (l + r) / 2;
+//             let a = f(l, mid, nums);
+//             let b = f(mid + 1, r, nums);
+//             a + b
+//                 - if nums.at(mid) == nums.at(mid + 1) {
+//                     1
+//                 } else {
+//                     0
+//                 }
+//         }
+//         f(0, nums.size() - 1, &nums)
+//     }
+//     pub fn count_blocks1(nums: BigArray) -> i32 {
+//         let mut ans = 0;
+//         let n = nums.size();
+//         let search = |mut l| {
+//             let mut r = n;
+//             let x = nums.at(l);
+//             while l < r {
+//                 let mid = (l + r) / 2;
+//                 if nums.at(mid) != x {
+//                     r = mid;
+//                 } else {
+//                     l = mid + 1;
+//                 }
+//             }
+//             l
+//         };
+//         let mut i = 0;
+//         while i < n {
+//             i = search(i);
+//             ans += 1;
+//         }
+//         ans
+//     }
+// }
 
 #[cfg(test)]
 mod test {

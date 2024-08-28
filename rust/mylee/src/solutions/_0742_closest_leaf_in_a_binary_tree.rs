@@ -186,6 +186,7 @@ impl Solution {
         }
         unreachable!()
     }
+    #[allow(dead_code)]
     fn find_closest_leaf3(root: Option<Rc<RefCell<TreeNode>>>, k: i32) -> i32 {
         use std::collections::{HashMap, HashSet, VecDeque};
         let (mut queue, mut vis, mut nodes, mut edges) = (

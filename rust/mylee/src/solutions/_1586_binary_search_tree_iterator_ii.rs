@@ -115,6 +115,9 @@ impl BSTIterator {
 
     pub fn prev(&mut self) -> i32 {
         self.index -= 1;
+        if self.index < 0 {
+            return self.p[0].borrow().val;
+        }
         self.p[self.index as usize].borrow().val
     }
     pub fn next(&mut self) -> i32 {
@@ -160,6 +163,8 @@ impl BSTIterator {
 mod test {
     use super::*;
     use crate::tree;
+    // ["BSTIterator","next","prev","next","next","hasNext","next","next","next","hasNext","hasPrev","prev","prev"]
+    // [[[7,3,15,null,null,9,20]],[null],[null],[null],[null],[null],[null],[null],[null],[null],[null],[null],[null]]
     #[test]
     pub fn test_bstiterator_1() {
         let mut it = BSTIterator::new(tree![7, 3, 15, null, null, 9, 20]);

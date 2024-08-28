@@ -33,6 +33,32 @@ Constraints:
  *    pub fn has_ships(top_right: Vec<i32>,bottom_left: Vec<i32>)->bool{}
  * }
  */
+
+// impl Solution {
+//     pub fn count_ships(sea: &Sea, topRight: Vec<i32>, bottomLeft: Vec<i32>) -> i32 {
+//         let (top_right,bottom_left)=(topRight,bottomLeft);
+//  let x1 = top_right[0];
+//         let y1 = top_right[1];
+//         let x2 = bottom_left[0];
+//         let y2 = bottom_left[1];
+
+//         if x1 < x2 || y1 < y2 || !sea.hasShips(top_right, bottom_left) {
+//             return 0;
+//         }
+
+//         if x1 == x2 || y1 == y2 {
+//             return 1;
+//         }
+
+//         let mx = (x1 + x2) / 2;
+//         let my = (y1 + y2) / 2;
+
+//         Self::count_ships(sea, vec![mx, my], vec![x2, y2])
+//             + Self::count_ships(sea, vec![mx, y1], vec![x2, my + 1])
+//             + Self::count_ships(sea, vec![x1, my], vec![mx + 1, y2])
+//             + Self::count_ships(sea, vec![x1, y1], vec![mx + 1, my + 1])
+//     }
+// }
 pub struct Sea;
 impl Sea {
     pub fn has_ships(&self, _top_right: Vec<i32>, _bottom_left: Vec<i32>) -> bool {

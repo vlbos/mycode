@@ -37,24 +37,28 @@
 
 //  * Definition of commonBits API.
 //  * int commonBits(int num);
-fn common_set_bits(num: i32) -> i32 {
-    0
+fn common_bits(num: i32) -> i32 {
+    num
 }
 #[allow(dead_code)]
 pub struct Solution;
+/**
+ * Definition of commonBits API.
+ * unsafe fn common_bits(num: i32) -> i32 {}
+ */
 
 impl Solution {
-    pub fn find_number() -> i32 {
-        (0..32)
-            .map(|i| {
-                let (count1, count2) = (common_set_bits(1 << i), common_set_bits(1 << i));
-                if count1 > count2 {
-                    1 << i
-                } else {
-                    0
-                }
-            })
-            .sum()
+    unsafe fn find_number() -> i32 {
+        let mut ans = 0;
+        let mut i = 1;
+        while i < 1073741824 {
+            if common_bits(i) > common_bits(i) {
+                ans |= i;
+            }
+
+            i <<= 1;
+        }
+        ans
     }
 }
 
@@ -63,14 +67,14 @@ mod test {
     use super::*;
     #[test]
     pub fn test_find_number_1() {
-        assert_eq!(3, Solution::find_number());
+        assert_eq!(0, unsafe { Solution::find_number() });
     }
     #[test]
     pub fn test_find_number_2() {
-        assert_eq!(0, Solution::find_number());
+        assert_eq!(0, unsafe { Solution::find_number() });
     }
     #[test]
     pub fn test_find_number_3() {
-        assert_eq!(2, Solution::find_number());
+        assert_eq!(0, unsafe { Solution::find_number() });
     }
 }

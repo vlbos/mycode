@@ -37,7 +37,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn generate_sentences(synonyms: Vec<Vec<String>>, text: String) -> Vec<String> {
+    pub fn generate_sentenceswrong(synonyms: Vec<Vec<String>>, text: String) -> Vec<String> {
         let text: Vec<&str> = text.split_ascii_whitespace().collect();
         let mut q = std::collections::VecDeque::from([text.clone()]);
         for s in &synonyms {
@@ -62,11 +62,11 @@ impl Solution {
             }
         }
         let mut ans: Vec<String> = q.iter().map(|x| x.join(" ")).collect();
-        ans.sort();
+        ans.sort_unstable();
         ans
     }
 
-    pub fn generate_sentences2(synonyms: Vec<Vec<String>>, text: String) -> Vec<String> {
+    pub fn generate_sentences(synonyms: Vec<Vec<String>>, text: String) -> Vec<String> {
         use std::collections::{BTreeSet, HashMap};
         struct UnionFind {
             parent: Vec<usize>,
@@ -144,7 +144,6 @@ impl Solution {
             groups.push(group);
         }
 
-        let m = groups.len();
         let mut ans = vec![];
         fn dfs(
             groups: &Vec<Vec<usize>>,

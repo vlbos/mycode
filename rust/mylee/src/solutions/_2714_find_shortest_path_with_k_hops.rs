@@ -69,28 +69,29 @@ pub struct Solution;
 
 impl Solution {
     pub fn shortest_path_with_hops(n: i32, edges: Vec<Vec<i32>>, s: i32, d: i32, k: i32) -> i32 {
-        let mut g = vec![vec![]; n as usize];
+        let (n, k, s, d) = (n as usize, k as usize, s as usize, d as usize);
+        let mut g = vec![vec![]; n];
         for e in &edges {
             let (u, v) = (e[0] as usize, e[1] as usize);
             g[u].push((v, e[2]));
             g[v].push((u, e[2]));
         }
-        let mut dist = vec![vec![i32::MAX / 2; k as usize + 1]; n as usize];
-        dist[s as usize][k as usize] = 0;
+        let mut dist = vec![vec![i32::MAX / 3; k + 1]; n];
+        dist[s][k] = 0;
         use std::{cmp::Reverse, collections::BinaryHeap};
-        let mut q = BinaryHeap::from([Reverse((dist[s as usize][k as usize], s, k))]);
-        while let Some(Reverse((dis, u, hops))) = q.pop() {
+        let mut stack = BinaryHeap::from([Reverse((0, k, s))]);
+        while let Some(Reverse((dis, m, u))) = stack.pop() {
             if u == d {
                 return dis;
             }
-            for &(v, w) in &g[u as usize] {
-                if dis + w < dist[v][hops as usize] {
-                    dist[v][hops as usize] = dis + w;
-                    q.push(Reverse((dist[v][hops as usize], v as i32, hops)));
+            for &(v, w) in &g[u] {
+                if dist[v][m] > dis + w {
+                    dist[v][m] = dis + w;
+                    stack.push(Reverse((dis + w, m, v)));
                 }
-                if hops > 0 && d < dist[v][hops as usize - 1] {
-                    dist[v][hops as usize - 1] = dis;
-                    q.push(Reverse((dist[v][hops as usize - 1], v as i32, hops - 1)));
+                if m > 0 && dist[v][m - 1] > dis {
+                    dist[v][m - 1] = dis;
+                    stack.push(Reverse((dis, m - 1, v)));
                 }
             }
         }
@@ -101,7 +102,22 @@ impl Solution {
 #[cfg(test)]
 mod test {
     use super::*;
+    // n =
+    // 5
+    // edges =
+    // [[0,1,1],[4,3,3],[2,4,8],[3,0,4]]
+    // s =
+    // 1
+    // d =
+    // 4
+    // k =
+    // 1
 
+    // Use Testcase
+    // Output
+    // 5
+    // Expected
+    // 4
     #[test]
     pub fn test_shortest_path_with_hops_1() {
         assert_eq!(

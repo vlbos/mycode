@@ -84,7 +84,8 @@ pub struct Solution;
 
 impl Solution {
     pub fn is_preorder(nodes: Vec<Vec<i32>>) -> bool {
-        let mut g = vec![vec![]; nodes.len()];
+        let m = nodes.iter().max_by_key(|x| x[0]).unwrap()[0];
+        let mut g = vec![vec![]; m as usize + 1];
         for node in &nodes {
             if node[1] != -1 {
                 g[node[1] as usize].push(node[0]);
@@ -107,7 +108,7 @@ impl Solution {
 #[cfg(test)]
 mod test {
     use super::*;
-
+    // [[1,-1],[2,1],[3,2]]
     #[test]
     pub fn test_is_preorder_1() {
         assert!(Solution::is_preorder(vec![

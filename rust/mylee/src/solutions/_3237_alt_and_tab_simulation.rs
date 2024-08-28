@@ -68,7 +68,20 @@ pub struct Solution;
 
 impl Solution {
     pub fn simulation_result(windows: Vec<i32>, queries: Vec<i32>) -> Vec<i32> {
-        vec![]
+        let (mut ans, mut moved) = (vec![], std::collections::HashSet::new());
+        for q in queries.into_iter().rev() {
+            if !moved.contains(&q) {
+                ans.push(q);
+                moved.insert(q);
+            }
+        }
+        ans.extend(
+            windows
+                .into_iter()
+                .filter(|x| !moved.contains(x))
+                .collect::<Vec<_>>(),
+        );
+        ans
     }
 }
 

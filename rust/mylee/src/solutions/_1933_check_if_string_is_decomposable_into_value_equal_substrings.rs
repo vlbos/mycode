@@ -64,7 +64,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn is_decomposable(s: String) -> bool {
+    pub fn is_decomposablewrong(s: String) -> bool {
         let mut pre = s.chars().nth(0).unwrap();
         let mut cnt = 0;
         let mut flag = false;
@@ -93,31 +93,27 @@ impl Solution {
         }
         flag
     }
+    pub fn is_decomposable(s: String) -> bool {
+        let bs = s.as_bytes();
+        let mut i = 0;
+        let mut two = 0;
+
+        while i < bs.len() {
+            let mut j = i + 1;
+            while j < bs.len() && bs[j] == bs[i] {
+                j += 1;
+            }
+            if (j - i) % 3 == 1 {
+                return false;
+            }
+            if (j - i) % 3 == 2 {
+                two += 1;
+            }
+            i = j;
+        }
+        two == 1
+    }
 }
-
-// impl Solution {
-//     pub fn is_decomposable(s: String) -> bool {
-//         let bs=s.as_bytes();
-// let mut i =0;
-//         let mut two = 0;
-
-//         while i< bs.len(){
-//             let mut j = i+1;
-//             while j<bs.len() && bs[j]==bs[i]{
-//                 j+=1;
-//             }
-//             if (j-i)%3==1{
-//                 return false
-//             }
-//              if (j-i)%3==2{
-//                 two+=1;
-//             }
-//                     i=j;
-//             }
-//         two==1
-
-//     }
-// }
 
 #[cfg(test)]
 mod test {

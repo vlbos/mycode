@@ -62,7 +62,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn confusing_number(n: i32) -> bool {
+    pub fn confusing_numbererror(n: i32) -> bool {
         let ns = n.to_string();
         ns.chars()
             .filter(|x| "01869".chars().all(|c| c != *x))
@@ -70,7 +70,7 @@ impl Solution {
             == 0
             && ns.chars().filter(|x| "69".chars().any(|c| c == *x)).count() > 0
     }
-    pub fn confusing_number2(n: i32) -> bool {
+    pub fn confusing_number(n: i32) -> bool {
         n != n
             .to_string()
             .chars()
@@ -90,7 +90,13 @@ impl Solution {
 #[cfg(test)]
 mod test {
     use super::*;
-    // 916
+    //     916
+
+    // Use Testcase
+    // Output
+    // true
+    // Expected
+    // false
     #[test]
     pub fn test_confusing_number_1() {
         assert!(Solution::confusing_number(6));

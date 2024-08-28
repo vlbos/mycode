@@ -69,14 +69,14 @@ use std::rc::Rc;
 impl Solution {
     pub fn minimum_level(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
         let mut q = std::collections::VecDeque::from([root.clone()]);
-        let (mut ans, mut mn) = (0, i32::MAX);
+        let (mut ans, mut mn) = (0, i64::MAX);
         let mut level = 1;
         while !q.is_empty() {
             let len = q.len();
             let mut sum = 0;
             for _ in 0..len {
                 let node = q.pop_front().unwrap();
-                sum += node.as_ref().unwrap().borrow().val;
+                sum += node.as_ref().unwrap().borrow().val as i64;
                 if node.as_ref().unwrap().borrow().left.is_some() {
                     q.push_back(node.as_ref().unwrap().borrow().left.clone());
                 }

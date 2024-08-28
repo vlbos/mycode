@@ -52,6 +52,40 @@ pub struct Solution;
 
 impl Solution {
     pub fn self_divisible_permutation_count(n: i32) -> i32 {
+        let mut f = vec![0; 1 << n];
+        f[0] = 1;
+        let shift_j: Vec<_> = (0..n).map(|i| (1 << i, i + 1)).collect();
+        fn gcd(a: i32, b: i32) -> i32 {
+            if b == 0 {
+                a
+            } else {
+                gcd(b, a % b)
+            }
+        }
+        for mask in 0..1 << n {
+            let i = (mask as i32).count_ones() as i32;
+            for &(shift, j) in &shift_j {
+                if mask & shift != 0 && gcd(j, i) == 1 {
+                    f[mask] += f[mask ^ shift];
+                }
+            }
+        }
+        f[(1 << n) - 1]
+    }
+    pub fn self_divisible_permutation_countwrong(n: i32) -> i32 {
+        let mut f = vec![0; 1 << n];
+        f[0] = 1;
+        for mask in 0..1 << n {
+            let i = (mask as i32).count_ones() as i32;
+            for j in 1..=n {
+                if mask >> (j - 1) & 1 == 1 && (i % j == 0 || j % i == 0) {
+                    f[mask] += f[mask ^ (1 << (j - 1))];
+                }
+            }
+        }
+        f[(1 << n) - 1]
+    }
+    pub fn self_divisible_permutation_count2wrong(n: i32) -> i32 {
         let mut memo = vec![-1; 1 << (n + 1)];
         fn dfs(mask: i32, n: i32, memo: &mut Vec<i32>) -> i32 {
             if memo[mask as usize] != -1 {
@@ -63,8 +97,7 @@ impl Solution {
             }
             memo[mask as usize] = 0;
             for j in 1..=n {
-                if mask >> j & 1 == 0 && (i % j == 0 || j % i == 0) {
-                    println!("{i},{j},{mask}");
+                if (mask >> j) & 1 == 0 && (i % j == 0 || j % i == 0) {
                     memo[mask as usize] += dfs(mask | (1 << j), n, memo);
                 }
             }
@@ -74,9 +107,29 @@ impl Solution {
     }
 }
 
+//   def selfDivisiblePermutationCount(self, n: int) -> int:
+//         dp = [0] * (1 << n)
+//         dp[0] = 1
+
+//         shift_j = [(1 << i, i+1) for i in range(n)]
+//         for mask in range(1, 1 << n):
+//             bit_count = mask.bit_count()
+//             for shift, j in shift_j:
+//                 if mask & shift and gcd(j, bit_count) == 1:
+//                     dp[mask] += dp[mask ^ shift]
+
+//         return dp[-1]
 #[cfg(test)]
 mod test {
     use super::*;
+    // n =
+    // 2
+
+    // Use Testcase
+    // Output
+    // 2
+    // Expected
+    // 1
     #[test]
     pub fn test_self_divisible_permutation_count_1() {
         assert_eq!(1, Solution::self_divisible_permutation_count(1));

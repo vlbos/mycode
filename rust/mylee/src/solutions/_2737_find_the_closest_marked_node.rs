@@ -71,24 +71,15 @@ pub struct Solution;
 
 impl Solution {
     pub fn minimum_distance(n: i32, edges: Vec<Vec<i32>>, s: i32, marked: Vec<i32>) -> i32 {
-        let mut g = vec![vec![i32::MAX / 2; n as usize]; n as usize];
-        for e in &edges {
-            g[e[0] as usize][e[1] as usize] = e[2];
-        }
-        let mut dist = vec![i32::MAX / 2; n as usize];
-        let mut vis = vec![false; n as usize];
+        let n = n as usize;
+        let mut dist = vec![i32::MAX / 2; n];
         dist[s as usize] = 0;
-        for _ in 0..n {
-            let mut t = -1;
-            for j in 0..n {
-                if !vis[j as usize] && (t == -1 || dist[t as usize] > dist[j as usize]) {
-                    t = j;
+        for _ in 0..n - 1 {
+            for e in &edges {
+                let (u, v, w) = (e[0] as usize, e[1] as usize, e[2]);
+                if dist[v] > dist[u] + w {
+                    dist[v] = dist[u] + w;
                 }
-            }
-            vis[t as usize] = true;
-            for j in 0..n {
-                dist[j as usize] =
-                    dist[j as usize].min(dist[t as usize] + g[t as usize][j as usize]);
             }
         }
         let ans = marked.iter().map(|&i| dist[i as usize]).min().unwrap();
@@ -103,7 +94,20 @@ impl Solution {
 #[cfg(test)]
 mod test {
     use super::*;
+    // n =
+    // 2
+    // edges =
+    // [[0,1,1],[0,1,2],[0,1,3],[1,0,8],[1,0,10],[0,1,7],[0,1,2],[0,1,6],[1,0,1],[1,0,2],[1,0,4],[0,1,9],[1,0,10]]
+    // s =
+    // 0
+    // marked =
+    // [1]
 
+    // Use Testcase
+    // Output
+    // 9
+    // Expected
+    // 1
     #[test]
     pub fn test_minimum_distance_1() {
         assert_eq!(

@@ -37,7 +37,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn probability_of_heads(prob: Vec<f64>, target: i32) -> f64 {
+    pub fn probability_of_headserror(prob: Vec<f64>, target: i32) -> f64 {
         let n = 1 << target as u32;
         let mut ans = 0.0;
         for i in 0..n {
@@ -50,7 +50,7 @@ impl Solution {
         }
         ans
     }
-    pub fn probability_of_heads2(prob: Vec<f64>, target: i32) -> f64 {
+    pub fn probability_of_heads(prob: Vec<f64>, target: i32) -> f64 {
         let mut ans = vec![0.0; target as usize + 1];
         ans[0] = 1.0;
         for (i, &p) in prob.iter().enumerate() {

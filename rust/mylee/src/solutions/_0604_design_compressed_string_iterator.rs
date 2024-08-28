@@ -99,7 +99,7 @@ mod sol2 {
         Current { content: char, repeat: usize },
         Empty,
     }
-
+    #[allow(dead_code)]
     #[derive(Clone, Debug)]
     pub struct StringIterator {
         source: Vec<char>,
@@ -111,6 +111,7 @@ mod sol2 {
      * `&self` means the method takes an immutable reference.
      * If you need a mutable reference, change it to `&mut self` instead.
      */
+    #[allow(dead_code)]
     impl StringIterator {
         pub fn new(compressed_string: String) -> Self {
             let mut source = compressed_string.chars().collect::<Vec<_>>();

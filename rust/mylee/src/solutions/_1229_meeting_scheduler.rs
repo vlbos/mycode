@@ -48,8 +48,8 @@ impl Solution {
         mut slots2: Vec<Vec<i32>>,
         duration: i32,
     ) -> Vec<i32> {
-        slots1.sort();
-        slots2.sort();
+        slots1.sort_unstable();
+        slots2.sort_unstable();
         let (mut i, mut j) = (0, 0);
         while i < slots1.len() && j < slots2.len() {
             let start = slots1[i][0].max(slots2[j][0]);

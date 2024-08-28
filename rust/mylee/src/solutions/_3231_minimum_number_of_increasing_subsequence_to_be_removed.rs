@@ -54,8 +54,17 @@
 pub struct Solution;
 
 impl Solution {
-    pub fn min_operations(nums: Vec<i32>) -> i32 {
-        0
+    pub fn min_operations(mut nums: Vec<i32>) -> i32 {
+        let mut dp = vec![nums.pop().unwrap()];
+        for x in nums.into_iter().rev() {
+            if x >= *dp.last().unwrap() {
+                dp.push(x);
+            } else {
+                let i = dp.partition_point(|&y| y <= x);
+                dp[i] = x;
+            }
+        }
+        dp.len() as _
     }
 }
 

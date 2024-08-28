@@ -76,7 +76,7 @@ use crate::solutions::util::linked_list::ListNode;
 // use std::borrow::BorrowMut;
 
 impl Solution {
-    pub fn frequencies_of_elements(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+    pub fn frequencies_of_elements(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
         let mut freq = std::collections::HashMap::new();
         let mut p = &head;
         while let Some(node) = p {

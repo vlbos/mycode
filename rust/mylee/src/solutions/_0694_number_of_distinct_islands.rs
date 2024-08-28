@@ -98,7 +98,7 @@ impl Solution {
 
     pub fn num_distinct_islands(grid: Vec<Vec<i32>>) -> i32 {
         use std::collections::{HashMap, HashSet};
-
+        #[allow(dead_code)]
         pub struct UnionFind {
             sz: Vec<usize>,
             id: Vec<usize>,
@@ -120,7 +120,7 @@ impl Solution {
                 }
                 p
             }
-
+            #[allow(dead_code)]
             pub fn connected(&self, p: usize, q: usize) -> bool {
                 let pid = self.find(p);
                 let qid = self.find(q);

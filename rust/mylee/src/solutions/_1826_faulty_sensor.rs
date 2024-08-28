@@ -57,7 +57,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn bad_sensor(sensor1: Vec<i32>, sensor2: Vec<i32>) -> i32 {
+    pub fn bad_sensorwrong(sensor1: Vec<i32>, sensor2: Vec<i32>) -> i32 {
         for (i, (&s1, &s2)) in sensor1.iter().zip(&sensor2).enumerate() {
             if s1 == s2 {
                 continue;
@@ -82,37 +82,44 @@ impl Solution {
         }
         -1
     }
+    pub fn bad_sensor(sensor1: Vec<i32>, sensor2: Vec<i32>) -> i32 {
+        let n = sensor1.len() - 1;
+        let mut i = 0;
+
+        while sensor1[i] == sensor2[i] && i < n {
+            i += 1;
+        }
+
+        let s11 = &sensor1[i..n];
+        let s12 = &sensor1[i + 1..=n];
+        let s21 = &sensor2[i..n];
+        let s22 = &sensor2[i + 1..=n];
+
+        if s11 == s22 && s12 != s21 {
+            return 1;
+        }
+
+        if s21 == s12 && s22 != s11 {
+            return 2;
+        }
+
+        -1
+    }
 }
 
-// impl Solution {
-//     pub fn bad_sensor(sensor1: Vec<i32>, sensor2: Vec<i32>) -> i32 {
-//  let n = sensor1.len() - 1;
-//         let mut i = 0;
-
-//         while sensor1[i] == sensor2[i] && i < n {
-//             i += 1;
-//         }
-
-//         let s11 = &sensor1[i..n];
-//         let s12 = &sensor1[i+1..=n];
-//         let s21 = &sensor2[i..n];
-//         let s22 = &sensor2[i+1..=n];
-
-//         if s11 == s22 && s12 != s21 {
-//             return 1;
-//         }
-
-//         if s21 == s12 && s22 != s11 {
-//             return 2;
-//         }
-
-//         -1
-//     }
-// }
 #[cfg(test)]
 mod test {
     use super::*;
+    // sensor1 =
+    // [8,2,2,6,3,8,7,2,5,3]
+    // sensor2 =
+    // [2,8,2,2,6,3,8,7,2,5]
 
+    // Use Testcase
+    // Output
+    // 2
+    // Expected
+    // 1
     #[test]
     pub fn test_bad_sensor_1() {
         assert_eq!(1, Solution::bad_sensor(vec![2, 3, 4, 5], vec![2, 1, 3, 4]));

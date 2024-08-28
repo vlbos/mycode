@@ -74,7 +74,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn leads_to_destination(
+    pub fn leads_to_destinationtle(
         _n: i32,
         edges: Vec<Vec<i32>>,
         source: i32,
@@ -106,7 +106,7 @@ impl Solution {
         let mut visited = HashSet::new();
         dfs(&g, &mut visited, source, destination)
     }
-    pub fn leads_to_destination2(
+    pub fn leads_to_destination(
         n: i32,
         edges: Vec<Vec<i32>>,
         source: i32,

@@ -39,7 +39,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn missing_number(arr: Vec<i32>) -> i32 {
+    pub fn missing_numbereror(arr: Vec<i32>) -> i32 {
         for w in arr.windows(3) {
             if w[0] - w[1] != w[1] - w[2] {
                 return if (w[0] - w[1]).abs() > (w[1] - w[2]).abs() {
@@ -51,7 +51,7 @@ impl Solution {
         }
         -1
     }
-    pub fn missing_number2(arr: Vec<i32>) -> i32 {
+    pub fn missing_number(arr: Vec<i32>) -> i32 {
         (arr[0] + arr[arr.len() - 1]) * (arr.len() as i32 + 1) / 2 - arr.iter().sum::<i32>()
     }
 }

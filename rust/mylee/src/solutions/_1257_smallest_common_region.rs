@@ -43,7 +43,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn find_smallest_region(
+    pub fn find_smallest_regionerror(
         regions: Vec<Vec<String>>,
         region1: String,
         region2: String,
@@ -76,7 +76,7 @@ impl Solution {
         }
         String::new()
     }
-    pub fn find_smallest_region2(
+    pub fn find_smallest_region(
         regions: Vec<Vec<String>>,
         region1: String,
         region2: String,

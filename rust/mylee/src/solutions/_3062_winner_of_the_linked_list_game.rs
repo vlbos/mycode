@@ -106,7 +106,7 @@ use crate::solutions::util::linked_list::ListNode;
 // use std::borrow::BorrowMut;
 
 impl Solution {
-    pub fn game_result(mut head: Option<Box<ListNode>>) -> String {
+    pub fn game_result(head: Option<Box<ListNode>>) -> String {
         let mut p = &head;
         let (mut odd, mut even) = (0, 0);
         while let Some(node) = p {

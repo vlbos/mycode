@@ -44,43 +44,44 @@
 // *   `1 <= sum(words[i].length) <= 10^5`
 
 //   string longest_word(vector<string>& words)
-use std::collections::HashMap;
-pub struct Trie {
-    children: HashMap<char, Trie>,
-    is_word: bool,
-}
-impl Trie {
-    pub fn new() -> Self {
-        Self {
-            children: HashMap::new(),
-            is_word: false,
-        }
-    }
-    pub fn insert(&mut self, word: &String) {
-        let mut node = self;
-        for c in word.chars() {
-            node = node.children.entry(c).or_insert(Trie::new());
-        }
-        node.is_word = true;
-    }
-    pub fn all_prefixed(&self, word: &String) -> bool {
-        let mut node = self;
-        for c in word.chars() {
-            if let Some(child) = node.children.get(&c) {
-                if !child.is_word {
-                    return false;
-                }
-                node = child;
-            }
-        }
-        node.is_word
-    }
-}
+
 #[allow(dead_code)]
 pub struct Solution {}
 
 impl Solution {
     pub fn longest_word(words: Vec<String>) -> String {
+        use std::collections::HashMap;
+        pub struct Trie {
+            children: HashMap<char, Trie>,
+            is_word: bool,
+        }
+        impl Trie {
+            pub fn new() -> Self {
+                Self {
+                    children: HashMap::new(),
+                    is_word: false,
+                }
+            }
+            pub fn insert(&mut self, word: &String) {
+                let mut node = self;
+                for c in word.chars() {
+                    node = node.children.entry(c).or_insert(Trie::new());
+                }
+                node.is_word = true;
+            }
+            pub fn all_prefixed(&self, word: &String) -> bool {
+                let mut node = self;
+                for c in word.chars() {
+                    if let Some(child) = node.children.get(&c) {
+                        if !child.is_word {
+                            return false;
+                        }
+                        node = child;
+                    }
+                }
+                node.is_word
+            }
+        }
         let mut trie = Trie::new();
         for w in &words {
             trie.insert(w);

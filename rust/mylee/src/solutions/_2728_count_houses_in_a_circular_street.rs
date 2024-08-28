@@ -109,6 +109,19 @@ impl Solution {
         }
         ans
     }
+    pub fn house_count2(mut street: Street, k: i32) -> i32 {
+        for _ in 0..k {
+            street.open_door();
+            street.move_left();
+        }
+        let mut ans = 0;
+        while street.is_door_open() {
+            street.close_door();
+            street.move_left();
+            ans += 1;
+        }
+        ans
+    }
 }
 
 #[cfg(test)]

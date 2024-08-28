@@ -59,7 +59,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn find_rle_array(encoded1: Vec<Vec<i32>>, encoded2: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+    pub fn find_rle_arrayerror(encoded1: Vec<Vec<i32>>, encoded2: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
         let e1: Vec<i32> = encoded1
             .into_iter()
             .map(|x| vec![x[0]; x[1] as usize])
@@ -88,42 +88,42 @@ impl Solution {
         }
         ans
     }
+    pub fn find_rle_array(
+        mut encoded1: Vec<Vec<i32>>,
+        mut encoded2: Vec<Vec<i32>>,
+    ) -> Vec<Vec<i32>> {
+        let n = encoded1.len();
+        let m = encoded2.len();
+        let mut i = 0;
+        let mut j = 0;
+        let mut ans: Vec<Vec<i32>> = vec![];
+
+        while i < n && j < m {
+            let val = encoded1[i][0] * encoded2[j][0];
+            let freq = encoded1[i][1].min(encoded2[j][1]);
+
+            if ans.len() == 0 || ans[ans.len() - 1][0] != val {
+                ans.push(vec![val, freq]);
+            } else {
+                let index = ans.len() - 1;
+                ans[index][1] += freq;
+            }
+
+            encoded1[i][1] -= freq;
+            encoded2[j][1] -= freq;
+
+            if encoded1[i][1] == 0 {
+                i += 1;
+            }
+
+            if encoded2[j][1] == 0 {
+                j += 1;
+            }
+        }
+
+        ans
+    }
 }
-
-// impl Solution {
-//     pub fn find_rle_array(mut encoded1: Vec<Vec<i32>>, mut encoded2: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-// let n = encoded1.len();
-//         let m = encoded2.len();
-//         let mut i = 0;
-//         let mut j = 0;
-//         let mut ans: Vec<Vec<i32>> = vec![];
-
-//         while i < n && j < m {
-//             let val = encoded1[i][0] * encoded2[j][0];
-//             let freq = encoded1[i][1].min(encoded2[j][1]);
-
-//             if ans.len() == 0 || ans[ans.len() - 1][0] != val {
-//                 ans.push(vec![val, freq]);
-//             } else {
-//                 let index = ans.len() - 1;
-//                 ans[index][1] += freq;
-//             }
-
-//             encoded1[i][1] -= freq;
-//             encoded2[j][1] -= freq;
-
-//             if encoded1[i][1] == 0 {
-//                 i += 1;
-//             }
-
-//             if encoded2[j][1] == 0 {
-//                 j += 1;
-//             }
-//         }
-
-//         ans
-//     }
-// }
 
 #[cfg(test)]
 mod test {

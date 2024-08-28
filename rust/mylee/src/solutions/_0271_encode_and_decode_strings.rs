@@ -259,7 +259,7 @@ impl Codec {
         // trie.serialize()
         let strs: Vec<String> = strs
             .into_iter()
-            .map(|mut x| {
+            .map(|x| {
                 if x.is_empty() {
                     String::from(".")
                 } else {

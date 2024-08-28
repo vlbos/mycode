@@ -60,6 +60,7 @@ mod error {
      * `&self` means the method takes an immutable reference.
      * If you need a mutable reference, change it to `&mut self` instead.
      */
+    #[allow(dead_code)]
     impl FileSystem {
         pub fn new() -> Self {
             Self {
@@ -130,7 +131,7 @@ mod sol1 {
     use std::collections::BTreeMap;
     use std::rc::Rc;
     #[derive(Debug)]
-    enum FSNode {
+    pub enum FSNode {
         Directory {
             children: BTreeMap<String, Rc<RefCell<FSNode>>>,
         },
@@ -138,7 +139,7 @@ mod sol1 {
             address: usize,
         },
     }
-
+    #[allow(dead_code)]
     impl FSNode {
         pub fn new_directory() -> Self {
             FSNode::Directory {
@@ -161,6 +162,7 @@ mod sol1 {
      * `&self` means the method takes an immutable reference.
      * If you need a mutable reference, change it to `&mut self` instead.
      */
+    #[allow(dead_code)]
     impl FileSystem {
         pub fn new() -> Self {
             Self {
@@ -299,7 +301,7 @@ mod sol1 {
 // @lc code=end
 
 use std::collections::BTreeMap;
-
+#[allow(dead_code)]
 enum Entry {
     Dir(Dir),
     File(File),
@@ -309,7 +311,7 @@ struct Dir {
     name: String,
     entries: BTreeMap<String, Entry>,
 }
-
+#[allow(dead_code)]
 impl Dir {
     fn new(name: String) -> Self {
         Self {
@@ -322,12 +324,12 @@ impl Dir {
         self.entries.keys().map(|s| s.clone()).collect()
     }
 }
-
+#[allow(dead_code)]
 struct File {
     name: String,
     contents: Vec<String>,
 }
-
+#[allow(dead_code)]
 impl File {
     fn new(name: String, content: String) -> Self {
         Self {
@@ -352,7 +354,7 @@ impl File {
 struct FileSystem {
     root: Entry,
 }
-
+#[allow(dead_code)]
 impl FileSystem {
     fn new() -> Self {
         Self {

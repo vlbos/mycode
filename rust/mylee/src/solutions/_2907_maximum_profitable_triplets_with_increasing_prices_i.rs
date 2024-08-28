@@ -68,25 +68,6 @@ pub struct Solution;
 
 impl Solution {
     pub fn max_profit(prices: Vec<i32>, profits: Vec<i32>) -> i32 {
-        // let mut ans=-1;
-        // let n=profits.len();
-        // for (j,&x) in profits.iter().enumerate(){
-        //     let (mut left,mut right)=(0,0);
-        //     for i in 0..j{
-        //         if prices[i]<prices[j] && left<profits[i]{
-        //             left=profits[i];
-        //         }
-        //      }
-        //     for k in j+1..n{
-        //         if prices[j]<prices[k] && right<profits[k]{
-        //             right=profits[k];
-        //         }
-        //      }
-        //     if left >0 && right>0{
-        //         ans=ans.max(left+x+right);
-        //     }
-        // }
-        // ans
         let update = |mut x: i32, v: i32, c: &mut Vec<i32>| {
             let n = c.len() as i32;
             while x < n {
@@ -130,6 +111,27 @@ impl Solution {
             .map(|((l, x), r)| l + x + r)
             .max()
             .unwrap_or(-1)
+    }
+    pub fn max_profit2(prices: Vec<i32>, profits: Vec<i32>) -> i32 {
+        let mut ans = -1;
+        let n = profits.len();
+        for (j, &x) in profits.iter().enumerate() {
+            let (mut left, mut right) = (0, 0);
+            for i in 0..j {
+                if prices[i] < prices[j] && left < profits[i] {
+                    left = profits[i];
+                }
+            }
+            for k in j + 1..n {
+                if prices[j] < prices[k] && right < profits[k] {
+                    right = profits[k];
+                }
+            }
+            if left > 0 && right > 0 {
+                ans = ans.max(left + x + right);
+            }
+        }
+        ans
     }
 }
 

@@ -71,7 +71,7 @@
 // [Amazon](https://leetcode.ca/tags/#Amazon) [Microsoft](https://leetcode.ca/tags/#Microsoft)
 
 // @lc code=start
-
+#[allow(dead_code)]
 use std::collections::HashMap;
 
 pub struct Excel {
@@ -186,7 +186,7 @@ mod sol2 {
         }
     }
     use std::collections::HashMap;
-
+    #[allow(dead_code)]
     pub struct Excel {
         values: Vec<Vec<ExcelNode>>,
         rows: usize,
@@ -197,6 +197,7 @@ mod sol2 {
      * `&self` means the method takes an immutable reference.
      * If you need a mutable reference, change it to `&mut self` instead.
      */
+    #[allow(dead_code)]
     impl Excel {
         pub fn new(h: i32, w: char) -> Self {
             let cols = h as usize;
@@ -234,7 +235,7 @@ mod sol2 {
             let sub_v = v - self.retrieve(row, col).value;
             let mut stack = vec![(row, col)];
             while let Some((r, c)) = stack.pop() {
-                let mut node = self.retrieve_mut(r, c);
+                let node = self.retrieve_mut(r, c);
                 node.value += sub_v;
                 stack.extend(node.observers_to_vec().into_iter());
             }

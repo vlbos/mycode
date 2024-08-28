@@ -55,7 +55,7 @@
 pub struct Solution {}
 
 impl Solution {
-    pub fn count_pairs(nums1: Vec<i32>, nums2: Vec<i32>) -> i32 {
+    pub fn count_pairswrong(nums1: Vec<i32>, nums2: Vec<i32>) -> i32 {
         let mut diff: Vec<i32> = nums1
             .into_iter()
             .zip(nums2)
@@ -73,43 +73,40 @@ impl Solution {
         }
         ans as _
     }
+    pub fn count_pairs(nums1: Vec<i32>, nums2: Vec<i32>) -> i64 {
+        let n = nums1.len();
+        let mut nums = vec![0; n];
+
+        for i in 0..n {
+            nums[i] = nums1[i] - nums2[i];
+        }
+
+        nums.sort();
+
+        let mut ans = 0;
+
+        for i in 0..n - 1 {
+            let mut lo = i + 1;
+            let mut hi = n - 1;
+            let mut pos = n;
+
+            while lo <= hi && hi < n {
+                let mid = lo + (hi - lo) / 2;
+
+                if nums[i] + nums[mid] > 0 {
+                    pos = mid;
+                    hi = mid - 1;
+                } else {
+                    lo = mid + 1;
+                }
+            }
+
+            ans += n - pos;
+        }
+
+        ans as i64
+    }
 }
-
-// impl Solution {
-//     pub fn count_pairs(nums1: Vec<i32>, nums2: Vec<i32>) -> i64 {
-//  let n = nums1.len();
-//         let mut nums = vec![0;n];
-
-//         for i in 0..n {
-//             nums[i] = nums1[i] - nums2[i];
-//         }
-
-//         nums.sort();
-
-//         let mut ans = 0;
-
-//         for i in 0..n-1 {
-//             let mut lo = i + 1;
-//             let mut hi = n - 1;
-//             let mut pos = n;
-
-//             while lo <= hi && hi < n {
-//                 let mid = lo + (hi - lo) / 2;
-
-//                 if nums[i] + nums[mid] > 0 {
-//                     pos = mid;
-//                     hi = mid - 1;
-//                 } else {
-//                     lo = mid + 1;
-//                 }
-//             }
-
-//             ans += n - pos;
-//         }
-
-//         ans as i64
-//     }
-// }
 
 #[cfg(test)]
 mod test {

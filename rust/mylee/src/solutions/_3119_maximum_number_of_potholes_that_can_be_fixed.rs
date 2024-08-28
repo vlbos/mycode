@@ -73,26 +73,20 @@ impl Solution {
                 k = 0;
             }
         }
-        println!("{cnt:?}");
+
         let mut ans = 0;
-        let mut carry = 0;
         for (k, v) in cnt.into_iter().rev() {
             if budget < k + 1 {
                 ans += budget - 1;
                 break;
             }
             if budget <= v * (k + 1) {
-                ans += budget / (k + 1) * k
-                    + if budget % (k + 1) > 1 {
-                        budget % (k + 1) - 1
-                    } else {
-                        0
-                    };
-                break;
+                ans += budget - (budget + k) / (k + 1);
+                budget = 0;
+            } else {
+                ans += v * k;
+                budget -= (k + 1) * v;
             }
-            let t = v.min(budget / (k + 1));
-            ans += t * k;
-            budget -= t;
             if budget == 0 {
                 break;
             }
@@ -108,7 +102,18 @@ pub struct Solution;
 #[cfg(test)]
 mod test {
     use super::*;
+    // road =
+    // "xx..x"
+    // budget =
+    // 4
 
+    // Use Testcase
+    // Stdout
+    // {1: 1, 2: 1}
+    // Output
+    // 3
+    // Expected
+    // 2
     #[test]
     pub fn test_max_potholes_1() {
         assert_eq!(Solution::max_potholes(String::from(".."), 5), 0);

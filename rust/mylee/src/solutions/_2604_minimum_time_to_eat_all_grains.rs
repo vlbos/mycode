@@ -76,37 +76,33 @@ impl Solution {
     pub fn minimum_time(mut hens: Vec<i32>, mut grains: Vec<i32>) -> i32 {
         hens.sort_unstable();
         grains.sort_unstable();
-        let m = grains.len();
-        let check = |t: i32| {
-            let mut j = 0;
-            for &x in &hens {
-                if j == m {
-                    return true;
-                }
-                let y = grains[j];
-                if y <= x {
-                    let d = x - y;
-                    if d > t {
+        let (m, n) = (grains.len(), hens.len());
+
+        let check = |t: i64| {
+            let mut r = 0;
+            for &hen in &hens {
+                let mut budget = t;
+                if hen > grains[r] {
+                    let diff = (hen - grains[r]) as i64;
+                    if diff > t {
                         return false;
                     }
-                    while j < m && grains[j] <= x {
-                        j += 1;
-                    }
-                    while j < m && d.min(grains[j] - x) + grains[j] - y <= t {
-                        j += 1;
-                    }
-                } else {
-                    while j < m && grains[j] - x <= t {
-                        j += 1;
-                    }
+                    budget = if 3 * diff >= budget {
+                        (budget - diff) / 2
+                    } else {
+                        budget - diff * 2
+                    };
+                }
+                while r < m && (grains[r] - hen) as i64 <= budget {
+                    r += 1;
+                }
+                if r == m {
+                    return true;
                 }
             }
-            j == m
+            false
         };
-        let (mut l, mut r) = (
-            0,
-            (hens[0] - grains[0]).abs() + grains[m - 1] - grains[0] + 1,
-        );
+        let (mut l, mut r) = (0, 2_000_000_001);
         while l < r {
             let mid = (l + r) / 2;
             if check(mid) {
@@ -115,13 +111,17 @@ impl Solution {
                 l = mid + 1;
             }
         }
-        l
+        l as _
     }
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
+    // hens =
+    // [500000000]
+    // grains =
+    // [1,1000000000]
 
     #[test]
     pub fn test_minimum_time_1() {

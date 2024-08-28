@@ -45,49 +45,50 @@
 // 	  1 <= values[i] <= 10^9
 // 	 It is guaranteed that  edges  represents a valid tree.
 //    long long max_xor(int n, vector<vector<int>>& edges, vector<int>& values) {
-use std::collections::HashMap;
-struct Trie {
-    children: HashMap<i64, Trie>,
-}
-impl Trie {
-    pub fn new() -> Self {
-        Self {
-            children: HashMap::new(),
-        }
-    }
-    pub fn insert(&mut self, x: i64) {
-        let mut node = self;
-        for i in (0..48).rev() {
-            let v = (x >> i) & 1;
-            node = node.children.entry(v).or_insert(Trie::new());
-        }
-    }
-    pub fn search(&self, x: i64) -> i64 {
-        let mut node = self;
-        let mut ans = 0;
-        for i in (0..48).rev() {
-            let v = (x >> i) & 1;
-            if node.children.is_empty() {
-                return ans;
-            };
-            if let Some(child) = node.children.get(&(v ^ 1)) {
-                ans = ans << 1 | 1;
-                node = child;
-            } else {
-                ans <<= 1;
-                if let Some(child) = node.children.get(&v) {
-                    node = child;
-                }
-            }
-        }
-        ans
-    }
-}
+
 #[allow(dead_code)]
 pub struct Solution;
 
 impl Solution {
     pub fn max_xor(_n: i32, edges: Vec<Vec<i32>>, values: Vec<i32>) -> i64 {
+        use std::collections::HashMap;
+        struct Trie {
+            children: HashMap<i64, Trie>,
+        }
+        impl Trie {
+            pub fn new() -> Self {
+                Self {
+                    children: HashMap::new(),
+                }
+            }
+            pub fn insert(&mut self, x: i64) {
+                let mut node = self;
+                for i in (0..48).rev() {
+                    let v = (x >> i) & 1;
+                    node = node.children.entry(v).or_insert(Trie::new());
+                }
+            }
+            pub fn search(&self, x: i64) -> i64 {
+                let mut node = self;
+                let mut ans = 0;
+                for i in (0..48).rev() {
+                    let v = (x >> i) & 1;
+                    if node.children.is_empty() {
+                        return ans;
+                    };
+                    if let Some(child) = node.children.get(&(v ^ 1)) {
+                        ans = ans << 1 | 1;
+                        node = child;
+                    } else {
+                        ans <<= 1;
+                        if let Some(child) = node.children.get(&v) {
+                            node = child;
+                        }
+                    }
+                }
+                ans
+            }
+        }
         fn dfs1(
             i: i32,
             fa: i32,

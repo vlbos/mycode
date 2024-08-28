@@ -77,7 +77,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn widest_pair_of_indices(nums1: Vec<i32>, nums2: Vec<i32>) -> i32 {
+    pub fn widest_pair_of_indiceswrong(nums1: Vec<i32>, nums2: Vec<i32>) -> i32 {
         let diff: Vec<i32> = nums1
             .into_iter()
             .zip(nums2)
@@ -96,32 +96,26 @@ impl Solution {
         }
         ans as _
     }
+    pub fn widest_pair_of_indices(nums1: Vec<i32>, nums2: Vec<i32>) -> i32 {
+        let mut diff = std::collections::HashMap::from([(0, -1)]);
+        let mut ans = 0;
+        let (mut sum1, mut sum2) = (0, 0);
+        for (i, (num1, num2)) in nums1.into_iter().zip(nums2).enumerate() {
+            let i = i as i32;
+            sum1 += num1;
+            sum2 += num2;
+            if let Some(&j) = diff.get(&(sum1 - sum2)) {
+                if i - j > ans {
+                    ans = i - j;
+                }
+            } else {
+                diff.insert(sum1 - sum2, i);
+            }
+        }
+        ans as _
+    }
 }
 
-// impl Solution {
-//     pub fn widest_pair_of_indices(nums1: Vec<i32>, nums2: Vec<i32>) -> i32 {
-
-//         let mut diff = std::collections::HashMap::from([(0,-1)]);
-//         let mut ans = 0;
-//         let (mut sum1,mut sum2) = (0,0);
-//         for (i, (num1,num2)) in nums1
-//             .into_iter()
-//             .zip(nums2).enumerate() {
-//               let i  =      i as i32;
-//             sum1 += num1;
-//               sum2 += num2;
-//             if let Some(&j) = diff.get(&(sum1-sum2)) {
-//                 if i -j >ans{
-//                       ans = i  - j;
-//                 }
-
-//             } else {
-//                 diff.insert(sum1-sum2, i );
-//             }
-//         }
-//         ans as _
-//     }
-// }
 #[cfg(test)]
 mod test {
     use super::*;

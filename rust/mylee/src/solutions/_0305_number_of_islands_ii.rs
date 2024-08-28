@@ -87,7 +87,7 @@ impl Solution {
                     self.count += 1;
                 }
             }
-
+            #[allow(dead_code)]
             pub fn connected(&self, p: usize, q: usize) -> bool {
                 self.find(p) == self.find(q)
             }

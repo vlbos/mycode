@@ -212,7 +212,7 @@ mod sol2 {
             &mut self.0
         }
     }
-
+    #[allow(dead_code)]
     impl Trie {
         pub fn new() -> Self {
             Self(Rc::new(RefCell::new(TrieNode {
@@ -283,7 +283,7 @@ mod sol2 {
             None
         }
     }
-
+    #[allow(dead_code)]
     pub struct AutocompleteSystem {
         root: Trie,
         sentence: Vec<char>,
@@ -295,6 +295,7 @@ mod sol2 {
      * `&self` means the method takes an immutable reference.
      * If you need a mutable reference, change it to `&mut self` instead.
      */
+    #[allow(dead_code)]
     impl AutocompleteSystem {
         pub fn new(sentences: Vec<String>, times: Vec<i32>) -> Self {
             let sentence = vec![];

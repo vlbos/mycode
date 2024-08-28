@@ -125,7 +125,6 @@ impl Solution {
         res
     }
     pub fn add_bold_tag3(s: String, words: Vec<String>) -> String {
-        let n = s.len();
         let mut hightlights = vec![];
 
         for word in words {

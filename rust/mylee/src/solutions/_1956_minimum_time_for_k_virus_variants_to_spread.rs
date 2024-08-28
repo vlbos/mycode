@@ -67,7 +67,7 @@
 pub struct Solution {}
 
 impl Solution {
-    pub fn min_daysk_variants(points: Vec<Vec<i32>>, k: i32) -> i32 {
+    pub fn min_daysk_variantswrong(points: Vec<Vec<i32>>, k: i32) -> i32 {
         let points: Vec<Vec<i32>> = points
             .into_iter()
             .map(|x| vec![x[0] + x[1], x[0] - x[1]])
@@ -141,6 +141,24 @@ impl Solution {
             }
         }
         left as _
+    }
+    pub fn min_daysk_variants(points: Vec<Vec<i32>>, k: i32) -> i32 {
+        (1..101)
+            .map(|i| {
+                (1..101)
+                    .map(|j| {
+                        let mut dists: Vec<_> = points
+                            .iter()
+                            .map(|p| p[0].abs_diff(i as i32) + p[1].abs_diff(j as i32))
+                            .collect();
+                        dists.sort_unstable();
+                        dists[k as usize - 1]
+                    })
+                    .min()
+                    .unwrap()
+            })
+            .min()
+            .unwrap() as _
     }
 }
 

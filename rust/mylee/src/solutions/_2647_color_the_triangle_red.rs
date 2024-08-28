@@ -91,26 +91,6 @@ pub struct Solution;
 
 impl Solution {
     pub fn color_red(n: i32) -> Vec<Vec<i32>> {
-        // let mut ans = vec![vec![1, 1]];
-        // let mut k = 0;
-        // for i in (2..=n).rev() {
-        //     match k {
-        //         0 => {
-        //             for j in (1..i << 1).step_by(2) {
-        //                 ans.push(vec![i, j]);
-        //             }
-        //         }
-        //         1 => ans.push(vec![i, 2]),
-        //         2 => {
-        //             for j in (3..i << 1).step_by(2) {
-        //                 ans.push(vec![i, j]);
-        //             }
-        //         }
-        //         _ => ans.push(vec![i, 1]),
-        //     }
-        //     k = (k + 1) % 4;
-        // }
-        // ans
         let mut ans = vec![];
         let tip_size = n % 4;
         if tip_size >= 1 {
@@ -129,6 +109,28 @@ impl Solution {
             for j in 0..=i + 2 {
                 ans.push(vec![i + 3, 2 * j + 1]);
             }
+        }
+        ans
+    }
+    pub fn color_red2(n: i32) -> Vec<Vec<i32>> {
+        let mut ans = vec![vec![1, 1]];
+        let mut k = 0;
+        for i in (2..=n).rev() {
+            match k {
+                0 => {
+                    for j in (1..i << 1).step_by(2) {
+                        ans.push(vec![i, j]);
+                    }
+                }
+                1 => ans.push(vec![i, 2]),
+                2 => {
+                    for j in (3..i << 1).step_by(2) {
+                        ans.push(vec![i, j]);
+                    }
+                }
+                _ => ans.push(vec![i, 1]),
+            }
+            k = (k + 1) % 4;
         }
         ans
     }

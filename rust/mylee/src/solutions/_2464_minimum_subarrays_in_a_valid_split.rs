@@ -49,7 +49,7 @@
 pub struct Solution;
 
 impl Solution {
-    pub fn valid_subarray_split(nums: Vec<i32>) -> i32 {
+    pub fn valid_subarray_splitwrong(nums: Vec<i32>) -> i32 {
         fn gcd(a: i32, b: i32) -> i32 {
             if b == 0 {
                 a
@@ -65,7 +65,7 @@ impl Solution {
             if f[i] > 0 {
                 return f[i];
             }
-            let mut ans = i32::MAX;
+            let mut ans = i32::MAX / 2;
             for j in i..n {
                 if gcd(nums[i], nums[j]) > 1 {
                     ans = ans.min(1 + dfs(j + 1, nums, f));
@@ -76,18 +76,62 @@ impl Solution {
         }
         let mut f = vec![0; nums.len()];
         let ans = dfs(0, &nums, &mut f);
-        if ans == i32::MAX {
+        if ans == i32::MAX / 2 {
             -1
         } else {
             ans
         }
+    }
+
+    pub fn valid_subarray_split(nums: Vec<i32>) -> i32 {
+        fn gcd(mut a: i32, mut b: i32) -> i32 {
+            while b != 0 {
+                (a, b) = (b, a % b);
+            }
+            a
+        }
+        let n = nums.len();
+        if nums[0] == 1 || nums[n - 1] == 1 {
+            return -1;
+        }
+
+        let mut dp = vec![0; n + 1];
+        for i in (0..n).rev() {
+            if nums[i] == 1 {
+                dp[i] = i32::MAX;
+            } else {
+                let mut best_val = dp[i + 1];
+                for j in i + 1..n {
+                    if gcd(nums[i], nums[j]) > 1 {
+                        best_val = best_val.min(dp[j + 1]);
+                    }
+                }
+                if best_val == i32::MAX {
+                    dp[i] = i32::MAX;
+                } else {
+                    dp[i] = best_val + 1;
+                }
+            }
+        }
+
+        if dp[0] == i32::MAX {
+            return -1;
+        }
+        return dp[0];
     }
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
+    // nums =
+    // [661,337,283,89,53,941,641,839,271,457,491,677,661,1,601,73,467,89,547,619,211,113,953,167,811,499,751,373,941,887,241,839,163,163,293,449,449,131,947,467,67,401,79,773,701,263,709,619,211,971,953,383,181,577,593,661,877]
 
+    // Use Testcase
+    // Output
+    // -2147483648
+    // Expected
+    // 2
     #[test]
     pub fn test_valid_subarray_split_1() {
         assert_eq!(2, Solution::valid_subarray_split(vec![2, 6, 3, 4, 3]));

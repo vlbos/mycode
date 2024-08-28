@@ -74,7 +74,7 @@ impl Solution {
         }
         let (mut x, mut y) = (0, 0);
         for i in 1.. {
-            let mut v = stream.next();
+            let mut v = stream.next() as i64;
             y = y << 1 | v;
             v = y >> (m - half) & 1;
             y &= mask2;

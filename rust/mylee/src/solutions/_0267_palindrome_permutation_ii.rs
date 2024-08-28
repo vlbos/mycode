@@ -186,7 +186,7 @@ impl Solution {
         }
         use std::collections::{HashMap, HashSet};
         let mut m = HashMap::new();
-        let mut vec = s.chars().collect::<Vec<char>>();
+        let vec = s.chars().collect::<Vec<char>>();
 
         if can_permute_palindrome(&vec, &mut m) == false {
             return vec![];
@@ -199,7 +199,7 @@ impl Solution {
             if m.get(ch).unwrap() % 2 == 1 {
                 c = Some(ch.to_owned());
             }
-            for j in 0..(m.get(ch).unwrap() / 2) {
+            for _ in 0..(m.get(ch).unwrap() / 2) {
                 st.push(ch.to_owned());
             }
         }

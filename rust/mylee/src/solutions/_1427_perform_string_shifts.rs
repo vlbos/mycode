@@ -52,7 +52,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn string_shift(s: String, shift: Vec<Vec<i32>>) -> String {
+    pub fn string_shiftwrong(s: String, shift: Vec<Vec<i32>>) -> String {
         let n = s.len();
         let mut ans = s;
         for sh in &shift {
@@ -64,27 +64,23 @@ impl Solution {
         }
         ans
     }
+    pub fn string_shift(s: String, shift: Vec<Vec<i32>>) -> String {
+        let mut count = 0;
+        for v in shift {
+            if v[0] == 1 {
+                count += v[1];
+            } else {
+                count -= v[1];
+            }
+        }
+        let size = s.len() as i32;
+        count = (count % size + size) % size;
+        let mut ret = String::new();
+        ret.push_str(&s[((size - count) as usize)..]);
+        ret.push_str(&s[0..((size - count) as usize)]);
+        ret
+    }
 }
-
-// impl Solution {
-//     pub fn string_shift(s: String, shift: Vec<Vec<i32>>) -> String {
-//  let mut count = 0;
-//         for v in shift {
-//             if v[0] == 1 {
-//                 count += v[1];
-//             }
-//             else {
-//                 count -= v[1];
-//             }
-//         }
-//         let size = s.len() as i32;
-//         count = (count % size + size) % size;
-//         let mut ret = String::new();
-//         ret.push_str(&s[((size-count) as usize)..]);
-//         ret.push_str(&s[0..((size-count) as usize)]);
-//         ret
-//     }
-// }
 
 #[cfg(test)]
 mod test {

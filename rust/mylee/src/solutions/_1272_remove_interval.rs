@@ -37,7 +37,10 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn remove_interval(intervals: Vec<Vec<i32>>, to_be_removed: Vec<i32>) -> Vec<Vec<i32>> {
+    pub fn remove_intervalwrong(
+        intervals: Vec<Vec<i32>>,
+        to_be_removed: Vec<i32>,
+    ) -> Vec<Vec<i32>> {
         let mut ans = Vec::new();
         let mut to_be_removed = to_be_removed;
         for interval in &intervals {
@@ -63,7 +66,7 @@ impl Solution {
         }
         ans
     }
-    pub fn remove_interval2(intervals: Vec<Vec<i32>>, to_be_removed: Vec<i32>) -> Vec<Vec<i32>> {
+    pub fn remove_interval(intervals: Vec<Vec<i32>>, to_be_removed: Vec<i32>) -> Vec<Vec<i32>> {
         let mut ans = vec![];
 
         for interval in intervals {

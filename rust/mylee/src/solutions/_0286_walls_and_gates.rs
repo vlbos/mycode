@@ -57,9 +57,15 @@ impl Solution {
                 if rooms[i][j] == i32::MAX {
                     rooms[i][j] = dist;
                 }
-                for (ii, jj) in [(i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)] {
-                    if ii < rooms.len() && jj < rooms[0].len() && rooms[ii][jj] == i32::MAX {
-                        q.push_back((ii, jj));
+                for d in [0, 1, 0, -1, 0].windows(2) {
+                    let (ii, jj) = (i as i32 + d[0], j as i32 + d[1]);
+                    if ii >= 0
+                        && ii < rooms.len() as i32
+                        && jj >= 0
+                        && jj < rooms[0].len() as i32
+                        && rooms[ii as usize][jj as usize] == i32::MAX
+                    {
+                        q.push_back((ii as usize, jj as usize));
                     }
                 }
             }

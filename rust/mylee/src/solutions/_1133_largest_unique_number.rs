@@ -39,7 +39,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn largest_unique_number(nums: Vec<i32>) -> i32 {
+    pub fn largest_unique_numbererror(nums: Vec<i32>) -> i32 {
         let mut a = nums;
         a.sort();
         let mut pre = a[a.len() - 1];
@@ -57,7 +57,7 @@ impl Solution {
         }
         -1
     }
-    pub fn largest_unique_number2(nums: Vec<i32>) -> i32 {
+    pub fn largest_unique_number(nums: Vec<i32>) -> i32 {
         let mut btm = std::collections::BTreeMap::new();
         for i in nums {
             *btm.entry(i).or_insert(0) += 1;

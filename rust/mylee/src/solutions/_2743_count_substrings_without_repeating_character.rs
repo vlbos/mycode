@@ -61,10 +61,11 @@ impl Solution {
         let mut cnt = std::collections::HashMap::new();
         let mut ans = 0;
         let mut j = 0;
-        for (i, c) in s.chars().enumerate() {
+        let bs = s.as_bytes();
+        for (i, c) in s.bytes().enumerate() {
             *cnt.entry(c).or_insert(0) += 1;
             while cnt[&c] > 1 {
-                *cnt.entry(c).or_insert(0) -= 1;
+                *cnt.entry(bs[j]).or_insert(0) -= 1;
                 j += 1;
             }
             ans += i - j + 1;
@@ -76,7 +77,14 @@ impl Solution {
 #[cfg(test)]
 mod test {
     use super::*;
+    // s =
+    // "bddqc"
 
+    // Use Testcase
+    // Output
+    // 12
+    // Expected
+    // 9
     #[test]
     pub fn test_number_of_special_substrings_1() {
         assert_eq!(

@@ -52,20 +52,38 @@
 
 // ## Solutions
 
-// ### **C++**
-
-// ```cpp
-// /**
-//  * Definition for a category handler.
-//  * class CategoryHandler {
-//  * public:
-//  *     CategoryHandler(vector<int> categories);
-//  *     bool haveSameCategory(int a, int b);
-//  * };
-//  */
-// class Solution {
-// public:
-//     int number_of_categories(int n, CategoryHandler* category_handler) {
+/**
+ * Definition for a category handler.
+ * impl CategoryHandler {
+ *     pub fn new(categories: Vec<i32>) -> Self {}
+ *     pub fn have_same_category(&self, a: i32, b: i32) -> bool {}
+ * }
+ */
+impl Solution {
+    pub fn number_of_categories(n: i32, category_handler: CategoryHandler) -> i32 {
+        let mut parents: Vec<i32> = (0..n).collect();
+        fn find(x: i32, parents: &mut Vec<i32>) -> i32 {
+            let px = parents[x as usize];
+            if px != x {
+                parents[x as usize] = find(px, parents);
+            }
+            parents[x as usize]
+        }
+        for a in 0..n {
+            for b in a + 1..n {
+                if category_handler.have_same_category(a, b) {
+                    let (pa, pb) = (find(a, &mut parents), find(b, &mut parents));
+                    parents[pa as usize] = pb;
+                }
+            }
+        }
+        parents
+            .into_iter()
+            .enumerate()
+            .filter(|(i, x)| *i == *x as usize)
+            .count() as _
+    }
+}
 
 #[allow(dead_code)]
 pub struct CategoryHandler {
@@ -83,49 +101,23 @@ impl CategoryHandler {
 #[allow(dead_code)]
 pub struct Solution;
 
-impl Solution {
-    pub fn number_of_categories(n: i32, category_handler: Option<Box<CategoryHandler>>) -> i32 {
-        let mut parents: Vec<i32> = (0..n).collect();
-        fn find(x: i32, parents: &mut Vec<i32>) -> i32 {
-            let px = parents[x as usize];
-            if px != x {
-                parents[x as usize] = find(px, parents);
-            }
-            parents[x as usize]
-        }
-        for a in 0..n {
-            for b in a + 1..n {
-                if category_handler.as_ref().unwrap().have_same_category(a, b) {
-                    let (pa, pb) = (find(a, &mut parents), find(b, &mut parents));
-                    parents[pa as usize] = pb;
-                }
-            }
-        }
-        parents
-            .into_iter()
-            .enumerate()
-            .filter(|(i, x)| *i == *x as usize)
-            .count() as _
-    }
-}
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     pub fn test_number_of_categories_1() {
-        let category_handler = Some(Box::new(CategoryHandler::new(vec![1, 1, 2, 2, 3, 3])));
+        let category_handler = CategoryHandler::new(vec![1, 1, 2, 2, 3, 3]);
         assert_eq!(3, Solution::number_of_categories(6, category_handler));
     }
     #[test]
     pub fn test_number_of_categories_2() {
-        let category_handler = Some(Box::new(CategoryHandler::new(vec![1, 2, 3, 4, 5])));
+        let category_handler = CategoryHandler::new(vec![1, 2, 3, 4, 5]);
         assert_eq!(5, Solution::number_of_categories(5, category_handler));
     }
     #[test]
     pub fn test_number_of_categories_3() {
-        let category_handler = Some(Box::new(CategoryHandler::new(vec![1, 1, 1])));
+        let category_handler = CategoryHandler::new(vec![1, 1, 1]);
         assert_eq!(1, Solution::number_of_categories(3, category_handler));
     }
 }

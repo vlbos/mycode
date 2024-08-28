@@ -51,11 +51,11 @@
 //     string better_compression(string compressed) {
 
 impl Solution {
-    pub fn better_compression(expression: String) -> String {
+    pub fn better_compression(compressed: String) -> String {
         let mut m = std::collections::BTreeMap::new();
         let mut cnt = 0;
         let mut letter = ' ';
-        for c in expression.chars() {
+        for c in compressed.chars() {
             if c.is_ascii_digit() {
                 cnt = cnt * 10 + c.to_digit(10).unwrap();
                 continue;

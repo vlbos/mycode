@@ -55,7 +55,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn equalize_water(buckets: Vec<i32>, loss: i32) -> f64 {
+    pub fn equalize_waterwrong(buckets: Vec<i32>, loss: i32) -> f64 {
         let rate = (100.0 - loss as f64) / 100.0;
         let check = |x: f64| {
             let (mut extra, mut need) = (0.0, 0.0);
@@ -83,37 +83,33 @@ impl Solution {
         }
         (right * 100000.0) as i64 as f64 / 100000.0
     }
+    pub fn equalize_water(buckets: Vec<i32>, loss: i32) -> f64 {
+        let mut lo = 0.0;
+        let mut hi = *buckets.iter().max().unwrap() as f64;
+
+        while hi - lo > 1e-5 {
+            let mid = lo + (hi - lo) / 2.0;
+            let mut t1 = 0.0;
+            let mut t2 = 0.0;
+
+            for &b in &buckets {
+                if b as f64 > mid {
+                    t1 += b as f64 - mid;
+                } else {
+                    t2 += (mid - b as f64) * 100.0 / (100.0 - loss as f64);
+                }
+            }
+
+            if t1 >= t2 {
+                lo = mid;
+            } else {
+                hi = mid - 1e-6;
+            }
+        }
+
+        lo
+    }
 }
-
-// impl Solution {
-//     pub fn equalize_water(buckets: Vec<i32>, loss: i32) -> f64 {
-//  let n = buckets.len();
-//         let mut lo = 0.0;
-//         let mut hi = *buckets.iter().max().unwrap() as f64;
-
-//         while hi - lo > 1e-5 {
-//             let mid = lo + (hi - lo) / 2.0;
-//             let mut t1 = 0.0;
-//             let mut t2 = 0.0;
-
-//             for &b in &buckets {
-//                 if b as f64 > mid {
-//                     t1 += b as f64 - mid;
-//                 } else {
-//                     t2 += (mid - b as f64) * 100.0 / (100.0 - loss as f64);
-//                 }
-//             }
-
-//             if t1 >= t2 {
-//                 lo = mid;
-//             } else {
-//                 hi = mid - 1e-6;
-//             }
-//         }
-
-//         lo
-//     }
-// }
 
 #[cfg(test)]
 mod test {
@@ -123,14 +119,14 @@ mod test {
     // 15
     #[test]
     pub fn test_equalize_water_1() {
-        assert_eq!(2.00000, Solution::equalize_water(vec![1, 2, 7], 80));
+        assert!(2.00000 - Solution::equalize_water(vec![1, 2, 7], 80) < 0.00001);
     }
     #[test]
     pub fn test_equalize_water_2() {
-        assert_eq!(3.50000, Solution::equalize_water(vec![2, 4, 6], 50));
+        assert!(3.50000 - Solution::equalize_water(vec![2, 4, 6], 50) < 0.00001);
     }
     #[test]
     pub fn test_equalize_water_3() {
-        assert_eq!(3.00000, Solution::equalize_water(vec![3, 3, 3, 3], 40));
+        assert!(3.00000 - Solution::equalize_water(vec![3, 3, 3, 3], 40) < 0.00001);
     }
 }

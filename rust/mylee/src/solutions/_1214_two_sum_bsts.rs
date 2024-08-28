@@ -61,7 +61,7 @@ pub struct Solution {}
 use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
-    pub fn two_sum_bs_ts(
+    pub fn two_sum_bs_tstle(
         root1: Option<Rc<RefCell<TreeNode>>>,
         root2: Option<Rc<RefCell<TreeNode>>>,
         target: i32,
@@ -85,7 +85,7 @@ impl Solution {
         }
     }
 
-    pub fn two_sum_bs_ts2(
+    pub fn two_sum_bs_ts(
         root1: Option<Rc<RefCell<TreeNode>>>,
         root2: Option<Rc<RefCell<TreeNode>>>,
         target: i32,

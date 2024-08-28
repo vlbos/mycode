@@ -56,7 +56,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn outer_trees(trees: Vec<Vec<i32>>) -> Vec<f64> {
+    pub fn outer_treestle(trees: Vec<Vec<i32>>) -> Vec<f64> {
         let mut ans = vec![trees[0][0] as f64, trees[0][1] as f64, 0.0];
         let n = trees.len();
         let get_squared_distance = |xy1: &Vec<f64>, xy2: &Vec<f64>| {
@@ -117,139 +117,144 @@ impl Solution {
         }
         ans
     }
+    pub fn outer_treesbuilderror(mut trees: Vec<Vec<i32>>) -> Vec<f64> {
+        trees.sort();
+        let (mut top, mut bot) = (Vec::new(), Vec::new());
+
+        let cross = |p1: (i32, i32), p2: (i32, i32), p3: (i32, i32)| {
+            let (x1, y1, x2, y2) = (p2.0 - p1.0, p2.1 - p1.1, p3.0 - p2.0, p3.1 - p2.1);
+            x1 * y2 - x2 * y1
+        };
+        for tree in &trees {
+            while top.len() > 1
+                && cross(top[top.len() - 2], top[top.len() - 1], (tree[0], tree[1])) >= 0
+            {
+                top.pop();
+            }
+            top.push((tree[0], tree[1]));
+        }
+        for tree in trees.iter().rev() {
+            while bot.len() > 1
+                && cross(bot[bot.len() - 2], bot[bot.len() - 1], (tree[0], tree[1])) >= 0
+            {
+                bot.pop();
+            }
+            bot.push((tree[0], tree[1]));
+        }
+        top.extend(bot);
+
+        let f = |x: f64, y: f64| {
+            let mut ans: f64 = 0.0;
+            for tree in &top {
+                let (xi, yi) = (tree.0 as f64, tree.0 as f64);
+                ans = ans.max((x - xi) * (x - xi) + (y - yi) * (y - yi));
+            }
+            ans
+        };
+        let ff = |x: i32| {
+            let (mut l, mut r) = (-1.0, 3000.0);
+            for _ in 0..80 {
+                let (sp1, sp2) = (l + (r - l) / 3.0, l + 2.0 * (r - l) / 3.0);
+                let (f1, f2) = (f(x as f64, sp1), f(x as f64, sp2));
+                if f1 < f2 {
+                    r = sp2;
+                } else if f1 > f2 {
+                    l = sp1;
+                } else {
+                    l = sp1;
+                    r = sp2;
+                }
+            }
+            l
+        };
+        let (mut l, mut r) = (-1.0, 3000.0);
+        let mut y = 0.0;
+        while r - l > 1e-7 {
+            let (sp1, sp2) = (l + (r - l) / 3.0, l + 2.0 * (r - l) / 3.0);
+            let (y1, y2) = (ff(sp1 as i32), ff(sp2 as i32));
+            let (f1, f2) = (f(sp1, y1), f(sp2, y2));
+            if f1 < f2 {
+                r = sp2;
+            } else if f1 > f2 {
+                l = sp1;
+            } else {
+                l = sp1;
+                r = sp2;
+            }
+            y = (y1 + y2) / 2.0;
+        }
+        vec![l, ff(l as i32), f(l, y).sqrt()]
+    }
+    pub fn outer_trees(mut trees: Vec<Vec<i32>>) -> Vec<f64> {
+        trees.sort();
+        let (mut top, mut bot) = (Vec::new(), Vec::new());
+
+        let cross = |p1: (i32, i32), p2: (i32, i32), p3: (i32, i32)| {
+            let (x1, y1, x2, y2) = (p2.0 - p1.0, p2.1 - p1.1, p3.0 - p2.0, p3.1 - p2.1);
+            x1 * y2 - x2 * y1
+        };
+        for tree in &trees {
+            while top.len() > 1
+                && cross(top[top.len() - 2], top[top.len() - 1], (tree[0], tree[1])) >= 0
+            {
+                top.pop();
+            }
+            top.push((tree[0], tree[1]));
+        }
+        for tree in trees.iter().rev() {
+            while bot.len() > 1
+                && cross(bot[bot.len() - 2], bot[bot.len() - 1], (tree[0], tree[1])) >= 0
+            {
+                bot.pop();
+            }
+            bot.push((tree[0], tree[1]));
+        }
+        top.extend(bot);
+        let f = |x: f64, y: f64| {
+            let mut ans = 0.0;
+            for tree in &top {
+                let (xi, yi) = (tree.0 as f64, tree.1 as f64);
+                if ans < (x - xi) * (x - xi) + (y - yi) * (y - yi) {
+                    ans = (x - xi) * (x - xi) + (y - yi) * (y - yi);
+                }
+            }
+            ans
+        };
+        let ff = |x: f64| {
+            let (mut l, mut r) = (-1.0, 3000.0);
+            for _ in 0..80 {
+                let (sp1, sp2) = (l + (r - l) / 3.0, l + 2.0 * (r - l) / 3.0);
+                let (f1, f2) = (f(x, sp1), f(x, sp2));
+                if f1 < f2 {
+                    r = sp2;
+                } else if f1 > f2 {
+                    l = sp1;
+                } else {
+                    l = sp1;
+                    r = sp2;
+                }
+            }
+            l
+        };
+        let (mut l, mut r) = (-1.0, 3000.0);
+        let mut y = 0.0;
+        while r - l > 1e-7 {
+            let (sp1, sp2) = (l + (r - l) / 3.0, l + 2.0 * (r - l) / 3.0);
+            let (y1, y2) = (ff(sp1), ff(sp2));
+            let (f1, f2) = (f(sp1, y1), f(sp2, y2));
+            if f1 < f2 {
+                r = sp2;
+            } else if f1 > f2 {
+                l = sp1;
+            } else {
+                l = sp1;
+                r = sp2;
+            }
+            y = (y1 + y2) / 2.0;
+        }
+        vec![l, ff(l), f(l, y).sqrt()]
+    }
 }
-
-// impl Solution {
-//     pub fn outer_trees(mut trees: Vec<Vec<i32>>) -> Vec<f64> {
-
-//         trees.sort();
-//         let (mut top,mut bot)=(Vec::new(),Vec::new());
-
-//         let cross=|p1:(i32,32),p2:(i32,32),p3:(i32,32)|{
-//             let (x1,y1,x2,y2)=(p2.0-p1.0,p2.1-p1.1,p3.0-p2.0,p3.1-p2.1);
-//             x1*y2-x2*y1
-//         };
-//         for tree in &trees{
-//             while top.len()>1 && cross(top[top.len()-2],top[top.len()-1],(tree[0],tree[1]))>=0{
-//                 top.pop();
-//             }
-//             top.push((tree[0],tree[1]));
-//         }
-//         for tree in trees.iter().rev(){
-//             while bot.len()>1 && cross(bot[bot.len()-2],bot[bot.len()-1],(tree[0],tree[1]))>=0{
-//                 bot.pop();
-//             }
-//             bot.push((tree[0],tree[1]));
-//         }
-//         top.extend(bot);
-
-//         let f =|x:f64,y:f64|{
-//             let mut ans=0.0;
-//             for tree in &top{
-//                 let (xi,yi)=(tree.0 as f64,tree.0 as f64);
-//                 ans=ans.max((x-xi)*(x-xi)+(y-yi)*(y-yi));
-//             }
-//             ans
-//         };
-//         let ff=|x:i32|{
-//             let (mut l,mut r)=(-1.0,3000.0);
-//             for _ in 0..80{
-//                 let (sp1,sp2)=(l+(r-l)/3.0,l+2.0*(r-l)/3.0);
-//                 let (f1,f2)=(f(x,sp1),f(x,sp2));
-//                 if f1<f2{
-//                 r=sp2;
-//                 }else if f1>f2{l=sp1;
-//                 }else{
-//                 l=sp1;r=sp2;
-//                 }
-
-//             }
-//             l
-//         };
-//           let (mut l,mut r)=(-1.0,3000.0);
-//         let mut y=0.0;
-//         while r-l>1e-7{
-//                 let (sp1,sp2)=(l+(r-l)/3.0,l+2.0*(r-l)/3.0);
-//                 let (y1,y2)=(ff(sp1),ff(sp2));
-//                 let (f1,f2)=(f(sp1,y1),f(sp2,y2));
-//                 if f1<f2{
-//                 r=sp2;
-//                 }else if f1>f2{l=sp1;
-//                 }else{
-//                 l=sp1;r=sp2;
-//                 }
-//             y=(y1+y2)/2.0;
-
-//         }
-//         vec![l,ff(l),f(l,y).sqrt()]
-//     }
-// }
-
-// impl Solution {
-//     pub fn outer_trees(mut trees: Vec<Vec<i32>>) -> Vec<f64> {
-//     trees.sort();
-//         let (mut top,mut bot)=(Vec::new(),Vec::new());
-
-//         let cross=|p1:(i32,i32),p2:(i32,i32),p3:(i32,i32)|{
-//             let (x1,y1,x2,y2)=(p2.0-p1.0,p2.1-p1.1,p3.0-p2.0,p3.1-p2.1);
-//             x1*y2-x2*y1
-//         };
-//         for tree in &trees{
-//             while top.len()>1 && cross(top[top.len()-2],top[top.len()-1],(tree[0],tree[1]))>=0{
-//                 top.pop();
-//             }
-//             top.push((tree[0],tree[1]));
-//         }
-//         for tree in trees.iter().rev(){
-//             while bot.len()>1 && cross(bot[bot.len()-2],bot[bot.len()-1],(tree[0],tree[1]))>=0{
-//                 bot.pop();
-//             }
-//             bot.push((tree[0],tree[1]));
-//         }
-//         top.extend(bot);
-//         let f =|x:f64,y:f64|{
-//             let mut ans=0.0;
-//             for tree in &top{
-//                 let (xi,yi)=(tree.0 as f64,tree.1 as f64);
-//                 if ans<(x-xi)*(x-xi)+(y-yi)*(y-yi){
-//                         ans=(x-xi)*(x-xi)+(y-yi)*(y-yi);
-//                 }
-
-//             }
-//             ans
-//         };
-//         let ff=|x:f64|{
-//             let (mut l,mut r)=(-1.0,3000.0);
-//             for _ in 0..80{
-//                 let (sp1,sp2)=(l+(r-l)/3.0,l+2.0*(r-l)/3.0);
-//                 let (f1,f2)=(f(x,sp1),f(x,sp2));
-//                 if f1<f2{
-//                 r=sp2;
-//                 }else if f1>f2{l=sp1;
-//                 }else{
-//                 l=sp1;r=sp2;
-//                 }
-
-//             }
-//             l
-//         };
-//           let (mut l,mut r)=(-1.0,3000.0);
-//         let mut y=0.0;
-//         while r-l>1e-7{
-//                 let (sp1,sp2)=(l+(r-l)/3.0,l+2.0*(r-l)/3.0);
-//                 let (y1,y2)=(ff(sp1),ff(sp2));
-//                 let (f1,f2)=(f(sp1,y1),f(sp2,y2));
-//                 if f1<f2{
-//                 r=sp2;
-//                 }else if f1>f2{l=sp1;
-//                 }else{
-//                 l=sp1;r=sp2;
-//                 }
-//             y=(y1+y2)/2.0;
-//         }
-//         vec![l,ff(l),f(l,y).sqrt()]
-//     }
-// }
 
 #[cfg(test)]
 mod test {
@@ -259,23 +264,27 @@ mod test {
     // [1499.00000,0.00000,1499.00000]
     #[test]
     pub fn test_outer_trees_1() {
-        assert_eq!(
-            vec![2.00000, 2.00000, 2.00000],
-            Solution::outer_trees(vec![
+        assert!([2.00000, 2.00000, 2.00000]
+            .into_iter()
+            .zip(Solution::outer_trees(vec![
                 vec![1, 1],
                 vec![2, 2],
                 vec![2, 0],
                 vec![2, 4],
                 vec![3, 3],
                 vec![4, 2]
-            ])
-        );
+            ]))
+            .all(|(a, b)| a - b < 0.00001));
     }
     #[test]
     pub fn test_outer_trees_2() {
-        assert_eq!(
-            vec![2.50000, 2.00000, 1.50000],
-            Solution::outer_trees(vec![vec![1, 2], vec![2, 2], vec![4, 2]])
-        );
+        assert!([2.50000, 2.00000, 1.50000]
+            .into_iter()
+            .zip(Solution::outer_trees(vec![
+                vec![1, 2],
+                vec![2, 2],
+                vec![4, 2]
+            ]))
+            .all(|(a, b)| a - b < 0.00001));
     }
 }

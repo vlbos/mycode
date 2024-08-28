@@ -96,7 +96,7 @@ impl Solution {
         left.into_iter()
             .zip(right)
             .zip(profits)
-            .filter(|&((l, r), x)| l > 0 && r > 0)
+            .filter(|&((l, r), _)| l > 0 && r > 0)
             .map(|((l, r), x)| l + r + x)
             .max()
             .unwrap_or(-1)

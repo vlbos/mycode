@@ -54,7 +54,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn most_visited_pattern(
+    pub fn most_visited_patternerror(
         username: Vec<String>,
         timestamp: Vec<i32>,
         website: Vec<String>,
@@ -82,7 +82,7 @@ impl Solution {
         cnt.sort();
         cnt[0].1.clone()
     }
-    pub fn most_visited_pattern2(
+    pub fn most_visited_pattern(
         username: Vec<String>,
         timestamp: Vec<i32>,
         website: Vec<String>,
@@ -131,7 +131,18 @@ impl Solution {
 #[cfg(test)]
 mod test {
     use super::*;
+    // username =
+    // ["zkiikgv","zkiikgv","zkiikgv","zkiikgv"]
+    // timestamp =
+    // [436363475,710406388,386655081,797150921]
+    // website =
+    // ["wnaaxbfhxp","mryxsjc","oz","wlarkzzqht"]
 
+    // Use Testcase
+    // Output
+    // ["oz","wnaaxbfhxp","mryxsjc"]
+    // Expected
+    // ["oz","mryxsjc","wlarkzzqht"]
     #[test]
     pub fn test_most_visited_pattern_1() {
         assert_eq!(

@@ -66,74 +66,75 @@
 // ### Company:
 
 // [Unknown](https://leetcode.ca/tags/#Unknown)
+mod wrong {
+    use std::cmp::Reverse;
+    use std::collections::{BinaryHeap, HashMap, HashSet};
+    pub struct FileSharing {
+        curr_user_id: i32,
+        reused_user_ids: BinaryHeap<Reverse<i32>>,
+        u2c: HashMap<i32, HashSet<i32>>,
+        c2u: HashMap<i32, HashSet<i32>>,
+    }
 
-use std::cmp::Reverse;
-use std::collections::{BinaryHeap, HashMap, HashSet};
-pub struct FileSharing {
-    curr_user_id: i32,
-    reused_user_ids: BinaryHeap<Reverse<i32>>,
-    u2c: HashMap<i32, HashSet<i32>>,
-    c2u: HashMap<i32, HashSet<i32>>,
+    /**
+     * `&self` means the method takes an immutable reference.
+     * If you need a mutable reference, change it to `&mut self` instead.
+     */
+    #[allow(dead_code)]
+    impl FileSharing {
+        pub fn new(_m: i32) -> Self {
+            Self {
+                curr_user_id: 0,
+                reused_user_ids: BinaryHeap::new(),
+                u2c: HashMap::new(),
+                c2u: HashMap::new(),
+            }
+        }
+
+        pub fn join(&mut self, owned_chunks: Vec<i32>) -> i32 {
+            let id = if let Some(Reverse(v)) = self.reused_user_ids.pop() {
+                v
+            } else {
+                self.curr_user_id += 1;
+                self.curr_user_id
+            };
+            for &c in &owned_chunks {
+                self.u2c.entry(id).or_insert(HashSet::new()).insert(c);
+                self.c2u.entry(c).or_insert(HashSet::new()).insert(id);
+            }
+            id
+        }
+
+        pub fn leave(&mut self, user_id: i32) {
+            self.reused_user_ids.push(Reverse(user_id));
+            for &c in self.u2c.get(&user_id).unwrap_or(&HashSet::new()) {
+                self.c2u.entry(c).and_modify(|x| {
+                    x.remove(&user_id);
+                });
+            }
+            self.u2c.remove(&user_id);
+        }
+
+        pub fn request(&mut self, user_id: i32, chunk_id: i32) -> Vec<i32> {
+            let ans = self
+                .c2u
+                .get(&chunk_id)
+                .unwrap_or(&HashSet::new())
+                .iter()
+                .cloned()
+                .collect();
+            self.u2c
+                .entry(user_id)
+                .or_insert(HashSet::new())
+                .insert(chunk_id);
+            self.c2u
+                .entry(chunk_id)
+                .or_insert(HashSet::new())
+                .insert(user_id);
+            ans
+        }
+    }
 }
-
-/**
- * `&self` means the method takes an immutable reference.
- * If you need a mutable reference, change it to `&mut self` instead.
- */
-impl FileSharing {
-    pub fn new(_m: i32) -> Self {
-        Self {
-            curr_user_id: 0,
-            reused_user_ids: BinaryHeap::new(),
-            u2c: HashMap::new(),
-            c2u: HashMap::new(),
-        }
-    }
-
-    pub fn join(&mut self, owned_chunks: Vec<i32>) -> i32 {
-        let id = if let Some(Reverse(v)) = self.reused_user_ids.pop() {
-            v
-        } else {
-            self.curr_user_id += 1;
-            self.curr_user_id
-        };
-        for &c in &owned_chunks {
-            self.u2c.entry(id).or_insert(HashSet::new()).insert(c);
-            self.c2u.entry(c).or_insert(HashSet::new()).insert(id);
-        }
-        id
-    }
-
-    pub fn leave(&mut self, user_id: i32) {
-        self.reused_user_ids.push(Reverse(user_id));
-        for &c in self.u2c.get(&user_id).unwrap_or(&HashSet::new()) {
-            self.c2u.entry(c).and_modify(|x| {
-                x.remove(&user_id);
-            });
-        }
-        self.u2c.remove(&user_id);
-    }
-
-    pub fn request(&mut self, user_id: i32, chunk_id: i32) -> Vec<i32> {
-        let ans = self
-            .c2u
-            .get(&chunk_id)
-            .unwrap_or(&HashSet::new())
-            .iter()
-            .cloned()
-            .collect();
-        self.u2c
-            .entry(user_id)
-            .or_insert(HashSet::new())
-            .insert(chunk_id);
-        self.c2u
-            .entry(chunk_id)
-            .or_insert(HashSet::new())
-            .insert(user_id);
-        ans
-    }
-}
-
 /**
  * Your FileSharing object will be instantiated and called as such:
  * let obj = FileSharing::new(m);
@@ -141,61 +142,56 @@ impl FileSharing {
  * obj.leave(userID);
  * let ret_3: Vec<i32> = obj.request(userID, chunkID);
  */
+use std::cmp::Reverse;
+use std::collections::{BTreeSet, BinaryHeap, HashMap};
+pub struct FileSharing {
+    q: BinaryHeap<Reverse<i32>>,
+    u2c: HashMap<i32, Vec<i32>>,
+    c2u: Vec<BTreeSet<i32>>,
+}
 
-// use std::cmp::Reverse;
-// use std::collections::{BinaryHeap, HashMap, BTreeSet};
-// pub struct FileSharing {
-//     q: BinaryHeap<Reverse<i32>>,
-//     u2c: HashMap<i32, Vec<i32>>,
-//     c2u: Vec<BTreeSet<i32>>,
-// }
+/**
+ * `&self` means the method takes an immutable reference.
+ * If you need a mutable reference, change it to `&mut self` instead.
+ */
+impl FileSharing {
+    pub fn new(m: i32) -> Self {
+        Self {
+            q: (1..=m).map(|x| Reverse(x)).collect(),
+            u2c: HashMap::new(),
+            c2u: vec![BTreeSet::new(); m as usize + 1],
+        }
+    }
 
-// /**
-//  * `&self` means the method takes an immutable reference.
-//  * If you need a mutable reference, change it to `&mut self` instead.
-//  */
-// impl FileSharing {
-//     pub fn new(m: i32) -> Self {
-//         Self {
-//             q: (1..=m).map(|x|Reverse(x)).collect(),
-//             u2c: HashMap::new(),
-//             c2u: vec![BTreeSet::new();m as usize+1],
-//         }
-//     }
+    pub fn join(&mut self, owned_chunks: Vec<i32>) -> i32 {
+        let id = if let Some(Reverse(v)) = self.q.pop() {
+            v
+        } else {
+            0
+        };
+        for &c in &owned_chunks {
+            self.c2u[c as usize].insert(id);
+        }
+        self.u2c.insert(id, owned_chunks);
+        id
+    }
 
-//     pub fn join(&mut self, owned_chunks: Vec<i32>) -> i32 {
-//         let id = if let Some(Reverse(v)) = self.q.pop() {
-//             v
-//         } else {
-//            0
-//         };
-//         for &c in &owned_chunks {
-//             self.c2u[c as usize].insert(id);
-//         }
-//         self.u2c.insert(id,owned_chunks);
-//         id
-//     }
+    pub fn leave(&mut self, user_id: i32) {
+        self.q.push(Reverse(user_id));
+        for &c in self.u2c.get(&user_id).unwrap_or(&Vec::new()) {
+            self.c2u[c as usize].remove(&user_id);
+        }
+    }
 
-//     pub fn leave(&mut self, user_id: i32) {
-//         self.q.push(Reverse(user_id));
-//         for &c in self.u2c.get(&user_id).unwrap_or(&Vec::new()) {
-//             self.c2u[c as usize].remove(&user_id);
-//         }
-//     }
-
-//     pub fn request(&mut self, user_id: i32, chunk_id: i32) -> Vec<i32> {
-//         let ans: Vec<i32>  = self
-//             .c2u[chunk_id as usize].iter().cloned().collect();
-//         if !ans.is_empty(){
-//             self.u2c
-//             .entry(user_id)
-//             .or_insert(Vec::new())
-//             .push(chunk_id);
-//         self.c2u[chunk_id as usize].insert(user_id);
-//         }
-//         ans
-//     }
-// }
+    pub fn request(&mut self, user_id: i32, chunk_id: i32) -> Vec<i32> {
+        let ans: Vec<i32> = self.c2u[chunk_id as usize].iter().cloned().collect();
+        if !ans.is_empty() {
+            self.u2c.entry(user_id).or_insert(Vec::new()).push(chunk_id);
+            self.c2u[chunk_id as usize].insert(user_id);
+        }
+        ans
+    }
+}
 
 #[cfg(test)]
 mod test {

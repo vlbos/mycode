@@ -113,31 +113,3 @@ impl Solution {
         lo
     }
 }
-
-// func getIndex(reader *ArrayReader) int {
-//     n := reader.length()
-//     l, y := 0, n-1
-//     var tmp int
-//     for l < y {
-//         m := l + (y - l) / 2
-//         // 二分查找，将原数组分成两部分，这里要注意
-//         // 如果是 [l...y] 是奇数长度，那么中间那个数(即 m 所指向的位置)不在比较范围内
-//         if (y - l + 1) & 1 == 1 {
-//             tmp = reader.compareSub(l, m-1, m+1, y)
-//         } else {
-//             tmp = reader.compareSub(l, m, m+1, y)
-//         }
-//         // 左半部分大于右半部分，说明待求数字肯定在左半部分，注意这里不减 1 是考虑 [l..y] 长度为偶数、m 值在左半部分的情况
-//         if tmp > 0 {
-//             y = m
-//         } else if tmp < 0 {
-//             // 左半部分小于右半部分，说明待求数字肯定在右半部分
-//             l = m+1
-//         } else {
-//             // 左右两部分相等，那么大数肯定就在中间了
-//             return m
-//         }
-//     }
-//     return l
-
-// }

@@ -60,7 +60,16 @@ impl Solution {
             .zip(upgrade)
             .zip(sell)
             .zip(money)
-            .map(|(((cnt, cost), income), cash)| cnt.min((cnt * income + cash) / (cost + income)))
+            .map(|(((cnt, cost), income), cash)| {
+                let to_sell =
+                    (cnt as i64 * cost as i64 - cash as i64 + income as i64 + cost as i64 - 1)
+                        / (income as i64 + cost as i64);
+                if to_sell > 0 {
+                    (cnt as i64 - to_sell as i64) as i32
+                } else {
+                    cnt
+                }
+            })
             .collect()
     }
 }

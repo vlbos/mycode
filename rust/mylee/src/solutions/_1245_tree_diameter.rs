@@ -46,7 +46,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn tree_diameter(edges: Vec<Vec<i32>>) -> i32 {
+    pub fn tree_diametertle(edges: Vec<Vec<i32>>) -> i32 {
         use std::collections::{BinaryHeap, HashMap};
         let mut t = HashMap::new();
         for e in &edges {
@@ -74,7 +74,7 @@ impl Solution {
         ans
     }
 
-    pub fn tree_diameter2(edges: Vec<Vec<i32>>) -> i32 {
+    pub fn tree_diameter(edges: Vec<Vec<i32>>) -> i32 {
         fn dfs(graph: &Vec<Vec<usize>>, vis: &mut Vec<bool>, ans: &mut usize, cur: usize) -> usize {
             vis[cur] = true;
             let mut depth = 0;

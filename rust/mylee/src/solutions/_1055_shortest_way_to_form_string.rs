@@ -44,7 +44,7 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn shortest_way(source: String, target: String) -> i32 {
+    pub fn shortest_wayerror(source: String, target: String) -> i32 {
         let mut ans = 1;
         let mut pos = None;
         for c in target.chars() {
@@ -59,7 +59,7 @@ impl Solution {
         }
         ans
     }
-    pub fn shortest_way2(source: String, target: String) -> i32 {
+    pub fn shortest_way(source: String, target: String) -> i32 {
         let s = source.as_bytes();
         let t = target.as_bytes();
         let mut j = 0;

@@ -55,7 +55,7 @@
 pub struct Solution {}
 
 impl Solution {
-    pub fn check_contradictions(equations: Vec<Vec<String>>, values: Vec<f64>) -> bool {
+    pub fn check_contradictionswrong(equations: Vec<Vec<String>>, values: Vec<f64>) -> bool {
         let mut m = std::collections::HashMap::new();
         for e in &equations {
             for u in e {
@@ -92,74 +92,50 @@ impl Solution {
         }
         false
     }
+    pub fn check_contradictions(equations: Vec<Vec<String>>, values: Vec<f64>) -> bool {
+        use std::collections::HashMap;
+        let mut m = HashMap::new();
+        let mut g = HashMap::new();
+        for (i, e) in equations.iter().enumerate() {
+            let (u, v) = (e[0].clone(), e[1].clone());
+            g.entry(u.clone())
+                .or_insert(Vec::new())
+                .push((v.clone(), values[i]));
+            g.entry(v.clone())
+                .or_insert(Vec::new())
+                .push((u.clone(), 1.0 / values[i]));
+        }
+        fn dfs(
+            u: &String,
+            val: f64,
+            g: &HashMap<String, Vec<(String, f64)>>,
+            m: &mut HashMap<String, f64>,
+            ans: &mut bool,
+        ) {
+            if *ans {
+                return;
+            }
+            if let Some(&v) = m.get(u) {
+                if (v - val).abs() > 1e-5 {
+                    *ans = true;
+                }
+                return;
+            }
+            m.insert(u.clone(), val);
+
+            for (v, w) in g.get(u).unwrap_or(&Vec::new()) {
+                dfs(v, val / w, g, m, ans);
+            }
+        }
+        let mut ans = false;
+        for e in &equations {
+            if !m.contains_key(&e[0]) {
+                dfs(&e[0], 1.0, &g, &mut m, &mut ans)
+            }
+        }
+        ans
+    }
 }
-
-// impl Solution {
-//     pub fn check_contradictions(equations: Vec<Vec<String>>, values: Vec<f64>) -> bool {
-//             use std::collections::HashMap;
-//  let mut m = HashMap::new();
-//         let mut g = HashMap::new();
-//         for (i, e) in equations.iter().enumerate() {
-//             let (u, v) = (
-//                 e[0].clone() ,
-//                e[1].clone(),
-//             );
-//             g.entry(u.clone()).or_insert(Vec::new()).push((v.clone(), values[i]));
-//             g.entry(v.clone()).or_insert(Vec::new()).push((u.clone(), 1.0 / values[i]));
-//         }
-//         fn dfs(u: &String, val: f64, g: &HashMap<String,Vec<(String, f64)>>, m: &mut HashMap<String,f64>,ans:&mut bool){
-//             if *ans{
-//                 return
-//             }
-//            if let Some(&v)=m.get(u) {
-//                 if (v-val).abs()>1e-5{
-//                     *ans=true;
-//                 }
-//                 return
-//            }
-//            m.insert(u.clone(),val);
-
-//             for (v, w) in g.get(u).unwrap_or(&Vec::new()) {
-//                 dfs(v, val / w, g, m,ans);
-//                 }
-
-//         }
-//         let mut ans=false;
-//         for e in &equations {
-//             if !m.contains_key(&e[0]) {
-//                  dfs(&e[0], 1.0, &g, &mut m,&mut ans)
-//             }
-
-//         }
-//         ans
-//     }
-// }
-
-// class Solution:
-//     def checkContradictions(self, equations: List[List[str]], values: List[float]) -> bool:
-//         edges = defaultdict(set)
-//         for j,(x,y) in enumerate(equations):
-//             edges[x].add((y,values[j]))
-//             edges[y].add((x,1/values[j]))  #图中的边一定要成对添加
-//         val = {}
-//         ans = False #初始默认没有矛盾
-
-//         def dfs(node,v):
-//             nonlocal ans
-//             if ans: #已经有矛盾就不浪费时间了
-//                 return
-//             if node in val:
-//                 if abs(val[node]-v)>1e-5: #题目明确说不超过1e-5视为相同值
-//                     ans=True
-//                 return #搜过的点，不管有没有矛盾，都应直接return，否则程序就会死循环
-//             val[node]=v
-//             for nei,rat in edges[node]:
-//                 dfs(nei,v/rat)
-
-//         for x,y in equations:
-//             if x not in val: # 如果x还没有值，y也一定没有，这时说明遇到了一个新的连通分量
-//                 dfs(x,1.)
-//         return ans
 
 #[cfg(test)]
 mod test {

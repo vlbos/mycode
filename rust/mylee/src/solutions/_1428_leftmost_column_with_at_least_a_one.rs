@@ -44,6 +44,46 @@ Constraints:
     mat[i] is sorted in a non-decreasing way.
 
 */
+// /**
+//  * // This is the BinaryMatrix's API interface.
+//  * // You should not implement it, or speculate about its implementation
+//  *  struct BinaryMatrix;
+//  *  impl BinaryMatrix {
+//  *      fn get(&self, row: i32, col: i32) -> i32;
+//  *     fn dimensions() -> Vec<i32>;
+//  * };
+//  */
+// impl Solution {
+//     pub fn left_most_column_with_one(binaryMatrix: &BinaryMatrix) -> i32 {
+//           let vec = binaryMatrix.dimensions();
+//         let n = vec[0];
+//         let m = vec[1];
+
+//         let mut ans = n;
+
+//         for i in 0..n {
+//             let mut lo = 0;
+//             let mut hi = m - 1;
+
+//             while lo <= hi {
+//                 let mid = lo + (hi - lo) / 2;
+
+//                 if binaryMatrix.get(i, mid) == 1 {
+//                     hi = mid - 1;
+//                     ans = ans.min(mid);
+//                 } else {
+//                     lo = mid + 1;
+//                 }
+//             }
+//         }
+
+//         if ans == n {
+//             -1
+//         } else {
+//             ans as i32
+//         }
+//     }
+// }
 /**
  * // This is the BinaryMatrix's API interface.
  * // You should not implement it, or speculate about its implementation

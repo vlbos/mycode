@@ -14,74 +14,17 @@
 
 //
 // Example 1:
-
-// <table border="1" cellspacing="3" style="border-collapse: separate; text-align: center;">
-
-// 			<th style="padding: 5px; border: 1px solid black;">Substring
-// 			<th style="padding: 5px; border: 1px solid black;">Mapped
-// 			<th style="padding: 5px; border: 1px solid black;">Sum
-// 			<th style="padding: 5px; border: 1px solid black;">Length
-// 			<th style="padding: 5px; border: 1px solid black;">Divisible?
-
-// 			<td style="padding: 5px; border: 1px solid black;">a
-// 			<td style="padding: 5px; border: 1px solid black;">1
-// 			<td style="padding: 5px; border: 1px solid black;">1
-// 			<td style="padding: 5px; border: 1px solid black;">1
-// 			<td style="padding: 5px; border: 1px solid black;">Yes
-
-// 			<td style="padding: 5px; border: 1px solid black;">s
-// 			<td style="padding: 5px; border: 1px solid black;">7
-// 			<td style="padding: 5px; border: 1px solid black;">7
-// 			<td style="padding: 5px; border: 1px solid black;">1
-// 			<td style="padding: 5px; border: 1px solid black;">Yes
-
-// 			<td style="padding: 5px; border: 1px solid black;">d
-// 			<td style="padding: 5px; border: 1px solid black;">2
-// 			<td style="padding: 5px; border: 1px solid black;">2
-// 			<td style="padding: 5px; border: 1px solid black;">1
-// 			<td style="padding: 5px; border: 1px solid black;">Yes
-
-// 			<td style="padding: 5px; border: 1px solid black;">f
-// 			<td style="padding: 5px; border: 1px solid black;">3
-// 			<td style="padding: 5px; border: 1px solid black;">3
-// 			<td style="padding: 5px; border: 1px solid black;">1
-// 			<td style="padding: 5px; border: 1px solid black;">Yes
-
-// 			<td style="padding: 5px; border: 1px solid black;">as
-// 			<td style="padding: 5px; border: 1px solid black;">1, 7
-// 			<td style="padding: 5px; border: 1px solid black;">8
-// 			<td style="padding: 5px; border: 1px solid black;">2
-// 			<td style="padding: 5px; border: 1px solid black;">Yes
-
-// 			<td style="padding: 5px; border: 1px solid black;">sd
-// 			<td style="padding: 5px; border: 1px solid black;">7, 2
-// 			<td style="padding: 5px; border: 1px solid black;">9
-// 			<td style="padding: 5px; border: 1px solid black;">2
-// 			<td style="padding: 5px; border: 1px solid black;">No
-
-// 			<td style="padding: 5px; border: 1px solid black;">df
-// 			<td style="padding: 5px; border: 1px solid black;">2, 3
-// 			<td style="padding: 5px; border: 1px solid black;">5
-// 			<td style="padding: 5px; border: 1px solid black;">2
-// 			<td style="padding: 5px; border: 1px solid black;">No
-
-// 			<td style="padding: 5px; border: 1px solid black;">asd
-// 			<td style="padding: 5px; border: 1px solid black;">1, 7, 2
-// 			<td style="padding: 5px; border: 1px solid black;">10
-// 			<td style="padding: 5px; border: 1px solid black;">3
-// 			<td style="padding: 5px; border: 1px solid black;">No
-
-// 			<td style="padding: 5px; border: 1px solid black;">sdf
-// 			<td style="padding: 5px; border: 1px solid black;">7, 2, 3
-// 			<td style="padding: 5px; border: 1px solid black;">12
-// 			<td style="padding: 5px; border: 1px solid black;">3
-// 			<td style="padding: 5px; border: 1px solid black;">Yes
-
-// 			<td style="padding: 5px; border: 1px solid black;">asdf
-// 			<td style="padding: 5px; border: 1px solid black;">1, 7, 2, 3
-// 			<td style="padding: 5px; border: 1px solid black;">13
-// 			<td style="padding: 5px; border: 1px solid black;">4
-// 			<td style="padding: 5px; border: 1px solid black;">No
+//|Substring|Mapped|Sum|Length|Divisible?|
+// |a|1|1|1|Yes|
+// |s|7|7|1|Yes|
+// |d|2|2|1|Yes|
+// |f|3|3|1|Yes|
+// |as|1, 7|8|2|Yes|
+// |sd|7, 2|9|2|No|
+// |df|2, 3|5|2|No|
+// |asd|1, 7, 2|10|3|No|
+// |sdf|7, 2, 3|12|3|Yes|
+// |asdf|1, 7, 2, 3|13|4|No|
 
 // Input: word = "asdf"
 // Output: 6
@@ -127,7 +70,6 @@ impl Solution {
             let i = (b - b'a') as i32 + 1;
             i / 3 + 1
         };
-        let n = word.len();
         let mut ans = 0;
         for i in 1..10 {
             let mut cnt = std::collections::HashMap::from([(0, 1)]);

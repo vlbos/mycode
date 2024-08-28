@@ -47,7 +47,7 @@
 
 // Definition for an Interval.
 #[derive(PartialEq, Eq, Clone, Debug)]
-struct Interval {
+pub struct Interval {
     pub start: i32,
     pub end: i32,
 }

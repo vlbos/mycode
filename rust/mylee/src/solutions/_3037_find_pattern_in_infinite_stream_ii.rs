@@ -58,38 +58,75 @@ impl InfiniteStream {
 
 #[allow(dead_code)]
 pub struct Solution;
-
+/**
+ * Definition for an infinite stream.
+ * impl InfiniteStream {
+ *     pub fn new(bits: Vec<i32>) -> Self {}
+ *     pub fn next(&mut self) -> i32 {}
+ * }
+ */
 impl Solution {
     pub fn find_pattern(mut stream: InfiniteStream, pattern: Vec<i32>) -> i32 {
-        let (mut a, mut b) = (0, 0);
-        let m = pattern.len();
-        let half = m >> 1;
-        let (mask1, mask2) = ((1 << half) - 1, (1 << (m - half)) - 1);
-        for i in 0..half {
-            a |= (pattern[i] as i64) << (half - 1 - i);
-        }
-        for i in half..m {
-            b |= (pattern[i] as i64) << (m - 1 - i);
-        }
-        let (mut x, mut y) = (0, 0);
-        for i in 1.. {
-            let mut v = stream.next();
-            y = y << 1 | v;
-            v = y >> (m - half) & 1;
-            y &= mask2;
-            x = x << 1 | v;
-            x &= mask1;
-            if i >= m && a == x && b == y {
-                return (i - m) as _;
+        let n = pattern.len();
+        let (mut i, mut j) = (0, 1);
+        let mut dp = vec![0; n];
+        while j < n {
+            if pattern[i] == pattern[j] {
+                i += 1;
+                dp[j] = i;
+                j += 1;
+            } else {
+                if i > 0 {
+                    i = dp[i - 1];
+                } else {
+                    j += 1;
+                }
             }
         }
-        -1
+        let (mut i, mut j) = (0, 0);
+        let mut cur = stream.next();
+        while i < n {
+            if pattern[i] as i64 == cur {
+                i += 1;
+                cur = stream.next();
+                j += 1;
+            } else {
+                if i == 0 {
+                    cur = stream.next();
+                    j += 1;
+                } else {
+                    i = dp[i - 1];
+                }
+            }
+            if i == n {
+                return (j - n) as _;
+            }
+        }
+        0
     }
 }
 
+// class Solution:
+//     def findPattern(self, stream: Optional['InfiniteStream'], pattern: List[int]) -> int:
+
+//         num, target, ans, n = 0, 0, 0, len(pattern)
+//         mask = (1<<(n-1))-1
+
+//         for bit in pattern:                       # <-- 1.
+//             target = 2*target + bit               #
+
+//         while num != target or ans < n:           # <-- 2.
+//             num = 2*(num&mask) + stream.next()    #
+//             ans+= 1
+
+//         return ans-n
 #[cfg(test)]
 mod test {
     use super::*;
+    // stream =
+    // [0,1,1,0,1,0,0,0,0,1,1,1,1,0,1,0,0,0,1,0,0,0,1,0,1,0,0,0,0,1,0,1,0,0,1,1,0,1,0,1,1,1,0,1,1,0,1,1,1,1,0,0,1,1,1,1,1,0,0,1,0]
+    // pattern =
+    // [1,0,1,1,1,0,1,1,0,1,1,1,1,0,0,1,1,1,1,1,0,0,1,0,0,1,1,0,1,0,0,0,0,1,1,1,1,0,1,0,0,0,1,0,0,0,1,0,1,0,0,0,0,1,0,1,0,0,1,1,0,1,0,1,1,1,0,1,1,0,1,1,1,1,0,0,1,1,1,1,1,0,0,1,0,0,1,1,0,1,0,0,0,0,1,1,1,1,0,1,0,0,0,1,0,0,0,1,0,1,0,0,0,0,1,0,1,0,0,1,1,0,1,0,1,1,1]
     #[test]
     pub fn test_find_pattern_1() {
         let is = InfiniteStream::new(vec![1, 1, 1, 0, 1, 1, 1]);

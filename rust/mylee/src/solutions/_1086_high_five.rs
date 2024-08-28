@@ -62,11 +62,11 @@ impl Solution {
         ans
     }
 
-    pub fn high_five2(items: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+    pub fn high_fiveerror(items: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
         let mut cnt = std::collections::HashMap::<i32, (i32, i32)>::new();
         for item in &items {
             cnt.entry(item[0])
-                .and_modify(|mut x| {
+                .and_modify(|x| {
                     x.0 += item[1];
                     x.1 += 1;
                 })

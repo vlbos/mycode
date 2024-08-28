@@ -43,7 +43,7 @@ use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
     pub fn maximum_average_subtree(root: Option<Rc<RefCell<TreeNode>>>) -> f64 {
-        pub fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, ans: &mut f64) -> (i32, i32) {
+        fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, ans: &mut f64) -> (i32, i32) {
             if root.is_none() {
                 return (0, 0);
             }
@@ -51,7 +51,7 @@ impl Solution {
             let (left_sum, left_cnt) = dfs(&node.left, ans);
             let (right_sum, right_cnt) = dfs(&node.right, ans);
             let (sum, cnt) = (left_sum + right_sum + node.val, left_cnt + right_cnt + 1);
-            *ans = (*ans).max((node.val as f64).max(sum as f64 / cnt as f64));
+            *ans = (*ans).max(sum as f64 / cnt as f64);
             (sum, cnt)
         }
         let mut ans = 0.0;
@@ -64,6 +64,14 @@ impl Solution {
 mod test {
     use super::*;
     use crate::tree;
+    // root =
+    // [2,null,1]
+
+    // Use Testcase
+    // Output
+    // 2.00000
+    // Expected
+    // 1.50000
     #[test]
     pub fn test_maximum_average_subtree_1() {
         assert_eq!(6.0000, Solution::maximum_average_subtree(tree![5, 6, 1]));

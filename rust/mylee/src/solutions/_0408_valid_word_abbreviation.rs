@@ -44,25 +44,25 @@ impl Solution {
         let word = word.chars().collect::<Vec<_>>();
 
         let mut step = 0;
-        let mut idx = -1i32 as usize;
+        let mut idx = -1i32;
         for c in abbr.bytes() {
             if c == b'0' && step == 0 {
                 return false;
             }
             if c >= b'0' && c <= b'9' {
-                step = step * 10 + (c - b'0') as usize;
+                step = step * 10 + (c - b'0') as i32;
             } else {
                 idx += step + 1;
-                if idx >= word.len() {
+                if idx >= word.len() as i32 {
                     return false;
                 }
-                if word[idx] != c as char {
+                if word[idx as usize] != c as char {
                     return false;
                 }
                 step = 0;
             }
         }
-        word.len() == idx + step + 1
+        word.len() as i32 == idx + step + 1
     }
     pub fn valid_word_abbreviation2(word: String, abbr: String) -> bool {
         enum AbbrType {

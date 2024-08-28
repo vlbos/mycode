@@ -141,41 +141,44 @@ impl DistanceLimitedPathsExist {
     }
 }
 
-// use std::collections::BTreeMap;
-// #[allow(dead_code)]
-// pub struct DistanceLimitedPathsExist {
-//      g: BTreeMap<i32, Vec<i32>>,
-// }
-// impl DistanceLimitedPathsExist {
-//     pub fn new(n: i32, edge_list: Vec<Vec<i32>>) -> Self {
-//         let mut v:Vec<i32>= (0..n).collect();
-//         let mut el= edge_list;
-//         el.sort_by_key(|x|x[2]);
-//         let mut g =BTreeMap::new();
-//         for e in &el {
-//             let (x,y)=(Self::find(e[0],&mut v),Self::find(e[1],&mut v));
-//             v[x as usize]=y;
-//             g.insert(e[2],v.clone());
-//         }
-//         Self { g}
-//     }
+mod sol2 {
+    use std::collections::BTreeMap;
+    #[allow(dead_code)]
+    pub struct DistanceLimitedPathsExist {
+        g: BTreeMap<i32, Vec<i32>>,
+    }
+    #[allow(dead_code)]
+    impl DistanceLimitedPathsExist {
+        pub fn new(n: i32, edge_list: Vec<Vec<i32>>) -> Self {
+            let mut v: Vec<i32> = (0..n).collect();
+            let mut el = edge_list;
+            el.sort_by_key(|x| x[2]);
+            let mut g = BTreeMap::new();
+            for e in &el {
+                let (x, y) = (Self::find(e[0], &mut v), Self::find(e[1], &mut v));
+                v[x as usize] = y;
+                g.insert(e[2], v.clone());
+            }
+            Self { g }
+        }
 
-//     pub fn query(&mut self, p: i32, q: i32, limit: i32) -> bool {
-//         if  self.g.range(..limit).count()<2{
-//         return false
-//         }
-//         let i =*self.g.range(..limit).next_back().unwrap().0;
-//         let mut v = self.g.get_mut(&i).unwrap();
-//         Self::find(p,&mut v)== Self::find(q,&mut v)
-//     }
-//     pub fn find(mut x:i32,v:&mut Vec<i32>)->i32{
-//                 while  v[x as usize]!=x{
-//                      v[x as usize]= v[v[x as usize] as usize];
-//                     x= v[x as usize];
-//                 }
-//             x
-//     }
-// }
+        pub fn query(&mut self, p: i32, q: i32, limit: i32) -> bool {
+            if self.g.range(..limit).count() < 2 {
+                return false;
+            }
+            let i = *self.g.range(..limit).next_back().unwrap().0;
+            let mut v = self.g.get_mut(&i).unwrap();
+            Self::find(p, &mut v) == Self::find(q, &mut v)
+        }
+        pub fn find(mut x: i32, v: &mut Vec<i32>) -> i32 {
+            while v[x as usize] != x {
+                v[x as usize] = v[v[x as usize] as usize];
+                x = v[x as usize];
+            }
+            x
+        }
+    }
+}
 
 #[cfg(test)]
 mod test {

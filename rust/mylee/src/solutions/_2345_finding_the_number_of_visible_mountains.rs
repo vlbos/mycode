@@ -42,7 +42,25 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn visible_mountains(peaks: Vec<Vec<i32>>) -> i32 {
+    pub fn visible_mountains(mut peaks: Vec<Vec<i32>>) -> i32 {
+        peaks.sort_unstable_by_key(|x| (x[0] - x[1], -(x[0] + x[1])));
+
+        let mut ans = 0;
+        let mut cnt = 0;
+        let mut max_end = i32::MIN;
+        let n = peaks.len();
+        for (i, p) in peaks.iter().enumerate() {
+            if max_end < p[0] + p[1] {
+                max_end = p[0] + p[1];
+                if i < n - 1 && peaks[i] == peaks[i + 1] {
+                    continue;
+                }
+                ans += 1;
+            }
+        }
+        ans
+    }
+    pub fn visible_mountainswrong(peaks: Vec<Vec<i32>>) -> i32 {
         let mut cnt = std::collections::HashMap::new();
         for p in &peaks {
             *cnt.entry(p.clone()).or_insert(0) += 1;
@@ -71,32 +89,32 @@ impl Solution {
         }
         ans
     }
+    pub fn visible_mountainswrong2(peaks: Vec<Vec<i32>>) -> i32 {
+        if peaks.len() == 1 {
+            return 1;
+        }
+        let mut a: Vec<Vec<i32>> = peaks
+            .into_iter()
+            .map(|x| vec![x[0] - x[1], x[0] + x[1]])
+            .collect();
+        a.sort_by_key(|x| (x[0], -x[1]));
+
+        let mut ans = 1;
+
+        if a.len() > 1 && a[0] == a[1] {
+            ans -= 1;
+        }
+        let mut curr = a[0][1];
+
+        for r in &a[1..] {
+            if curr < r[1] {
+                ans += 1;
+                curr = r[1];
+            }
+        }
+        ans
+    }
 }
-
-// impl Solution {
-//     pub fn visible_mountains(peaks: Vec<Vec<i32>>) -> i32 {
-//         if peaks.len()==1{
-//             return 1
-//         }
-//         let mut a:Vec<Vec<i32>>=peaks.into_iter().map(|x| vec![x[0]-x[1],x[0]+x[1]]).collect();
-//         a.sort_by_key(|x| (x[0],-x[1]));
-
-//         let mut ans = 1;
-
-//         if a.len()>1 && a[0]==a[1]{
-//             ans-=1;
-//         }
-//                 let mut curr = a[0][1];
-
-//         for r in &a[1..] {
-//             if curr< r[1] {
-//                 ans += 1;
-//                 curr= r[1];
-//             }
-//         }
-//         ans
-//     }
-// }
 
 #[cfg(test)]
 mod test {
