@@ -82,6 +82,18 @@
 
 // ### **TypeScript**
 
+type Fn = (...args) => any
+
+interface Function {
+    bindPolyfill(obj: Record<any, any>): Fn;
+}
+
+Function.prototype.bindPolyfill = function(obj): Fn {
+     return (...args) => {
+        return this.call(obj, ...args);
+    };
+}
+
 // ```ts
 // type Fn = (...args) => any;
 

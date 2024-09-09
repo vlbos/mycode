@@ -45,7 +45,13 @@
 // <!-- tabs:start -->
 
 // ### **TypeScript**
+interface String {
+    replicate(times: number): string;
+}
 
+String.prototype.replicate = function(times): string {
+    return new Array(times).fill(this).join('');
+}
 // ```ts
 // declare global {
 //     interface String {

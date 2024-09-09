@@ -53,7 +53,18 @@
 // <!-- tabs:start -->
 
 // ### **TypeScript**
+type JSONValue = null | boolean | number | string | JSONValue[] | { [key: string]: JSONValue };
 
+function createObject(keysArr: JSONValue[], valuesArr: JSONValue[]): Record<string, JSONValue> {
+        const ans: Record<string, any> = {};
+    for (let i = 0; i < keysArr.length; ++i) {
+        const k = String(keysArr[i]);
+        if (ans[k] === undefined) {
+            ans[k] = valuesArr[i];
+        }
+    }
+    return ans;
+};
 // ```ts
 // function createObject(keysArr: any[], valuesArr: any[]): Record<string, any> {
 //     const ans: Record<string, any> = {};

@@ -50,7 +50,24 @@
 // <!-- tabs:start -->
 
 // ### **TypeScript**
+type JSONValue = null | boolean | number | string | JSONValue[] | { [key: string]: JSONValue };
+type Obj = Record<string, JSONValue> | Array<JSONValue>
 
+function invertObject(obj: Obj): Record<string, JSONValue> {
+        const ans: Record<any, any> = {};
+    for (const key in obj) {
+        if (ans.hasOwnProperty(obj[key])) {
+            if (Array.isArray(ans[obj[key]])) {
+                ans[obj[key]].push(key);
+            } else {
+                ans[obj[key]] = [ans[obj[key]], key];
+            }
+        } else {
+            ans[obj[key]] = key;
+        }
+    }
+    return ans;
+};
 // ```ts
 // function invertObject(obj: Record<any, any>): Record<any, any> {
 //     const ans: Record<any, any> = {};

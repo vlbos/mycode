@@ -42,19 +42,19 @@
 // ### **TypeScript**
 
 // ```ts
-// function createInfiniteObject(): Record<string, () => string> {
-//     return new Proxy(
-//         {},
-//         {
-//             get: (_, prop) => () => prop.toString(),
-//         },
-//     );
-// }
+function createInfiniteObject(): Record<string, () => string> {
+    return new Proxy(
+        {},
+        {
+            get: (_, prop) => () => prop.toString(),
+        },
+    );
+}
 
-// /**
-//  * const obj = createInfiniteObject();
-//  * obj['abc123'](); // "abc123"
-//  */
+/**
+ * const obj = createInfiniteObject();
+ * obj['abc123'](); // "abc123"
+ */
 // ```
-
+// 
 // <!-- tabs:end -->

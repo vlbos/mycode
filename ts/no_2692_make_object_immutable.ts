@@ -93,6 +93,47 @@
 // <!-- tabs:start -->
 
 // ### **TypeScript**
+//leetcode
+type JSONValue = null | boolean | number | string | JSONValue[] | { [key: string]: JSONValue };
+type Obj = Array<JSONValue> | Record<string, JSONValue>;
+
+function makeImmutable(obj: Obj): Obj {
+     const arrayHandler: ProxyHandler<Array<JSONValue> > = {
+        set: (_, prop) => {
+            throw `Error Modifying Index: ${String(prop)}`;
+        },
+    };
+    const objectHandler: ProxyHandler<Record<string, JSONValue>> = {
+        set: (_, prop) => {
+            throw `Error Modifying: ${String(prop)}`;
+        },
+    };
+    const fnHandler: ProxyHandler<Array<JSONValue> > = {
+        apply: target => {
+            throw `Error Calling Method: ${target["name"]}`;
+        },
+    };
+    const fn = ['pop', 'push', 'shift', 'unshift', 'splice', 'sort', 'reverse'];
+    const dfs = (obj: Obj) => {
+        for (const key in obj) {
+            if (typeof obj[key] === 'object' && obj[key] !== null) {
+                obj[key] = dfs(obj[key]);
+            }
+        }
+        if (Array.isArray(obj)) {
+            fn.forEach(f => (obj[f] = new Proxy(obj[f], fnHandler)));
+            return new Proxy(obj, arrayHandler);
+        }
+        return new Proxy(obj, objectHandler);
+    };
+    return dfs(obj);
+};
+
+/**
+ * const obj = makeImmutable({x: 5});
+ * obj.x = 6; // throws "Error Modifying x"
+ */
+
 
 // ```ts
 // type Obj = Array | Record<any, any>;
@@ -129,10 +170,10 @@
 //     return dfs(obj);
 // }
 
-// /**
-//  * const obj = makeImmutable({x: 5});
-//  * obj.x = 6; // throws "Error Modifying x"
-//  */
+/**
+ * const obj = makeImmutable({x: 5});
+ * obj.x = 6; // throws "Error Modifying x"
+ */
 // ```
 
 // <!-- tabs:end -->

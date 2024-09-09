@@ -39,6 +39,23 @@
 
 // ### **TypeScript**
 
+type JSONValue = null | boolean | number | string | JSONValue[] | { [key: string]: JSONValue };
+type Value = undefined | null | boolean | number | string | Value[] | { [key: string]: Value };
+
+type Obj1 = Record<string, Value> | Array<Value>
+type Obj2 = Record<string, JSONValue> | Array<JSONValue>
+
+function undefinedToNull(obj: Obj1): Obj2 {
+     for (const key in obj) {
+        if (typeof obj[key] === 'object') {
+            obj[key] = undefinedToNull(obj[key]);
+        }
+        if (obj[key] === undefined) {
+            obj[key] = null;
+        }
+    }
+    return obj;
+};
 // ```ts
 // function undefinedToNull(obj: Record<any, any>): Record<any, any> {
 //     for (const key in obj) {
