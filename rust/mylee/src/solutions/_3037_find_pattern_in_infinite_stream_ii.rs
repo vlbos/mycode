@@ -50,7 +50,7 @@ impl InfiniteStream {
     pub fn new(s: Vec<u8>) -> Self {
         Self { s, i: 0 }
     }
-    pub fn next(&mut self) -> i64 {
+    pub fn next(&mut self) -> i32 {
         self.i += 1;
         self.s[self.i - 1] as _
     }
@@ -86,7 +86,7 @@ impl Solution {
         let (mut i, mut j) = (0, 0);
         let mut cur = stream.next();
         while i < n {
-            if pattern[i] as i64 == cur {
+            if pattern[i] == cur {
                 i += 1;
                 cur = stream.next();
                 j += 1;

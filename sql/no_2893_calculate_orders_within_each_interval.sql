@@ -68,7 +68,7 @@ Returning table orderd by interval_no in ascending order.</pre>
 <!-- tabs:start -->
 
 ```sql
-# Write your MySQL query statement below
+# Write your MySQL query statement below  tle
 WITH
     T AS (
         SELECT

@@ -97,16 +97,16 @@ impl Street {
 pub struct Solution;
 
 impl Solution {
-    pub fn house_count(mut street: Option<Box<Street>>, k: i32) -> i32 {
-        while !street.as_ref().unwrap().is_door_open() {
-            street.as_mut().unwrap().move_right();
+    pub fn house_count(mut street: Street, k: i32) -> i32 {
+        while !street.is_door_open() {
+            street.move_right();
         }
         let mut ans = 0;
         for i in 1..=k {
-            street.as_mut().unwrap().move_right();
-            if street.as_ref().unwrap().is_door_open() {
+            street.move_right();
+            if street.is_door_open() {
                 ans = i;
-                street.as_mut().unwrap().close_door();
+                street.close_door();
             }
         }
         ans
@@ -119,12 +119,12 @@ mod test {
 
     #[test]
     pub fn test_house_count_1() {
-        let street = Some(Box::new(Street::new(vec![1, 1, 1, 1])));
+        let street = Street::new(vec![1, 1, 1, 1]);
         assert_eq!(4, Solution::house_count(street, 10));
     }
     #[test]
     pub fn test_house_count_2() {
-        let street = Some(Box::new(Street::new(vec![1, 0, 1, 1, 0])));
+        let street = Street::new(vec![1, 0, 1, 1, 0]);
         assert_eq!(5, Solution::house_count(street, 5));
     }
 }

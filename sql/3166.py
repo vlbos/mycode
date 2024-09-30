@@ -85,3 +85,15 @@ def calculate_fees_and_duration(df: pd.DataFrame) -> pd.DataFrame:
             'most_time_lot': group.groupby('lot_id')['hours'].sum().idxmax()
         })
     return df.groupby('car_id', as_index=False).apply(fn)
+
+import pandas as pd
+
+def calculate_fees_and_duration(parking_transactions: pd.DataFrame) -> pd.DataFrame:
+    parking_transactions['hours'] = (parking_transactions['exit_time'] - parking_transactions['entry_time']).dt.seconds / 3600
+    def fn(group):
+        return pd.Series({
+            'total_fee_paid': group.fee_paid.sum(),
+            'avg_hourly_fee': round(group.fee_paid.sum() / group.hours.sum(), 2),
+            'most_time_lot': group.groupby('lot_id')['hours'].sum().idxmax()
+        })
+    return parking_transactions.groupby('car_id', as_index=False).apply(fn)

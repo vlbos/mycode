@@ -64,7 +64,6 @@
 import pandas as pd
 
 def symmetric_pairs(coordinates: pd.DataFrame) -> pd.DataFrame:
-    
     df = pd.merge(coordinates.reset_index(), coordinates.reset_index(), how='inner', left_on='Y',right_on='X')
     df = df[(df.X_x == df.Y_y) & (df.X_x <= df.Y_x) & (df.index_x != df.index_y)]\
             [['X_x','Y_x']].drop_duplicates()

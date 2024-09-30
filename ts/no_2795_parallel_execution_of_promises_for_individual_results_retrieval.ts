@@ -100,33 +100,33 @@
 // ### **TypeScript**
 
 // ```ts
-// type FulfilledObj = {
-//     status: 'fulfilled';
-//     value: string;
-// };
-// type RejectedObj = {
-//     status: 'rejected';
-//     reason: string;
-// };
-// type Obj = FulfilledObj | RejectedObj;
+type FulfilledObj = {
+    status: 'fulfilled';
+    value: string;
+};
+type RejectedObj = {
+    status: 'rejected';
+    reason: string;
+};
+type Obj = FulfilledObj | RejectedObj;
 
-// function promiseAllSettled(functions: Function[]): Promise<Obj[]> {
-//     return new Promise(resolve => {
-//         const res: Obj[] = [];
-//         let count = 0;
-//         for (let i in functions) {
-//             functions[i]()
-//                 .then(value => ({ status: 'fulfilled', value }))
-//                 .catch(reason => ({ status: 'rejected', reason }))
-//                 .then(obj => {
-//                     res[i] = obj;
-//                     if (++count === functions.length) {
-//                         resolve(res);
-//                     }
-//                 });
-//         }
-//     });
-// }
+function promiseAllSettled(functions: Function[]): Promise<Obj[]> {
+    return new Promise(resolve => {
+        const res: Obj[] = [];
+        let count = 0;
+        for (let i in functions) {
+            functions[i]()
+                .then(value => ({ status: 'fulfilled', value }))
+                .catch(reason => ({ status: 'rejected', reason }))
+                .then(obj => {
+                    res[i] = obj;
+                    if (++count === functions.length) {
+                        resolve(res);
+                    }
+                });
+        }
+    });
+}
 
 // /**
 //  * const functions = [

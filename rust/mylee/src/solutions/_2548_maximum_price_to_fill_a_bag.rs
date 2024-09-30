@@ -46,7 +46,7 @@ pub struct Solution;
 impl Solution {
     pub fn max_price(mut items: Vec<Vec<i32>>, mut capacity: i32) -> f64 {
         let mut ans = 0.0;
-        items.sort_by(|a, b| (a[1] * b[0]).cmp(&(a[0] * b[1])));
+        items.sort_unstable_by(|a, b| (a[1] * b[0]).cmp(&(a[0] * b[1])));
         for item in &items {
             let v = item[1].min(capacity);
             ans += (v as f64) / (item[1] as f64) * item[0] as f64;

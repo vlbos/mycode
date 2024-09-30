@@ -59,4 +59,19 @@
 # Output table is ordered by user\_id1 in ascending order.
 
 
+import pandas as pd
 
+def friends_with_no_mutual_friends(friends: pd.DataFrame) -> pd.DataFrame:
+
+    df1 = pd.concat([friends,
+                friends.rename(columns= {'user_id2':'user_id1', 'user_id1':'user_id2'})])
+
+    df2 = friends.merge(df1, how = 'outer', on = 'user_id1' 
+               ).merge(df1, how = 'outer', left_on = 'user_id2_x', right_on = 'user_id2')
+    
+    df2 = df2[df2.user_id2_y == df2.user_id1_y].iloc[:,[0,1]]
+
+    df2 = friends.merge(df2, how = 'left', left_on =['user_id1','user_id2'], 
+                                        right_on =['user_id1_x','user_id2_x'])
+
+    return df2[df2.user_id1_x.isna()].iloc[:,[0,1]].sort_values(['user_id1', 'user_id2'])

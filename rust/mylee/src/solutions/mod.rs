@@ -415,4 +415,6 @@ pub mod _3247_number_of_subsequences_with_odd_sum;
 pub mod _3253_construct_string_with_minimum_cost;
 pub mod _3269_constructing_two_increasing_arrays;
 pub mod _3279_maximum_total_area_occupied_by_pistons;
+pub mod _3284_sum_of_consecutive_subarrays;
+pub mod _3299_sum_of_consecutive_subsequences;
 pub mod util;
