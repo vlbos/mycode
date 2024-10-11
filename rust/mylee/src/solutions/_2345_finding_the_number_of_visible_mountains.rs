@@ -46,7 +46,6 @@ impl Solution {
         peaks.sort_unstable_by_key(|x| (x[0] - x[1], -(x[0] + x[1])));
 
         let mut ans = 0;
-        let mut cnt = 0;
         let mut max_end = i32::MIN;
         let n = peaks.len();
         for (i, p) in peaks.iter().enumerate() {

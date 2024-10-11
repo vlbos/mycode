@@ -90,7 +90,6 @@ impl Solution {
 #[cfg(test)]
 mod test {
     use super::*;
-    use crate::lc_vec_s;
 
     #[test]
     pub fn test_max_area_1() {

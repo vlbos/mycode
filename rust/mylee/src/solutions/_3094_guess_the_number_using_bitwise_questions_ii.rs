@@ -37,6 +37,7 @@
 
 //  * Definition of commonBits API.
 //  * int commonBits(int num);
+#[allow(dead_code)]
 fn common_bits(num: i32) -> i32 {
     num
 }
@@ -48,6 +49,7 @@ pub struct Solution;
  */
 
 impl Solution {
+#[allow(dead_code)]
     unsafe fn find_number() -> i32 {
         let mut ans = 0;
         let mut i = 1;

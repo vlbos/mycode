@@ -76,7 +76,7 @@ impl Solution {
     pub fn minimum_time(mut hens: Vec<i32>, mut grains: Vec<i32>) -> i32 {
         hens.sort_unstable();
         grains.sort_unstable();
-        let (m, n) = (grains.len(), hens.len());
+        let m = grains.len();
 
         let check = |t: i64| {
             let mut r = 0;
