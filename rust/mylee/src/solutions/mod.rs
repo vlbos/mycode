@@ -418,4 +418,6 @@ pub mod _3279_maximum_total_area_occupied_by_pistons;
 pub mod _3284_sum_of_consecutive_subarrays;
 pub mod _3299_sum_of_consecutive_subsequences;
 pub mod _3313_find_the_last_marked_nodes_in_tree;
+pub mod _3323_minimize_connected_groups_by_inserting_interval;
+pub mod _3329_count_substrings_with_k_frequency_characters_ii;
 pub mod util;
