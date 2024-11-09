@@ -420,4 +420,6 @@ pub mod _3299_sum_of_consecutive_subsequences;
 pub mod _3313_find_the_last_marked_nodes_in_tree;
 pub mod _3323_minimize_connected_groups_by_inserting_interval;
 pub mod _3329_count_substrings_with_k_frequency_characters_ii;
+pub mod _3339_find_the_number_of_k_even_arrays;
+pub mod _3344_maximum_sized_array;
 pub mod util;
