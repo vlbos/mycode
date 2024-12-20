@@ -38,28 +38,24 @@
 
 // **Explanation:**
 
-// One way to replace, having 13 as the largest element is `nums1 = [2, 3, 4, 6, 7]`, and `nums2 = [8, 10, 12, 13]`. 
-
-
+// One way to replace, having 13 as the largest element is `nums1 = [2, 3, 4, 6, 7]`, and `nums2 = [8, 10, 12, 13]`.
 
 #[allow(dead_code)]
 pub struct Solution;
 
 impl Solution {
     pub fn min_largest(nums1: Vec<i32>, nums2: Vec<i32>) -> i32 {
-        let (m,n)=(nums1.len(),nums2.len());
-        let mut dp=vec![vec![i32::MAX;n+1];m+1];
-        dp[0][0]=0;
-        let get=|x:i32,p:i32|{
-                x+ if (x^p)&1==0{2}else{1}
-        };
-        for i in 0..=m{
-            for j in (if i==0{1}else{0})..=n{
-                if i>0{
-                    dp[i][j]=get(dp[i-1][j],nums1[i-1]);
+        let (m, n) = (nums1.len(), nums2.len());
+        let mut dp = vec![vec![i32::MAX; n + 1]; m + 1];
+        dp[0][0] = 0;
+        let get = |x: i32, p: i32| x + if (x ^ p) & 1 == 0 { 2 } else { 1 };
+        for i in 0..=m {
+            for j in (if i == 0 { 1 } else { 0 })..=n {
+                if i > 0 {
+                    dp[i][j] = get(dp[i - 1][j], nums1[i - 1]);
                 }
-                if j>0{
-                     dp[i][j]= dp[i][j].min(get(dp[i][j-1],nums2[j-1]));
+                if j > 0 {
+                    dp[i][j] = dp[i][j].min(get(dp[i][j - 1], nums2[j - 1]));
                 }
             }
         }
@@ -67,23 +63,16 @@ impl Solution {
     }
 }
 
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     pub fn test_min_largest_1() {
-        assert_eq!(
-            5,
-            Solution::min_largest(vec![], vec![1,0,1,1])
-        );
+        assert_eq!(5, Solution::min_largest(vec![], vec![1, 0, 1, 1]));
     }
     #[test]
     pub fn test_min_largest_2() {
-        assert_eq!(
-            9,
-            Solution::min_largest(vec![0,1,0,1], vec![1,0,0,1])
-        );
+        assert_eq!(9, Solution::min_largest(vec![0, 1, 0, 1], vec![1, 0, 0, 1]));
     }
 }

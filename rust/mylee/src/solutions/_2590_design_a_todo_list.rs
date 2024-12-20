@@ -79,7 +79,6 @@
 
 // The space complexity is $O(n)$. Where $n$ is the number of all tasks.
 
-
 use std::collections::{HashMap, HashSet};
 #[allow(dead_code)]
 pub struct TodoList {
@@ -88,13 +87,10 @@ pub struct TodoList {
     task: HashMap<i32, (String, i32, HashSet<String>)>,
 }
 
-
 /**
  * `&self` means the method takes an immutable reference.
  * If you need a mutable reference, change it to `&mut self` instead.
  */
-
-
 
 impl TodoList {
     pub fn new() -> Self {

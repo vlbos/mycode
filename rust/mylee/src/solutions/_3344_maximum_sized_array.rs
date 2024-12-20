@@ -45,11 +45,9 @@
 
 // **Constraints:**
 
-// *   `0 <= s <= 1015` 
+// *   `0 <= s <= 1015`
 
 // int max_sized_array(long long s)
-
-
 
 #[allow(dead_code)]
 pub struct Solution;
@@ -57,25 +55,26 @@ pub struct Solution;
 impl Solution {
     pub fn max_sized_array(s: i64) -> i32 {
         use std::sync::OnceLock;
-        static FF:OnceLock<Vec<i64>>=OnceLock::new();
-        FF.get_or_init(||{
-            let  mx=1330;
-            let mut tmp=vec![0;mx];
-            for i in 1..mx{
-                tmp[i]=tmp[i-1]+i as i64;
-            for j in 0..i{
-                tmp[i]+=2*(i|j) as i64;
-            }}
+        static FF: OnceLock<Vec<i64>> = OnceLock::new();
+        FF.get_or_init(|| {
+            let mx = 1330;
+            let mut tmp = vec![0; mx];
+            for i in 1..mx {
+                tmp[i] = tmp[i - 1] + i as i64;
+                for j in 0..i {
+                    tmp[i] += 2 * (i | j) as i64;
+                }
+            }
             tmp
         });
-        let (mut l,mut r)=(1,1330);
-        let f=FF.get().unwrap();
-        while l<r{
-            let m=(l+r+1)/2;
-            if f[m as usize-1]*(m-1)*m/2<=s{
-                l=m;
-            }else{
-                r=m-1;
+        let (mut l, mut r) = (1, 1330);
+        let f = FF.get().unwrap();
+        while l < r {
+            let m = (l + r + 1) / 2;
+            if f[m as usize - 1] * (m - 1) * m / 2 <= s {
+                l = m;
+            } else {
+                r = m - 1;
             }
         }
         l as _
@@ -93,5 +92,4 @@ mod test {
     pub fn test_max_sized_array_2() {
         assert_eq!(1, Solution::max_sized_array(0));
     }
-
 }

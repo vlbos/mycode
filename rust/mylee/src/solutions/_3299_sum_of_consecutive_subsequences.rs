@@ -3,8 +3,6 @@
 
 // [![](https://img.shields.io/badge/Difficulty-Hard-4051B5?style=flat-square)](https://img.shields.io/badge/Difficulty-Hard-4051B5?style=flat-square)
 
-
-
 // Description
 // -----------
 
@@ -48,33 +46,38 @@
 // *   `1 <= nums.length <= 105`
 // *   `1 <= nums[i] <= 105`
 
-
-
 #[allow(dead_code)]
 pub struct Solution;
 impl Solution {
     pub fn get_sum(mut nums: Vec<i32>) -> i32 {
-        let n=nums.len();
-        let calc=|nums:&[i32]|{
-            let (mut left,mut right)=(vec![0;n],vec![0;n]);
-            let mut cnt=std::collections::HashMap::new();
-            for i in 1..n{
-                *cnt.entry(nums[i-1]).or_insert(0)+=1+*cnt.get(&(nums[i-1]-1)).unwrap_or(&0);
-                left[i]=*cnt.get(&(nums[i]-1)).unwrap_or(&0);
+        let n = nums.len();
+        let calc = |nums: &[i32]| {
+            let (mut left, mut right) = (vec![0; n], vec![0; n]);
+            let mut cnt = std::collections::HashMap::new();
+            for i in 1..n {
+                *cnt.entry(nums[i - 1]).or_insert(0) +=
+                    1 + *cnt.get(&(nums[i - 1] - 1)).unwrap_or(&0);
+                left[i] = *cnt.get(&(nums[i] - 1)).unwrap_or(&0);
             }
             cnt.clear();
-              for i in (0..n-1).rev(){
-                *cnt.entry(nums[i+1]).or_insert(0)+=1+*cnt.get(&(nums[i+1]+1)).unwrap_or(&0);
-                right[i]=*cnt.get(&(nums[i]+1)).unwrap_or(&0);
+            for i in (0..n - 1).rev() {
+                *cnt.entry(nums[i + 1]).or_insert(0) +=
+                    1 + *cnt.get(&(nums[i + 1] + 1)).unwrap_or(&0);
+                right[i] = *cnt.get(&(nums[i] + 1)).unwrap_or(&0);
             }
-            let modu=1_000_000_007;
-            left.into_iter().zip(right).zip(nums).fold(0,|s,((l,r),&x)| (s+(l+r+l*r%modu)*x as i64%modu)%modu)
+            let modu = 1_000_000_007;
+            left.into_iter()
+                .zip(right)
+                .zip(nums)
+                .fold(0, |s, ((l, r), &x)| {
+                    (s + (l + r + l * r % modu) * x as i64 % modu) % modu
+                })
         };
-        let x=calc(&nums);
+        let x = calc(&nums);
         nums.reverse();
-        let y=calc(&nums);
-        let s=nums.into_iter().map(Into::<i64>::into).sum::<i64>();
-        ((s+x+y)%1_000_000_007) as _
+        let y = calc(&nums);
+        let s = nums.into_iter().map(Into::<i64>::into).sum::<i64>();
+        ((s + x + y) % 1_000_000_007) as _
     }
 }
 
@@ -83,11 +86,10 @@ mod test {
     use super::*;
     #[test]
     pub fn test_get_sum_1() {
-        assert_eq!(6, Solution::get_sum(vec![1,2]));
+        assert_eq!(6, Solution::get_sum(vec![1, 2]));
     }
     #[test]
     pub fn test_get_sum_2() {
-        assert_eq!(31, Solution::get_sum(vec![1,4,2,3]));
+        assert_eq!(31, Solution::get_sum(vec![1, 4, 2, 3]));
     }
-
 }

@@ -1,5 +1,3 @@
-
-
 // 3279. Maximum Total Area Occupied by Pistons
 
 // Hard
@@ -48,44 +46,42 @@
 // *   `0 <= positions[i] <= height`
 // *   `directions[i]` is either `'U'` or `'D'`.
 
-
-
-
 #[allow(dead_code)]
 pub struct Solution;
 
 impl Solution {
     pub fn max_area(height: i32, positions: Vec<i32>, directions: String) -> i64 {
-         let (mut down,mut up)=(vec![],vec![]);
-        let (mut ans,mut cur,total)=(0,positions.iter().map(|&x|x as i64).sum::<i64>(),positions.len() as i64*height as i64);
-        for (d,&p) in directions.chars().zip(&positions){
-            if d=='D'{
+        let (mut down, mut up) = (vec![], vec![]);
+        let (mut ans, mut cur, total) = (
+            0,
+            positions.iter().map(|&x| x as i64).sum::<i64>(),
+            positions.len() as i64 * height as i64,
+        );
+        for (d, &p) in directions.chars().zip(&positions) {
+            if d == 'D' {
                 down.push(p);
-            }else{
-                up.push(height-p);
+            } else {
+                up.push(height - p);
             }
         }
         down.sort_unstable();
         up.sort_unstable();
-        let (mut i,mut j)=(0,0);
-        for t in 0..height{
-            while i<down.len() && down[i]==t{
-                up.push(down[i]+height);
-                i+=1;
+        let (mut i, mut j) = (0, 0);
+        for t in 0..height {
+            while i < down.len() && down[i] == t {
+                up.push(down[i] + height);
+                i += 1;
             }
-            while j<up.len() && up[j]==t{
-                down.push(up[j]+height);
-                j+=1;
+            while j < up.len() && up[j] == t {
+                down.push(up[j] + height);
+                j += 1;
             }
-            cur+=(up.len()-j ) as i64-(down.len()-i)  as i64;
-            ans=ans.max(cur).max(total-cur);
+            cur += (up.len() - j) as i64 - (down.len() - i) as i64;
+            ans = ans.max(cur).max(total - cur);
         }
         ans
     }
 }
-
-
-
 
 #[cfg(test)]
 mod test {
@@ -93,29 +89,17 @@ mod test {
 
     #[test]
     pub fn test_max_area_1() {
-        assert_eq!(
-            7,
-            Solution::max_area(
-                5,
-                vec![2,5],String::from("UD"),
-            )
-        );
+        assert_eq!(7, Solution::max_area(5, vec![2, 5], String::from("UD"),));
     }
 
     #[test]
     pub fn test_max_area_2() {
         assert_eq!(
             15,
-            Solution::max_area(
-               6,
-                vec![0,0,6,3],String::from("UUDU"),
-            )
+            Solution::max_area(6, vec![0, 0, 6, 3], String::from("UUDU"),)
         );
     }
 }
-
-
-
 
 // // class Solution {
 // // public:
@@ -158,9 +142,6 @@ mod test {
 // //     }
 // // };
 
-
-
-
 // // class Solution:
 // //     def maxArea(self, height: int, positions: List[int], directions: str) -> int:
 // //         events = {0:0}
@@ -201,7 +182,6 @@ mod test {
 // //             res = max(res,currarea)
 // //         return res
 
-        
 //     private long sln1(int h, int[] ps, String ds){
 //         int n = ps.length;
 //         long[] timeline = new long[h*2+2];

@@ -1,8 +1,6 @@
 // [3339\. Find the Number of K-Even Arrays 🔒](https://leetcode.com/problems/find-the-number-of-k-even-arrays)
 // ============================================================================================================
 
-
-
 // [![](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)
 
 // Description
@@ -59,32 +57,31 @@
 // *   `0 <= k <= n - 1`
 // *   `1 <= m <= 1000`
 
-
-// int count_of_arrays(int n, int m, int k) 
-
+// int count_of_arrays(int n, int m, int k)
 
 #[allow(dead_code)]
 pub struct Solution;
 
 impl Solution {
     pub fn count_of_arrays(n: i32, m: i32, k: i32) -> i32 {
-        let mut memo=vec![vec![vec![-1;2];k as usize+1];n as usize];
-        fn dfs(i:usize,j:i32,k:i32,m:i64,memo:&mut Vec<Vec<Vec<i32>>>)->i32{
-            if j<0{
-            return 0
+        let mut memo = vec![vec![vec![-1; 2]; k as usize + 1]; n as usize];
+        fn dfs(i: usize, j: i32, k: i32, m: i64, memo: &mut Vec<Vec<Vec<i32>>>) -> i32 {
+            if j < 0 {
+                return 0;
             }
-            if i>=memo.len(){
-                return if j==0{1}else{0}
+            if i >= memo.len() {
+                return if j == 0 { 1 } else { 0 };
             }
-            if memo[i][j as usize][k as usize]!=-1{
-return memo[i][j as usize][k as usize]}  
-            let (cnt0,cnt1)=(m/2,(m+1)/2);       
-            let a=cnt1*dfs(i+1,j,1,m,memo) as i64%1_000_000_007;
-            let b=cnt0*dfs(i+1,j-(k&1^1),0,m,memo) as i64%1_000_000_007;
-            memo[i][j as usize][k as usize]=((a+b)%1_000_000_007) as i32;
+            if memo[i][j as usize][k as usize] != -1 {
+                return memo[i][j as usize][k as usize];
+            }
+            let (cnt0, cnt1) = (m / 2, (m + 1) / 2);
+            let a = cnt1 * dfs(i + 1, j, 1, m, memo) as i64 % 1_000_000_007;
+            let b = cnt0 * dfs(i + 1, j - (k & 1 ^ 1), 0, m, memo) as i64 % 1_000_000_007;
+            memo[i][j as usize][k as usize] = ((a + b) % 1_000_000_007) as i32;
             memo[i][j as usize][k as usize]
         }
-        dfs(0,k,1,m as i64,&mut memo)
+        dfs(0, k, 1, m as i64, &mut memo)
     }
 }
 

@@ -1,7 +1,6 @@
 // [3313\. Find the Last Marked Nodes in Tree 🔒](https://leetcode.com/problems/find-the-last-marked-nodes-in-tree)
 // ================================================================================================================
 
-
 // [![](https://img.shields.io/badge/Difficulty-Hard-4051B5?style=flat-square)](https://img.shields.io/badge/Difficulty-Hard-4051B5?style=flat-square)
 
 // Description
@@ -64,42 +63,45 @@
 // *   `0 <= edges[i][0], edges[i][1] <= n - 1`
 // *   The input is generated such that `edges` represents a valid tree.
 
-
 #[allow(dead_code)]
 pub struct Solution;
 
 impl Solution {
     pub fn last_marked_nodes(edges: Vec<Vec<i32>>) -> Vec<i32> {
-       let n=edges.len()+1;
-        let mut g=vec![vec![];n];
-        for e in edges{
-            let (u,v)=(e[0] as usize,e[1] as usize );
+        let n = edges.len() + 1;
+        let mut g = vec![vec![]; n];
+        for e in edges {
+            let (u, v) = (e[0] as usize, e[1] as usize);
             g[u].push(v);
             g[v].push(u);
         }
-        fn dfs(u:usize,pa:usize,dist:&mut Vec<i32>,g:&Vec<Vec<usize>>){
-            for &v in &g[u]{
-                if v!=pa{
-                    dist[v]=dist[u]+1;
-                    dfs(v,u,dist,g);
+        fn dfs(u: usize, pa: usize, dist: &mut Vec<i32>, g: &Vec<Vec<usize>>) {
+            for &v in &g[u] {
+                if v != pa {
+                    dist[v] = dist[u] + 1;
+                    dfs(v, u, dist, g);
                 }
             }
         }
-        let mut dist1=vec![-1;n];
-        dist1[0]=0;
-        dfs(0,n,&mut dist1,&g);
-        let a=dist1.iter().enumerate().max_by_key(|x|x.1).unwrap().0;
+        let mut dist1 = vec![-1; n];
+        dist1[0] = 0;
+        dfs(0, n, &mut dist1, &g);
+        let a = dist1.iter().enumerate().max_by_key(|x| x.1).unwrap().0;
 
-        let mut dist2=vec![-1;n];
-        dist2[a]=0;
-        dfs(a,n,&mut dist2,&g);
-        let b=dist2.iter().enumerate().max_by_key(|x|x.1).unwrap().0;
-        
-        let mut dist3=vec![-1;n];
-        dist3[b]=0;
-        dfs(b,n,&mut dist3,&g);
+        let mut dist2 = vec![-1; n];
+        dist2[a] = 0;
+        dfs(a, n, &mut dist2, &g);
+        let b = dist2.iter().enumerate().max_by_key(|x| x.1).unwrap().0;
 
-        dist2.iter().zip(&dist3).map(|(&x,&y)| (if x>y{a}else{b} )as i32).collect()
+        let mut dist3 = vec![-1; n];
+        dist3[b] = 0;
+        dfs(b, n, &mut dist3, &g);
+
+        dist2
+            .iter()
+            .zip(&dist3)
+            .map(|(&x, &y)| (if x > y { a } else { b }) as i32)
+            .collect()
     }
 }
 
@@ -109,27 +111,16 @@ mod test {
     use crate::lc_matrix;
     #[test]
     pub fn test_last_marked_nodes_1() {
-        let ans=Solution::last_marked_nodes(
-                lc_matrix![[0,1],[0,2]],
-            );
-        assert!(
-            vec![2,2,1]==ans|| vec![1,2,1]==ans
-        );
+        let ans = Solution::last_marked_nodes(lc_matrix![[0, 1], [0, 2]]);
+        assert!(vec![2, 2, 1] == ans || vec![1, 2, 1] == ans);
     }
     #[test]
     pub fn test_last_marked_nodes_2() {
-        assert_eq!(
-            vec![1, 0],
-            Solution::last_marked_nodes(
-                lc_matrix![[0,1]],
-            )
-        );
+        assert_eq!(vec![1, 0], Solution::last_marked_nodes(lc_matrix![[0, 1]],));
     }
     #[test]
     pub fn test_last_marked_nodes_3() {
-        let ans=Solution::last_marked_nodes(lc_matrix![[0,1],[0,2],[2,3],[2,4]] );
-        assert!(
-            vec![3,3,1,1,1]==ans||vec![4,4,1,1,1]==ans
-        );
+        let ans = Solution::last_marked_nodes(lc_matrix![[0, 1], [0, 2], [2, 3], [2, 4]]);
+        assert!(vec![3, 3, 1, 1, 1] == ans || vec![4, 4, 1, 1, 1] == ans);
     }
 }

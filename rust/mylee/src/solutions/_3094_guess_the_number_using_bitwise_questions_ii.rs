@@ -49,7 +49,7 @@ pub struct Solution;
  */
 
 impl Solution {
-#[allow(dead_code)]
+    #[allow(dead_code)]
     unsafe fn find_number() -> i32 {
         let mut ans = 0;
         let mut i = 1;
