@@ -64,7 +64,55 @@ pub struct Solution;
 
 impl Solution {
     pub fn min_runes_to_add(n:i32,crystals: Vec<i32>, flow_from: Vec<i32>, flow_to: Vec<i32>) -> i32 {
-        0
+        use std::collections::VecDeque;
+ let n=n as usize;
+      let mut g=vec![vec![];n];
+        for (a,b) in flow_from.into_iter().zip(flow_to){
+            g[a as usize].push(b as usize);
+            g[b as usize].push(a as usize);
+        }
+        let bfs=|mut q:VecDeque<usize>,vis:&mut Vec<i32>|{
+            while let Some(a)=q.pop_front(){
+                for &b in &g[a]{
+                    if vis[b]!=1{
+                        vis[b]=1;
+                        q.push_back(b);
+                    }
+                }
+            }
+        };
+        fn dfs(a:usize,g:&Vec<Vec<usize>>,vis:&mut Vec<i32>,seq:&mut Vec<usize>){
+            vis[a]=2;
+            for &b in &g[a]{
+                    if vis[b]==0{
+                        dfs(b,g,vis,seq);
+                    }
+            }
+            seq.push(a);
+        }
+       
+  
+            let mut vis=vec![0;n];
+        for &x in &crystals{
+            vis[x as usize]=1;
+        }
+        let mut q:VecDeque<_>=crystals.into_iter().map(|i| i as usize).collect();
+        bfs(q,&mut vis);
+        let mut seq=vec![];
+        for i in 0..n{
+         if vis[i]==0{
+         dfs(i,&g,&mut vis,&mut seq);
+        }}
+        seq.reverse();
+        let mut ans=0;
+        for i in seq{
+            if vis[i]==2{
+                vis[i]=1;
+                bfs(VecDeque::from([i]),&mut vis);
+                ans+=1;
+            }
+        }
+        ans
     }
 }
 
