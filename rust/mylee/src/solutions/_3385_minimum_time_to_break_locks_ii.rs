@@ -70,7 +70,55 @@
 pub struct Solution;
 impl Solution {
     pub fn find_minimum_time(strength: Vec<i32>) -> i32 {
-       0
+       let costs:Vec<_>=(1..=strength.len() as i32).map(|i| strength.iter().map(|&v| (v+i-1)/i).collect::<Vec<_>>()).collect();
+       let n=costs.len();
+       let (mut lock_a,mut lock_p,mut turn_p)=(vec![n+1;n+1],vec![0;n+1],vec![0;n]);
+       let mut ans=vec![];
+       for i in 0..n{
+            let mut j=n;
+            lock_a[j]=i;
+            let mut mn_r_c=vec![i32::MAX;n+1];
+            let mut pre_lock_a=vec![n+1;n+1];
+            let mut l_i_o_p=vec![false;n+1];
+            while lock_a[j]!=n+1{
+                l_i_o_p[j]=true;
+                let a_t=lock_a[j];
+                let mut mn_c_d=i32::MAX;
+                let mut n_l=0;
+                for k in 0..n{
+                    if l_i_o_p[k]{
+                    continue
+                    }
+                    let r_c=costs[a_t][k]-turn_p[a_t]-lock_p[k];
+                    if mn_r_c[k]>r_c{
+                        mn_r_c[k]=r_c;
+                        pre_lock_a[k]=j;
+                    }
+                    if mn_c_d>mn_r_c[k]{
+                        mn_c_d=mn_r_c[k];
+                        n_l=k;
+                    }
+                }
+                for k in 0..=n{
+                    if l_i_o_p[k]{
+                        turn_p[lock_a[k]]+=mn_c_d;
+                        lock_p[k]-=mn_c_d;
+                    }
+                    else{
+                        mn_r_c[k]-=mn_c_d;
+                    }
+                }
+                j=n_l;
+            }
+          
+            while j!=n{
+                let k=pre_lock_a[j];
+                lock_a[j]=lock_a[k];
+                j=k;
+            }
+            ans.push(-lock_p[n]);
+       }
+        *ans.last().unwrap()
     }
 }
 

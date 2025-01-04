@@ -428,4 +428,5 @@ pub mod _3369_design_an_array_statistics_tracker;
 pub mod _3383_minimum_runes_to_add_to_cast_spell;
 pub mod _3385_minimum_time_to_break_locks_ii;
 pub mod _3391_design_a_3d_binary_matrix_with_efficient_layer_tracking;
+pub mod _3400_maximum_number_of_matching_indices_after_right_shifts;
 pub mod util;
