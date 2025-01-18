@@ -429,4 +429,7 @@ pub mod _3383_minimum_runes_to_add_to_cast_spell;
 pub mod _3385_minimum_time_to_break_locks_ii;
 pub mod _3391_design_a_3d_binary_matrix_with_efficient_layer_tracking;
 pub mod _3400_maximum_number_of_matching_indices_after_right_shifts;
+pub mod _3406_find_the_lexicographically_largest_string_from_the_box_ii;
+pub mod _3416_subsequences_with_a_unique_middle_mode_ii;
+pub mod _3422_minimum_operations_to_make_subarray_elements_equal;
 pub mod util;
