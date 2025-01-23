@@ -1,52 +1,52 @@
-264.权值
+151\. 表达式计算4
 
-给定一棵 N 个节点的树，每条边带有一个权值。
+*    [题目](https://www.acwing.com/problem/content/description/153/)
+*    [讨论](https://www.acwing.com/problem/content/discussion/index/153/1/)
+*    [题解](https://www.acwing.com/problem/content/solution/153/1/)
+*    [视频讲解](https://www.acwing.com/problem/content/video/153/)
 
-求一条简单路径，路径上各条边的权值和等于 K，且路径包含的边的数量最少。
+  
+
+给出一个表达式,其中运算符仅包含`+,-,*,/,^`（加 减 乘 整除 乘方）要求求出表达式的最终值。
+
+数据可能会出现括号情况，还有可能出现多余括号情况。
+
+数据保证不会出现大于或等于231231的答案。
+
+数据可能会出现负数情况。
+
+数据保证不会出现指数为负数的情况。
 
 #### 输入格式
 
-第一行两个整数 N,K。
-
-第 2∼N 行每行三个整数 x,y,z 表示一条无向边的两个端点 x,y 和权值 z，点的编号从 0 开始。
+输入仅一行，即为表达式。
 
 #### 输出格式
 
-输出一个整数，表示最少边数量。
-
-如果不存在满足要求的路径，输出 −1。
-
-#### 数据范围
-
-1≤N≤2×105,  
-1≤K≤106,  
-0≤z≤106
+输出仅一行，既为表达式算出的结果。
 
 #### 输入样例：
 
-    4 3
-    0 1 1
-    1 2 2
-    1 3 4
+    (2+2)^(1+1)
     
 
 #### 输出样例：
 
-    2
+    16
     
 
-难度：困难
+难度：中等
 
-时/空限制：2s / 64MB
+时/空限制：1s / 64MB
 
-总通过数：1604
+总通过数：3994
 
-总尝试数：5102
+总尝试数：14939
 
 来源：
 
-
+[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3702&show_algorithm_tags=0)
 
 算法标签
 
-[点分治]
+[栈](https://www.acwing.com/problem/search/1/?search_content=%E6%A0%88&source_file_id=3702&show_algorithm_tags=1)[中缀表达式计算](https://www.acwing.com/problem/search/1/?search_content=%E4%B8%AD%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AE%A1%E7%AE%97&source_file_id=3702&show_algorithm_tags=1)

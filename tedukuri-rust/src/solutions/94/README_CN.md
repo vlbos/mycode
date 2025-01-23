@@ -1,52 +1,57 @@
-264.权值
+94\. 递归实现排列型枚举
 
-给定一棵 N 个节点的树，每条边带有一个权值。
+*    [题目](https://www.acwing.com/problem/content/description/96/)
+*    [讨论](https://www.acwing.com/problem/content/discussion/index/96/1/)
+*    [题解](https://www.acwing.com/problem/content/solution/96/1/)
+*    [视频讲解](https://www.acwing.com/problem/content/video/96/)
 
-求一条简单路径，路径上各条边的权值和等于 K，且路径包含的边的数量最少。
+  
+
+把 1∼n1∼n 这 nn 个整数排成一行后随机打乱顺序，输出所有可能的次序。
 
 #### 输入格式
 
-第一行两个整数 N,K。
-
-第 2∼N 行每行三个整数 x,y,z 表示一条无向边的两个端点 x,y 和权值 z，点的编号从 0 开始。
+一个整数 nn。
 
 #### 输出格式
 
-输出一个整数，表示最少边数量。
+按照从小到大的顺序输出所有方案，每行 11 个。
 
-如果不存在满足要求的路径，输出 −1。
+首先，同一行相邻两个数用一个空格隔开。
+
+其次，对于两个不同的行，对应下标的数一一比较，字典序较小的排在前面。
 
 #### 数据范围
 
-1≤N≤2×105,  
-1≤K≤106,  
-0≤z≤106
+1≤n≤91≤n≤9
 
 #### 输入样例：
 
-    4 3
-    0 1 1
-    1 2 2
-    1 3 4
+    3
     
 
 #### 输出样例：
 
-    2
+    1 2 3
+    1 3 2
+    2 1 3
+    2 3 1
+    3 1 2
+    3 2 1
     
 
-难度：困难
+难度：简单
 
-时/空限制：2s / 64MB
+时/空限制：5s / 256MB
 
-总通过数：1604
+总通过数：55474
 
-总尝试数：5102
+总尝试数：73354
 
 来源：
 
-
+[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3645&show_algorithm_tags=0)
 
 算法标签
 
-[点分治]
+[递归](https://www.acwing.com/problem/search/1/?search_content=%E9%80%92%E5%BD%92&source_file_id=3645&show_algorithm_tags=1)

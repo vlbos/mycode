@@ -1,52 +1,61 @@
-264.权值
+173\. 矩阵距离
 
-给定一棵 N 个节点的树，每条边带有一个权值。
+*    [题目](https://www.acwing.com/problem/content/description/175/)
+*    [讨论](https://www.acwing.com/problem/content/discussion/index/175/1/)
+*    [题解](https://www.acwing.com/problem/content/solution/175/1/)
+*    [视频讲解](https://www.acwing.com/problem/content/video/175/)
 
-求一条简单路径，路径上各条边的权值和等于 K，且路径包含的边的数量最少。
+  
+
+给定一个 NN 行 MM 列的 0101 矩阵 AA，A\[i\]\[j\]A\[i\]\[j\] 与 A\[k\]\[l\]A\[k\]\[l\] 之间的曼哈顿距离定义为：
+
+dist(i,j,k,l)\=|i−k|+|j−l|dist(i,j,k,l)\=|i−k|+|j−l|
+
+输出一个 NN 行 MM 列的整数矩阵 BB，其中：
+
+B\[i\]\[j\]\=min1≤x≤N,1≤y≤M,A\[x\]\[y\]\=1dist(i,j,x,y)B\[i\]\[j\]\=min1≤x≤N,1≤y≤M,A\[x\]\[y\]\=1⁡dist(i,j,x,y)
 
 #### 输入格式
 
-第一行两个整数 N,K。
+第一行两个整数 N,MN,M。
 
-第 2∼N 行每行三个整数 x,y,z 表示一条无向边的两个端点 x,y 和权值 z，点的编号从 0 开始。
+接下来一个 NN 行 MM 列的 0101 矩阵，数字之间没有空格。
 
 #### 输出格式
 
-输出一个整数，表示最少边数量。
-
-如果不存在满足要求的路径，输出 −1。
+一个 NN 行 MM 列的矩阵 BB，相邻两个整数之间用一个空格隔开。
 
 #### 数据范围
 
-1≤N≤2×105,  
-1≤K≤106,  
-0≤z≤106
+1≤N,M≤10001≤N,M≤1000
 
 #### 输入样例：
 
-    4 3
-    0 1 1
-    1 2 2
-    1 3 4
+    3 4
+    0001
+    0011
+    0110
     
 
 #### 输出样例：
 
-    2
+    3 2 1 0
+    2 1 0 0
+    1 0 0 1
     
 
-难度：困难
+难度：简单
 
-时/空限制：2s / 64MB
+时/空限制：1s / 64MB
 
-总通过数：1604
+总通过数：18886
 
-总尝试数：5102
+总尝试数：29160
 
 来源：
 
-
+[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3724&show_algorithm_tags=0)[小马智行面试题](https://www.acwing.com/problem/search/1/?search_content=%E5%B0%8F%E9%A9%AC%E6%99%BA%E8%A1%8C%E9%9D%A2%E8%AF%95%E9%A2%98&source_file_id=3724&show_algorithm_tags=0)
 
 算法标签
 
-[点分治]
+[BFS](https://www.acwing.com/problem/search/1/?search_content=BFS&source_file_id=3724&show_algorithm_tags=1)[多源BFS](https://www.acwing.com/problem/search/1/?search_content=%E5%A4%9A%E6%BA%90BFS&source_file_id=3724&show_algorithm_tags=1)

@@ -1,52 +1,65 @@
-264.权值
+96\. 奇怪的汉诺塔
 
-给定一棵 N 个节点的树，每条边带有一个权值。
+*    [题目](https://www.acwing.com/problem/content/description/98/)
+*    [讨论](https://www.acwing.com/problem/content/discussion/index/98/1/)
+*    [题解](https://www.acwing.com/problem/content/solution/98/1/)
+*    [视频讲解](https://www.acwing.com/problem/content/video/98/)
 
-求一条简单路径，路径上各条边的权值和等于 K，且路径包含的边的数量最少。
+  
+
+汉诺塔问题，条件如下：
+
+1、这里有 A、B、CA、B、C 和 DD 四座塔。
+
+2、这里有 nn 个圆盘，nn 的数量是恒定的。
+
+3、每个圆盘的尺寸都不相同。
+
+4、所有的圆盘在开始时都堆叠在塔 AA 上，且圆盘尺寸从塔顶到塔底逐渐增大。
+
+5、我们需要将所有的圆盘都从塔 AA 转移到塔 DD 上。
+
+6、每次可以移动一个圆盘，当塔为空塔或者塔顶圆盘尺寸大于被移动圆盘时，可将圆盘移至这座塔上。
+
+请你求出将所有圆盘从塔 AA 移动到塔 DD，所需的最小移动次数是多少。
+
+![河内塔.jpg](https://cdn.acwing.com/media/article/image/2019/01/10/19_acbb764014-%E6%B2%B3%E5%86%85%E5%A1%94.jpg)  
+汉诺塔塔参考模型
 
 #### 输入格式
 
-第一行两个整数 N,K。
-
-第 2∼N 行每行三个整数 x,y,z 表示一条无向边的两个端点 x,y 和权值 z，点的编号从 0 开始。
+没有输入
 
 #### 输出格式
 
-输出一个整数，表示最少边数量。
-
-如果不存在满足要求的路径，输出 −1。
+对于每一个整数 nn，输出一个满足条件的最小移动次数，每个结果占一行。
 
 #### 数据范围
 
-1≤N≤2×105,  
-1≤K≤106,  
-0≤z≤106
+1≤n≤121≤n≤12
 
 #### 输入样例：
 
-    4 3
-    0 1 1
-    1 2 2
-    1 3 4
+    没有输入
     
 
 #### 输出样例：
 
-    2
+    参考输出格式
     
 
-难度：困难
+难度：简单
 
-时/空限制：2s / 64MB
+时/空限制：1s / 64MB
 
-总通过数：1604
+总通过数：8936
 
-总尝试数：5102
+总尝试数：15367
 
 来源：
 
-
+[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3647&show_algorithm_tags=0)
 
 算法标签
 
-[点分治]
+[递归](https://www.acwing.com/problem/search/1/?search_content=%E9%80%92%E5%BD%92&source_file_id=3647&show_algorithm_tags=1)

@@ -1,52 +1,93 @@
-264.权值
+175\. 电路维修
 
-给定一棵 N 个节点的树，每条边带有一个权值。
+*    [题目](https://www.acwing.com/problem/content/description/177/)
+*    [讨论](https://www.acwing.com/problem/content/discussion/index/177/1/)
+*    [题解](https://www.acwing.com/problem/content/solution/177/1/)
+*    [视频讲解](https://www.acwing.com/problem/content/video/177/)
 
-求一条简单路径，路径上各条边的权值和等于 K，且路径包含的边的数量最少。
+  
+
+达达是来自异世界的魔女，她在漫无目的地四处漂流的时候，遇到了善良的少女翰翰，从而被收留在地球上。
+
+翰翰的家里有一辆飞行车。
+
+有一天飞行车的电路板突然出现了故障，导致无法启动。
+
+电路板的整体结构是一个 RR 行 CC 列的网格（R,C≤500R,C≤500），如下图所示。
+
+![电路.png](https://cdn.acwing.com/media/article/image/2019/01/16/19_be6ff7a219-%E7%94%B5%E8%B7%AF.png)
+
+每个格点都是电线的接点，每个格子都包含一个电子元件。
+
+电子元件的主要部分是一个可旋转的、连接一条对角线上的两个接点的短电缆。
+
+在旋转之后，它就可以连接另一条对角线的两个接点。
+
+电路板左上角的接点接入直流电源，右下角的接点接入飞行车的发动装置。
+
+达达发现因为某些元件的方向不小心发生了改变，电路板可能处于断路的状态。
+
+她准备通过计算，旋转最少数量的元件，使电源与发动装置通过若干条短缆相连。
+
+不过，电路的规模实在是太大了，达达并不擅长编程，希望你能够帮她解决这个问题。
+
+**注意**：只能走斜向的线段，水平和竖直线段不能走。
 
 #### 输入格式
 
-第一行两个整数 N,K。
+输入文件包含多组测试数据。
 
-第 2∼N 行每行三个整数 x,y,z 表示一条无向边的两个端点 x,y 和权值 z，点的编号从 0 开始。
+第一行包含一个整数 TT，表示测试数据的数目。
+
+对于每组测试数据，第一行包含正整数 RR 和 CC，表示电路板的行数和列数。
+
+之后 RR 行，每行 CC 个字符，字符是`"/"`和`"\"`中的一个，表示标准件的方向。
 
 #### 输出格式
 
-输出一个整数，表示最少边数量。
+对于每组测试数据，在单独的一行输出一个正整数，表示所需的最小旋转次数。
 
-如果不存在满足要求的路径，输出 −1。
+如果无论怎样都不能使得电源和发动机之间连通，输出 `NO SOLUTION`。
 
 #### 数据范围
 
-1≤N≤2×105,  
-1≤K≤106,  
-0≤z≤106
+1≤R,C≤5001≤R,C≤500,  
+1≤T≤51≤T≤5
 
 #### 输入样例：
 
-    4 3
-    0 1 1
-    1 2 2
-    1 3 4
+    1
+    3 5
+    \\/\\
+    \\///
+    /\\\\
     
 
 #### 输出样例：
 
-    2
+    1
     
 
-难度：困难
+#### 样例解释
 
-时/空限制：2s / 64MB
+样例的输入对应于题目描述中的情况。
 
-总通过数：1604
+只需要按照下面的方式旋转标准件，就可以使得电源和发动机之间连通。
 
-总尝试数：5102
+![电路2.png](https://cdn.acwing.com/media/article/image/2019/01/16/19_a0e8e80a19-%E7%94%B5%E8%B7%AF2.png)
+
+难度：简单
+
+时/空限制：1s / 64MB
+
+总通过数：16117
+
+总尝试数：34857
 
 来源：
 
-
+[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3726&show_algorithm_tags=0)[BalticOI 2011](https://www.acwing.com/problem/search/1/?search_content=BalticOI%202011&source_file_id=3726&show_algorithm_tags=0)[《信息学奥赛一本通》算法提高篇](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E4%BF%A1%E6%81%AF%E5%AD%A6%E5%A5%A5%E8%B5%9B%E4%B8%80%E6%9C%AC%E9%80%9A%E3%80%8B%E7%AE%97%E6%B3%95%E6%8F%90%E9%AB%98%E7%AF%87&source_file_id=3726&show_algorithm_tags=0)
 
 算法标签
 
-[点分治]
+[搜索](https://www.acwing.com/problem/search/1/?search_content=%E6%90%9C%E7%B4%A2&source_file_id=3726&show_algorithm_tags=1)[双端队列BFS](https://www.acwing.com/problem/search/1/?search_content=%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97BFS&source_file_id=3726&show_algorithm_tags=1)
