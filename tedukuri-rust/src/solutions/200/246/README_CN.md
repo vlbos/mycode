@@ -1,52 +1,70 @@
-264.权值
+246\. 区间最大公约数
 
-给定一棵 N 个节点的树，每条边带有一个权值。
+*    [题目](https://www.acwing.com/problem/content/description/247/)
+*    [讨论](https://www.acwing.com/problem/content/discussion/index/247/1/)
+*    [题解](https://www.acwing.com/problem/content/solution/247/1/)
+*    [视频讲解](https://www.acwing.com/problem/content/video/247/)
 
-求一条简单路径，路径上各条边的权值和等于 K，且路径包含的边的数量最少。
+  
+
+给定一个长度为 NN 的数列 AA，以及 MM 条指令，每条指令可能是以下两种之一：
+
+1.  `C l r d`，表示把 A\[l\],A\[l+1\],…,A\[r\]A\[l\],A\[l+1\],…,A\[r\] 都加上 dd。
+2.  `Q l r`，表示询问 A\[l\],A\[l+1\],…,A\[r\]A\[l\],A\[l+1\],…,A\[r\] 的最大公约数(GCDGCD)。
+
+对于每个询问，输出一个整数表示答案。
 
 #### 输入格式
 
-第一行两个整数 N,K。
+第一行两个整数 N,MN,M。
 
-第 2∼N 行每行三个整数 x,y,z 表示一条无向边的两个端点 x,y 和权值 z，点的编号从 0 开始。
+第二行 NN 个整数 A\[i\]A\[i\]。
+
+接下来 MM 行表示 MM 条指令，每条指令的格式如题目描述所示。
 
 #### 输出格式
 
-输出一个整数，表示最少边数量。
+对于每个询问，输出一个整数表示答案。
 
-如果不存在满足要求的路径，输出 −1。
+每个答案占一行。
 
 #### 数据范围
 
-1≤N≤2×105,  
-1≤K≤106,  
-0≤z≤106
+N≤500000,M≤100000N≤500000,M≤100000,  
+1≤A\[i\]≤10181≤A\[i\]≤1018,  
+|d|≤1018|d|≤1018,  
+保证数据在计算过程中不会超过 long long 范围。
 
 #### 输入样例：
 
-    4 3
-    0 1 1
-    1 2 2
-    1 3 4
+    5 5
+    1 3 5 7 9
+    Q 1 5
+    C 1 5 1
+    Q 1 5
+    C 3 3 6
+    Q 2 4
     
 
 #### 输出样例：
 
+    1
     2
+    4
     
 
 难度：困难
 
-时/空限制：2s / 64MB
+时/空限制：1s / 64MB
 
-总通过数：1604
+总通过数：16136
 
-总尝试数：5102
+总尝试数：46397
 
 来源：
 
-
+[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3796&show_algorithm_tags=0)
 
 算法标签
 
-[点分治]
+[线段树](https://www.acwing.com/problem/search/1/?search_content=%E7%BA%BF%E6%AE%B5%E6%A0%91&source_file_id=3796&show_algorithm_tags=1)

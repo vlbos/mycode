@@ -1,52 +1,50 @@
-264.权值
+221\. 龙哥的问题
 
-给定一棵 N 个节点的树，每条边带有一个权值。
+*    [题目](https://www.acwing.com/problem/content/description/223/)
+*    [讨论](https://www.acwing.com/problem/content/discussion/index/223/1/)
+*    [题解](https://www.acwing.com/problem/content/solution/223/1/)
+*    [视频讲解](https://www.acwing.com/problem/content/video/223/)
 
-求一条简单路径，路径上各条边的权值和等于 K，且路径包含的边的数量最少。
+  
+
+龙哥现在有一道题，要考考大家。
+
+给定一个整数 NN，请你求出 ∑1≤i≤Ngcd(i，N)∑1≤i≤Ngcd(i，N)的值。
 
 #### 输入格式
 
-第一行两个整数 N,K。
-
-第 2∼N 行每行三个整数 x,y,z 表示一条无向边的两个端点 x,y 和权值 z，点的编号从 0 开始。
+一个整数 NN。
 
 #### 输出格式
 
-输出一个整数，表示最少边数量。
-
-如果不存在满足要求的路径，输出 −1。
+一个整数表示结果。
 
 #### 数据范围
 
-1≤N≤2×105,  
-1≤K≤106,  
-0≤z≤106
+1<N<2311<N<231
 
 #### 输入样例：
 
-    4 3
-    0 1 1
-    1 2 2
-    1 3 4
+    6
     
 
 #### 输出样例：
 
-    2
+    15
     
 
-难度：困难
+难度：中等
 
-时/空限制：2s / 64MB
+时/空限制：1s / 64MB
 
-总通过数：1604
+总通过数：1567
 
-总尝试数：5102
+总尝试数：2973
 
 来源：
 
-
+[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3772&show_algorithm_tags=0)[SDOI2012](https://www.acwing.com/problem/search/1/?search_content=SDOI2012&source_file_id=3772&show_algorithm_tags=0)
 
 算法标签
 
-[点分治]
+[数学知识](https://www.acwing.com/problem/search/1/?search_content=%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86&source_file_id=3772&show_algorithm_tags=1)[最大公约数](https://www.acwing.com/problem/search/1/?search_content=%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0&source_file_id=3772&show_algorithm_tags=1)[欧拉函数](https://www.acwing.com/problem/search/1/?search_content=%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0&source_file_id=3772&show_algorithm_tags=1)[积性函数](https://www.acwing.com/problem/search/1/?search_content=%E7%A7%AF%E6%80%A7%E5%87%BD%E6%95%B0&source_file_id=3772&show_algorithm_tags=1)

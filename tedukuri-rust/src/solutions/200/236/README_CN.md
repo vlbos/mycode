@@ -1,52 +1,76 @@
-264.权值
+236\. 格鲁吉亚和鲍勃
 
-给定一棵 N 个节点的树，每条边带有一个权值。
+*    [题目](https://www.acwing.com/problem/content/description/238/)
+*    [讨论](https://www.acwing.com/problem/content/discussion/index/238/1/)
+*    [题解](https://www.acwing.com/problem/content/solution/238/1/)
+*    [视频讲解](https://www.acwing.com/problem/content/video/238/)
 
-求一条简单路径，路径上各条边的权值和等于 K，且路径包含的边的数量最少。
+  
+
+格鲁吉亚和鲍勃决定一起玩一个自创的游戏。
+
+他们在纸上绘制一排网格，将网格从左到右依次编号 1,2,3，......1,2,3，......，并将 NN 个西洋棋棋子放在不同的网格上，如下图所示：
+
+![1704_1.jpg](https://cdn.acwing.com/media/article/image/2019/01/19/19_01841f9e1b-1704_1.jpg)
+
+格鲁吉亚和鲍勃依次移动西洋棋棋子。
+
+每次玩家选择一个棋子，并将其向左移动，但是不能越过任何其他西洋棋棋子或超过左边界。
+
+玩家可以自由选择棋子移动的步数，其限制是棋子必须至少移动一步，一个网格最多可以包含一个棋子。
+
+无法移动任何棋子的玩家将输掉游戏。
+
+假设格鲁吉亚和鲍勃在游戏中都能够采取最好的策略，每次都由格鲁吉亚先手。
+
+在给定你 NN 个棋子的具体位置的情况下，请你预测出谁将获得胜利。
 
 #### 输入格式
 
-第一行两个整数 N,K。
+第一行包含一个整数 TT，表示共有 TT 组测试数据。
 
-第 2∼N 行每行三个整数 x,y,z 表示一条无向边的两个端点 x,y 和权值 z，点的编号从 0 开始。
+每组测试数据包含两行，第一行包含整数 NN，表示棋子数目。
+
+第二行包含 NN 个不同正整数（均不超过 1000010000），第 ii 个表示第 ii 个棋子的初始位置。
 
 #### 输出格式
 
-输出一个整数，表示最少边数量。
+对于每组测试数据，如果格鲁吉亚将赢得比赛，则输出 `Georgia will win`；如果鲍勃将赢得比赛，则输出 `Bob will win`；否则输出 `Not sure`。
 
-如果不存在满足要求的路径，输出 −1。
+每个结果占一行。
 
 #### 数据范围
 
-1≤N≤2×105,  
-1≤K≤106,  
-0≤z≤106
+1≤T≤201≤T≤20,  
+1≤N≤10001≤N≤1000
 
 #### 输入样例：
 
-    4 3
-    0 1 1
-    1 2 2
-    1 3 4
+    2
+    3
+    1 2 3
+    8
+    1 5 6 7 9 12 14 17
     
 
 #### 输出样例：
 
-    2
+    Bob will win
+    Georgia will win
     
 
 难度：困难
 
-时/空限制：2s / 64MB
+时/空限制：1s / 64MB
 
-总通过数：1604
+总通过数：382
 
-总尝试数：5102
+总尝试数：842
 
 来源：
 
-
+[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3787&show_algorithm_tags=0)
 
 算法标签
 
-[点分治]
+[数学知识](https://www.acwing.com/problem/search/1/?search_content=%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86&source_file_id=3787&show_algorithm_tags=1)[博弈论](https://www.acwing.com/problem/search/1/?search_content=%E5%8D%9A%E5%BC%88%E8%AE%BA&source_file_id=3787&show_algorithm_tags=1)

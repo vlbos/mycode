@@ -1,52 +1,77 @@
-264.权值
+324\. 贿赂FIPA
 
-给定一棵 N 个节点的树，每条边带有一个权值。
+*    [题目](https://www.acwing.com/problem/content/description/326/)
+*    [讨论](https://www.acwing.com/problem/content/discussion/index/326/1/)
+*    [题解](https://www.acwing.com/problem/content/solution/326/1/)
+*    [视频讲解](https://www.acwing.com/problem/content/video/326/)
 
-求一条简单路径，路径上各条边的权值和等于 K，且路径包含的边的数量最少。
+  
+
+FIPA（国际国际计划协会联合会）近期将进行投票，以确定下一届 IPWC（国际规划世界杯）的主办方。
+
+钻石大陆的代表本内特希望通过以赠送钻石买通国家的方式，获得更多的投票。
+
+当然，他并不需要买通所有的国家，因为小国家会跟随着他们附庸的大国进行投票。
+
+换句话说，只要买通了一个大国，就等于获得了它和它统治下所有小国的投票。
+
+例如，CC 在 BB 的统治下，BB 在 AA 的统治下，那么买通 AA 就等于获得了三国的投票。
+
+请注意，一个国家最多附庸于一个国家的统治下，附庸关系也不会构成环。
+
+请你编写一个程序，帮助本内特求出在至少获得 mm 个国家支持的情况下的最少花费是多少。
 
 #### 输入格式
 
-第一行两个整数 N,K。
+输入包含多组测试数据。
 
-第 2∼N 行每行三个整数 x,y,z 表示一条无向边的两个端点 x,y 和权值 z，点的编号从 0 开始。
+第一行包含两个整数 nn 和 mm，其中 nn 表示参与投票的国家的总数，mm 表示获得的票数。
+
+接下来 nn 行，每行包含一个国家的信息，形式如下：
+
+`CountryName DiamondCount DCName DCName ...`
+
+其中 `CountryName` 是一个长度不超过 100100 的字符串，表示这个国家的名字，`DiamondCount` 是一个整数，表示买通该国家需要的钻石数，`DCName` 是一个字符串，表示直接附庸于该国家的一个国家的名字。
+
+一个国家可能没有任何附庸国家。
+
+当读入一行为 `#` 时，表示输入终止。
 
 #### 输出格式
 
-输出一个整数，表示最少边数量。
-
-如果不存在满足要求的路径，输出 −1。
+每组数据输出一个结果，每个结果占一行。
 
 #### 数据范围
 
-1≤N≤2×105,  
-1≤K≤106,  
-0≤z≤106
+1≤n≤2001≤n≤200,  
+0≤m≤n0≤m≤n
 
 #### 输入样例：
 
-    4 3
-    0 1 1
-    1 2 2
-    1 3 4
+    3 2
+    Aland 10
+    Boland 20 Aland
+    Coland 15
+    #
     
 
 #### 输出样例：
 
-    2
+    20
     
 
 难度：困难
 
-时/空限制：2s / 64MB
+时/空限制：1s / 64MB
 
-总通过数：1604
+总通过数：835
 
-总尝试数：5102
+总尝试数：2128
 
 来源：
 
-
+[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3875&show_algorithm_tags=0)
 
 算法标签
 
-[点分治]
+[动态规划](https://www.acwing.com/problem/search/1/?search_content=%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92&source_file_id=3875&show_algorithm_tags=1)[树形DP](https://www.acwing.com/problem/search/1/?search_content=%E6%A0%91%E5%BD%A2DP&source_file_id=3875&show_algorithm_tags=1)
