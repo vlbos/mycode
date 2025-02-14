@@ -1,9 +1,13 @@
 383\. 观光
 
-*    [题目](https://www.acwing.com/problem/content/description/385/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/385/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/385/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/385/)
+
+
+
+
+ 
+
+
+
 
   
 
@@ -15,41 +19,42 @@
 
 沿途汽车可能会在一些城市（零或更多）停靠。
 
-旅行社计划旅途从 SS 城市出发，到 FF 城市结束。
+旅行社计划旅途从S城市出发，到F城市结束。
 
 由于不同旅客的景点偏好不同，所以为了迎合更多旅客，旅行社将为客户提供多种不同线路。
 
-游客可以选择的行进路线有所限制，要么满足所选路线总路程为 SS 到 FF 的最小路程，要么满足所选路线总路程仅比最小路程多一个单位长度。
+游客可以选择的行进路线有所限制，要么满足所选路线总路程为S到F的最小路程，要么满足所选路线总路程仅比最小路程多一个单位长度。
 
-![3463_1.png](https://cdn.acwing.com/media/article/image/2019/02/26/19_75361c2839-3463_1.png)
+!* 3463_1.png 
 
-如上图所示，如果 S\=1，F\=5S\=1，F\=5，则这里有两条最短路线 1→2→5,1→3→51→2→5,1→3→5，长度为 66；有一条比最短路程多一个单位长度的路线 1→3→4→51→3→4→5，长度为 77。
 
-现在给定比荷卢经济联盟的公交路线图以及两个城市 SS 和 FF，请你求出旅行社最多可以为旅客提供多少种不同的满足限制条件的线路。
+如上图所示，如果 S\=1，F\=5S\=1，F\=5，则这里有两条最短路线 1→2→5,1→3→51→2→5,1→3→5，长度为6；有一条比最短路程多一个单位长度的路线 1→3→4→51→3→4→5，长度为7。
+
+现在给定比荷卢经济联盟的公交路线图以及两个城市S和F，请你求出旅行社最多可以为旅客提供多少种不同的满足限制条件的线路。
 
 #### 输入格式
 
-第一行包含整数 TT，表示共有 TT 组测试数据。
+第一行包含整数T，表示共有T组测试数据。
 
-每组数据第一行包含两个整数 NN 和 MM，分别表示总城市数量和道路数量。
+每组数据第一行包含两个整数N和M，分别表示总城市数量和道路数量。
 
-接下来 MM 行，每行包含三个整数 A,B,LA,B,L，表示有一条线路从城市 AA 通往城市 BB，长度为 LL。
+接下来M行，每行包含三个整数 A,B,LA,B,L，表示有一条线路从城市A通往城市B，长度为L。
 
-需注意，线路是 **单向的**，存在从 AA 到 BB 的线路不代表一定存在从 BB 到 AA 的线路，另外从城市 AA 到城市 BB 可能存在多个不同的线路。
+需注意，线路是 **单向的**，存在从A到B的线路不代表一定存在从B到A的线路，另外从城市A到城市B可能存在多个不同的线路。
 
-接下来一行，包含两个整数 SS 和 FF，数据保证 SS 和 FF 不同，并且 S、FS、F 之间至少存在一条线路。
+接下来一行，包含两个整数S和F，数据保证S和F不同，并且 S、FS、F 之间至少存在一条线路。
 
 #### 输出格式
 
 每组数据输出一个结果，每个结果占一行。
 
-数据保证结果不超过 109109。
+数据保证结果不超过109。
 
 #### 数据范围
 
-2≤N≤10002≤N≤1000,  
-1≤M≤100001≤M≤10000,  
-1≤L≤10001≤L≤1000，  
+2≤N≤1000,  
+1≤M≤10000,  
+1≤L≤1000，  
 1≤A,B,S,F≤N1≤A,B,S,F≤N
 
 #### 输入样例：
@@ -91,8 +96,10 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3934&show_algorithm_tags=0)
+习题/0x6B 图论 总结与练习/Sightseeing
 
 算法标签
 
-[图论](https://www.acwing.com/problem/search/1/?search_content=%E5%9B%BE%E8%AE%BA&source_file_id=3934&show_algorithm_tags=1)[最短路](https://www.acwing.com/problem/search/1/?search_content=%E6%9C%80%E7%9F%AD%E8%B7%AF&source_file_id=3934&show_algorithm_tags=1)[单源次短路及其条数](https://www.acwing.com/problem/search/1/?search_content=%E5%8D%95%E6%BA%90%E6%AC%A1%E7%9F%AD%E8%B7%AF%E5%8F%8A%E5%85%B6%E6%9D%A1%E6%95%B0&source_file_id=3934&show_algorithm_tags=1)
+* 图论 
+* 最短路 
+* 单源次短路及其条数 

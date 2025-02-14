@@ -1,13 +1,17 @@
 179\. 八数码
 
-*    [题目](https://www.acwing.com/problem/content/description/181/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/181/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/181/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/181/)
+
+
+
+
+ 
+
+
+
 
   
 
-在一个 3×33×3 的网格中，1∼81∼8 这 88 个数字和一个 `x` 恰好不重不漏地分布在这 3×33×3 的网格中。
+在一个 3×33×3 的网格中，1∼81∼8 这8个数字和一个 `x` 恰好不重不漏地分布在这 3×33×3 的网格中。
 
 例如：
 
@@ -79,8 +83,11 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3730&show_algorithm_tags=0)[HDU1043](https://www.acwing.com/problem/search/1/?search_content=HDU1043&source_file_id=3730&show_algorithm_tags=0)[kuangbin专题](https://www.acwing.com/problem/search/1/?search_content=kuangbin%E4%B8%93%E9%A2%98&source_file_id=3730&show_algorithm_tags=0)
+例题/0x20 搜索/0x27 A_star/八数码
 
 算法标签
 
-[搜索](https://www.acwing.com/problem/search/1/?search_content=%E6%90%9C%E7%B4%A2&source_file_id=3730&show_algorithm_tags=1)[A\*](https://www.acwing.com/problem/search/1/?search_content=A*&source_file_id=3730&show_algorithm_tags=1)[哈希](https://www.acwing.com/problem/search/1/?search_content=%E5%93%88%E5%B8%8C&source_file_id=3730&show_algorithm_tags=1)[康托展开](https://www.acwing.com/problem/search/1/?search_content=%E5%BA%B7%E6%89%98%E5%B1%95%E5%BC%80&source_file_id=3730&show_algorithm_tags=1)
+* 搜索 
+* A\* 
+* 哈希 
+* 康托展开 

@@ -1,9 +1,13 @@
 201\. 可见的点
 
-*    [题目](https://www.acwing.com/problem/content/description/203/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/203/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/203/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/203/)
+
+
+
+
+ 
+
+
+
 
   
 
@@ -13,21 +17,22 @@
 
 部分可见点与原点的连线如下图所示：
 
-![3090_1.png](https://cdn.acwing.com/media/article/image/2019/01/18/19_a68c1a281a-3090_1.png)
+!* 3090_1.png 
 
-编写一个程序，计算给定整数 NN 的情况下，满足 0≤x，y≤N0≤x，y≤N 的可见点 (x，y)(x，y) 的数量（可见点不包括原点）。
+
+编写一个程序，计算给定整数N的情况下，满足 0≤x，y≤N0≤x，y≤N 的可见点 (x，y)(x，y) 的数量（可见点不包括原点）。
 
 #### 输入格式
 
-第一行包含整数 CC，表示共有 CC 组测试数据。
+第一行包含整数C，表示共有C组测试数据。
 
-每组测试数据占一行，包含一个整数 NN。
+每组测试数据占一行，包含一个整数N。
 
 #### 输出格式
 
 每组测试数据的输出占据一行。
 
-应包括：测试数据的编号（从 11 开始），该组测试数据对应的 NN 以及可见点的数量。
+应包括：测试数据的编号（从1开始），该组测试数据对应的N以及可见点的数量。
 
 同行数据之间用空格隔开。
 
@@ -62,8 +67,9 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3752&show_algorithm_tags=0)
+例题/0x30 数学知识/0x32 约数/Visible Lattice Points
 
 算法标签
 
-[数学知识](https://www.acwing.com/problem/search/1/?search_content=%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86&source_file_id=3752&show_algorithm_tags=1)[欧拉函数](https://www.acwing.com/problem/search/1/?search_content=%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0&source_file_id=3752&show_algorithm_tags=1)
+* 数学知识 
+* 欧拉函数 

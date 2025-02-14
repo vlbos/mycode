@@ -1,17 +1,22 @@
 236\. 格鲁吉亚和鲍勃
 
-*    [题目](https://www.acwing.com/problem/content/description/238/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/238/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/238/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/238/)
+
+
+
+
+ 
+
+
+
 
   
 
 格鲁吉亚和鲍勃决定一起玩一个自创的游戏。
 
-他们在纸上绘制一排网格，将网格从左到右依次编号 1,2,3，......1,2,3，......，并将 NN 个西洋棋棋子放在不同的网格上，如下图所示：
+他们在纸上绘制一排网格，将网格从左到右依次编号 1,2,3，......1,2,3，......，并将N个西洋棋棋子放在不同的网格上，如下图所示：
 
-![1704_1.jpg](https://cdn.acwing.com/media/article/image/2019/01/19/19_01841f9e1b-1704_1.jpg)
+!* 1704_1.jpg 
+
 
 格鲁吉亚和鲍勃依次移动西洋棋棋子。
 
@@ -23,15 +28,15 @@
 
 假设格鲁吉亚和鲍勃在游戏中都能够采取最好的策略，每次都由格鲁吉亚先手。
 
-在给定你 NN 个棋子的具体位置的情况下，请你预测出谁将获得胜利。
+在给定你N个棋子的具体位置的情况下，请你预测出谁将获得胜利。
 
 #### 输入格式
 
-第一行包含一个整数 TT，表示共有 TT 组测试数据。
+第一行包含一个整数T，表示共有T组测试数据。
 
-每组测试数据包含两行，第一行包含整数 NN，表示棋子数目。
+每组测试数据包含两行，第一行包含整数N，表示棋子数目。
 
-第二行包含 NN 个不同正整数（均不超过 1000010000），第 ii 个表示第 ii 个棋子的初始位置。
+第二行包含N个不同正整数（均不超过10000），第i个表示第i个棋子的初始位置。
 
 #### 输出格式
 
@@ -41,8 +46,8 @@
 
 #### 数据范围
 
-1≤T≤201≤T≤20,  
-1≤N≤10001≤N≤1000
+1≤T≤20,  
+1≤N≤1000
 
 #### 输入样例：
 
@@ -69,8 +74,9 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3787&show_algorithm_tags=0)
+习题/0x3B 数学知识 总结与练习/Georgia and Bob
 
 算法标签
 
-[数学知识](https://www.acwing.com/problem/search/1/?search_content=%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86&source_file_id=3787&show_algorithm_tags=1)[博弈论](https://www.acwing.com/problem/search/1/?search_content=%E5%8D%9A%E5%BC%88%E8%AE%BA&source_file_id=3787&show_algorithm_tags=1)
+* 数学知识 
+* 博弈论 

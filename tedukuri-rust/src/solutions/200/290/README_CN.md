@@ -1,9 +1,13 @@
 290\. 坏掉的机器人
 
-*    [题目](https://www.acwing.com/problem/content/description/292/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/292/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/292/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/292/)
+
+
+
+
+ 
+
+
+
 
   
 
@@ -17,9 +21,9 @@
 
 #### 输入格式
 
-第一行包含两个整数 NN 和 MM。
+第一行包含两个整数N和M。
 
-第二行包含两个整数 xx 和 yy，表示机器人的初始位置。
+第二行包含两个整数x和y，表示机器人的初始位置。
 
 设定棋盘左上角为 (1,1)(1,1)，右下角为 (N,M)(N,M)。
 
@@ -52,8 +56,9 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3841&show_algorithm_tags=0)[CF24D](https://www.acwing.com/problem/search/1/?search_content=CF24D&source_file_id=3841&show_algorithm_tags=0)
+例题/0x50 动态规划/0x55 环形与后效性处理/Broken Robot
 
 算法标签
 
-[动态规划](https://www.acwing.com/problem/search/1/?search_content=%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92&source_file_id=3841&show_algorithm_tags=1)[后效性处理](https://www.acwing.com/problem/search/1/?search_content=%E5%90%8E%E6%95%88%E6%80%A7%E5%A4%84%E7%90%86&source_file_id=3841&show_algorithm_tags=1)
+* 动态规划 
+* 后效性处理 

@@ -1,9 +1,13 @@
 188\. 武士风度的牛
 
-*    [题目](https://www.acwing.com/problem/content/description/190/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/190/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/190/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/190/)
+
+
+
+
+ 
+
+
+
 
   
 
@@ -21,7 +25,7 @@ The Knight 的位置用 `K` 来标记，障碍的位置用 `*` 来标记，草�
 
 这里有一个地图的例子：
 
-                 11 | . . . . . . . . . .
+                1| . . . . . . . . . .
                  10 | . . . . * . . . . . 
                   9 | . . . . . . . . . . 
                   8 | . . . * . * . . . . 
@@ -37,9 +41,9 @@ The Knight 的位置用 `K` 来标记，障碍的位置用 `*` 来标记，草�
                     0 1 2 3 4 5 6 7 8 9 0 
     
 
-The Knight 可以按照下图中的 A,B,C,D…A,B,C,D… 这条路径用 55 次跳到草的地方（有可能其它路线的长度也是 55）：
+The Knight 可以按照下图中的 A,B,C,D…A,B,C,D… 这条路径用5次跳到草的地方（有可能其它路线的长度也是5）：
 
-                 11 | . . . . . . . . . .
+                1| . . . . . . . . . .
                  10 | . . . . * . . . . .
                   9 | . . . . . . . . . .
                   8 | . . . * . * . . . .
@@ -59,9 +63,9 @@ The Knight 可以按照下图中的 A,B,C,D…A,B,C,D… 这条路径用 55 次�
 
 #### 输入格式
 
-第 11 行： 两个数，表示农场的列数 CC 和行数 RR。
+第1行： 两个数，表示农场的列数C和行数R。
 
-第 2..R+12..R+1 行: 每行一个由 CC 个字符组成的字符串，共同描绘出牧场地图。
+第 2..R+12..R+1 行: 每行一个由C个字符组成的字符串，共同描绘出牧场地图。
 
 #### 输出格式
 
@@ -73,7 +77,7 @@ The Knight 可以按照下图中的 A,B,C,D…A,B,C,D… 这条路径用 55 次�
 
 #### 输入样例：
 
-    10 11
+    101
     ..........
     ....*.....
     ..........
@@ -102,8 +106,10 @@ The Knight 可以按照下图中的 A,B,C,D…A,B,C,D… 这条路径用 55 次�
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3739&show_algorithm_tags=0)
+习题/0x29 搜索 总结与练习/武士风度的牛
 
 算法标签
 
-[搜索](https://www.acwing.com/problem/search/1/?search_content=%E6%90%9C%E7%B4%A2&source_file_id=3739&show_algorithm_tags=1)[广度优先搜索](https://www.acwing.com/problem/search/1/?search_content=%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2&source_file_id=3739&show_algorithm_tags=1)[BFS](https://www.acwing.com/problem/search/1/?search_content=BFS&source_file_id=3739&show_algorithm_tags=1)
+* 搜索 
+* 广度优先搜索 
+* BFS 

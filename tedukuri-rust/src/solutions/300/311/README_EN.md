@@ -1,52 +1,68 @@
-264.权值
+311\. 月之谜
 
-给定一棵 N 个节点的树，每条边带有一个权值。
++     [题目](https://www.acwing.com/problem/content/description/313/)
++     [讨论](https://www.acwing.com/problem/content/discussion/index/313/1/)
++     [题解](https://www.acwing.com/problem/content/solution/313/1/)
++     [视频讲解](https://www.acwing.com/problem/content/video/313/)
 
-求一条简单路径，路径上各条边的权值和等于 K，且路径包含的边的数量最少。
+  
+
+如果一个十进制数能够被它的各位数字之和整除，则称这个数为“月之数”。
+
+给定整数 $L$ 和 $R$，你需要计算闭区间 $\[L,R\]$ 中有多少个“月之数”。
 
 #### 输入格式
 
-第一行两个整数 N,K。
-
-第 2∼N 行每行三个整数 x,y,z 表示一条无向边的两个端点 x,y 和权值 z，点的编号从 0 开始。
+输入占一行，包含两个整数 $L$ 和 $R$。
 
 #### 输出格式
 
-输出一个整数，表示最少边数量。
-
-如果不存在满足要求的路径，输出 −1。
+输出一个整数，表示月之数的个数。
 
 #### 数据范围
 
-1≤N≤2×105,  
-1≤K≤106,  
-0≤z≤106
+$1 \\le L,R < 2^{31}$
 
 #### 输入样例：
 
-    4 3
-    0 1 1
-    1 2 2
-    1 3 4
-    
+```
+1 100 
+```
 
 #### 输出样例：
 
-    2
-    
+```
+33 
+```
 
-难度：困难
+<table class="table table-striped table-responsive"><tbody><tr><td>难度： <span class="label label-warning round">中等</span></td></tr><tr><td>时/空限制： <span>2s / 64MB</span></td></tr><tr><td>总通过数： <span>1215</span></td></tr><tr><td>总尝试数： <span>2040</span></td></tr><tr><td>来源：</td></tr><tr><td><span class="problem-algorithm-tag">算法标签<span class="caret"></span></span></td></tr></tbody></table>
 
-时/空限制：2s / 64MB
+* * *
 
-总通过数：1604
+代码编辑器设置
 
-总尝试数：5102
+* * *
 
-来源：
+界面风格
 
+对白色界面感到厌倦了吗？可以尝试其他的背景和代码高亮风格。
 
+* * *
 
-算法标签
+编辑类型
 
-[点分治]
+更喜欢Vim或者Emacs的输入方式吗？我们也为你提供了这些选项。
+
+* * *
+
+缩进长度
+
+选择代码缩进的长度。默认是4个空格。
+
+* * *
+
+代码补全
+
+写代码疲惫了吗？让我们来帮你一把。唤醒词列表在[这里](https://www.acwing.com/file_system/file/content/whole/index/content/2145234/)。
+
+* * *

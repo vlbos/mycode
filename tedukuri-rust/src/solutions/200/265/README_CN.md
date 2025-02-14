@@ -1,9 +1,13 @@
 265\. 营业额统计
 
-*    [题目](https://www.acwing.com/problem/content/description/267/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/267/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/267/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/267/)
+
+
+
+
+ 
+
+
+
 
   
 
@@ -17,7 +21,7 @@ Tiger 拿出了公司的账本，账本上记录了公司成立以来每天的�
 
 经济管理学上定义了一种最小波动值来衡量这种情况。
 
-设第 ii 天的营业额为 aiai，则第 ii 天(i≥2i≥2)的最小波动值 fifi 被定义为：
+设第i天的营业额为ai，则第i天(i≥2i≥2)的最小波动值fi被定义为：
 
 fi\=min1≤j<i|ai−aj|fi\=min1≤j<i|ai−aj|
 
@@ -27,13 +31,13 @@ fi\=min1≤j<i|ai−aj|fi\=min1≤j<i|ai−aj|
 
 你的任务就是编写一个程序帮助 Tiger 来计算这一个值。
 
-第一天的最小波动值为第一天的营业额 a1a1。
+第一天的最小波动值为第一天的营业额a1。
 
 #### 输入格式
 
-第一行为正整数 nn，表示该公司从成立一直到现在的天数。
+第一行为正整数n，表示该公司从成立一直到现在的天数。
 
-接下来的 nn 行每行有一个整数 aiai(有可能有负数) ，表示第 ii 天公司的营业额。
+接下来的n行每行有一个整数ai(有可能有负数) ，表示第i天公司的营业额。
 
 #### 输出格式
 
@@ -73,8 +77,9 @@ fi\=min1≤j<i|ai−aj|fi\=min1≤j<i|ai−aj|
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3816&show_algorithm_tags=0)[HNOI2002](https://www.acwing.com/problem/search/1/?search_content=HNOI2002&source_file_id=3816&show_algorithm_tags=0)[kuangbin专题](https://www.acwing.com/problem/search/1/?search_content=kuangbin%E4%B8%93%E9%A2%98&source_file_id=3816&show_algorithm_tags=0)[《信息学奥赛一本通》算法提高篇](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E4%BF%A1%E6%81%AF%E5%AD%A6%E5%A5%A5%E8%B5%9B%E4%B8%80%E6%9C%AC%E9%80%9A%E3%80%8B%E7%AE%97%E6%B3%95%E6%8F%90%E9%AB%98%E7%AF%87&source_file_id=3816&show_algorithm_tags=0)
+习题/0x49 数据结构进阶 总结与练习/营业额统计
 
 算法标签
 
-[平衡树](https://www.acwing.com/problem/search/1/?search_content=%E5%B9%B3%E8%A1%A1%E6%A0%91&source_file_id=3816&show_algorithm_tags=1)[Treap](https://www.acwing.com/problem/search/1/?search_content=Treap&source_file_id=3816&show_algorithm_tags=1)
+* 平衡树 
+* Treap 

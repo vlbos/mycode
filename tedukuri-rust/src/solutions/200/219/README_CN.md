@@ -1,9 +1,13 @@
 219\. 剪纸游戏
 
-*    [题目](https://www.acwing.com/problem/content/description/221/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/221/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/221/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/221/)
+
+
+
+
+ 
+
+
+
 
   
 
@@ -21,7 +25,7 @@
 
 输入包含多组测试数据，每组数据占一行。
 
-每组数据包括两个整数 NN 和 MM，表示初始网格纸的尺寸。
+每组数据包括两个整数N和M，表示初始网格纸的尺寸。
 
 #### 输出格式
 
@@ -59,8 +63,10 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3770&show_algorithm_tags=0)
+例题/0x30 数学知识/0x3A 博弈论与SG函数/Cutting Game
 
 算法标签
 
-[数学知识](https://www.acwing.com/problem/search/1/?search_content=%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86&source_file_id=3770&show_algorithm_tags=1)[博弈论](https://www.acwing.com/problem/search/1/?search_content=%E5%8D%9A%E5%BC%88%E8%AE%BA&source_file_id=3770&show_algorithm_tags=1)[SG函数](https://www.acwing.com/problem/search/1/?search_content=SG%E5%87%BD%E6%95%B0&source_file_id=3770&show_algorithm_tags=1)
+* 数学知识 
+* 博弈论 
+* SG函数 

@@ -1,9 +1,13 @@
 186\. 巴士
 
-*    [题目](https://www.acwing.com/problem/content/description/188/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/188/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/188/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/188/)
+
+
+
+
+ 
+
+
+
 
   
 
@@ -21,15 +25,15 @@
 
 4、不同巴士线路的车首次到达本站的时间和到站的时间间隔都有可能相同。
 
-5、测试用例中的总线路不会超过 1717 条。
+5、测试用例中的总线路不会超过17条。
 
 请你编写一个程序，求出在所有巴士到达本站的时刻满足输入数据的要求的情况下，巴士线路的总数量最小是多少。
 
 #### 输入格式
 
-输入数据第一行包含整数 nn，表示在这一小时内抵达到该站的巴士总数量。
+输入数据第一行包含整数n，表示在这一小时内抵达到该站的巴士总数量。
 
-第二行包含 nn 个整数，表示按升序排序得到的 nn 个巴士的到站时间。
+第二行包含n个整数，表示按升序排序得到的n个巴士的到站时间。
 
 #### 输出格式
 
@@ -37,7 +41,7 @@
 
 #### 数据范围
 
-1≤n≤3001≤n≤300
+1≤n≤300
 
 #### 输入样例：
 
@@ -60,8 +64,12 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3737&show_algorithm_tags=0)
+习题/0x29 搜索 总结与练习/The Buses
 
 算法标签
 
-[搜索](https://www.acwing.com/problem/search/1/?search_content=%E6%90%9C%E7%B4%A2&source_file_id=3737&show_algorithm_tags=1)[深度优先搜索](https://www.acwing.com/problem/search/1/?search_content=%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2&source_file_id=3737&show_algorithm_tags=1)[DFS](https://www.acwing.com/problem/search/1/?search_content=DFS&source_file_id=3737&show_algorithm_tags=1)[迭代加深](https://www.acwing.com/problem/search/1/?search_content=%E8%BF%AD%E4%BB%A3%E5%8A%A0%E6%B7%B1&source_file_id=3737&show_algorithm_tags=1)[剪枝](https://www.acwing.com/problem/search/1/?search_content=%E5%89%AA%E6%9E%9D&source_file_id=3737&show_algorithm_tags=1)
+* 搜索 
+* 深度优先搜索 
+* DFS 
+* 迭代加深 
+* 剪枝 

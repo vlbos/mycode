@@ -1,9 +1,13 @@
 284\. 金字塔
 
-*    [题目](https://www.acwing.com/problem/content/description/286/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/286/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/286/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/286/)
+
+
+
+
+ 
+
+
+
 
   
 
@@ -35,7 +39,7 @@
 
 #### 输入格式
 
-输入仅一行，包含一个字符串 SS，长度不超过 300300，表示机器人得到的颜色序列。
+输入仅一行，包含一个字符串S，长度不超过300，表示机器人得到的颜色序列。
 
 #### 输出格式
 
@@ -43,7 +47,7 @@
 
 #### 输入样例：
 
-    ABABABA
+   ABABA
     
 
 #### 输出样例：
@@ -61,8 +65,9 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3835&show_algorithm_tags=0)
+例题/0x50 动态规划/0x53 区间DP/金字塔
 
 算法标签
 
-[动态规划](https://www.acwing.com/problem/search/1/?search_content=%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92&source_file_id=3835&show_algorithm_tags=1)[区间DP](https://www.acwing.com/problem/search/1/?search_content=%E5%8C%BA%E9%97%B4DP&source_file_id=3835&show_algorithm_tags=1)
+* 动态规划 
+* 区间DP 

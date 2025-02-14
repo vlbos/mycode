@@ -1,13 +1,17 @@
 306\. 杰拉尔德和巨型象棋
 
-*    [题目](https://www.acwing.com/problem/content/description/308/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/308/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/308/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/308/)
+
+
+
+
+ 
+
+
+
 
   
 
-给定一个 H×WH×W 的棋盘，棋盘上只有 NN 个格子是黑色的，其他格子都是白色的。
+给定一个 H×WH×W 的棋盘，棋盘上只有N个格子是黑色的，其他格子都是白色的。
 
 在棋盘左上角有一个卒，每一步可以向右或向下移动一格，并且不能移动到黑色格子中。
 
@@ -17,7 +21,7 @@
 
 第一行包含三个整数 H,W,NH,W,N。
 
-接下来 NN 行，每行包含两个整数 x，yx，y，描述一个黑色格子位于 xx 行 yy 列。
+接下来N行，每行包含两个整数 x，yx，y，描述一个黑色格子位于x行y列。
 
 数据保证左上角和右下角的格子都是白色的。
 
@@ -28,7 +32,7 @@
 #### 数据范围
 
 1≤H,W≤1051≤H,W≤105,  
-1≤N≤20001≤N≤2000
+1≤N≤2000
 
 #### 输入样例1：
 
@@ -47,7 +51,7 @@
     100 100 3
     15 16
     16 15
-    99 88
+   988
     
 
 #### 输出样例2：
@@ -65,8 +69,9 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3857&show_algorithm_tags=0)[CF559C](https://www.acwing.com/problem/search/1/?search_content=CF559C&source_file_id=3857&show_algorithm_tags=0)
+例题/0x50 动态规划/0x5C 计数类DP/Gerald and Giant Chess
 
 算法标签
 
-[动态规划](https://www.acwing.com/problem/search/1/?search_content=%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92&source_file_id=3857&show_algorithm_tags=1)[计数类DP](https://www.acwing.com/problem/search/1/?search_content=%E8%AE%A1%E6%95%B0%E7%B1%BBDP&source_file_id=3857&show_algorithm_tags=1)
+* 动态规划 
+* 计数类DP 

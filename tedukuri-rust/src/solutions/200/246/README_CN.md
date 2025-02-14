@@ -1,15 +1,19 @@
 246\. 区间最大公约数
 
-*    [题目](https://www.acwing.com/problem/content/description/247/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/247/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/247/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/247/)
+
+
+
+
+ 
+
+
+
 
   
 
-给定一个长度为 NN 的数列 AA，以及 MM 条指令，每条指令可能是以下两种之一：
+给定一个长度为N的数列A，以及M条指令，每条指令可能是以下两种之一：
 
-1.  `C l r d`，表示把 A\[l\],A\[l+1\],…,A\[r\]A\[l\],A\[l+1\],…,A\[r\] 都加上 dd。
+1.  `C l r d`，表示把 A\[l\],A\[l+1\],…,A\[r\]A\[l\],A\[l+1\],…,A\[r\] 都加上d。
 2.  `Q l r`，表示询问 A\[l\],A\[l+1\],…,A\[r\]A\[l\],A\[l+1\],…,A\[r\] 的最大公约数(GCDGCD)。
 
 对于每个询问，输出一个整数表示答案。
@@ -18,9 +22,9 @@
 
 第一行两个整数 N,MN,M。
 
-第二行 NN 个整数 A\[i\]A\[i\]。
+第二行N个整数 A\[i\]A\[i\]。
 
-接下来 MM 行表示 MM 条指令，每条指令的格式如题目描述所示。
+接下来M行表示M条指令，每条指令的格式如题目描述所示。
 
 #### 输出格式
 
@@ -63,8 +67,8 @@ N≤500000,M≤100000N≤500000,M≤100000,
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3796&show_algorithm_tags=0)
+例题/0x40 数据结构进阶/0x43 线段树/Interval GCD
 
 算法标签
 
-[线段树](https://www.acwing.com/problem/search/1/?search_content=%E7%BA%BF%E6%AE%B5%E6%A0%91&source_file_id=3796&show_algorithm_tags=1)
+* 线段树 

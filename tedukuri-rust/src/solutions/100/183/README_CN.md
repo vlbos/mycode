@@ -1,45 +1,51 @@
 183\. 靶形数独
 
-*    [题目](https://www.acwing.com/problem/content/description/185/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/185/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/185/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/185/)
+
+
+
+
+ 
+
+
+
 
   
 
 小城和小华都是热爱数学的好学生，最近，他们不约而同地迷上了数独游戏，好胜的他们想用数独来一比高低。
 
-但普通的数独对他们来说都过于简单了，于是他们向 ZZ 博士请教，ZZ 博士拿出了他最近发明的“靶形数独”，作为这两个孩子比试的题目。
+但普通的数独对他们来说都过于简单了，于是他们向Z博士请教，ZZ 博士拿出了他最近发明的“靶形数独”，作为这两个孩子比试的题目。
 
-靶形数独的方格同普通数独一样，在 9×99×9 的大九宫格中有 99 个 3×33×3 的小九宫格（用粗黑色线隔开的）。
+靶形数独的方格同普通数独一样，在 9×99×9 的大九宫格中有9个 3×33×3 的小九宫格（用粗黑色线隔开的）。
 
-在这个大九宫格中，有一些数字是已知的，根据这些数字，利用逻辑推理，在其他的空格上填入 11 到 99 的数字。
+在这个大九宫格中，有一些数字是已知的，根据这些数字，利用逻辑推理，在其他的空格上填入1到9的数字。
 
 每个数字在每个小九宫格内不能重复出现，每个数字在每行、每列也不能重复出现。
 
 但靶形数独有一点和普通数独不同，即每一个方格都有一个分值，而且如同一个靶子一样，离中心越近则分值越高（如下图所示）。
 
-![靶子.jpe.jpg](https://cdn.acwing.com/media/article/image/2019/01/17/19_1add32be19-%E9%9D%B6%E5%AD%90.jpe.jpg)
+!* 靶子.jpe.jpg 
 
-上图具体的分值分布是：最里面一格（黄色区域）为 1010 分，黄色区域外面的一圈（红色区域）每个格子为 99 分，再外面一圈（蓝色区域）每个格子为 88 分，蓝色区域外面一圈（棕色区域）每个格子为 77 分，最外面一圈（白色区域）每个格子为 66 分，如上图所示。
+
+上图具体的分值分布是：最里面一格（黄色区域）为10分，黄色区域外面的一圈（红色区域）每个格子为9分，再外面一圈（蓝色区域）每个格子为8分，蓝色区域外面一圈（棕色区域）每个格子为7分，最外面一圈（白色区域）每个格子为6分，如上图所示。
 
 比赛的要求是：每个人必须完成一个给定的数独（每个给定数独可能有不同的填法），而且要争取更高的总分数。
 
 而这个总分数即每个方格上的分值和完成这个数独时填在相应格上的数字的乘积的总和。
 
-如图，在以下的这个已经填完数字的靶形数独游戏中，总分数为 28292829。
+如图，在以下的这个已经填完数字的靶形数独游戏中，总分数为2829。
 
 游戏规定，将以总分数的高低决出胜负。
 
-![靶子2.jpe.jpg](https://cdn.acwing.com/media/article/image/2019/01/17/19_55aa03a419-%E9%9D%B6%E5%AD%902.jpe.jpg)
+!* 靶子2.jpe.jpg 
+
 
 由于求胜心切，小城找到了善于编程的你，让你帮他求出，对于给定的靶形数独，能够得到的最高分数。
 
 #### 输入格式
 
-输入一共包含 99 行。
+输入一共包含9行。
 
-每行 99 个整数（每个数都在 0—90—9 的范围内），表示一个尚未填满的数独方格，未填的空格用 00 表示。
+每行9个整数（每个数都在 0—90—9 的范围内），表示一个尚未填满的数独方格，未填的空格用0表示。
 
 每两个数字之间用一个空格隔开。
 
@@ -51,11 +57,11 @@
 
 #### 数据范围
 
-40%40% 的数据，数独中非 00 数的个数不少于 3030。
+40%40% 的数据，数独中非0数的个数不少于30。
 
-80%80% 的数据，数独中非 00 数的个数不少于 2626。
+80%80% 的数据，数独中非0数的个数不少于26。
 
-100%100% 的数据，数独中非 00 数的个数不少于 2424。
+100%100% 的数据，数独中非0数的个数不少于24。
 
 #### 输入样例：
 
@@ -85,8 +91,11 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3734&show_algorithm_tags=0)[NOIP2009提高组](https://www.acwing.com/problem/search/1/?search_content=NOIP2009%E6%8F%90%E9%AB%98%E7%BB%84&source_file_id=3734&show_algorithm_tags=0)[《信息学奥赛一本通》算法提高篇](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E4%BF%A1%E6%81%AF%E5%AD%A6%E5%A5%A5%E8%B5%9B%E4%B8%80%E6%9C%AC%E9%80%9A%E3%80%8B%E7%AE%97%E6%B3%95%E6%8F%90%E9%AB%98%E7%AF%87&source_file_id=3734&show_algorithm_tags=0)
+习题/0x29 搜索 总结与练习/靶形数独
 
 算法标签
 
-[DFS](https://www.acwing.com/problem/search/1/?search_content=DFS&source_file_id=3734&show_algorithm_tags=1)[剪枝](https://www.acwing.com/problem/search/1/?search_content=%E5%89%AA%E6%9E%9D&source_file_id=3734&show_algorithm_tags=1)[位运算优化](https://www.acwing.com/problem/search/1/?search_content=%E4%BD%8D%E8%BF%90%E7%AE%97%E4%BC%98%E5%8C%96&source_file_id=3734&show_algorithm_tags=1)[Dancing Links](https://www.acwing.com/problem/search/1/?search_content=Dancing%20Links&source_file_id=3734&show_algorithm_tags=1)
+* DFS 
+* 剪枝 
+* 位运算优化 
+* Dancing Links 

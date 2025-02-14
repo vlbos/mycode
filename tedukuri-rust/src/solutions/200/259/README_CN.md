@@ -1,9 +1,13 @@
 259\. 真正的骗子
 
-*    [题目](https://www.acwing.com/problem/content/description/261/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/261/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/261/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/261/)
+
+
+
+
+ 
+
+
+
 
   
 
@@ -13,17 +17,17 @@
 
 岛上的每一个成员都有一个整数编号（类似于身份证号，用以区分每个成员）。
 
-现在你拥有 nn 次提问的机会，但是问题的内容只能是向其中一个居民询问另一个居民是否是天神，请你根据收集的回答判断各个居民的身份。
+现在你拥有n次提问的机会，但是问题的内容只能是向其中一个居民询问另一个居民是否是天神，请你根据收集的回答判断各个居民的身份。
 
 #### 输入格式
 
 输入包含多组测试用例。
 
-每组测试用例的第一行包含三个非负整数 n,p1,p2n,p1,p2，其中 nn 是你可以提问的总次数，p1p1 是天神的总数量，p2p2 是恶魔的总数量。
+每组测试用例的第一行包含三个非负整数 n,p1,p2n,p1,p2，其中n是你可以提问的总次数，p1p1 是天神的总数量，p2p2 是恶魔的总数量。
 
-接下来 nn 行每行包含两个整数 xi,yixi,yi 以及一个字符串 aiai，其中 xi,yixi,yi 是岛上居民的编号，你将向编号为 xixi 的居民询问编号为 yiyi 的居民是否是天神，
+接下来n行每行包含两个整数 xi,yixi,yi 以及一个字符串ai，其中 xi,yixi,yi 是岛上居民的编号，你将向编号为xi的居民询问编号为yi的居民是否是天神，
 
-aiai 是他的回答，如果 aiai 为 `yes`，表示他回答你“是”，如果 aiai 为 `no`，表示他回答你“不是”。
+aiai 是他的回答，如果ai为 `yes`，表示他回答你“是”，如果ai为 `no`，表示他回答你“不是”。
 
 xi,yixi,yi 可能相同，表示你问的是那个人自己是否为天神。
 
@@ -85,8 +89,9 @@ xi,yixi,yi 可能相同，表示你问的是那个人自己是否为天神。
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3810&show_algorithm_tags=0)[POJ1417](https://www.acwing.com/problem/search/1/?search_content=POJ1417&source_file_id=3810&show_algorithm_tags=0)[kuangbin专题](https://www.acwing.com/problem/search/1/?search_content=kuangbin%E4%B8%93%E9%A2%98&source_file_id=3810&show_algorithm_tags=0)
+习题/0x49 数据结构进阶 总结与练习/True Liars
 
 算法标签
 
-[并查集](https://www.acwing.com/problem/search/1/?search_content=%E5%B9%B6%E6%9F%A5%E9%9B%86&source_file_id=3810&show_algorithm_tags=1)[背包](https://www.acwing.com/problem/search/1/?search_content=%E8%83%8C%E5%8C%85&source_file_id=3810&show_algorithm_tags=1)
+* 并查集 
+* 背包 

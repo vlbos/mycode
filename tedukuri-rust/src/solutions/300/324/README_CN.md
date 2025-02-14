@@ -1,9 +1,13 @@
 324\. 贿赂FIPA
 
-*    [题目](https://www.acwing.com/problem/content/description/326/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/326/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/326/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/326/)
+
+
+
+
+ 
+
+
+
 
   
 
@@ -15,23 +19,23 @@ FIPA（国际国际计划协会联合会）近期将进行投票，以确定下�
 
 换句话说，只要买通了一个大国，就等于获得了它和它统治下所有小国的投票。
 
-例如，CC 在 BB 的统治下，BB 在 AA 的统治下，那么买通 AA 就等于获得了三国的投票。
+例如，CC 在B的统治下，BB 在A的统治下，那么买通A就等于获得了三国的投票。
 
 请注意，一个国家最多附庸于一个国家的统治下，附庸关系也不会构成环。
 
-请你编写一个程序，帮助本内特求出在至少获得 mm 个国家支持的情况下的最少花费是多少。
+请你编写一个程序，帮助本内特求出在至少获得m个国家支持的情况下的最少花费是多少。
 
 #### 输入格式
 
 输入包含多组测试数据。
 
-第一行包含两个整数 nn 和 mm，其中 nn 表示参与投票的国家的总数，mm 表示获得的票数。
+第一行包含两个整数n和m，其中n表示参与投票的国家的总数，mm 表示获得的票数。
 
-接下来 nn 行，每行包含一个国家的信息，形式如下：
+接下来n行，每行包含一个国家的信息，形式如下：
 
 `CountryName DiamondCount DCName DCName ...`
 
-其中 `CountryName` 是一个长度不超过 100100 的字符串，表示这个国家的名字，`DiamondCount` 是一个整数，表示买通该国家需要的钻石数，`DCName` 是一个字符串，表示直接附庸于该国家的一个国家的名字。
+其中 `CountryName` 是一个长度不超过100的字符串，表示这个国家的名字，`DiamondCount` 是一个整数，表示买通该国家需要的钻石数，`DCName` 是一个字符串，表示直接附庸于该国家的一个国家的名字。
 
 一个国家可能没有任何附庸国家。
 
@@ -43,8 +47,8 @@ FIPA（国际国际计划协会联合会）近期将进行投票，以确定下�
 
 #### 数据范围
 
-1≤n≤2001≤n≤200,  
-0≤m≤n0≤m≤n
+1≤n≤200,  
+0≤m≤n
 
 #### 输入样例：
 
@@ -70,8 +74,9 @@ FIPA（国际国际计划协会联合会）近期将进行投票，以确定下�
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3875&show_algorithm_tags=0)
+习题/0x5E 动态规划 总结与练习/Bribing FIPA
 
 算法标签
 
-[动态规划](https://www.acwing.com/problem/search/1/?search_content=%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92&source_file_id=3875&show_algorithm_tags=1)[树形DP](https://www.acwing.com/problem/search/1/?search_content=%E6%A0%91%E5%BD%A2DP&source_file_id=3875&show_algorithm_tags=1)
+* 动态规划 
+* 树形DP 

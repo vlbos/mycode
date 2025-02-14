@@ -1,9 +1,13 @@
 229\. 新NIM游戏
 
-*    [题目](https://www.acwing.com/problem/content/description/231/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/231/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/231/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/231/)
+
+
+
+
+ 
+
+
+
 
   
 
@@ -29,9 +33,9 @@
 
 #### 输入格式
 
-第一行为整数 kk，即火柴堆数。
+第一行为整数k，即火柴堆数。
 
-第二行包含 kk 个正整数（均不超过 109109），即各堆的火柴个数。
+第二行包含k个正整数（均不超过109），即各堆的火柴个数。
 
 #### 输出格式
 
@@ -41,7 +45,7 @@
 
 #### 数据范围
 
-1≤k≤1001≤k≤100
+1≤k≤100
 
 #### 输入样例：
 
@@ -64,8 +68,11 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3780&show_algorithm_tags=0)[CQOI2013](https://www.acwing.com/problem/search/1/?search_content=CQOI2013&source_file_id=3780&show_algorithm_tags=0)
+习题/0x3B 数学知识 总结与练习/新NIM游戏
 
 算法标签
 
-[数学知识](https://www.acwing.com/problem/search/1/?search_content=%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86&source_file_id=3780&show_algorithm_tags=1)[高斯消元](https://www.acwing.com/problem/search/1/?search_content=%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83&source_file_id=3780&show_algorithm_tags=1)[博弈论](https://www.acwing.com/problem/search/1/?search_content=%E5%8D%9A%E5%BC%88%E8%AE%BA&source_file_id=3780&show_algorithm_tags=1)[线性基](https://www.acwing.com/problem/search/1/?search_content=%E7%BA%BF%E6%80%A7%E5%9F%BA&source_file_id=3780&show_algorithm_tags=1)
+* 数学知识 
+* 高斯消元 
+* 博弈论 
+* 线性基 

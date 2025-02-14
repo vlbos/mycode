@@ -1,25 +1,29 @@
 289\. 环路运输
 
-*    [题目](https://www.acwing.com/problem/content/description/291/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/291/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/291/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/291/)
+
+
+
+
+ 
+
+
+
 
   
 
-在一条环形公路旁均匀地分布着 NN 座仓库，编号为 1∼N1∼N，编号为 ii 的仓库与编号为 jj 的仓库之间的距离定义为 dist(i,j)\=min(|i−j|,N−|i−j|)dist(i,j)\=min⁡(|i−j|,N−|i−j|)，也就是逆时针或顺时针从 ii 到 jj 中较近的一种。
+在一条环形公路旁均匀地分布着N座仓库，编号为 1∼N1∼N，编号为i的仓库与编号为j的仓库之间的距离定义为 dist(i,j)\=min(|i−j|,N−|i−j|)dist(i,j)\=min⁡(|i−j|,N−|i−j|)，也就是逆时针或顺时针从i到j中较近的一种。
 
-每座仓库都存有货物，其中编号为 ii 的仓库库存量为 AiAi。
+每座仓库都存有货物，其中编号为i的仓库库存量为Ai。
 
-在 ii 和 jj 两座仓库之间运送货物需要的代价为 Ai+Aj+dist(i,j)Ai+Aj+dist(i,j)。
+在i和j两座仓库之间运送货物需要的代价为 Ai+Aj+dist(i,j)Ai+Aj+dist(i,j)。
 
 求在哪两座仓库之间运送货物需要的代价最大。
 
 #### 输入格式
 
-第一行包含一个整数 NN。
+第一行包含一个整数N。
 
-第二行包含 NN 个整数 A1∼ANA1∼AN。
+第二行包含N个整数 A1∼ANA1∼AN。
 
 #### 输出格式
 
@@ -27,8 +31,8 @@
 
 #### 数据范围
 
-2≤N≤1062≤N≤106,  
-1≤Ai≤1071≤Ai≤107
+2≤N≤106,  
+1≤Ai≤107
 
 #### 输入样例：
 
@@ -51,8 +55,9 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3840&show_algorithm_tags=0)
+例题/0x50 动态规划/0x55 环形与后效性处理/环路运输
 
 算法标签
 
-[动态规划](https://www.acwing.com/problem/search/1/?search_content=%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92&source_file_id=3840&show_algorithm_tags=1)[环形结构](https://www.acwing.com/problem/search/1/?search_content=%E7%8E%AF%E5%BD%A2%E7%BB%93%E6%9E%84&source_file_id=3840&show_algorithm_tags=1)
+* 动态规划 
+* 环形结构 

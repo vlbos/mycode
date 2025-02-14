@@ -1,13 +1,17 @@
 407\. 稳定的牛分配
 
-*    [题目](https://www.acwing.com/problem/content/description/409/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/409/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/409/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/409/)
+
+
+
+
+ 
+
+
+
 
   
 
-农夫约翰的 NN 头奶牛住在 BB 个谷仓里，每个谷仓的容量有限，有的牛很喜欢现在的住所，而有的则对现在的住所非常不满意。
+农夫约翰的N头奶牛住在B个谷仓里，每个谷仓的容量有限，有的牛很喜欢现在的住所，而有的则对现在的住所非常不满意。
 
 农夫约翰打算重新安排奶牛的住所，使得它们的幸福感尽可能的接近，哪怕这会使所有牛都对安排产生不满。
 
@@ -19,22 +23,22 @@
 
 #### 输入格式
 
-第 11 行包含两个整数 NN 和 BB。
+第1行包含两个整数N和B。
 
-第 2..N+12..N+1 行，每行包含 BB 个整数，第 i+1i+1 行描述了第 ii 头牛的住所幸福感列表，越靠前的住所牛越满意。
+第 2..N+1 行，每行包含B个整数，第 i+1 行描述了第i头牛的住所幸福感列表，越靠前的住所牛越满意。
 
-第 N+2N+2 行，包含 BB 个整数，第 ii 个整数表示第 ii 间谷仓的容量。
+第 N+2 行，包含B个整数，第i个整数表示第i间谷仓的容量。
 
 #### 输出格式
 
 输出一个整数，表示牛被安排的住所在列表上的排名的范围是多少。
 
-例如，一共 44 头牛，33 头被安排在满意度排名 11 的谷仓，11 头被安排在满意度排名 22 的谷仓，则范围是 \[1,2\]\[1,2\]，输出 22。
+例如，一共4头牛，3 头被安排在满意度排名1的谷仓，1 头被安排在满意度排名2的谷仓，则范围是 \[1,2\]\[1,2\]，输出2。
 
 #### 数据范围
 
-1≤N≤10001≤N≤1000,  
-1≤B≤201≤B≤20
+1≤N≤1000,  
+1≤B≤20
 
 #### 输入样例：
 
@@ -63,8 +67,9 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3958&show_algorithm_tags=0)[POJ3189](https://www.acwing.com/problem/search/1/?search_content=POJ3189&source_file_id=3958&show_algorithm_tags=0)[kuangbin专题](https://www.acwing.com/problem/search/1/?search_content=kuangbin%E4%B8%93%E9%A2%98&source_file_id=3958&show_algorithm_tags=0)
+习题/0x6B 图论 总结与练习/Steady Cow Assignment
 
 算法标签
 
-[图论](https://www.acwing.com/problem/search/1/?search_content=%E5%9B%BE%E8%AE%BA&source_file_id=3958&show_algorithm_tags=1)[二分图多重匹配](https://www.acwing.com/problem/search/1/?search_content=%E4%BA%8C%E5%88%86%E5%9B%BE%E5%A4%9A%E9%87%8D%E5%8C%B9%E9%85%8D&source_file_id=3958&show_algorithm_tags=1)
+* 图论 
+* 二分图多重匹配 

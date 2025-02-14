@@ -1,9 +1,13 @@
 175\. 电路维修
 
-*    [题目](https://www.acwing.com/problem/content/description/177/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/177/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/177/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/177/)
+
+
+
+
+ 
+
+
+
 
   
 
@@ -13,9 +17,10 @@
 
 有一天飞行车的电路板突然出现了故障，导致无法启动。
 
-电路板的整体结构是一个 RR 行 CC 列的网格（R,C≤500R,C≤500），如下图所示。
+电路板的整体结构是一个R行C列的网格（R,C≤500R,C≤500），如下图所示。
 
-![电路.png](https://cdn.acwing.com/media/article/image/2019/01/16/19_be6ff7a219-%E7%94%B5%E8%B7%AF.png)
+!* 电路.png 
+
 
 每个格点都是电线的接点，每个格子都包含一个电子元件。
 
@@ -37,11 +42,11 @@
 
 输入文件包含多组测试数据。
 
-第一行包含一个整数 TT，表示测试数据的数目。
+第一行包含一个整数T，表示测试数据的数目。
 
-对于每组测试数据，第一行包含正整数 RR 和 CC，表示电路板的行数和列数。
+对于每组测试数据，第一行包含正整数R和C，表示电路板的行数和列数。
 
-之后 RR 行，每行 CC 个字符，字符是`"/"`和`"\"`中的一个，表示标准件的方向。
+之后R行，每行C个字符，字符是`"/"`和`"\"`中的一个，表示标准件的方向。
 
 #### 输出格式
 
@@ -52,7 +57,7 @@
 #### 数据范围
 
 1≤R,C≤5001≤R,C≤500,  
-1≤T≤51≤T≤5
+1≤T≤5
 
 #### 输入样例：
 
@@ -74,7 +79,8 @@
 
 只需要按照下面的方式旋转标准件，就可以使得电源和发动机之间连通。
 
-![电路2.png](https://cdn.acwing.com/media/article/image/2019/01/16/19_a0e8e80a19-%E7%94%B5%E8%B7%AF2.png)
+!* 电路2.png 
+
 
 难度：简单
 
@@ -86,8 +92,9 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3726&show_algorithm_tags=0)[BalticOI 2011](https://www.acwing.com/problem/search/1/?search_content=BalticOI%202011&source_file_id=3726&show_algorithm_tags=0)[《信息学奥赛一本通》算法提高篇](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E4%BF%A1%E6%81%AF%E5%AD%A6%E5%A5%A5%E8%B5%9B%E4%B8%80%E6%9C%AC%E9%80%9A%E3%80%8B%E7%AE%97%E6%B3%95%E6%8F%90%E9%AB%98%E7%AF%87&source_file_id=3726&show_algorithm_tags=0)
+例题/0x20 搜索/0x26 广搜变形/电路维修
 
 算法标签
 
-[搜索](https://www.acwing.com/problem/search/1/?search_content=%E6%90%9C%E7%B4%A2&source_file_id=3726&show_algorithm_tags=1)[双端队列BFS](https://www.acwing.com/problem/search/1/?search_content=%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97BFS&source_file_id=3726&show_algorithm_tags=1)
+* 搜索 
+* 双端队列BFS 

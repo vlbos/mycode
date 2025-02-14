@@ -1,9 +1,13 @@
 286\. 选课
 
-*    [题目](https://www.acwing.com/problem/content/description/288/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/288/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/288/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/288/)
+
+
+
+
+ 
+
+
+
 
   
 
@@ -11,9 +15,9 @@
 
 每门的必修课都有固定的学分，同时还必须获得相应的选修课程学分。
 
-学校开设了 NN 门的选修课程，每个学生可选课程的数量 MM 是给定的。
+学校开设了N门的选修课程，每个学生可选课程的数量M是给定的。
 
-学生选修了这 MM 门课并考核通过就能获得相应的学分。
+学生选修了这M门课并考核通过就能获得相应的学分。
 
 在选修课程中，有些课程可以直接选修，有些课程需要一定的基础知识，必须在选了其他的一些课程的基础上才能选修。
 
@@ -33,11 +37,11 @@
 
 输入文件的第一行包括两个整数 N、MN、M（中间用一个空格隔开）其中 1≤N≤300,1≤M≤N1≤N≤300,1≤M≤N。
 
-接下来 NN 行每行代表一门课，课号依次为 1，2，…，N1，2，…，N。
+接下来N行每行代表一门课，课号依次为 1，2，…，N1，2，…，N。
 
-每行有两个数（用一个空格隔开），第一个数为这门课先修课的课号（若不存在先修课则该项为 00），第二个数为这门课的学分。
+每行有两个数（用一个空格隔开），第一个数为这门课先修课的课号（若不存在先修课则该项为0），第二个数为这门课的学分。
 
-学分是不超过 1010 的正整数。
+学分是不超过10的正整数。
 
 #### 输出格式
 
@@ -70,8 +74,9 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3837&show_algorithm_tags=0)[《信息学奥赛一本通》算法提高篇](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E4%BF%A1%E6%81%AF%E5%AD%A6%E5%A5%A5%E8%B5%9B%E4%B8%80%E6%9C%AC%E9%80%9A%E3%80%8B%E7%AE%97%E6%B3%95%E6%8F%90%E9%AB%98%E7%AF%87&source_file_id=3837&show_algorithm_tags=0)
+例题/0x50 动态规划/0x54 树形DP/选课
 
 算法标签
 
-[动态规划](https://www.acwing.com/problem/search/1/?search_content=%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92&source_file_id=3837&show_algorithm_tags=1)[背包类树形DP](https://www.acwing.com/problem/search/1/?search_content=%E8%83%8C%E5%8C%85%E7%B1%BB%E6%A0%91%E5%BD%A2DP&source_file_id=3837&show_algorithm_tags=1)
+* 动态规划 
+* 背包类树形DP 

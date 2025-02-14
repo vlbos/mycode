@@ -1,25 +1,29 @@
 5579\. 增加模数
 
-*    [题目](https://www.acwing.com/problem/content/description/5582/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/5582/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/5582/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/5582/)
+
+
+
+
+ 
+
+
+
 
   
 
-给定 HH 对非负整数数对 (Ai,Bi)(Ai,Bi) 和一个正整数 MM。
+给定 H 对非负整数数对 (A<sub>i</sub>,B<sub>i</sub>) 和一个正整数 M。
 
-请你计算并输出 (AB11+AB22+…+ABHH)modM(A1B1+A2B2+…+AHBH)modM。
+请你计算并输出 (A<sub>1</sub><sup>B<sub>1</sub></sup>+A<sub>2</sub><sup>B<sub>2</sub></sup>+…+A<sub>H</sub><sup>B<sub>H</sub></sup>)modM。
 
 #### 输入格式
 
-第一行包含整数 TT，表示共有 TT 组测试数据。
+第一行包含整数 T，表示共有 T 组测试数据。
 
-每组数据第一行包含整数 MM。
+每组数据第一行包含整数 M。
 
-第二行包含整数 HH。
+第二行包含整数 H。
 
-接下来 HH 行，每行包含两个整数 Ai,BiAi,Bi。
+接下来 H 行，每行包含两个整数 A<sub>i</sub>,B<sub>i</sub>。
 
 #### 输出格式
 
@@ -27,11 +31,11 @@
 
 #### 数据范围
 
-1≤T≤1001≤T≤100,  
-1≤M≤450001≤M≤45000,  
-1≤H≤450001≤H≤45000,  
-0≤Ai,Bi≤1070≤Ai,Bi≤107,  
-AiAi 和 BiBi 不同时为 00。
+1≤T≤100,  
+1≤M≤45000,  
+1≤H≤45000,  
+0≤Ai,Bi≤107,  
+Ai 和 Bi 不同时为 0。
 
 #### 输入样例：
 
@@ -67,8 +71,8 @@ AiAi 和 BiBi 不同时为 00。
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=11655622&show_algorithm_tags=0)[POJ1995](https://www.acwing.com/problem/search/1/?search_content=POJ1995&source_file_id=11655622&show_algorithm_tags=0)
+例题/0x00 基本算法/0x01 位运算/Raising Modulo Numbers
 
 算法标签
 
-[快速幂](https://www.acwing.com/problem/search/1/?search_content=%E5%BF%AB%E9%80%9F%E5%B9%82&source_file_id=11655622&show_algorithm_tags=1)
+* 快速幂 

@@ -1,15 +1,19 @@
 275\. 传纸条
 
-*    [题目](https://www.acwing.com/problem/content/description/277/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/277/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/277/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/277/)
+
+
+
+
+ 
+
+
+
 
   
 
 小渊和小轩是好朋友也是同班同学，他们在一起总有谈不完的话题。
 
-一次素质拓展活动中，班上同学安排坐成一个 mm 行 nn 列的矩阵，而小渊和小轩被安排在矩阵对角线的两端，因此，他们就无法直接交谈了。
+一次素质拓展活动中，班上同学安排坐成一个m行n列的矩阵，而小渊和小轩被安排在矩阵对角线的两端，因此，他们就无法直接交谈了。
 
 幸运的是，他们可以通过传纸条来进行交流。
 
@@ -21,7 +25,7 @@
 
 班里每个同学都可以帮他们传递，但只会帮他们一次，也就是说如果此人在小渊递给小轩纸条的时候帮忙，那么在小轩递给小渊的时候就不会再帮忙，反之亦然。 
 
-还有一件事情需要注意，全班每个同学愿意帮忙的好感度有高有低（注意：小渊和小轩的好心程度没有定义，输入时用 00 表示），可以用一个 0∼1000∼100 的自然数来表示，数越大表示越好心。
+还有一件事情需要注意，全班每个同学愿意帮忙的好感度有高有低（注意：小渊和小轩的好心程度没有定义，输入时用0表示），可以用一个 0∼1000∼100 的自然数来表示，数越大表示越好心。
 
 小渊和小轩希望尽可能找好心程度高的同学来帮忙传纸条，即找到来回两条传递路径，使得这两条路径上同学的好心程度之和最大。
 
@@ -29,9 +33,9 @@
 
 #### 输入格式
 
-第一行有 22 个用空格隔开的整数 mm 和 nn，表示学生矩阵有 mm 行 nn 列。
+第一行有2个用空格隔开的整数m和n，表示学生矩阵有m行n列。
 
-接下来的 mm 行是一个 m×nm×n 的矩阵，矩阵中第 ii 行 jj 列的整数表示坐在第 ii 行 jj 列的学生的好心程度，每行的 nn 个整数之间用空格隔开。
+接下来的m行是一个 m×nm×n 的矩阵，矩阵中第i行j列的整数表示坐在第i行j列的学生的好心程度，每行的n个整数之间用空格隔开。
 
 #### 输出格式
 
@@ -64,8 +68,9 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3826&show_algorithm_tags=0)[NOIP2008提高组](https://www.acwing.com/problem/search/1/?search_content=NOIP2008%E6%8F%90%E9%AB%98%E7%BB%84&source_file_id=3826&show_algorithm_tags=0)[Google面试题](https://www.acwing.com/problem/search/1/?search_content=Google%E9%9D%A2%E8%AF%95%E9%A2%98&source_file_id=3826&show_algorithm_tags=0)
+例题/0x50 动态规划/0x51 线性DP/传纸条
 
 算法标签
 
-[DP](https://www.acwing.com/problem/search/1/?search_content=DP&source_file_id=3826&show_algorithm_tags=1)[线性DP](https://www.acwing.com/problem/search/1/?search_content=%E7%BA%BF%E6%80%A7DP&source_file_id=3826&show_algorithm_tags=1)
+* DP 
+* 线性DP 

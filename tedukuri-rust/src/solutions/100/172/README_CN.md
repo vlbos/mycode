@@ -1,15 +1,19 @@
 172\. 立体推箱子
 
-*    [题目](https://www.acwing.com/problem/content/description/174/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/174/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/174/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/174/)
+
+
+
+
+ 
+
+
+
 
   
 
 立体推箱子是一个风靡世界的小游戏。
 
-游戏地图是一个 NN 行 MM 列的矩阵，每个位置可能是硬地（用 `.` 表示）、易碎地面（用 `E` 表示）、禁地（用 `#` 表示）、起点（用 `X` 表示）或终点（用 `O` 表示）。
+游戏地图是一个N行M列的矩阵，每个位置可能是硬地（用 `.` 表示）、易碎地面（用 `E` 表示）、禁地（用 `#` 表示）、起点（用 `X` 表示）或终点（用 `O` 表示）。
 
 你的任务是操作一个 1×1×21×1×2 的长方体。
 
@@ -17,7 +21,7 @@
 
 在每一步操作中，可以按上下左右四个键之一。
 
-按下按键之后，长方体向对应的方向沿着棱滚动 9090 度。
+按下按键之后，长方体向对应的方向沿着棱滚动90度。
 
 任意时刻，长方体不能有任何部位接触禁地，并且不能立在易碎地面上。
 
@@ -33,9 +37,9 @@
 
 输入包含多组测试用例。
 
-对于每个测试用例，第一行包括两个整数 NN 和 MM。
+对于每个测试用例，第一行包括两个整数N和M。
 
-接下来 NN 行用来描述地图，每行包括 MM 个字符，每个字符表示一块地面的具体状态。
+接下来N行用来描述地图，每行包括M个字符，每个字符表示一块地面的具体状态。
 
 当输入用例 N\=0，M\=0N\=0，M\=0 时，表示输入终止，且该用例无需考虑。
 
@@ -77,8 +81,10 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3723&show_algorithm_tags=0)
+例题/0x20 搜索/0x25 广度优先搜索/Bloxorz I
 
 算法标签
 
-[搜索](https://www.acwing.com/problem/search/1/?search_content=%E6%90%9C%E7%B4%A2&source_file_id=3723&show_algorithm_tags=1)[广度优先搜索](https://www.acwing.com/problem/search/1/?search_content=%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2&source_file_id=3723&show_algorithm_tags=1)[BFS](https://www.acwing.com/problem/search/1/?search_content=BFS&source_file_id=3723&show_algorithm_tags=1)
+* 搜索 
+* 广度优先搜索 
+* BFS 

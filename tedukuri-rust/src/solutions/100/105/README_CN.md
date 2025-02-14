@@ -1,12 +1,4 @@
 105\. 七夕祭
-
-*    [题目](https://www.acwing.com/problem/content/description/107/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/107/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/107/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/107/)
-
-  
-
 七夕节因牛郎织女的传说而被扣上了「情人节」的帽子。
 
 于是 TYVJ 今年举办了一次线下七夕祭。
@@ -15,7 +7,7 @@ Vani 同学今年成功邀请到了 cl 同学陪他来共度七夕，于是他�
 
 TYVJ 七夕祭和 11 区的夏祭的形式很像。
 
-矩形的祭典会场由 NN 排 MM 列共计 N×MN×M 个摊点组成。
+矩形的祭典会场由 N 排 M 列共计 N×M 个摊点组成。
 
 虽然摊点种类繁多，不过 cl 只对其中的一部分摊点感兴趣，比如章鱼烧、苹果糖、棉花糖、射的屋……什么的。
 
@@ -31,14 +23,12 @@ Vani 预先联系了七夕祭的负责人 zhq，希望能够通过恰当地布�
 
 在此前提下，至少需要交换多少次摊点。
 
-#### 输入格式
+输入格式<br>
+第一行包含三个整数 N 和 M 和 T，T 表示 cl 对多少个摊点感兴趣。
 
-第一行包含三个整数 NN 和 MM 和 TT，TT 表示 cl 对多少个摊点感兴趣。
+接下来 T 行，每行两个整数 x,y，表示 cl 对处在第 x 行第 y 列的摊点感兴趣。
 
-接下来 TT 行，每行两个整数 x,yx,y，表示 cl 对处在第 xx 行第 yy 列的摊点感兴趣。
-
-#### 输出格式
-
+输出格式<br>
 首先输出一个字符串。
 
 如果能满足 Vani 的全部两个要求，输出 both；
@@ -51,12 +41,11 @@ Vani 预先联系了七夕祭的负责人 zhq，希望能够通过恰当地布�
 
 如果输出的字符串不是 impossible， 接下来输出最小交换次数，与字符串之间用一个空格隔开。
 
-#### 数据范围
-
-1≤N,M≤1000001≤N,M≤100000,  
-0≤T≤min(N∗M,100000)0≤T≤min(N∗M,100000),  
-1≤x≤N1≤x≤N,  
-1≤y≤M1≤y≤M
+数据范围<br>
+1≤N,M≤100000,<br>
+0≤T≤min(N∗M,100000),<br>
+1≤x≤N,<br>
+1≤y≤M<br>
 
 #### 输入样例：
 
@@ -82,8 +71,10 @@ Vani 预先联系了七夕祭的负责人 zhq，希望能够通过恰当地布�
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3656&show_algorithm_tags=0)
+例题/0x00 基本算法/0x05 排序/七夕祭
 
 算法标签
 
-[排序](https://www.acwing.com/problem/search/1/?search_content=%E6%8E%92%E5%BA%8F&source_file_id=3656&show_algorithm_tags=1)[贪心](https://www.acwing.com/problem/search/1/?search_content=%E8%B4%AA%E5%BF%83&source_file_id=3656&show_algorithm_tags=1)[推公式](https://www.acwing.com/problem/search/1/?search_content=%E6%8E%A8%E5%85%AC%E5%BC%8F&source_file_id=3656&show_algorithm_tags=1)
+* 排序 
+* 贪心 
+* 推公式 

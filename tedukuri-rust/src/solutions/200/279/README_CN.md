@@ -1,24 +1,28 @@
 279\. 自然数拆分
 
-*    [题目](https://www.acwing.com/problem/content/description/281/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/281/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/281/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/281/)
+
+
+
+
+ 
+
+
+
 
   
 
-给定一个自然数 NN，要求把 NN 拆分成若干个正整数相加的形式，参与加法运算的数可以重复。
+给定一个自然数N，要求把N拆分成若干个正整数相加的形式，参与加法运算的数可以重复。
 
 **注意**:
 
 *   拆分方案不考虑顺序；
-*   至少拆分成 22 个数的和。
+*   至少拆分成2个数的和。
 
-求拆分的方案数 mod2147483648mod2147483648 的结果。
+求拆分的方案数mod2147483648的结果。
 
 #### 输入格式
 
-一个自然数 NN。
+一个自然数N。
 
 #### 输出格式
 
@@ -26,7 +30,7 @@
 
 #### 数据范围
 
-1≤N≤40001≤N≤4000
+1≤N≤4000
 
 #### 输入样例：
 
@@ -48,8 +52,9 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3830&show_algorithm_tags=0)
+例题/0x50 动态规划/0x52 背包/自然数拆分Lunatic版
 
 算法标签
 
-[动态规划](https://www.acwing.com/problem/search/1/?search_content=%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92&source_file_id=3830&show_algorithm_tags=1)[完全背包问题](https://www.acwing.com/problem/search/1/?search_content=%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98&source_file_id=3830&show_algorithm_tags=1)
+* 动态规划 
+* 完全背包问题 

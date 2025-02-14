@@ -1,13 +1,17 @@
-1055\. 股票买卖 II
+1055\. 股票买卖I
 
-*    [题目](https://www.acwing.com/problem/content/description/1057/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/1057/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/1057/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/1057/)
+
+
+
+
+ 
+
+
+
 
   
 
-给定一个长度为 NN 的数组，数组中的第 ii 个数字表示一个给定股票在第 ii 天的价格。
+给定一个长度为N的数组，数组中的第i个数字表示一个给定股票在第i天的价格。
 
 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。
 
@@ -15,9 +19,9 @@
 
 #### 输入格式
 
-第一行包含整数 NN，表示数组长度。
+第一行包含整数N，表示数组长度。
 
-第二行包含 NN 个不大于 1000010000 的正整数，表示完整的数组。
+第二行包含N个不大于10000的正整数，表示完整的数组。
 
 #### 输出格式
 
@@ -25,7 +29,7 @@
 
 #### 数据范围
 
-1≤N≤1051≤N≤105
+1≤N≤105
 
 #### 输入样例1：
 
@@ -78,8 +82,11 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=4184000&show_algorithm_tags=0)[LeetCode](https://www.acwing.com/problem/search/1/?search_content=LeetCode&source_file_id=4184000&show_algorithm_tags=0)
+
 
 算法标签
 
-[贪心](https://www.acwing.com/problem/search/1/?search_content=%E8%B4%AA%E5%BF%83&source_file_id=4184000&show_algorithm_tags=1)[DP](https://www.acwing.com/problem/search/1/?search_content=DP&source_file_id=4184000&show_algorithm_tags=1)[线性DP](https://www.acwing.com/problem/search/1/?search_content=%E7%BA%BF%E6%80%A7DP&source_file_id=4184000&show_algorithm_tags=1)[状态机](https://www.acwing.com/problem/search/1/?search_content=%E7%8A%B6%E6%80%81%E6%9C%BA&source_file_id=4184000&show_algorithm_tags=1)
+* 贪心 
+* DP 
+* 线性DP 
+* 状态机 

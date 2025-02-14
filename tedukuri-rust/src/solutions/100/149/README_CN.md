@@ -1,12 +1,4 @@
 149\. 荷马史诗
-
-*    [题目](https://www.acwing.com/problem/content/description/151/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/151/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/151/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/151/)
-
-  
-
 追逐影子的人，自己就是影子。 ——荷马
 
 达达最近迷上了文学。
@@ -15,43 +7,40 @@
 
 但是由《奥德赛》和《伊利亚特》组成的鸿篇巨制《荷马史诗》实在是太长了，达达想通过一种编码方式使得它变得短一些。
 
-一部《荷马史诗》中有 nn 种不同的单词，从 11 到 nn 进行编号。其中第 ii 种单词出现的总次数为 wiwi。
+一部《荷马史诗》中有 n 种不同的单词，从 1 到 n 进行编号。其中第 i 种单词出现的总次数为 w<sub>i</sub>。
 
-达达想要用 kk 进制串 sisi 来替换第 ii 种单词，使得其满足如下要求:
+达达想要用 k 进制串 s<sub>i</sub> 来替换第 i 种单词，使得其满足如下要求:
 
-对于任意的 1≤i,j≤n，i≠j1≤i,j≤n，i≠j，都有：sisi 不是 sjsj 的前缀。
+对于任意的 1≤i,j≤n，i≠j，都有：s<sub>i</sub>不是 s<sub>i</sub> 的前缀。
 
-现在达达想要知道，如何选择 sisi，才能使替换以后得到的新的《荷马史诗》长度最小。
+现在达达想要知道，如何选择 s<sub>i</sub>，才能使替换以后得到的新的《荷马史诗》长度最小。
 
-在确保总长度最小的情况下，达达还想知道最长的 sisi 的最短长度是多少？
+在确保总长度最小的情况下，达达还想知道最长的 s<sub>i</sub>的最短长度是多少？
 
-一个字符串被称为 kk 进制字符串，当且仅当它的每个字符是 00 到 k−1k−1 之间（包括 00 和 k−1k−1）的整数。
+一个字符串被称为 k 进制字符串，当且仅当它的每个字符是 0 到 k−1 之间（包括 0 和 k−1）的整数。
 
-字符串 Str1Str1 被称为字符串 Str2Str2 的前缀，当且仅当：存在 1≤t≤m1≤t≤m，使得 Str1\=Str2\[1..t\]Str1\=Str2\[1..t\]。
+字符串 Str1 被称为字符串 Str2 的前缀，当且仅当：存在 1≤t≤m，使得 Str1=Str2[1..t]。
 
-其中，mm 是字符串 Str2Str2 的长度，Str2\[1..t\]Str2\[1..t\] 表示 Str2Str2 的前 tt 个字符组成的字符串。
+其中，m 是字符串 Str2 的长度，Str2[1..t] 表示 Str2 的前 t 个字符组成的字符串。
 
-**注意**:请使用 6464 位整数进行输入输出、储存和计算。
+注意:请使用 64 位整数进行输入输出、储存和计算。
 
-#### 输入格式
+输入格式<br>
+输入文件的第 1 行包含 2 个正整数 n,k，中间用单个空格隔开，表示共有 n 种单词，需要使用 k 进制字符串进行替换。
 
-输入文件的第 11 行包含 22 个正整数 n,kn,k，中间用单个空格隔开，表示共有 nn 种单词，需要使用 kk 进制字符串进行替换。
+第 2∼n+1 行：第 i+1 行包含 1 个非负整数 wi，表示第 i 种单词的出现次数。
 
-第 2∼n+12∼n+1 行：第 i+1i+1 行包含 11 个非负整数 wiwi，表示第 ii 种单词的出现次数。
+输出格式<br>
+输出文件包括 2 行。
 
-#### 输出格式
+第 1 行输出 1 个整数，为《荷马史诗》经过重新编码以后的最短长度。
 
-输出文件包括 22 行。
+第 2 行输出 1 个整数，为保证最短总长度的情况下，最长字符串 s<sub>i</sub> 的最短长度。
 
-第 11 行输出 11 个整数，为《荷马史诗》经过重新编码以后的最短长度。
-
-第 22 行输出 11 个整数，为保证最短总长度的情况下，最长字符串 sisi 的最短长度。
-
-#### 数据范围
-
-2≤n≤1000002≤n≤100000,  
-2≤k≤92≤k≤9  
-1≤wi≤10121≤wi≤1012
+数据范围<br>
+2≤n≤100000,<br>
+2≤k≤9<br>
+1≤w<sub>i</sub>≤10<sup>12</sup>
 
 #### 输入样例：
 
@@ -78,8 +67,10 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3700&show_algorithm_tags=0)[NOI2015](https://www.acwing.com/problem/search/1/?search_content=NOI2015&source_file_id=3700&show_algorithm_tags=0)
+例题/0x10 基本数据结构/0x17 二叉堆/荷马史诗
 
 算法标签
 
-[贪心](https://www.acwing.com/problem/search/1/?search_content=%E8%B4%AA%E5%BF%83&source_file_id=3700&show_algorithm_tags=1)[二叉堆](https://www.acwing.com/problem/search/1/?search_content=%E4%BA%8C%E5%8F%89%E5%A0%86&source_file_id=3700&show_algorithm_tags=1)[Huffman树](https://www.acwing.com/problem/search/1/?search_content=Huffman%E6%A0%91&source_file_id=3700&show_algorithm_tags=1)
+* 贪心 
+* 二叉堆 
+* Huffman树 

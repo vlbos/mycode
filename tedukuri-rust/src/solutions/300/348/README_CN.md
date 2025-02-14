@@ -1,9 +1,13 @@
 348\. 沙漠之王
 
-*    [题目](https://www.acwing.com/problem/content/description/350/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/350/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/350/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/350/)
+
+
+
+
+ 
+
+
+
 
   
 
@@ -29,13 +33,13 @@
 
 输入包含多组测试数据。
 
-每组测试数据第一行包含整数 NN，表示村庄（包括首都）的总数目。
+每组测试数据第一行包含整数N，表示村庄（包括首都）的总数目。
 
-接下来 NN 行，每行包含三个整数 x，y，zx，y，z，描述一个村庄的地理位置，(x,y)(x,y) 为该村庄的位置坐标，zz 为该村庄的地理高度。
+接下来N行，每行包含三个整数 x，y，zx，y，z，描述一个村庄的地理位置，(x,y)(x,y) 为该村庄的位置坐标，zz 为该村庄的地理高度。
 
 第一个被描述的村庄即为首都。
 
-当输入一行为 00 时，表示输入终止。
+当输入一行为0时，表示输入终止。
 
 #### 输出格式
 
@@ -45,9 +49,9 @@
 
 #### 数据范围
 
-2≤N≤10002≤N≤1000,  
+2≤N≤1000,  
 0≤x,y<100000≤x,y<10000,  
-0≤z≤100000000≤z≤10000000
+0≤z≤10000000
 
 #### 输入样例：
 
@@ -74,8 +78,9 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3899&show_algorithm_tags=0)
+
 
 算法标签
 
-[图论](https://www.acwing.com/problem/search/1/?search_content=%E5%9B%BE%E8%AE%BA&source_file_id=3899&show_algorithm_tags=1)[最小生成树](https://www.acwing.com/problem/search/1/?search_content=%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91&source_file_id=3899&show_algorithm_tags=1)
+* 图论 
+* 最小生成树 

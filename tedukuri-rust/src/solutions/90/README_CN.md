@@ -1,17 +1,11 @@
 90\. 64位整数乘法
 
-*    [题目](https://www.acwing.com/problem/content/description/92/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/92/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/92/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/92/)
 
-  
-
-求 aa 乘 bb 对 pp 取模的值。
+求 $a$ 乘 $b$ 对 $p$ 取模的值。
 
 #### 输入格式
 
-第一行输入整数aa，第二行输入整数bb，第三行输入整数pp。
+第一行输入整数$a$，第二行输入整数$b$，第三行输入整数$p$。
 
 #### 输出格式
 
@@ -19,7 +13,7 @@
 
 #### 数据范围
 
-1≤a,b,p≤10181≤a,b,p≤1018
+$1 \\le a,b,p \\le 10^{18}$
 
 #### 输入样例：
 
@@ -43,8 +37,10 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3641&show_algorithm_tags=0)
+/配套光盘/例题/0x30 数学知识/0x33 同余/The Luckiest Number/POJ3696.cpp
+/配套光盘/正文包含的程序片段/0x01 bit.cpp
+例题/0x00 基本算法/0x01 位运算/64位整数乘法
 
 算法标签
 
-[位运算](https://www.acwing.com/problem/search/1/?search_content=%E4%BD%8D%E8%BF%90%E7%AE%97&source_file_id=3641&show_algorithm_tags=1)
+* 位运算 

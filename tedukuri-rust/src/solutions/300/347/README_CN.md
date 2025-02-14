@@ -1,9 +1,13 @@
 347\. 野餐规划
 
-*    [题目](https://www.acwing.com/problem/content/description/349/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/349/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/349/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/349/)
+
+
+
+
+ 
+
+
+
 
   
 
@@ -23,19 +27,19 @@
 
 #### 输入格式
 
-第一行包含整数 nn，表示人和人之间或人和公园之间的道路的总数量。
+第一行包含整数n，表示人和人之间或人和公园之间的道路的总数量。
 
-接下来 nn 行，每行包含两个字符串 A、BA、B 和一个整数 LL，用以描述人 AA 和人 BB 之前存在道路，路长为 LL（L≤200L≤200），或者描述某人和公园之间存在道路，路长为 LL。
+接下来n行，每行包含两个字符串 A、BA、B 和一个整数L，用以描述人A和人B之前存在道路，路长为L（L≤200L≤200），或者描述某人和公园之间存在道路，路长为L。
 
-道路都是双向的，并且人数不超过 2020，表示人的名字的字符串长度不超过 1010，公园用 `Park` 表示。
+道路都是双向的，并且人数不超过20，表示人的名字的字符串长度不超过10，公园用 `Park` 表示。
 
-再接下来一行，包含整数 ss，表示公园的最大停车数量。
+再接下来一行，包含整数s，表示公园的最大停车数量。
 
 你可以假设每个人的家都有一条通往公园的道路。
 
 #### 输出格式
 
-输出 `Total miles driven: xxx`，其中 xxxxxx 表示所有汽车行驶的总路程。
+输出 `Total miles driven:xx`，其中xxx表示所有汽车行驶的总路程。
 
 #### 输入样例：
 
@@ -68,8 +72,9 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3898&show_algorithm_tags=0)
+例题/0x60 图论/0x62 最小生成树/Picnic Planning
 
 算法标签
 
-[图论](https://www.acwing.com/problem/search/1/?search_content=%E5%9B%BE%E8%AE%BA&source_file_id=3898&show_algorithm_tags=1)[最小生成树](https://www.acwing.com/problem/search/1/?search_content=%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91&source_file_id=3898&show_algorithm_tags=1)
+* 图论 
+* 最小生成树 

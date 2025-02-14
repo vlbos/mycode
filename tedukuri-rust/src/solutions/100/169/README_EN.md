@@ -1,52 +1,71 @@
-264.权值
+169\. 数独2
 
-给定一棵 N 个节点的树，每条边带有一个权值。
 
-求一条简单路径，路径上各条边的权值和等于 K，且路径包含的边的数量最少。
+请你将一个 $16 \\times 16$ 的数独填写完整，使得每行、每列、每个 $4 \\times 4$ 十六宫格内字母 $A \\sim P$ 均恰好出现一次。
+
+保证每个输入只有唯一解决方案。
+
+![数独2.jpg](https://cdn.acwing.com/media/article/image/2019/01/16/19_cabce58018-%E6%95%B0%E7%8B%AC2.jpg)
 
 #### 输入格式
 
-第一行两个整数 N,K。
+输入包含多组测试用例。
 
-第 2∼N 行每行三个整数 x,y,z 表示一条无向边的两个端点 x,y 和权值 z，点的编号从 0 开始。
+每组测试用例包括 $16$ 行，每行一组字符串，共 $16$ 个字符串。
+
+第 $i$ 个字符串表示数独的第 $i$ 行。
+
+字符串包含字符可能为字母 $A \\sim P$ 或 `-`（表示等待填充）。
+
+测试用例之间用单个空行分隔，输入至文件结尾处终止。
 
 #### 输出格式
 
-输出一个整数，表示最少边数量。
+对于每个测试用例，均要求保持与输入相同的格式，将填充完成后的数独输出。
 
-如果不存在满足要求的路径，输出 −1。
-
-#### 数据范围
-
-1≤N≤2×105,  
-1≤K≤106,  
-0≤z≤106
+每个测试用例输出结束后，输出一个空行。
 
 #### 输入样例：
 
-    4 3
-    0 1 1
-    1 2 2
-    1 3 4
-    
+```
+--A----C-----O-I
+-J--A-B-P-CGF-H-
+--D--F-I-E----P-
+-G-EL-H----M-J--
+----E----C--G---
+-I--K-GA-B---E-J
+D-GP--J-F----A--
+-E---C-B--DP--O-
+E--F-M--D--L-K-A
+-C--------O-I-L-
+H-P-C--F-A--B---
+---G-OD---J----H
+K---J----H-A-P-L
+--B--P--E--K--A-
+-H--B--K--FI-C--
+--F---C--D--H-N-
+```
 
 #### 输出样例：
 
-    2
-    
+```
+FPAHMJECNLBDKOGI
+OJMIANBDPKCGFLHE
+LNDKGFOIJEAHMBPC
+BGCELKHPOFIMAJDN
+MFHBELPOACKJGNID
+CILNKDGAHBMOPEFJ
+DOGPIHJMFNLECAKB
+JEKAFCNBGIDPLHOM
+EBOFPMIJDGHLNKCA
+NCJDHBAEKMOFIGLP
+HMPLCGKFIAENBDJO
+AKIGNODLBPJCEFMH
+KDEMJIFNCHGAOPBL
+GLBCDPMHEONKJIAF
+PHNOBALKMJFIDCEG
+IAFJOECGLDPBHMNK
 
-难度：困难
+```
 
-时/空限制：2s / 64MB
-
-总通过数：1604
-
-总尝试数：5102
-
-来源：
-
-
-
-算法标签
-
-[点分治]
+* * *

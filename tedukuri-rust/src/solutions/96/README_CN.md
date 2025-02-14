@@ -1,29 +1,22 @@
 96\. 奇怪的汉诺塔
 
-*    [题目](https://www.acwing.com/problem/content/description/98/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/98/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/98/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/98/)
-
-  
-
 汉诺塔问题，条件如下：
 
-1、这里有 A、B、CA、B、C 和 DD 四座塔。
+1、这里有 $A、B、C$ 和 $D$ 四座塔。
 
-2、这里有 nn 个圆盘，nn 的数量是恒定的。
+2、这里有 $n$ 个圆盘，$n$ 的数量是恒定的。
 
 3、每个圆盘的尺寸都不相同。
 
-4、所有的圆盘在开始时都堆叠在塔 AA 上，且圆盘尺寸从塔顶到塔底逐渐增大。
+4、所有的圆盘在开始时都堆叠在塔 $A$ 上，且圆盘尺寸从塔顶到塔底逐渐增大。
 
-5、我们需要将所有的圆盘都从塔 AA 转移到塔 DD 上。
+5、我们需要将所有的圆盘都从塔 $A$ 转移到塔 $D$ 上。
 
 6、每次可以移动一个圆盘，当塔为空塔或者塔顶圆盘尺寸大于被移动圆盘时，可将圆盘移至这座塔上。
 
-请你求出将所有圆盘从塔 AA 移动到塔 DD，所需的最小移动次数是多少。
+请你求出将所有圆盘从塔 $A$ 移动到塔 $D$，所需的最小移动次数是多少。
 
-![河内塔.jpg](https://cdn.acwing.com/media/article/image/2019/01/10/19_acbb764014-%E6%B2%B3%E5%86%85%E5%A1%94.jpg)  
+![河内塔.jpg](https://cdn.acwing.com/media/article/image/2019/01/10/19_acbb764014-%E6%B2%B3%E5%86%85%E5%A1%94.jpg)
 汉诺塔塔参考模型
 
 #### 输入格式
@@ -32,11 +25,23 @@
 
 #### 输出格式
 
-对于每一个整数 nn，输出一个满足条件的最小移动次数，每个结果占一行。
+对于每一个整数 $n$，输出一个满足条件的最小移动次数，每个结果占一行。
 
 #### 数据范围
 
-1≤n≤121≤n≤12
+$1 \\le n \\le 12$
+
+#### 输入格式
+
+没有输入
+
+#### 输出格式
+
+对于每一个整数n，输出一个满足条件的最小移动次数，每个结果占一行。
+
+#### 数据范围
+
+1≤n≤12
 
 #### 输入样例：
 
@@ -58,8 +63,8 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3647&show_algorithm_tags=0)
+例题/0x00 基本算法/0x02 递推与递归/Strange Towers of Hanoi
 
 算法标签
 
-[递归](https://www.acwing.com/problem/search/1/?search_content=%E9%80%92%E5%BD%92&source_file_id=3647&show_algorithm_tags=1)
+* 递归 

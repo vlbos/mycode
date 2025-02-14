@@ -1,15 +1,19 @@
 408\. 回家
 
-*    [题目](https://www.acwing.com/problem/content/description/410/)
-*    [讨论](https://www.acwing.com/problem/content/discussion/index/410/1/)
-*    [题解](https://www.acwing.com/problem/content/solution/410/1/)
-*    [视频讲解](https://www.acwing.com/problem/content/video/410/)
+
+
+
+
+ 
+
+
+
 
   
 
-在网格地图上有 nn 个小人和 nn 个房子，在单位时间内，每个小人都可以水平或垂直移动一个格子。
+在网格地图上有n个小人和n个房子，在单位时间内，每个小人都可以水平或垂直移动一个格子。
 
-每个小人移动一步都会花费你 11 美金，直到他进入到一间房子里为止，每间房子只能容纳一人。
+每个小人移动一步都会花费你1美金，直到他进入到一间房子里为止，每间房子只能容纳一人。
 
 你需要计算，所有小人都进入到房子里，你所需要花费的金额最少是多少。
 
@@ -21,11 +25,11 @@
 
 输入包含多组测试数据。
 
-每组测试数据第一行包含两个整数 NN 和 MM，表示地图大小为 NN 行 MM 列。
+每组测试数据第一行包含两个整数N和M，表示地图大小为N行M列。
 
-接下来 NN 行每行包含 MM 个字符，表示完整的地图场景。
+接下来N行每行包含M个字符，表示完整的地图场景。
 
-房屋数量与人数量相同，且不超过 100100 个。
+房屋数量与人数量相同，且不超过100个。
 
 当输入一行为 `0 0` 时，表示输入终止。
 
@@ -45,16 +49,16 @@
     .m
     H.
     5 5
-    HH..m
+   H..m
     .....
     .....
     .....
-    mm..H
+   m..H
     7 8
     ...H....
     ...H....
     ...H....
-    mmmHmmmm
+   mmHmmmm
     ...H....
     ...H....
     ...H....
@@ -78,8 +82,9 @@
 
 来源：
 
-[《算法竞赛进阶指南》](https://www.acwing.com/problem/search/1/?search_content=%E3%80%8A%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97%E3%80%8B&source_file_id=3959&show_algorithm_tags=0)[POJ2195](https://www.acwing.com/problem/search/1/?search_content=POJ2195&source_file_id=3959&show_algorithm_tags=0)[kuangbin专题](https://www.acwing.com/problem/search/1/?search_content=kuangbin%E4%B8%93%E9%A2%98&source_file_id=3959&show_algorithm_tags=0)
+习题/0x6B 图论 总结与练习/Going Home
 
 算法标签
 
-[图论](https://www.acwing.com/problem/search/1/?search_content=%E5%9B%BE%E8%AE%BA&source_file_id=3959&show_algorithm_tags=1)[二分图带权匹配](https://www.acwing.com/problem/search/1/?search_content=%E4%BA%8C%E5%88%86%E5%9B%BE%E5%B8%A6%E6%9D%83%E5%8C%B9%E9%85%8D&source_file_id=3959&show_algorithm_tags=1)
+* 图论 
+* 二分图带权匹配 
