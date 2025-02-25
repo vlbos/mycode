@@ -1,16 +1,5 @@
 199\. 余数之和
 
-
-
-
-
- 
-
-
-
-
-  
-
 给出正整数n和k，计算 j(n,k)\=kmod1+kmod2+kmod3+…+kmodnj(n,k)\=kmod1+kmod2+kmod3+…+kmodn 的值。
 
 例如 j(5,3)\=3mod1+3mod2+3mod3+3mod4+3mod5\=0+1+0+3+3\=7j(5,3)\=3mod1+3mod2+3mod3+3mod4+3mod5\=0+1+0+3+3\=7。

@@ -45,3 +45,9 @@ Q 2 4
 15
 
 ```
+
+
+
+配套光盘/例题/0x40 数据结构进阶/0x43 线段树/A Simple Problem with Integers
+
+配套光盘/例题/0x40 数据结构进阶/0x44 分块/A Simple Problem with Integers

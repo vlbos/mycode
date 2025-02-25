@@ -49,3 +49,7 @@ Q 2
 2
 5
 ```
+
+
+
+配套光盘/例题/0x40 数据结构进阶/0x42 树状数组/A Simple Problem with Integers

@@ -62,7 +62,7 @@ N≤500000,M≤100000N≤500000,M≤100000,
 
 来源：
 
-
+配套光盘/例题/0x40 数据结构进阶/0x43 线段树/Can you answer on these queries III
 
 算法标签
 
