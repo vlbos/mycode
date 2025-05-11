@@ -408,7 +408,7 @@ fn main() {
         "",
         "Raising Modulo Numbers",
     ];
-    const fno: i32 = 199;
+    const fno: i32 = 200;
     for i in fno..=fno {
         let mut paths = [
             BASE_PATH,
@@ -614,23 +614,22 @@ fn sub_path_solving(file_number: &i32) -> &str {
         _ if fno == fno.clamp(293, 294) => "例题/0x50 动态规划/0x57 倍增优化DP/",
         _ if fno == fno.clamp(295, 297) => "例题/0x50 动态规划/0x58 数据结构优化DP/",
         _ if fno == fno.clamp(298, 299) => "例题/0x50 动态规划/0x59 单调队列优化DP/",
-        _ if fno == fno.clamp(300, 299) => "例题/0x50 动态规划/0x5A 斜率优化/",
-        _ if fno == fno.clamp(300, 299) => "例题/0x50 动态规划/0x5B 四边形不等式/",
-        _ if fno == fno.clamp(306, 299) => "例题/0x50 动态规划/0x5C 计数类DP/",
-        _ if fno == fno.clamp(310, 299) => "例题/0x50 动态规划/0x5D 数位统计DP/",
-        _ if fno == fno.clamp(312, 299) => "习题/0x5E 动态规划 总结与练习/",
-        _ if fno == fno.clamp(340, 299) => "例题/0x60 图论/0x61 最短路/",
-        _ if fno == fno.clamp(346, 299) => "例题/0x60 图论/0x62 最小生成树/",
-        _ if fno == fno.clamp(350, 299) => "例题/0x60 图论/0x63 树的直径与最近公共祖先/",
-        _ if fno == fno.clamp(358, 299) => "例题/0x60 图论/0x64 基环树/",
-        _ if fno == fno.clamp(361, 299) => "例题/0x60 图论/0x65 负环与差分约束/",
-        _ if fno == fno.clamp(363, 299) => "例题/0x60 图论/0x66 Tarjan算法与无向图连通性/",
-        _ if fno == fno.clamp(368, 299) => "例题/0x60 图论/0x67 Tarjan算法与有向图连通性/",
-        _ if fno == fno.clamp(372, 299) => "例题/0x60 图论/0x68 二分图的匹配/",
-        _ if fno == fno.clamp(376, 299) => "例题/0x60 图论/0x69 二分图的覆盖与独立集/",
-        _ if fno == fno.clamp(380, 299) => "例题/0x60 图论/0x6A 网络流初步/",
-        _ if fno == fno.clamp(383, 299) => "习题/0x6B 图论 总结与练习/",
-
+        _ if fno == fno.clamp(300, 303) => "例题/0x50 动态规划/0x5A 斜率优化/",
+        _ if fno == fno.clamp(304, 305) => "例题/0x50 动态规划/0x5B 四边形不等式/",
+        _ if fno == fno.clamp(306, 309) => "例题/0x50 动态规划/0x5C 计数类DP/",
+        _ if fno == fno.clamp(310, 311) => "例题/0x50 动态规划/0x5D 数位统计DP/",
+        _ if fno == fno.clamp(312, 339) => "习题/0x5E 动态规划 总结与练习/",
+        _ if fno == fno.clamp(340, 345) => "例题/0x60 图论/0x61 最短路/",
+        _ if fno == fno.clamp(346, 349) => "例题/0x60 图论/0x62 最小生成树/",
+        _ if fno == fno.clamp(350, 357) => "例题/0x60 图论/0x63 树的直径与最近公共祖先/",
+        _ if fno == fno.clamp(358, 360) => "例题/0x60 图论/0x64 基环树/",
+        _ if fno == fno.clamp(361, 362) => "例题/0x60 图论/0x65 负环与差分约束/",
+        _ if fno == fno.clamp(363, 367) => "例题/0x60 图论/0x66 Tarjan算法与无向图连通性/",
+        _ if fno == fno.clamp(368, 371) => "例题/0x60 图论/0x67 Tarjan算法与有向图连通性/",
+        _ if fno == fno.clamp(372, 375) => "例题/0x60 图论/0x68 二分图的匹配/",
+        _ if fno == fno.clamp(376, 379) => "例题/0x60 图论/0x69 二分图的覆盖与独立集/",
+        _ if fno == fno.clamp(380, 382) => "例题/0x60 图论/0x6A 网络流初步/",
+        _ if fno == fno.clamp(383, 412) => "习题/0x6B 图论 总结与练习/",
         _ => panic!("{}", fno),
     }
 }
