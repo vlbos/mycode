@@ -448,3 +448,5 @@ pub mod _3520_minimum_threshold_for_inversion_pairs_count;
 pub mod _3526_range_xor_queries_with_subarray_reversals;
 pub mod _3535_unit_conversion_ii;
 pub mod _3540_minimum_time_to_visit_all_houses;
+pub mod _3549_multiply_two_polynomials;
+pub mod _3555_smallest_subarray_to_sort_in_every_sliding_window;
