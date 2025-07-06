@@ -1,4 +1,3 @@
-
 // ## [3466\. Maximum Coin Collection 🔒](https://leetcode.com/problems/maximum-coin-collection)
 
 // [![](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)
@@ -87,11 +86,7 @@
 // +   `1 <= lane1.length == lane2.length <= 105`
 // +   `-109 <= lane1[i], lane2[i] <= 109`
 
-
-
-
 //  long long max_coins(vector<int>& lane1, vector<int>& lane2) {
-
 
 #[allow(dead_code)]
 pub struct Solution;
@@ -108,23 +103,28 @@ mod test {
 
     #[test]
     pub fn test_max_coins_1() {
-        assert_eq!(14, Solution::max_coins(vec![1,-2,-10,3], vec![-5,10,0,1]));
+        assert_eq!(
+            14,
+            Solution::max_coins(vec![1, -2, -10, 3], vec![-5, 10, 0, 1])
+        );
     }
     #[test]
     pub fn test_max_coins_2() {
-        assert_eq!(8, Solution::max_coins(vec![1,-1,-1,-1], vec![0,3,4,-5]));
+        assert_eq!(
+            8,
+            Solution::max_coins(vec![1, -1, -1, -1], vec![0, 3, 4, -5])
+        );
     }
-   #[test]
+    #[test]
     pub fn test_max_coins_3() {
-        assert_eq!(5, Solution::max_coins(vec![-5,-4,-3], vec![-1,2,3]));
+        assert_eq!(5, Solution::max_coins(vec![-5, -4, -3], vec![-1, 2, 3]));
     }
     #[test]
     pub fn test_max_coins_4() {
-        assert_eq!(11, Solution::max_coins(vec![-3,-3,-3], vec![9,-2,4]));
+        assert_eq!(11, Solution::max_coins(vec![-3, -3, -3], vec![9, -2, 4]));
     }
-   #[test]
+    #[test]
     pub fn test_max_coins_5() {
         assert_eq!(-2, Solution::max_coins(vec![-10], vec![-2]));
     }
-  
 }

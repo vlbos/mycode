@@ -1,4 +1,3 @@
-
 // ## [3511\. Make a Positive Array 🔒](https://leetcode.com/problems/make-a-positive-array)
 
 // [![](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)
@@ -56,15 +55,13 @@
 // +   `3 <= nums.length <= 105`
 // +   `-109 <= nums[i] <= 109`
 
-
 //  int make_array_positive(vector<int>& nums) {
-
 
 #[allow(dead_code)]
 pub struct Solution;
 impl Solution {
     pub fn make_array_positive(nums: Vec<i32>) -> i32 {
-       0
+        0
     }
 }
 
@@ -73,11 +70,10 @@ mod test {
     use super::*;
     #[test]
     pub fn test_make_array_positive_1() {
-        assert_eq!(1, Solution::make_array_positive(vec![-10,15,-12]));
+        assert_eq!(1, Solution::make_array_positive(vec![-10, 15, -12]));
     }
     #[test]
     pub fn test_make_array_positive_2() {
-        assert_eq!(1, Solution::make_array_positive(vec![-1,-2,3,-1,2,6]));
+        assert_eq!(1, Solution::make_array_positive(vec![-1, -2, 3, -1, 2, 6]));
     }
 }
-

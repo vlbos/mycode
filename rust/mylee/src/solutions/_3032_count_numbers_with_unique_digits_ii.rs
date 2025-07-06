@@ -34,6 +34,7 @@
 // 	1  <= a  <= b  <= 1000
 
 // int number_count(int a, int b)
+
 #[allow(dead_code)]
 pub struct Solution;
 

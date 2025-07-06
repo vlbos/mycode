@@ -39,9 +39,7 @@
 // *   `1 <= nums1.length, nums2.length <= 3000`
 // *   `1 <= nums1[i], nums2[i] <= 109`
 
-
 //  int maximum_matching_indices(vector<int>& nums1, vector<int>& nums2) {
-
 
 #[allow(dead_code)]
 pub struct Solution;
@@ -58,10 +56,16 @@ mod test {
 
     #[test]
     pub fn test_maximum_matching_indices_1() {
-        assert_eq!(6, Solution::maximum_matching_indices(vec![3,1,2,3,1,2], vec![1,2,3,1,2,3]));
+        assert_eq!(
+            6,
+            Solution::maximum_matching_indices(vec![3, 1, 2, 3, 1, 2], vec![1, 2, 3, 1, 2, 3])
+        );
     }
     #[test]
     pub fn test_maximum_matching_indices_2() {
-        assert_eq!(3, Solution::maximum_matching_indices(vec![1,4,2,5,3,1], vec![2,3,1,2,4,6]));
+        assert_eq!(
+            3,
+            Solution::maximum_matching_indices(vec![1, 4, 2, 5, 3, 1], vec![2, 3, 1, 2, 4, 6])
+        );
     }
 }

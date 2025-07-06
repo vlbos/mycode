@@ -1,4 +1,3 @@
-
 // ## [3535\. Unit Conversion II 🔒](https://leetcode.com/problems/unit-conversion-ii)
 
 // [![](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)
@@ -53,17 +52,14 @@
 // +   `0 <= unitAi, unitBi < n`
 // +   It is guaranteed that unit 0 can be **uniquely** converted into any other unit through a combination of forward or backward conversions.
 
-
-
 //  vector<int> query_conversions(vector<vector<int>>& conversions,
 //                                vector<vector<int>>& queries) {
-
 
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn query_conversions( conversions: Vec<Vec<i32>>, queries: Vec<Vec<i32>>) -> Vec<i32> {
-       vec![]
+    pub fn query_conversions(conversions: Vec<Vec<i32>>, queries: Vec<Vec<i32>>) -> Vec<i32> {
+        vec![]
     }
 }
 
@@ -74,21 +70,28 @@ mod test {
     #[test]
     pub fn test_query_conversions_1() {
         assert_eq!(
-            vec![3,500000004],
+            vec![3, 500000004],
             Solution::query_conversions(
-                lc_matrix![[0,1,2],[0,2,6]],
-                lc_matrix![[1,2],[1,0]]
+                lc_matrix![[0, 1, 2], [0, 2, 6]],
+                lc_matrix![[1, 2], [1, 0]]
             )
         );
     }
     #[test]
     pub fn test_query_conversions_2() {
         assert_eq!(
-            vec![3,12,1,2,83333334],
-            Solution::query_conversions(  
-            lc_matrix![[0,1,2],[0,2,6],[0,3,8],[2,4,2],[2,5,4],[3,6,3]],
-                lc_matrix![[1,2],[0,4],[6,5],[4,6],[6,1]])
+            vec![3, 12, 1, 2, 83333334],
+            Solution::query_conversions(
+                lc_matrix![
+                    [0, 1, 2],
+                    [0, 2, 6],
+                    [0, 3, 8],
+                    [2, 4, 2],
+                    [2, 5, 4],
+                    [3, 6, 3]
+                ],
+                lc_matrix![[1, 2], [0, 4], [6, 5], [4, 6], [6, 1]]
+            )
         );
     }
-
 }

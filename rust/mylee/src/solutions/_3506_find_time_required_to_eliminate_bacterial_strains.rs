@@ -54,11 +54,7 @@
 // +   `1 <= timeReq[i] <= 109`
 // +   `1 <= splitTime <= 109`
 
-
-
 // long long min_elimination_time(vector<int>& time_req, int split_time) {
-
-
 
 #[allow(dead_code)]
 pub struct Solution;
@@ -74,11 +70,10 @@ mod test {
     use super::*;
     #[test]
     pub fn test_min_elimination_time_1() {
-        assert_eq!(12, Solution::min_elimination_time(vec![10,4,5], 2));
+        assert_eq!(12, Solution::min_elimination_time(vec![10, 4, 5], 2));
     }
     #[test]
     pub fn test_min_elimination_time_2() {
-        assert_eq!(15, Solution::min_elimination_time(vec![10,4], 5));
+        assert_eq!(15, Solution::min_elimination_time(vec![10, 4], 5));
     }
-
 }

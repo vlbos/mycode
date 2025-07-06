@@ -1,4 +1,3 @@
-
 // ## [3491\. Phone Number Prefix 🔒](https://leetcode.com/problems/phone-number-prefix)
 
 // [![](https://img.shields.io/badge/Difficulty-Easy-4051B5?style=flat-square)](https://img.shields.io/badge/Difficulty-Easy-4051B5?style=flat-square)
@@ -33,14 +32,11 @@
 // +   `1 <= numbers[i].length <= 50`
 // +   All numbers contain only digits `'0'` to `'9'`.
 
-
-
 //  bool phone_prefix(vector<string>& numbers) {
 
 #[allow(dead_code)]
 pub struct Solution;
 impl Solution {
-    
     pub fn phone_prefix(numbers: Vec<String>) -> bool {
         false
     }
@@ -52,14 +48,12 @@ mod test {
     use crate::lc_vec_s;
     #[test]
     pub fn test_phone_prefix_1() {
-        assert!(Solution::phone_prefix(
-            lc_vec_s!["1","2","4","3"]
-        ));
+        assert!(Solution::phone_prefix(lc_vec_s!["1", "2", "4", "3"]));
     }
     #[test]
     pub fn test_phone_prefix_2() {
-        assert!(!Solution::phone_prefix(
-            lc_vec_s!["001","007","15","00153"]
-        ));
+        assert!(!Solution::phone_prefix(lc_vec_s![
+            "001", "007", "15", "00153"
+        ]));
     }
 }

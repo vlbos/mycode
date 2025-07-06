@@ -33,7 +33,6 @@
 // **Explanation:**
 
 // *   The subarray `[-2, -2]` of size `k = 2` already contains all equal elements, so no operations are needed. Hence, the answer is 0.
-    
 
 // **Constraints:**
 
@@ -41,10 +40,7 @@
 // *   `-106 <= nums[i] <= 106`
 // *   `2 <= k <= nums.length`
 
-
 //   long long min_operations(vector<int>& nums, int k) {
-
-
 
 #[allow(dead_code)]
 pub struct Solution;
@@ -60,11 +56,10 @@ mod test {
     use super::*;
     #[test]
     pub fn test_min_operations_1() {
-        assert_eq!(5, Solution::min_operations(vec![4,-3,2,1,-4,6], 3));
+        assert_eq!(5, Solution::min_operations(vec![4, -3, 2, 1, -4, 6], 3));
     }
     #[test]
     pub fn test_min_operations_2() {
-        assert_eq!(0, Solution::min_operations(vec![-2,-2,3,1,4], 2));
+        assert_eq!(0, Solution::min_operations(vec![-2, -2, 3, 1, 4], 2));
     }
-
 }

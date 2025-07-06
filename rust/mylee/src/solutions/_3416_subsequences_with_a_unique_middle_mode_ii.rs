@@ -51,15 +51,12 @@
 // *   `5 <= nums.length <= 105`
 // *   `-109 <= nums[i] <= 109`
 
-
-
-
 #[allow(dead_code)]
 pub struct Solution;
 
 impl Solution {
     pub fn subsequences_with_middle_mode(mut nums: Vec<i32>) -> i32 {
-       0
+        0
     }
 }
 
@@ -68,16 +65,19 @@ mod test {
     use super::*;
     #[test]
     pub fn test_subsequences_with_middle_mode_1() {
-        assert_eq!(6, Solution::subsequences_with_middle_mode(vec![1,1,1,1,1,1]));
+        assert_eq!(
+            6,
+            Solution::subsequences_with_middle_mode(vec![1, 1, 1, 1, 1, 1])
+        );
     }
     #[test]
     pub fn test_subsequences_with_middle_mode_2() {
-        assert_eq!(4, Solution::subsequences_with_middle_mode(vec![1,2,2,3,3,4]));
+        assert_eq!(
+            4,
+            Solution::subsequences_with_middle_mode(vec![1, 2, 2, 3, 3, 4])
+        );
     }
 }
-
-
-
 
 // int (vector<int>& nums) {
 // Time:  O(n)
@@ -153,4 +153,3 @@ mod test {
 //         return result % MOD;
 //     }
 // };
-

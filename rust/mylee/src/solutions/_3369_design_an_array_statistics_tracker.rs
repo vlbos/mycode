@@ -73,112 +73,115 @@
 // *   `1 <= number <= 109`
 // *   At most, `105` calls will be made to `addNumber`, `removeFirstAddedNumber`, `getMean`, `getMedian`, and `getMode` in total.
 // *   `removeFirstAddedNumber`, `getMean`, `getMedian`, and `getMode` will be called only if there is at least one element in the data structure.
-use std::collections::{HashMap,BinaryHeap,VecDeque,BTreeSet};
+use std::collections::{BTreeSet, BinaryHeap, HashMap, VecDeque};
 #[allow(dead_code)]
 pub struct StatisticsTracker {
-q:VecDeque<i32>,
-l:BinaryHeap<i32>,
-r:BinaryHeap<i32>,
-cnt:HashMap<i32,i32>,
-delayed:HashMap<i32,i32>,
-seq:BTreeSet<(i32,i32)>,
-l_len:i32,
-r_len:i32,
-s:i64,
+    q: VecDeque<i32>,
+    l: BinaryHeap<i32>,
+    r: BinaryHeap<i32>,
+    cnt: HashMap<i32, i32>,
+    delayed: HashMap<i32, i32>,
+    seq: BTreeSet<(i32, i32)>,
+    l_len: i32,
+    r_len: i32,
+    s: i64,
 }
 #[allow(dead_code)]
 impl StatisticsTracker {
-    fn new()->Self{
-    Self{
-q:VecDeque::new(),
-l:BinaryHeap::new(),
-r:BinaryHeap::new(),
-cnt:HashMap::new(),
-seq:BTreeSet::new(),
-delayed:HashMap::new(),
-l_len:0,
-r_len:0,
-s:0,
+    fn new() -> Self {
+        Self {
+            q: VecDeque::new(),
+            l: BinaryHeap::new(),
+            r: BinaryHeap::new(),
+            cnt: HashMap::new(),
+            seq: BTreeSet::new(),
+            delayed: HashMap::new(),
+            l_len: 0,
+            r_len: 0,
+            s: 0,
+        }
     }
-    }
-    fn prune(&mut self,signed:i32) {
-        let bh=if signed>0 {&mut self.l}else{&mut self.r};
+    fn prune(&mut self, signed: i32) {
+        let bh = if signed > 0 { &mut self.l } else { &mut self.r };
         while !bh.is_empty() {
-            let c=*bh.peek().unwrap()*signed;
-            if let Some(v)=self.delayed.get_mut(&c){
-                    *v-=1;
-                    if *v==0{
-                        self.delayed.remove(&c);
-                    }
-                    bh.pop();
-            }else{
-                break
+            let c = *bh.peek().unwrap() * signed;
+            if let Some(v) = self.delayed.get_mut(&c) {
+                *v -= 1;
+                if *v == 0 {
+                    self.delayed.remove(&c);
+                }
+                bh.pop();
+            } else {
+                break;
             }
         }
     }
     fn rebalance(&mut self) {
-        if self.l_len>self.r_len+1{
+        if self.l_len > self.r_len + 1 {
             self.r.push(-self.l.pop().unwrap());
-            self.l_len-=1;
-            self.r_len+=1;
+            self.l_len -= 1;
+            self.r_len += 1;
             self.prune(1);
-        }else if self.l_len<self.r_len{
+        } else if self.l_len < self.r_len {
             self.l.push(-self.r.pop().unwrap());
-            self.l_len+=1;
-            self.r_len-=1;
+            self.l_len += 1;
+            self.r_len -= 1;
             self.prune(-1);
         }
     }
     fn add_number(&mut self, number: i32) {
-        self.s+=number as i64;
+        self.s += number as i64;
         self.q.push_back(number);
-        *self.cnt.entry(number).or_insert(0)+=1;
-        let c=self.cnt[&number];
-        if c>1{
-            self.seq.remove(&(-c+1,number));
+        *self.cnt.entry(number).or_insert(0) += 1;
+        let c = self.cnt[&number];
+        if c > 1 {
+            self.seq.remove(&(-c + 1, number));
         }
-        self.seq.insert((-c,number));
-        if self.l.is_empty() || *self.l.peek().unwrap()>=number{
+        self.seq.insert((-c, number));
+        if self.l.is_empty() || *self.l.peek().unwrap() >= number {
             self.l.push(number);
-            self.l_len+=1;
-        }else{
+            self.l_len += 1;
+        } else {
             self.r.push(-number);
-            self.r_len+=1;
+            self.r_len += 1;
         }
         self.rebalance();
     }
     fn remove_first_added_number(&mut self) {
-        let number=self.q.pop_front().unwrap();
-        self.s-=number as i64;
-        let c=self.cnt[&number];
-        *self.cnt.entry(number).or_insert(0)-=1;
-        if self.cnt[&number]==0{
-        self.cnt.remove(&number);
+        let number = self.q.pop_front().unwrap();
+        self.s -= number as i64;
+        let c = self.cnt[&number];
+        *self.cnt.entry(number).or_insert(0) -= 1;
+        if self.cnt[&number] == 0 {
+            self.cnt.remove(&number);
         }
-        self.seq.remove(&(-c,number));
-        if c>1
-        {
-            self.seq.insert((-c+1,number));
+        self.seq.remove(&(-c, number));
+        if c > 1 {
+            self.seq.insert((-c + 1, number));
         }
-        *self.delayed.entry(number).or_insert(0)+=1;
-        if *self.l.peek().unwrap()>=number{
-            self.l_len-=1;
-            if *self.l.peek().unwrap()==number{
+        *self.delayed.entry(number).or_insert(0) += 1;
+        if *self.l.peek().unwrap() >= number {
+            self.l_len -= 1;
+            if *self.l.peek().unwrap() == number {
                 self.prune(1);
             }
-        }else{
-            self.r_len-=1;
-            if *self.r.peek().unwrap()==number{
+        } else {
+            self.r_len -= 1;
+            if *self.r.peek().unwrap() == number {
                 self.prune(-1);
             }
         }
         self.rebalance();
     }
     fn get_mean(&self) -> i32 {
-       (self.s/self.q.len() as i64) as _
+        (self.s / self.q.len() as i64) as _
     }
     fn get_median(&self) -> i32 {
-         if self.l_len==self.r_len{-*self.r.peek().unwrap()}else{*self.l.peek().unwrap()}
+        if self.l_len == self.r_len {
+            -*self.r.peek().unwrap()
+        } else {
+            *self.l.peek().unwrap()
+        }
     }
     fn get_mode(&self) -> i32 {
         self.seq.first().unwrap().1
@@ -195,24 +198,24 @@ mod test {
         statistics_tracker.add_number(4);
         statistics_tracker.add_number(2);
         statistics_tracker.add_number(3);
-        assert_eq!(3 , statistics_tracker.get_mean());
-        assert_eq!(4 , statistics_tracker.get_median());
-        assert_eq!(4 , statistics_tracker.get_mode());
+        assert_eq!(3, statistics_tracker.get_mean());
+        assert_eq!(4, statistics_tracker.get_median());
+        assert_eq!(4, statistics_tracker.get_mode());
         statistics_tracker.remove_first_added_number();
-        assert_eq!(2 , statistics_tracker.get_mode());
+        assert_eq!(2, statistics_tracker.get_mode());
     }
     #[test]
     pub fn test_statistics_tracker_2() {
         let mut statistics_tracker = StatisticsTracker::new();
         statistics_tracker.add_number(9);
         statistics_tracker.add_number(5);
-        assert_eq!(7 , statistics_tracker.get_mean());
+        assert_eq!(7, statistics_tracker.get_mean());
         statistics_tracker.remove_first_added_number();
         statistics_tracker.add_number(5);
         statistics_tracker.add_number(6);
         statistics_tracker.remove_first_added_number();
-        assert_eq!(6 , statistics_tracker.get_median());
+        assert_eq!(6, statistics_tracker.get_median());
         statistics_tracker.add_number(8);
-        assert_eq!(5 , statistics_tracker.get_mode());
+        assert_eq!(5, statistics_tracker.get_mode());
     }
 }

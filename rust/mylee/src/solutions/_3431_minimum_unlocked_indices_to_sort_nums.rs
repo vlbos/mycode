@@ -1,4 +1,3 @@
-
 // ## [3431\. Minimum Unlocked Indices to Sort Nums 🔒](https://leetcode.com/problems/minimum-unlocked-indices-to-sort-nums)
 
 // [![](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)
@@ -60,10 +59,7 @@
 // +   `locked.length == nums.length`
 // +   `0 <= locked[i] <= 1`
 
-
-
 //  int min_unlocked_indices(vector<int>& nums, vector<int>& locked) {
-
 
 #[allow(dead_code)]
 pub struct Solution;
@@ -80,14 +76,23 @@ mod test {
 
     #[test]
     pub fn test_min_unlocked_indices_1() {
-        assert_eq!(0, Solution::min_unlocked_indices(vec![1,2,1,2,3,2], vec![1,0,1,1,0,1]));
+        assert_eq!(
+            0,
+            Solution::min_unlocked_indices(vec![1, 2, 1, 2, 3, 2], vec![1, 0, 1, 1, 0, 1])
+        );
     }
     #[test]
     pub fn test_min_unlocked_indices_2() {
-        assert_eq!(2, Solution::min_unlocked_indices(vec![1,2,1,1,3,2,2], vec![1,0,1,1,0,1,0]));
+        assert_eq!(
+            2,
+            Solution::min_unlocked_indices(vec![1, 2, 1, 1, 3, 2, 2], vec![1, 0, 1, 1, 0, 1, 0])
+        );
     }
     #[test]
     pub fn test_min_unlocked_indices_3() {
-        assert_eq!(-1, Solution::min_unlocked_indices(vec![1,2,1,2,3,2,1], vec![0,0,0,0,0,0,0]));
+        assert_eq!(
+            -1,
+            Solution::min_unlocked_indices(vec![1, 2, 1, 2, 3, 2, 1], vec![0, 0, 0, 0, 0, 0, 0])
+        );
     }
 }

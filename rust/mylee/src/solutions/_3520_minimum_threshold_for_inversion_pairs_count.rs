@@ -1,4 +1,3 @@
-
 // ## [3520\. Minimum Threshold for Inversion Pairs Count 🔒](https://leetcode.com/problems/minimum-threshold-for-inversion-pairs-count)
 
 // [![](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)
@@ -65,7 +64,6 @@
 
 // int min_threshold(vector<int>& nums, int k) {
 
-
 #[allow(dead_code)]
 pub struct Solution;
 
@@ -80,11 +78,10 @@ mod test {
     use super::*;
     #[test]
     pub fn test_min_threshold_1() {
-        assert_eq!(2, Solution::min_threshold(vec![1,2,3,4,3,2,1], 7));
+        assert_eq!(2, Solution::min_threshold(vec![1, 2, 3, 4, 3, 2, 1], 7));
     }
     #[test]
     pub fn test_min_threshold_2() {
-        assert_eq!(8, Solution::min_threshold(vec![10,9,9,9,1], 4));
+        assert_eq!(8, Solution::min_threshold(vec![10, 9, 9, 9, 1], 4));
     }
-
 }

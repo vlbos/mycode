@@ -1,4 +1,3 @@
-
 // ## [3450\. Maximum Students on a Single Bench 🔒](https://leetcode.com/problems/maximum-students-on-a-single-bench)
 
 // [![](https://img.shields.io/badge/Difficulty-Easy-4051B5?style=flat-square)](https://img.shields.io/badge/Difficulty-Easy-4051B5?style=flat-square)
@@ -62,10 +61,7 @@
 // +   `1 <= student_id <= 100`
 // +   `1 <= bench_id <= 100`
 
-
-
 // int max_students_on_bench(vector<vector<int>>& students) {
-
 
 #[allow(dead_code)]
 pub struct Solution;
@@ -84,19 +80,22 @@ mod test {
     pub fn test_max_students_on_bench_1() {
         assert_eq!(
             3,
-            Solution::max_students_on_bench(lc_matrix![[1,2],[2,2],[3,3],[1,3],[2,3]])
+            Solution::max_students_on_bench(lc_matrix![[1, 2], [2, 2], [3, 3], [1, 3], [2, 3]])
         );
     }
     #[test]
     pub fn test_max_students_on_bench_2() {
         assert_eq!(
             3,
-            Solution::max_students_on_bench(lc_matrix![[1,1],[2,1],[3,1],[4,2],[5,2]])
+            Solution::max_students_on_bench(lc_matrix![[1, 1], [2, 1], [3, 1], [4, 2], [5, 2]])
         );
     }
     #[test]
     pub fn test_max_students_on_bench_3() {
-        assert_eq!(1, Solution::max_students_on_bench(lc_matrix![[1,1],[1,1]]));
+        assert_eq!(
+            1,
+            Solution::max_students_on_bench(lc_matrix![[1, 1], [1, 1]])
+        );
     }
     #[test]
     pub fn test_max_students_on_bench_4() {

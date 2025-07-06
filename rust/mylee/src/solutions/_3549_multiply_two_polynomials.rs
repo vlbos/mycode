@@ -1,4 +1,3 @@
-
 // ## [3549\. Multiply Two Polynomials 🔒](https://leetcode.com/problems/multiply-two-polynomials)
 
 // ## Description
@@ -58,8 +57,6 @@
 
 // // vector<long long> multiply(vector<int>& poly1, vector<int>& poly2) {
 
-
-
 #[allow(dead_code)]
 pub struct Solution;
 
@@ -76,22 +73,19 @@ mod test {
     #[test]
     pub fn test_multiply_1() {
         assert_eq!(
-            vec![3,14,13,20],
-            Solution::multiply(vec![3,2,5], vec![1,4])
+            vec![3, 14, 13, 20],
+            Solution::multiply(vec![3, 2, 5], vec![1, 4])
         );
     }
     #[test]
     pub fn test_multiply_2() {
-        assert_eq!(
-            vec![-1,0,2],
-            Solution::multiply(vec![1,0,-2], vec![-1])
-        );
+        assert_eq!(vec![-1, 0, 2], Solution::multiply(vec![1, 0, -2], vec![-1]));
     }
     #[test]
     pub fn test_multiply_3() {
         assert_eq!(
-            vec![-4,-18,22,-6,0],
-            Solution::multiply(vec![1,5,-3], vec![-4,2,0])
+            vec![-4, -18, 22, -6, 0],
+            Solution::multiply(vec![1, 5, -3], vec![-4, 2, 0])
         );
     }
 }

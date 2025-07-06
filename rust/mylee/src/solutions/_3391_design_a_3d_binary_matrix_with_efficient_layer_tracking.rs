@@ -17,38 +17,38 @@
 
 // **Example 1:**
 
-// **Input:**  
-// \["matrix3D", "setCell", "largestMatrix", "setCell", "largestMatrix", "setCell", "largestMatrix"\]  
+// **Input:**
+// \["matrix3D", "setCell", "largestMatrix", "setCell", "largestMatrix", "setCell", "largestMatrix"\]
 // \[\[3\], \[0, 0, 0\], \[\], \[1, 1, 2\], \[\], \[0, 0, 1\], \[\]\]
 
-// **Output:**  
+// **Output:**
 // \[null, null, 0, null, 1, null, 0\]
 
 // **Explanation**
 
-// matrix3D matrix3D = new matrix3D(3); // Initializes a `3 x 3 x 3` 3D array `matrix`, filled with all 0's.  
-// matrix3D.setCell(0, 0, 0); // Sets `matrix[0][0][0]` to 1.  
-// matrix3D.largestMatrix(); // Returns 0. `matrix[0]` has the most number of 1's.  
-// matrix3D.setCell(1, 1, 2); // Sets `matrix[1][1][2]` to 1.  
-// matrix3D.largestMatrix(); // Returns 1. `matrix[0]` and `matrix[1]` tie with the most number of 1's, but index 1 is bigger.  
-// matrix3D.setCell(0, 0, 1); // Sets `matrix[0][0][1]` to 1.  
+// matrix3D matrix3D = new matrix3D(3); // Initializes a `3 x 3 x 3` 3D array `matrix`, filled with all 0's.
+// matrix3D.setCell(0, 0, 0); // Sets `matrix[0][0][0]` to 1.
+// matrix3D.largestMatrix(); // Returns 0. `matrix[0]` has the most number of 1's.
+// matrix3D.setCell(1, 1, 2); // Sets `matrix[1][1][2]` to 1.
+// matrix3D.largestMatrix(); // Returns 1. `matrix[0]` and `matrix[1]` tie with the most number of 1's, but index 1 is bigger.
+// matrix3D.setCell(0, 0, 1); // Sets `matrix[0][0][1]` to 1.
 // matrix3D.largestMatrix(); // Returns 0. `matrix[0]` has the most number of 1's.
 
 // **Example 2:**
 
-// **Input:**  
-// \["matrix3D", "setCell", "largestMatrix", "unsetCell", "largestMatrix"\]  
+// **Input:**
+// \["matrix3D", "setCell", "largestMatrix", "unsetCell", "largestMatrix"\]
 // \[\[4\], \[2, 1, 1\], \[\], \[2, 1, 1\], \[\]\]
 
-// **Output:**  
+// **Output:**
 // \[null, null, 2, null, 3\]
 
 // **Explanation**
 
-// matrix3D matrix3D = new matrix3D(4); // Initializes a `4 x 4 x 4` 3D array `matrix`, filled with all 0's.  
-// matrix3D.setCell(2, 1, 1); // Sets `matrix[2][1][1]` to 1.  
-// matrix3D.largestMatrix(); // Returns 2. `matrix[2]` has the most number of 1's.  
-// matrix3D.unsetCell(2, 1, 1); // Sets `matrix[2][1][1]` to 0.  
+// matrix3D matrix3D = new matrix3D(4); // Initializes a `4 x 4 x 4` 3D array `matrix`, filled with all 0's.
+// matrix3D.setCell(2, 1, 1); // Sets `matrix[2][1][1]` to 1.
+// matrix3D.largestMatrix(); // Returns 2. `matrix[2]` has the most number of 1's.
+// matrix3D.unsetCell(2, 1, 1); // Sets `matrix[2][1][1]` to 0.
 // matrix3D.largestMatrix(); // Returns 3. All indices from 0 to 3 tie with the same number of 1's, but index 3 is the biggest.
 
 // **Constraints:**
@@ -58,19 +58,16 @@
 // *   At most `105` calls are made in total to `setCell` and `unsetCell`.
 // *   At most `104` calls are made to `largestMatrix`.
 #[allow(dead_code)]
-struct Matrix3D{
-}
+struct Matrix3D {}
 #[allow(dead_code)]
-impl Matrix3D{
-    fn new(n:i32)->Self{
-    Self{}
+impl Matrix3D {
+    fn new(n: i32) -> Self {
+        Self {}
     }
-    fn set_cell(&mut self,x:i32,y:i32,z:i32){
-    }
-     fn unset_cell(&mut self,x:i32,y:i32,z:i32){
-    } 
-    fn largest_matrix(&self)->i32{
-    0
+    fn set_cell(&mut self, x: i32, y: i32, z: i32) {}
+    fn unset_cell(&mut self, x: i32, y: i32, z: i32) {}
+    fn largest_matrix(&self) -> i32 {
+        0
     }
 }
 
@@ -79,20 +76,20 @@ mod test {
     use super::*;
     #[test]
     pub fn test_matrix_3d_1() {
-        let mut matrix_3d=Matrix3D::new(3);
-        matrix_3d.set_cell(0,0,0);
+        let mut matrix_3d = Matrix3D::new(3);
+        matrix_3d.set_cell(0, 0, 0);
         assert_eq!(0, matrix_3d.largest_matrix());
-        matrix_3d.set_cell(1,1,2);
+        matrix_3d.set_cell(1, 1, 2);
         assert_eq!(1, matrix_3d.largest_matrix());
-        matrix_3d.set_cell(0,0,1);
+        matrix_3d.set_cell(0, 0, 1);
         assert_eq!(0, matrix_3d.largest_matrix());
     }
     #[test]
     pub fn test_matrix_3d_2() {
-        let mut matrix_3d=Matrix3D::new(4);
-        matrix_3d.set_cell(2,1,1);
+        let mut matrix_3d = Matrix3D::new(4);
+        matrix_3d.set_cell(2, 1, 1);
         assert_eq!(2, matrix_3d.largest_matrix());
-        matrix_3d.unset_cell(2,1,1);
+        matrix_3d.unset_cell(2, 1, 1);
         assert_eq!(3, matrix_3d.largest_matrix());
     }
 }

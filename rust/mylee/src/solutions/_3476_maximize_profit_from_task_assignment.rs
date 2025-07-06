@@ -1,4 +1,3 @@
-
 // ## [3476\. Maximize Profit from Task Assignment 🔒](https://leetcode.com/problems/maximize-profit-from-task-assignment)
 
 // [![](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)
@@ -55,18 +54,14 @@
 // +   `tasks[i].length == 2`
 // +   `1 <= tasks[i][0], tasks[i][1] <= 109`
 
-
-
 //  long long max_profit(vector<int>& workers, vector<vector<int>>& tasks) {
-
-
 
 #[allow(dead_code)]
 pub struct Solution;
 
 impl Solution {
-    pub fn max_profit( workers: Vec<i32>,tasks: Vec<Vec<i32>>) -> i64 {
-       0
+    pub fn max_profit(workers: Vec<i32>, tasks: Vec<Vec<i32>>) -> i64 {
+        0
     }
 }
 
@@ -78,21 +73,21 @@ mod test {
     pub fn test_max_profit_1() {
         assert_eq!(
             1000,
-            Solution::max_profit(vec![1,2,3,4,5],lc_matrix![[1,100],[2,400],[3,100],[3,400]] )
+            Solution::max_profit(
+                vec![1, 2, 3, 4, 5],
+                lc_matrix![[1, 100], [2, 400], [3, 100], [3, 400]]
+            )
         );
     }
     #[test]
     pub fn test_max_profit_2() {
         assert_eq!(
             100,
-            Solution::max_profit(vec![10,10000,100000000],lc_matrix![[1,100]] )
+            Solution::max_profit(vec![10, 10000, 100000000], lc_matrix![[1, 100]])
         );
     }
     #[test]
     pub fn test_max_profit_3() {
-        assert_eq!(
-            3,
-            Solution::max_profit(vec![7],lc_matrix![[3,3],[3,3]] )
-        );
+        assert_eq!(3, Solution::max_profit(vec![7], lc_matrix![[3, 3], [3, 3]]));
     }
 }

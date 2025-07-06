@@ -98,7 +98,7 @@ impl Solution {
                         } else {
                             0
                         });
-                    ans += h * (h + 1) / 2*w;
+                    ans += h * (h + 1) / 2 * w;
                     pos = dp[j].pop().unwrap().0;
                 }
                 if dp[j].is_empty() || dp[j].last().unwrap().1 != len {

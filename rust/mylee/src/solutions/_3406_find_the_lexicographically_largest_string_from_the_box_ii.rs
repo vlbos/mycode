@@ -15,7 +15,7 @@
 
 // Find the **lexicographically largest** string from the box after all the rounds are finished.
 
-// A string `a` is **lexicographically smaller** than a string `b` if in the first position where `a` and `b` differ, string `a` has a letter that appears earlier in the alphabet than the corresponding letter in `b`.  
+// A string `a` is **lexicographically smaller** than a string `b` if in the first position where `a` and `b` differ, string `a` has a letter that appears earlier in the alphabet than the corresponding letter in `b`.
 // If the first `min(a.length, b.length)` characters do not differ, then the shorter string is the lexicographically smaller one.
 
 // **Example 1:**
@@ -48,9 +48,6 @@
 // *   `word` consists only of lowercase English letters.
 // *   `1 <= numFriends <= word.length`
 
-
-
-
 #[allow(dead_code)]
 pub struct Solution;
 impl Solution {
@@ -67,25 +64,17 @@ mod test {
     pub fn test_answer_string_1() {
         assert_eq!(
             String::from("dbc"),
-            Solution::answer_string(
-                String::from("dbca"),
-                2
-            )
+            Solution::answer_string(String::from("dbca"), 2)
         );
     }
     #[test]
     pub fn test_answer_string_2() {
         assert_eq!(
             String::from("g"),
-            Solution::answer_string(
-                String::from("gggg"),
-                4
-            )
+            Solution::answer_string(String::from("gggg"), 4)
         );
     }
 }
-
-
 
 // Time:  O(n)
 // Space: O(1)

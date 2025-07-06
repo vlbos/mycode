@@ -1,4 +1,3 @@
-
 // ## [3481\. Apply Substitutions 🔒](https://leetcode.com/problems/apply-substitutions)
 
 // [![](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)
@@ -46,17 +45,13 @@
 // +   Every placeholder in the `text` or in any replacement value corresponds to a key in the `replacements` mapping.
 // +   There are no cyclic dependencies between replacement keys.
 
-
-
-
 // string apply_substitutions(vector<vector<string>>& replacements, string text) {
-
 
 #[allow(dead_code)]
 pub struct Solution;
 impl Solution {
-    pub fn apply_substitutions(replacements: Vec<Vec<String>>,text:String) -> String {
-       String::new()
+    pub fn apply_substitutions(replacements: Vec<Vec<String>>, text: String) -> String {
+        String::new()
     }
 }
 
@@ -68,15 +63,20 @@ mod test {
     pub fn test_apply_substitutions_1() {
         assert_eq!(
             "abc_def".to_owned(),
-            Solution::apply_substitutions(lc_matrix_s![["A","abc"],["B","def"]], "%A%_%B%".to_owned())
+            Solution::apply_substitutions(
+                lc_matrix_s![["A", "abc"], ["B", "def"]],
+                "%A%_%B%".to_owned()
+            )
         );
     }
     #[test]
     pub fn test_apply_substitutions_2() {
         assert_eq!(
             "bce_ace_abcace".to_owned(),
-            Solution::apply_substitutions(lc_matrix_s![["A","bce"],["B","ace"],["C","abc%B%"]],"%A%_%B%_%C%".to_owned())
+            Solution::apply_substitutions(
+                lc_matrix_s![["A", "bce"], ["B", "ace"], ["C", "abc%B%"]],
+                "%A%_%B%_%C%".to_owned()
+            )
         );
     }
-    
 }

@@ -1,4 +1,3 @@
-
 // ## [3496\. Maximize Score After Pair Deletions 🔒](https://leetcode.com/problems/maximize-score-after-pair-deletions)
 
 // [![](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)
@@ -52,14 +51,13 @@
 // +   `1 <= nums.length <= 105`
 // +   `-104 <= nums[i] <= 104`
 
-
 //  int max_score(vector<int>& nums) {
 
 #[allow(dead_code)]
 pub struct Solution;
 impl Solution {
     pub fn max_score(nums: Vec<i32>) -> i32 {
-      0
+        0
     }
 }
 
@@ -68,10 +66,10 @@ mod test {
     use super::*;
     #[test]
     pub fn test_max_score_1() {
-        assert_eq!(6, Solution::max_score(vec![2,4,1]));
+        assert_eq!(6, Solution::max_score(vec![2, 4, 1]));
     }
     #[test]
     pub fn test_max_score_2() {
-        assert_eq!(7, Solution::max_score(vec![5,-1,4,2]));
+        assert_eq!(7, Solution::max_score(vec![5, -1, 4, 2]));
     }
 }

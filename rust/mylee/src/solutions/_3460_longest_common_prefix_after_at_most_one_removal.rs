@@ -1,4 +1,3 @@
-
 // ## [3460\. Longest Common Prefix After at Most One Removal 🔒](https://leetcode.com/problems/longest-common-prefix-after-at-most-one-removal)
 
 // [![](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)
@@ -57,12 +56,7 @@
 // +   `1 <= t.length <= 105`
 // +   `s` and `t` contain only lowercase English letters.
 
-
-
-
-
 //  int longest_common_prefix(string s, string t) {
-
 
 #[allow(dead_code)]
 pub struct Solution {}

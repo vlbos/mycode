@@ -1,4 +1,3 @@
-
 // ## [3437\. Permutations III 🔒](https://leetcode.com/problems/permutations-iii)
 
 // [![](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)
@@ -31,11 +30,7 @@
 
 // +   `1 <= n <= 10`
 
-
-
 //    vector<vector<int>> permute(int n) {
-
-
 
 #[allow(dead_code)]
 pub struct Solution;
@@ -43,10 +38,9 @@ pub struct Solution;
 impl Solution {
     pub fn permute(n: i32) -> Vec<Vec<i32>> {
         let mut ans = vec![];
-        
+
         ans
     }
-    
 }
 
 #[cfg(test)]
@@ -56,22 +50,25 @@ mod test {
     #[test]
     pub fn test_permute_1() {
         assert_eq!(
-            lc_matrix![[1,2,3,4],[1,4,3,2],[2,1,4,3],[2,3,4,1],[3,2,1,4],[3,4,1,2],[4,1,2,3],[4,3,2,1]],
+            lc_matrix![
+                [1, 2, 3, 4],
+                [1, 4, 3, 2],
+                [2, 1, 4, 3],
+                [2, 3, 4, 1],
+                [3, 2, 1, 4],
+                [3, 4, 1, 2],
+                [4, 1, 2, 3],
+                [4, 3, 2, 1]
+            ],
             Solution::permute(4)
         );
     }
     #[test]
     pub fn test_permute_2() {
-        assert_eq!(
-            lc_matrix![[1,2],[2,1]],
-            Solution::permute(2)
-        );
+        assert_eq!(lc_matrix![[1, 2], [2, 1]], Solution::permute(2));
     }
- #[test]
+    #[test]
     pub fn test_permute_3() {
-        assert_eq!(
-            lc_matrix![[1,2,3],[3,2,1]],
-            Solution::permute(3)
-        );
+        assert_eq!(lc_matrix![[1, 2, 3], [3, 2, 1]], Solution::permute(3));
     }
 }

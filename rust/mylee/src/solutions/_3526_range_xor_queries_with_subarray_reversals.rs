@@ -1,4 +1,3 @@
-
 // ## [3526\. Range XOR Queries with Subarray Reversals 🔒](https://leetcode.com/problems/range-xor-queries-with-subarray-reversals)
 
 // [![](https://img.shields.io/badge/Difficulty-Hard-4051B5?style=flat-square)](https://img.shields.io/badge/Difficulty-Hard-4051B5?style=flat-square)
@@ -7,15 +6,14 @@
 
 // You are given an integer array `nums` of length `n` and a 2D integer array `queries` of length `q`, where each query is one of the following three types:
 
-// 1.  **Update**: `queries[i] = [1, index, value]`  
+// 1.  **Update**: `queries[i] = [1, index, value]`
 //     Set `nums[index] = value`.
-    
-// 2.  **Range XOR Query**: `queries[i] = [2, left, right]`  
+
+// 2.  **Range XOR Query**: `queries[i] = [2, left, right]`
 //     Compute the bitwise XOR of all elements in the subarray `nums[left...right]`, and record this result.
-    
-// 3.  **Reverse Subarray**: `queries[i] = [3, left, right]`  
+
+// 3.  **Reverse Subarray**: `queries[i] = [3, left, right]`
 //     Reverse the subarray `nums[left...right]` in place.
-    
 
 // Return *an array of the results of all range XOR queries* in the order they were encountered.
 
@@ -28,13 +26,12 @@
 // **Explanation:**
 
 // +   **Query** **1****:** `[2, 1, 3]` – Compute XOR of subarray `[2, 3, 4]` resulting in 5.
-    
+
 // +   **Query 2:** `[1, 2, 10]` – Update `nums[2]` to 10, updating the array to `[1, 2, 10, 4, 5]`.
-    
+
 // +   **Query 3:** `[3, 0, 4]` – Reverse the entire array to get `[5, 4, 10, 2, 1]`.
-    
+
 // +   **Query 4:** `[2, 0, 4]` – Compute XOR of subarray `[5, 4, 10, 2, 1]` resulting in 8.
-    
 
 // **Example 2:**
 
@@ -45,11 +42,10 @@
 // **Explanation:**
 
 // +   **Query 1:** `[1, 0, 3]` – Update `nums[0]` to 3, updating the array to `[3, 8, 9]`.
-    
+
 // +   **Query 2:** `[2, 0, 2]` – Compute XOR of subarray `[3, 8, 9]` resulting in 2.
-    
+
 // +   **Query 3:** `[3, 1, 2]` – Reverse the subarray `[8, 9]` to get `[9, 8]`.
-    
 
 // **Constraints:**
 
@@ -64,10 +60,7 @@
 // +   If `queries[i][0] == 2` or `queries[i][0] == 3`:`​`
 //     +   `0 <= left <= right < nums.length​`
 
-
-
 //  vector<int> get_results(vector<int>& nums, vector<vector<int>>& queries) {
-
 
 #[allow(dead_code)]
 pub struct Solution {}
@@ -85,19 +78,18 @@ mod test {
     #[test]
     pub fn test_get_results_1() {
         assert_eq!(
-            vec![5,8],
-            Solution::get_results(vec![1,2,3,4,5], lc_matrix![[2,1,3],[1,2,10],[3,0,4],[2,0,4]])
+            vec![5, 8],
+            Solution::get_results(
+                vec![1, 2, 3, 4, 5],
+                lc_matrix![[2, 1, 3], [1, 2, 10], [3, 0, 4], [2, 0, 4]]
+            )
         );
     }
     #[test]
     pub fn test_get_results_2() {
         assert_eq!(
             vec![2],
-            Solution::get_results(
-                vec![7,8,9],
-                lc_matrix![[1,0,3],[2,0,2],[3,1,2]]
-            )
+            Solution::get_results(vec![7, 8, 9], lc_matrix![[1, 0, 3], [2, 0, 2], [3, 1, 2]])
         );
     }
-
 }

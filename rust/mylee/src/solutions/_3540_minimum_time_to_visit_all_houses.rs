@@ -1,6 +1,4 @@
-
 // ## [3540\. Minimum Time to Visit All Houses 🔒](https://leetcode.com/problems/minimum-time-to-visit-all-houses)
-
 
 // ## Description
 
@@ -47,9 +45,7 @@
 // +   `queries[i] != queries[i + 1]`
 // +   `queries[0]` is not 0.
 
-
 // //  long long min_total_time(vector<int>& forward, vector<int>& backward, vector<int>& queries) {
-
 
 #[allow(dead_code)]
 pub struct Solution;
@@ -65,13 +61,16 @@ mod test {
     use super::*;
     #[test]
     pub fn test_min_total_time_1() {
-        assert_eq!(12, Solution::min_total_time(vec![1,4,4], vec![4,1,2], vec![1,2,0,2]));
+        assert_eq!(
+            12,
+            Solution::min_total_time(vec![1, 4, 4], vec![4, 1, 2], vec![1, 2, 0, 2])
+        );
     }
     #[test]
     pub fn test_min_total_time_2() {
         assert_eq!(
             4,
-            Solution::min_total_time(vec![1,1,1,1], vec![2,2,2,2], vec![1,2,3,0])
+            Solution::min_total_time(vec![1, 1, 1, 1], vec![2, 2, 2, 2], vec![1, 2, 3, 0])
         );
     }
 }

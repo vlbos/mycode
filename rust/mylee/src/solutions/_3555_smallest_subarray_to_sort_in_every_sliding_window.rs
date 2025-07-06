@@ -1,6 +1,4 @@
-
 // ## [3555\. Smallest Subarray to Sort in Every Sliding Window 🔒](https://leetcode.com/problems/smallest-subarray-to-sort-in-every-sliding-window)
-
 
 // ## Description
 
@@ -41,14 +39,12 @@
 
 //     // vector<int> min_subarray_sort(vector<int>& nums, int k) {
 
-
-
 #[allow(dead_code)]
 pub struct Solution {}
 
 impl Solution {
     pub fn min_subarray_sort(nums: Vec<i32>, k: i32) -> Vec<i32> {
-       vec![]
+        vec![]
     }
 }
 
@@ -59,15 +55,15 @@ mod test {
     #[test]
     pub fn test_min_subarray_sort_1() {
         assert_eq!(
-            vec![2,2,0],
-            Solution::min_subarray_sort(vec![1,3,2,4,5], 3)
+            vec![2, 2, 0],
+            Solution::min_subarray_sort(vec![1, 3, 2, 4, 5], 3)
         );
     }
     #[test]
     pub fn test_min_subarray_sort_2() {
         assert_eq!(
-            vec![4,4],
-            Solution::min_subarray_sort(vec![5,4,3,2,1], 4)
+            vec![4, 4],
+            Solution::min_subarray_sort(vec![5, 4, 3, 2, 1], 4)
         );
     }
 }
