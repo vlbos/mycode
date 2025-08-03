@@ -455,3 +455,7 @@ pub mod _3581_count_odd_letters_from_number;
 pub mod _3595_once_twice;
 pub mod _3596_minimum_cost_path_with_alternating_directions_i;
 pub mod util;
+pub mod _3610_minimum_number_of_primes_to_sum_to_target;
+ pub mod _3616_number_of_student_replacements;
+ pub mod _3631_sort_threats_by_severity_and_exploitability;
+ pub mod _3632_subarrays_with_xor_at_least_k;
