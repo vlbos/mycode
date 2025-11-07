@@ -4,7 +4,8 @@
 
 // ## Description
 
-// You are given an array `nums`. An array is considered **positive** if the sum of all numbers in each **subarray** with **more than two** elements is positive.
+// You are given an array `nums`. 
+// An array is considered **positive** if the sum of all numbers in each **subarray** with **more than two** elements is positive.
 
 // You can perform the following operation any number of times:
 
@@ -20,7 +21,9 @@
 
 // **Explanation:**
 
-// The only subarray with more than 2 elements is the array itself. The sum of all elements is `(-10) + 15 + (-12) = -7`. By replacing `nums[0]` with 0, the new sum becomes `0 + 15 + (-12) = 3`. Thus, the array is now positive.
+// The only subarray with more than 2 elements is the array itself. 
+// The sum of all elements is `(-10) + 15 + (-12) = -7`. 
+// By replacing `nums[0]` with 0, the new sum becomes `0 + 15 + (-12) = 3`. Thus, the array is now positive.
 
 // **Example 2:**
 
@@ -61,7 +64,32 @@
 pub struct Solution;
 impl Solution {
     pub fn make_array_positive(nums: Vec<i32>) -> i32 {
-        0
+        // let mut q=std::collections::BinaryHeap::new();
+        // let (mut ans,mut pre)=(0,0);
+        // for x in nums{
+        //     pre+=x;
+        //     if x<0{
+        //         q.push(-x);
+        //     }
+        //     while pre<=0 && !q.is_empty(){
+        //         pre+=2*q.pop().unwrap();
+        //         ans+=1;
+        //     }
+        // }
+        // ans
+        let (mut l,mut ans,mut pre_mx,mut s)=(-1,0,0,0);
+        for (r,&x) in nums.iter().enumerate(){
+            let rr=r as i32;
+            s+=x;
+            if l+2<rr && s<=pre_mx{
+                ans+=1;
+                l=rr;
+                (pre_mx,s)=(0,0);
+            }else if l+2<=rr{
+                pre_mx=pre_mx.max(s-x-nums[r-1]);
+            }
+        }
+        ans
     }
 }
 
@@ -75,5 +103,9 @@ mod test {
     #[test]
     pub fn test_make_array_positive_2() {
         assert_eq!(1, Solution::make_array_positive(vec![-1, -2, 3, -1, 2, 6]));
+    }
+    #[test]
+    pub fn test_make_array_positive_3() {
+        assert_eq!(0, Solution::make_array_positive(vec![1,2,3]));
     }
 }

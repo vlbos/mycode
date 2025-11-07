@@ -1,5 +1,5 @@
 // [3391\. Design a 3D Binary Matrix with Efficient Layer Tracking 🔒](https://leetcode.com/problems/design-a-3d-binary-matrix-with-efficient-layer-tracking)
-// ==========================================================================================================================================================
+// 
 
 // [![](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)
 
@@ -57,17 +57,46 @@
 // *   `0 <= x, y, z < n`
 // *   At most `105` calls are made in total to `setCell` and `unsetCell`.
 // *   At most `104` calls are made to `largestMatrix`.
+
+use std::collections::{BTreeSet,HashMap};
 #[allow(dead_code)]
-struct Matrix3D {}
+struct Matrix3D {
+matrix:Vec<Vec<Vec<bool>>>,
+cnt:HashMap<i32,i32>,
+ones:BTreeSet<(i32,i32)>,
+}
 #[allow(dead_code)]
 impl Matrix3D {
     fn new(n: i32) -> Self {
-        Self {}
+        let n= n as usize;
+        Self {
+            matrix:vec![vec![vec![false;n];n];n],
+            cnt:HashMap::new(),
+            ones:BTreeSet::new(),
+        }
     }
-    fn set_cell(&mut self, x: i32, y: i32, z: i32) {}
-    fn unset_cell(&mut self, x: i32, y: i32, z: i32) {}
+    fn set_cell(&mut self, x: i32, y: i32, z: i32) {
+        if self.matrix[x as usize][y as usize][z as usize]{
+            return 
+        }
+        self.matrix[x as usize][y as usize][z as usize]=true;
+        if self.cnt.get(&x).is_some_and(|&v|v>0)
+        { self.ones.remove(&(self.cnt[&x],x));}
+        *self.cnt.entry(x).or_insert(0)+=1;
+        self.ones.insert((self.cnt[&x],x));
+    }
+    fn unset_cell(&mut self, x: i32, y: i32, z: i32) {
+         if !self.matrix[x as usize][y as usize][z as usize]{
+            return 
+        }
+        self.matrix[x as usize][y as usize][z as usize]=false;
+        self.ones.remove(&(self.cnt[&x],x));
+        *self.cnt.entry(x).or_insert(0)-=1;
+        if self.cnt[&x]>0
+        {self.ones.insert((self.cnt[&x],x));}
+    }
     fn largest_matrix(&self) -> i32 {
-        0
+        self.ones.iter().next_back().map_or_else(|| self.matrix.len() as i32-1,|v|v.1)
     }
 }
 

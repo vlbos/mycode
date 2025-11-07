@@ -69,7 +69,27 @@ pub struct Solution;
 
 impl Solution {
     pub fn min_threshold(nums: Vec<i32>, k: i32) -> i32 {
-        0
+        let mx=*nums.iter().max().unwrap();
+        let (mut l,mut r)=(0,mx+1);
+        let check=|m:i32|{
+            let mut cnt=0;
+            let mut sorted=vec![];
+            for &x in &nums{
+                let (lo,hi)=(sorted.partition_point(|&v| v<=x),sorted.partition_point(|&v| v<=x+m));
+                cnt+=hi as i32-lo as i32;
+                sorted.insert(lo,x);
+            }
+            cnt>=k 
+        };
+        while l<r{
+            let m=(l+r)/2;
+            if check(m){
+            r=m;
+            }else{
+            l=m+1;
+            }
+        }
+        if l>mx{-1}else{l}
     }
 }
 

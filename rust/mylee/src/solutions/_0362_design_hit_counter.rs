@@ -104,7 +104,7 @@ impl HitCounter {
         self.time
             .iter()
             .enumerate()
-            .filter(|(_, &t)| timestamp - t < 300)
+            .filter(|&(_, &t)| timestamp - t < 300)
             .map(|(i, _)| self.hits[i])
             .sum::<i32>()
     }

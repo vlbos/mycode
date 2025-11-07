@@ -80,7 +80,7 @@ impl Solution {
         for a in abbr.chars() {
             if a.is_digit(10) {
                 current_num = match &mut current_num {
-                    Some(ref mut v) => {
+                    Some(v) => {
                         v.push(a);
                         current_num
                     }

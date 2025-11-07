@@ -4,7 +4,10 @@
 
 // ## Description
 
-// You are given a `replacements` mapping and a `text` string that may contain **placeholders** formatted as `%var%`, where each `var` corresponds to a key in the `replacements` mapping. Each replacement value may itself contain **one or more** such **placeholders**. Each **placeholder** is replaced by the value associated with its corresponding replacement key.
+// You are given a `replacements` mapping and a `text` string that may contain **placeholders** formatted as `%var%`,
+//  where each `var` corresponds to a key in the `replacements` mapping.
+// Each replacement value may itself contain **one or more** such **placeholders**. 
+// Each **placeholder** is replaced by the value associated with its corresponding replacement key.
 
 // Return the fully substituted `text` string which **does not** contain any **placeholders**.
 
@@ -51,7 +54,16 @@
 pub struct Solution;
 impl Solution {
     pub fn apply_substitutions(replacements: Vec<Vec<String>>, text: String) -> String {
-        String::new()
+        use std::collections::HashMap;
+        let d:HashMap<_,_>=replacements.iter().map(|v| (v[0].as_str(),v[1].as_str())).collect();
+        fn dfs(s:&str,d:&HashMap<&str,&str>)->String{
+            let Some(i)=s.find('%') else {
+            return s.to_owned()
+            };
+            let key=&s[i+1..=i+1];
+            format!("{}{}{}",&s[..i],dfs(d[key],&d),dfs(&s[i+3..],d))
+        }
+        dfs(&text,&d)
     }
 }
 
@@ -62,7 +74,7 @@ mod test {
     #[test]
     pub fn test_apply_substitutions_1() {
         assert_eq!(
-            "abc_def".to_owned(),
+            r"abc_def".to_owned(),
             Solution::apply_substitutions(
                 lc_matrix_s![["A", "abc"], ["B", "def"]],
                 "%A%_%B%".to_owned()

@@ -63,7 +63,21 @@ pub struct Solution {}
 
 impl Solution {
     pub fn longest_common_prefix(s: String, t: String) -> i32 {
-        0
+        let (m,n)=(s.len(),t.len());
+        let (bs,bt)=(s.as_bytes(),t.as_bytes());
+        let (mut i,mut j,mut rem)=(0,0,false);
+        while i<m && j<n{
+            if bs[i]!=bt[j]{
+                if rem{
+                break
+                }
+                rem=true;
+            }else{
+                j+=1;
+            }
+            i+=1;
+        }
+        j as _
     }
 }
 

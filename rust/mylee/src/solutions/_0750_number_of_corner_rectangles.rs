@@ -70,7 +70,7 @@ impl Solution {
             let mut exists = grid[i]
                 .iter()
                 .enumerate()
-                .filter(|(_, &v)| v != 0)
+                .filter(|&(_, &v)| v != 0)
                 .map(|(j, _)| j)
                 .collect::<Vec<_>>();
             let e_len = exists.len();

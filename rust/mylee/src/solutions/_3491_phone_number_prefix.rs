@@ -4,7 +4,8 @@
 
 // ## Description
 
-// You are given a string array `numbers` that represents phone numbers. Return `true` if no phone number is a prefix of any other phone number; otherwise, return `false`.
+// You are given a string array `numbers` that represents phone numbers. 
+// Return `true` if no phone number is a prefix of any other phone number; otherwise, return `false`.
 
 // **Example 1:**
 
@@ -37,8 +38,27 @@
 #[allow(dead_code)]
 pub struct Solution;
 impl Solution {
-    pub fn phone_prefix(numbers: Vec<String>) -> bool {
-        false
+    pub fn phone_prefix(mut numbers: Vec<String>) -> bool {
+        numbers.sort_unstable();
+        for (i,x) in numbers.iter().enumerate().skip(1){
+                if numbers[..i].iter().any(|s| x.starts_with(s)){
+                    return false
+                }
+        }
+        true
+    }
+    pub fn phone_prefix2(mut numbers: Vec<String>) -> bool {
+        numbers.sort_unstable();
+        let mut s=std::collections::HashSet::new();
+        for x in &numbers{
+            for i in 1..x.len(){
+                if s.contains(&(x[..i])){
+                return false
+                }
+            }
+            s.insert(x.as_str());
+        }
+        true
     }
 }
 

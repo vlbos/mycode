@@ -78,7 +78,7 @@ impl Solution {
         let mut q: std::collections::VecDeque<usize> = degrees
             .iter()
             .enumerate()
-            .filter(|(_, &v)| v == 1)
+            .filter(|&(_, &v)| v == 1)
             .map(|(i, _)| i)
             .collect();
 
@@ -95,7 +95,7 @@ impl Solution {
         let mut q: std::collections::VecDeque<usize> = ans
             .iter()
             .enumerate()
-            .filter(|(_, &v)| v == 0)
+            .filter(|&(_, &v)| v == 0)
             .map(|(i, _)| i)
             .collect();
         while let Some(u) = q.pop_front() {

@@ -67,9 +67,8 @@ mod test {
     }
     #[test]
     pub fn test_find_path_2() {
-        assert_eq!(
-            vec![],
-            Solution::find_path(lc_matrix![[1, 0, 4], [3, 0, 2]], 2)
+        assert!(
+            Solution::find_path(lc_matrix![[1, 0, 4], [3, 0, 2]], 2).is_empty()
         );
     }
 }

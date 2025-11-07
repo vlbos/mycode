@@ -46,7 +46,8 @@ pub struct Solution;
 
 impl Solution {
     pub fn maximum_matching_indices(nums1: Vec<i32>, nums2: Vec<i32>) -> i32 {
-        0
+        let n=nums1.len();
+        (0..n).map(|k| nums2.iter().enumerate().filter(|&(i,&x)|x==nums1[(i+k)%n]).count()).max().unwrap() as _
     }
 }
 

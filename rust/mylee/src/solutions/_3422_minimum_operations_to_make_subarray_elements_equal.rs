@@ -47,7 +47,55 @@ pub struct Solution;
 
 impl Solution {
     pub fn min_operations(nums: Vec<i32>, k: i32) -> i64 {
-        0
+        use std::collections::BTreeMap;
+        let k=k as usize;
+        let (mut l,mut r)=(BTreeMap::new(),BTreeMap::new());
+        let (mut l_sum,mut r_sum,mut l_cnt,mut r_cnt)=(0,0,0,0);
+        let mut ans=i64::MAX;
+        for (i,&x) in nums.iter().enumerate(){
+            *l.entry(x).or_insert(0)+=1;
+            l_sum+=x as i64;
+            let (y,v)=l.pop_last().unwrap();
+            l_sum-=y  as i64;
+            if v>1{
+                l.insert(y,v-1);
+            }
+            *r.entry(y).or_insert(0)+=1;
+            r_sum+=y  as i64;
+            r_cnt+=1;
+            if r_cnt>l_cnt+1{
+                let (y,v)=r.pop_first().unwrap();
+                r_sum-=y  as i64;
+                r_cnt-=1;
+                if v>1{
+                    r.insert(y,v-1);
+                }
+                *l.entry(y).or_insert(0)+=1;
+                l_sum+=y  as i64;
+                l_cnt+=1;
+            }
+            if i+1>=k{
+                let j=i+1-k;
+                let v=*r.first_key_value().unwrap().0 as i64;
+                ans=ans.min(r_sum-r_cnt*v+l_cnt*v-l_sum);
+                if let Some(v)=r.get_mut(&nums[j]){
+                    *v-=1;
+                    if *v==0{
+                    r.remove(&nums[j]);
+                    }
+                    r_sum-=nums[j]  as i64;
+                    r_cnt-=1;
+                }else{
+                    *l.entry(nums[j]).or_insert(0)-=1;
+                    if l[&nums[j]]==0{
+                        l.remove(&nums[j]);
+                    }
+                    l_sum-=nums[j]   as i64;
+                    l_cnt-=1;
+                }
+            }
+        }
+        ans
     }
 }
 

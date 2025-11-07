@@ -91,7 +91,7 @@ impl Solution {
                         .iter()
                         .enumerate()
                         .filter(|(j, _)| *j != i)
-                        .min_by_key(|(_, &v)| v)
+                        .min_by_key(|&(_, &v)| v)
                         .unwrap()
                         .1;
             }

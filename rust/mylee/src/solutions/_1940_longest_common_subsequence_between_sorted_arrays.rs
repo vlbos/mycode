@@ -65,7 +65,7 @@ impl Solution {
         }
         let mut ans: Vec<i32> = cnt
             .iter()
-            .filter(|(_, &v)| v == arrays.len())
+            .filter(|&(_, &v)| v == arrays.len())
             .map(|(&k, _)| k)
             .collect();
         ans.sort();

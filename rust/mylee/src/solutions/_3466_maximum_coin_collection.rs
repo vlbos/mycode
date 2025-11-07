@@ -93,7 +93,26 @@ pub struct Solution;
 
 impl Solution {
     pub fn max_coins(lane1: Vec<i32>, lane2: Vec<i32>) -> i64 {
-        0
+        fn dfs(i:usize,j:usize,k:usize,lane1:&[i32],lane2:&[i32],memo:&mut Vec<Vec<Vec<i64>>>)->i64{
+            if i>=lane1.len(){
+            return 0
+            }
+            if memo[i][j][k]!=i64::MIN{
+                return memo[i][j][k]
+            }
+            let x= (if j==0{lane1[i]}else{lane2[i]}) as i64;
+            let mut ans=x.max(dfs(i+1,j,k,lane1,lane2,memo)+x);
+            if k>0{
+                ans=ans.max(dfs(i+1,1-j,k-1,lane1,lane2,memo)+x);
+                ans=ans.max(dfs(i,1-j,k-1,lane1,lane2,memo));
+            }
+            memo[i][j][k]=ans;
+            ans
+        }
+        let n=lane1.len();
+        
+        let mut memo=vec![vec![vec![i64::MIN;3];2];n];
+        (0..n).map(|i| dfs(i,0,2,&lane1,&lane2,&mut memo)).max().unwrap()
     }
 }
 
