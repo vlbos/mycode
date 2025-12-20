@@ -123,30 +123,28 @@ mod test {
 
     #[test]
     pub fn test_most_similar_1() {
-        assert!(std::collections::HashSet::from([
-            vec![0, 2, 4, 2],
-            vec![0, 3, 0, 2],
-            vec![0, 3, 1, 2]
-        ])
-        .contains(&Solution::most_similar(
-            5,
-            vec![
-                vec![0, 2],
-                vec![0, 3],
-                vec![1, 2],
-                vec![1, 3],
-                vec![1, 4],
-                vec![2, 4]
-            ],
-            ["ATL", "PEK", "LAX", "DXB", "HND"]
-                .into_iter()
-                .map(String::from)
-                .collect::<Vec<String>>(),
-            ["ATL", "DXB", "HND", "LAX"]
-                .into_iter()
-                .map(String::from)
-                .collect::<Vec<String>>()
-        )));
+        assert!(
+            std::collections::HashSet::from([vec![0, 2, 4, 2], vec![0, 3, 0, 2], vec![0, 3, 1, 2]])
+                .contains(&Solution::most_similar(
+                    5,
+                    vec![
+                        vec![0, 2],
+                        vec![0, 3],
+                        vec![1, 2],
+                        vec![1, 3],
+                        vec![1, 4],
+                        vec![2, 4]
+                    ],
+                    ["ATL", "PEK", "LAX", "DXB", "HND"]
+                        .into_iter()
+                        .map(String::from)
+                        .collect::<Vec<String>>(),
+                    ["ATL", "DXB", "HND", "LAX"]
+                        .into_iter()
+                        .map(String::from)
+                        .collect::<Vec<String>>()
+                ))
+        );
     }
     #[test]
     pub fn test_most_similar_2() {

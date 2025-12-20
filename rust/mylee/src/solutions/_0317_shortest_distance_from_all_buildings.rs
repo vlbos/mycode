@@ -148,11 +148,7 @@ impl Solution {
                 }
             }
         }
-        if ans == i32::MAX {
-            -1
-        } else {
-            ans
-        }
+        if ans == i32::MAX { -1 } else { ans }
     }
 }
 // @lc code=end

@@ -56,11 +56,7 @@ impl Solution {
         f[0] = 1;
         let shift_j: Vec<_> = (0..n).map(|i| (1 << i, i + 1)).collect();
         fn gcd(a: i32, b: i32) -> i32 {
-            if b == 0 {
-                a
-            } else {
-                gcd(b, a % b)
-            }
+            if b == 0 { a } else { gcd(b, a % b) }
         }
         for mask in 0..1 << n {
             let i = (mask as i32).count_ones() as i32;

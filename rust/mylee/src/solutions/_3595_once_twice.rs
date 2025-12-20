@@ -12,7 +12,8 @@
 
 // +   All other elements appear **exactly three times**.
 
-// Return an integer array of length 2, where the first element is the one that appears **once**, and the second is the one that appears **twice**.
+// Return an integer array of length 2, where the first element is the one that appears **once**,
+// and the second is the one that appears **twice**.
 
 // Your solution must run in **O(n)** time and **O(1)** space.
 
@@ -50,7 +51,23 @@ pub struct Solution {}
 
 impl Solution {
     pub fn once_twice(nums: Vec<i32>) -> Vec<i32> {
-        vec![]
+        let mut dp = vec![0; 3];
+        dp[0] = !0;
+        for &x in &nums {
+            dp = (0..3)
+                .map(|i| (x & dp[(i + 2) % 3]) | (!x & dp[i]))
+                .collect();
+        }
+        let mut dp2 = vec![0; 3];
+        dp2[0] = !0;
+        for &x in &nums {
+            if !x & dp[1] == 0 && x & dp[2] == 0 {
+                dp2 = (0..3)
+                    .map(|i| (x & dp2[(i + 2) % 3]) | (!x & dp2[i]))
+                    .collect();
+            }
+        }
+        vec![dp2[1], (dp2[1] ^ dp[1]) | dp[2]]
     }
 }
 
@@ -60,11 +77,16 @@ mod test {
 
     #[test]
     pub fn test_once_twice_1() {
-        assert_eq!(vec![3,7], Solution::once_twice(vec![2,2,3,2,5,5,5,7,7]));
+        assert_eq!(
+            vec![3, 7],
+            Solution::once_twice(vec![2, 2, 3, 2, 5, 5, 5, 7, 7])
+        );
     }
     #[test]
     pub fn test_once_twice_2() {
-        assert_eq!(vec![8, 6], Solution::once_twice(vec![4,4,6,4,9,9,9,6,8]));
+        assert_eq!(
+            vec![8, 6],
+            Solution::once_twice(vec![4, 4, 6, 4, 9, 9, 9, 6, 8])
+        );
     }
-
 }

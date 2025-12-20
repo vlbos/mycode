@@ -119,11 +119,7 @@ impl Solution {
             ((lt + rt).min(lf + rf), (lt + rf).min(lf + rt))
         }
         let (l, r) = dfs(&root);
-        if result {
-            r
-        } else {
-            l
-        }
+        if result { r } else { l }
     }
     pub fn minimum_flips2(root: Option<Rc<RefCell<TreeNode>>>, result: bool) -> i32 {
         use std::hash::Hash;

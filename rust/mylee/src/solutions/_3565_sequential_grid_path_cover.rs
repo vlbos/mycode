@@ -4,14 +4,16 @@
 
 // ## Description
 
-// You are given a 2D array `grid` of size `m x n`, and an integer `k`. There are `k` cells in `grid` containing the values from 1 to `k` **exactly once**, and the rest of the cells have a value 0.
+// You are given a 2D array `grid` of size `m x n`, and an integer `k`.
+// There are `k` cells in `grid` containing the values from 1 to `k` **exactly once**, and the rest of the cells have a value 0.
 
 // You can start at any cell, and move from a cell to its neighbors (up, down, left, or right). You must find a path in `grid` which:
 
 // +   Visits each cell in `grid` **exactly once**.
 // +   Visits the cells with values from 1 to `k` **in order**.
 
-// Return a 2D array `result` of size `(m * n) x 2`, where `result[i] = [xi, yi]` represents the `ith` cell visited in the path. If there are multiple such paths, you may return **any** one.
+// Return a 2D array `result` of size `(m * n) x 2`, where `result[i] = [xi, yi]` represents the `ith` cell visited in the path.
+// If there are multiple such paths, you may return **any** one.
 
 // If no such path exists, return an **empty** array.
 
@@ -50,6 +52,52 @@ pub struct Solution;
 
 impl Solution {
     pub fn find_path(grid: Vec<Vec<i32>>, k: i32) -> Vec<Vec<i32>> {
+        fn dfs(
+            i: i32,
+            j: i32,
+            mut v: i32,
+            grid: &Vec<Vec<i32>>,
+            st: &mut u64,
+            path: &mut Vec<Vec<i32>>,
+        ) -> bool {
+            path.push(vec![i, j]);
+            let (m, n) = (grid.len() as i32, grid[0].len() as i32);
+            if path.len() as i32 == m * n {
+                return true;
+            }
+            let c = 1 << (i * n + j);
+            *st |= c;
+            if grid[i as usize][j as usize] == v {
+                v += 1;
+            }
+            for d in [0, 1, 0, -1, 0].windows(2) {
+                let (ni, nj) = (i + d[0], j + d[1]);
+                if ni < 0 || ni == m || nj < 0 || nj == n || *st & 1 << (ni * n + nj) != 0 {
+                    continue;
+                }
+                let (ii, jj) = (ni as usize, nj as usize);
+                if grid[ii][jj] == 0 || grid[ii][jj] == v {
+                    if dfs(ni, nj, v, grid, st, path) {
+                        return true;
+                    }
+                }
+            }
+            *st ^= c;
+            path.pop();
+            false
+        }
+        let (m, n) = (grid.len(), grid[0].len());
+        for (i, r) in grid.iter().enumerate() {
+            for (j, &x) in r.iter().enumerate() {
+                if x == 0 || x == 1 {
+                    let mut path = vec![];
+                    if dfs(i as i32, j as i32, 1, &grid, &mut 0, &mut path) {
+                        return path;
+                    }
+                }
+            }
+        }
+
         vec![]
     }
 }
@@ -67,8 +115,6 @@ mod test {
     }
     #[test]
     pub fn test_find_path_2() {
-        assert!(
-            Solution::find_path(lc_matrix![[1, 0, 4], [3, 0, 2]], 2).is_empty()
-        );
+        assert!(Solution::find_path(lc_matrix![[1, 0, 4], [3, 0, 2]], 2).is_empty());
     }
 }

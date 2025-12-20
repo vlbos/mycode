@@ -78,11 +78,7 @@ impl Solution {
             }
             semester += 1;
         }
-        if courses == n {
-            semester
-        } else {
-            -1
-        }
+        if courses == n { semester } else { -1 }
     }
 }
 

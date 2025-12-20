@@ -1,4 +1,4 @@
-use error_chain::error_chain;
+// use error_chain::error_chain;
 use std::env;
 use std::fs;
 // use std::fs::File;
@@ -8,14 +8,14 @@ use std::path::Path;
 
 use glob::glob;
 
-error_chain! {
-    foreign_links {
-        Glob(glob::GlobError);
-        Pattern(glob::PatternError);
-    }
-}
+// error_chain! {
+//     foreign_links {
+//         Glob(glob::GlobError);
+//         Pattern(glob::PatternError);
+//     }
+// }
 
-fn main() -> Result<()> {
+fn main() {
     println!("Welcome to leetcode-rust system.\n");
     // let lines: Vec<Vec<i32>> = io::BufReader::new(File::open("./ids.txt").unwrap())
     //     .lines()
@@ -37,8 +37,8 @@ fn main() -> Result<()> {
     // println!("{:?}", ids_set.len());
     let path = env::current_dir().unwrap();
     println!("The current directory is {}", path.display());
-    for entry in glob(&(path.to_str().unwrap().to_owned() + "/solutions/*.rs"))? {
-        let filenamepath = format!("{}", entry?.display());
+    for entry in glob(&(path.to_str().unwrap().to_owned() + "/solutions/*.rs")).unwrap() {
+        let filenamepath = format!("{}", entry.unwrap().display());
         let j = filenamepath.rfind("/").unwrap_or(0);
         let filename = filenamepath[j + 1..].to_string();
         if &filename == "mod.rs" {
@@ -57,7 +57,7 @@ fn main() -> Result<()> {
         deal_solving(&filenamepath, &new_filename, &new_filepath);
     }
 
-    Ok(())
+    // Ok(())
 }
 
 fn deal_solving(filename: &String, _new_filename: &String, new_filepath: &String) {

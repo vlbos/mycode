@@ -1,11 +1,9 @@
-
 // ## [3616\. Number of Student Replacements 🔒](https://leetcode.com/problems/number-of-student-replacements)
- 
-
 
 // ## Description
 
-// You are given an integer array `ranks` where `ranks[i]` represents the rank of the `ith` student arriving **in order**. A lower number indicates a **better** rank.
+// You are given an integer array `ranks` where `ranks[i]` represents the rank of the `ith` student arriving **in order**.
+// A lower number indicates a **better** rank.
 
 // Initially, the first student is **selected** by default.
 
@@ -45,12 +43,18 @@
 
 // int total_replacements(vector<int>& ranks) {
 
-
 #[allow(dead_code)]
 pub struct Solution;
 impl Solution {
     pub fn total_replacements(nums: Vec<i32>) -> i32 {
-        0
+        let (mut cur, mut ans) = (nums[0], 0);
+        for &x in &nums[1..] {
+            if cur > x {
+                cur = x;
+                ans += 1;
+            }
+        }
+        ans
     }
 }
 
@@ -59,10 +63,10 @@ mod test {
     use super::*;
     #[test]
     pub fn test_total_replacements_1() {
-        assert_eq!(1, Solution::total_replacements(vec![4,1,2]));
+        assert_eq!(1, Solution::total_replacements(vec![4, 1, 2]));
     }
     #[test]
     pub fn test_total_replacements_2() {
-        assert_eq!(0, Solution::total_replacements(vec![2,2,3]));
+        assert_eq!(0, Solution::total_replacements(vec![2, 2, 3]));
     }
 }

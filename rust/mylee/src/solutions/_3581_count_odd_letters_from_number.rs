@@ -46,7 +46,21 @@ pub struct Solution;
 
 impl Solution {
     pub fn count_odd_letters(n: i32) -> i32 {
-        0
+        n.to_string()
+            .bytes()
+            .fold([0; 26], |mut s, b| {
+                [
+                    "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+                ][(b - b'0') as usize]
+                    .bytes()
+                    .for_each(|c| {
+                        s[(c - b'a') as usize] += 1;
+                    });
+                s
+            })
+            .iter()
+            .filter(|&&c| c % 2 != 0)
+            .count() as _
     }
 }
 

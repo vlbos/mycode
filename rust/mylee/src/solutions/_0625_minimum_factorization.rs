@@ -53,11 +53,7 @@ impl Solution {
             return 0;
         }
         let ans = ans.parse::<i64>().unwrap();
-        if ans > i32::MAX as i64 {
-            0
-        } else {
-            ans as _
-        }
+        if ans > i32::MAX as i64 { 0 } else { ans as _ }
     }
 
     pub fn smallest_factorization2(num: i32) -> i32 {

@@ -132,14 +132,16 @@ mod test {
     pub fn test_exp_tree_1() {
         assert_eq!(
             to_tree(
-                ['+', '-', '1', '2', '/', ' ', ' ', ' ', ' ', '3', '*', ' ', ' ', '5', '2']
-                    .into_iter()
-                    .map(|c| if "+-*/".chars().any(|x| x == c) {
-                        Some(c as u8 as i32)
-                    } else {
-                        c.to_string().parse::<i32>().ok()
-                    })
-                    .collect::<Vec<Option<i32>>>()
+                [
+                    '+', '-', '1', '2', '/', ' ', ' ', ' ', ' ', '3', '*', ' ', ' ', '5', '2'
+                ]
+                .into_iter()
+                .map(|c| if "+-*/".chars().any(|x| x == c) {
+                    Some(c as u8 as i32)
+                } else {
+                    c.to_string().parse::<i32>().ok()
+                })
+                .collect::<Vec<Option<i32>>>()
             ),
             Solution::exp_tree(String::from("2-3/(5*2)+1"))
         );
@@ -164,14 +166,16 @@ mod test {
     pub fn test_exp_tree_3() {
         assert_eq!(
             to_tree(
-                ['+', '+', '5', '+', '4', ' ', ' ', '+', '3', ' ', ' ', '1', '2']
-                    .into_iter()
-                    .map(|c| if "+-*/".chars().any(|x| x == c) {
-                        Some(c as u8 as i32)
-                    } else {
-                        c.to_string().parse::<i32>().ok()
-                    })
-                    .collect::<Vec<Option<i32>>>()
+                [
+                    '+', '+', '5', '+', '4', ' ', ' ', '+', '3', ' ', ' ', '1', '2'
+                ]
+                .into_iter()
+                .map(|c| if "+-*/".chars().any(|x| x == c) {
+                    Some(c as u8 as i32)
+                } else {
+                    c.to_string().parse::<i32>().ok()
+                })
+                .collect::<Vec<Option<i32>>>()
             ),
             Solution::exp_tree(String::from("1+2+3+4+5"))
         );

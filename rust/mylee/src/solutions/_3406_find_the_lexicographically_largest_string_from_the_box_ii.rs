@@ -52,32 +52,32 @@
 pub struct Solution;
 impl Solution {
     pub fn answer_string(word: String, num_friends: i32) -> String {
-        if num_friends==1{
-            return word
+        if num_friends == 1 {
+            return word;
         }
-        let (n,m)=(word.len(),num_friends as usize);
-        if n==m{
-        return word.chars().max().unwrap().to_string()
+        let (n, m) = (word.len(), num_friends as usize);
+        if n == m {
+            return word.chars().max().unwrap().to_string();
         }
-        
+
         // String::from_utf8(word.into_bytes().windows(n-m+1).max().unwrap().to_vec()).unwrap()
-        let s=word.as_bytes();
-        let (mut i,mut j,mut k)=(0,0,0);
-        while j+k<n{
-            if s[i+k]==s[j+k]{
-                k+=1;
-            }else if s[i+k]<s[j+k]{
-                i+=k+1;
-                k=0;
-                if i>=j{
-                j=i+1;
+        let s = word.as_bytes();
+        let (mut i, mut j, mut k) = (0, 0, 0);
+        while j + k < n {
+            if s[i + k] == s[j + k] {
+                k += 1;
+            } else if s[i + k] < s[j + k] {
+                i += k + 1;
+                k = 0;
+                if i >= j {
+                    j = i + 1;
                 }
-            }else{
-                    j+=k+1;
-                k=0;
+            } else {
+                j += k + 1;
+                k = 0;
             }
         }
-        word[i..i+n-m+1].to_owned()
+        word[i..i + n - m + 1].to_owned()
     }
 }
 

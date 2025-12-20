@@ -4,7 +4,7 @@
 
 // ## Description
 
-// You are given an array of integers `nums`. 
+// You are given an array of integers `nums`.
 // You **must** repeatedly perform one of the following operations while the array has more than two elements:
 
 // +   Remove the first two elements.
@@ -58,7 +58,12 @@
 pub struct Solution;
 impl Solution {
     pub fn max_score(nums: Vec<i32>) -> i32 {
-        nums.iter().sum::<i32>()-if nums.len()%2==0{nums.windows(2).map(|w|w[0]+w[1]).min().unwrap()}else{*nums.iter().min().unwrap()}
+        nums.iter().sum::<i32>()
+            - if nums.len() % 2 == 0 {
+                nums.windows(2).map(|w| w[0] + w[1]).min().unwrap()
+            } else {
+                *nums.iter().min().unwrap()
+            }
     }
 }
 

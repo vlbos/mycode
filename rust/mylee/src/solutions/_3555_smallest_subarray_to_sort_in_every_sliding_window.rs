@@ -4,7 +4,8 @@
 
 // You are given an integer array `nums` and an integer `k`.
 
-// For each contiguous subarray of length `k`, determine the **minimum** length of a continuous segment that must be sorted so that the entire window becomes **non‑decreasing**; if the window is already sorted, its required length is zero.
+// For each contiguous subarray of length `k`, determine the **minimum** length of a continuous segment that must be sorted so that the entire window becomes **non‑decreasing**;
+//if the window is already sorted, its required length is zero.
 
 // Return an array of length `n − k + 1` where each element corresponds to the answer for its window.
 
@@ -44,7 +45,20 @@ pub struct Solution {}
 
 impl Solution {
     pub fn min_subarray_sort(nums: Vec<i32>, k: i32) -> Vec<i32> {
-        vec![]
+        let mut ans = vec![];
+        for w in nums.windows(k as usize) {
+            let mut sw = w.to_vec();
+            sw.sort_unstable();
+            let (l, r) = (
+                sw.iter()
+                    .zip(w)
+                    .position(|(a, b)| a != b)
+                    .unwrap_or(sw.len()),
+                sw.iter().zip(w).rposition(|(a, b)| a != b).unwrap_or(0) + 1,
+            );
+            ans.push(r.saturating_sub(l) as i32);
+        }
+        ans
     }
 }
 

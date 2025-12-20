@@ -181,11 +181,7 @@ impl Solution {
             }
         }
 
-        if k == ans.len() {
-            ans
-        } else {
-            "".to_string()
-        }
+        if k == ans.len() { ans } else { "".to_string() }
         // let words = words
         //     .iter()
         //     .map(|s| s.chars().collect::<Vec<char>>())

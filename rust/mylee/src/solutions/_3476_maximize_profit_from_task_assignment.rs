@@ -4,13 +4,13 @@
 
 // ## Description
 
-// You are given an integer array `workers`, where `workers[i]` represents the skill level of the `ith` worker. 
+// You are given an integer array `workers`, where `workers[i]` represents the skill level of the `ith` worker.
 // You are also given a 2D integer array `tasks`, where:
 
 // +   `tasks[i][0]` represents the skill requirement needed to complete the task.
 // +   `tasks[i][1]` represents the profit earned from completing the task.
 
-// Each worker can complete **at most** one task, and they can only take a task if their skill level is **equal** to the task's skill requirement. 
+// Each worker can complete **at most** one task, and they can only take a task if their skill level is **equal** to the task's skill requirement.
 // An **additional** worker joins today who can take up *any* task, **regardless** of the skill requirement.
 
 // Return the **maximum** total profit that can be earned by optimally assigning the tasks to the workers.
@@ -63,17 +63,24 @@ pub struct Solution;
 
 impl Solution {
     pub fn max_profit(workers: Vec<i32>, tasks: Vec<Vec<i32>>) -> i64 {
-        use std::collections::{HashMap,BinaryHeap};
-        let mut hb=tasks.iter().fold(HashMap::new(),|mut s,t| {s.entry(t[0]).or_insert(BinaryHeap::new()).push(t[1]);s});
-        let mut ans=0;
-        for w in workers{
-            if let Some(v)=hb.get_mut(&w){
-                    if let Some(s)=v.pop(){
-                        ans+=s as i64;
-                    }
+        use std::collections::{BinaryHeap, HashMap};
+        let mut hb = tasks.iter().fold(HashMap::new(), |mut s, t| {
+            s.entry(t[0]).or_insert(BinaryHeap::new()).push(t[1]);
+            s
+        });
+        let mut ans = 0;
+        for w in workers {
+            if let Some(v) = hb.get_mut(&w) {
+                if let Some(s) = v.pop() {
+                    ans += s as i64;
+                }
             }
         }
-        ans+hb.values().map(|v|*v.peek().unwrap_or(&0)).max().unwrap_or(0) as i64
+        ans + hb
+            .values()
+            .map(|v| *v.peek().unwrap_or(&0))
+            .max()
+            .unwrap_or(0) as i64
     }
 }
 

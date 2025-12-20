@@ -68,9 +68,12 @@ pub struct Solution;
 
 impl Solution {
     pub fn max_students_on_bench(students: Vec<Vec<i32>>) -> i32 {
-        use std::collections::{HashMap,HashSet};
-        let  cnt=students.iter().fold(HashMap::new(),|mut s,x| {s.entry(x[1]).or_insert(HashSet::new()).insert(x);s});
-        cnt.values().map(|s|s.len() as i32).max().unwrap_or(0)
+        use std::collections::{HashMap, HashSet};
+        let cnt = students.iter().fold(HashMap::new(), |mut s, x| {
+            s.entry(x[1]).or_insert(HashSet::new()).insert(x);
+            s
+        });
+        cnt.values().map(|s| s.len() as i32).max().unwrap_or(0)
     }
 }
 

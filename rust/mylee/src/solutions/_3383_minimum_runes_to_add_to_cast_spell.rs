@@ -97,7 +97,7 @@ impl Solution {
         for &x in &crystals {
             vis[x as usize] = 1;
         }
-        let  q: VecDeque<_> = crystals.into_iter().map(|i| i as usize).collect();
+        let q: VecDeque<_> = crystals.into_iter().map(|i| i as usize).collect();
         bfs(q, &mut vis);
         let mut seq = vec![];
         for i in 0..n {

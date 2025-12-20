@@ -42,11 +42,7 @@ impl Solution {
     pub fn minimum_splits(nums: Vec<i32>) -> i32 {
         let (mut ans, mut x) = (1, nums[0]);
         fn gcd(a: i32, b: i32) -> i32 {
-            if b == 0 {
-                a
-            } else {
-                gcd(b, a % b)
-            }
+            if b == 0 { a } else { gcd(b, a % b) }
         }
         for &v in &nums {
             x = gcd(x, v);

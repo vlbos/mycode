@@ -264,27 +264,31 @@ mod test {
     // [1499.00000,0.00000,1499.00000]
     #[test]
     pub fn test_outer_trees_1() {
-        assert!([2.00000, 2.00000, 2.00000]
-            .into_iter()
-            .zip(Solution::outer_trees(vec![
-                vec![1, 1],
-                vec![2, 2],
-                vec![2, 0],
-                vec![2, 4],
-                vec![3, 3],
-                vec![4, 2]
-            ]))
-            .all(|(a, b)| a - b < 0.00001));
+        assert!(
+            [2.00000, 2.00000, 2.00000]
+                .into_iter()
+                .zip(Solution::outer_trees(vec![
+                    vec![1, 1],
+                    vec![2, 2],
+                    vec![2, 0],
+                    vec![2, 4],
+                    vec![3, 3],
+                    vec![4, 2]
+                ]))
+                .all(|(a, b)| a - b < 0.00001)
+        );
     }
     #[test]
     pub fn test_outer_trees_2() {
-        assert!([2.50000, 2.00000, 1.50000]
-            .into_iter()
-            .zip(Solution::outer_trees(vec![
-                vec![1, 2],
-                vec![2, 2],
-                vec![4, 2]
-            ]))
-            .all(|(a, b)| a - b < 0.00001));
+        assert!(
+            [2.50000, 2.00000, 1.50000]
+                .into_iter()
+                .zip(Solution::outer_trees(vec![
+                    vec![1, 2],
+                    vec![2, 2],
+                    vec![4, 2]
+                ]))
+                .all(|(a, b)| a - b < 0.00001)
+        );
     }
 }

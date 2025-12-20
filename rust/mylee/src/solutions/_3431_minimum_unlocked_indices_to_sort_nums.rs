@@ -66,28 +66,32 @@ pub struct Solution;
 
 impl Solution {
     pub fn min_unlocked_indices(nums: Vec<i32>, locked: Vec<i32>) -> i32 {
-        let n=nums.len();
-        let (mut first2,mut first3,mut last1,mut last2)=(n,n,n,n);
-        for (i,x) in nums.into_iter().enumerate(){
-            match x{
-                1=> last1=i,
-                2=>{
-                    if first2==n{
-                        first2=i;
+        let n = nums.len();
+        let (mut first2, mut first3, mut last1, mut last2) = (n, n, n, n);
+        for (i, x) in nums.into_iter().enumerate() {
+            match x {
+                1 => last1 = i,
+                2 => {
+                    if first2 == n {
+                        first2 = i;
                     }
-                    last2=i;
+                    last2 = i;
                 }
-                _=>{
-                    if first3==n{
-                        first3=i;
+                _ => {
+                    if first3 == n {
+                        first3 = i;
                     }
                 }
             }
         }
-        if first3<last1{
-            return -1
+        if first3 < last1 {
+            return -1;
         }
-        locked.into_iter().enumerate().filter(|&(i,st)|  st==1 && (first2<=i && i<last1 || first3 <=i&& i<last2)).count() as _
+        locked
+            .into_iter()
+            .enumerate()
+            .filter(|&(i, st)| st == 1 && (first2 <= i && i < last1 || first3 <= i && i < last2))
+            .count() as _
     }
 }
 

@@ -55,43 +55,56 @@
 pub struct Solution;
 
 impl Solution {
-    pub fn subsequences_with_middle_mode( nums: Vec<i32>) -> i32 {
-        const MOD:i64=1_000_000_007;
+    pub fn subsequences_with_middle_mode(nums: Vec<i32>) -> i32 {
+        const MOD: i64 = 1_000_000_007;
         use std::collections::HashMap;
-        let n=nums.len();
-        let mut p=HashMap::new();
-        let mut s=nums.iter().fold(HashMap::new(),|mut s,&x| {*s.entry(x).or_insert(0)+=1;s});
-        let mut ss=s.values().fold(0,|s,&x| (s+x as i64*x as i64)%MOD);
-        let (mut pss,mut spp,mut pp,mut ps)=(0,0,0,0);
-        let nc2=|n:i64|{n*(n-1)/2%MOD};
-        let mut ans=0;
-        for (i,&a) in nums.iter().enumerate(){
-            let (mut sa, pa)=(s[&a] as i64,*p.get(&a).unwrap_or(&0) as i64);
-            pss=(pss+pa*(-sa*sa+(sa-1)*(sa-1)))%MOD;
-            spp=(spp-pa*pa)%MOD;
-            ss=(ss-sa*sa+(sa-1)*(sa-1))%MOD;
-            ps=(ps-pa)%MOD;
-            s.entry(a).and_modify(|v|{*v-=1;});
-            sa=s[&a] as i64;
-            let ( l, r)=(i as i64,(n-i-1) as i64);
-            ans=(ans+nc2(l)*nc2(r))%MOD;
-            ans=(ans-nc2(l-pa)*nc2(r-sa))%MOD;
-            let (pss_,spp_,pp_,ss_,ps_,p_,s_)=((pss-pa*sa*sa)%MOD,(spp-sa*pa*pa)%MOD,(pp-pa*pa)%MOD,(ss-sa*sa)%MOD,(ps-pa*sa)%MOD,l-pa,r-sa);
-            let mut su=0;
-            su=(su+ps_*(pa*(r-sa)))%MOD;
-            su=(su+pss_*(-pa))%MOD;
-            su=(su+ps_*(sa*(l-pa)))%MOD;
-            su=(su+spp_*(-sa))%MOD;
-            su=(su+(pp_-p_)*sa*(r-sa)/2)%MOD;
-            su=(su+(ss_-s_)*pa*(l-pa)/2)%MOD;
-            ans=(ans-su+MOD)%MOD;
-            pss=(pss+sa*sa)%MOD;
-            spp=(spp+sa*(-pa*pa+(pa+1)*(pa+1)))%MOD;
-            pp=(pp-pa*pa+(pa+1)*(pa+1))%MOD;
-            ps=(ps+sa)%MOD;
-            *p.entry(a).or_insert(0)+=1;
+        let n = nums.len();
+        let mut p = HashMap::new();
+        let mut s = nums.iter().fold(HashMap::new(), |mut s, &x| {
+            *s.entry(x).or_insert(0) += 1;
+            s
+        });
+        let mut ss = s.values().fold(0, |s, &x| (s + x as i64 * x as i64) % MOD);
+        let (mut pss, mut spp, mut pp, mut ps) = (0, 0, 0, 0);
+        let nc2 = |n: i64| n * (n - 1) / 2 % MOD;
+        let mut ans = 0;
+        for (i, &a) in nums.iter().enumerate() {
+            let (mut sa, pa) = (s[&a] as i64, *p.get(&a).unwrap_or(&0) as i64);
+            pss = (pss + pa * (-sa * sa + (sa - 1) * (sa - 1))) % MOD;
+            spp = (spp - pa * pa) % MOD;
+            ss = (ss - sa * sa + (sa - 1) * (sa - 1)) % MOD;
+            ps = (ps - pa) % MOD;
+            s.entry(a).and_modify(|v| {
+                *v -= 1;
+            });
+            sa = s[&a] as i64;
+            let (l, r) = (i as i64, (n - i - 1) as i64);
+            ans = (ans + nc2(l) * nc2(r)) % MOD;
+            ans = (ans - nc2(l - pa) * nc2(r - sa)) % MOD;
+            let (pss_, spp_, pp_, ss_, ps_, p_, s_) = (
+                (pss - pa * sa * sa) % MOD,
+                (spp - sa * pa * pa) % MOD,
+                (pp - pa * pa) % MOD,
+                (ss - sa * sa) % MOD,
+                (ps - pa * sa) % MOD,
+                l - pa,
+                r - sa,
+            );
+            let mut su = 0;
+            su = (su + ps_ * (pa * (r - sa))) % MOD;
+            su = (su + pss_ * (-pa)) % MOD;
+            su = (su + ps_ * (sa * (l - pa))) % MOD;
+            su = (su + spp_ * (-sa)) % MOD;
+            su = (su + (pp_ - p_) * sa * (r - sa) / 2) % MOD;
+            su = (su + (ss_ - s_) * pa * (l - pa) / 2) % MOD;
+            ans = (ans - su + MOD) % MOD;
+            pss = (pss + sa * sa) % MOD;
+            spp = (spp + sa * (-pa * pa + (pa + 1) * (pa + 1))) % MOD;
+            pp = (pp - pa * pa + (pa + 1) * (pa + 1)) % MOD;
+            ps = (ps + sa) % MOD;
+            *p.entry(a).or_insert(0) += 1;
         }
-        ((ans+MOD)%MOD) as _
+        ((ans + MOD) % MOD) as _
     }
 }
 
@@ -188,8 +201,6 @@ mod test {
 //         return result % MOD;
 //     }
 // };
-
-
 
 // // Recall from solution 1 that after counting all the subsequences with `a` as
 // // the middle mode number, we need to subtract the cases where `a` is not a

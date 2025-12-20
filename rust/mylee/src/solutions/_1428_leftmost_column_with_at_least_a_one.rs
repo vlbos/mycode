@@ -127,10 +127,6 @@ impl Solution {
             }
         }
 
-        if ans == n {
-            -1
-        } else {
-            ans as i32
-        }
+        if ans == n { -1 } else { ans as i32 }
     }
 }

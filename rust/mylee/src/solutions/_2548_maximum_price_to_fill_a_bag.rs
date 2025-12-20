@@ -52,11 +52,7 @@ impl Solution {
             ans += (v as f64) / (item[1] as f64) * item[0] as f64;
             capacity -= v;
         }
-        if capacity > 0 {
-            -1.0
-        } else {
-            ans
-        }
+        if capacity > 0 { -1.0 } else { ans }
     }
 }
 

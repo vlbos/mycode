@@ -65,11 +65,7 @@ impl Solution {
                 }
             }
         }
-        if dp[n] == i32::MAX {
-            -1
-        } else {
-            dp[n]
-        }
+        if dp[n] == i32::MAX { -1 } else { dp[n] }
     }
 }
 

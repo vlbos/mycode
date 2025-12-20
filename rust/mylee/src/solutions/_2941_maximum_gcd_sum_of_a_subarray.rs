@@ -43,11 +43,7 @@ pub struct Solution;
 impl Solution {
     pub fn max_gcd_sum(nums: Vec<i32>, k: i32) -> i64 {
         fn gcd(a: i32, b: i32) -> i32 {
-            if b == 0 {
-                a
-            } else {
-                gcd(b, a % b)
-            }
+            if b == 0 { a } else { gcd(b, a % b) }
         }
         let mut s: Vec<_> = nums
             .iter()

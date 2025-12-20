@@ -140,7 +140,9 @@ mod test {
         let t = tree![3, 5, 1, 6, 2, 0, 8, null, null, 7, 4];
         let leaf = dfs(&t, 7);
         assert_eq!(
-            tree![7, 2, null, 5, 4, 3, 6, null, null, null, 1, null, null, 0, 8],
+            tree![
+                7, 2, null, 5, 4, 3, 6, null, null, null, 1, null, null, 0, 8
+            ],
             Solution::flip_binary_tree(t, leaf)
         );
     }
@@ -149,7 +151,9 @@ mod test {
         let t = tree![3, 5, 1, 6, 2, 0, 8, null, null, 7, 4];
         let leaf = dfs(&t, 0);
         assert_eq!(
-            tree![0, 1, null, 3, 8, 5, null, null, null, 6, 2, null, null, 7, 4],
+            tree![
+                0, 1, null, 3, 8, 5, null, null, null, 6, 2, null, null, 7, 4
+            ],
             Solution::flip_binary_tree(t, leaf)
         );
     }

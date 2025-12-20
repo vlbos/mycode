@@ -83,11 +83,7 @@ impl Solution {
             }
         }
         let ans = marked.iter().map(|&i| dist[i as usize]).min().unwrap();
-        if ans < i32::MAX / 2 {
-            ans
-        } else {
-            -1
-        }
+        if ans < i32::MAX / 2 { ans } else { -1 }
     }
 }
 

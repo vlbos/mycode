@@ -33,6 +33,7 @@ sha1 = "0.10.6"
 
 crypto-bigint = { version = "0.7.0-rc.2", default-features = false, features = ["zeroize", "alloc"] }
 base64ct = { version = "1", features = ["alloc"] }
+markdown2pdf="0.1"
 [[example]]
 name="enumfn"
 path="src/enumfn.rs"

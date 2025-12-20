@@ -76,17 +76,9 @@ impl Solution {
             ];
         }
         (if source[0] == dest[0] {
-            if source[1] == dest[1] {
-                f[0]
-            } else {
-                f[2]
-            }
+            if source[1] == dest[1] { f[0] } else { f[2] }
         } else {
-            if source[1] == dest[1] {
-                f[1]
-            } else {
-                f[3]
-            }
+            if source[1] == dest[1] { f[1] } else { f[3] }
         }) as _
     }
 }

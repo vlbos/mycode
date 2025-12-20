@@ -69,11 +69,7 @@ impl Solution {
             }
             i += 1;
         }
-        if ans == i32::MAX {
-            -1
-        } else {
-            ans
-        }
+        if ans == i32::MAX { -1 } else { ans }
     }
 
     pub fn k_empty_slots2(bulbs: Vec<i32>, k: i32) -> i32 {

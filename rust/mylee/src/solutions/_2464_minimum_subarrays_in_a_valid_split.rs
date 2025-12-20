@@ -51,11 +51,7 @@ pub struct Solution;
 impl Solution {
     pub fn valid_subarray_splitwrong(nums: Vec<i32>) -> i32 {
         fn gcd(a: i32, b: i32) -> i32 {
-            if b == 0 {
-                a
-            } else {
-                gcd(b, a % b)
-            }
+            if b == 0 { a } else { gcd(b, a % b) }
         }
         fn dfs(i: usize, nums: &Vec<i32>, f: &mut Vec<i32>) -> i32 {
             let n = nums.len();
@@ -76,11 +72,7 @@ impl Solution {
         }
         let mut f = vec![0; nums.len()];
         let ans = dfs(0, &nums, &mut f);
-        if ans == i32::MAX / 2 {
-            -1
-        } else {
-            ans
-        }
+        if ans == i32::MAX / 2 { -1 } else { ans }
     }
 
     pub fn valid_subarray_split(nums: Vec<i32>) -> i32 {

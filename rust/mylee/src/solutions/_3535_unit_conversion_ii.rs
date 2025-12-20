@@ -6,11 +6,16 @@
 
 // There are `n` types of units indexed from `0` to `n - 1`.
 
-// You are given a 2D integer array `conversions` of length `n - 1`, where `conversions[i] = [sourceUniti, targetUniti, conversionFactori]`. This indicates that a single unit of type `sourceUniti` is equivalent to `conversionFactori` units of type `targetUniti`.
+// You are given a 2D integer array `conversions` of length `n - 1`,
+// where `conversions[i] = [sourceUniti, targetUniti, conversionFactori]`.
+// This indicates that a single unit of type `sourceUniti` is equivalent to `conversionFactori` units of type `targetUniti`.
 
 // You are also given a 2D integer array `queries` of length `q`, where `queries[i] = [unitAi, unitBi]`.
 
-// Return an array `answer` of length `q` where `answer[i]` is the number of units of type `unitBi` equivalent to 1 unit of type `unitAi`, and can be represented as `p/q` where `p` and `q` are coprime. Return each `answer[i]` as `pq-1` **modulo** `109 + 7`, where `q-1` represents the multiplicative inverse of `q` modulo `109 + 7`.
+// Return an array `answer` of length `q` where `answer[i]` is the number of units of type `unitBi` equivalent to 1 unit of type `unitAi`,
+// and can be represented as `p/q` where `p` and `q` are coprime.
+// Return each `answer[i]` as `pq-1` **modulo** `109 + 7`,
+// where `q-1` represents the multiplicative inverse of `q` modulo `109 + 7`.
 
 // **Example 1:**
 
@@ -59,7 +64,44 @@
 pub struct Solution {}
 impl Solution {
     pub fn query_conversions(conversions: Vec<Vec<i32>>, queries: Vec<Vec<i32>>) -> Vec<i32> {
-        vec![]
+        const MOD: i64 = 1_000_000_007;
+        fn quick_pow(base: i64, p: i64) -> i64 {
+            if p == 0 {
+                return 1;
+            }
+            if p == 1 {
+                return base;
+            }
+            let mut ans = quick_pow(base, p / 2);
+            ans = ans * ans % MOD;
+            if p & 1 != 0 {
+                ans = ans * base % MOD;
+            }
+            ans
+        }
+        let n = conversions.len() + 1;
+        let mut g = vec![vec![]; n];
+        for c in conversions {
+            let (u, v, w) = (c[0] as usize, c[1] as usize, c[2] as i64);
+            g[u].push((v, w));
+            g[v].push((u, quick_pow(w, MOD - 2)));
+        }
+        let mut q = std::collections::VecDeque::from([0]);
+        let mut dis = vec![i64::MAX; n];
+        dis[0] = 1;
+        while let Some(now) = q.pop_front() {
+            for &(nxt, w) in &g[now] {
+                if dis[nxt] == i64::MAX {
+                    dis[nxt] = dis[now] * w % MOD;
+                    q.push_back(nxt);
+                }
+            }
+        }
+        let mut ans = vec![];
+        for q in queries {
+            ans.push((quick_pow(dis[q[0] as usize], MOD - 2) * dis[q[1] as usize] % MOD) as i32);
+        }
+        ans
     }
 }
 

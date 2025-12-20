@@ -57,11 +57,7 @@ impl Solution {
         );
 
         let ans = (mi + nums.len() - 1 - xi) as i32;
-        if mi <= xi {
-            ans
-        } else {
-            ans - 1
-        }
+        if mi <= xi { ans } else { ans - 1 }
     }
 }
 

@@ -4,7 +4,7 @@
 
 // ## Description
 
-// You are given an integer array `nums` of length `n` and a 2D integer array `queries` of length `q`, 
+// You are given an integer array `nums` of length `n` and a 2D integer array `queries` of length `q`,
 // where each query is one of the following three types:
 
 // 1.  **Update**: `queries[i] = [1, index, value]`
@@ -68,138 +68,166 @@ pub struct Solution {}
 
 impl Solution {
     pub fn get_results(nums: Vec<i32>, queries: Vec<Vec<i32>>) -> Vec<i32> {
-        
-        use std::{rc::Rc,cell::RefCell};
-        struct Node{
-           pub val:i32,
-           pub sub_xor:i32,
-           pub sz:i32,
-           pub rev:bool,
-           pub prior:i32,
-           pub l:Option<Rc<RefCell<Node>>>,
-           pub r:Option<Rc<RefCell<Node>>>,
+        use std::{cell::RefCell, rc::Rc};
+        struct Node {
+            pub val: i32,
+            pub sub_xor: i32,
+            pub sz: i32,
+            pub rev: bool,
+            pub prior: i32,
+            pub l: Option<Rc<RefCell<Node>>>,
+            pub r: Option<Rc<RefCell<Node>>>,
         }
-        impl Node{
-            pub fn new(v:i32)->Self{
-                Self{val:v,sub_xor:v,sz:1,rev:false,prior: rand::random(),l:None,r:None}
+        impl Node {
+            pub fn new(v: i32) -> Self {
+                Self {
+                    val: v,
+                    sub_xor: v,
+                    sz: 1,
+                    rev: false,
+                    prior: rand::random(),
+                    l: None,
+                    r: None,
+                }
             }
         }
-            #[inline]
-            fn get_size(t:&Option<Rc<RefCell<Node>>>)->i32{
-                if let Some(v)=t{
-                    v.borrow().sz
-                }else{0}
+        #[inline]
+        fn get_size(t: &Option<Rc<RefCell<Node>>>) -> i32 {
+            if let Some(v) = t { v.borrow().sz } else { 0 }
+        }
+        #[inline]
+        fn get_xor(t: &Option<Rc<RefCell<Node>>>) -> i32 {
+            if let Some(v) = t {
+                v.borrow().sub_xor
+            } else {
+                0
             }
-            #[inline]
-            fn get_xor(t:&Option<Rc<RefCell<Node>>>)->i32{
-                if let Some(v)=t{
-                    v.borrow().sub_xor
-                }else{0}
+        }
+        fn update(t: &Option<Rc<RefCell<Node>>>) {
+            if t.is_none() {
+                return;
             }
-            fn update(t:&Option<Rc<RefCell<Node>>>){
-                if  t.is_none(){
-                return 
-                    }
-                let sz=1+get_size(&t.as_ref().unwrap().borrow().l)+get_size(&t.as_ref().unwrap().borrow().r);
-                t.as_ref().unwrap().borrow_mut().sz=sz;
-                let sub_xor=t.as_ref().unwrap().borrow().val^get_xor(&t.as_ref().unwrap().borrow().l)^get_xor(&t.as_ref().unwrap().borrow().r);
-                t.as_ref().unwrap().borrow_mut().sub_xor=sub_xor;
+            let sz = 1
+                + get_size(&t.as_ref().unwrap().borrow().l)
+                + get_size(&t.as_ref().unwrap().borrow().r);
+            t.as_ref().unwrap().borrow_mut().sz = sz;
+            let sub_xor = t.as_ref().unwrap().borrow().val
+                ^ get_xor(&t.as_ref().unwrap().borrow().l)
+                ^ get_xor(&t.as_ref().unwrap().borrow().r);
+            t.as_ref().unwrap().borrow_mut().sub_xor = sub_xor;
+        }
+        fn push(t: &Option<Rc<RefCell<Node>>>) {
+            if t.is_none() || !t.as_ref().unwrap().borrow().rev {
+                return;
             }
-             fn push(t:&Option<Rc<RefCell<Node>>>){
-                if  t.is_none()||!t.as_ref().unwrap().borrow().rev{
-                return 
-                    }
-                let ll=t.as_ref().unwrap().borrow_mut().l.take();
-                let rr=t.as_ref().unwrap().borrow_mut().r.take();
-                (t.as_ref().unwrap().borrow_mut().r,t.as_ref().unwrap().borrow_mut().l)=(ll,rr);
-                if let Some(v)=&t.as_ref().unwrap().borrow().l{
-                    v.borrow_mut().rev^=true;
-                }
-                if let Some(v)=&t.as_ref().unwrap().borrow().r{
-                    v.borrow_mut().rev^=true;
-                }
-                t.as_ref().unwrap().borrow_mut().rev=false;
+            let ll = t.as_ref().unwrap().borrow_mut().l.take();
+            let rr = t.as_ref().unwrap().borrow_mut().r.take();
+            (
+                t.as_ref().unwrap().borrow_mut().r,
+                t.as_ref().unwrap().borrow_mut().l,
+            ) = (ll, rr);
+            if let Some(v) = &t.as_ref().unwrap().borrow().l {
+                v.borrow_mut().rev ^= true;
             }
-            fn merge(l:&Option<Rc<RefCell<Node>>>,r:&Option<Rc<RefCell<Node>>>)->Option<Rc<RefCell<Node>>>{
-                push(l);
-                push(r);
-                if l.is_none()||r.is_none(){
-                   return  if l.is_none() {r.clone()}else{l.clone()}
-                }
-                if l.as_ref().unwrap().borrow().prior>r.as_ref().unwrap().borrow().prior{
-                    let rr=merge(&l.as_ref().unwrap().borrow().r,&r);
-                   l.as_ref().unwrap().borrow_mut().r=rr;
-                    update(l);
-                    l.clone()
-                }else{
-                    let ll=merge(&l,&r.as_ref().unwrap().borrow().l);
-                    r.as_ref().unwrap().borrow_mut().l=ll;
-                    update(r);
-                    r.clone()
-                }
+            if let Some(v) = &t.as_ref().unwrap().borrow().r {
+                v.borrow_mut().rev ^= true;
             }
-            fn split(t:&Option<Rc<RefCell<Node>>>,k:i32,l:&mut Option<Rc<RefCell<Node>>>,r:&mut Option<Rc<RefCell<Node>>>){
+            t.as_ref().unwrap().borrow_mut().rev = false;
+        }
+        fn merge(
+            l: &Option<Rc<RefCell<Node>>>,
+            r: &Option<Rc<RefCell<Node>>>,
+        ) -> Option<Rc<RefCell<Node>>> {
+            push(l);
+            push(r);
+            if l.is_none() || r.is_none() {
+                return if l.is_none() { r.clone() } else { l.clone() };
+            }
+            if l.as_ref().unwrap().borrow().prior > r.as_ref().unwrap().borrow().prior {
+                let rr = merge(&l.as_ref().unwrap().borrow().r, &r);
+                l.as_ref().unwrap().borrow_mut().r = rr;
+                update(l);
+                l.clone()
+            } else {
+                let ll = merge(&l, &r.as_ref().unwrap().borrow().l);
+                r.as_ref().unwrap().borrow_mut().l = ll;
+                update(r);
+                r.clone()
+            }
+        }
+        fn split(
+            t: &Option<Rc<RefCell<Node>>>,
+            k: i32,
+            l: &mut Option<Rc<RefCell<Node>>>,
+            r: &mut Option<Rc<RefCell<Node>>>,
+        ) {
+            if t.is_none() {
+                (*l, *r) = (None, None);
+                return;
+            }
+            push(t);
 
-                if t.is_none(){
-                   (*l,*r)=(None,None);
-                   return  
-                }
-                push(t);
-              
-                if get_size(&t.as_ref().unwrap().borrow().l)>=k{
-                    let mut ll=t.as_ref().unwrap().borrow().l.clone();
-                   split(&t.as_ref().unwrap().borrow().l,k,l,&mut ll);
-                   t.as_ref().unwrap().borrow_mut().l=ll;
-                   *r=t.clone();
-                }else{
-                    let mut rr=t.as_ref().unwrap().borrow().r.clone();
-                    split(&t.as_ref().unwrap().borrow().r,k-get_size(&t.as_ref().unwrap().borrow().l)-1,&mut rr,r);
-                    t.as_ref().unwrap().borrow_mut().r=rr;
-                    *l=t.clone();
-                }
-                update(t);
+            if get_size(&t.as_ref().unwrap().borrow().l) >= k {
+                let mut ll = t.as_ref().unwrap().borrow().l.clone();
+                split(&t.as_ref().unwrap().borrow().l, k, l, &mut ll);
+                t.as_ref().unwrap().borrow_mut().l = ll;
+                *r = t.clone();
+            } else {
+                let mut rr = t.as_ref().unwrap().borrow().r.clone();
+                split(
+                    &t.as_ref().unwrap().borrow().r,
+                    k - get_size(&t.as_ref().unwrap().borrow().l) - 1,
+                    &mut rr,
+                    r,
+                );
+                t.as_ref().unwrap().borrow_mut().r = rr;
+                *l = t.clone();
             }
-            fn build(nums: Vec<i32>)->Option<Rc<RefCell<Node>>>{
-                nums.into_iter().fold(None,|root,x| merge(&root,&Some(Rc::new(RefCell::new(Node::new(x))))))
+            update(t);
+        }
+        fn build(nums: Vec<i32>) -> Option<Rc<RefCell<Node>>> {
+            nums.into_iter().fold(None, |root, x| {
+                merge(&root, &Some(Rc::new(RefCell::new(Node::new(x)))))
+            })
+        }
+        let mut root = build(nums);
+        fn update_value(index: i32, val: i32, root: &mut Option<Rc<RefCell<Node>>>) {
+            let (mut l, mut r, mut m) = (None, None, None);
+            split(root, index, &mut l, &mut r);
+            split(&r.clone(), 1, &mut m, &mut r);
+            if let Some(v) = &m {
+                v.borrow_mut().val = val;
             }
-            let mut root=build(nums);
-            fn update_value(index:i32,val:i32,root:&mut Option<Rc<RefCell<Node>>>){
-                let (mut l,mut r,mut m)=(None,None,None);
-                split(root,index,&mut l,&mut r);
-                split(&r.clone(),1,&mut m,&mut r);
-                if let Some(v)=&m{
-                    v.borrow_mut().val=val;
-                }
-                update(&m);
-                *root=merge(&l,&merge(&m,&r));
-            }
-            fn range_xor(left:i32,right:i32,root:&mut Option<Rc<RefCell<Node>>>)->i32{
-                let (mut l,mut r,mut m)=(None,None,None);
-                split(root,left,&mut l,&mut r);
-                split(&r.clone(),right-left+1,&mut m,&mut r);
-                let ans=get_xor(&m);
-                *root=merge(&merge(&l,&m),&r);
-                ans
-            }
-            fn reverse_range(left:i32,right:i32,root:&mut Option<Rc<RefCell<Node>>>){
-                let (mut l,mut r,mut m)=(None,None,None);
-                split(root,left,&mut l,&mut r);
-                split(&r.clone(),right-left+1,&mut m,&mut r);
-                if let Some(v)=&m{
-                    v.borrow_mut().rev^=true;
-                }
-                *root=merge(&merge(&l,&m),&r);
-            }
-            let mut ans=vec![];
-            for q in queries{
-                match q[0]{
-                1=>update_value(q[1],q[2],&mut root),
-                2=>ans.push(range_xor(q[1],q[2],&mut root)),
-                _=>reverse_range(q[1],q[2],&mut root),
-                }
-            }
+            update(&m);
+            *root = merge(&l, &merge(&m, &r));
+        }
+        fn range_xor(left: i32, right: i32, root: &mut Option<Rc<RefCell<Node>>>) -> i32 {
+            let (mut l, mut r, mut m) = (None, None, None);
+            split(root, left, &mut l, &mut r);
+            split(&r.clone(), right - left + 1, &mut m, &mut r);
+            let ans = get_xor(&m);
+            *root = merge(&merge(&l, &m), &r);
             ans
-    }       
+        }
+        fn reverse_range(left: i32, right: i32, root: &mut Option<Rc<RefCell<Node>>>) {
+            let (mut l, mut r, mut m) = (None, None, None);
+            split(root, left, &mut l, &mut r);
+            split(&r.clone(), right - left + 1, &mut m, &mut r);
+            if let Some(v) = &m {
+                v.borrow_mut().rev ^= true;
+            }
+            *root = merge(&merge(&l, &m), &r);
+        }
+        let mut ans = vec![];
+        for q in queries {
+            match q[0] {
+                1 => update_value(q[1], q[2], &mut root),
+                2 => ans.push(range_xor(q[1], q[2], &mut root)),
+                _ => reverse_range(q[1], q[2], &mut root),
+            }
+        }
+        ans
+    }
 }
 
 #[cfg(test)]

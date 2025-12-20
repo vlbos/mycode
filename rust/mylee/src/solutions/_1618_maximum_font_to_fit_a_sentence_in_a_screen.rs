@@ -100,11 +100,7 @@ impl Solution {
                 high = mid - 1;
             }
         }
-        if low > 0 {
-            fonts[low as usize - 1]
-        } else {
-            -1
-        }
+        if low > 0 { fonts[low as usize - 1] } else { -1 }
     }
 }
 

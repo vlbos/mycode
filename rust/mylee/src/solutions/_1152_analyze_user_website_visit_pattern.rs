@@ -151,10 +151,12 @@ mod test {
                 .map(String::from)
                 .collect::<Vec<String>>(),
             Solution::most_visited_pattern(
-                ["joe", "joe", "joe", "james", "james", "james", "james", "mary", "mary", "mary"]
-                    .into_iter()
-                    .map(String::from)
-                    .collect::<Vec<String>>(),
+                [
+                    "joe", "joe", "joe", "james", "james", "james", "james", "mary", "mary", "mary"
+                ]
+                .into_iter()
+                .map(String::from)
+                .collect::<Vec<String>>(),
                 vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
                 [
                     "home", "about", "career", "home", "cart", "maps", "home", "home", "about",

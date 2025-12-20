@@ -49,11 +49,7 @@ impl Solution {
         for (i, c1) in s1.chars().enumerate() {
             for (j, c2) in s2.chars().enumerate() {
                 f[i + 1][j + 1] = if c1 == c2 {
-                    if j == 0 {
-                        i + 1
-                    } else {
-                        f[i][j]
-                    }
+                    if j == 0 { i + 1 } else { f[i][j] }
                 } else {
                     f[i][j + 1]
                 };

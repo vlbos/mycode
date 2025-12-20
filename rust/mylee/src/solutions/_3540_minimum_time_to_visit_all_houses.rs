@@ -2,14 +2,19 @@
 
 // ## Description
 
-// You are given two integer arrays `forward` and `backward`, both of size `n`. You are also given another integer array `queries`.
+// You are given two integer arrays `forward` and `backward`, both of size `n`.
+//  You are also given another integer array `queries`.
 
-// There are `n` houses *arranged in a circle*. The houses are connected via roads in a special arrangement:
+// There are `n` houses *arranged in a circle*.
+// The houses are connected via roads in a special arrangement:
 
-// +   For all `0 <= i <= n - 2`, house `i` is connected to house `i + 1` via a road with length `forward[i]` meters. Additionally, house `n - 1` is connected back to house 0 via a road with length `forward[n - 1]` meters, completing the circle.
-// +   For all `1 <= i <= n - 1`, house `i` is connected to house `i - 1` via a road with length `backward[i]` meters. Additionally, house 0 is connected back to house `n - 1` via a road with length `backward[0]` meters, completing the circle.
+// +   For all `0 <= i <= n - 2`, house `i` is connected to house `i + 1` via a road with length `forward[i]` meters.
+//  Additionally, house `n - 1` is connected back to house 0 via a road with length `forward[n - 1]` meters, completing the circle.
+// +   For all `1 <= i <= n - 1`, house `i` is connected to house `i - 1` via a road with length `backward[i]` meters.
+// Additionally, house 0 is connected back to house `n - 1` via a road with length `backward[0]` meters, completing the circle.
 
-// You can walk at a pace of **one** meter per second. Starting from house 0, find the **minimum** time taken to visit each house in the order specified by `queries`.
+// You can walk at a pace of **one** meter per second.
+// Starting from house 0, find the **minimum** time taken to visit each house in the order specified by `queries`.
 
 // Return the **minimum** total time taken to visit the houses.
 
@@ -52,7 +57,32 @@ pub struct Solution;
 
 impl Solution {
     pub fn min_total_time(forward: Vec<i32>, backward: Vec<i32>, queries: Vec<i32>) -> i64 {
-        0
+        let n = forward.len();
+        let sum = backward.iter().fold(0, |s, &x| s + x as i64);
+        let mut pre_f: Vec<_> = forward
+            .iter()
+            .scan(0, |s, &x| {
+                *s += x as i64;
+                Some(*s)
+            })
+            .collect();
+        pre_f.insert(0, 0);
+        let mut pre_b: Vec<_> = backward
+            .iter()
+            .scan(0, |s, &x| {
+                *s += x as i64;
+                Some(*s)
+            })
+            .collect();
+        pre_b.push(0);
+        let (mut ans, mut p) = (0, 0);
+        for q in queries {
+            let r = if q < p { pre_f[n] } else { 0 } + pre_f[q as usize] - pre_f[p as usize];
+            let l = if q > p { sum } else { 0 } + pre_b[p as usize] - pre_b[q as usize];
+            ans += l.min(r);
+            p = q;
+        }
+        ans
     }
 }
 

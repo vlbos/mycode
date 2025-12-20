@@ -37,23 +37,29 @@ pub struct Solution;
 
 impl Solution {
     pub fn permute(n: i32) -> Vec<Vec<i32>> {
-        fn dfs(i:i32,n:i32,vis:&mut Vec<bool>,t:&mut Vec<i32>,ans:&mut Vec<Vec<i32>>){
-            if i>=n{
+        fn dfs(i: i32, n: i32, vis: &mut Vec<bool>, t: &mut Vec<i32>, ans: &mut Vec<Vec<i32>>) {
+            if i >= n {
                 ans.push(t.clone());
-                return 
+                return;
             }
-            for j in 1..=n{
-                if !vis[j as usize] && (i==0|| t[t.len()-1]&1!=j&1){
+            for j in 1..=n {
+                if !vis[j as usize] && (i == 0 || t[t.len() - 1] & 1 != j & 1) {
                     t.push(j);
-                    vis[j as usize]=true;
-                    dfs(i+1,n,vis,t,ans);
-                    vis[j as usize]=false;
+                    vis[j as usize] = true;
+                    dfs(i + 1, n, vis, t, ans);
+                    vis[j as usize] = false;
                     t.pop();
                 }
             }
         }
-        let mut ans=vec![];
-        dfs(0,n,&mut vec![false;n as usize+1],&mut vec![],&mut ans);
+        let mut ans = vec![];
+        dfs(
+            0,
+            n,
+            &mut vec![false; n as usize + 1],
+            &mut vec![],
+            &mut ans,
+        );
         ans
     }
 }
