@@ -1,4 +1,4 @@
-// # 3662. Filter Characters by Frequency 🔒 
+// # 3662. Filter Characters by Frequency 🔒
 
 // Description
 // -----------
@@ -46,12 +46,17 @@
 
 // //  string filter_characters(string s, int k) {
 
-
 #[allow(dead_code)]
 pub struct Solution;
 impl Solution {
     pub fn filter_characters(s: String, k: i32) -> String {
-       s
+        let cnt = s.bytes().fold([0; 26], |mut c, b| {
+            c[(b - b'a') as usize] += 1;
+            c
+        });
+        s.chars()
+            .filter(|&c| cnt[(c as u8 - b'a') as usize] < k)
+            .collect()
     }
 }
 
@@ -74,10 +79,3 @@ mod test {
         );
     }
 }
-
-
-
-
-
-
-

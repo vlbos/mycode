@@ -1,15 +1,18 @@
-// # 3758. Convert Number Words to Digits 🔒 
+// # 3758. Convert Number Words to Digits 🔒
 
 // Description
 // -----------
 
-// You are given a string `s` consisting of lowercase English letters. `s` may contain **valid concatenated** English words representing the digits 0 to 9, without spaces.
+// You are given a string `s` consisting of lowercase English letters.
+// `s` may contain **valid concatenated** English words representing the digits 0 to 9, without spaces.
 
-// Your task is to **extract** each valid number word **in order** and convert it to its corresponding digit, producing a string of digits.
+// Your task is to **extract** each valid number word **in order** and convert it to its corresponding digit,
+// producing a string of digits.
 
 // Parse `s` from left to right. At each position:
 
-// *   If a valid number word starts at the current position, append its corresponding digit to the result and advance by the length of that word.
+// *   If a valid number word starts at the current position,
+// append its corresponding digit to the result and advance by the length of that word.
 // *   Otherwise, skip **exactly** one character and continue parsing.
 
 // Return the resulting digit string. If no number words are found, return an empty string.
@@ -66,12 +69,35 @@
 
 // //  string convert_number(string s) {
 
-
-
-
 impl Solution {
     pub fn convert_number(s: String) -> String {
-        s
+        use std::collections::{HashMap, HashSet};
+        let h: HashMap<_, _> = [
+            "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+        ]
+        .into_iter()
+        .enumerate()
+        .map(|(i, x)| (x, i))
+        .collect();
+        let mut pre = h.keys().fold(HashSet::new(), |mut p, w| {
+            (1..=w.len()).for_each(|i| {
+                p.insert(&w[..i]);
+            });
+            p
+        });
+        let (mut cur, mut ans) = (String::new(), String::new());
+        for c in s.chars() {
+            cur.push(c);
+            if !pre.contains(&cur.as_str()) {
+                cur = String::new();
+                continue;
+            }
+            if let Some(v) = h.get(&cur.as_str()) {
+                ans.push_str(&v.to_string());
+                cur = String::new();
+            }
+        }
+        ans
     }
 }
 // @lc code=end
@@ -92,29 +118,15 @@ mod test {
 
     #[test]
     pub fn test_convert_number_2() {
-        assert_eq!(
-            Solution::convert_number(String::from("ninexsix")),
-            "96"
-        );
+        assert_eq!(Solution::convert_number(String::from("ninexsix")), "96");
     }
 
     #[test]
     pub fn test_convert_number_3() {
-        assert_eq!(
-            Solution::convert_number(String::from("zeero")),
-            ""
-        );
+        assert_eq!(Solution::convert_number(String::from("zeero")), "");
     }
-  #[test]
+    #[test]
     pub fn test_convert_number_4() {
-        assert_eq!(
-            Solution::convert_number(String::from("tw")),
-            ""
-        );
+        assert_eq!(Solution::convert_number(String::from("tw")), "");
     }
 }
-
-
-
-
-

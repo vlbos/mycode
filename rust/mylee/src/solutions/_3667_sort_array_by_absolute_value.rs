@@ -1,4 +1,4 @@
-// # 3667. Sort Array By Absolute Value 🔒 
+// # 3667. Sort Array By Absolute Value 🔒
 
 // Description
 // -----------
@@ -45,13 +45,12 @@
 
 // // vector<int> sort_by_absolute_value(vector<int>& nums) {
 
-
-
 #[allow(dead_code)]
 pub struct Solution {}
 
 impl Solution {
-    pub fn sort_by_absolute_value(nums: Vec<i32>) -> Vec<i32> {
+    pub fn sort_by_absolute_value(mut nums: Vec<i32>) -> Vec<i32> {
+        nums.sort_unstable_by_key(|v| v.abs());
         nums
     }
 }
@@ -62,19 +61,16 @@ mod test {
 
     #[test]
     pub fn test_sort_by_absolute_value_1() {
-        assert_eq!(vec![-1,1,3,-4,5], Solution::sort_by_absolute_value(vec![3,-1,-4,1,5]));
+        assert_eq!(
+            vec![-1, 1, 3, -4, 5],
+            Solution::sort_by_absolute_value(vec![3, -1, -4, 1, 5])
+        );
     }
     #[test]
     pub fn test_sort_by_absolute_value_2() {
-        assert_eq!(vec![-100,100], Solution::sort_by_absolute_value(vec![-100,100]));
+        assert_eq!(
+            vec![-100, 100],
+            Solution::sort_by_absolute_value(vec![-100, 100])
+        );
     }
-   
 }
-
-
-
-
-
-
-
-

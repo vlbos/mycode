@@ -1,4 +1,4 @@
-// # 3696. Maximum Distance Between Unequal Words in Array I 🔒 
+// # 3696. Maximum Distance Between Unequal Words in Array I 🔒
 
 // Description
 // -----------
@@ -50,11 +50,20 @@
 
 // //  int max_distance(vector<string>& words) {
 
-
 pub struct Solution;
 impl Solution {
     pub fn max_distance(words: Vec<String>) -> i32 {
-        0
+        let n = words.len();
+        let mut ans = 0;
+        for (i, w) in words.iter().enumerate() {
+            if w != &words[0] {
+                ans = ans.max(i + 1);
+            }
+            if w != &words[n - 1] {
+                ans = ans.max(n - i);
+            }
+        }
+        ans as _
     }
 }
 
@@ -66,35 +75,18 @@ mod test {
     pub fn test_max_distance_1() {
         assert_eq!(
             3,
-            Solution::max_distance(
-                lc_vec_s!["leetcode","leetcode","codeforces"],
-            )
+            Solution::max_distance(lc_vec_s!["leetcode", "leetcode", "codeforces"],)
         );
     }
     #[test]
     pub fn test_max_distance_2() {
         assert_eq!(
             4,
-            Solution::max_distance(
-                lc_vec_s!["a","b","c","a","a"]
-            )
+            Solution::max_distance(lc_vec_s!["a", "b", "c", "a", "a"])
         );
     }
     #[test]
     pub fn test_max_distance_3() {
-        assert_eq!(
-            0,
-            Solution::max_distance(
-                lc_vec_s!["z","z","z"]
-            )
-        );
+        assert_eq!(0, Solution::max_distance(lc_vec_s!["z", "z", "z"]));
     }
-
 }
-
-
-
-
-
-
-

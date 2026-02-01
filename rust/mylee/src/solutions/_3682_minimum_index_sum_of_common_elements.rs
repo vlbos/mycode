@@ -1,4 +1,4 @@
-// # 3682. Minimum Index Sum of Common Elements 🔒 
+// # 3682. Minimum Index Sum of Common Elements 🔒
 
 // Description
 // -----------
@@ -50,18 +50,26 @@
 // *   `1 <= nums1.length == nums2.length <= 105`
 // *   `-105 <= nums1[i], nums2[i] <= 105`
 
-
 // //  int minimum_sum(vector<int>& nums1, vector<int>& nums2) {
-
-
-
 
 #[allow(dead_code)]
 pub struct Solution;
 
 impl Solution {
     pub fn minimum_sum(nums1: Vec<i32>, nums2: Vec<i32>) -> i32 {
-        0
+        let mut cnt = std::collections::HashMap::new();
+        let n = nums1.len() * 2;
+        let mut ans = n;
+        for (i, x) in nums1.into_iter().enumerate() {
+            cnt.entry(x).or_insert(i);
+        }
+        for (i, x) in nums2.into_iter().enumerate() {
+            if let Some(&j) = cnt.get(&x) {
+                ans = ans.min(i + j);
+                cnt.remove(&x);
+            }
+        }
+        if ans == n { -1 } else { ans as i32 }
     }
 }
 
@@ -71,29 +79,14 @@ mod test {
 
     #[test]
     pub fn test_minimum_sum_1() {
-        assert_eq!(
-            1,
-            Solution::minimum_sum(vec![3,2,1], vec![1,3,1])
-        );
+        assert_eq!(1, Solution::minimum_sum(vec![3, 2, 1], vec![1, 3, 1]));
     }
     #[test]
     pub fn test_minimum_sum_2() {
-        assert_eq!(
-            2,
-            Solution::minimum_sum(vec![5,1,2], vec![2,1,3])
-        );
+        assert_eq!(2, Solution::minimum_sum(vec![5, 1, 2], vec![2, 1, 3]));
     }
     #[test]
     pub fn test_minimum_sum_3() {
-        assert_eq!(
-            -1,
-            Solution::minimum_sum(vec![6,4], vec![7,8])
-        );
+        assert_eq!(-1, Solution::minimum_sum(vec![6, 4], vec![7, 8]));
     }
 }
-
-
-
-
-
-

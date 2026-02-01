@@ -1,4 +1,4 @@
-// # 3763. Maximum Total Sum with Threshold Constraints 🔒 
+// # 3763. Maximum Total Sum with Threshold Constraints 🔒
 
 // Description
 // -----------
@@ -60,13 +60,28 @@
 
 // // long long max_sum(vector<int>& nums, vector<int>& threshold) {
 
-
 #[allow(dead_code)]
 pub struct Solution;
 
 impl Solution {
     pub fn max_sum(nums: Vec<i32>, threshold: Vec<i32>) -> i64 {
-        0
+        let mut s: Vec<_> = nums.into_iter().zip(threshold).collect();
+        s.sort_unstable_by_key(|v| v.1);
+        let (mut i, mut ans, mut step) = (0, 0, 1);
+        let mut q = std::collections::BinaryHeap::new();
+        loop {
+            while s.get(i).is_some_and(|v| v.1 <= step) {
+                q.push(s[i].0);
+                i += 1;
+            }
+            if let Some(v) = q.pop() {
+                ans += v as i64;
+                step += 1;
+            } else {
+                break;
+            }
+        }
+        ans
     }
 }
 
@@ -78,34 +93,18 @@ mod test {
     pub fn test_max_sum_1() {
         assert_eq!(
             17,
-            Solution::max_sum(vec![1,10,4,2,1,6], vec![5,1,5,5,2,2])
+            Solution::max_sum(vec![1, 10, 4, 2, 1, 6], vec![5, 1, 5, 5, 2, 2])
         );
     }
     #[test]
     pub fn test_max_sum_2() {
         assert_eq!(
             0,
-            Solution::max_sum(vec![4,1,5,2,3], vec![3,3,2,3,3])
+            Solution::max_sum(vec![4, 1, 5, 2, 3], vec![3, 3, 2, 3, 3])
         );
     }
     #[test]
     pub fn test_max_sum_3() {
-        assert_eq!(
-            31,
-            Solution::max_sum(vec![2,6,10,13], vec![2,1,1,1])
-        );
+        assert_eq!(31, Solution::max_sum(vec![2, 6, 10, 13], vec![2, 1, 1, 1]));
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

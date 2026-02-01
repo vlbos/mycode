@@ -1,4 +1,4 @@
-// # 3717. Minimum Operations to Make the Array Beautiful 🔒 
+// # 3717. Minimum Operations to Make the Array Beautiful 🔒
 
 // Description
 // -----------
@@ -48,12 +48,27 @@
 
 // //  pub fn min_operations(nums: Vec<i32>) -> i32 {
 
-
 #[allow(dead_code)]
 pub struct Solution;
 impl Solution {
     pub fn min_operations(nums: Vec<i32>) -> i32 {
-       0
+        use std::collections::HashMap;
+        let mut f = HashMap::from([(nums[0], 0)]);
+
+        for &x in &nums[1..] {
+            let mut g = HashMap::new();
+            for (pre, s) in f {
+                let mut cur = (x + pre - 1) / pre * pre;
+                while cur <= 100 {
+                    if g.get(&cur).map_or(true, |&v| v > s + cur - x) {
+                        g.insert(cur, s + cur - x);
+                    }
+                    cur += pre;
+                }
+            }
+            f = g;
+        }
+        *f.values().min().unwrap()
     }
 }
 
@@ -62,25 +77,14 @@ mod test {
     use super::*;
     #[test]
     pub fn test_min_operations_1() {
-        assert_eq!(2, Solution::min_operations(vec![3,7,9]));
+        assert_eq!(2, Solution::min_operations(vec![3, 7, 9]));
     }
     #[test]
     pub fn test_min_operations_2() {
-        assert_eq!(0, Solution::min_operations(vec![1,1,1]));
+        assert_eq!(0, Solution::min_operations(vec![1, 1, 1]));
     }
     #[test]
     pub fn test_min_operations_3() {
         assert_eq!(0, Solution::min_operations(vec![4]));
     }
 }
-
-
-
-
-
-
-
-
-
-
-

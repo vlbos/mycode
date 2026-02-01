@@ -1,4 +1,4 @@
-// # 3730. Maximum Calories Burnt from Jumps 🔒 
+// # 3730. Maximum Calories Burnt from Jumps 🔒
 
 // Description
 // -----------
@@ -66,15 +66,23 @@
 // *   `1 <= n == heights.length <= 105`
 // *   `1 <= heights[i] <= 105`
 
-
 // // long long max_calories_burnt(vector<int>& heights) {
-
 
 #[allow(dead_code)]
 pub struct Solution;
 impl Solution {
-    pub fn max_calories_burnt(heights: Vec<i32>) -> i64 {
-       0
+    pub fn max_calories_burnt(mut heights: Vec<i32>) -> i64 {
+        heights.sort_unstable();
+        let (mut l, mut r, mut pre, mut ans) = (0, heights.len() - 1, 0, 0);
+        while l < r {
+            let (a, b) = (heights[l] as i64, heights[r] as i64);
+            ans += (pre - b) * (pre - b) + (a - b) * (a - b);
+            pre = a;
+            l += 1;
+            r -= 1;
+        }
+        let b = heights[r] as i64;
+        ans + (b - pre) * (b - pre)
     }
 }
 
@@ -83,22 +91,14 @@ mod test {
     use super::*;
     #[test]
     pub fn test_max_calories_burnt_1() {
-        assert_eq!(181, Solution::max_calories_burnt(vec![1,7,9]));
+        assert_eq!(181, Solution::max_calories_burnt(vec![1, 7, 9]));
     }
     #[test]
     pub fn test_max_calories_burnt_2() {
-        assert_eq!(38, Solution::max_calories_burnt(vec![5,2,4]));
+        assert_eq!(38, Solution::max_calories_burnt(vec![5, 2, 4]));
     }
     #[test]
     pub fn test_max_calories_burnt_3() {
-        assert_eq!(9, Solution::max_calories_burnt(vec![3,3]));
+        assert_eq!(9, Solution::max_calories_burnt(vec![3, 3]));
     }
 }
-
-
-
-
-
-
-
-

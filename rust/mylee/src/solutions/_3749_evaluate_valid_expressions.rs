@@ -1,4 +1,4 @@
-// # 3749. Evaluate Valid Expressions 🔒 
+// # 3749. Evaluate Valid Expressions 🔒
 
 // Description
 // -----------
@@ -61,17 +61,96 @@
 // *   All intermediate results fit within the range of a long integer.
 // *   All divisions result in integer values.
 
-
 // // long long evaluate_expression(string expression) {
-
-
 
 #[allow(dead_code)]
 pub struct Solution;
 
 impl Solution {
     pub fn evaluate_expression(expression: String) -> i64 {
-       0
+        let m: std::collections::HashMap<_, _> = ["add", "sub", "mul", "div"]
+            .into_iter()
+            .enumerate()
+            .map(|(i, s)| (s, i))
+            .collect();
+        let (mut op_st, mut st, mut op, mut num, mut signed) =
+            (vec![], vec![], String::new(), 0, false);
+        let n = expression.len();
+        let exp = expression.as_bytes();
+        for (i, c) in expression.chars().enumerate() {
+            match c {
+                ')' => {
+                    let num2 = st.pop().unwrap();
+                    match op_st.pop().unwrap() {
+                        0 => {
+                            let v = st.pop().unwrap() + num2;
+                            st.push(v);
+                        }
+                        1 => {
+                            let v = st.pop().unwrap() - num2;
+                            st.push(v);
+                        }
+                        2 => {
+                            let v = st.pop().unwrap() * num2;
+                            st.push(v);
+                        }
+                        _ => {
+                            let v = st.pop().unwrap() / num2;
+                            st.push(v);
+                        }
+                    }
+                }
+                ',' => {}
+                '(' => {
+                    op_st.push(m[&op.as_str()]);
+                    op = String::new();
+                }
+                '-' => {
+                    signed = true;
+                }
+                _ if c.is_ascii_alphabetic() => {
+                    op.push(c);
+                }
+                _ => {
+                    // println!("{num}");
+                    num = num * 10 + c.to_digit(10).unwrap() as i64;
+                    if i + 1 == n || !(exp[i + 1] as char).is_ascii_digit() {
+                        if signed {
+                            num *= -1;
+                        }
+                        signed = false;
+                        st.push(num);
+                        num = 0;
+                    }
+                }
+            }
+            // println!("{op_st:?},={c}=={st:?},");
+        }
+        // while let Some(op) = op_st.pop() {
+        //     num = st.pop().unwrap();
+        //     match op {
+        //         0 => {
+        //             let v = st.pop().unwrap() + num;
+        //             st.push(v);
+        //         }
+        //         1 => {
+        //             let v = st.pop().unwrap() - num;
+        //             st.push(v);
+        //         }
+        //         2 => {
+        //             let v = st.pop().unwrap() * num;
+        //             st.push(v);
+        //         }
+        //         _ => {
+        //             let v = st.pop().unwrap() / num;
+        //             st.push(v);
+        //         }
+        //     }
+        // }
+        if signed {
+            num *= -1;
+        }
+        *st.get(0).unwrap_or(&num)
     }
 }
 
@@ -89,13 +168,9 @@ mod test {
     }
     #[test]
     pub fn test_evaluate_expression_3() {
-        assert_eq!(8, Solution::evaluate_expression("div(mul(4,sub(9,5)),add(1,1))".to_string()));
+        assert_eq!(
+            8,
+            Solution::evaluate_expression("div(mul(4,sub(9,5)),add(1,1))".to_string())
+        );
     }
 }
-
-
-
-
-
-
-

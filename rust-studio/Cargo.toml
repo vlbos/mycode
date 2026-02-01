@@ -39,7 +39,7 @@ name="enumfn"
 path="src/enumfn.rs"
 [[example]]
 name="test"
-path="src/aes.rs"
+path="src/trait.rs"
 
 [[example]]
 name="rsa"
@@ -51,4 +51,4 @@ name="oaep"
 path="src/crypto/rust_crypto_demo/main1.rs"
 [[example]]
 name="const"
-path="src/generic_const_expr_items_trait.rs"
+path="src/const/const5.rs"

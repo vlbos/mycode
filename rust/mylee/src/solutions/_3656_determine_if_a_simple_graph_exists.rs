@@ -1,4 +1,4 @@
-// # 3656. Determine if a Simple Graph Exists 🔒 
+// # 3656. Determine if a Simple Graph Exists 🔒
 
 // Description
 // -----------
@@ -43,14 +43,34 @@
 // *   `1 <= n == degrees.length <= 10​​​​​​​5`
 // *   `0 <= degrees[i] <= n - 1`
 
-
 // //  bool simple_graph_exists(vector<int>& degrees) {
 
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn simple_graph_exists(degrees: Vec<i32>) -> bool {
-       false
+    pub fn simple_graph_exists(mut degrees: Vec<i32>) -> bool {
+        let total = degrees.iter().fold(0, |s, &x| s + x as i64);
+        if total % 2 != 0 {
+            return false;
+        }
+        degrees.sort_unstable_by_key(|&x| -x);
+        let (mut l, mut suf1, mut suf2) = (0, total, 0);
+        let mut i = degrees.len();
+        for (k, &d) in degrees.iter().enumerate() {
+            let k = k as i64 + 1;
+            l += d as i64;
+            suf1 -= d as i64;
+            while i > 0 && (degrees[i - 1] as i64) < k {
+                suf2 += degrees[i - 1] as i64;
+                i -= 1;
+            }
+            let i1 = i as i64;
+            let r = k * (k - 1) + if i1 > k { (i1 - k) * k + suf2 } else { suf1 };
+            if l > r {
+                return false;
+            }
+        }
+        true
     }
 }
 
@@ -60,11 +80,10 @@ mod test {
 
     #[test]
     pub fn test_simple_graph_exists_1() {
-        assert!(Solution::simple_graph_exists(vec![3,1,2,2]));
+        assert!(Solution::simple_graph_exists(vec![3, 1, 2, 2]));
     }
     #[test]
     pub fn test_simple_graph_exists_2() {
-        assert!(!Solution::simple_graph_exists(vec![1,3,3,1]));
+        assert!(!Solution::simple_graph_exists(vec![1, 3, 3, 1]));
     }
-  
 }

@@ -1,4 +1,4 @@
-// # 3744. Find Kth Character in Expanded String 🔒 
+// # 3744. Find Kth Character in Expanded String 🔒
 
 // Description
 // -----------
@@ -43,14 +43,31 @@
 // *   All the words in `s` are separated by a **single space**.
 // *   `0 <= k < t.length`. That is, `k` is a **valid** index of `t`.
 
-
 // //  char kth_character(string s, long long k) {
 
 #[allow(dead_code)]
 pub struct Solution;
 
 impl Solution {
-    pub fn kth_character(s: String, k: i64) -> char {
+    pub fn kth_character(s: String, mut k: i64) -> char {
+        for w in s.split_ascii_whitespace() {
+            let m = w.len() as i64;
+            let n = (m + 1) * m / 2;
+            if k == n {
+                return ' ';
+            }
+            if k > n {
+                k -= n + 1;
+                continue;
+            }
+            let mut cnt = 0;
+            for (i, c) in w.chars().enumerate() {
+                cnt += i as i64 + 1;
+                if k < cnt {
+                    return c;
+                }
+            }
+        }
         ' '
     }
 }
@@ -65,15 +82,9 @@ mod test {
 
     #[test]
     pub fn test_kth_character_2() {
-        assert_eq!(Solution::kth_character(String::from("hello world"), 15), ' ');
+        assert_eq!(
+            Solution::kth_character(String::from("hello world"), 15),
+            ' '
+        );
     }
 }
-
-
-
-
-
-
-
-
-

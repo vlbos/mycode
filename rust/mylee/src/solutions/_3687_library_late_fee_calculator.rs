@@ -1,4 +1,4 @@
-// # 3687. Library Late Fee Calculator 🔒 
+// # 3687. Library Late Fee Calculator 🔒
 
 // Description
 // -----------
@@ -45,12 +45,21 @@
 
 // //  int late_fee(vector<int>& daysLate) {
 
-
 #[allow(dead_code)]
 pub struct Solution;
 impl Solution {
     pub fn late_fee(days_late: Vec<i32>) -> i32 {
-        0
+        let mut ans = 0;
+        for d in days_late {
+            ans += if d == 1 {
+                1
+            } else if d > 5 {
+                d * 3
+            } else {
+                d * 2
+            };
+        }
+        ans
     }
 }
 
@@ -59,18 +68,10 @@ mod test {
     use super::*;
     #[test]
     pub fn test_late_fee_1() {
-        assert_eq!(32, Solution::late_fee(vec![5,1,7]));
+        assert_eq!(32, Solution::late_fee(vec![5, 1, 7]));
     }
     #[test]
     pub fn test_late_fee_2() {
-        assert_eq!(2, Solution::late_fee(vec![1,1]));
+        assert_eq!(2, Solution::late_fee(vec![1, 1]));
     }
 }
-
-
-
-
-
-
-
-

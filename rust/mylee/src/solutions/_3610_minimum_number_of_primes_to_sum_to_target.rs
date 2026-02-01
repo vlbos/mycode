@@ -52,8 +52,8 @@ pub struct Solution;
 impl Solution {
     pub fn min_number_of_primes(n: i32, m: i32) -> i32 {
         use std::sync::OnceLock;
-        static prime_s: OnceLock<Vec<i32>> = OnceLock::new();
-        let primes = prime_s.get_or_init(|| {
+        static PRIME_S: OnceLock<Vec<i32>> = OnceLock::new();
+        let primes = PRIME_S.get_or_init(|| {
             let mut prime = vec![];
             for x in 2.. {
                 let mut is_prime = true;

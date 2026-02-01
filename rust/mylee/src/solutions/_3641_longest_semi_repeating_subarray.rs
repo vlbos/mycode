@@ -1,4 +1,3 @@
-
 // ## [3641\. Longest Semi-Repeating Subarray 🔒](https://leetcode.com/problems/longest-semi-repeating-subarray)
 
 // [![](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)
@@ -34,6 +33,9 @@
 // **Example 3:**
 
 // **Constraints:**
+// *   `1 <= nums.length <= 105`
+// *   `1 <= nums[i] <= 105`
+// *   `0 <= k <= nums.length`
 
 // //    int longest_subarray(vector<int>& nums, int k) {
 
@@ -42,7 +44,29 @@ pub struct Solution;
 
 impl Solution {
     pub fn longest_subarray(nums: Vec<i32>, k: i32) -> i32 {
-       0
+        let mut cnt = std::collections::HashMap::new();
+        let (mut ans, mut cur, mut l) = (0, 0, 0);
+        for (r, &x) in nums.iter().enumerate() {
+            if let Some(v) = cnt.get_mut(&x) {
+                *v += 1;
+                if *v == 2 {
+                    cur += 1;
+                }
+            } else {
+                cnt.insert(x, 1);
+            }
+            while cur > k {
+                if let Some(v) = cnt.get_mut(&nums[l]) {
+                    *v -= 1;
+                    if *v == 1 {
+                        cur -= 1;
+                    }
+                }
+                l += 1;
+            }
+            ans = ans.max(r - l + 1);
+        }
+        ans as _
     }
 }
 
@@ -51,10 +75,10 @@ mod test {
     use super::*;
     #[test]
     pub fn test_longest_subarray_1() {
-        assert_eq!(6, Solution::longest_subarray(vec![1,2,3,1,2,3,4], 2));
+        assert_eq!(6, Solution::longest_subarray(vec![1, 2, 3, 1, 2, 3, 4], 2));
     }
     #[test]
     pub fn test_longest_subarray_2() {
-        assert_eq!(5, Solution::longest_subarray(vec![1,1,1,1,1], 4));
+        assert_eq!(5, Solution::longest_subarray(vec![1, 1, 1, 1, 1], 4));
     }
 }
