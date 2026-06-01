@@ -1,3 +1,4 @@
+
 import logging,shutil
 import re
 import threading
@@ -16,6 +17,9 @@ from faster_whisper import WhisperModel
 import time
 from werkzeug.utils import secure_filename
 import uuid
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
 
 class CustomRequestHandler(WSGIHandler):
     def log_request(self):
@@ -140,7 +144,7 @@ def shibie():
                 modelobj= WhisperModel(
                     model  if not model.startswith('distil') else  model.replace('-whisper', ''), 
                     device=sets.get('devtype'), 
-                    download_root=cfg.ROOT_DIR + "/models"
+                    download_root=cfg.ROOT_DIR + "/models", compute_type="float32"
                 )
                 cfg.MODEL_DICT[model]=modelobj
             except Exception as e:
@@ -364,7 +368,7 @@ def _api_process(model_name,wav_file,language=None,response_format="text",prompt
         model = WhisperModel(
             model_name, 
             device=sets.get('devtype'), 
-            download_root=cfg.ROOT_DIR + "/models"
+            download_root=cfg.ROOT_DIR + "/models", compute_type="float32"
         )
     except Exception as e:
         raise
