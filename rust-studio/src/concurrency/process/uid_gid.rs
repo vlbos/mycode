@@ -1,5 +1,5 @@
-use std::process::Command;
 use std::os::unix::process::CommandExt;
+use std::process::Command;
 fn main() {
     // UID GID
     let output = Command::new("whoami")

@@ -6,7 +6,7 @@ fn main1() -> Result<(), Box<dyn std::error::Error>> {
         scope.push(|| println!("hello"));
     });
     // let pool = poolite::Pool::builder().thread_num(8).build()?;
-  Ok(())
+    Ok(())
 }
 use poolite::Pool;
 
@@ -46,7 +46,7 @@ fn test1(msg: i32) {
     println!("key: {}\tvalue: {}", msg, fib(msg));
 }
 fn main() {
-    let _=main1();
+    let _ = main1();
     main2();
     let pool = Builder::new()
         .min(1)

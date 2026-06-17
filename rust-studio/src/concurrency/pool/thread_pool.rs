@@ -1,16 +1,14 @@
 use std::sync::mpsc::channel;
 
-use std::sync::atomic::Ordering;
-use std::sync::Barrier;
 use std::sync::Arc;
+use std::sync::Barrier;
 use std::sync::atomic::AtomicUsize;
+use std::sync::atomic::Ordering;
 fn main1() {
     // 4
     let pool = threadpool::ThreadPool::new(4);
 
-
     let (sender, receiver) = channel();
-
 
     for i in 0..8 {
         let sender = sender.clone();
@@ -19,7 +17,6 @@ fn main1() {
             sender.send(result).expect(" ");
         });
     }
-
 
     for _ in 0..8 {
         let result = receiver.recv().expect(" ");
@@ -43,14 +40,11 @@ fn main() {
         let an_atomic = an_atomic.clone();
 
         pool.execute(move || {
-
             an_atomic.fetch_add(1, Ordering::Relaxed);
-
 
             barrier.wait();
         });
     }
-
 
     barrier.wait();
     assert_eq!(an_atomic.load(Ordering::SeqCst), /* n_jobs = */ 23);

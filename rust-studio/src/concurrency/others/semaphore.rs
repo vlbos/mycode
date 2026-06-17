@@ -1,6 +1,6 @@
- use std::sync::Arc;
+use futures::pin_mut;
 use futures::poll;
- use futures::pin_mut;
+use std::sync::Arc;
 pub fn async_weighted_semaphore_example() {
     smol::block_on(async {
         let sem = async_weighted_semaphore::Semaphore::new(1);
@@ -25,7 +25,7 @@ pub fn async_lock_semaphore() {
     drop(g2);
     assert!(s.try_acquire_arc().is_some());
 }
-fn main(){
-async_lock_semaphore();
-async_weighted_semaphore_example();
+fn main() {
+    async_lock_semaphore();
+    async_weighted_semaphore_example();
 }

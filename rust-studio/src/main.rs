@@ -62,48 +62,50 @@ impl A for C {
 }
 
 struct ABC(pub i32);
-const AA:ABC=ABC(2);
-const AA2:ABC=ABC(3);
-const AA3:ABC=AA*AA2;
-impl const std::ops::Mul for ABC{
-    type Output=Self;
-    fn mul(self,rhs:ABC)->Self{
-       ABC( self.0*rhs.0)
+const AA: ABC = ABC(2);
+const AA2: ABC = ABC(3);
+const AA3: ABC = AA * AA2;
+impl const std::ops::Mul for ABC {
+    type Output = Self;
+    fn mul(self, rhs: ABC) -> Self {
+        ABC(self.0 * rhs.0)
     }
 }
-struct TestC<const N:usize>;
-pub trait Config<const N:usize> {
-    const N2:usize=N*2;
+struct TestC<const N: usize>;
+pub trait Config<const N: usize> {
+    const N2: usize = N * 2;
     // const TC:TestC<{N*2}>;
     fn a() -> i32 {
-       0
+        0
     }
-    fn test()->Self;
+    fn test() -> Self;
 }
 struct Test;
-impl Config<1> for Test{
+impl Config<1> for Test {
     // const TC:TestC<2>=TestC::<2>;
     fn a() -> i32 {
-      1
+        1
     }
-    fn test()->Self{
-    Test}
-}
-impl Config<2> for Test{
-//  const TC:TestC<4>=TestC::<4>;
- fn a() -> i32 {
-       2
+    fn test() -> Self {
+        Test
     }
- fn test()->Self{
-    Test}
 }
-use tracing::{Level,span};
+impl Config<2> for Test {
+    //  const TC:TestC<4>=TestC::<4>;
+    fn a() -> i32 {
+        2
+    }
+    fn test() -> Self {
+        Test
+    }
+}
+use tracing::{Level, span};
 use tracing_appender::{non_blocking, rolling};
 use tracing_error::ErrorLayer;
-use tracing_subscriber::{fmt, layer::SubscriberExt, util::SubscriberInitExt, Layer, Registry};
+use tracing_subscriber::{Layer, Registry, fmt, layer::SubscriberExt, util::SubscriberInitExt};
 fn main() {
-//  tracing_subscriber::fmt::init();
-// let _ = tracing_subscriber::fmt().with_test_writer().try_init();
+    //  tracing_subscriber::fmt::init();
+    // let _ = tracing_subscriber::fmt().with_test_writer().try_init();
     tracing_subscriber::fmt()
         // NEW: 记录 Span 的开启 (New) 和关闭 (Close) 事件
         .with_span_events(tracing_subscriber::fmt::format::FmtSpan::FULL)
@@ -114,8 +116,8 @@ fn main() {
     //     .with(ErrorLayer::default())
     //     .with(formatting_layer)
     //     .init();
-    let span=span!(Level::INFO,"info");
-    let _=span.enter();
+    let span = span!(Level::INFO, "info");
+    let _ = span.enter();
     //    SubTest::build(&C);
     // let mut a=A{a:0,b:1};
     // a.aa();
@@ -123,6 +125,6 @@ fn main() {
     // let b = B;
     // println!("{},{}", B::a(), C::a());
 
-    let _test=Test;
+    let _test = Test;
     println!("{},{}", <Test as Config<2>>::a(), <Test as Config<1>>::a());
 }

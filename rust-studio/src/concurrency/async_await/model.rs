@@ -39,7 +39,8 @@ fn main() {
     let _fut = async {
         foo().await?;
         bar().await?;
-        Ok::<(), String>(())     };
+        Ok::<(), String>(())
+    };
 }
 // pub trait Future {
 //     type Output;

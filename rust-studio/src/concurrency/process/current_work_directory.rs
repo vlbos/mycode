@@ -1,6 +1,6 @@
 use std::process::Command;
 fn main() {
-        let output = Command::new("ls")
+    let output = Command::new("ls")
         .arg("-l")
         .current_dir("/Users")
         .output()

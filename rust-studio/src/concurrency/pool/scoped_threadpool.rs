@@ -1,4 +1,3 @@
-
 pub fn scoped_threadpool() {
     let mut pool = scoped_threadpool::Pool::new(4);
 

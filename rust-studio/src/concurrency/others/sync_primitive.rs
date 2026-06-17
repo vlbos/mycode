@@ -1,5 +1,5 @@
-use std::thread;
 use std::sync::Arc;
+use std::thread;
 pub fn async_lock_mutex() {
     use async_lock::Mutex;
 
@@ -16,7 +16,7 @@ pub fn async_lock_mutex() {
     });
 }
 pub fn async_lock_rwlock() {
-use async_lock::RwLock;
+    use async_lock::RwLock;
     let lock = Arc::new(RwLock::new(0));
     let lock1 = lock.clone();
     smol::block_on(async {
@@ -30,7 +30,7 @@ use async_lock::RwLock;
     });
 }
 pub fn async_lock_barrier() {
-use async_lock::Barrier;
+    use async_lock::Barrier;
     let barrier = Arc::new(Barrier::new(5));
     thread::scope(|s| {
         for _ in 0..5 {
@@ -102,12 +102,11 @@ pub fn awaitgroup_example() {
         wg.wait().await;
     });
 }
-fn main(){
-async_lock_mutex();
-async_lock_rwlock();
-async_lock_barrier();
-waitgroup_example();
-wg_example();
-awaitgroup_example();
-
+fn main() {
+    async_lock_mutex();
+    async_lock_rwlock();
+    async_lock_barrier();
+    waitgroup_example();
+    wg_example();
+    awaitgroup_example();
 }

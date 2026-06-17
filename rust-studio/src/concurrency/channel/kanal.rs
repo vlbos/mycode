@@ -1,4 +1,4 @@
- use std::thread;
+use std::thread;
 fn main() {
     let (tx, rx) = kanal::unbounded();
     thread::spawn(move || {
@@ -19,6 +19,4 @@ fn main() {
         });
         println!("rx: {}", rx.recv().await.unwrap());
     });
-
-
 }

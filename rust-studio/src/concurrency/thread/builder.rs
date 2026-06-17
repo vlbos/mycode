@@ -14,7 +14,7 @@ pub fn start_one_thread_by_builder() {
     handler.join().unwrap();
 }
 
-use  std::thread;
+use std::thread;
 fn main() {
     start_one_thread_by_builder();
     let builder = Builder::new();

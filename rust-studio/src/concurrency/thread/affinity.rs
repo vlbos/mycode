@@ -10,6 +10,6 @@ pub fn use_affinity() {
         affinity::get_thread_affinity().unwrap()
     );
 }
-fn main(){
-use_affinity();
+fn main() {
+    use_affinity();
 }

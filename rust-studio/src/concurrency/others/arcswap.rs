@@ -1,6 +1,6 @@
+use arc_swap::ArcSwap;
 use std::sync::Arc;
 use std::thread;
-use arc_swap::ArcSwap;
 pub fn arc_swap_example() {
     let value = ArcSwap::from(Arc::new(5));
     thread::scope(|scope| {
@@ -18,8 +18,7 @@ pub fn arc_swap_example() {
             });
         }
     })
-   
 }
-fn main(){
-arc_swap_example();
+fn main() {
+    arc_swap_example();
 }

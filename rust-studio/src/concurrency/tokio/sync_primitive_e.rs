@@ -1,10 +1,10 @@
- use tokio::sync::{Semaphore, TryAcquireError};
+use tokio::sync::{Semaphore, TryAcquireError};
 #[tokio::main]
-    pub async fn main() {
-        let semaphore = Semaphore::new(3);
-        let a_permit = semaphore.acquire().await.unwrap();
-        let two_permits = semaphore.acquire_many(2).await.unwrap();
-        assert_eq!(semaphore.available_permits(), 0);
-        let permit_attempt = semaphore.try_acquire();
-        assert_eq!(permit_attempt.err(), Some(TryAcquireError::NoPermits));
-    }
+pub async fn main() {
+    let semaphore = Semaphore::new(3);
+    let a_permit = semaphore.acquire().await.unwrap();
+    let two_permits = semaphore.acquire_many(2).await.unwrap();
+    assert_eq!(semaphore.available_permits(), 0);
+    let permit_attempt = semaphore.try_acquire();
+    assert_eq!(permit_attempt.err(), Some(TryAcquireError::NoPermits));
+}

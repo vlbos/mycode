@@ -16,12 +16,11 @@ fn main() {
             while !*guard {
                 guard = condvar.wait(guard).unwrap();
             }
-        
+
             println!("Thread {} woke up", id);
         });
         handles.push(handle);
     }
-
 
     thread::sleep(std::time::Duration::from_secs(2));
 
@@ -29,9 +28,8 @@ fn main() {
         let mut guard = mutex.lock().unwrap();
         *guard = true;
         condvar.notify_all();
-       
     }
-        for handle in handles {
-            handle.join().unwrap();
-        }
+    for handle in handles {
+        handle.join().unwrap();
+    }
 }

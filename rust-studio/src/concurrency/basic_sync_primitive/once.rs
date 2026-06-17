@@ -3,7 +3,7 @@ static INIT: Once = Once::new();
 fn main1() {
     // call_once
     INIT.call_once(|| {
-                println!("Initialization code executed!");
+        println!("Initialization code executed!");
     });
     // call_once
     INIT.call_once(|| {
@@ -22,15 +22,15 @@ fn init_global_config() {
 fn get_global_config() -> &'static str {
     GLOBAL_CONFIG_INIT.call_once(|| init_global_config());
     unsafe {
-    // GLOBAL_CONFIG.as_ref().unwrap() 
- let ptr = std::ptr::addr_of!(GLOBAL_CONFIG); // 获取原始指针
-    (*ptr).as_ref().unwrap()  
+        // GLOBAL_CONFIG.as_ref().unwrap()
+        let ptr = std::ptr::addr_of!(GLOBAL_CONFIG); // 获取原始指针
+        (*ptr).as_ref().unwrap()
     }
-     
 }
 fn main2() {
     println!("{}", get_global_config());
-    println!("{}", get_global_config()); }
+    println!("{}", get_global_config());
+}
 
 fn main() {
     main1();

@@ -1,7 +1,4 @@
-
 fn main() {
-  
-
     use crossbeam_utils::sync::WaitGroup;
     use std::thread;
     let wg = WaitGroup::new();

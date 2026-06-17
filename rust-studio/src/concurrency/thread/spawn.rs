@@ -48,8 +48,8 @@ pub fn start_n_threads() {
 }
 
 fn main() {
-start_one_thread();
-start_one_thread_result();
-start_two_threads();
-start_n_threads();
+    start_one_thread();
+    start_one_thread_result();
+    start_two_threads();
+    start_n_threads();
 }

@@ -5,7 +5,7 @@ fn main() {
     rayon::scope(|s| {
         s.spawn(|s1| {
             // ˆ`s` `handle` `s1`
-                                    value_a = Some(22);
+            value_a = Some(22);
             //`s`
             s1.spawn(|_| {
                 value_b = Some(44);

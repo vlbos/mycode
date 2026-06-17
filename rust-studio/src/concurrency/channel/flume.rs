@@ -14,7 +14,7 @@ use std::thread;
 fn main1() {
     // 3
     let (sender, receiver): (Sender<i32>, Receiver<i32>) = bounded(3);
-        let producer = thread::spawn(move || {
+    let producer = thread::spawn(move || {
         for i in 0..5 {
             sender.send(i).unwrap();
             println!("Produced: {}", i);
@@ -28,7 +28,7 @@ fn main1() {
         }
     });
 
-        producer.join().unwrap();
+    producer.join().unwrap();
     consumer.join().unwrap();
 }
 fn main() {

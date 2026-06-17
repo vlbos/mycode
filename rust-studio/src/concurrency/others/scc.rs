@@ -1,4 +1,4 @@
-use scc::{HashIndex,HashMap,HashSet,TreeIndex,Queue};
+use scc::{HashIndex, HashMap, HashSet, Queue, TreeIndex};
 use std::hash::RandomState;
 pub fn scc_hashmap() {
     let hashmap: HashMap<usize, usize, RandomState> = HashMap::with_capacity(1000);
@@ -46,11 +46,10 @@ pub fn scc_queue() {
     assert_eq!(queue.pop().map(|e| **e), Some(1));
     assert!(queue.pop().is_none());
 }
-fn main(){
-scc_queue();
-scc_hashindex();
-scc_hashmap();
-scc_hashset();
-scc_treeindex();
-
+fn main() {
+    scc_queue();
+    scc_hashindex();
+    scc_hashmap();
+    scc_hashset();
+    scc_treeindex();
 }

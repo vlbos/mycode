@@ -42,5 +42,5 @@ pub fn threadpool_executor_example() {
     })
     .unwrap();
     let mut exp = pool.execute(|| {}).unwrap();
-    let _=exp.cancel();
+    let _ = exp.cancel();
 }

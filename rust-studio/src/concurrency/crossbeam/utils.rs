@@ -29,7 +29,6 @@ fn blocking_wait(ready: &AtomicBool) {
     }
 }
 fn main() {
-   
     use crossbeam_utils::CachePadded;
     let array = [CachePadded::new(1i8), CachePadded::new(2i8)];
     let addr1 = &*array[0] as *const i8 as usize;
@@ -55,9 +54,9 @@ fn main() {
     })
     .unwrap();
 
- let u=AtomicUsize::new(10);
-    let v=fetch_mul(&u,11);
+    let u = AtomicUsize::new(10);
+    let v = fetch_mul(&u, 11);
     println!("{v}");
-    let b=AtomicBool::new(false);
+    let b = AtomicBool::new(false);
     blocking_wait(&b);
 }

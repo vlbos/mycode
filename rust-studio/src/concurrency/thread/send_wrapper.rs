@@ -1,8 +1,8 @@
-use std::thread;
-use std::rc::Rc;
-use std::sync::mpsc::channel;
 use send_wrapper::SendWrapper;
 use std::ops::Deref;
+use std::rc::Rc;
+use std::sync::mpsc::channel;
+use std::thread;
 // pub fn wrong_send() {
 //     let counter = Rc::new(42);
 
@@ -31,8 +31,7 @@ pub fn send_wrapper() {
     let value = wrapped_value.deref();
     println!("received from the main thread: {}", value);
 }
-fn main(){
-// wrong_send();
-send_wrapper();
-
- }
+fn main() {
+    // wrong_send();
+    send_wrapper();
+}

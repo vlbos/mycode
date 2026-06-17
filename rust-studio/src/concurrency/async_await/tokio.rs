@@ -4,10 +4,10 @@
 //         // do work
 //     });
 //     // other_task.await;
-   
+
 // }
-fn main(){
- tokio_async();
+fn main() {
+    tokio_async();
 }
 pub fn tokio_async() {
     let rt = tokio::runtime::Runtime::new().unwrap();

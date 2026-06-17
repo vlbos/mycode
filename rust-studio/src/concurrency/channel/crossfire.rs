@@ -1,9 +1,8 @@
-
 pub fn crossfire_mpsc() {
     let rt = tokio::runtime::Runtime::new().unwrap();
-    
+
     rt.block_on(async move {
-let (tx, rx) = crossfire::mpsc::bounded_async::<i32>(100);
+        let (tx, rx) = crossfire::mpsc::bounded_async::<i32>(100);
         tokio::spawn(async move {
             for i in 0i32..10 {
                 let _ = tx.send(i).await;
@@ -23,9 +22,9 @@ let (tx, rx) = crossfire::mpsc::bounded_async::<i32>(100);
 
 pub fn crossfire_mpmc() {
     let rt = tokio::runtime::Runtime::new().unwrap();
-    
+
     rt.block_on(async move {
-let (tx, rx) = crossfire::mpmc::bounded_async::<i32>(100);
+        let (tx, rx) = crossfire::mpmc::bounded_async::<i32>(100);
         let mut sender_handles = vec![];
         for _ in 0..4 {
             let tx = tx.clone();
@@ -61,7 +60,7 @@ let (tx, rx) = crossfire::mpmc::bounded_async::<i32>(100);
         }
     });
 }
-fn main(){
-crossfire_mpmc();
-crossfire_mpsc();
+fn main() {
+    crossfire_mpmc();
+    crossfire_mpsc();
 }

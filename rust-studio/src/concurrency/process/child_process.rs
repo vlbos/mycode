@@ -1,9 +1,9 @@
 use nix::unistd::{ForkResult, close, dup2};
+use std::io::Read;
 use std::net::{TcpListener, TcpStream};
+use std::os::fd::FromRawFd;
 use std::os::unix::io::AsRawFd;
 use std::process::{Command, Stdio};
-use std::os::fd::FromRawFd;
-use std::io::Read;
 fn main() {
     // TCP
     let listener = TcpListener::bind("127.0.0.1:8080").expect("Failed to bind to add");
@@ -12,19 +12,17 @@ fn main() {
 
     let socket_fd = stream.as_raw_fd();
 
-
     match unsafe { nix::unistd::fork() } {
         Ok(ForkResult::Parent { child }) => {
-        
             println!("Parent process. Child PID: {}", child);
             drop(stream);
         }
         Ok(ForkResult::Child) => {
-            drop(listener); 
-        
+            drop(listener);
+
             let mut child_stream = unsafe { TcpStream::from_raw_fd(socket_fd) };
 
-            drop(stream); 
+            drop(stream);
             let mut buffer = [0; 1024];
             match child_stream.read(&mut buffer) {
                 Ok(bytes_read) => {

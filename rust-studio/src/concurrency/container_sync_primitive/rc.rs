@@ -1,6 +1,6 @@
-use std::collections::HashMap;
-use std::cell::RefMut;
 use std::cell::RefCell;
+use std::cell::RefMut;
+use std::collections::HashMap;
 use std::rc::Rc;
 fn main() {
     use std::rc::Rc;

@@ -1,5 +1,5 @@
-use std::thread;
 use std::cell::RefCell;
+use std::thread;
 pub fn start_threads_with_threadlocal() {
     thread_local!(static COUNTER: RefCell<u32> = RefCell::new(1));
 
@@ -34,6 +34,6 @@ pub fn start_threads_with_threadlocal() {
         println!("Hello from main, c={}!", *c.borrow());
     });
 }
-fn main(){
-start_threads_with_threadlocal();
+fn main() {
+    start_threads_with_threadlocal();
 }

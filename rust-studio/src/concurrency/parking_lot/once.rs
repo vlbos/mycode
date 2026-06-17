@@ -1,5 +1,5 @@
-use std::thread;
 use parking_lot::Once;
+use std::thread;
 static mut VAL: usize = 0;
 static INIT: Once = Once::new();
 fn get_cached_val() -> usize {

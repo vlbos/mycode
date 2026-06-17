@@ -1,5 +1,5 @@
-use std::thread;
 use std::sync::Arc;
+use std::thread;
 pub fn atomic_cell_example() {
     let a = AtomicCell::new(0i32);
     a.store(1);
@@ -27,10 +27,9 @@ fn main() {
             println!("Incremented count to {}", c + 1);
         });
         handles.push(handle);
-       
     }
- for handle in handles {
-            handle.join().unwrap();
-        }
+    for handle in handles {
+        handle.join().unwrap();
+    }
     println!("Final count is {}", count.load())
 }

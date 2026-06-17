@@ -20,10 +20,10 @@ fn main2() {
         .num_threads(5)
         .build()
         .unwrap();
-        let v: Vec<usize> = pool.broadcast(|ctx| ctx.index() * ctx.index());
+    let v: Vec<usize> = pool.broadcast(|ctx| ctx.index() * ctx.index());
     // [0, 1, 4, 9, 16]
     assert_eq!(v, &[0, 1, 4, 9, 16]);
-        let count = AtomicUsize::new(0);
+    let count = AtomicUsize::new(0);
     // AtomicUsize
     pool.broadcast(|_| count.fetch_add(1, Ordering::Relaxed));
     // 5

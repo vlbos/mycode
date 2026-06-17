@@ -1,6 +1,6 @@
+use futures::StreamExt;
+use futures::channel::mpsc;
 use futures::executor::{self, ThreadPool};
-use futures::channel::mpsc; 
-use futures::StreamExt;    
 
 pub fn futures_async() {
     let pool = ThreadPool::new().expect("Failed to build pool");
@@ -19,6 +19,6 @@ pub fn futures_async() {
     let values: Vec<i32> = executor::block_on(fut_values);
     println!("Values={:?}", values);
 }
-fn main(){
-futures_async();
+fn main() {
+    futures_async();
 }

@@ -21,6 +21,6 @@ pub fn crossbeam_scope() {
     a.push(4);
     assert_eq!(x, a.len());
 }
-fn main(){
-crossbeam_scope();
+fn main() {
+    crossbeam_scope();
 }

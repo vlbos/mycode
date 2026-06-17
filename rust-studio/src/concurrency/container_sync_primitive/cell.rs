@@ -1,24 +1,24 @@
-
 #![feature(lazy_cell)]
 
+use std::borrow::Borrow;
 use std::cell::OnceCell;
 use std::ops::Deref;
-use std::borrow::Borrow;
 fn main1() {
     use std::cell::Cell;
     let x = Cell::new(42);
     let y = &x;
-    x.set(10);     println!("y: {:?}", y.get()); // y: 10
+    x.set(10);
+    println!("y: {:?}", y.get()); // y: 10
 
     use std::cell::RefCell;
     let x = RefCell::new(42);
     {
         let y = x.borrow();
-                println!("y: {:?}", *y.borrow());
+        println!("y: {:?}", *y.borrow());
     }
     {
         let mut z = x.borrow_mut();
-                *z = 10;
+        *z = 10;
     }
     println!("x: {:?}", x.borrow().deref());
 }
@@ -34,7 +34,8 @@ pub fn once_cell_example() {
 use std::cell::LazyCell;
 fn main() {
     let lazy: LazyCell<i32> = LazyCell::new(|| {
-        println!("initializing");0
+        println!("initializing");
+        0
     });
     println!("ready");
     println!("{}", *lazy); // 46
@@ -42,7 +43,6 @@ fn main() {
 
     use std::collections::HashMap;
     use std::sync::LazyLock;
-
 
     static HASHMAP: LazyLock<HashMap<i32, String>> = LazyLock::new(|| {
         println!("initializing");

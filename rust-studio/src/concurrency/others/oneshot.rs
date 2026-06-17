@@ -1,13 +1,15 @@
- use std::thread;
+use std::thread;
 pub fn oneshot_example() {
     let (sender, receiver) = oneshot::channel::<i32>();
     let sender = thread::spawn(move || {
         sender.send(1).unwrap();
     });
     let receiver = thread::spawn(move || {
-        #[cfg(feature = "std")] {
-        let v = receiver.recv().unwrap();
-        println!("get value {}", v);}
+        #[cfg(feature = "std")]
+        {
+            let v = receiver.recv().unwrap();
+            println!("get value {}", v);
+        }
     });
     sender.join().unwrap();
     receiver.join().unwrap();
@@ -39,7 +41,7 @@ pub fn catty_example() {
     sender.join().unwrap();
     receiver.join().unwrap();
 }
-fn main(){
+fn main() {
     oneshot_example();
     async_oneshot_example();
     catty_example();

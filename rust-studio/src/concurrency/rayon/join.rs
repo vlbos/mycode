@@ -1,14 +1,14 @@
 use rayon::join;
 fn main1() {
     let result = join(|| expensive_operation1(), || expensive_operation2());
-        let final_result = result.0 + result.1;
+    let final_result = result.0 + result.1;
     println!("Final Result: {}", final_result);
 }
 fn expensive_operation1() -> i32 {
-        42
+    42
 }
 fn expensive_operation2() -> i32 {
-        58
+    58
 }
 fn main() {
     main1();

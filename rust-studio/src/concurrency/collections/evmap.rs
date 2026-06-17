@@ -1,7 +1,7 @@
 use std::sync::Arc;
 use std::sync::Mutex;
 fn main() {
-    let ( book_reviews_w,book_reviews_r ) = evmap::new();
+    let (book_reviews_w, book_reviews_r) = evmap::new();
 
     // start some writers.
     // since evmap does not support concurrent writes, we need
@@ -20,10 +20,9 @@ fn main() {
     // eventually we should see all the writes
     while book_reviews_r.len() < 4 {
         std::thread::yield_now();
-     
     }
-   // all the threads should eventually finish writing
-        for w in writers.into_iter() {
-            assert!(w.join().is_ok());
-        }
+    // all the threads should eventually finish writing
+    for w in writers.into_iter() {
+        assert!(w.join().is_ok());
+    }
 }

@@ -1,5 +1,5 @@
-use std::time::Duration;
 use std::sync::mpsc::channel;
+use std::time::Duration;
 pub fn scheduled_thread_pool() {
     let (sender, receiver) = channel();
 
@@ -12,6 +12,6 @@ pub fn scheduled_thread_pool() {
     let _ = handle;
     receiver.recv().unwrap();
 }
-fn main(){
-scheduled_thread_pool();
+fn main() {
+    scheduled_thread_pool();
 }

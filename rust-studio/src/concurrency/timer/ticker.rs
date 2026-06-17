@@ -6,6 +6,6 @@ pub fn ticker_example() {
         println!("{:?}", i)
     }
 }
-fn main(){
-ticker_example();
+fn main() {
+    ticker_example();
 }

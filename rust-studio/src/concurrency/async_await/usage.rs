@@ -7,9 +7,9 @@ fn download(url: &str) {
     println!("下载完成: {}", url);
 }
 fn get_two_sites() {
-        let thread_one = thread::spawn(|| download("https://course.rs"));
+    let thread_one = thread::spawn(|| download("https://course.rs"));
     let thread_two = thread::spawn(|| download("https://fancy.rs"));
-        thread_one.join().expect("thread one panicked");
+    thread_one.join().expect("thread one panicked");
     thread_two.join().expect("thread two panicked");
 }
 fn main1() {

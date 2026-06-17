@@ -1,8 +1,7 @@
+use std::io::Read;
 use std::io::Write;
 use std::process::{Command, Stdio};
-use std::io::Read;
 fn main1() {
-
     let mut child = Command::new("echo")
         .arg("Hello, Rust!")
         .stdout(Stdio::piped())

@@ -136,4 +136,4 @@ name="h2md"
 path="src/html2md.rs"
 [[example]]
 name="con"
-path="src/concurrency/ch14/section10.rs"
+path="src/concurrency/timer/timer.rs"

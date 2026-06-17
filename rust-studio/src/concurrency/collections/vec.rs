@@ -8,16 +8,15 @@ fn main() {
     for i in 0..5 {
         let shared_vec = Arc::clone(&shared_vec);
         let handle = thread::spawn(move || {
-                        let mut vec = shared_vec.lock().unwrap();
+            let mut vec = shared_vec.lock().unwrap();
             // Vec
             vec.push(i);
         });
         handles.push(handle);
-      
     }
-          for handle in handles {
-            handle.join().unwrap();
-        }
+    for handle in handles {
+        handle.join().unwrap();
+    }
     // Vec
     let final_vec = shared_vec.lock().unwrap();
     println!("Final Vec: {:?}", *final_vec);

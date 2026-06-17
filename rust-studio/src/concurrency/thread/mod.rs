@@ -6,7 +6,7 @@ pub mod crossbeam_scoped;
 pub mod current;
 pub mod go_thread;
 pub mod local;
-pub mod move;
+pub mod moves;
 pub mod panic;
 pub mod park;
 pub mod priority;

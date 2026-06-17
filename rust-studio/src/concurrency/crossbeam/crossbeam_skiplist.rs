@@ -3,7 +3,7 @@ fn main() {
     use crossbeam_utils::thread::scope;
     let person_ages = SkipMap::new();
     scope(|s| {
-                s.spawn(|_| {
+        s.spawn(|_| {
             person_ages.insert("Spike Garrett", 22);
             person_ages.insert("Stan Hancock", 47);
             person_ages.insert("Rea Bryan", 234);

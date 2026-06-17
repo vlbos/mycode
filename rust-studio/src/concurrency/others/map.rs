@@ -1,6 +1,6 @@
-use std::thread;
 use dashmap::DashMap;
 use std::sync::Arc;
+use std::thread;
 pub fn hashmap_example() {
     let map = Arc::new(DashMap::new());
     let map1 = map.clone();
@@ -54,7 +54,7 @@ pub fn flurry_hashset() {
 }
 
 pub fn evmap_example() {
-    let (mut book_reviews_w,  book_reviews_r) = evmap::new();
+    let (mut book_reviews_w, book_reviews_r) = evmap::new();
     let readers: Vec<_> = (0..4)
         .map(|_| {
             let r = book_reviews_r.clone();
@@ -89,10 +89,9 @@ pub fn evmap_example() {
         assert!(r.join().is_ok());
     }
 }
-fn main(){
-hashmap_example();
-flurry_hashmap();
-flurry_hashset();
-evmap_example();
-
+fn main() {
+    hashmap_example();
+    flurry_hashmap();
+    flurry_hashset();
+    evmap_example();
 }

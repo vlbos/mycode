@@ -1,10 +1,10 @@
- use std::sync::atomic::Ordering;
-use std::time::Duration;
-use std::thread;
 use event_listener::Event;
+use event_listener::Listener;
 use std::sync::Arc;
 use std::sync::atomic::AtomicBool;
- use event_listener::Listener;
+use std::sync::atomic::Ordering;
+use std::thread;
+use std::time::Duration;
 pub fn event_listener_example() {
     let flag = Arc::new(AtomicBool::new(false));
     let event = Arc::new(Event::new());
@@ -63,9 +63,8 @@ pub fn barrage_example() {
         assert_eq!(rx2.recv_async().await, Ok("Hello!"));
     });
 }
-fn main(){
-event_listener_example();
-triggered_example();
-barrage_example();
-
+fn main() {
+    event_listener_example();
+    triggered_example();
+    barrage_example();
 }

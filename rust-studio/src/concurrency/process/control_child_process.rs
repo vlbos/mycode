@@ -8,14 +8,14 @@ fn main1() {
     println!("Command exited with: {:?}", status);
 }
 
-use std::process::{ Stdio};
+use std::process::Stdio;
 fn main2() {
     let mut child = Command::new("sleep")
         .arg("10")
         .stdout(Stdio::null())
         .spawn()
         .expect("Failed to start command");
-        child.kill().expect("Failed to send signal");
+    child.kill().expect("Failed to send signal");
 }
 
 use std::io::Write;

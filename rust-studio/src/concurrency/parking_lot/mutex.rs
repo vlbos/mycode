@@ -1,6 +1,6 @@
-use std::thread;
 use std::sync::Arc;
- use std::sync::mpsc::channel;
+use std::sync::mpsc::channel;
+use std::thread;
 pub fn mutex_example() {
     use parking_lot::Mutex;
     const N: usize = 10;
@@ -10,15 +10,16 @@ pub fn mutex_example() {
     for _ in 0..10 {
         let (data, tx) = (Arc::clone(&data), tx.clone());
         thread::spawn(move || {
-                        let mut data = data.lock(); // MutexGuard
+            let mut data = data.lock(); // MutexGuard
             *data += 1;
             if *data == N {
                 tx.send(()).unwrap();
             }
-                    });
+        });
     }
     rx.recv().unwrap();
-    println!("mutex_example: {}", data2.lock()); }
+    println!("mutex_example: {}", data2.lock());
+}
 
 const N: usize = 10;
 fn main() {
@@ -40,7 +41,8 @@ fn main() {
     use parking_lot::Mutex;
     let mutex = Mutex::new(1);
     // mutex
-    unsafe{mutex.force_unlock(); // mutex
+    unsafe {
+        mutex.force_unlock(); // mutex
     }
 
     // use parking_lot::Mutex;

@@ -1,5 +1,5 @@
-use std::time::Duration;
 use std::thread;
+use std::time::Duration;
 use thread_control::*;
 pub fn control_thread() {
     let (flag, control) = make_pair();
@@ -20,6 +20,6 @@ pub fn control_thread() {
 
     println!("This thread is stopped")
 }
-fn main(){
-control_thread();
+fn main() {
+    control_thread();
 }

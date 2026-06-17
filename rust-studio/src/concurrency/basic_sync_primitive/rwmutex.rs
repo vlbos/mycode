@@ -4,12 +4,10 @@ fn main1() {
     // RwLock
     let counter = Arc::new(RwLock::new(0));
 
-
     let mut read_handles = vec![];
     for _ in 0..3 {
         let counter = Arc::clone(&counter);
         let handle = thread::spawn(move || {
-
             let num = counter.read().unwrap();
             println!("Reader {:?}: {}", thread::current().id(), *num);
         });
@@ -17,7 +15,6 @@ fn main1() {
     }
 
     let write_handle = thread::spawn(move || {
-    
         let mut num = counter.write().unwrap();
         *num += 1;
         println!(
@@ -43,7 +40,6 @@ fn main2() {
     let read_handle = {
         let counter = Arc::clone(&counter);
         thread::spawn(move || {
-
             let num = counter.read().unwrap();
             println!("Reader {:?}: {}", thread::current().id(), *num);
 
@@ -54,15 +50,14 @@ fn main2() {
     let write_handle = {
         let counter = Arc::clone(&counter);
         thread::spawn(move || {
-
             thread::sleep(std::time::Duration::from_secs(1));
-
 
             let mut num = counter.write().unwrap();
             *num += 1;
             println!(
                 "Writer {:?}: Incremented counter to {}",
-                thread::current().id(),*num
+                thread::current().id(),
+                *num
             );
         })
     };
@@ -78,7 +73,6 @@ fn main3() {
     let read_handle = {
         let counter = counter.clone();
         thread::spawn(move || {
-
             let num = counter.read().unwrap();
             println!("Reader#1: {}", *num);
 
@@ -89,7 +83,6 @@ fn main3() {
     let write_handle = {
         let counter = counter.clone();
         thread::spawn(move || {
-
             thread::sleep(std::time::Duration::from_secs(1));
 
             let mut num = counter.write().unwrap();
@@ -101,7 +94,6 @@ fn main3() {
     let read_handle_2 = {
         let counter = counter.clone();
         thread::spawn(move || {
-
             thread::sleep(std::time::Duration::from_secs(2));
 
             let num = counter.read().unwrap();
@@ -126,7 +118,6 @@ fn main() {
     let read_and_write_handle = {
         let counter = Arc::clone(&counter);
         thread::spawn(move || {
-
             let num = counter.read().unwrap();
             println!("Reader {:?}: {}", thread::current().id(), *num);
 
@@ -134,7 +125,8 @@ fn main() {
             *num += 1;
             println!(
                 "Reader {:?}: Incremented counter to {}",
-                thread::current().id(),*num
+                thread::current().id(),
+                *num
             );
         })
     };
@@ -142,12 +134,12 @@ fn main() {
     let write_and_read_handle = {
         let counter = Arc::clone(&counter);
         thread::spawn(move || {
-
             let mut num = counter.write().unwrap();
             *num += 1;
             println!(
                 "Writer {:?}: Incremented counter to {}",
-                thread::current().id(),*num
+                thread::current().id(),
+                *num
             );
 
             let num = counter.read().unwrap();

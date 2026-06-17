@@ -1,7 +1,7 @@
- use std::sync::atomic::Ordering;
-use std::sync::atomic::AtomicI64;
+use go_spawn::{go, join};
 use std::sync::Arc;
-use go_spawn::{go,join};
+use std::sync::atomic::AtomicI64;
+use std::sync::atomic::Ordering;
 pub fn go_thread() {
     let counter = Arc::new(AtomicI64::new(0));
     let counter_cloned = counter.clone();
@@ -18,6 +18,6 @@ pub fn go_thread() {
     assert!(join!().is_ok());
     assert_eq!(counter.load(Ordering::SeqCst), 100);
 }
-fn main(){
-go_thread();
+fn main() {
+    go_thread();
 }

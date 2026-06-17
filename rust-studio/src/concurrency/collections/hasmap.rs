@@ -9,16 +9,15 @@ fn main() {
     for i in 0..5 {
         let shared_map = Arc::clone(&shared_map);
         let handle = thread::spawn(move || {
-                        let mut map = shared_map.lock().unwrap();
+            let mut map = shared_map.lock().unwrap();
             // HashMap
             map.insert(i, i * i);
         });
         handles.push(handle);
-       
     }
-         for handle in handles {
-            handle.join().unwrap();
-        }
+    for handle in handles {
+        handle.join().unwrap();
+    }
     // HashMap
     let final_map = shared_map.lock().unwrap();
     println!("Final HashMap: {:?}", *final_map);

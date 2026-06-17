@@ -1,6 +1,6 @@
-use std::thread;
-use std::sync::Arc;
 use concurrent_queue::ConcurrentQueue;
+use std::sync::Arc;
+use std::thread;
 pub fn concurrent_queue_example() {
     let q = Arc::new(ConcurrentQueue::unbounded());
     let q1 = q.clone();
@@ -23,6 +23,6 @@ pub fn concurrent_queue_example() {
     whandle.join().unwrap();
     rhandle.join().unwrap();
 }
-fn main(){
-concurrent_queue_example();
+fn main() {
+    concurrent_queue_example();
 }

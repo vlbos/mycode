@@ -1,6 +1,6 @@
 use std::{io, thread};
 
-fn main1() -> Result<(),()> {
+fn main1() -> Result<(), ()> {
     let count = thread::available_parallelism().unwrap().get();
     assert!(count >= 1_usize);
 
@@ -13,7 +13,7 @@ fn main1() -> Result<(),()> {
 //  use num_cpus;
 //  let num = num_cpus::get();
 fn main() {
-    let _=main1();
+    let _ = main1();
     let count = thread::available_parallelism().unwrap().get();
     println!("available_parallelism: {}", count);
 
