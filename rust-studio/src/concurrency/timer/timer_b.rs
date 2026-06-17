@@ -1,0 +1,28 @@
+use chrono;
+use std::sync::mpsc::channel;
+use timer;
+pub(crate) fn main() {
+    let timer = timer::Timer::new();
+    let (tx, rx) = channel();
+    timer.schedule_with_delay(chrono::Duration::seconds(3), move || {
+        tx.send(()).unwrap();
+    });
+    if let Ok(v) = rx.recv() {
+        println!("{v:?}");
+    }
+    println!("This code has been executed after 3 seconds");
+    timer_schedule_with_date();
+}
+pub fn timer_schedule_with_date() {
+    use std::ops::Add;
+    let timer = timer::Timer::new();
+    let (tx, rx) = channel();
+    let _guard = timer.schedule_with_date(
+        chrono::Local::now().add(chrono::Duration::seconds(1)),
+        move || {
+            let _ignored = tx.send(()); // Avoid unwrapping here.
+        },
+    );
+    rx.recv().unwrap();
+    println!("This code has been executed after 1 seconds");
+}
