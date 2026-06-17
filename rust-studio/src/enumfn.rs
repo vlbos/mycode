@@ -1,21 +1,21 @@
 #![forbid(unsafe_code)]
 #![warn(
-	trivial_numeric_casts,
-	unused_import_braces,
-	unused_qualifications,
-	unused_results,
-	unreachable_pub,
-	clippy::pedantic
+    trivial_numeric_casts,
+    unused_import_braces,
+    unused_qualifications,
+    unused_results,
+    unreachable_pub,
+    clippy::pedantic
 )]
 #![allow(
-	clippy::too_many_lines,
-	clippy::many_single_char_names,
-	clippy::self_assignment,
-	clippy::uninlined_format_args,
-	unused_imports
+    clippy::too_many_lines,
+    clippy::many_single_char_names,
+    clippy::self_assignment,
+    clippy::uninlined_format_args,
+    unused_imports
 )]
 
-use serde::{de::DeserializeOwned, Serialize};
+use serde::{Serialize, de::DeserializeOwned};
 use std::{fmt::Debug, mem::size_of};
 
 use serde_closure::{Fn, FnMut, FnOnce};
@@ -48,7 +48,6 @@ use serde_closure::{Fn, FnMut, FnOnce};
 // type ServiceResponse<T> = Pin<Box<dyn Future<Output = T> + Send + 'static>>;
 // type Service<T> = Box<dyn Fn() -> ServiceResponse<T>>;
 
-
 // #[tokio::main]
 // async fn main() {
 //     let mut cron_orchestrator = CronOrchestrator::new();
@@ -63,7 +62,6 @@ use serde_closure::{Fn, FnMut, FnOnce};
 
 //     cron_orchestrator.run().await;
 // }
-
 
 // async fn fun1() {
 //     println!("Help me");
@@ -115,10 +113,10 @@ use serde_closure::{Fn, FnMut, FnOnce};
 //             }
 //             result
 //         };
-        
+
 //         let start = 0;
 //         let get_quadrant_like = |
-//             f: &dyn Fn(usize) -> usize, // fn(usize) -> usize, 
+//             f: &dyn Fn(usize) -> usize, // fn(usize) -> usize,
 //             g: &dyn Fn(usize, usize) -> (usize, usize), // fn(usize, usize) -> (usize, usize)
 //         | {
 //             let columns = get_triangle(start, width);
@@ -160,45 +158,39 @@ use serde_closure::{Fn, FnMut, FnOnce};
 //     f(&mut i);
 //     println!("{i}");
 // }
-trait Test{
-    fn test(&mut self,v:i32);
-fn val(&self)->i32;
+trait Test {
+    fn test(&mut self, v: i32);
+    fn val(&self) -> i32;
 }
 struct Obj(i32);
-impl Test for Obj{
-    fn test(&mut self,v:i32){
-    self.0=v;
+impl Test for Obj {
+    fn test(&mut self, v: i32) {
+        self.0 = v;
     }
-fn val(&self)->i32{
-    self.0
+    fn val(&self) -> i32 {
+        self.0
     }
 }
 use std::hash::Hash;
-use std::{rc::Rc,cell::RefCell};
-struct ObjBox{
-    ob:Rc<RefCell<dyn Test>>,
+use std::{cell::RefCell, rc::Rc};
+struct ObjBox {
+    ob: Rc<RefCell<dyn Test>>,
 }
-#[derive(Clone,Debug)]
-struct Eval{
-}
+#[derive(Clone, Debug)]
+struct Eval {}
 
-            #[derive(Hash, Clone, Debug)]
-            struct Prover<F: FnOnce( &mut Eval)
-			+ Serialize
-			+ DeserializeOwned
-			+ PartialEq
-			+ Eq
-			+ Clone
-			+ Debug+Hash> {
-                pub f:F,
-            }
+#[derive(Hash, Clone, Debug)]
+struct Prover<
+    F: FnOnce(&mut Eval) + Serialize + DeserializeOwned + PartialEq + Eq + Clone + Debug + Hash,
+> {
+    pub f: F,
+}
 
 // use std::rc::Rc;
 // use std::cell::RefCell;
-trait TestA{
-}
-struct A{
-t:Rc<RefCell<dyn TestA>>,
+trait TestA {}
+struct A {
+    t: Rc<RefCell<dyn TestA>>,
 }
 
 // impl Hash for InstructionDyn + Send + Sync {
@@ -239,37 +231,31 @@ t:Rc<RefCell<dyn TestA>>,
 //     }
 // }
 
+//     impl <'a,G:CGConfig+Hash+Clone+Debug> Instruction for Prover<'a,G> {
+//         fn evaluate(&self, evaluator: &mut CircuitEvaluator) {
+//             let myValue = evaluator
+//                 .getWireValuei(self.long_element.clone(), LongElement::CHUNK_BITWIDTH);
+//             let otherValue =
+//                 evaluator.getWireValuei(self.other.clone(), LongElement::CHUNK_BITWIDTH);
+//             let resultValue = myValue.sub(otherValue);
+//             assert!(
+//                 resultValue.sign() != Sign::Minus,
+//                 "Result of subtraction is negative!"
+//             );
+//             evaluator.setWireValuebi(
+//                 self.result.clone(),
+//                 resultValue,
+//                 LongElement::CHUNK_BITWIDTH,
+//             );
+//         }
+//     }
 
-
-
-        //     impl <'a,G:CGConfig+Hash+Clone+Debug> Instruction for Prover<'a,G> {
-        //         fn evaluate(&self, evaluator: &mut CircuitEvaluator) {
-        //             let myValue = evaluator
-        //                 .getWireValuei(self.long_element.clone(), LongElement::CHUNK_BITWIDTH);
-        //             let otherValue =
-        //                 evaluator.getWireValuei(self.other.clone(), LongElement::CHUNK_BITWIDTH);
-        //             let resultValue = myValue.sub(otherValue);
-        //             assert!(
-        //                 resultValue.sign() != Sign::Minus,
-        //                 "Result of subtraction is negative!"
-        //             );
-        //             evaluator.setWireValuebi(
-        //                 self.result.clone(),
-        //                 resultValue,
-        //                 LongElement::CHUNK_BITWIDTH,
-        //             );
-        //         }
-        //     }
-
-        //     Box::new(Prover::<'_,C> {
-        //         long_element: self.clone(),
-        //         other: rhs.clone(),
-        //         result: result.clone(),
-        //     })
-        // });
-
-
-
+//     Box::new(Prover::<'_,C> {
+//         long_element: self.clone(),
+//         other: rhs.clone(),
+//         result: result.clone(),
+//     })
+// });
 
 // playground_hacks! {
 //     #[my_attr]
@@ -297,7 +283,7 @@ t:Rc<RefCell<dyn TestA>>,
 //         Result,
 //         visit_mut::{self, VisitMut},
 //     };
-    
+
 //     /// Playground hack
 //     macro_rules! parse_macro_input {( $input:expr ) => (
 //         match ::syn::parse2($input) {
@@ -305,7 +291,7 @@ t:Rc<RefCell<dyn TestA>>,
 //             Err(err) => return err.to_compile_error().into(),
 //         }
 //     )}
-    
+
 //     /* Not in the playground
 //     #[proc_macro_attribute] // */
 //     pub fn my_attr (
@@ -314,9 +300,9 @@ t:Rc<RefCell<dyn TestA>>,
 //     ) -> TokenStream
 //     {
 //         let _: parse::Nothing = parse_macro_input!(attrs);
-        
+
 //         let mut input: ItemFn = parse_macro_input!(input);
-        
+
 //         struct Visitor {
 //             /* state here */
 //         }
@@ -341,11 +327,11 @@ t:Rc<RefCell<dyn TestA>>,
 //                 }
 //             }
 //         }
-        
+
 //         let mut visitor = Visitor { /* initial state */ };
-        
+
 //         visitor.visit_item_fn_mut(&mut input);
-        
+
 //         input.into_token_stream()
 //     }
 // }
@@ -360,31 +346,27 @@ t:Rc<RefCell<dyn TestA>>,
 
 //         let attrs: TokenStream = stringify!($($($attrs)*)?).parse().unwrap();
 //         let input: TokenStream = stringify!($item).parse().unwrap();
-        
+
 //         println!("{}", proc_macro_crate::$attr(attrs, input));
 //     }
 // )} use playground_hacks;
 
-
-trait TestDyn<T>{
-    fn t(self)->Box<dyn BoxDyn<T>>;
+trait TestDyn<T> {
+    fn t(self) -> Box<dyn BoxDyn<T>>;
 }
-trait BoxDyn<T>{
-}
+trait BoxDyn<T> {}
 struct TT;
 struct TestS;
-impl<T> BoxDyn<T> for TestS {
-   
-}
+impl<T> BoxDyn<T> for TestS {}
 impl<T> TestDyn<T> for TestS {
-    fn t(self)->Box<dyn BoxDyn<T>>{
+    fn t(self) -> Box<dyn BoxDyn<T>> {
         Box::new(self)
     }
 }
 fn main() {
-let s:Box<dyn TestDyn<TT>> =Box::new(TestS);
-//         let a:i32=0;
-// let b=a.clone();
+    let s: Box<dyn TestDyn<TT>> = Box::new(TestS);
+    //         let a:i32=0;
+    // let b=a.clone();
     //    let t=ObjBox{ob:Rc::new(RefCell::new(Obj(0)))};
     //    t.ob.borrow_mut().test(3);
     //    println!("{}",t.ob.borrow().val());
@@ -392,9 +374,9 @@ let s:Box<dyn TestDyn<TT>> =Box::new(TestS);
     // // let ff=move |e:&mut Eval| };
     // let f=FnOnce!(move |e:&mut Eval|  for v in s{println!("{v:?}");});
     // let p=Prover{f};
-//    let mut h=std::collections::HashMap::new();
-//     let f=InstructionType::Function(Box::new(|i:&mut i32| {*i+=1;}));
-//     h.insert(f.clone(),f.clone());
+    //    let mut h=std::collections::HashMap::new();
+    //     let f=InstructionType::Function(Box::new(|i:&mut i32| {*i+=1;}));
+    //     h.insert(f.clone(),f.clone());
 
-//    test(Box::new(|i:&mut i32| {*i+=1;}));
+    //    test(Box::new(|i:&mut i32| {*i+=1;}));
 }

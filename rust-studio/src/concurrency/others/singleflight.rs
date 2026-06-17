@@ -1,0 +1,22 @@
+use singleflight_async::SingleFlight;
+pub fn singleflight_example() {
+    smol::block_on(async {
+        let group = SingleFlight::new();
+        let mut futures = Vec::new();
+        for _ in 0..10 {
+            futures.push(group.work("key", || async {
+                println!("will sleep to simulate async task");
+                smol::Timer::after(std::time::Duration::from_millis(100)).await;
+                println!("real task done");
+                "my-result"
+            }));
+        }
+        for fut in futures.into_iter() {
+            assert_eq!(fut.await, "my-result");
+            println!("task finished");
+        }
+    });
+}
+fn main(){
+singleflight_example();
+}
