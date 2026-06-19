@@ -1,6 +1,6 @@
 use dashmap::DashMap;
 use std::sync::Arc;
-fn main() {
+pub fn main() {
     let map = Arc::new(DashMap::new());
     let mut handles = vec![];
     for i in 0..10 {

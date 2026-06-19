@@ -1,8 +1,8 @@
 use rand::Rng;
 use std::sync::{Arc, Barrier};
 use std::thread;
-use std::time::{self, Duration};
-fn main1() {
+use std::time::{self};
+pub fn main1() {
     // Barrier
     let barrier = Arc::new(Barrier::new(3)); // 3
     let mut handles = vec![];
@@ -21,7 +21,7 @@ fn main1() {
         handle.join().unwrap();
     }
 }
-fn main() {
+pub fn main() {
     main1();
     let barrier = Arc::new(Barrier::new(10));
     let mut handles = vec![];

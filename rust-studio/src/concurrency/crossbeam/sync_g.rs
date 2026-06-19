@@ -1,4 +1,5 @@
-pub(crate) fn main() {
+
+pub fn main() {
     use crossbeam_channel::{select, unbounded};
     use std::thread;
     use std::time::Duration;

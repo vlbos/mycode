@@ -7,7 +7,7 @@ async fn my_timer() {
 }
 
 #[tokio::main]
-async fn main() {
+pub async fn main() {
     my_timer().await;
 
     futures_timer_example().await;

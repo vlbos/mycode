@@ -31,7 +31,7 @@ pub fn send_wrapper() {
     let value = wrapped_value.deref();
     println!("received from the main thread: {}", value);
 }
-fn main() {
+pub fn main() {
     // wrong_send();
     send_wrapper();
 }

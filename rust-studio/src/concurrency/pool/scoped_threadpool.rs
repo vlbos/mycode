@@ -17,7 +17,7 @@ pub fn scoped_threadpool() {
 
     assert_eq!(vec, vec![1, 2, 3, 4, 5, 6, 7, 8]);
 }
-fn main() {
+pub fn main() {
     println!("scoped_threadpool");
     scoped_threadpool();
 }

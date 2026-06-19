@@ -1,5 +1,5 @@
 use rayon::join;
-fn main1() {
+pub fn main1() {
     let result = join(|| expensive_operation1(), || expensive_operation2());
     let final_result = result.0 + result.1;
     println!("Final Result: {}", final_result);
@@ -10,7 +10,7 @@ fn expensive_operation1() -> i32 {
 fn expensive_operation2() -> i32 {
     58
 }
-fn main() {
+pub fn main() {
     main1();
     let mut v = vec![5, 1, 8, 22, 0, 44];
     quick_sort(&mut v);

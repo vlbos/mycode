@@ -19,6 +19,6 @@ pub fn arc_swap_example() {
         }
     })
 }
-fn main() {
+pub fn main() {
     arc_swap_example();
 }

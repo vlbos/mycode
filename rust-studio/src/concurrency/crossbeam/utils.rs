@@ -28,7 +28,7 @@ fn blocking_wait(ready: &AtomicBool) {
         }
     }
 }
-fn main() {
+pub fn main() {
     use crossbeam_utils::CachePadded;
     let array = [CachePadded::new(1i8), CachePadded::new(2i8)];
     let addr1 = &*array[0] as *const i8 as usize;
@@ -39,11 +39,11 @@ fn main() {
 
     // use crossbeam_utils::CachePadded;
     use std::sync::atomic::AtomicUsize;
-    struct Queue<T> {
-        head: CachePadded<AtomicUsize>,
-        tail: CachePadded<AtomicUsize>,
-        buffer: *mut T,
-    }
+    // pub struct Queue<T> {
+    //     head: CachePadded<AtomicUsize>,
+    //     tail: CachePadded<AtomicUsize>,
+    //     buffer: *mut T,
+    // }
 
     use crossbeam_utils::thread;
     let var = vec![1, 2, 3];

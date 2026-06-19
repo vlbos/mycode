@@ -112,6 +112,10 @@ flurry = "0.5.2"
 awaitgroup = "0.7.0"
 triggered = "0.1.3"
 barrage = "0.2.3"
+
+[features]
+default = ["std"]
+std = []
 [[example]]
 name="enumfn"
 path="src/enumfn.rs"

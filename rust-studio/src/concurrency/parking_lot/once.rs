@@ -12,7 +12,7 @@ fn get_cached_val() -> usize {
         VAL
     }
 }
-fn main() {
+pub fn main() {
     let _handle = thread::spawn(|| {
         println!("thread 1 get_cached_val: {}", get_cached_val());
     });

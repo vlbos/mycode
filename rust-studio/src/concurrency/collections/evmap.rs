@@ -1,6 +1,6 @@
 use std::sync::Arc;
 use std::sync::Mutex;
-fn main() {
+pub fn main() {
     let (book_reviews_w, book_reviews_r) = evmap::new();
 
     // start some writers.

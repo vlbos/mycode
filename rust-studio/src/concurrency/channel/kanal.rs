@@ -1,5 +1,5 @@
 use std::thread;
-fn main() {
+pub fn main() {
     let (tx, rx) = kanal::unbounded();
     thread::spawn(move || {
         (0..10).for_each(|i| {

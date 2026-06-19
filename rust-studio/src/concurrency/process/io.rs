@@ -1,5 +1,5 @@
 use std::process::{Command, Stdio};
-fn main() {
+pub fn main() {
     let output = Command::new("echo")
         .arg("Hello, Rust!")
         .stdout(Stdio::piped())

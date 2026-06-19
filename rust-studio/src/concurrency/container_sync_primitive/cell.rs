@@ -1,9 +1,7 @@
-#![feature(lazy_cell)]
-
 use std::borrow::Borrow;
 use std::cell::OnceCell;
 use std::ops::Deref;
-fn main1() {
+pub fn main1() {
     use std::cell::Cell;
     let x = Cell::new(42);
     let y = &x;
@@ -32,7 +30,7 @@ pub fn once_cell_example() {
 }
 
 use std::cell::LazyCell;
-fn main() {
+pub fn main() {
     let lazy: LazyCell<i32> = LazyCell::new(|| {
         println!("initializing");
         0

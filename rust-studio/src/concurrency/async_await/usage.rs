@@ -12,7 +12,7 @@ fn get_two_sites() {
     thread_one.join().expect("thread one panicked");
     thread_two.join().expect("thread two panicked");
 }
-fn main1() {
+pub fn main1() {
     get_two_sites();
 }
 async fn download_async(url: &str) {
@@ -32,7 +32,7 @@ async fn get_two_sites_async() {
 }
 
 #[tokio::main]
-async fn main() {
+pub async fn main() {
     main1();
     get_two_sites_async().await;
 }

@@ -19,7 +19,7 @@ async fn bar() -> Result<u8, String> {
     Ok(1)
 }
 
-// pub fn main1() {
+// pub pub fn main1() {
 //     let fut = async {
 //         foo().await?;
 //         bar().await?;
@@ -35,7 +35,7 @@ async fn bar() -> Result<u8, String> {
 // ...
 // 14 | Ok(1)
 // | ˆˆ cannot infer type for type parameter`E` declared on the enum`Resul
-fn main() {
+pub fn main() {
     let _fut = async {
         foo().await?;
         bar().await?;

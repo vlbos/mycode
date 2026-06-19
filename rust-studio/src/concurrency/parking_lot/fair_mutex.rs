@@ -2,7 +2,7 @@ use parking_lot::FairMutex;
 use std::sync::Arc;
 use std::sync::mpsc::channel;
 use std::thread;
-fn main() {
+pub fn main() {
     const N: usize = 10;
     let data = Arc::new(FairMutex::new(0));
     let (tx, rx) = channel();

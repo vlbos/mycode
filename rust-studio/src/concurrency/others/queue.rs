@@ -23,6 +23,6 @@ pub fn concurrent_queue_example() {
     whandle.join().unwrap();
     rhandle.join().unwrap();
 }
-fn main() {
+pub fn main() {
     concurrent_queue_example();
 }

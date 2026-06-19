@@ -7,7 +7,7 @@ pub fn fast_threadpool_example() -> Result<(), fast_threadpool::ThreadPoolDiscon
 
     Ok(())
 }
-fn main() {
+pub fn main() {
     let _ = fast_threadpool_example();
     let rt = tokio::runtime::Runtime::new().unwrap();
     rt.block_on(async {

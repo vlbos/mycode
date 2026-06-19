@@ -65,6 +65,7 @@ impl Sea {
         true
     }
 }
+
 pub struct Solution;
 impl Solution {
     pub fn count_ships(sea: &Sea, top_right: Vec<i32>, bottom_left: Vec<i32>) -> i32 {

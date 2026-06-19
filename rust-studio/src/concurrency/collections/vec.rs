@@ -1,6 +1,6 @@
 use std::sync::{Arc, Mutex};
 use std::thread;
-fn main() {
+pub fn main() {
     // Arc Mutex Vec
     let shared_vec = Arc::new(Mutex::new(Vec::new()));
     // Vec

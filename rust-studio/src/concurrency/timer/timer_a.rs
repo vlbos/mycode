@@ -1,6 +1,7 @@
 use std::thread;
 use std::time::Duration;
-pub(crate) fn main() {
+
+pub fn main() {
     println!(" ");
 
     thread::sleep(Duration::from_secs(5));

@@ -38,6 +38,6 @@ pub fn start_one_thread_with_move() {
 //     });
 //     handle.join().unwrap();
 // }
-fn main() {
+pub fn main() {
     start_one_thread_with_move();
 }

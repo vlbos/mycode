@@ -21,7 +21,7 @@ pub fn process_lock() {
 
 use named_lock::NamedLock;
 use named_lock::Result;
-fn main() -> Result<()> {
+pub fn main() -> Result<()> {
     process_lock();
     let lock = NamedLock::create("foobar")?;
     let _guard = lock.lock()?;

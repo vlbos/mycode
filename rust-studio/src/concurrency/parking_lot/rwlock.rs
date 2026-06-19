@@ -1,7 +1,7 @@
 use parking_lot::RwLock;
 use std::sync::Arc;
 use std::thread;
-fn main() {
+pub fn main() {
     const N: usize = 10;
     let lock = Arc::new(RwLock::new(5));
     let handles: Vec<_> = (0..N)

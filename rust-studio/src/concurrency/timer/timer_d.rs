@@ -1,7 +1,8 @@
 use async_io::Timer;
 use futures_lite::prelude::*;
 use std::time::Duration;
-pub(crate) async fn main() {
+#[tokio::main]
+pub async fn main() {
     Timer::after(Duration::from_secs(1)).await;
 
     // use async_io::Timer;

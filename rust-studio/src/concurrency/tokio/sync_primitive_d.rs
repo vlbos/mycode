@@ -7,7 +7,7 @@ pub async fn main() {
     let notified1 = notify.notified();
     let notified2 = notify.notified();
 
-    let handle = tokio::spawn(async move {
+    let _handle = tokio::spawn(async move {
         println!("sending notifications");
         notify2.notify_waiters();
     });

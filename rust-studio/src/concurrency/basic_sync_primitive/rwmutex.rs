@@ -1,6 +1,6 @@
 use std::sync::{Arc, RwLock};
 use std::thread;
-fn main1() {
+pub fn main1() {
     // RwLock
     let counter = Arc::new(RwLock::new(0));
 
@@ -33,7 +33,7 @@ fn main1() {
 
 // use std::sync::{Arc, RwLock};
 // use std::thread;
-fn main2() {
+pub fn main2() {
     // RwLock
     let counter = Arc::new(RwLock::new(0));
 
@@ -66,7 +66,7 @@ fn main2() {
     write_handle.join().unwrap();
 }
 
-fn main3() {
+pub fn main3() {
     // RwLock
     let counter = Arc::new(RwLock::new(0));
 
@@ -108,7 +108,7 @@ fn main3() {
 
 // use std::sync::{Arc, RwLock};
 // use std::thread;
-fn main() {
+pub fn main() {
     main1();
     main2();
     main3();

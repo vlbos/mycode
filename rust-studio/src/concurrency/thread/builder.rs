@@ -1,4 +1,3 @@
-#![feature(thread_spawn_unchecked)]
 use std::thread::Builder;
 pub fn start_one_thread_by_builder() {
     let builder = thread::Builder::new()
@@ -15,7 +14,7 @@ pub fn start_one_thread_by_builder() {
 }
 
 use std::thread;
-fn main() {
+pub fn main() {
     start_one_thread_by_builder();
     let builder = Builder::new();
     let x = 1;

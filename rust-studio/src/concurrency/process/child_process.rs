@@ -1,10 +1,10 @@
-use nix::unistd::{ForkResult, close, dup2};
+use nix::unistd::ForkResult;
 use std::io::Read;
 use std::net::{TcpListener, TcpStream};
 use std::os::fd::FromRawFd;
 use std::os::unix::io::AsRawFd;
-use std::process::{Command, Stdio};
-fn main() {
+// use std::process::{Command, Stdio};
+pub fn main() {
     // TCP
     let listener = TcpListener::bind("127.0.0.1:8080").expect("Failed to bind to add");
 

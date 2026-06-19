@@ -1,4 +1,5 @@
-pub(crate) fn main() {
+
+pub fn main() {
     use crossbeam_channel::{RecvError, unbounded};
     let (s, r) = unbounded();
     s.send(1).unwrap();

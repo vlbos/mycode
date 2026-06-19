@@ -1,6 +1,6 @@
 use std::sync::{Arc, Mutex};
 use std::thread;
-fn main1() {
+pub fn main1() {
     let counter = Arc::new(Mutex::new(0));
     let mut handles = vec![];
     for _ in 0..5 {
@@ -19,7 +19,7 @@ fn main1() {
 
 // use std::sync::{Arc, Mutex};
 // use std::thread;
-fn main2() {
+pub fn main2() {
     let counter = Arc::new(Mutex::new(0));
     let mut handles = vec![];
     for _ in 0..5 {
@@ -39,9 +39,9 @@ fn main2() {
     println!("Final count: {}", *counter.lock().unwrap());
 }
 
-use std::sync::{LockResult, PoisonError};
+use std::sync::LockResult;
 // use std::thread;
-fn main3() {
+pub fn main3() {
     let counter = Arc::new(Mutex::new(0));
     let mut handles = vec![];
     for _ in 0..5 {
@@ -101,7 +101,7 @@ fn main4() {
 
 // use std::sync::{Arc, Mutex};
 // use std::thread;
-fn main() {
+pub fn main() {
     main1();
     main2();
     main3();

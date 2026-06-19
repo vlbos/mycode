@@ -1,4 +1,5 @@
-pub(crate) fn main() {
+
+pub fn main() {
     use crossbeam_channel::{select, unbounded};
     let (s1, r1) = unbounded();
     let (s2, r2) = unbounded();

@@ -60,7 +60,7 @@ pub fn crossfire_mpmc() {
         }
     });
 }
-fn main() {
+pub fn main() {
     crossfire_mpmc();
     crossfire_mpsc();
 }

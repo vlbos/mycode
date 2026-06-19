@@ -20,6 +20,6 @@ pub fn control_thread() {
 
     println!("This thread is stopped")
 }
-fn main() {
+pub fn main() {
     control_thread();
 }

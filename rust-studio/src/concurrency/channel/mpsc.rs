@@ -1,7 +1,7 @@
 use std::sync::mpsc;
 use std::sync::mpsc::sync_channel;
 use std::thread;
-fn main1() {
+pub fn main1() {
     let (sender, receiver) = mpsc::channel();
     thread::spawn(move || {
         let message = "Hello from the producer!";
@@ -14,7 +14,7 @@ fn main1() {
 
 // use std::sync::mpsc;
 // use std::thread;
-fn main2() {
+pub fn main2() {
     let (sender, receiver) = mpsc::channel();
     for i in 0..3 {
         let tx = sender.clone();
@@ -28,7 +28,7 @@ fn main2() {
     }
 }
 
-fn main3() {
+pub fn main3() {
     let (tx, rx) = sync_channel(3);
     for _ in 0..3 {
         let tx = tx.clone();
@@ -45,7 +45,7 @@ fn main3() {
 }
 // use std::sync::mpsc;
 // use std::thread;
-fn main() {
+pub fn main() {
     main1();
     main2();
     main3();

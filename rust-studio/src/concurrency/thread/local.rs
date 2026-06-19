@@ -34,6 +34,6 @@ pub fn start_threads_with_threadlocal() {
         println!("Hello from main, c={}!", *c.borrow());
     });
 }
-fn main() {
+pub fn main() {
     start_threads_with_threadlocal();
 }

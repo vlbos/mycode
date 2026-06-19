@@ -1,6 +1,6 @@
 use arc_swap::ArcSwap;
 use std::sync::Arc;
-fn main() {
+pub fn main() {
     // ArcSwap
     let data = ArcSwap::new(1.into());
     println!("Initial Value: {}", data.load());

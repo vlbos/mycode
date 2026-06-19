@@ -5,7 +5,7 @@ use std::sync::atomic::Ordering;
 use std::thread;
 use std::thread::sleep;
 use std::time::Duration;
-fn main() -> Result<(), Box<dyn std::error::Error>> {
+pub fn main() -> Result<(), Box<dyn std::error::Error>> {
     executor_service_example();
 
     // let pool = Executors::new_fixed_thread_pool(4)?;

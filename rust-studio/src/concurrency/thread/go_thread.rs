@@ -18,6 +18,6 @@ pub fn go_thread() {
     assert!(join!().is_ok());
     assert_eq!(counter.load(Ordering::SeqCst), 100);
 }
-fn main() {
+pub fn main() {
     go_thread();
 }

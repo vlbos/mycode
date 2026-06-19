@@ -11,7 +11,7 @@ pub fn flume_example() {
 
 use flume::{Receiver, Sender, bounded};
 use std::thread;
-fn main1() {
+pub fn main1() {
     // 3
     let (sender, receiver): (Sender<i32>, Receiver<i32>) = bounded(3);
     let producer = thread::spawn(move || {
@@ -31,7 +31,7 @@ fn main1() {
     producer.join().unwrap();
     consumer.join().unwrap();
 }
-fn main() {
+pub fn main() {
     flume_example();
     main1();
     let (tx0, rx0) = flume::unbounded();

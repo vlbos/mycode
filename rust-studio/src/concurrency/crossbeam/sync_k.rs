@@ -1,4 +1,5 @@
-pub(crate) fn main() {
+
+pub fn main() {
     use crossbeam_utils::sync::ShardedLock;
     let lock = ShardedLock::new(5);
     {

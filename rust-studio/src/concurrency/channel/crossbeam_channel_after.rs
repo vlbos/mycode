@@ -1,6 +1,6 @@
 use crossbeam_channel::{after, select};
 use std::time::Duration;
-pub(crate) fn main() {
+pub fn main() {
     let timeout = Duration::from_secs(2);
 
     let timeout_channel = after(timeout);

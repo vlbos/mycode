@@ -41,7 +41,7 @@ pub fn thread_park2() {
     handle.join().unwrap();
 }
 
-fn main() {
+pub fn main() {
     start_thread_with_sleep();
     start_thread_with_yield_now();
     thread_park2();

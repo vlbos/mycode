@@ -19,6 +19,6 @@ pub fn futures_async() {
     let values: Vec<i32> = executor::block_on(fut_values);
     println!("Values={:?}", values);
 }
-fn main() {
+pub fn main() {
     futures_async();
 }

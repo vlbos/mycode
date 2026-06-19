@@ -14,7 +14,7 @@ use std::collections::BTreeMap;
 use std::sync::{Arc, Mutex};
 
 ///`cargo run --example arc_mutex`
-fn main2() {
+pub fn main2() {
     let pool = Pool::new().unwrap();
     // You also can use RwLock instead of Mutex if you read more than write.
     let map = Arc::new(Mutex::new(BTreeMap::<i32, i32>::new()));
@@ -45,7 +45,7 @@ fn fib(msg: i32) -> i32 {
 fn test1(msg: i32) {
     println!("key: {}\tvalue: {}", msg, fib(msg));
 }
-fn main() {
+pub fn main() {
     let _ = main1();
     main2();
     let pool = Builder::new()

@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::thread;
-fn main() {
+pub fn main() {
     // Arc Mutex HashMap
     let shared_map = Arc::new(Mutex::new(HashMap::new()));
     // HashMap

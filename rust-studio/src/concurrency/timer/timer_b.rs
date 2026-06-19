@@ -1,7 +1,8 @@
 use chrono;
 use std::sync::mpsc::channel;
 use timer;
-pub(crate) fn main() {
+
+pub fn main() {
     let timer = timer::Timer::new();
     let (tx, rx) = channel();
     timer.schedule_with_delay(chrono::Duration::seconds(3), move || {

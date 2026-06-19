@@ -1,6 +1,6 @@
 use crossbeam_channel::{Receiver, Sender, select, unbounded};
 use std::thread;
-pub(crate) fn main() {
+pub fn main() {
     let (sender1, receiver1): (Sender<String>, Receiver<String>) = unbounded();
     let (sender2, receiver2): (Sender<String>, Receiver<String>) = unbounded();
     let producer1 = thread::spawn(move || {

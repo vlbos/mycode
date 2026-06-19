@@ -1,4 +1,5 @@
-fn main() {
+
+pub fn main() {
     let mut value_a = None;
     let mut value_b = None;
     let mut value_c = None;

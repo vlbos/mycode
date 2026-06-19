@@ -1,5 +1,5 @@
 use cuckoofilter::CuckooFilter;
-fn main() {
+pub fn main() {
     let value: &str = "hello world";
     // Create cuckoo filter with default max capacity of 1000000 items
     let mut cf = CuckooFilter::new();

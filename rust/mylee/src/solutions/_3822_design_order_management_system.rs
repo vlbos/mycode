@@ -121,7 +121,6 @@ impl OrderManagementSystem {
 //  * obj.cancel_order(orderId);
 //  * let ret_4: Vec<i32> = obj.get_orders_at_price(orderType, price);
 //  */
-
 #[cfg(test)]
 mod test {
     use super::*;
@@ -144,7 +143,8 @@ mod test {
         order_management_system.cancel_order(3);
         order_management_system.cancel_order(2);
         assert_eq!(
-            order_management_system.get_orders_at_price("buy".to_owned(), 1),vec![]
+            order_management_system.get_orders_at_price("buy".to_owned(), 1),
+            vec![]
         );
     }
 }

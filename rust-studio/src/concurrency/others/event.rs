@@ -63,7 +63,7 @@ pub fn barrage_example() {
         assert_eq!(rx2.recv_async().await, Ok("Hello!"));
     });
 }
-fn main() {
+pub fn main() {
     event_listener_example();
     triggered_example();
     barrage_example();

@@ -1,4 +1,4 @@
-use crossbeam::scope;
+// use crossbeam::scope;
 // use crate::scope;
 pub fn crossbeam_scope() {
     let mut a = vec![1, 2, 3];
@@ -21,6 +21,6 @@ pub fn crossbeam_scope() {
     a.push(4);
     assert_eq!(x, a.len());
 }
-fn main() {
+pub fn main() {
     crossbeam_scope();
 }

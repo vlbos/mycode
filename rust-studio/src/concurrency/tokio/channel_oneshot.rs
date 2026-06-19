@@ -10,5 +10,5 @@ pub async fn main() {
         let res = some_computation().await;
         tx.send(res).unwrap();
     });
-    let res = rx.await.unwrap();
+    let _res = rx.await.unwrap();
 }

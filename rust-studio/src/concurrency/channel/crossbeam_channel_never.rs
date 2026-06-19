@@ -1,5 +1,5 @@
 use crossbeam_channel::{never, select};
-pub(crate) fn main() {
+pub fn main() {
     let never_channel: crossbeam_channel::Receiver<i32> = never();
     loop {
         select! {

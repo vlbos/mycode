@@ -22,7 +22,7 @@ pub fn mutex_example() {
 }
 
 const N: usize = 10;
-fn main() {
+pub fn main() {
     let mutex = Arc::new(Mutex::new(()));
     let handles: Vec<_> = (0..N)
         .map(|i| {

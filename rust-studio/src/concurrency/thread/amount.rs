@@ -1,4 +1,4 @@
-use std::{io, thread};
+use std::thread;
 
 fn main1() -> Result<(), ()> {
     let count = thread::available_parallelism().unwrap().get();
@@ -12,7 +12,7 @@ fn main1() -> Result<(), ()> {
 // 更多的场景下，我们使用 num_cpus 获取 CPU 的核数（逻辑核）：
 //  use num_cpus;
 //  let num = num_cpus::get();
-fn main() {
+pub fn main() {
     let _ = main1();
     let count = thread::available_parallelism().unwrap().get();
     println!("available_parallelism: {}", count);

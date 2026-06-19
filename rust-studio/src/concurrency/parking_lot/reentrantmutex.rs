@@ -1,5 +1,5 @@
-use parking_lot::RawMutex;
-use parking_lot::RawThreadId;
+// use parking_lot::RawMutex;
+// use parking_lot::RawThreadId;
 use parking_lot::ReentrantMutex;
 // pub type ReentrantMutex<T> = ReentrantMutex<RawMutex, RawThreadId, T>;
 
@@ -16,6 +16,6 @@ fn reentrant(lock: &ReentrantMutex<()>, i: usize) {
     reentrant(lock, i - 1);
 }
 
-fn main() {
+pub fn main() {
     reentrantmutex_example();
 }

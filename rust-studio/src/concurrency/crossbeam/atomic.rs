@@ -17,7 +17,7 @@ pub fn atomic_cell_example() {
 }
 
 use crossbeam::atomic::AtomicCell;
-fn main() {
+pub fn main() {
     let count = Arc::new(AtomicCell::new(0i32));
     let mut handles = vec![];
     for _ in 0..10 {

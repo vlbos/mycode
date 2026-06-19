@@ -18,7 +18,7 @@ pub fn rayon_scope() {
     assert_eq!(x, a.len());
 }
 // After the scope, we can modify and access our variables again:
-fn main() {
+pub fn main() {
     rayon_scope();
     rayon::scope_fifo(|s| {
         s.spawn_fifo(|s| {

@@ -1,5 +1,5 @@
 use std::process::Command;
-fn main1() {
+pub fn main1() {
     let mut child = Command::new("echo")
         .arg("Hello, Rust!")
         .spawn()
@@ -9,7 +9,7 @@ fn main1() {
 }
 
 use std::process::Stdio;
-fn main2() {
+pub fn main2() {
     let mut child = Command::new("sleep")
         .arg("10")
         .stdout(Stdio::null())
@@ -20,7 +20,7 @@ fn main2() {
 
 use std::io::Write;
 // use std::process::{Command, Stdio};
-fn main() {
+pub fn main() {
     main1();
     main2();
     let mut child = Command::new("cat")

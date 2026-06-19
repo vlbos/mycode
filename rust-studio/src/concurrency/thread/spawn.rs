@@ -47,7 +47,7 @@ pub fn start_n_threads() {
     }
 }
 
-fn main() {
+pub fn main() {
     start_one_thread();
     start_one_thread_result();
     start_two_threads();

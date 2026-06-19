@@ -13,7 +13,7 @@ fn find_task<T>(local: &Worker<T>, global: &Injector<T>, stealers: &[Stealer<T>]
     })
 }
 
-fn main1() {
+pub fn main1() {
     let local_worker: Worker<i32> = Worker::new_fifo();
     let global_injector: Injector<i32> = Injector::new();
     let stealer1: Stealer<i32> = local_worker.stealer();
@@ -26,7 +26,7 @@ fn main1() {
         println!("No task found.");
     }
 }
-fn main2() {
+pub fn main2() {
     use crossbeam::queue::ArrayQueue;
     let queue = Arc::new(ArrayQueue::new(100));
     for i in 0..10 {
@@ -46,7 +46,7 @@ fn main2() {
 }
 use crossbeam_queue::SegQueue;
 use std::thread;
-fn main() {
+pub fn main() {
     main1();
     main2();
     // SegQueue

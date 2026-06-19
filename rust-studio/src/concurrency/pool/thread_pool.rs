@@ -4,7 +4,7 @@ use std::sync::Arc;
 use std::sync::Barrier;
 use std::sync::atomic::AtomicUsize;
 use std::sync::atomic::Ordering;
-fn main1() {
+pub fn main1() {
     // 4
     let pool = threadpool::ThreadPool::new(4);
 
@@ -23,7 +23,7 @@ fn main1() {
         println!(" : {}", result);
     }
 }
-fn main() {
+pub fn main() {
     main1();
     // create at least as many workers as jobs or you will deadlock yourself
     let n_workers = 42;

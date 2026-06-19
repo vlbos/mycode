@@ -46,7 +46,7 @@ pub fn scc_queue() {
     assert_eq!(queue.pop().map(|e| **e), Some(1));
     assert!(queue.pop().is_none());
 }
-fn main() {
+pub fn main() {
     scc_queue();
     scc_hashindex();
     scc_hashmap();

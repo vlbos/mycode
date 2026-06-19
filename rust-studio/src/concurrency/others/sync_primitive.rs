@@ -102,7 +102,7 @@ pub fn awaitgroup_example() {
         wg.wait().await;
     });
 }
-fn main() {
+pub fn main() {
     async_lock_mutex();
     async_lock_rwlock();
     async_lock_barrier();

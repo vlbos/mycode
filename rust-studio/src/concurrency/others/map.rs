@@ -89,7 +89,7 @@ pub fn evmap_example() {
         assert!(r.join().is_ok());
     }
 }
-fn main() {
+pub fn main() {
     hashmap_example();
     flurry_hashmap();
     flurry_hashset();

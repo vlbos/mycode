@@ -12,6 +12,6 @@ pub fn scheduled_thread_pool() {
     let _ = handle;
     receiver.recv().unwrap();
 }
-fn main() {
+pub fn main() {
     scheduled_thread_pool();
 }

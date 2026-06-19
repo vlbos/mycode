@@ -2,7 +2,8 @@ use chrono;
 use std::sync::{Arc, Mutex};
 use std::thread;
 use timer;
-pub(crate) fn main() {
+
+pub fn main() {
     let timer = timer::Timer::new();
     // Number of times the callback has been called.
     let count = Arc::new(Mutex::new(0));

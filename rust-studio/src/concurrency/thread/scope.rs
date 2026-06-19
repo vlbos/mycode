@@ -38,7 +38,7 @@ pub fn start_scoped_threads() {
     a.push(4);
     assert_eq!(x, a.len());
 }
-fn main() {
+pub fn main() {
     // wrong_start_threads_without_scoped();
     start_scoped_threads();
 }

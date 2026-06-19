@@ -1,12 +1,12 @@
 // #[tokio::main]
-// async fn main() {
+// pub async  fn main() {
 //     tokio::spawn(async {
 //         // do work
 //     });
 //     // other_task.await;
 
 // }
-fn main() {
+pub fn main() {
     tokio_async();
 }
 pub fn tokio_async() {

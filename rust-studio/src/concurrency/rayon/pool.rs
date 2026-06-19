@@ -5,7 +5,7 @@ fn fib(n: usize) -> usize {
     let (a, b) = rayon::join(|| fib(n - 1), || fib(n - 2)); // runs inside of`pool
     return a + b;
 }
-fn main1() {
+pub fn main1() {
     let pool = rayon::ThreadPoolBuilder::new()
         .num_threads(4)
         .build()
@@ -14,7 +14,7 @@ fn main1() {
     println!("{}", n);
 }
 use std::sync::atomic::{AtomicUsize, Ordering};
-fn main2() {
+pub fn main2() {
     // 5
     let pool = rayon::ThreadPoolBuilder::new()
         .num_threads(5)
@@ -30,7 +30,7 @@ fn main2() {
     assert_eq!(count.into_inner(), 5);
 }
 
-fn main() {
+pub fn main() {
     main1();
     main2();
     rayon::ThreadPoolBuilder::new()

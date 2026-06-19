@@ -30,7 +30,7 @@ pub fn panic_caught_example() {
 
     println!("Exiting main!")
 }
-fn main() {
+pub fn main() {
     panic_example();
     panic_caught_example();
 }

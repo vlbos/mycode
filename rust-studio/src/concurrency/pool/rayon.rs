@@ -1,11 +1,11 @@
 use rayon::ThreadPoolBuilder;
 
-fn main1() {
+pub fn main1() {
     let _builder = ThreadPoolBuilder::new();
 
     let _builder = ThreadPoolBuilder::new().num_threads(4);
 
-    let builder = ThreadPoolBuilder::new().thread_name(|i| {
+    let _builder = ThreadPoolBuilder::new().thread_name(|i| {
         format!(
             "
 worker-{}",
@@ -59,7 +59,7 @@ pub fn rayon_threadpool2() {
     //Once we've returned,`pool_data` is no longer borrowed.
     drop(pool_data);
 }
-fn main() {
+pub fn main() {
     main1();
     rayon_threadpool();
     rayon_threadpool2();

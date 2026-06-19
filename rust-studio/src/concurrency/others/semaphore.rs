@@ -25,7 +25,7 @@ pub fn async_lock_semaphore() {
     drop(g2);
     assert!(s.try_acquire_arc().is_some());
 }
-fn main() {
+pub fn main() {
     async_lock_semaphore();
     async_weighted_semaphore_example();
 }

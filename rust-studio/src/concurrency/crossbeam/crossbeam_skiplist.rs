@@ -1,4 +1,5 @@
-fn main() {
+
+pub fn main() {
     use crossbeam_skiplist::SkipMap;
     use crossbeam_utils::thread::scope;
     let person_ages = SkipMap::new();

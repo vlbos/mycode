@@ -1,6 +1,6 @@
-use std::sync::{ONCE_INIT, Once};
+use std::sync::Once;
 static INIT: Once = Once::new();
-fn main1() {
+pub fn main1() {
     // call_once
     INIT.call_once(|| {
         println!("Initialization code executed!");
@@ -27,12 +27,12 @@ fn get_global_config() -> &'static str {
         (*ptr).as_ref().unwrap()
     }
 }
-fn main2() {
+pub fn main2() {
     println!("{}", get_global_config());
     println!("{}", get_global_config());
 }
 
-fn main() {
+pub fn main() {
     main1();
     main2();
     use once_cell::sync::OnceCell;

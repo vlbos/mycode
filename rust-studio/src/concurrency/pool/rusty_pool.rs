@@ -78,7 +78,7 @@ pub fn rusty_pool_example3() {
     pool.shutdown_join();
     assert_eq!(count.load(Ordering::SeqCst), 15);
 }
-fn main() {
+pub fn main() {
     rusty_pool_example();
     rusty_pool_example2();
     rusty_pool_example3();

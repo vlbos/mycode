@@ -17,6 +17,6 @@ pub fn singleflight_example() {
         }
     });
 }
-fn main() {
+pub fn main() {
     singleflight_example();
 }

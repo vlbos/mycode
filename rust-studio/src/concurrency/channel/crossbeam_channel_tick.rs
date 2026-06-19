@@ -1,6 +1,6 @@
 use crossbeam_channel::{select, tick};
 use std::time::Duration;
-pub(crate) fn main() {
+pub fn main() {
     let tick_interval = Duration::from_secs(1);
     let ticker = tick(tick_interval);
     for _ in 0..5 {

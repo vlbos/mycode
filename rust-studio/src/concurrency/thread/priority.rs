@@ -17,23 +17,23 @@ pub fn start_thread_with_priority() {
 use std::convert::TryInto;
 use thread_priority::*;
 
-fn main1() {
+pub fn main1() {
     start_thread_with_priority();
     assert!(
         set_current_thread_priority(ThreadPriority::Crossplatform(0.try_into().unwrap())).is_ok()
     );
 }
 
-use thread_priority::*;
+// use thread_priority::*;
 
-fn main2() {
+pub fn main2() {
     main1();
     // assert!(
     //     set_current_thread_priority(ThreadPriority::Os(WinAPIThreadPriority::Lowest.into()))
     //         .is_ok()
     // );
 }
-fn main3() {
+pub fn main3() {
     main2();
     use thread_priority::ThreadBuilderExt;
     use thread_priority::*;
@@ -70,8 +70,8 @@ pub fn thread_builder() {
     thread2.join().unwrap();
 }
 
-use thread_priority::*;
-fn main() {
+// use thread_priority::*;
+pub fn main() {
     main3();
     thread_builder();
     assert!(std::thread::current().get_priority().is_ok());

@@ -1,6 +1,6 @@
 use std::sync::{Arc, Condvar, Mutex};
 use std::thread;
-fn main() {
+pub fn main() {
     // Mutex Condvar
     let mutex = Arc::new(Mutex::new(false));
     let condvar = Arc::new(Condvar::new());

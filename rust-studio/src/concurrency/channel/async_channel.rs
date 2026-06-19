@@ -1,4 +1,5 @@
-fn main() {
+
+pub fn main() {
     let rt = tokio::runtime::Runtime::new().unwrap();
     let (tx, rx) = async_channel::unbounded();
     rt.block_on(async move {

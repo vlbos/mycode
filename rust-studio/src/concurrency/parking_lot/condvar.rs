@@ -1,4 +1,5 @@
-fn main() {
+
+pub fn main() {
     use parking_lot::{Condvar, Mutex};
     use std::sync::Arc;
     use std::thread;

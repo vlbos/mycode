@@ -1,6 +1,6 @@
 use std::borrow::Cow;
 // use dyn_clone::clone;
-fn main() {
+pub fn main() {
     let s1 = String::from("hello");
     let mut s2 = s1; // s1 s2
     s2.push_str(" world"); // s2 , s2

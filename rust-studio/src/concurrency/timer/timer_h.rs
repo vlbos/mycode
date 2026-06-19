@@ -12,7 +12,7 @@ where
 
     println!("done");
 }
-
+#[tokio::main]
 pub async fn main() {
     println!("---  Tokio ");
 

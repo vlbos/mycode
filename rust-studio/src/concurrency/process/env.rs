@@ -1,5 +1,5 @@
 use std::process::Command;
-fn main() {
+pub fn main() {
     let output = Command::new("printenv")
         .env("MY_VAR", "HelloRust")
         .output()

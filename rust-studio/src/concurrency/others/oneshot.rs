@@ -5,11 +5,11 @@ pub fn oneshot_example() {
         sender.send(1).unwrap();
     });
     let receiver = thread::spawn(move || {
-        #[cfg(feature = "std")]
-        {
-            let v = receiver.recv().unwrap();
-            println!("get value {}", v);
-        }
+        // #[cfg(feature = "std")]
+        // {
+        let v = receiver.try_recv().unwrap();
+        println!("get value {}", v);
+        // }
     });
     sender.join().unwrap();
     receiver.join().unwrap();
@@ -41,7 +41,7 @@ pub fn catty_example() {
     sender.join().unwrap();
     receiver.join().unwrap();
 }
-fn main() {
+pub fn main() {
     oneshot_example();
     async_oneshot_example();
     catty_example();

@@ -17,7 +17,7 @@ pub fn pipe() {
     println!("Output: {:?}", output);
 }
 
-fn main() {
+pub fn main() {
     let command = "echo \"Hello, Rust!\" | grep Rust";
     let output = Command::new("sh")
         .arg("-c")

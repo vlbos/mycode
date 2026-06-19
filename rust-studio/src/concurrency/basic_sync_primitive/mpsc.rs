@@ -1,4 +1,5 @@
-fn main() {
+
+pub fn main() {
     use std::sync::mpsc::channel;
     use std::thread;
     // Create a simple streaming channel

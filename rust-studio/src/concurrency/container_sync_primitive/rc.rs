@@ -2,11 +2,11 @@ use std::cell::RefCell;
 use std::cell::RefMut;
 use std::collections::HashMap;
 use std::rc::Rc;
-fn main() {
+pub fn main() {
     use std::rc::Rc;
     let data = Rc::new(42);
-    let reference1 = Rc::clone(&data);
-    let reference2 = Rc::clone(&data);
+    let _reference1 = Rc::clone(&data);
+    let _reference2 = Rc::clone(&data);
     // data 3
     // reference1 reference2
     rc_refcell_example();

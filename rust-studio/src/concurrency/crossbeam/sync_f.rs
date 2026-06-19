@@ -1,4 +1,5 @@
-pub(crate) fn main() {
+
+pub fn main() {
     use crossbeam_channel::unbounded;
     use std::thread;
     let (s, r) = unbounded();

@@ -26,7 +26,7 @@ pub fn current_thread() {
 
 use std::thread;
 use std::time::Duration;
-fn main() {
+pub fn main() {
     current_thread();
     let parked_thread = thread::Builder::new()
         .spawn(|| {

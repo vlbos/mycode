@@ -1,5 +1,5 @@
 use std::thread;
-fn main() {
+pub fn main() {
     let rt = tokio::runtime::Runtime::new().unwrap();
     let (tx, mut rx) = futures_channel::mpsc::channel(3);
     rt.block_on(async move {
@@ -11,7 +11,7 @@ fn main() {
             drop(tx);
         });
         // Unbounded receiver waiting for all senders to complete.
-        while let Ok(msg) = rx.try_next() {
+        while let Ok(msg) = rx.try_recv() {
             println!("{:?}", msg);
         }
         println!("futures_channel_mpsc_example completed");

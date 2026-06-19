@@ -1,6 +1,6 @@
 use std::sync::Arc;
 use std::thread;
-fn main1() {
+pub fn main1() {
     let data = Arc::new(46);
     // data
     let thread1 = {
@@ -24,7 +24,7 @@ fn main1() {
 
 use std::sync::Mutex;
 // use std::thread;
-fn main() {
+pub fn main() {
     main1();
     let counter = Arc::new(Mutex::new(0));
     let mut handles = vec![];

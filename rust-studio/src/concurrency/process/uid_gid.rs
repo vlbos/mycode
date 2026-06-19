@@ -1,6 +1,6 @@
 use std::os::unix::process::CommandExt;
 use std::process::Command;
-fn main() {
+pub fn main() {
     // UID GID
     let output = Command::new("whoami")
         .uid(1000) // UID
