@@ -40,7 +40,7 @@
 // F: FnMut(i64) -> Option<i64>,
 // pub fn fetch_max(&self, val: i64, order: Ordering) -> i64
 // pub fn fetch_min(&self, val: i64, order: Ordering) -> i64
-fn main() {
+fn relexed() {
     use std::sync::atomic::{AtomicI64, Ordering};
     let atomic_num = AtomicI64::new(0);
     let num = atomic_num.load(Ordering::Relaxed);
@@ -50,37 +50,37 @@ fn main() {
     atomic_num.store(1000, Ordering::Relaxed);
 }
 
-use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::{Arc,atomic::{AtomicBool, Ordering}};
 use std::thread;
 fn main() {
-    let atomic_bool = AtomicBool::new(false);
+    let atomic_bool = Arc::new(AtomicBool::new(false));
     // true
     let producer_thread = thread::spawn(move || {
         // Ordering::Relaxed
-        atomic_bool.store(true, Ordering::Relaxed);
+        atomic_bool.clone().store(true, Ordering::Relaxed);
     });
     let consumer_thread = thread::spawn(move || {
         // Ordering::Relaxed
-        let value = atomic_bool.load(Ordering::Relaxed);
+        let value = atomic_bool.clone().load(Ordering::Relaxed);
         println!("Received value: {}", value);
     });
     producer_thread.join().unwrap();
     consumer_thread.join().unwrap();
 }
 
-use std::sync::atomic::{AtomicBool, Ordering};
+// use std::sync::atomic::{AtomicBool, Ordering};
 
-use std::thread;
-fn main() {
-    let atomic_bool = AtomicBool::new(false);
+//use std::thread;
+fn release_example() {
+    let atomic_bool = Arc::new(AtomicBool::new(false));
     // true
     let producer_thread = thread::spawn(move || {
         // true
-        atomic_bool.store(true, Ordering::Release);
+        atomic_bool.clone().store(true, Ordering::Release);
     });
     let consumer_thread = thread::spawn(move || {
         // true
-        while !atomic_bool.load(Ordering::Acquire) {
+        while !atomic_bool.clone().load(Ordering::Acquire) {
             // Acquire
         }
         println!("Received value: true");
@@ -89,10 +89,10 @@ fn main() {
     consumer_thread.join().unwrap();
 }
 
-use std::sync::atomic::{AtomicBool, Ordering};
-use std::thread;
-fn main() {
-    let atomic_bool = AtomicBool::new(false);
+// use std::sync::atomic::{AtomicBool, Ordering};
+//use std::thread;
+fn main2() {
+    let atomic_bool = Arc::new(AtomicBool::new(false));
     // true
     let producer_thread = thread::spawn(move || {
         // true
@@ -109,10 +109,10 @@ fn main() {
     consumer_thread.join().unwrap();
 }
 
-use std::sync::atomic::{AtomicBool, Ordering};
-use std::thread;
-fn main() {
-    let atomic_bool = AtomicBool::new(false);
+// use std::sync::atomic::{AtomicBool, Ordering};
+//use std::thread;
+fn acq_rel_example() {
+    let atomic_bool =Arc::new( AtomicBool::new(false));
     // true
     let producer_thread = thread::spawn(move || {
         // true
@@ -130,10 +130,10 @@ fn main() {
     consumer_thread.join().unwrap();
 }
 
-use std::sync::atomic::{AtomicBool, Ordering};
-use std::thread;
-fn main() {
-    let atomic_bool = AtomicBool::new(false);
+// use std::sync::atomic::{AtomicBool, Ordering};
+//use std::thread;
+fn seqcst_example() {
+    let atomic_bool = Arc::new(AtomicBool::new(false));
     // true
     let producer_thread = thread::spawn(move || {
         // true

@@ -11,5 +11,5 @@ pub fn use_affinity() {
     );
 }
 fn main() {
-    use_affinity();
+    // use_affinity();
 }

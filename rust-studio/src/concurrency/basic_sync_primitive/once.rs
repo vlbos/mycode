@@ -13,7 +13,7 @@ fn main1() {
 
 // use std::sync::{ONCE_INIT, Once};
 static mut GLOBAL_CONFIG: Option<String> = None;
-static GLOBAL_CONFIG_INIT: Once = ONCE_INIT;
+static GLOBAL_CONFIG_INIT: Once = Once::new();
 fn init_global_config() {
     unsafe {
         GLOBAL_CONFIG = Some("Initialized global configuration".to_string());

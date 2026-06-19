@@ -1,5 +1,5 @@
 #![feature(thin_box)]
-use std::boxed::ThinBox;
+use std::r#box::ThinBox;
 fn main1() {
     let val: u8 = 5;
     let boxed: Box<u8> = Box::new(val);
