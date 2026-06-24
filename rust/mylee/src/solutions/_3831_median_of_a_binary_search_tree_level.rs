@@ -37,7 +37,30 @@ use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
     pub fn level_median(root: Option<Rc<RefCell<TreeNode>>>, level: i32) -> i32 {
-        0
+        let mut i = 0;
+        let mut q = std::collections::VecDeque::from([root]);
+        for _ in 0..level {
+            let n = q.len();
+            for _ in 0..n {
+                let mut node = q.pop_front().unwrap();
+                if node.as_ref().unwrap().borrow().left.is_some() {
+                    q.push_back(node.as_mut().unwrap().borrow_mut().left.take());
+                }
+                if node.as_ref().unwrap().borrow().right.is_some() {
+                    q.push_back(node.as_mut().unwrap().borrow_mut().right.take());
+                }
+            }
+        }
+        if q.is_empty() {
+            return -1;
+        }
+        if q.len() == 1 {
+            return q.front().unwrap().as_ref().unwrap().borrow().val;
+        }
+
+        let mut v: Vec<_> = q.iter().map(|v| v.as_ref().unwrap().borrow().val).collect();
+        v.sort_unstable();
+        v[v.len() / 2]
     }
 }
 
@@ -51,25 +74,16 @@ mod test {
 
     #[test]
     pub fn test_level_median_rec_1() {
-        assert_eq!(
-            Solution::level_median(tree![4,null,5,null,7], 2),
-            7
-        );
+        assert_eq!(Solution::level_median(tree![4, null, 5, null, 7], 2), 7);
     }
 
     #[test]
     pub fn test_level_median_rec_2() {
-        assert_eq!(
-            Solution::level_median(tree![6,3,8], 1),
-            8
-        );
+        assert_eq!(Solution::level_median(tree![6, 3, 8], 1), 8);
     }
 
     #[test]
     pub fn test_level_median_rec_3() {
-        assert_eq!(
-            Solution::level_median(tree![2,1], 2),
-            -1
-        );
+        assert_eq!(Solution::level_median(tree![2, 1], 2), -1);
     }
 }

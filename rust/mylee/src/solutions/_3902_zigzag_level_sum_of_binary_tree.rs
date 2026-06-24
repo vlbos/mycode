@@ -4,7 +4,8 @@
 // Traverse the tree level by level using a zigzag pattern:
 // * At **odd**-numbered levels (1-indexed), traverse nodes from **left to right**.
 // * At **even**-numbered levels, traverse nodes from **right to left**.
-// While traversing a level in the specified direction, process nodes in order and **stop** immediately before the first node that violates the condition:
+// While traversing a level in the specified direction,
+// process nodes in order and **stop** immediately before the first node that violates the condition:
 // * At **odd** levels: the node does not have a **left** child.
 // * At **even** levels: the node does not have a **right** child.
 // Only the nodes processed before this stopping condition contribute to the level sum.
@@ -41,15 +42,52 @@ use std::rc::Rc;
 
 impl Solution {
     pub fn zigzag_level_sum(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
-        vec![]
+        let mut ans = vec![];
+        let mut q = std::collections::VecDeque::from([root]);
+        let mut level = 1;
+        while !q.is_empty() {
+            let (mut sum, mut no_stop) = (0, true);
+            let len = q.len();
+            for _ in 0..len {
+                if level & 1 == 1 {
+                    let node = q.pop_front().unwrap();
+
+                    if node.as_ref().unwrap().borrow().left.is_some() {
+                        q.push_back(node.as_ref().unwrap().borrow().left.clone());
+                    } else {
+                        no_stop = false;
+                    }
+                    if node.as_ref().unwrap().borrow().right.is_some() {
+                        q.push_back(node.as_ref().unwrap().borrow().right.clone());
+                    }
+                    if no_stop {
+                        sum += node.as_ref().unwrap().borrow().val;
+                    }
+                } else {
+                    let node = q.pop_back().unwrap();
+
+                    if node.as_ref().unwrap().borrow().right.is_some() {
+                        q.push_front(node.as_ref().unwrap().borrow().right.clone());
+                    } else {
+                        no_stop = false;
+                    }
+                    if node.as_ref().unwrap().borrow().left.is_some() {
+                        q.push_front(node.as_ref().unwrap().borrow().left.clone());
+                    }
+                    if no_stop {
+                        sum += node.as_ref().unwrap().borrow().val;
+                    }
+                }
+            }
+            level += 1;
+            ans.push(sum);
+        }
+        ans
     }
 }
 
-
 #[allow(dead_code)]
 pub struct Solution;
-
-impl Solution {}
 
 #[cfg(test)]
 mod test {
@@ -57,14 +95,17 @@ mod test {
     use crate::tree;
     #[test]
     pub fn test_zigzag_level_sum_1() {
-        assert_eq!(Solution::zigzag_level_sum(tree![5,2,8,1,null,9,6]), vec![5,8,0]);
+        assert_eq!(
+            Solution::zigzag_level_sum(tree![5, 2, 8, 1, null, 9, 6]),
+            vec![5, 8, 0]
+        );
     }
 
     #[test]
     pub fn test_zigzag_level_sum_2() {
         assert_eq!(
-            Solution::zigzag_level_sum(tree![1,2,3,4,5,null,7]),
-            vec![1,5,0]
+            Solution::zigzag_level_sum(tree![1, 2, 3, 4, 5, null, 7]),
+            vec![1, 5, 0]
         );
     }
 }

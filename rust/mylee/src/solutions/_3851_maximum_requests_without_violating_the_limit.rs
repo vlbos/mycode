@@ -41,7 +41,29 @@
 pub struct Solution;
 
 impl Solution {
-    pub fn max_requests(mut requests: Vec<Vec<i32>>, k: i32, window: i32) -> i32 {0}
+    pub fn max_requests(mut requests: Vec<Vec<i32>>, k: i32, window: i32) -> i32 {
+        use std::collections::{HashMap, VecDeque};
+        let mut ans = requests.len() as i32;
+        let mut g = HashMap::new();
+        for req in requests {
+            g.entry(req[0]).or_insert(vec![]).push(req[1]);
+        }
+        for ts in g.values_mut() {
+            ts.sort_unstable();
+            let mut kept = VecDeque::new();
+            for t in ts {
+                while kept.front().is_some_and(|&s| *t - s > window) {
+                    kept.pop_front();
+                }
+                if kept.len() < k as usize {
+                    kept.push_back(*t);
+                } else {
+                    ans -= 1;
+                }
+            }
+        }
+        ans
+    }
 }
 
 #[cfg(test)]
@@ -52,21 +74,21 @@ mod test {
     pub fn test_max_requests_1() {
         assert_eq!(
             4,
-            Solution::max_requests(lc_matrix![[1,1],[2,1],[1,7],[2,8]], 1,4),
+            Solution::max_requests(lc_matrix![[1, 1], [2, 1], [1, 7], [2, 8]], 1, 4),
         );
     }
     #[test]
     pub fn test_max_requests_2() {
         assert_eq!(
             2,
-            Solution::max_requests(lc_matrix![[1,2],[1,5],[1,2],[1,6]], 2,5)
+            Solution::max_requests(lc_matrix![[1, 2], [1, 5], [1, 2], [1, 6]], 2, 5)
         );
     }
     #[test]
     pub fn test_max_requests_3() {
         assert_eq!(
             3,
-            Solution::max_requests(lc_matrix![[1,1],[2,5],[1,2],[3,9]], 1,1)
+            Solution::max_requests(lc_matrix![[1, 1], [2, 5], [1, 2], [3, 9]], 1, 1)
         );
     }
 }

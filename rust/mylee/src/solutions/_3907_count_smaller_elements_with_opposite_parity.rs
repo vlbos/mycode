@@ -20,7 +20,8 @@
 // **Input:** nums = [4,4,1]
 // **Output:** [1,1,0]
 // **Explanation:**​​​​​​​
-// For `i = 0` and `i = 1`, the element `nums[2] = 1` is smaller and has different parity. Thus, the `answer = [1, 1, 0]`.
+// For `i = 0` and `i = 1`, the element `nums[2] = 1` is smaller and has different parity.
+// Thus, the `answer = [1, 1, 0]`.
 // **Example 3:**
 // **Input:** nums = [7]
 // **Output:** [0]
@@ -37,7 +38,44 @@
 pub struct Solution {}
 impl Solution {
     pub fn count_smaller_opposite_parity(nums: Vec<i32>) -> Vec<i32> {
-        vec![]
+        // let mut q=vec![vec![];2];
+        // let mut ans=vec![];
+        // for &x in nums.iter().rev(){
+        //     let p=(x&1) as usize;
+        //     let i=q[1-p].partition_point(|&v|v<x);
+        //     ans.push(i as i32);
+        //     let i=q[p].partition_point(|&v|v<x);
+        //     q[p].insert(i,x);
+        // }
+        // ans.reverse();
+        // ans
+        let update = |mut x: i32, delta: i32, c: &mut Vec<i32>| {
+            let n = c.len() as i32;
+            while x < n {
+                c[x as usize] += delta;
+                x += x & -x;
+            }
+        };
+        let query = |mut x: i32, c: &[i32]| {
+            let mut s = 0;
+            while x > 0 {
+                s += c[x as usize];
+                x -= x & -x;
+            }
+            s
+        };
+        let mut sorted = nums.clone();
+        sorted.sort_unstable();
+        sorted.dedup();
+        let m = sorted.len();
+        let mut bits = vec![vec![0; m + 1]; 2];
+        let mut ans = vec![0; nums.len()];
+        for (i, &x) in nums.iter().enumerate().rev() {
+            let y = sorted.partition_point(|&v| v < x) as i32;
+            ans[i] = query(y, &bits[(x & 1 ^ 1) as usize]);
+            update(y + 1, 1, &mut bits[(x & 1) as usize]);
+        }
+        ans
     }
 }
 
@@ -48,22 +86,19 @@ mod test {
     #[test]
     pub fn test_count_smaller_opposite_parity_1() {
         assert_eq!(
-            vec![2,1,2,0,0],
-            Solution::count_smaller_opposite_parity(vec![5,2,4,1,3])
+            vec![2, 1, 2, 0, 0],
+            Solution::count_smaller_opposite_parity(vec![5, 2, 4, 1, 3])
         );
     }
     #[test]
     pub fn test_count_smaller_opposite_parity_2() {
         assert_eq!(
-            vec![1,1,0],
-            Solution::count_smaller_opposite_parity(vec![4,4,1])
+            vec![1, 1, 0],
+            Solution::count_smaller_opposite_parity(vec![4, 4, 1])
         );
     }
     #[test]
     pub fn test_count_smaller_opposite_parity_3() {
-        assert_eq!(
-            vec![0],
-            Solution::count_smaller_opposite_parity(vec![7])
-        );
+        assert_eq!(vec![0], Solution::count_smaller_opposite_parity(vec![7]));
     }
 }

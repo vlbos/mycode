@@ -40,7 +40,9 @@
 pub struct Solution;
 
 impl Solution {
-    pub fn min_operations(mut nums: Vec<i32>, k: i32) -> i64 {0}
+    pub fn min_operations(mut nums: Vec<i32>, k: i32) -> i64 {
+        0
+    }
 }
 
 #[cfg(test)]
@@ -49,14 +51,14 @@ mod test {
 
     #[test]
     pub fn test_min_operations_1() {
-        assert_eq!(2, Solution::min_operations(vec![1,4,2,8], 3));
+        assert_eq!(2, Solution::min_operations(vec![1, 4, 2, 8], 3));
     }
     #[test]
     pub fn test_min_operations_2() {
-        assert_eq!(1, Solution::min_operations(vec![1,1,1], 3));
+        assert_eq!(1, Solution::min_operations(vec![1, 1, 1], 3));
     }
     #[test]
     pub fn test_min_operations_3() {
-        assert_eq!(0, Solution::min_operations(vec![6,7,8], 2));
+        assert_eq!(0, Solution::min_operations(vec![6, 7, 8], 2));
     }
 }

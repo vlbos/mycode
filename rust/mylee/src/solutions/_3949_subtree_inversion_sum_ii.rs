@@ -69,8 +69,8 @@ mod test {
         assert_eq!(
             23,
             Solution::subtree_inversion_sum(
-                lc_matrix![[0,1],[0,2],[0,3],[1,4],[1,5]],
-                vec![1,0,-10,3,4,5],
+                lc_matrix![[0, 1], [0, 2], [0, 3], [1, 4], [1, 5]],
+                vec![1, 0, -10, 3, 4, 5],
                 2
             )
         );
@@ -79,33 +79,21 @@ mod test {
     pub fn test_subtree_inversion_sum_2() {
         assert_eq!(
             25,
-            Solution::subtree_inversion_sum(
-                lc_matrix![[0,1],[1,2]],
-                vec![5,-10,-10],
-                1
-            )
+            Solution::subtree_inversion_sum(lc_matrix![[0, 1], [1, 2]], vec![5, -10, -10], 1)
         );
     }
- #[test]
+    #[test]
     pub fn test_subtree_inversion_sum_3() {
         assert_eq!(
             12,
-            Solution::subtree_inversion_sum(
-                lc_matrix![[0,1],[0,2]],
-                vec![1,-5,-6],
-                2
-            )
+            Solution::subtree_inversion_sum(lc_matrix![[0, 1], [0, 2]], vec![1, -5, -6], 2)
         );
     }
     #[test]
     pub fn test_subtree_inversion_sum_4() {
         assert_eq!(
             10,
-            Solution::subtree_inversion_sum(
-                lc_matrix![[0,1],[0,2]],
-                vec![1,-5,-6],
-                3
-            )
+            Solution::subtree_inversion_sum(lc_matrix![[0, 1], [0, 2]], vec![1, -5, -6], 3)
         );
     }
 }

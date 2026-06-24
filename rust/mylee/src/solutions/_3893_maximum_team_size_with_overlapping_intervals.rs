@@ -3,7 +3,8 @@
 // You are given two integer arrays `startTime` and `endTime` of length `n`.
 // * `startTime[i]` represents the start time of the `ith` employee.
 // * `endTime[i]` represents the end time of the `ith` employee.
-// Two employees `i` and `j` can interact if their time intervals **overlap**. Two intervals are considered overlapping if they share **at least one** common time point.
+// Two employees `i` and `j` can interact if their time intervals **overlap**.
+//  Two intervals are considered overlapping if they share **at least one** common time point.
 // A team is **valid** if there exists **at least one** employee in the team who can interact with every other member of the team.
 // Return an integer denoting the **maximum** possible size of such a team.
 
@@ -39,8 +40,19 @@
 #[allow(dead_code)]
 pub struct Solution;
 impl Solution {
-    pub fn maximum_team_size(start_time: Vec<i32>, end_time: Vec<i32>) -> i32 {
-        0
+    pub fn maximum_team_size(mut start_time: Vec<i32>, mut end_time: Vec<i32>) -> i32 {
+        let intervals: Vec<_> = start_time.iter().cloned().zip(end_time.clone()).collect();
+        start_time.sort_unstable();
+        end_time.sort_unstable();
+        let mut ans = 0;
+        for (l, r) in intervals {
+            let (i, j) = (
+                end_time.partition_point(|&v| v <= l - 1) as i32,
+                start_time.partition_point(|&v| v <= r) as i32,
+            );
+            ans = ans.max(j - i);
+        }
+        ans
     }
 }
 
@@ -50,24 +62,14 @@ mod test {
 
     #[test]
     pub fn test_maximum_team_size_1() {
-        assert_eq!(
-            3,
-            Solution::maximum_team_size(vec![1,2,3], vec![4,5,6])
-        );
+        assert_eq!(3, Solution::maximum_team_size(vec![1, 2, 3], vec![4, 5, 6]));
     }
     #[test]
     pub fn test_maximum_team_size_2() {
-        assert_eq!(
-            1,
-            Solution::maximum_team_size(vec![2,5,8], vec![3,7,9])
-        );
+        assert_eq!(1, Solution::maximum_team_size(vec![2, 5, 8], vec![3, 7, 9]));
     }
     #[test]
     pub fn test_maximum_team_size_3() {
-        assert_eq!(
-            3,
-            Solution::maximum_team_size(vec![3,4,6], vec![8,5,7])
-        );
+        assert_eq!(3, Solution::maximum_team_size(vec![3, 4, 6], vec![8, 5, 7]));
     }
-
 }

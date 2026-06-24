@@ -31,7 +31,14 @@
 pub struct Solution {}
 
 impl Solution {
-    pub fn reverse_subarrays(nums: Vec<i32>, k: i32) -> Vec<i32> {vec![]}
+    pub fn reverse_subarrays(mut nums: Vec<i32>, k: i32) -> Vec<i32> {
+        let (n, k) = (nums.len(), k as usize);
+        let m = n / k;
+        for i in (0..=n - m).step_by(m) {
+            nums[i..i + m].reverse();
+        }
+        nums
+    }
 }
 
 #[cfg(test)]
@@ -41,15 +48,15 @@ mod test {
     #[test]
     pub fn test_reverse_subarrays_1() {
         assert_eq!(
-            vec![2,1,3,4,6,5],
-            Solution::reverse_subarrays(vec![1,2,4,3,5,6], 3)
+            vec![2, 1, 3, 4, 6, 5],
+            Solution::reverse_subarrays(vec![1, 2, 4, 3, 5, 6], 3)
         );
     }
     #[test]
     pub fn test_reverse_subarrays_2() {
         assert_eq!(
-            vec![2,4,4,5],
-            Solution::reverse_subarrays(vec![5,4,4,2], 1)
+            vec![2, 4, 4, 5],
+            Solution::reverse_subarrays(vec![5, 4, 4, 2], 1)
         );
     }
 }

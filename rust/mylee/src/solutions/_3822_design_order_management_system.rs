@@ -56,6 +56,7 @@
 
 use std::collections::HashMap;
 
+#[warn(dead_code)]
 struct OrderManagementSystem {
     orders: HashMap<i32, (String, i32)>,
     t: HashMap<(String, i32), Vec<i32>>,

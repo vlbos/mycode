@@ -4,7 +4,9 @@
 // |q|w|e|r|t|y|u|i|o|p|
 // |a|s|d|f|g|h|j|k|l| |
 // |z|x|c|v|b|n|m| | | |
-// You are given a string `s` that consists of lowercase English letters only. Return an integer denoting the total **distance** to type `s` using only one finger. Your finger starts on the key `'a'`.
+// You are given a string `s` that consists of lowercase English letters only.
+// Return an integer denoting the total **distance** to type `s` using only one finger.
+// Your finger starts on the key `'a'`.
 // The **distance** between two keys at `(r1, c1)` and `(r2, c2)` is `|r1 - r2| + |c1 - c2|`.
 
 // **Example 1:**
@@ -34,15 +36,24 @@
 
 #[allow(dead_code)]
 pub struct Solution;
-// @lc code=start
-
-// use std::mem::swap;
 
 impl Solution {
-    pub fn total_distance(s: String) -> i32 {0}
+    pub fn total_distance(s: String) -> i32 {
+        const ROWS: [i32; 26] = [
+            1, 2, 2, 1, 0, 1, 1, 1, 0, 1, 1, 1, 2, 2, 0, 0, 0, 0, 1, 0, 0, 2, 0, 2, 0, 2,
+        ];
+        const COLS: [i32; 26] = [
+            0, 4, 2, 2, 2, 3, 4, 5, 7, 6, 7, 8, 6, 5, 8, 9, 0, 3, 1, 4, 6, 3, 1, 1, 5, 0,
+        ];
+        let (mut i, mut j, mut ans) = (1, 0, 0);
+        for b in s.bytes() {
+            let k = (b - b'a') as usize;
+            ans += (i - ROWS[k]).abs() + (j - COLS[k]).abs();
+            (i, j) = (ROWS[k], COLS[k]);
+        }
+        ans
+    }
 }
-
-// @lc code=end
 
 #[cfg(test)]
 mod tests {

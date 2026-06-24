@@ -42,10 +42,64 @@ use std::rc::Rc;
 
 impl Solution {
     pub fn max_sum(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-        0
+        use std::collections::{HashMap, HashSet};
+        fn dfs(
+            root: &Option<Rc<RefCell<TreeNode>>>,
+            p: &Option<Rc<RefCell<TreeNode>>>,
+            g: &mut HashMap<*const RefCell<TreeNode>, Vec<Option<Rc<RefCell<TreeNode>>>>>,
+        ) {
+            if root.is_none() {
+                return;
+            }
+            let mut v = g
+                .entry(Rc::as_ptr(root.as_ref().unwrap()))
+                .or_insert(vec![]);
+            if p.is_some() {
+                v.push(p.clone());
+            }
+            if root.as_ref().unwrap().borrow().left.is_some() {
+                v.push(root.as_ref().unwrap().borrow().left.clone());
+            }
+            if root.as_ref().unwrap().borrow().right.is_some() {
+                v.push(root.as_ref().unwrap().borrow().right.clone());
+            }
+
+            dfs(&root.as_ref().unwrap().borrow().left, root, g);
+            dfs(&root.as_ref().unwrap().borrow().right, root, g);
+        }
+        fn dfs2(
+            root: &Option<Rc<RefCell<TreeNode>>>,
+            g: &HashMap<*const RefCell<TreeNode>, Vec<Option<Rc<RefCell<TreeNode>>>>>,
+            vis: &mut HashSet<i32>,
+        ) -> i32 {
+            if root.is_none() || vis.contains(&root.as_ref().unwrap().borrow().val) {
+                return 0;
+            }
+            vis.insert(root.as_ref().unwrap().borrow().val);
+            let mut ans = root.as_ref().unwrap().borrow().val;
+            let mut best = 0;
+            for nxt in g
+                .get(&Rc::as_ptr(root.as_ref().unwrap()))
+                .unwrap_or(&vec![])
+            {
+                best = best.max(dfs2(nxt, g, vis));
+            }
+            vis.remove(&root.as_ref().unwrap().borrow().val);
+            ans += best;
+            ans
+        }
+        let mut g = HashMap::new();
+        dfs(&root, &None, &mut g);
+        let mut vis = HashSet::new();
+        let mut ans = i32::MIN;
+        for node in g.values().flatten() {
+            ans = ans.max(dfs2(node, &g, &mut vis));
+            vis.clear();
+        }
+        ans
     }
 }
-// @lc code=end
+
 #[allow(dead_code)]
 pub struct Solution;
 
@@ -56,14 +110,14 @@ mod test {
 
     #[test]
     pub fn test_max_sum_1() {
-        assert_eq!(Solution::max_sum(tree![2,2,1]), 3);
+        assert_eq!(Solution::max_sum(tree![2, 2, 1]), 3);
     }
- #[test]
+    #[test]
     pub fn test_max_sum_2() {
-        assert_eq!(Solution::max_sum(tree![1,-2,5,null,null,3,5]), 9);
+        assert_eq!(Solution::max_sum(tree![1, -2, 5, null, null, 3, 5]), 9);
     }
- #[test]
+    #[test]
     pub fn test_max_sum_3() {
-        assert_eq!(Solution::max_sum(tree![4,6,6,null,null,null,9]), 19);
+        assert_eq!(Solution::max_sum(tree![4, 6, 6, null, null, null, 9]), 19);
     }
 }

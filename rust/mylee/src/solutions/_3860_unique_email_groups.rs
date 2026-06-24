@@ -52,7 +52,26 @@
 
 pub struct Solution;
 impl Solution {
-    pub fn unique_email_groups(emails: Vec<String>) -> i32 {0}
+    pub fn unique_email_groups(emails: Vec<String>) -> i32 {
+        let mut cnt = std::collections::HashSet::new();
+        for email in emails {
+            let Some((local_names, domain_names)) = email.split_once('@') else {
+                continue;
+            };
+            let local_names = (if let Some(i) = local_names.find("+") {
+                &local_names[..i]
+            } else {
+                local_names
+            })
+            .replace(".", "")
+            .to_ascii_lowercase();
+            cnt.insert(format!(
+                "{local_names}{}",
+                domain_names.to_ascii_lowercase()
+            ));
+        }
+        cnt.len() as _
+    }
 }
 
 #[cfg(test)]
@@ -63,18 +82,34 @@ mod test {
     pub fn test_unique_email_groups_1() {
         assert_eq!(
             2,
-            Solution::unique_email_groups(lc_vec_s!["test.email+alex@leetcode.com", "test.e.mail+bob.cathy@leetcode.com", "testemail+david@lee.tcode.com"])
+            Solution::unique_email_groups(lc_vec_s![
+                "test.email+alex@leetcode.com",
+                "test.e.mail+bob.cathy@leetcode.com",
+                "testemail+david@lee.tcode.com"
+            ])
         );
     }
     #[test]
     pub fn test_unique_email_groups_2() {
         assert_eq!(
             2,
-            Solution::unique_email_groups(lc_vec_s!["A@B.com", "a@b.com", "ab+xy@b.com", "a.b@b.com"])
+            Solution::unique_email_groups(lc_vec_s![
+                "A@B.com",
+                "a@b.com",
+                "ab+xy@b.com",
+                "a.b@b.com"
+            ])
         );
     }
     #[test]
     pub fn test_unique_email_groups_3() {
-        assert_eq!(1, Solution::unique_email_groups(lc_vec_s!["a.b+c.d+e@DoMain.com", "ab+xyz@domain.com", "ab@domain.com"]));
+        assert_eq!(
+            1,
+            Solution::unique_email_groups(lc_vec_s![
+                "a.b+c.d+e@DoMain.com",
+                "ab+xyz@domain.com",
+                "ab@domain.com"
+            ])
+        );
     }
 }

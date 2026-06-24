@@ -49,5 +49,4 @@ mod test {
     pub fn test_min_cost_2() {
         assert_eq!(6, Solution::min_cost(4));
     }
-   
 }

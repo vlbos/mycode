@@ -42,7 +42,28 @@
 pub struct Solution;
 
 impl Solution {
-    pub fn count_the_num_of_k_free_subsets(mut nums: Vec<i32>, k: i32) -> i64 {0}
+    pub fn count_the_num_of_k_free_subsets(mut nums: Vec<i32>, k: i32) -> i64 {
+        let (n, k) = (nums.len(), k as usize);
+        let mut peak_indices = vec![];
+        for (i, &x) in nums.iter().enumerate().skip(1).take(n - 2) {
+            if (i == 0 || nums[i - 1] < x) && (i + 1 == n || x > nums[i + 1]) {
+                peak_indices.push(i);
+            }
+        }
+        let mut ans = 0;
+        for (j, &p) in peak_indices.iter().enumerate() {
+            let mut left_min = p.saturating_sub(k);
+            if j > 0 {
+                left_min = left_min.max(peak_indices[j - 1] + 1);
+            }
+            let mut right_max = (p + k).min(n - 1);
+            if j + 1 < peak_indices.len() {
+                right_max = right_max.min(peak_indices[j + 1] - 1);
+            }
+            ans += (p - left_min + 1) * (right_max - p + 1);
+        }
+        ans as _
+    }
 }
 
 #[cfg(test)]
@@ -53,21 +74,21 @@ mod test {
     pub fn test_count_the_num_of_k_free_subsets_1() {
         assert_eq!(
             4,
-            Solution::count_the_num_of_k_free_subsets(vec![1,3,2], 1)
+            Solution::count_the_num_of_k_free_subsets(vec![1, 3, 2], 1)
         );
     }
     #[test]
     pub fn test_count_the_num_of_k_free_subsets_2() {
         assert_eq!(
             0,
-            Solution::count_the_num_of_k_free_subsets(vec![7,8,9], 2)
+            Solution::count_the_num_of_k_free_subsets(vec![7, 8, 9], 2)
         );
     }
     #[test]
     pub fn test_count_the_num_of_k_free_subsets_3() {
         assert_eq!(
             6,
-            Solution::count_the_num_of_k_free_subsets(vec![4,3,5,1], 2)
+            Solution::count_the_num_of_k_free_subsets(vec![4, 3, 5, 1], 2)
         );
     }
 }

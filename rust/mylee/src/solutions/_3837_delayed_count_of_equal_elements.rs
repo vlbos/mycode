@@ -1,4 +1,4 @@
-// 3837. Delayed Count of Equal Elements 🔒
+// 3837. Delayed Count of Equal Elements
 // ## Description
 // You are given an integer array `nums` of length `n` and an integer `k`.
 // For each index `i`, define the **delayed count** as the number of indices `j` such that:
@@ -37,10 +37,25 @@
 // vector<int> delayed_count(vector<int>& nums, int k) {
 
 #[allow(dead_code)]
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
-    pub fn delayed_count(nums: Vec<i32>, k: i32) -> Vec<i32> {vec![]}
+    pub fn delayed_count(nums: Vec<i32>, k: i32) -> Vec<i32> {
+        let k = k as usize;
+        let mut cnt = std::collections::HashMap::new();
+        for (i, &x) in nums.iter().enumerate() {
+            cnt.entry(x).or_insert(vec![]).push(i);
+        }
+        let mut ans = vec![0; nums.len()];
+        for (i, &x) in nums.iter().enumerate() {
+            let v = cnt.get(&x).unwrap();
+            let j = v.partition_point(|&y| y <= i + k);
+            if j < v.len() {
+                ans[i] = (v.len() - j) as i32;
+            }
+        }
+        ans
+    }
 }
 
 #[cfg(test)]
@@ -50,15 +65,15 @@ mod test {
     #[test]
     pub fn test_delayed_count_1() {
         assert_eq!(
-            vec![2,0,0,0],
-            Solution::delayed_count(vec![1,2,1,1], 1)
+            vec![2, 0, 0, 0],
+            Solution::delayed_count(vec![1, 2, 1, 1], 1)
         );
     }
     #[test]
     pub fn test_delayed_count_2() {
         assert_eq!(
-            vec![1,1,0,0],
-            Solution::delayed_count(vec![3,1,3,1], 0)
+            vec![1, 1, 0, 0],
+            Solution::delayed_count(vec![3, 1, 3, 1], 0)
         );
     }
 }

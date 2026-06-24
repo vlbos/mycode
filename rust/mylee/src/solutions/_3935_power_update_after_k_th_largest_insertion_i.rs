@@ -62,8 +62,8 @@ mod test {
     #[test]
     pub fn test_power_update_2() {
         assert_eq!(
-            vec![1296,220296870],
-            Solution::power_update(vec![7,5], 6, lc_matrix![[4,3],[7,2]])
+            vec![1296, 220296870],
+            Solution::power_update(vec![7, 5], 6, lc_matrix![[4, 3], [7, 2]])
         );
     }
 }
