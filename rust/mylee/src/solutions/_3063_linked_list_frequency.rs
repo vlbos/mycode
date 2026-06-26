@@ -101,17 +101,18 @@ mod test {
     use crate::linked;
     #[test]
     pub fn test_frequencies_of_elements_1() {
-        assert_eq!(
-            linked![3, 2, 1],
-            Solution::frequencies_of_elements(linked![1, 1, 1, 2, 2, 3])
-        );
+        let l=Solution::frequencies_of_elements(linked![1, 1, 1, 2, 2, 3]);
+        assert!(
+            linked![3, 2, 1]==l||linked![1, 2, 3]==l
+         );
     }
 
     #[test]
     pub fn test_frequencies_of_elements_2() {
-        assert_eq!(
-            linked![2, 3],
-            Solution::frequencies_of_elements(linked![1, 1, 2, 2, 2])
+        let l=Solution::frequencies_of_elements(linked![1, 1, 2, 2, 2]);
+        assert!(
+            linked![2, 3]==l||linked![3,2]==l,
+
         );
     }
     #[test]

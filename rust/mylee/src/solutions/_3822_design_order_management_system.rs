@@ -131,9 +131,11 @@ mod test {
         order_management_system.add_order(1, "buy".to_owned(), 1);
         order_management_system.add_order(2, "buy".to_owned(), 1);
         order_management_system.add_order(3, "sell".to_owned(), 2);
+        let mut v=order_management_system.get_orders_at_price("buy".to_owned(), 1);
+        v.sort_unstable();
         assert_eq!(
-            vec![2, 1],
-            order_management_system.get_orders_at_price("buy".to_owned(), 1)
+            vec![1,2],
+            v
         );
         order_management_system.modify_order(1, 3);
         order_management_system.modify_order(2, 1);

@@ -77,7 +77,7 @@ impl Solution {
         let (mut left, mut right) = (0, mx);
         while left <= right {
             let mid = left + (right - left) / 2;
-            if f(mid).1 <= k  as i64{
+            if f(mid).1 <= k as i64 {
                 right = mid - 1;
             } else {
                 left = mid + 1;

@@ -1,14 +1,12 @@
 // [3802\. Number of Ways to Paint Sheets 🔒](https://leetcode.com/problems/number-of-ways-to-paint-sheets)
-// ========================================================================================================
-
-// [![](https://img.shields.io/badge/Difficulty-Hard-4051B5?style=flat-square)](https://img.shields.io/badge/Difficulty-Hard-4051B5?style=flat-square)
 
 // Description
 // -----------
 
 // You are given an integer `n` representing the number of sheets.
 
-// You are also given an integer array `limit` of size `m`, where `limit[i]` is the **maximum** number of sheets that can be painted using color `i`.
+// You are also given an integer array `limit` of size `m`,
+// where `limit[i]` is the **maximum** number of sheets that can be painted using color `i`.
 
 // You must paint **all** `n` sheets under the following conditions:
 
@@ -16,7 +14,8 @@
 // *   Each color must cover a **single contiguous** segment of sheets.
 // *   The number of sheets painted with color `i` cannot exceed `limit[i]`.
 
-// Return an integer denoting the number of **distinct** ways to paint all sheets. Since the answer may be large, return it **modulo** `109 + 7`.
+// Return an integer denoting the number of **distinct** ways to paint all sheets.
+// Since the answer may be large, return it **modulo** `109 + 7`.
 
 // **Note:** Two ways differ if **at least** one sheet is painted with a different color.
 
@@ -28,7 +27,9 @@
 
 // **Explanation:**​​​​​​​
 
-// For each ordered pair `(i, j)`, where color `i` is used for the first segment and color `j` for the second segment (`i != j`), a split of `x` and `4 - x` is valid if `1 <= x <= limit[i]` and `1 <= 4 - x <= limit[j]`.
+// For each ordered pair `(i, j)`,
+// where color `i` is used for the first segment and color `j` for the second segment (`i != j`),
+//  a split of `x` and `4 - x` is valid if `1 <= x <= limit[i]` and `1 <= 4 - x <= limit[j]`.
 
 // Valid pairs and counts are:
 
@@ -47,7 +48,9 @@
 
 // **Explanation:**
 
-// For each ordered pair `(i, j)`, where color `i` is used for the first segment and color `j` for the second segment (`i != j`), a split of `x` and `3 - x` is valid if `1 <= x <= limit[i]` and `1 <= 3 - x <= limit[j]`.
+// For each ordered pair `(i, j)`,
+// where color `i` is used for the first segment and color `j` for the second segment (`i != j`),
+//  a split of `x` and `3 - x` is valid if `1 <= x <= limit[i]` and `1 <= 3 - x <= limit[j]`.
 
 // Valid pairs and counts are:
 
@@ -64,7 +67,9 @@
 
 // **Explanation:**
 
-// For each ordered pair `(i, j)`, where color `i` is used for the first segment and color `j` for the second segment (`i != j`), a split of `x` and `3 - x` is valid if `1 <= x <= limit[i]` and `1 <= 3 - x <= limit[j]`.
+// For each ordered pair `(i, j)`,
+//  where color `i` is used for the first segment and color `j` for the second segment (`i != j`),
+// a split of `x` and `3 - x` is valid if `1 <= x <= limit[i]` and `1 <= 3 - x <= limit[j]`.
 
 // Valid pairs and counts are:
 
@@ -85,8 +90,30 @@
 pub struct Solution;
 
 impl Solution {
-    pub fn number_of_ways(n: i32, limit: Vec<i32>) -> i32 {
-        0
+    pub fn number_of_ways(n: i32, mut limit: Vec<i32>) -> i32 {
+        let m = limit.len();
+        let n1 = n - 1;
+        limit.sort_unstable();
+        let mut suffix = vec![0; limit.len() + 1];
+        for (i, x) in limit.iter_mut().enumerate().rev() {
+            *x = n1.min(*x);
+            suffix[i] = suffix[i + 1] + *x as i64;
+        }
+        let (mut ans, mut j) = (0, 0);
+        for (i, &x) in limit.iter().enumerate().rev() {
+            while j < m {
+                if x + limit[j] >= n {
+                    break;
+                }
+                j += 1;
+            }
+            let mut cnt = (x - n + 1) as i64 * (m - j) as i64 + suffix[j];
+            if i >= j {
+                cnt -= (x + x - n + 1) as i64;
+            }
+            ans = (ans + cnt) % 1_000_000_007;
+        }
+        ans as _
     }
 }
 

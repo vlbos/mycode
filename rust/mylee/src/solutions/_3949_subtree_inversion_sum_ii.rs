@@ -1,6 +1,8 @@
 // 3949. Subtree Inversion Sum II
 // ## Description
-// You are given an undirected tree rooted at node 0, with `n` nodes numbered from 0 to `n - 1`. The tree is represented by a 2D integer array `edges` of length `n - 1`, where `edges[i] = [ui, vi]` indicates an edge between nodes `ui` and `vi`.
+// You are given an undirected tree rooted at node 0, with `n` nodes numbered from 0 to `n - 1`.
+//  The tree is represented by a 2D integer array `edges` of length `n - 1`,
+// where `edges[i] = [ui, vi]` indicates an edge between nodes `ui` and `vi`.
 // You are also given an integer array `nums` of length `n`, where `nums[i]` represents the value at node `i`, and an integer `k`.
 // You may perform **inversion operations** on a subset of nodes subject to the following rules:
 // * **Subtree Inversion Operation:**
@@ -56,7 +58,47 @@ pub struct Solution;
 
 impl Solution {
     pub fn subtree_inversion_sum(edges: Vec<Vec<i32>>, nums: Vec<i32>, k: i32) -> i32 {
-        0
+        let n = nums.len();
+        let mut g = vec![vec![]; n];
+        for e in edges {
+            let (u, v) = (e[0] as usize, e[1] as usize);
+            g[u].push(v);
+            g[v].push(u);
+        }
+        fn dfs(u: usize, p: usize, nums: &[i32], k: usize, g: &Vec<Vec<usize>>) -> Vec<Vec<i32>> {
+            let mut dp = vec![vec![nums[u]; k]; 2];
+            for &v in &g[u] {
+                if v == p {
+                    continue;
+                }
+                let new_dp = dfs(v, u, nums, k, g);
+                for j in 0..2 {
+                    for i in 0..k / 2 {
+                        dp[j][i] =
+                            (dp[j][i] + new_dp[j][k - 2 - i]).max(new_dp[j][i] + dp[j][k - 2 - i]);
+                    }
+                }
+                for j in 0..2 {
+                    for i in k / 2..k {
+                        dp[j][i] += new_dp[j][i];
+                    }
+                }
+                for j in 0..2 {
+                    for i in (0..k - 1).rev() {
+                        dp[j][i] = dp[j][i].max(dp[j][i + 1]);
+                    }
+                }
+            }
+            let v = dp[0][0].max(-dp[1][k - 1]);
+            dp[0].insert(0, v);
+            let v = dp[1][0].min(-dp[0][k - 1]);
+            dp[1].insert(0, v);
+            dp[0].pop();
+            dp[1].pop();
+            dp
+        }
+        let dp = dfs(0, n, &nums, k as usize, &g);
+        dp[0][0]
     }
 }
 

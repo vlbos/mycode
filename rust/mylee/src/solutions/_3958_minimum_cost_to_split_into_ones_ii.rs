@@ -33,8 +33,9 @@
 pub struct Solution;
 
 impl Solution {
-    pub fn min_cost(n: i64) -> i64 {
-        0
+    pub fn min_cost(n: i32) -> i64 {
+        let n = n as i64;
+        n * (n - 1) / 2
     }
 }
 

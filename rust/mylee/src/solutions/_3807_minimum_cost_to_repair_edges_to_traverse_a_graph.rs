@@ -1,16 +1,16 @@
 // [3807\. Minimum Cost to Repair Edges to Traverse a Graph 🔒](https://leetcode.com/problems/minimum-cost-to-repair-edges-to-traverse-a-graph)
-// ============================================================================================================================================
-
-// [![](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)
 
 // Description
 // -----------
 
-// You are given an **undirected graph** with `n` nodes labeled from 0 to `n - 1`. The graph consists of `m` edges represented by a 2D integer array `edges`, where `edges[i] = [ui, vi, wi]` indicates that there is an edge between nodes `ui` and `vi` with a repair cost of `wi`.
+// You are given an **undirected graph** with `n` nodes labeled from 0 to `n - 1`.
+// The graph consists of `m` edges represented by a 2D integer array `edges`,
+// where `edges[i] = [ui, vi, wi]` indicates that there is an edge between nodes `ui` and `vi` with a repair cost of `wi`.
 
 // You are also given an integer `k`. Initially, **all** edges are damaged.
 
-// You may choose a non-negative integer `money` and repair **all** edges whose repair cost is **less than or equal** to `money`. All other edges remain damaged and cannot be used.
+// You may choose a non-negative integer `money` and repair **all** edges whose repair cost is **less than or equal** to `money`.
+// All other edges remain damaged and cannot be used.
 
 // You want to travel from node 0 to node `n - 1` using at most `k` edges.
 
@@ -26,7 +26,8 @@
 
 // **Explanation:**
 
-// The only valid path using at most `k = 1` edge is `0 -> 2`, which requires repairing the edge with cost 100. Therefore, the minimum required amount of money is 100.
+// The only valid path using at most `k = 1` edge is `0 -> 2`, which requires repairing the edge with cost 100.
+// Therefore, the minimum required amount of money is 100.
 
 // **Example 2:**
 
@@ -70,8 +71,48 @@
 #[allow(dead_code)]
 pub struct Solution {}
 impl Solution {
-    pub fn min_cost(n: i32, edges: Vec<Vec<i32>>, k: i32) -> i32 {
-        0
+    pub fn min_cost(n: i32, mut edges: Vec<Vec<i32>>, k: i32) -> i32 {
+        let (m, n) = (edges.len(), n as usize);
+        edges.sort_unstable_by_key(|e| e[2]);
+        let check = |idx: usize| {
+            let mut g = vec![vec![]; n];
+            for e in &edges[..=idx] {
+                let (u, v) = (e[0] as usize, e[1] as usize);
+                g[u].push(v);
+                g[v].push(u);
+            }
+            let mut q = std::collections::VecDeque::from([0]);
+            let mut dist = 0;
+            let mut vis = vec![false; n];
+            vis[0] = true;
+            while !q.is_empty() {
+                let len = q.len();
+                for _ in 0..len {
+                    let u = q.pop_front().unwrap();
+                    if u == n - 1 {
+                        return dist <= k;
+                    }
+                    for &v in &g[u] {
+                        if !vis[v] {
+                            vis[v] = true;
+                            q.push_back(v);
+                        }
+                    }
+                }
+                dist += 1;
+            }
+            false
+        };
+        let (mut l, mut r) = (0, m - 1);
+        while l < r {
+            let mid = (l + r) >> 1;
+            if check(mid) {
+                r = mid;
+            } else {
+                l = mid + 1;
+            }
+        }
+        if check(l) { edges[l][2] } else { -1 }
     }
 }
 

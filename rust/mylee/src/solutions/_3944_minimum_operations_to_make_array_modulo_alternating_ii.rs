@@ -41,7 +41,49 @@ pub struct Solution;
 
 impl Solution {
     pub fn min_operations(mut nums: Vec<i32>, k: i32) -> i64 {
-        0
+        let kk = k as usize;
+        let mut cnt = vec![vec![0; kk]; 2];
+        for (i, &x) in nums.iter().enumerate() {
+            cnt[i % 2][(x % k) as usize] += 1;
+        }
+        let distance = |cnt: &[i32]| {
+            let total = cnt.iter().fold(0, |s, &x| s + x as i64);
+            let mut c = cnt[1..kk / 2 + 1].iter().fold(0, |s, &x| s + x as i64);
+            let mut dist = vec![0; kk];
+            dist[0] = cnt
+                .iter()
+                .enumerate()
+                .fold(0, |s, (i, &x)| s + x as i64 * (i.min(kk - i) as i64));
+            for i in 1..dist.len() {
+                dist[i] = dist[i - 1] - c + (total - c)
+                    - (if k & 1 == 0 {
+                        0
+                    } else {
+                        cnt[(i + kk / 2) % kk] as i64
+                    });
+                c += (cnt[(i + kk / 2) % kk] - cnt[i]) as i64;
+            }
+            dist
+        };
+        let dist: Vec<_> = cnt.iter().map(|v| distance(v)).collect();
+        let topn = |dis: &[i64], n: usize| {
+            let mut ans = vec![(i64::MAX, usize::MAX); n];
+            for i in 0..dis.len() {
+                let mut x = (dis[i], i);
+                for j in 0..ans.len() {
+                    if x < ans[j] {
+                        (x, ans[j]) = (ans[j], x);
+                    }
+                }
+            }
+            ans
+        };
+        let top2: Vec<_> = dist.iter().map(|v| topn(v, 2)).collect();
+        if top2[0][0].1 == top2[1][0].1 {
+            (top2[0][0].0 + top2[1][1].0).min(top2[0][1].0 + top2[1][0].0)
+        } else {
+            top2[0][0].0 + top2[1][0].0
+        }
     }
 }
 

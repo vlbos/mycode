@@ -1,7 +1,4 @@
 // [3817\. Good Indices in a Digit String 🔒](https://leetcode.com/problems/good-indices-in-a-digit-string)
-// ========================================================================================================
-
-// [![](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)
 
 // Description
 // -----------
@@ -64,7 +61,15 @@ pub struct Solution;
 
 impl Solution {
     pub fn good_indices(s: String) -> Vec<i32> {
-        vec![]
+        let mut ans = vec![];
+        for i in 0..s.len() {
+            let t = i.to_string();
+            let k = t.len();
+            if &s[i.saturating_sub(k - 1)..=i] == &t {
+                ans.push(i as i32);
+            }
+        }
+        ans
     }
 }
 // @lc code=end

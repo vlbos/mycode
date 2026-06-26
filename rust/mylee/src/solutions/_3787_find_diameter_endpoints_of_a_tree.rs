@@ -1,18 +1,18 @@
 // [3787\. Find Diameter Endpoints of a Tree 🔒](https://leetcode.com/problems/find-diameter-endpoints-of-a-tree)
-// ==============================================================================================================
-
-// [![](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)](https://img.shields.io/badge/Difficulty-Medium-4051B5?style=flat-square)
 
 // Description
 // -----------
 
-// You are given an **undirected tree** with `n` nodes, numbered from 0 to `n - 1`. It is represented by a 2D integer array `edges`​​​​​​​ of length `n - 1`, where `edges[i] = [ai, bi]` indicates that there is an edge between nodes `ai` and `bi` in the tree.
+// You are given an **undirected tree** with `n` nodes, numbered from 0 to `n - 1`.
+// It is represented by a 2D integer array `edges`​​​​​​​ of length `n - 1`,
+// where `edges[i] = [ai, bi]` indicates that there is an edge between nodes `ai` and `bi` in the tree.
 
 // A node is called **special** if it is an **endpoint** of any **diameter path** of the tree.
 
 // Return a binary string `s` of length `n`, where `s[i] = '1'` if node `i` is special, and `s[i] = '0'` otherwise.
 
-// A **diameter path** of a tree is the **longest** simple path between any two nodes. A tree may have multiple diameter paths.
+// A **diameter path** of a tree is the **longest** simple path between any two nodes.
+// A tree may have multiple diameter paths.
 
 // An **endpoint** of a path is the **first** or **last** node on that path.
 
@@ -77,7 +77,40 @@
 pub struct Solution {}
 impl Solution {
     pub fn find_special_nodes(n: i32, edges: Vec<Vec<i32>>) -> String {
-        String::new()
+        let n = n as usize;
+        let mut g = vec![vec![]; n];
+        for e in edges {
+            let (u, v) = (e[0] as usize, e[1] as usize);
+            g[u].push(v);
+            g[v].push(u);
+        }
+        let bfs = |start: usize| {
+            let mut dist = vec![-1; n];
+            dist[start] = 0;
+            let mut q = std::collections::VecDeque::from([start]);
+            let mut far = start;
+            while let Some(u) = q.pop_front() {
+                if dist[u] > dist[far] {
+                    far = u;
+                }
+                for &v in &g[u] {
+                    if dist[v] == -1 {
+                        dist[v] = dist[u] + 1;
+                        q.push_back(v);
+                    }
+                }
+            }
+            (far, dist)
+        };
+        let (a, _) = bfs(0);
+        let (b, dist1) = bfs(a);
+        let (_, dist2) = bfs(b);
+        let d = dist1[b];
+        dist1
+            .into_iter()
+            .zip(dist2)
+            .map(|(d1, d2)| if d1 == d || d2 == d { "1" } else { "0" })
+            .collect()
     }
 }
 
@@ -85,8 +118,6 @@ impl Solution {
 mod test {
     use super::*;
     use crate::lc_matrix;
-    // "a"
-    // [[1,1],[1,1],[0,2],[1,3],[0,0]]
     #[test]
     pub fn test_find_special_nodes_1() {
         assert_eq!(
