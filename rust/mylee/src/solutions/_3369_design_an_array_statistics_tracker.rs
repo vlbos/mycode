@@ -94,21 +94,23 @@ impl StatisticsTracker {
             l: BinaryHeap::new(),
             r: BinaryHeap::new(),
             cnt: HashMap::new(),
-            seq: BTreeSet::new(),
             delayed: HashMap::new(),
+            seq: BTreeSet::new(),
             l_len: 0,
             r_len: 0,
             s: 0,
         }
     }
+
+    // 清理堆延迟删除标记
     fn prune(&mut self, signed: i32) {
         let bh = if signed > 0 { &mut self.l } else { &mut self.r };
-        while !bh.is_empty() {
-            let c = *bh.peek().unwrap() * signed;
-            if let Some(v) = self.delayed.get_mut(&c) {
-                *v -= 1;
-                if *v == 0 {
-                    self.delayed.remove(&c);
+        while let Some(&top) = bh.peek() {
+            let real_val = top * signed;
+            if let Some(del) = self.delayed.get_mut(&real_val) {
+                *del -= 1;
+                if *del == 0 {
+                    self.delayed.remove(&real_val);
                 }
                 bh.pop();
             } else {
@@ -116,28 +118,40 @@ impl StatisticsTracker {
             }
         }
     }
+
+    // 平衡：l_len == r_len 或 l_len = r_len + 1
     fn rebalance(&mut self) {
+        self.prune(1);
+        self.prune(-1);
         if self.l_len > self.r_len + 1 {
-            self.r.push(-self.l.pop().unwrap());
+            let val = self.l.pop().unwrap();
+            self.r.push(-val);
             self.l_len -= 1;
             self.r_len += 1;
-            self.prune(1);
         } else if self.l_len < self.r_len {
-            self.l.push(-self.r.pop().unwrap());
+            let val = -self.r.pop().unwrap();
+            self.l.push(val);
             self.l_len += 1;
             self.r_len -= 1;
-            self.prune(-1);
         }
     }
+
     fn add_number(&mut self, number: i32) {
         self.s += number as i64;
         self.q.push_back(number);
-        *self.cnt.entry(number).or_insert(0) += 1;
-        let c = self.cnt[&number];
-        if c > 1 {
-            self.seq.remove(&(-c + 1, number));
+
+        // 更新计数与众数有序集合
+        let old_cnt = *self.cnt.get(&number).unwrap_or(&0);
+        if old_cnt > 0 {
+            self.seq.remove(&(-old_cnt, number));
         }
-        self.seq.insert((-c, number));
+        let new_cnt = old_cnt + 1;
+        *self.cnt.entry(number).or_insert(0) = new_cnt;
+        self.seq.insert((-new_cnt, number));
+
+        // 加入对应堆
+        self.prune(1);
+        self.prune(-1);
         if self.l.is_empty() || *self.l.peek().unwrap() >= number {
             self.l.push(number);
             self.l_len += 1;
@@ -147,42 +161,51 @@ impl StatisticsTracker {
         }
         self.rebalance();
     }
+
     fn remove_first_added_number(&mut self) {
         let number = self.q.pop_front().unwrap();
         self.s -= number as i64;
-        let c = self.cnt[&number];
-        *self.cnt.entry(number).or_insert(0) -= 1;
-        if self.cnt[&number] == 0 {
+
+        // 更新计数、众数集合
+        let old_cnt = self.cnt[&number];
+        self.seq.remove(&(-old_cnt, number));
+        let new_cnt = old_cnt - 1;
+        if new_cnt == 0 {
             self.cnt.remove(&number);
-        }
-        self.seq.remove(&(-c, number));
-        if c > 1 {
-            self.seq.insert((-c + 1, number));
-        }
-        *self.delayed.entry(number).or_insert(0) += 1;
-        if *self.l.peek().unwrap() >= number {
-            self.l_len -= 1;
-            if *self.l.peek().unwrap() == number {
-                self.prune(1);
-            }
         } else {
+            *self.cnt.get_mut(&number).unwrap() = new_cnt;
+            self.seq.insert((-new_cnt, number));
+        }
+
+        // 标记延迟删除
+        self.prune(1);
+        if !self.l.is_empty() && *self.l.peek().unwrap() >= number {
+            *self.delayed.entry(number).or_insert(0) += 1;
+            self.l_len -= 1;
+        } else {
+            *self.delayed.entry(number).or_insert(0) += 1;
             self.r_len -= 1;
-            if *self.r.peek().unwrap() == number {
-                self.prune(-1);
-            }
         }
         self.rebalance();
     }
+
     fn get_mean(&self) -> i32 {
-        (self.s / self.q.len() as i64) as _
+        (self.s / self.q.len() as i64) as i32
     }
-    fn get_median(&self) -> i32 {
+
+    // 严格还原题目判题中位数规则：偶数取右堆最小值
+    fn get_median(&mut self) -> i32 {
+        self.prune(1);
+        self.prune(-1);
         if self.l_len == self.r_len {
-            -*self.r.peek().unwrap()
+            // 偶数个，取右堆最小
+            -self.r.peek().unwrap()
         } else {
+            // 奇数个，取左堆最大
             *self.l.peek().unwrap()
         }
     }
+
     fn get_mode(&self) -> i32 {
         self.seq.first().unwrap().1
     }

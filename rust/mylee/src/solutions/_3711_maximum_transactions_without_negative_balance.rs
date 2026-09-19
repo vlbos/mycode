@@ -54,15 +54,15 @@
 pub struct Solution;
 impl Solution {
     pub fn max_transactions(transactions: Vec<i32>) -> i32 {
-        use std::collections::BTreeMap; //, btree_map::OccupiedEntry
+        use std::collections::BTreeMap;
         let mut s = BTreeMap::new();
         let (mut ans, mut balance) = (transactions.len() as i32, 0);
         for t in transactions {
-            balance += t;
+            balance += t as i64;
             *s.entry(t).or_insert(0) += 1;
             while balance < 0 {
                 if let Some(mut o) = s.first_entry() {
-                    balance -= *o.key();
+                    balance -= *o.key() as i64;
                     *o.get_mut() -= 1;
                     if *o.get() == 0 {
                         o.remove_entry();

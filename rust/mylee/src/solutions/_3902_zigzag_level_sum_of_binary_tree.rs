@@ -41,7 +41,7 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 impl Solution {
-    pub fn zigzag_level_sum(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
+    pub fn zigzag_level_sum(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i64> {
         let mut ans = vec![];
         let mut q = std::collections::VecDeque::from([root]);
         let mut level = 1;
@@ -61,7 +61,7 @@ impl Solution {
                         q.push_back(node.as_ref().unwrap().borrow().right.clone());
                     }
                     if no_stop {
-                        sum += node.as_ref().unwrap().borrow().val;
+                        sum += node.as_ref().unwrap().borrow().val as i64;
                     }
                 } else {
                     let node = q.pop_back().unwrap();
@@ -75,7 +75,7 @@ impl Solution {
                         q.push_front(node.as_ref().unwrap().borrow().left.clone());
                     }
                     if no_stop {
-                        sum += node.as_ref().unwrap().borrow().val;
+                        sum += node.as_ref().unwrap().borrow().val as i64;
                     }
                 }
             }

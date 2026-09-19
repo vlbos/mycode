@@ -42,25 +42,27 @@
 pub struct Solution {}
 impl Solution {
     pub fn shortest_superstring(s1: String, s2: String) -> String {
-        let (s1, s2) = if s1.len() > s2.len() {
-            (s2, s1)
-        } else {
-            (s1, s2)
-        };
         if s2.contains(&s1) {
             return s2;
         }
-        let mut i = 0;
-        let bs1 = s1.as_bytes();
-        for b in s2.bytes() {
-            if b == bs1[i] {
-                i += 1;
+        if s1.contains(&s2) {
+            return s1;
+        }
+        let max_overlap = |s1: &str, s2: &str| {
+            let (len1, len2) = (s1.len(), s2.len());
+            for i in (1..=len1.min(len2)).rev() {
+                if &s1[len1 - i..] == &s2[..i] {
+                    return i;
+                }
             }
+            0
+        };
+        let (overlap1, overlap2) = (max_overlap(&s1, &s2), max_overlap(&s2, &s1));
+        if overlap1 >= overlap2 {
+            s1 + &s2[overlap1..]
+        } else {
+            s2 + &s1[overlap2..]
         }
-        if i < s1.len() {
-            return s2 + &s1[i..];
-        }
-        s2
     }
 }
 

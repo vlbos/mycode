@@ -58,47 +58,71 @@ pub struct Solution;
 
 impl Solution {
     pub fn subtree_inversion_sum(edges: Vec<Vec<i32>>, nums: Vec<i32>, k: i32) -> i32 {
+        if k == 1 {
+            return nums.iter().fold(0, |s, &x| s + x.abs());
+        }
         let n = nums.len();
-        let mut g = vec![vec![]; n];
+        let mut dc = vec![vec![]; n];
         for e in edges {
             let (u, v) = (e[0] as usize, e[1] as usize);
-            g[u].push(v);
-            g[v].push(u);
+            dc[u].push(v);
+            dc[v].push(u);
         }
-        fn dfs(u: usize, p: usize, nums: &[i32], k: usize, g: &Vec<Vec<usize>>) -> Vec<Vec<i32>> {
-            let mut dp = vec![vec![nums[u]; k]; 2];
-            for &v in &g[u] {
-                if v == p {
+        fn dfs(
+            x: usize,
+            p: usize,
+            k: usize,
+            nums: &[i32],
+            dc: &Vec<Vec<usize>>,
+        ) -> (Vec<i32>, Vec<i32>) {
+            let (mut v, mut a, mut b) = (nums[x], vec![], vec![]);
+            if dc[x].len() == 1 && dc[x][0] == p {
+                (a, b) = (vec![v; k + 1], vec![v; k + 1]);
+                if v >= 0 {
+                    b[..2].fill(-v);
+                } else {
+                    a[..2].fill(-v);
+                }
+                return (a, b);
+            }
+            for &y in &dc[x] {
+                if y == p {
                     continue;
                 }
-                let new_dp = dfs(v, u, nums, k, g);
-                for j in 0..2 {
-                    for i in 0..k / 2 {
-                        dp[j][i] =
-                            (dp[j][i] + new_dp[j][k - 2 - i]).max(new_dp[j][i] + dp[j][k - 2 - i]);
+                if a.is_empty() {
+                    (a, b) = dfs(y, x, k, nums, dc);
+                    continue;
+                }
+                let (c, d) = dfs(y, x, k, nums, dc);
+                let (mut e, mut f) = (vec![i32::MIN; k + 1], vec![i32::MIN; k + 1]);
+                (*e.last_mut().unwrap(), *f.last_mut().unwrap()) = (
+                    c[c.len() - 1] + a[a.len() - 1],
+                    d[d.len() - 1] + b[b.len() - 1],
+                );
+                for i in (0..k).rev() {
+                    if 2 * i >= k {
+                        (e[i], f[i]) = (e[i + 1].max(c[i] + a[i]), f[i + 1].min(d[i] + b[i]));
+                    } else {
+                        (e[i], f[i]) = (
+                            e[i + 1].max(c[i] + a[k - i]).max(c[k - i] + a[i]),
+                            f[i + 1].min(d[i] + b[k - i]).min(d[k - i] + b[i]),
+                        );
                     }
                 }
-                for j in 0..2 {
-                    for i in k / 2..k {
-                        dp[j][i] += new_dp[j][i];
-                    }
-                }
-                for j in 0..2 {
-                    for i in (0..k - 1).rev() {
-                        dp[j][i] = dp[j][i].max(dp[j][i + 1]);
-                    }
-                }
+                (a, b) = (e, f);
             }
-            let v = dp[0][0].max(-dp[1][k - 1]);
-            dp[0].insert(0, v);
-            let v = dp[1][0].min(-dp[0][k - 1]);
-            dp[1].insert(0, v);
-            dp[0].pop();
-            dp[1].pop();
-            dp
+            let (aa, bb) = (
+                (a[0] + v).max(-b[b.len() - 1] - v),
+                (-a[a.len() - 1] - v).min(b[0] + v),
+            );
+            for i in (1..k).rev() {
+                (a[i + 1], b[i + 1]) = (a[i] + v, b[i] + v);
+            }
+            a[..2].fill(aa);
+            b[..2].fill(bb);
+            (a, b)
         }
-        let dp = dfs(0, n, &nums, k as usize, &g);
-        dp[0][0]
+        dfs(0, n, k as usize, &nums, &dc).0[0]
     }
 }
 

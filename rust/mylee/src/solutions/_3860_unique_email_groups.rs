@@ -66,7 +66,7 @@ impl Solution {
             .replace(".", "")
             .to_ascii_lowercase();
             cnt.insert(format!(
-                "{local_names}{}",
+                "{local_names}@{}",
                 domain_names.to_ascii_lowercase()
             ));
         }

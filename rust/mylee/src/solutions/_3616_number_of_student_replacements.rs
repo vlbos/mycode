@@ -46,9 +46,9 @@
 #[allow(dead_code)]
 pub struct Solution;
 impl Solution {
-    pub fn total_replacements(nums: Vec<i32>) -> i32 {
-        let (mut cur, mut ans) = (nums[0], 0);
-        for &x in &nums[1..] {
+    pub fn total_replacements(ranks: Vec<i32>) -> i32 {
+        let (mut cur, mut ans) = (ranks[0], 0);
+        for &x in &ranks[1..] {
             if cur > x {
                 cur = x;
                 ans += 1;

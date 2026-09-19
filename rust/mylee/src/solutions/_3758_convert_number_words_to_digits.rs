@@ -81,16 +81,15 @@ impl Solution {
         .collect();
         let mut pre = h.keys().fold(HashSet::new(), |mut p, w| {
             (1..=w.len()).for_each(|i| {
-                p.insert(&w[..i]);
+                p.insert(w[..i].to_string());
             });
             p
         });
         let (mut cur, mut ans) = (String::new(), String::new());
         for c in s.chars() {
             cur.push(c);
-            if !pre.contains(&cur.as_str()) {
-                cur = String::new();
-                continue;
+            while !cur.is_empty() && !pre.contains(&cur) {
+                cur.remove(0);
             }
             if let Some(v) = h.get(&cur.as_str()) {
                 ans.push_str(&v.to_string());
@@ -100,7 +99,6 @@ impl Solution {
         ans
     }
 }
-// @lc code=end
 
 #[allow(dead_code)]
 pub struct Solution;

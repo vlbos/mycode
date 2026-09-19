@@ -65,48 +65,34 @@
 pub struct Solution;
 
 impl Solution {
-    pub fn count_submatrices(mut grid: Vec<Vec<i32>>, k: i32) -> i64 {
+    pub fn count_submatrices(grid: Vec<Vec<i32>>, k: i32) -> i64 {
+        let mut submatrices = 0;
         let (m, n) = (grid.len(), grid[0].len());
-        grid.push(vec![k + 1; n]);
-        let mut dp = vec![vec![]; n];
-        let mut ans = 0;
-        for i in 0..m {
-            let mut len = 0;
-            for j in 0..n {
+        let mut widths = vec![0; m];
+        for j in 0..n {
+            let mut curr_submatrices = 0;
+            let mut stack: Vec<Vec<i64>> = vec![];
+            for i in 0..m {
                 if grid[i][j] > k {
-                    dp[j].push((i as i64, 0));
-                    let mut t = 0;
-                    for idx in 0..dp[j].len() {
-                        let h = dp[j].last().unwrap().0 - dp[j][idx].0;
-                        ans += h * (h + 1) / 2 * (dp[j][idx].1 - t);
-                        t = dp[j][idx].1;
-                    }
-                    dp[j].clear();
-                    continue;
-                }
-                if j == 0 || grid[i][j] <= grid[i][j - 1] {
-                    len += 1;
+                    widths[i] = 0;
+                } else if j > 0 && grid[i][j] > grid[i][j - 1] {
+                    widths[i] = 1;
                 } else {
-                    len = 1;
+                    widths[i] += 1;
                 }
-                let mut pos = i as i64;
-                while !dp[j].is_empty() && dp[j].last().unwrap().1 > len {
-                    let h = i as i64 - dp[j].last().unwrap().0;
-                    let w = dp[j].last().unwrap().1
-                        - len.max(if dp[j].len() > 1 {
-                            dp[j][dp[j].len() - 2].1
-                        } else {
-                            0
-                        });
-                    ans += h * (h + 1) / 2 * w;
-                    pos = dp[j].pop().unwrap().0;
+                let width = widths[i];
+                let mut height = 1;
+                while stack.last().is_some_and(|v| v[0] >= width) {
+                    let prev = stack.pop().unwrap();
+                    curr_submatrices -= (prev[0] - width) * prev[1];
+                    height += prev[1];
                 }
-                if dp[j].is_empty() || dp[j].last().unwrap().1 != len {
-                    dp[j].push((pos, len));
-                }
+                curr_submatrices += width;
+                submatrices += curr_submatrices;
+                stack.push(vec![width, height]);
             }
         }
-        ans
+        submatrices
     }
 }
 
@@ -117,15 +103,19 @@ mod test {
     #[test]
     pub fn test_count_submatrices_1() {
         assert_eq!(
-            2,
-            Solution::count_submatrices(lc_matrix![[1, 3], [5, 6], [8, 10]], 3),
+            8,
+            Solution::count_submatrices(lc_matrix![[4, 3, 2, 1], [8, 7, 6, 1]], 3),
         );
     }
     #[test]
     pub fn test_count_submatrices_2() {
         assert_eq!(
-            3,
-            Solution::count_submatrices(lc_matrix![[5, 10], [1, 1], [3, 3]], 1)
+            36,
+            Solution::count_submatrices(lc_matrix![[1, 1, 1], [1, 1, 1], [1, 1, 1]], 1)
         );
+    }
+
+    pub fn test_count_submatrices_3() {
+        assert_eq!(1, Solution::count_submatrices(lc_matrix![[1]], 1));
     }
 }

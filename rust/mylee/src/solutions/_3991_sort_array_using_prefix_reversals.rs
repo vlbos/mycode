@@ -1,0 +1,78 @@
+// [3991. Sort Array Using Prefix Reversals](https://leetcode.com/problems/sort-array-using-prefix-reversals/)
+
+// You are given an integer array `nums` of length `n`, where `nums` is a permutation of the integers in the range `[0, n - 1]`.
+// You are also given an integer array `pre`, where each `pre[i]` is a valid prefix length.
+// In one operation, you may choose any length `x` from `pre` and reverse the first `x` elements of `nums`.
+// For example, applying a prefix reversal of length `3` on `[4, 1, 2, 3]` results in `[2, 1, 4, 3]`.
+// Return the minimum number of operations required to sort `nums` in ascending order. If it is impossible to sort `nums`, return `-1`.
+// **Example 1:**
+// **Input:** nums = [2,0,1], pre = [2,3]
+// **Output:** 2
+// **Explanation:**
+// * Reverse `pre[1] = 3` elements to get `nums = [1, 0, 2]`.
+// * Then reverse `pre[0] = 2` elements to get `nums = [0, 1, 2]`.
+// * Thus, the minimum number of prefix reversal required is 2.
+// **Example 2:**
+// **Input:** nums = [1,0,2], pre = [1,3]
+// **Output:** -1
+// **Explanation:**
+// It is impossible to sort the array using the given prefix lengths, so the answer is -1.
+// **Example 3:**
+// **Input:** nums = [0,1], pre = [2]
+// **Output:** 0
+// **Explanation:**
+// Since `nums` is already sorted, no prefix reversals are needed. Thus, the answer is 0.
+// **Constraints:**
+// * `1 \<= n == nums.length \<= 8`
+// * `0 \<= nums[i] \<= n - 1`
+// * `1 \<= pre.length \<= n`
+// * `1 \<= pre[i] \<= n`
+// * `​​​​​​​nums` is a permutation of integers from 0 to `n - 1`.
+// * `pre` consists of **unique** integers.
+
+impl Solution {
+    pub fn sort_array(nums: Vec<i32>, mut pre: Vec<i32>) -> i32 {
+        let mut s = nums.clone();
+        s.sort_unstable();
+        use std::collections::{HashSet, VecDeque};
+        let mut seen = HashSet::from([nums.clone()]);
+        let mut has = VecDeque::from([(nums.clone(), 0)]);
+        if let Some(i) = pre.iter().position(|&x| x == 1) {
+            pre.remove(i);
+        }
+        while let Some((a, b)) = has.pop_front() {
+            if a == s {
+                return b;
+            }
+            for &i in &pre {
+                let i = i as usize;
+                let na: Vec<_> = a[..i].iter().rev().chain(&a[i..]).cloned().collect();
+                if seen.insert(na.clone()) {
+                    has.push_back((na, b + 1));
+                }
+            }
+        }
+        -1
+    }
+}
+
+#[allow(dead_code)]
+pub struct Solution;
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    pub fn test_sort_array_1() {
+        assert_eq!(2, Solution::sort_array(vec![2,0,1], vec![2,3]));
+    }
+    #[test]
+    pub fn test_sort_array_2() {
+        assert_eq!(-1, Solution::sort_array(vec![1,0,2], vec![1,3]));
+    }
+    #[test]
+    pub fn test_sort_array_3() {
+        assert_eq!(0, Solution::sort_array(vec![0,1], vec![2]));
+    }
+}

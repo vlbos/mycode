@@ -112,7 +112,6 @@ impl Solution {
                     op.push(c);
                 }
                 _ => {
-                    // println!("{num}");
                     num = num * 10 + c.to_digit(10).unwrap() as i64;
                     if i + 1 == n || !(exp[i + 1] as char).is_ascii_digit() {
                         if signed {
@@ -124,29 +123,8 @@ impl Solution {
                     }
                 }
             }
-            // println!("{op_st:?},={c}=={st:?},");
         }
-        // while let Some(op) = op_st.pop() {
-        //     num = st.pop().unwrap();
-        //     match op {
-        //         0 => {
-        //             let v = st.pop().unwrap() + num;
-        //             st.push(v);
-        //         }
-        //         1 => {
-        //             let v = st.pop().unwrap() - num;
-        //             st.push(v);
-        //         }
-        //         2 => {
-        //             let v = st.pop().unwrap() * num;
-        //             st.push(v);
-        //         }
-        //         _ => {
-        //             let v = st.pop().unwrap() / num;
-        //             st.push(v);
-        //         }
-        //     }
-        // }
+
         if signed {
             num *= -1;
         }

@@ -68,53 +68,62 @@ impl Solution {
     ) -> i32 {
         use std::collections::VecDeque;
         let n = n as usize;
-        let mut g = vec![vec![]; n];
-        for (a, b) in flow_from.into_iter().zip(flow_to) {
-            g[a as usize].push(b as usize);
-            g[b as usize].push(a as usize);
-        }
-        let bfs = |mut q: VecDeque<usize>, vis: &mut Vec<i32>| {
-            while let Some(a) = q.pop_front() {
-                for &b in &g[a] {
-                    if vis[b] != 1 {
-                        vis[b] = 1;
-                        q.push_back(b);
-                    }
-                }
-            }
-        };
-        fn dfs(a: usize, g: &Vec<Vec<usize>>, vis: &mut Vec<i32>, seq: &mut Vec<usize>) {
-            vis[a] = 2;
-            for &b in &g[a] {
-                if vis[b] == 0 {
-                    dfs(b, g, vis, seq);
-                }
-            }
-            seq.push(a);
+        let (mut con, mut rcon) = (vec![vec![]; n], vec![vec![]; n]);
+        for (&a, &b) in flow_from.iter().zip(&flow_to) {
+            con[a as usize].push(b as usize);
+            rcon[b as usize].push(a as usize);
         }
 
-        let mut vis = vec![0; n];
-        for &x in &crystals {
-            vis[x as usize] = 1;
+        fn dfs(x: usize, con: &Vec<Vec<usize>>, mark: &mut Vec<bool>, all: &mut Vec<usize>) {
+            if mark[x] {
+                return;
+            }
+            mark[x] = true;
+
+            for &y in &con[x] {
+                dfs(y, con, mark, all);
+            }
+            all.push(x);
         }
-        let q: VecDeque<_> = crystals.into_iter().map(|i| i as usize).collect();
-        bfs(q, &mut vis);
-        let mut seq = vec![];
+        fn dfs2(x: usize, m: i32, con: &Vec<Vec<usize>>, id: &mut Vec<i32>) {
+            if id[x] >= 0 {
+                return;
+            }
+            id[x] = m;
+
+            for &y in &con[x] {
+                dfs2(y, m, con, id);
+            }
+        }
+
+        let (mut mark, mut all) = (vec![false; n], vec![]);
         for i in 0..n {
-            if vis[i] == 0 {
-                dfs(i, &g, &mut vis, &mut seq);
+            dfs(i, &con, &mut mark, &mut all);
+        }
+
+        let mut id = vec![-1; n];
+        let mut m = 0;
+        for i in (0..n).rev() {
+            let x = all[i];
+            if id[x] < 0 {
+                dfs2(x, m, &rcon, &mut id);
+                m += 1;
             }
         }
-        seq.reverse();
-        let mut ans = 0;
-        for i in seq {
-            if vis[i] == 2 {
-                vis[i] = 1;
-                bfs(VecDeque::from([i]), &mut vis);
-                ans += 1;
+
+        let mut to = vec![false; m as usize];
+        for i in 0..flow_from.len() {
+            if id[flow_from[i] as usize] != id[flow_to[i] as usize] {
+                to[id[flow_to[i] as usize] as usize] = true;
             }
         }
-        ans
+
+        let mut special = vec![false; m as usize];
+        for &x in &crystals {
+            special[id[x as usize] as usize] = true;
+        }
+
+        (0..m as usize).filter(|&i| !to[i] && !special[i]).count() as _
     }
 }
 
@@ -136,3 +145,158 @@ mod test {
         );
     }
 }
+
+// Intuition
+// Find strongly connected components, turn them into single nodes, and then find all nodes without a crystal and with an in-degree of zero
+
+// Approach
+// Tarjan Algo to find SCC's, then mark all nodes with crystals or incoming connections, and count the unmarked nodes
+
+// Code
+// class Solution {
+//     private int time = 1, current = 0, top = 0;
+//     public int minRunesToAdd(int n, int[] crystals, int[] flowFrom, int[] flowTo) {
+//         int m = flowFrom.length;
+//         int[] id = new int[n]; //stores the id of the strongly connected component for each node
+
+//         //create adj list
+//         ArrayList<Integer>[] adj = new ArrayList[n];
+//         for(int i = 0; i < n; i++) adj[i] = new ArrayList<>();
+//         for(int i = 0; i < m; i++) adj[flowFrom[i]].add(flowTo[i]);
+
+//         //identify strongly connected components
+//         int[] stack = new int[n], dist = new int[n], min = new int[n];
+//         boolean[] seen = new boolean[n];
+//         for(int i = 0; i < n; i++) {
+//             if(dist[i] == 0) tarjan(i, seen, dist, min, stack, id, adj);
+//         }
+//         //we now can treat strongly connected components as singular nodes
+
+//         //mark all nodes with a non-zero in-degree
+//         for(int i = 0; i < m; i++) {
+//             int val = id[flowTo[i]];
+//             if(id[flowFrom[i]] != val) seen[val] = true;
+//         }
+//         //mark all crystal nodes
+//         for(int x : crystals) seen[id[x]] = true;
+
+//         //count the nodes with a zero in-degree and arent crystal nodes, as these must be connected
+//         int count = 0;
+//         for(int i = 0; i < current; i++) {
+//             if(!seen[i]) count++;
+//         }
+//         return count;
+//     }
+//     private void tarjan(int index, boolean[] seen, int[] dist, int[] min, int[] stack, int[] id, ArrayList<Integer>[] adj) {
+//         dist[index] = min[index] = time++;
+//         seen[index] = true;
+//         stack[top++] = index;
+//         for(int next : adj[index]) {
+//             if(dist[next] == 0) {
+//                 tarjan(next, seen, dist, min, stack, id, adj);
+//                 min[index] = Math.min(min[index], min[next]);
+//             }else if(seen[next]) min[index] = Math.min(min[index], dist[next]);
+//         }
+//         if(min[index] == dist[index]) {
+//             int root = -1;
+//             while(root != index) {
+//                 root = stack[--top];
+//                 id[root] = current; //give all nodes in the current component the same id
+//                 seen[root] = false;
+//             }
+//             current++;
+//         }
+//     }
+// }
+
+// Intuition
+// Run kosa raju's algo to find all strongly connected components
+// Build a simplified graph (DAG) with all the strongly connected components
+// Identify what components the crystal nodes belong to
+// For each node in the new DAG, if this component does not contain a crystal node, and its indegree is zero, we need to add a new rune.
+// Complexity
+// Time complexity:
+// O(E+V)
+
+// Space complexity:
+// O(E+V)
+
+// Code
+// from collections import defaultdict
+// from typing import List
+
+// class Solution:
+//     def minRunesToAdd(self, n: int, crystals: List[int], flowFrom: List[int], flowTo: List[int]) -> int:
+//         adjMap = {i: [] for i in range(n)}
+//         transposeMap = {i: [] for i in range(n)}
+//         stack = []
+
+//         # Build the original graph and its transpose
+//         for src, dsn in zip(flowFrom, flowTo):
+//             adjMap[src].append(dsn)
+//             transposeMap[dsn].append(src)
+
+//         visited = set()
+//         count = 0
+//         sccs = []
+
+//         # First DFS pass to fill the stack based on finishing times
+//         def dfs(node):
+//             visited.add(node)
+//             for nei in adjMap[node]:
+//                 if nei not in visited:
+//                     dfs(nei)
+//             stack.append(node)
+
+//         # Second DFS pass on the transposed graph
+//         def transposedfs(node, scc):
+//             visited.add(node)
+//             scc.append(node)
+//             for nei in transposeMap[node]:  # Corrected to use transposeMap
+//                 if nei not in visited:
+//                     transposedfs(nei, scc)
+
+//         # Step 1: Perform DFS on the original graph to fill the stack
+//         for node in range(n):
+//             if node not in visited:
+//                 dfs(node)
+
+//         # Step 2: Perform DFS on the transposed graph in reverse finishing time order
+//         visited = set()
+//         while stack:
+//             node = stack.pop()
+//             if node not in visited:
+//                 scc = []
+//                 transposedfs(node, scc)
+//                 sccs.append(scc)
+
+//         # Step 3: Map each node to its SCC index
+//         scc_map = {}
+//         for i, scc in enumerate(sccs):
+//             for node in scc:
+//                 scc_map[node] = i
+
+//         # Step 4: Build the DAG of SCCs
+//         dag = {node:[]  for node in range(len(sccs))}
+//         for node in adjMap:
+//             for nei in adjMap[node]:
+//                 if scc_map[node] != scc_map[nei]:  # Only add edges between different SCCs
+//                     dag[scc_map[node]].append(scc_map[nei])
+
+//         # Step 5: Calculate indegree for each SCC in the DAG
+//         indegree = [0] * n
+//         for node in dag:
+//             for nei in dag[node]:
+//                 indegree[nei] += 1
+
+//         # Step 6: Track which SCCs contain crystals
+//         crystalComponents = set()
+//         for crystal in crystals:
+//             crystalComponents.add(scc_map[crystal])
+
+//         # Step 7: Count the number of SCCs that need new runes
+//         for node in dag:
+//             if indegree[node] == 0 and node not in crystalComponents:
+//                 count += 1
+
+//         return count

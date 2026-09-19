@@ -182,7 +182,7 @@ impl Solution {
             res = (res + a * quick_pow(b, MOD as i32 - 2) % MOD) % MOD
         }
 
-        res as _
+        ((res + MOD) % MOD) as _
     }
 }
 
@@ -198,4 +198,6 @@ mod test {
     pub fn test_zig_zag_arrays_2() {
         assert_eq!(10, Solution::zig_zag_arrays(3, 1, 3));
     }
+
+    
 }

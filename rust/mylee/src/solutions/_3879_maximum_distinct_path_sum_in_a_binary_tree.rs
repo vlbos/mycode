@@ -53,7 +53,7 @@ impl Solution {
             }
             let mut v = g
                 .entry(Rc::as_ptr(root.as_ref().unwrap()))
-                .or_insert(vec![]);
+                .or_insert(vec![root.clone()]);
             if p.is_some() {
                 v.push(p.clone());
             }
@@ -81,6 +81,8 @@ impl Solution {
             for nxt in g
                 .get(&Rc::as_ptr(root.as_ref().unwrap()))
                 .unwrap_or(&vec![])
+                .iter()
+                .skip(1)
             {
                 best = best.max(dfs2(nxt, g, vis));
             }

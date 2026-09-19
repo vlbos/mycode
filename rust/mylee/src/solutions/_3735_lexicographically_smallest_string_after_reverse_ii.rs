@@ -264,9 +264,6 @@ impl Solution {
         }
         let last = s.as_bytes()[n - 1];
         for (k, b) in s.bytes().enumerate().rev() {
-            if b < last {
-                continue;
-            }
             if is_less(k + 1, 1, best_k, best_i) {
                 best_k = k + 1;
                 best_i = 1;
@@ -281,7 +278,6 @@ impl Solution {
         String::from_utf8(ans).unwrap()
     }
 }
-// @lc code=end
 
 #[allow(dead_code)]
 pub struct Solution;

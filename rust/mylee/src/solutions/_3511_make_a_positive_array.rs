@@ -64,29 +64,16 @@
 pub struct Solution;
 impl Solution {
     pub fn make_array_positive(nums: Vec<i32>) -> i32 {
-        // let mut q=std::collections::BinaryHeap::new();
-        // let (mut ans,mut pre)=(0,0);
-        // for x in nums{
-        //     pre+=x;
-        //     if x<0{
-        //         q.push(-x);
-        //     }
-        //     while pre<=0 && !q.is_empty(){
-        //         pre+=2*q.pop().unwrap();
-        //         ans+=1;
-        //     }
-        // }
-        // ans
         let (mut l, mut ans, mut pre_mx, mut s) = (-1, 0, 0, 0);
         for (r, &x) in nums.iter().enumerate() {
             let rr = r as i32;
-            s += x;
+            s += x as i64;
             if l + 2 < rr && s <= pre_mx {
                 ans += 1;
                 l = rr;
                 (pre_mx, s) = (0, 0);
             } else if l + 2 <= rr {
-                pre_mx = pre_mx.max(s - x - nums[r - 1]);
+                pre_mx = pre_mx.max(s - x as i64 - nums[r - 1] as i64);
             }
         }
         ans
