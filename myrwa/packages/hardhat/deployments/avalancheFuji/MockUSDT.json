@@ -1,0 +1,346 @@
+{
+  "address": "0x4f5698b9d63eef8c0bd2b7a8faeda032fb270380",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "initialSupply",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "Approval",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "Transfer",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "allowance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "approve",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "balanceOf",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "decimals",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "name",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "symbol",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "transfer",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "transferFrom",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "contractName": "MockUSDT",
+  "sourceName": "contracts/MockUSDT.sol",
+  "bytecode": "0x608060405234801561000f575f5ffd5b5060405161075338038061075383398101604081905261002e916100c3565b610038338261003e565b506100ff565b805f5f82825461004e91906100da565b90915550506001600160a01b0382165f908152600160205260408120805483929061007a9084906100da565b90915550506040518181526001600160a01b038316905f907fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef9060200160405180910390a35050565b5f602082840312156100d3575f5ffd5b5051919050565b808201808211156100f957634e487b7160e01b5f52601160045260245ffd5b92915050565b6106478061010c5f395ff3fe608060405234801561000f575f5ffd5b5060043610610090575f3560e01c8063313ce56711610063578063313ce5671461011f57806370a082311461013957806395d89b4114610158578063a9059cbb1461017b578063dd62ed3e1461018e575f5ffd5b806306fdde0314610094578063095ea7b3146100d357806318160ddd146100f657806323b872dd1461010c575b5f5ffd5b6100bd6040518060400160405280600a815260200169135bd8dadcc81554d11560b21b81525081565b6040516100ca91906104d4565b60405180910390f35b6100e66100e1366004610524565b6101b8565b60405190151581526020016100ca565b6100fe5f5481565b6040519081526020016100ca565b6100e661011a36600461054c565b610224565b610127600681565b60405160ff90911681526020016100ca565b6100fe610147366004610586565b60016020525f908152604090205481565b6100bd604051806040016040528060048152602001631554d11560e21b81525081565b6100e6610189366004610524565b6103ea565b6100fe61019c3660046105a6565b600260209081525f928352604080842090915290825290205481565b335f8181526002602090815260408083206001600160a01b038716808552925280832085905551919290917f8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925906102129086815260200190565b60405180910390a35060015b92915050565b6001600160a01b0383165f908152600160205260408120548211156102905760405162461bcd60e51b815260206004820152601e60248201527f4d6f636b555344543a20696e73756666696369656e742062616c616e6365000060448201526064015b60405180910390fd5b6001600160a01b0384165f9081526002602090815260408083203384529091529020548211156103025760405162461bcd60e51b815260206004820181905260248201527f4d6f636b555344543a20696e73756666696369656e7420616c6c6f77616e63656044820152606401610287565b6001600160a01b0384165f908152600260209081526040808320338452909152812080548492906103349084906105eb565b90915550506001600160a01b0384165f90815260016020526040812080548492906103609084906105eb565b90915550506001600160a01b0383165f908152600160205260408120805484929061038c9084906105fe565b92505081905550826001600160a01b0316846001600160a01b03167fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef846040516103d891815260200190565b60405180910390a35060019392505050565b335f908152600160205260408120548211156104485760405162461bcd60e51b815260206004820152601e60248201527f4d6f636b555344543a20696e73756666696369656e742062616c616e636500006044820152606401610287565b335f90815260016020526040812080548492906104669084906105eb565b90915550506001600160a01b0383165f90815260016020526040812080548492906104929084906105fe565b90915550506040518281526001600160a01b0384169033907fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef90602001610212565b602081525f82518060208401528060208501604085015e5f604082850101526040601f19601f83011684010191505092915050565b80356001600160a01b038116811461051f575f5ffd5b919050565b5f5f60408385031215610535575f5ffd5b61053e83610509565b946020939093013593505050565b5f5f5f6060848603121561055e575f5ffd5b61056784610509565b925061057560208501610509565b929592945050506040919091013590565b5f60208284031215610596575f5ffd5b61059f82610509565b9392505050565b5f5f604083850312156105b7575f5ffd5b6105c083610509565b91506105ce60208401610509565b90509250929050565b634e487b7160e01b5f52601160045260245ffd5b8181038181111561021e5761021e6105d7565b8082018082111561021e5761021e6105d756fea2646970667358221220a5bbc64bc236f561c0308c4f9324c1cd5296def56f69af7ace1c6f4d6dd98f7464736f6c634300081e0033",
+  "deployedBytecode": "0x608060405234801561000f575f5ffd5b5060043610610090575f3560e01c8063313ce56711610063578063313ce5671461011f57806370a082311461013957806395d89b4114610158578063a9059cbb1461017b578063dd62ed3e1461018e575f5ffd5b806306fdde0314610094578063095ea7b3146100d357806318160ddd146100f657806323b872dd1461010c575b5f5ffd5b6100bd6040518060400160405280600a815260200169135bd8dadcc81554d11560b21b81525081565b6040516100ca91906104d4565b60405180910390f35b6100e66100e1366004610524565b6101b8565b60405190151581526020016100ca565b6100fe5f5481565b6040519081526020016100ca565b6100e661011a36600461054c565b610224565b610127600681565b60405160ff90911681526020016100ca565b6100fe610147366004610586565b60016020525f908152604090205481565b6100bd604051806040016040528060048152602001631554d11560e21b81525081565b6100e6610189366004610524565b6103ea565b6100fe61019c3660046105a6565b600260209081525f928352604080842090915290825290205481565b335f8181526002602090815260408083206001600160a01b038716808552925280832085905551919290917f8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925906102129086815260200190565b60405180910390a35060015b92915050565b6001600160a01b0383165f908152600160205260408120548211156102905760405162461bcd60e51b815260206004820152601e60248201527f4d6f636b555344543a20696e73756666696369656e742062616c616e6365000060448201526064015b60405180910390fd5b6001600160a01b0384165f9081526002602090815260408083203384529091529020548211156103025760405162461bcd60e51b815260206004820181905260248201527f4d6f636b555344543a20696e73756666696369656e7420616c6c6f77616e63656044820152606401610287565b6001600160a01b0384165f908152600260209081526040808320338452909152812080548492906103349084906105eb565b90915550506001600160a01b0384165f90815260016020526040812080548492906103609084906105eb565b90915550506001600160a01b0383165f908152600160205260408120805484929061038c9084906105fe565b92505081905550826001600160a01b0316846001600160a01b03167fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef846040516103d891815260200190565b60405180910390a35060019392505050565b335f908152600160205260408120548211156104485760405162461bcd60e51b815260206004820152601e60248201527f4d6f636b555344543a20696e73756666696369656e742062616c616e636500006044820152606401610287565b335f90815260016020526040812080548492906104669084906105eb565b90915550506001600160a01b0383165f90815260016020526040812080548492906104929084906105fe565b90915550506040518281526001600160a01b0384169033907fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef90602001610212565b602081525f82518060208401528060208501604085015e5f604082850101526040601f19601f83011684010191505092915050565b80356001600160a01b038116811461051f575f5ffd5b919050565b5f5f60408385031215610535575f5ffd5b61053e83610509565b946020939093013593505050565b5f5f5f6060848603121561055e575f5ffd5b61056784610509565b925061057560208501610509565b929592945050506040919091013590565b5f60208284031215610596575f5ffd5b61059f82610509565b9392505050565b5f5f604083850312156105b7575f5ffd5b6105c083610509565b91506105ce60208401610509565b90509250929050565b634e487b7160e01b5f52601160045260245ffd5b8181038181111561021e5761021e6105d7565b8082018082111561021e5761021e6105d756fea2646970667358221220a5bbc64bc236f561c0308c4f9324c1cd5296def56f69af7ace1c6f4d6dd98f7464736f6c634300081e0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {},
+  "immutableReferences": {},
+  "inputSourceName": "project/contracts/MockUSDT.sol",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "evm": {
+    "gasEstimates": {
+      "creation": {
+        "codeDepositCost": "321400",
+        "executionCost": "infinite",
+        "totalCost": "infinite"
+      },
+      "external": {
+        "allowance(address,address)": "infinite",
+        "approve(address,uint256)": "24519",
+        "balanceOf(address)": "2538",
+        "decimals()": "203",
+        "name()": "infinite",
+        "symbol()": "infinite",
+        "totalSupply()": "2338",
+        "transfer(address,uint256)": "infinite",
+        "transferFrom(address,address,uint256)": "infinite"
+      },
+      "internal": {
+        "_mint(address,uint256)": "infinite"
+      }
+    }
+  },
+  "metadata": "{\"compiler\":{\"version\":\"0.8.30+commit.73712a01\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"initialSupply\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project/contracts/MockUSDT.sol\":\"MockUSDT\"},\"evmVersion\":\"prague\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\"project/:@openzeppelin/contracts/=npm/@openzeppelin/contracts@5.7.0/\"]},\"sources\":{\"project/contracts/MockUSDT.sol\":{\"content\":\"\\n// SPDX-License-Identifier: MIT\\npragma solidity >=0.8.0 <0.9.0;\\n\\ncontract MockUSDT {\\n    string public constant name = \\\"Mocks USDT\\\";\\n    string public constant symbol = \\\"USDT\\\";\\n    uint8 public constant decimals = 6;\\n\\n    uint256 public totalSupply;\\n\\n    mapping(address => uint256) public balanceOf;\\n    mapping(address => mapping(address => uint256)) public allowance;\\n\\n    event Transfer(\\n        address indexed from,\\n        address indexed to,\\n        uint256 amount\\n    );\\n\\n    event Approval(\\n        address indexed owner,\\n        address indexed spender,\\n        uint256 amount\\n    );\\n\\n    constructor(uint256 initialSupply) {\\n        _mint(msg.sender, initialSupply);\\n    }\\n\\n    function _mint(address to, uint256 amount) internal {\\n        totalSupply += amount;\\n        balanceOf[to] += amount;\\n\\n        emit Transfer(address(0), to, amount);\\n    }\\n\\n    function transfer(\\n        address to,\\n        uint256 amount\\n    ) external returns (bool) {\\n        require(\\n            balanceOf[msg.sender] >= amount,\\n            \\\"MockUSDT: insufficient balance\\\"\\n        );\\n\\n        balanceOf[msg.sender] -= amount;\\n        balanceOf[to] += amount;\\n\\n        emit Transfer(msg.sender, to, amount);\\n\\n        return true;\\n    }\\n\\n    function approve(\\n        address spender,\\n        uint256 amount\\n    ) external returns (bool) {\\n        allowance[msg.sender][spender] = amount;\\n\\n        emit Approval(msg.sender, spender, amount);\\n\\n        return true;\\n    }\\n\\n    function transferFrom(\\n        address from,\\n        address to,\\n        uint256 amount\\n    ) external returns (bool) {\\n        require(\\n            balanceOf[from] >= amount,\\n            \\\"MockUSDT: insufficient balance\\\"\\n        );\\n\\n        require(\\n            allowance[from][msg.sender] >= amount,\\n            \\\"MockUSDT: insufficient allowance\\\"\\n        );\\n\\n        allowance[from][msg.sender] -= amount;\\n        balanceOf[from] -= amount;\\n        balanceOf[to] += amount;\\n\\n        emit Transfer(from, to, amount);\\n\\n        return true;\\n    }\\n}\",\"keccak256\":\"0xdca9921bdb60591d1be106ea2686b89396ad142cf5cec2bec619ad3463b464c3\",\"license\":\"MIT\"}},\"version\":1}",
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 798,
+        "contract": "project/contracts/MockUSDT.sol:MockUSDT",
+        "label": "totalSupply",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 802,
+        "contract": "project/contracts/MockUSDT.sol:MockUSDT",
+        "label": "balanceOf",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_mapping(t_address,t_uint256)"
+      },
+      {
+        "astId": 808,
+        "contract": "project/contracts/MockUSDT.sol:MockUSDT",
+        "label": "allowance",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => mapping(address => uint256))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_address,t_uint256)"
+      },
+      "t_mapping(t_address,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "argsData": "0x000000000000000000000000000000000000000000000000000000e8d4a51000",
+  "transaction": {
+    "nonce": "0x20",
+    "hash": "0x3073bb222708232e5994c9a93a8f865b61c8f349ed8c67d001dedbaf5f1b4e60",
+    "origin": "0x0e4928df01fb0940944a570e5cf1741b62863b9f"
+  },
+  "receipt": {
+    "blockHash": "0x5a7710af5085d2f3a062e929465bab95d2aec3e2865a4bc8d96fd98d5b447455",
+    "blockNumber": "0x37b2e51",
+    "transactionIndex": "0x0"
+  },
+  "numDeployments": 2
+}

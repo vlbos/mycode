@@ -1,0 +1,241 @@
+{
+  "address": "0x1b7c0d22a12b755f95f833755b0146cd38fbabcf",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_se2",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_usdt",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_pair",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "usdtAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "buySE2",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "usdtAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "calculateSE2Amount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "depositSE2",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getDEXPrice",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "pair",
+      "outputs": [
+        {
+          "internalType": "contract IPangolinPair",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "se2",
+      "outputs": [
+        {
+          "internalType": "contract IERC20Minimal",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "se2Balance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "usdt",
+      "outputs": [
+        {
+          "internalType": "contract IERC20Minimal",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "contractName": "SE2DexSale",
+  "sourceName": "contracts/SE2DexSale.sol",
+  "bytecode": "0x60e060405234801561000f575f5ffd5b50604051610cb1380380610cb183398101604081905261002e916102bd565b6001600160a01b0383166100775760405162461bcd60e51b815260206004820152600b60248201526a34b73b30b634b21029a29960a91b60448201526064015b60405180910390fd5b6001600160a01b0382166100bc5760405162461bcd60e51b815260206004820152600c60248201526b1a5b9d985b1a59081554d11560a21b604482015260640161006e565b6001600160a01b0381166101015760405162461bcd60e51b815260206004820152600c60248201526b34b73b30b634b2103830b4b960a11b604482015260640161006e565b6001600160a01b0380841660805282811660a052811660c081905260408051630dfe168160e01b815290515f9291630dfe16819160048083019260209291908290030181865afa158015610157573d5f5f3e3d5ffd5b505050506040513d601f19601f8201168201806040525081019061017b91906102fd565b90505f60c0516001600160a01b031663d21220a76040518163ffffffff1660e01b8152600401602060405180830381865afa1580156101bc573d5f5f3e3d5ffd5b505050506040513d601f19601f820116820180604052508101906101e091906102fd565b9050846001600160a01b0316826001600160a01b03161480156102145750836001600160a01b0316816001600160a01b0316145b8061024c5750836001600160a01b0316826001600160a01b031614801561024c5750846001600160a01b0316816001600160a01b0316145b6102985760405162461bcd60e51b815260206004820152601460248201527f7061697220746f6b656e73206d69736d61746368000000000000000000000000604482015260640161006e565b505050505061031d565b80516001600160a01b03811681146102b8575f5ffd5b919050565b5f5f5f606084860312156102cf575f5ffd5b6102d8846102a2565b92506102e6602085016102a2565b91506102f4604085016102a2565b90509250925092565b5f6020828403121561030d575f5ffd5b610316826102a2565b9392505050565b60805160a05160c05161093461037d5f395f818160fd01528181610256015261033501525f818160a3015261057c01525f818161015201528181610196015281816103b9015281816104b00152818161064d015261071c01526109345ff3fe608060405234801561000f575f5ffd5b5060043610610085575f3560e01c8063b314c67b11610058578063b314c67b1461011f578063f39cf72414610132578063fc8750461461013a578063ff92b24a1461014d575f5ffd5b80632c79c2d5146100895780632f48ab7d1461009e5780637818936a146100e2578063a8aa1b31146100f8575b5f5ffd5b61009c6100973660046107d5565b610174565b005b6100c57f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160a01b0390911681526020015b60405180910390f35b6100ea610251565b6040519081526020016100d9565b6100c57f000000000000000000000000000000000000000000000000000000000000000081565b61009c61012d3660046107d5565b610442565b6100ea610705565b6100ea6101483660046107d5565b610792565b6100c57f000000000000000000000000000000000000000000000000000000000000000081565b6040516323b872dd60e01b8152336004820152306024820152604481018290527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906323b872dd906064016020604051808303815f875af11580156101e4573d5f5f3e3d5ffd5b505050506040513d601f19601f8201168201806040525081019061020891906107ec565b61024e5760405162461bcd60e51b8152602060048201526012602482015271159314c819195c1bdcda5d0819985a5b195960721b60448201526064015b60405180910390fd5b50565b5f5f5f7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316630902f1ac6040518163ffffffff1660e01b8152600401606060405180830381865afa1580156102b0573d5f5f3e3d5ffd5b505050506040513d601f19601f820116820180604052508101906102d4919061082d565b50915091505f826001600160701b03161180156102f957505f816001600160701b0316115b6103325760405162461bcd60e51b815260206004820152600a60248201526932b6b83a3c903830b4b960b11b6044820152606401610245565b5f7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316630dfe16816040518163ffffffff1660e01b8152600401602060405180830381865afa15801561038f573d5f5f3e3d5ffd5b505050506040513d601f19601f820116820180604052508101906103b39190610879565b90505f5f7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316836001600160a01b0316036104055750506001600160701b03808416908316610416565b50506001600160701b038083169084165b8161042e826c0c9f2c9cd04674edea4000000061089f565b61043891906108c8565b9550505050505090565b5f81116104845760405162461bcd60e51b815260206004820152601060248201526f1e995c9bc81554d11508185b5bdd5b9d60821b6044820152606401610245565b5f61048e82610792565b6040516370a0823160e01b815230600482015290915081906001600160a01b037f000000000000000000000000000000000000000000000000000000000000000016906370a0823190602401602060405180830381865afa1580156104f5573d5f5f3e3d5ffd5b505050506040513d601f19601f8201168201806040525081019061051991906108e7565b101561055a5760405162461bcd60e51b815260206004820152601060248201526f696e73756666696369656e7420564c5360801b6044820152606401610245565b6040516323b872dd60e01b8152336004820152306024820152604481018390527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906323b872dd906064016020604051808303815f875af11580156105ca573d5f5f3e3d5ffd5b505050506040513d601f19601f820116820180604052508101906105ee91906107ec565b6106315760405162461bcd60e51b81526020600482015260146024820152731554d115081d1c985b9cd9995c8819985a5b195960621b6044820152606401610245565b60405163a9059cbb60e01b8152336004820152602481018290527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03169063a9059cbb906044016020604051808303815f875af115801561069b573d5f5f3e3d5ffd5b505050506040513d601f19601f820116820180604052508101906106bf91906107ec565b6107015760405162461bcd60e51b8152602060048201526013602482015272159314c81d1c985b9cd9995c8819985a5b1959606a1b6044820152606401610245565b5050565b6040516370a0823160e01b81523060048201525f907f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906370a0823190602401602060405180830381865afa158015610769573d5f5f3e3d5ffd5b505050506040513d601f19601f8201168201806040525081019061078d91906108e7565b905090565b5f5f61079c610251565b90505f6107ae8464e8d4a5100061089f565b9050816107c3670de0b6b3a76400008361089f565b6107cd91906108c8565b949350505050565b5f602082840312156107e5575f5ffd5b5035919050565b5f602082840312156107fc575f5ffd5b8151801515811461080b575f5ffd5b9392505050565b80516001600160701b0381168114610828575f5ffd5b919050565b5f5f5f6060848603121561083f575f5ffd5b61084884610812565b925061085660208501610812565b9150604084015163ffffffff8116811461086e575f5ffd5b809150509250925092565b5f60208284031215610889575f5ffd5b81516001600160a01b038116811461080b575f5ffd5b80820281158282048414176108c257634e487b7160e01b5f52601160045260245ffd5b92915050565b5f826108e257634e487b7160e01b5f52601260045260245ffd5b500490565b5f602082840312156108f7575f5ffd5b505191905056fea264697066735822122046c53ba1e4637e70cc88009ae737100a67ea1a87b4b5386c9e8811c62fa7a39864736f6c634300081e0033",
+  "deployedBytecode": "0x608060405234801561000f575f5ffd5b5060043610610085575f3560e01c8063b314c67b11610058578063b314c67b1461011f578063f39cf72414610132578063fc8750461461013a578063ff92b24a1461014d575f5ffd5b80632c79c2d5146100895780632f48ab7d1461009e5780637818936a146100e2578063a8aa1b31146100f8575b5f5ffd5b61009c6100973660046107d5565b610174565b005b6100c57f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160a01b0390911681526020015b60405180910390f35b6100ea610251565b6040519081526020016100d9565b6100c57f000000000000000000000000000000000000000000000000000000000000000081565b61009c61012d3660046107d5565b610442565b6100ea610705565b6100ea6101483660046107d5565b610792565b6100c57f000000000000000000000000000000000000000000000000000000000000000081565b6040516323b872dd60e01b8152336004820152306024820152604481018290527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906323b872dd906064016020604051808303815f875af11580156101e4573d5f5f3e3d5ffd5b505050506040513d601f19601f8201168201806040525081019061020891906107ec565b61024e5760405162461bcd60e51b8152602060048201526012602482015271159314c819195c1bdcda5d0819985a5b195960721b60448201526064015b60405180910390fd5b50565b5f5f5f7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316630902f1ac6040518163ffffffff1660e01b8152600401606060405180830381865afa1580156102b0573d5f5f3e3d5ffd5b505050506040513d601f19601f820116820180604052508101906102d4919061082d565b50915091505f826001600160701b03161180156102f957505f816001600160701b0316115b6103325760405162461bcd60e51b815260206004820152600a60248201526932b6b83a3c903830b4b960b11b6044820152606401610245565b5f7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316630dfe16816040518163ffffffff1660e01b8152600401602060405180830381865afa15801561038f573d5f5f3e3d5ffd5b505050506040513d601f19601f820116820180604052508101906103b39190610879565b90505f5f7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316836001600160a01b0316036104055750506001600160701b03808416908316610416565b50506001600160701b038083169084165b8161042e826c0c9f2c9cd04674edea4000000061089f565b61043891906108c8565b9550505050505090565b5f81116104845760405162461bcd60e51b815260206004820152601060248201526f1e995c9bc81554d11508185b5bdd5b9d60821b6044820152606401610245565b5f61048e82610792565b6040516370a0823160e01b815230600482015290915081906001600160a01b037f000000000000000000000000000000000000000000000000000000000000000016906370a0823190602401602060405180830381865afa1580156104f5573d5f5f3e3d5ffd5b505050506040513d601f19601f8201168201806040525081019061051991906108e7565b101561055a5760405162461bcd60e51b815260206004820152601060248201526f696e73756666696369656e7420564c5360801b6044820152606401610245565b6040516323b872dd60e01b8152336004820152306024820152604481018390527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906323b872dd906064016020604051808303815f875af11580156105ca573d5f5f3e3d5ffd5b505050506040513d601f19601f820116820180604052508101906105ee91906107ec565b6106315760405162461bcd60e51b81526020600482015260146024820152731554d115081d1c985b9cd9995c8819985a5b195960621b6044820152606401610245565b60405163a9059cbb60e01b8152336004820152602481018290527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03169063a9059cbb906044016020604051808303815f875af115801561069b573d5f5f3e3d5ffd5b505050506040513d601f19601f820116820180604052508101906106bf91906107ec565b6107015760405162461bcd60e51b8152602060048201526013602482015272159314c81d1c985b9cd9995c8819985a5b1959606a1b6044820152606401610245565b5050565b6040516370a0823160e01b81523060048201525f907f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906370a0823190602401602060405180830381865afa158015610769573d5f5f3e3d5ffd5b505050506040513d601f19601f8201168201806040525081019061078d91906108e7565b905090565b5f5f61079c610251565b90505f6107ae8464e8d4a5100061089f565b9050816107c3670de0b6b3a76400008361089f565b6107cd91906108c8565b949350505050565b5f602082840312156107e5575f5ffd5b5035919050565b5f602082840312156107fc575f5ffd5b8151801515811461080b575f5ffd5b9392505050565b80516001600160701b0381168114610828575f5ffd5b919050565b5f5f5f6060848603121561083f575f5ffd5b61084884610812565b925061085660208501610812565b9150604084015163ffffffff8116811461086e575f5ffd5b809150509250925092565b5f60208284031215610889575f5ffd5b81516001600160a01b038116811461080b575f5ffd5b80820281158282048414176108c257634e487b7160e01b5f52601160045260245ffd5b92915050565b5f826108e257634e487b7160e01b5f52601260045260245ffd5b500490565b5f602082840312156108f7575f5ffd5b505191905056fea264697066735822122046c53ba1e4637e70cc88009ae737100a67ea1a87b4b5386c9e8811c62fa7a39864736f6c634300081e0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {},
+  "immutableReferences": {
+    "263": [
+      {
+        "length": 32,
+        "start": 338
+      },
+      {
+        "length": 32,
+        "start": 406
+      },
+      {
+        "length": 32,
+        "start": 953
+      },
+      {
+        "length": 32,
+        "start": 1200
+      },
+      {
+        "length": 32,
+        "start": 1613
+      },
+      {
+        "length": 32,
+        "start": 1820
+      }
+    ],
+    "266": [
+      {
+        "length": 32,
+        "start": 163
+      },
+      {
+        "length": 32,
+        "start": 1404
+      }
+    ],
+    "269": [
+      {
+        "length": 32,
+        "start": 253
+      },
+      {
+        "length": 32,
+        "start": 598
+      },
+      {
+        "length": 32,
+        "start": 821
+      }
+    ]
+  },
+  "inputSourceName": "project/contracts/SE2DexSale.sol",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "evm": {
+    "gasEstimates": {
+      "creation": {
+        "codeDepositCost": "471200",
+        "executionCost": "infinite",
+        "totalCost": "infinite"
+      },
+      "external": {
+        "buySE2(uint256)": "infinite",
+        "calculateSE2Amount(uint256)": "infinite",
+        "depositSE2(uint256)": "infinite",
+        "getDEXPrice()": "infinite",
+        "pair()": "infinite",
+        "se2()": "infinite",
+        "se2Balance()": "infinite",
+        "usdt()": "infinite"
+      }
+    }
+  },
+  "metadata": "{\"compiler\":{\"version\":\"0.8.30+commit.73712a01\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_se2\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_usdt\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_pair\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"usdtAmount\",\"type\":\"uint256\"}],\"name\":\"buySE2\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"usdtAmount\",\"type\":\"uint256\"}],\"name\":\"calculateSE2Amount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"depositSE2\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getDEXPrice\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"pair\",\"outputs\":[{\"internalType\":\"contract IPangolinPair\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"se2\",\"outputs\":[{\"internalType\":\"contract IERC20Minimal\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"se2Balance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"usdt\",\"outputs\":[{\"internalType\":\"contract IERC20Minimal\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project/contracts/SE2DexSale.sol\":\"SE2DexSale\"},\"evmVersion\":\"prague\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project/contracts/SE2DexSale.sol\":{\"content\":\"\\n// SPDX-License-Identifier: MIT\\npragma solidity >=0.8.0 <0.9.0;\\n\\ninterface IERC20Minimal {\\n    function balanceOf(address account)\\n        external\\n        view\\n        returns (uint256);\\n\\n    function transfer(address to, uint256 amount)\\n        external\\n        returns (bool);\\n\\n    function transferFrom(\\n        address from,\\n        address to,\\n        uint256 amount\\n    ) external returns (bool);\\n}\\n\\ninterface IPangolinPair {\\n    function token0()\\n        external\\n        view\\n        returns (address);\\n\\n    function token1()\\n        external\\n        view\\n        returns (address);\\n\\n    function getReserves()\\n        external\\n        view\\n        returns (\\n            uint112 reserve0,\\n            uint112 reserve1,\\n            uint32 blockTimestampLast\\n        );\\n}\\n\\ncontract SE2DexSale {\\n    IERC20Minimal public immutable se2;\\n    IERC20Minimal public immutable usdt;\\n    IPangolinPair public immutable pair;\\n\\n    uint256 private constant PRICE_SCALE = 1e18;\\n\\n    constructor(\\n        address _se2,\\n        address _usdt,\\n        address _pair\\n    ) {\\n        require(_se2 != address(0), \\\"invalid SE2\\\");\\n        require(_usdt != address(0), \\\"invalid USDT\\\");\\n        require(_pair != address(0), \\\"invalid pair\\\");\\n\\n        se2 = IERC20Minimal(_se2);\\n        usdt = IERC20Minimal(_usdt);\\n        pair = IPangolinPair(_pair);\\n\\n        address token0 = pair.token0();\\n        address token1 = pair.token1();\\n\\n        require(\\n            (token0 == _se2 && token1 == _usdt) ||\\n            (token0 == _usdt && token1 == _se2),\\n            \\\"pair tokens mismatch\\\"\\n        );\\n    }\\n\\n    /*\\n     * Returns the DEX price of 1 VLS in USDT.\\n     *\\n     * Result uses 18 decimals.\\n     *\\n     * Example:\\n     *\\n     * 10,000 VLS\\n     * 2,000 USDT\\n     *\\n     * price = 0.2 USDT/VLS\\n     *\\n     * return = 200000000000000000\\n     */\\n    function getDEXPrice()\\n        public\\n        view\\n        returns (uint256)\\n    {\\n        (\\n            uint112 reserve0,\\n            uint112 reserve1,\\n\\n        ) = pair.getReserves();\\n\\n        require(\\n            reserve0 > 0 && reserve1 > 0,\\n            \\\"empty pair\\\"\\n        );\\n\\n        address token0 = pair.token0();\\n\\n        uint256 vlsReserve;\\n        uint256 usdtReserve;\\n\\n        if (token0 == address(se2)) {\\n            vlsReserve = uint256(reserve0);\\n            usdtReserve = uint256(reserve1);\\n        } else {\\n            vlsReserve = uint256(reserve1);\\n            usdtReserve = uint256(reserve0);\\n        }\\n\\n        /*\\n         * VLS = 18 decimals\\n         * USDT = 6 decimals\\n         *\\n         * Raw ratio:\\n         *\\n         * USDT raw / VLS raw\\n         *\\n         * Convert to an 18-decimal USDT/VLS price:\\n         *\\n         * reserveUSDT * 1e30 / reserveVLS\\n         */\\n        return\\n            (usdtReserve * 1e30)\\n            / vlsReserve;\\n    }\\n\\n    /*\\n     * Converts a USDT amount (6 decimals)\\n     * into the corresponding VLS amount (18 decimals)\\n     * using the current DEX reserve price.\\n     */\\n    function calculateSE2Amount(\\n        uint256 usdtAmount\\n    ) public view returns (uint256) {\\n        uint256 price = getDEXPrice();\\n\\n        /*\\n         * Convert USDT from 6 decimals to 18 decimals.\\n         */\\n        uint256 usdt18 = usdtAmount * 1e12;\\n\\n        /*\\n         * VLS amount = USDT value / VLS price.\\n         */\\n        return\\n            (usdt18 * PRICE_SCALE)\\n            / price;\\n    }\\n\\n    /*\\n     * Buy VLS using MockUSDT.\\n     *\\n     * The amount of VLS is calculated from\\n     * the current Pangolin pair reserves.\\n     */\\n    function buySE2(\\n        uint256 usdtAmount\\n    ) external {\\n        require(\\n            usdtAmount > 0,\\n            \\\"zero USDT amount\\\"\\n        );\\n\\n        uint256 se2Amount =\\n            calculateSE2Amount(usdtAmount);\\n\\n        require(\\n            se2.balanceOf(address(this)) >= se2Amount,\\n            \\\"insufficient VLS\\\"\\n        );\\n\\n        require(\\n            usdt.transferFrom(\\n                msg.sender,\\n                address(this),\\n                usdtAmount\\n            ),\\n            \\\"USDT transfer failed\\\"\\n        );\\n\\n        require(\\n            se2.transfer(\\n                msg.sender,\\n                se2Amount\\n            ),\\n            \\\"VLS transfer failed\\\"\\n        );\\n    }\\n\\n    /*\\n     * Deposit VLS into this sale contract.\\n     */\\n    function depositSE2(\\n        uint256 amount\\n    ) external {\\n        require(\\n            se2.transferFrom(\\n                msg.sender,\\n                address(this),\\n                amount\\n            ),\\n            \\\"VLS deposit failed\\\"\\n        );\\n    }\\n\\n    function se2Balance()\\n        external\\n        view\\n        returns (uint256)\\n    {\\n        return se2.balanceOf(address(this));\\n    }\\n}\",\"keccak256\":\"0x50eb552f3924c11836aa279d224c237df0158b0c13063f04b6bd5451775659a0\",\"license\":\"MIT\"}},\"version\":1}",
+  "storageLayout": {
+    "storage": [],
+    "types": null
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "argsData": "0x0000000000000000000000003aebfb8e93cb3694167dd797b2de278204397a4e0000000000000000000000004f5698b9d63eef8c0bd2b7a8faeda032fb270380000000000000000000000000c79496d1fb567a207fcebd2ff1b0611bb07849b2",
+  "transaction": {
+    "hash": "0xc5e0da8d299bf55963cc93e078ce668abf13b1a81ffb382cac1863121eda5489",
+    "nonce": "0x22",
+    "origin": "0x0e4928df01fb0940944a570e5cf1741b62863b9f"
+  },
+  "receipt": {
+    "blockHash": "0x0d15375a88760689ad7028071903eade33ebeb92c28f436b47ff32c0ebb838f3",
+    "blockNumber": "0x37b2e6f",
+    "transactionIndex": "0x0"
+  },
+  "numDeployments": 2
+}

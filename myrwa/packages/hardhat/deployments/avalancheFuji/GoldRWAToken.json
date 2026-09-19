@@ -1,0 +1,1050 @@
+{
+  "address": "0x485a159d1ab25d3443482bd9ba4501e3c9622808",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "initialAssetDocument",
+          "type": "string"
+        },
+        {
+          "internalType": "address",
+          "name": "admin",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "AccessControlBadConfirmation",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "neededRole",
+          "type": "bytes32"
+        }
+      ],
+      "name": "AccessControlUnauthorizedAccount",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "allowance",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "needed",
+          "type": "uint256"
+        }
+      ],
+      "name": "ERC20InsufficientAllowance",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "balance",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "needed",
+          "type": "uint256"
+        }
+      ],
+      "name": "ERC20InsufficientBalance",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "approver",
+          "type": "address"
+        }
+      ],
+      "name": "ERC20InvalidApprover",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "receiver",
+          "type": "address"
+        }
+      ],
+      "name": "ERC20InvalidReceiver",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "ERC20InvalidSender",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        }
+      ],
+      "name": "ERC20InvalidSpender",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Approval",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "oldDocument",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "newDocument",
+          "type": "string"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "updater",
+          "type": "address"
+        }
+      ],
+      "name": "AssetDocumentUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "previousAdminRole",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "newAdminRole",
+          "type": "bytes32"
+        }
+      ],
+      "name": "RoleAdminChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "RoleGranted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "RoleRevoked",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "TokensBurned",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "minter",
+          "type": "address"
+        }
+      ],
+      "name": "TokensMinted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Transfer",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "ASSET_MANAGER_ROLE",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "DEFAULT_ADMIN_ROLE",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MINTER_ROLE",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        }
+      ],
+      "name": "allowance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "approve",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "assetDocument",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "balanceOf",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "burn",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "decimals",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getRoleAdmin",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "grantRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "hasRole",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "mint",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "name",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "callerConfirmation",
+          "type": "address"
+        }
+      ],
+      "name": "renounceRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "revokeRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "interfaceId",
+          "type": "bytes4"
+        }
+      ],
+      "name": "supportsInterface",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "symbol",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "transfer",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "transferFrom",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "document",
+          "type": "string"
+        }
+      ],
+      "name": "updateAssetDocument",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "contractName": "GoldRWAToken",
+  "sourceName": "contracts/GoldRWAToken.sol",
+  "bytecode": "0x608060405234801561000f575f5ffd5b5060405161149138038061149183398101604081905261002e9161022c565b6040518060400160405280600e81526020016d23b7b63210292ba0902a37b5b2b760911b8152506040518060400160405280600481526020016323a6222960e11b81525081600390816100819190610371565b50600461008e8282610371565b5050506001600160a01b0381166100db5760405162461bcd60e51b815260206004820152600d60248201526c24b73b30b634b21030b236b4b760991b604482015260640160405180910390fd5b6100e55f82610150565b506101107f9f2df0fed2c77648de5860a4cc508cd0818c85b8b8a1ab4ceeef8d981c8956a682610150565b5061013b7fb1fadd3142ab2ad7f1337ea4d97112bcc8337fc11ce5b20cb04ad038adf9981982610150565b5060066101488382610371565b50505061042b565b5f8281526005602090815260408083206001600160a01b038516845290915281205460ff166101f4575f8381526005602090815260408083206001600160a01b03861684529091529020805460ff191660011790556101ac3390565b6001600160a01b0316826001600160a01b0316847f2f8788117e7eff1d82e926ec794901d17c78024a50270940304540a733656f0d60405160405180910390a45060016101f7565b505f5b92915050565b634e487b7160e01b5f52604160045260245ffd5b80516001600160a01b0381168114610227575f5ffd5b919050565b5f5f6040838503121561023d575f5ffd5b82516001600160401b03811115610252575f5ffd5b8301601f81018513610262575f5ffd5b80516001600160401b0381111561027b5761027b6101fd565b604051601f8201601f19908116603f011681016001600160401b03811182821017156102a9576102a96101fd565b6040528181528282016020018710156102c0575f5ffd5b8160208401602083015e5f602083830101528094505050506102e460208401610211565b90509250929050565b600181811c9082168061030157607f821691505b60208210810361031f57634e487b7160e01b5f52602260045260245ffd5b50919050565b601f82111561036c57805f5260205f20601f840160051c8101602085101561034a5750805b601f840160051c820191505b81811015610369575f8155600101610356565b50505b505050565b81516001600160401b0381111561038a5761038a6101fd565b61039e8161039884546102ed565b84610325565b6020601f8211600181146103d0575f83156103b95750848201515b5f19600385901b1c1916600184901b178455610369565b5f84815260208120601f198516915b828110156103ff57878501518255602094850194600190920191016103df565b508482101561041c57868401515f19600387901b60f8161c191681555b50505050600190811b01905550565b611059806104385f395ff3fe608060405234801561000f575f5ffd5b506004361061013d575f3560e01c806342966c68116100b4578063a217fddf11610079578063a217fddf14610293578063a4b32de81461029a578063a9059cbb146102c1578063d5391393146102d4578063d547741f146102fb578063dd62ed3e1461030e575f5ffd5b806342966c681461022a57806370a082311461023d5780638761e51a1461026557806391d148541461027857806395d89b411461028b575f5ffd5b806323b872dd1161010557806323b872dd146101ab578063248a9ca3146101be5780632f2ff15d146101e0578063313ce567146101f557806336568abe1461020457806340c10f1914610217575f5ffd5b806301ffc9a71461014157806306fdde0314610169578063095ea7b31461017e5780630ef655b41461019157806318160ddd14610199575b5f5ffd5b61015461014f366004610c94565b610346565b60405190151581526020015b60405180910390f35b61017161037c565b6040516101609190610cf0565b61015461018c366004610d1d565b61040c565b610171610423565b6002545b604051908152602001610160565b6101546101b9366004610d45565b610432565b61019d6101cc366004610d7f565b5f9081526005602052604090206001015490565b6101f36101ee366004610d96565b610455565b005b60405160128152602001610160565b6101f3610212366004610d96565b61047f565b6101f3610225366004610d1d565b6104b7565b6101f3610238366004610d7f565b6105cf565b61019d61024b366004610dc0565b6001600160a01b03165f9081526020819052604090205490565b6101f3610273366004610dd9565b610660565b610154610286366004610d96565b6107b1565b6101716107db565b61019d5f81565b61019d7fb1fadd3142ab2ad7f1337ea4d97112bcc8337fc11ce5b20cb04ad038adf9981981565b6101546102cf366004610d1d565b6107ea565b61019d7f9f2df0fed2c77648de5860a4cc508cd0818c85b8b8a1ab4ceeef8d981c8956a681565b6101f3610309366004610d96565b6107f7565b61019d61031c366004610e47565b6001600160a01b039182165f90815260016020908152604080832093909416825291909152205490565b5f6001600160e01b03198216637965db0b60e01b148061037657506301ffc9a760e01b6001600160e01b03198316145b92915050565b60606003805461038b90610e6f565b80601f01602080910402602001604051908101604052809291908181526020018280546103b790610e6f565b80156104025780601f106103d957610100808354040283529160200191610402565b820191905f5260205f20905b8154815290600101906020018083116103e557829003601f168201915b5050505050905090565b5f3361041981858561081b565b5060019392505050565b60606006805461038b90610e6f565b5f3361043f858285610828565b61044a85858561089e565b506001949350505050565b5f8281526005602052604090206001015461046f816108fb565b6104798383610908565b50505050565b6001600160a01b03811633146104a85760405163334bd91960e11b815260040160405180910390fd5b6104b28282610999565b505050565b7f9f2df0fed2c77648de5860a4cc508cd0818c85b8b8a1ab4ceeef8d981c8956a66104e1816108fb565b6001600160a01b0383166105305760405162461bcd60e51b8152602060048201526011602482015270125b9d985b1a59081c9958da5c1a595b9d607a1b60448201526064015b60405180910390fd5b5f821161057f5760405162461bcd60e51b815260206004820181905260248201527f416d6f756e74206d7573742062652067726561746572207468616e207a65726f6044820152606401610527565b6105898383610a04565b60405182815233906001600160a01b038516907f969cd201f68f120baff2bf3c59bc3b534434e08b69a71a14ab85cb79cd3b63e4906020015b60405180910390a3505050565b5f811161061e5760405162461bcd60e51b815260206004820181905260248201527f416d6f756e74206d7573742062652067726561746572207468616e207a65726f6044820152606401610527565b6106283382610a3c565b60405181815233907ffd38818f5291bf0bb3a2a48aadc06ba8757865d1dabd804585338aab3009dcb69060200160405180910390a250565b7fb1fadd3142ab2ad7f1337ea4d97112bcc8337fc11ce5b20cb04ad038adf9981961068a816108fb565b816106c85760405162461bcd60e51b815260206004820152600e60248201526d115b5c1d1e48191bd8dd5b595b9d60921b6044820152606401610527565b5f600680546106d690610e6f565b80601f016020809104026020016040519081016040528092919081815260200182805461070290610e6f565b801561074d5780601f106107245761010080835404028352916020019161074d565b820191905f5260205f20905b81548152906001019060200180831161073057829003601f168201915b50505050509050838360069182610765929190610f06565b50336001600160a01b03167fc860501571adcf2afff0b8d3f7d1a63202c597a43ecd5aea848340c92daeb09c8286866040516107a393929190610fc0565b60405180910390a250505050565b5f9182526005602090815260408084206001600160a01b0393909316845291905290205460ff1690565b60606004805461038b90610e6f565b5f3361041981858561089e565b5f82815260056020526040902060010154610811816108fb565b6104798383610999565b6104b28383836001610a70565b6001600160a01b038381165f908152600160209081526040808320938616835292905220545f19811015610479578181101561089057604051637dc7a0d960e11b81526001600160a01b03841660048201526024810182905260448101839052606401610527565b61047984848484035f610a70565b6001600160a01b0383166108c757604051634b637e8f60e11b81525f6004820152602401610527565b6001600160a01b0382166108f05760405163ec442f0560e01b81525f6004820152602401610527565b6104b2838383610b42565b6109058133610c5b565b50565b5f61091383836107b1565b610992575f8381526005602090815260408083206001600160a01b03861684529091529020805460ff1916600117905561094a3390565b6001600160a01b0316826001600160a01b0316847f2f8788117e7eff1d82e926ec794901d17c78024a50270940304540a733656f0d60405160405180910390a4506001610376565b505f610376565b5f6109a483836107b1565b15610992575f8381526005602090815260408083206001600160a01b0386168085529252808320805460ff1916905551339286917ff6391f5c32d9c69d2a47ea670b442974b53935d1edc7fd64eb21e047a839171b9190a4506001610376565b6001600160a01b038216610a2d5760405163ec442f0560e01b81525f6004820152602401610527565b610a385f8383610b42565b5050565b6001600160a01b038216610a6557604051634b637e8f60e11b81525f6004820152602401610527565b610a38825f83610b42565b6001600160a01b038416610a995760405163e602df0560e01b81525f6004820152602401610527565b6001600160a01b038316610ac257604051634a1406b160e11b81525f6004820152602401610527565b6001600160a01b038085165f908152600160209081526040808320938716835292905220829055801561047957826001600160a01b0316846001600160a01b03167f8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b92584604051610b3491815260200190565b60405180910390a350505050565b6001600160a01b038316610b6c578060025f828254610b619190611004565b90915550610bdc9050565b6001600160a01b0383165f9081526020819052604090205481811015610bbe5760405163391434e360e21b81526001600160a01b03851660048201526024810182905260448101839052606401610527565b6001600160a01b0384165f9081526020819052604090209082900390555b6001600160a01b038216610bf857600280548290039055610c16565b6001600160a01b0382165f9081526020819052604090208054820190555b816001600160a01b0316836001600160a01b03167fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef836040516105c291815260200190565b610c6582826107b1565b610a385760405163e2517d3f60e01b81526001600160a01b038216600482015260248101839052604401610527565b5f60208284031215610ca4575f5ffd5b81356001600160e01b031981168114610cbb575f5ffd5b9392505050565b5f81518084528060208401602086015e5f602082860101526020601f19601f83011685010191505092915050565b602081525f610cbb6020830184610cc2565b80356001600160a01b0381168114610d18575f5ffd5b919050565b5f5f60408385031215610d2e575f5ffd5b610d3783610d02565b946020939093013593505050565b5f5f5f60608486031215610d57575f5ffd5b610d6084610d02565b9250610d6e60208501610d02565b929592945050506040919091013590565b5f60208284031215610d8f575f5ffd5b5035919050565b5f5f60408385031215610da7575f5ffd5b82359150610db760208401610d02565b90509250929050565b5f60208284031215610dd0575f5ffd5b610cbb82610d02565b5f5f60208385031215610dea575f5ffd5b823567ffffffffffffffff811115610e00575f5ffd5b8301601f81018513610e10575f5ffd5b803567ffffffffffffffff811115610e26575f5ffd5b856020828401011115610e37575f5ffd5b6020919091019590945092505050565b5f5f60408385031215610e58575f5ffd5b610e6183610d02565b9150610db760208401610d02565b600181811c90821680610e8357607f821691505b602082108103610ea157634e487b7160e01b5f52602260045260245ffd5b50919050565b634e487b7160e01b5f52604160045260245ffd5b601f8211156104b257805f5260205f20601f840160051c81016020851015610ee05750805b601f840160051c820191505b81811015610eff575f8155600101610eec565b5050505050565b67ffffffffffffffff831115610f1e57610f1e610ea7565b610f3283610f2c8354610e6f565b83610ebb565b5f601f841160018114610f63575f8515610f4c5750838201355b5f19600387901b1c1916600186901b178355610eff565b5f83815260208120601f198716915b82811015610f925786850135825560209485019460019092019101610f72565b5086821015610fae575f1960f88860031b161c19848701351681555b505060018560011b0183555050505050565b604081525f610fd26040830186610cc2565b8281036020840152838152838560208301375f602085830101526020601f19601f860116820101915050949350505050565b8082018082111561037657634e487b7160e01b5f52601160045260245ffdfea264697066735822122025cd9b6e2634ed5067344ef6c6beb682d5068a540c3472c692d59dad1137e8e064736f6c634300081e0033",
+  "deployedBytecode": "0x608060405234801561000f575f5ffd5b506004361061013d575f3560e01c806342966c68116100b4578063a217fddf11610079578063a217fddf14610293578063a4b32de81461029a578063a9059cbb146102c1578063d5391393146102d4578063d547741f146102fb578063dd62ed3e1461030e575f5ffd5b806342966c681461022a57806370a082311461023d5780638761e51a1461026557806391d148541461027857806395d89b411461028b575f5ffd5b806323b872dd1161010557806323b872dd146101ab578063248a9ca3146101be5780632f2ff15d146101e0578063313ce567146101f557806336568abe1461020457806340c10f1914610217575f5ffd5b806301ffc9a71461014157806306fdde0314610169578063095ea7b31461017e5780630ef655b41461019157806318160ddd14610199575b5f5ffd5b61015461014f366004610c94565b610346565b60405190151581526020015b60405180910390f35b61017161037c565b6040516101609190610cf0565b61015461018c366004610d1d565b61040c565b610171610423565b6002545b604051908152602001610160565b6101546101b9366004610d45565b610432565b61019d6101cc366004610d7f565b5f9081526005602052604090206001015490565b6101f36101ee366004610d96565b610455565b005b60405160128152602001610160565b6101f3610212366004610d96565b61047f565b6101f3610225366004610d1d565b6104b7565b6101f3610238366004610d7f565b6105cf565b61019d61024b366004610dc0565b6001600160a01b03165f9081526020819052604090205490565b6101f3610273366004610dd9565b610660565b610154610286366004610d96565b6107b1565b6101716107db565b61019d5f81565b61019d7fb1fadd3142ab2ad7f1337ea4d97112bcc8337fc11ce5b20cb04ad038adf9981981565b6101546102cf366004610d1d565b6107ea565b61019d7f9f2df0fed2c77648de5860a4cc508cd0818c85b8b8a1ab4ceeef8d981c8956a681565b6101f3610309366004610d96565b6107f7565b61019d61031c366004610e47565b6001600160a01b039182165f90815260016020908152604080832093909416825291909152205490565b5f6001600160e01b03198216637965db0b60e01b148061037657506301ffc9a760e01b6001600160e01b03198316145b92915050565b60606003805461038b90610e6f565b80601f01602080910402602001604051908101604052809291908181526020018280546103b790610e6f565b80156104025780601f106103d957610100808354040283529160200191610402565b820191905f5260205f20905b8154815290600101906020018083116103e557829003601f168201915b5050505050905090565b5f3361041981858561081b565b5060019392505050565b60606006805461038b90610e6f565b5f3361043f858285610828565b61044a85858561089e565b506001949350505050565b5f8281526005602052604090206001015461046f816108fb565b6104798383610908565b50505050565b6001600160a01b03811633146104a85760405163334bd91960e11b815260040160405180910390fd5b6104b28282610999565b505050565b7f9f2df0fed2c77648de5860a4cc508cd0818c85b8b8a1ab4ceeef8d981c8956a66104e1816108fb565b6001600160a01b0383166105305760405162461bcd60e51b8152602060048201526011602482015270125b9d985b1a59081c9958da5c1a595b9d607a1b60448201526064015b60405180910390fd5b5f821161057f5760405162461bcd60e51b815260206004820181905260248201527f416d6f756e74206d7573742062652067726561746572207468616e207a65726f6044820152606401610527565b6105898383610a04565b60405182815233906001600160a01b038516907f969cd201f68f120baff2bf3c59bc3b534434e08b69a71a14ab85cb79cd3b63e4906020015b60405180910390a3505050565b5f811161061e5760405162461bcd60e51b815260206004820181905260248201527f416d6f756e74206d7573742062652067726561746572207468616e207a65726f6044820152606401610527565b6106283382610a3c565b60405181815233907ffd38818f5291bf0bb3a2a48aadc06ba8757865d1dabd804585338aab3009dcb69060200160405180910390a250565b7fb1fadd3142ab2ad7f1337ea4d97112bcc8337fc11ce5b20cb04ad038adf9981961068a816108fb565b816106c85760405162461bcd60e51b815260206004820152600e60248201526d115b5c1d1e48191bd8dd5b595b9d60921b6044820152606401610527565b5f600680546106d690610e6f565b80601f016020809104026020016040519081016040528092919081815260200182805461070290610e6f565b801561074d5780601f106107245761010080835404028352916020019161074d565b820191905f5260205f20905b81548152906001019060200180831161073057829003601f168201915b50505050509050838360069182610765929190610f06565b50336001600160a01b03167fc860501571adcf2afff0b8d3f7d1a63202c597a43ecd5aea848340c92daeb09c8286866040516107a393929190610fc0565b60405180910390a250505050565b5f9182526005602090815260408084206001600160a01b0393909316845291905290205460ff1690565b60606004805461038b90610e6f565b5f3361041981858561089e565b5f82815260056020526040902060010154610811816108fb565b6104798383610999565b6104b28383836001610a70565b6001600160a01b038381165f908152600160209081526040808320938616835292905220545f19811015610479578181101561089057604051637dc7a0d960e11b81526001600160a01b03841660048201526024810182905260448101839052606401610527565b61047984848484035f610a70565b6001600160a01b0383166108c757604051634b637e8f60e11b81525f6004820152602401610527565b6001600160a01b0382166108f05760405163ec442f0560e01b81525f6004820152602401610527565b6104b2838383610b42565b6109058133610c5b565b50565b5f61091383836107b1565b610992575f8381526005602090815260408083206001600160a01b03861684529091529020805460ff1916600117905561094a3390565b6001600160a01b0316826001600160a01b0316847f2f8788117e7eff1d82e926ec794901d17c78024a50270940304540a733656f0d60405160405180910390a4506001610376565b505f610376565b5f6109a483836107b1565b15610992575f8381526005602090815260408083206001600160a01b0386168085529252808320805460ff1916905551339286917ff6391f5c32d9c69d2a47ea670b442974b53935d1edc7fd64eb21e047a839171b9190a4506001610376565b6001600160a01b038216610a2d5760405163ec442f0560e01b81525f6004820152602401610527565b610a385f8383610b42565b5050565b6001600160a01b038216610a6557604051634b637e8f60e11b81525f6004820152602401610527565b610a38825f83610b42565b6001600160a01b038416610a995760405163e602df0560e01b81525f6004820152602401610527565b6001600160a01b038316610ac257604051634a1406b160e11b81525f6004820152602401610527565b6001600160a01b038085165f908152600160209081526040808320938716835292905220829055801561047957826001600160a01b0316846001600160a01b03167f8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b92584604051610b3491815260200190565b60405180910390a350505050565b6001600160a01b038316610b6c578060025f828254610b619190611004565b90915550610bdc9050565b6001600160a01b0383165f9081526020819052604090205481811015610bbe5760405163391434e360e21b81526001600160a01b03851660048201526024810182905260448101839052606401610527565b6001600160a01b0384165f9081526020819052604090209082900390555b6001600160a01b038216610bf857600280548290039055610c16565b6001600160a01b0382165f9081526020819052604090208054820190555b816001600160a01b0316836001600160a01b03167fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef836040516105c291815260200190565b610c6582826107b1565b610a385760405163e2517d3f60e01b81526001600160a01b038216600482015260248101839052604401610527565b5f60208284031215610ca4575f5ffd5b81356001600160e01b031981168114610cbb575f5ffd5b9392505050565b5f81518084528060208401602086015e5f602082860101526020601f19601f83011685010191505092915050565b602081525f610cbb6020830184610cc2565b80356001600160a01b0381168114610d18575f5ffd5b919050565b5f5f60408385031215610d2e575f5ffd5b610d3783610d02565b946020939093013593505050565b5f5f5f60608486031215610d57575f5ffd5b610d6084610d02565b9250610d6e60208501610d02565b929592945050506040919091013590565b5f60208284031215610d8f575f5ffd5b5035919050565b5f5f60408385031215610da7575f5ffd5b82359150610db760208401610d02565b90509250929050565b5f60208284031215610dd0575f5ffd5b610cbb82610d02565b5f5f60208385031215610dea575f5ffd5b823567ffffffffffffffff811115610e00575f5ffd5b8301601f81018513610e10575f5ffd5b803567ffffffffffffffff811115610e26575f5ffd5b856020828401011115610e37575f5ffd5b6020919091019590945092505050565b5f5f60408385031215610e58575f5ffd5b610e6183610d02565b9150610db760208401610d02565b600181811c90821680610e8357607f821691505b602082108103610ea157634e487b7160e01b5f52602260045260245ffd5b50919050565b634e487b7160e01b5f52604160045260245ffd5b601f8211156104b257805f5260205f20601f840160051c81016020851015610ee05750805b601f840160051c820191505b81811015610eff575f8155600101610eec565b5050505050565b67ffffffffffffffff831115610f1e57610f1e610ea7565b610f3283610f2c8354610e6f565b83610ebb565b5f601f841160018114610f63575f8515610f4c5750838201355b5f19600387901b1c1916600186901b178355610eff565b5f83815260208120601f198716915b82811015610f925786850135825560209485019460019092019101610f72565b5086821015610fae575f1960f88860031b161c19848701351681555b505060018560011b0183555050505050565b604081525f610fd26040830186610cc2565b8281036020840152838152838560208301375f602085830101526020601f19601f860116820101915050949350505050565b8082018082111561037657634e487b7160e01b5f52601160045260245ffdfea264697066735822122025cd9b6e2634ed5067344ef6c6beb682d5068a540c3472c692d59dad1137e8e064736f6c634300081e0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {},
+  "immutableReferences": {},
+  "inputSourceName": "project/contracts/GoldRWAToken.sol",
+  "devdoc": {
+    "errors": {
+      "AccessControlBadConfirmation()": [
+        {
+          "details": "The caller of a function is not the expected one. NOTE: Don't confuse with {AccessControlUnauthorizedAccount}."
+        }
+      ],
+      "AccessControlUnauthorizedAccount(address,bytes32)": [
+        {
+          "details": "The `account` is missing a role."
+        }
+      ],
+      "ERC20InsufficientAllowance(address,uint256,uint256)": [
+        {
+          "details": "Indicates a failure with the `spender`’s `allowance`. Used in transfers.",
+          "params": {
+            "allowance": "Amount of tokens a `spender` is allowed to operate with.",
+            "needed": "Minimum amount required to perform a transfer.",
+            "spender": "Address that may be allowed to operate on tokens without being their owner."
+          }
+        }
+      ],
+      "ERC20InsufficientBalance(address,uint256,uint256)": [
+        {
+          "details": "Indicates an error related to the current `balance` of a `sender`. Used in transfers.",
+          "params": {
+            "balance": "Current balance for the interacting account.",
+            "needed": "Minimum amount required to perform a transfer.",
+            "sender": "Address whose tokens are being transferred."
+          }
+        }
+      ],
+      "ERC20InvalidApprover(address)": [
+        {
+          "details": "Indicates a failure with the `approver` of a token to be approved. Used in approvals.",
+          "params": {
+            "approver": "Address initiating an approval operation."
+          }
+        }
+      ],
+      "ERC20InvalidReceiver(address)": [
+        {
+          "details": "Indicates a failure with the token `receiver`. Used in transfers.",
+          "params": {
+            "receiver": "Address to which tokens are being transferred."
+          }
+        }
+      ],
+      "ERC20InvalidSender(address)": [
+        {
+          "details": "Indicates a failure with the token `sender`. Used in transfers.",
+          "params": {
+            "sender": "Address whose tokens are being transferred."
+          }
+        }
+      ],
+      "ERC20InvalidSpender(address)": [
+        {
+          "details": "Indicates a failure with the `spender` to be approved. Used in approvals.",
+          "params": {
+            "spender": "Address that may be allowed to operate on tokens without being their owner."
+          }
+        }
+      ]
+    },
+    "events": {
+      "Approval(address,address,uint256)": {
+        "details": "Emitted when the allowance of a `spender` for an `owner` is set by a call to {approve}. `value` is the new allowance."
+      },
+      "RoleAdminChanged(bytes32,bytes32,bytes32)": {
+        "details": "Emitted when `newAdminRole` is set as ``role``'s admin role, replacing `previousAdminRole` `DEFAULT_ADMIN_ROLE` is the starting admin for all roles, despite {RoleAdminChanged} not being emitted to signal this."
+      },
+      "RoleGranted(bytes32,address,address)": {
+        "details": "Emitted when `account` is granted `role`. `sender` is the account that originated the contract call. This account bears the admin role (for the granted role). Expected in cases where the role was granted using the internal {AccessControl-_grantRole}."
+      },
+      "RoleRevoked(bytes32,address,address)": {
+        "details": "Emitted when `account` is revoked `role`. `sender` is the account that originated the contract call:   - if using `revokeRole`, it is the admin role bearer   - if using `renounceRole`, it is the role bearer (i.e. `account`)"
+      },
+      "Transfer(address,address,uint256)": {
+        "details": "Emitted when `value` tokens are moved from one account (`from`) to another (`to`). Note that `value` may be zero."
+      }
+    },
+    "kind": "dev",
+    "methods": {
+      "allowance(address,address)": {
+        "details": "Returns the remaining number of tokens that `spender` will be allowed to spend on behalf of `owner` through {transferFrom}. This is zero by default. This value changes when {approve} or {transferFrom} are called."
+      },
+      "approve(address,uint256)": {
+        "details": "See {IERC20-approve}. NOTE: If `value` is the maximum `uint256`, the allowance is not updated on `transferFrom`. This is semantically equivalent to an infinite approval. Requirements: - `spender` cannot be the zero address."
+      },
+      "balanceOf(address)": {
+        "details": "Returns the value of tokens owned by `account`."
+      },
+      "decimals()": {
+        "details": "Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5.05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the default value returned by this function, unless it's overridden. NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}."
+      },
+      "getRoleAdmin(bytes32)": {
+        "details": "Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}."
+      },
+      "grantRole(bytes32,address)": {
+        "details": "Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role. May emit a {RoleGranted} event."
+      },
+      "hasRole(bytes32,address)": {
+        "details": "Returns `true` if `account` has been granted `role`."
+      },
+      "mint(address,uint256)": {
+        "details": "Only accounts with MINTER_ROLE can call this function."
+      },
+      "name()": {
+        "details": "Returns the name of the token."
+      },
+      "renounceRole(bytes32,address)": {
+        "details": "Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). Emits a {RoleRevoked} event if the calling account had `role` and this call successfully revoked it. Requirements: - the caller must be `callerConfirmation`. May emit a {RoleRevoked} event."
+      },
+      "revokeRole(bytes32,address)": {
+        "details": "Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role. May emit a {RoleRevoked} event."
+      },
+      "supportsInterface(bytes4)": {
+        "details": "Returns true if this contract implements the interface defined by `interfaceId`. See the corresponding https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[ERC section] to learn more about how these ids are created. This function call must use less than 30 000 gas."
+      },
+      "symbol()": {
+        "details": "Returns the symbol of the token, usually a shorter version of the name."
+      },
+      "totalSupply()": {
+        "details": "Returns the value of tokens in existence."
+      },
+      "transfer(address,uint256)": {
+        "details": "See {IERC20-transfer}. Requirements: - `to` cannot be the zero address. - the caller must have a balance of at least `value`."
+      },
+      "transferFrom(address,address,uint256)": {
+        "details": "See {IERC20-transferFrom}. Skips emitting an {Approval} event indicating an allowance update. This is not required by the ERC. See {xref-ERC20-_approve-address-address-uint256-bool-}[_approve]. NOTE: Does not update the allowance if the current allowance is the maximum `uint256`. Requirements: - `from` and `to` cannot be the zero address. - `from` must have a balance of at least `value`. - the caller must have allowance for ``from``'s tokens of at least `value`."
+      }
+    },
+    "version": 1
+  },
+  "evm": {
+    "gasEstimates": {
+      "creation": {
+        "codeDepositCost": "837000",
+        "executionCost": "infinite",
+        "totalCost": "infinite"
+      },
+      "external": {
+        "ASSET_MANAGER_ROLE()": "238",
+        "DEFAULT_ADMIN_ROLE()": "215",
+        "MINTER_ROLE()": "282",
+        "allowance(address,address)": "infinite",
+        "approve(address,uint256)": "24764",
+        "assetDocument()": "infinite",
+        "balanceOf(address)": "2582",
+        "burn(uint256)": "52392",
+        "decimals()": "265",
+        "getRoleAdmin(bytes32)": "2486",
+        "grantRole(bytes32,address)": "infinite",
+        "hasRole(bytes32,address)": "2739",
+        "mint(address,uint256)": "infinite",
+        "name()": "infinite",
+        "renounceRole(bytes32,address)": "29134",
+        "revokeRole(bytes32,address)": "infinite",
+        "supportsInterface(bytes4)": "447",
+        "symbol()": "infinite",
+        "totalSupply()": "2392",
+        "transfer(address,uint256)": "51266",
+        "transferFrom(address,address,uint256)": "infinite",
+        "updateAssetDocument(string)": "infinite"
+      }
+    }
+  },
+  "metadata": "{\"compiler\":{\"version\":\"0.8.30+commit.73712a01\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"string\",\"name\":\"initialAssetDocument\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"admin\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"AccessControlBadConfirmation\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"neededRole\",\"type\":\"bytes32\"}],\"name\":\"AccessControlUnauthorizedAccount\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"allowance\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"needed\",\"type\":\"uint256\"}],\"name\":\"ERC20InsufficientAllowance\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"balance\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"needed\",\"type\":\"uint256\"}],\"name\":\"ERC20InsufficientBalance\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"approver\",\"type\":\"address\"}],\"name\":\"ERC20InvalidApprover\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"receiver\",\"type\":\"address\"}],\"name\":\"ERC20InvalidReceiver\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"ERC20InvalidSender\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"}],\"name\":\"ERC20InvalidSpender\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"oldDocument\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"newDocument\",\"type\":\"string\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"updater\",\"type\":\"address\"}],\"name\":\"AssetDocumentUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"previousAdminRole\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"newAdminRole\",\"type\":\"bytes32\"}],\"name\":\"RoleAdminChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"RoleGranted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"RoleRevoked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"TokensBurned\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"minter\",\"type\":\"address\"}],\"name\":\"TokensMinted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"ASSET_MANAGER_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DEFAULT_ADMIN_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MINTER_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"assetDocument\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"burn\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"getRoleAdmin\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"grantRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"hasRole\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"mint\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"callerConfirmation\",\"type\":\"address\"}],\"name\":\"renounceRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"revokeRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"document\",\"type\":\"string\"}],\"name\":\"updateAssetDocument\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"errors\":{\"AccessControlBadConfirmation()\":[{\"details\":\"The caller of a function is not the expected one. NOTE: Don't confuse with {AccessControlUnauthorizedAccount}.\"}],\"AccessControlUnauthorizedAccount(address,bytes32)\":[{\"details\":\"The `account` is missing a role.\"}],\"ERC20InsufficientAllowance(address,uint256,uint256)\":[{\"details\":\"Indicates a failure with the `spender`\\u2019s `allowance`. Used in transfers.\",\"params\":{\"allowance\":\"Amount of tokens a `spender` is allowed to operate with.\",\"needed\":\"Minimum amount required to perform a transfer.\",\"spender\":\"Address that may be allowed to operate on tokens without being their owner.\"}}],\"ERC20InsufficientBalance(address,uint256,uint256)\":[{\"details\":\"Indicates an error related to the current `balance` of a `sender`. Used in transfers.\",\"params\":{\"balance\":\"Current balance for the interacting account.\",\"needed\":\"Minimum amount required to perform a transfer.\",\"sender\":\"Address whose tokens are being transferred.\"}}],\"ERC20InvalidApprover(address)\":[{\"details\":\"Indicates a failure with the `approver` of a token to be approved. Used in approvals.\",\"params\":{\"approver\":\"Address initiating an approval operation.\"}}],\"ERC20InvalidReceiver(address)\":[{\"details\":\"Indicates a failure with the token `receiver`. Used in transfers.\",\"params\":{\"receiver\":\"Address to which tokens are being transferred.\"}}],\"ERC20InvalidSender(address)\":[{\"details\":\"Indicates a failure with the token `sender`. Used in transfers.\",\"params\":{\"sender\":\"Address whose tokens are being transferred.\"}}],\"ERC20InvalidSpender(address)\":[{\"details\":\"Indicates a failure with the `spender` to be approved. Used in approvals.\",\"params\":{\"spender\":\"Address that may be allowed to operate on tokens without being their owner.\"}}]},\"events\":{\"Approval(address,address,uint256)\":{\"details\":\"Emitted when the allowance of a `spender` for an `owner` is set by a call to {approve}. `value` is the new allowance.\"},\"RoleAdminChanged(bytes32,bytes32,bytes32)\":{\"details\":\"Emitted when `newAdminRole` is set as ``role``'s admin role, replacing `previousAdminRole` `DEFAULT_ADMIN_ROLE` is the starting admin for all roles, despite {RoleAdminChanged} not being emitted to signal this.\"},\"RoleGranted(bytes32,address,address)\":{\"details\":\"Emitted when `account` is granted `role`. `sender` is the account that originated the contract call. This account bears the admin role (for the granted role). Expected in cases where the role was granted using the internal {AccessControl-_grantRole}.\"},\"RoleRevoked(bytes32,address,address)\":{\"details\":\"Emitted when `account` is revoked `role`. `sender` is the account that originated the contract call:   - if using `revokeRole`, it is the admin role bearer   - if using `renounceRole`, it is the role bearer (i.e. `account`)\"},\"Transfer(address,address,uint256)\":{\"details\":\"Emitted when `value` tokens are moved from one account (`from`) to another (`to`). Note that `value` may be zero.\"}},\"kind\":\"dev\",\"methods\":{\"allowance(address,address)\":{\"details\":\"Returns the remaining number of tokens that `spender` will be allowed to spend on behalf of `owner` through {transferFrom}. This is zero by default. This value changes when {approve} or {transferFrom} are called.\"},\"approve(address,uint256)\":{\"details\":\"See {IERC20-approve}. NOTE: If `value` is the maximum `uint256`, the allowance is not updated on `transferFrom`. This is semantically equivalent to an infinite approval. Requirements: - `spender` cannot be the zero address.\"},\"balanceOf(address)\":{\"details\":\"Returns the value of tokens owned by `account`.\"},\"decimals()\":{\"details\":\"Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5.05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the default value returned by this function, unless it's overridden. NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}.\"},\"getRoleAdmin(bytes32)\":{\"details\":\"Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}.\"},\"grantRole(bytes32,address)\":{\"details\":\"Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role. May emit a {RoleGranted} event.\"},\"hasRole(bytes32,address)\":{\"details\":\"Returns `true` if `account` has been granted `role`.\"},\"mint(address,uint256)\":{\"details\":\"Only accounts with MINTER_ROLE can call this function.\"},\"name()\":{\"details\":\"Returns the name of the token.\"},\"renounceRole(bytes32,address)\":{\"details\":\"Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). Emits a {RoleRevoked} event if the calling account had `role` and this call successfully revoked it. Requirements: - the caller must be `callerConfirmation`. May emit a {RoleRevoked} event.\"},\"revokeRole(bytes32,address)\":{\"details\":\"Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role. May emit a {RoleRevoked} event.\"},\"supportsInterface(bytes4)\":{\"details\":\"Returns true if this contract implements the interface defined by `interfaceId`. See the corresponding https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[ERC section] to learn more about how these ids are created. This function call must use less than 30 000 gas.\"},\"symbol()\":{\"details\":\"Returns the symbol of the token, usually a shorter version of the name.\"},\"totalSupply()\":{\"details\":\"Returns the value of tokens in existence.\"},\"transfer(address,uint256)\":{\"details\":\"See {IERC20-transfer}. Requirements: - `to` cannot be the zero address. - the caller must have a balance of at least `value`.\"},\"transferFrom(address,address,uint256)\":{\"details\":\"See {IERC20-transferFrom}. Skips emitting an {Approval} event indicating an allowance update. This is not required by the ERC. See {xref-ERC20-_approve-address-address-uint256-bool-}[_approve]. NOTE: Does not update the allowance if the current allowance is the maximum `uint256`. Requirements: - `from` and `to` cannot be the zero address. - `from` must have a balance of at least `value`. - the caller must have allowance for ``from``'s tokens of at least `value`.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"assetDocument()\":{\"notice\":\"Return current asset proof document.\"},\"burn(uint256)\":{\"notice\":\"Burn caller's own tokens.\"},\"mint(address,uint256)\":{\"notice\":\"Issue RWA tokens\"},\"updateAssetDocument(string)\":{\"notice\":\"Update the simulated asset proof document.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project/contracts/GoldRWAToken.sol\":\"GoldRWAToken\"},\"evmVersion\":\"prague\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\"project/:@openzeppelin/contracts/=npm/@openzeppelin/contracts@5.7.0/\"]},\"sources\":{\"npm/@openzeppelin/contracts@5.7.0/access/AccessControl.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.7.0) (access/AccessControl.sol)\\n\\npragma solidity ^0.8.20;\\n\\nimport {IAccessControl} from \\\"./IAccessControl.sol\\\";\\nimport {Context} from \\\"../utils/Context.sol\\\";\\nimport {ERC165} from \\\"../utils/introspection/ERC165.sol\\\";\\n\\n/**\\n * @dev Contract module that allows children to implement role-based access\\n * control mechanisms. This is a lightweight version that doesn't allow enumerating role\\n * members except through off-chain means by accessing the contract event logs. Some\\n * applications may benefit from on-chain enumerability, for those cases see\\n * {AccessControlEnumerable}.\\n *\\n * Roles are referred to by their `bytes32` identifier. These should be exposed\\n * in the external API and be unique. The best way to achieve this is by\\n * using `public constant` hash digests:\\n *\\n * ```solidity\\n * bytes32 public constant MY_ROLE = keccak256(\\\"MY_ROLE\\\");\\n * ```\\n *\\n * Roles can be used to represent a set of permissions. To restrict access to a\\n * function call, use {hasRole}:\\n *\\n * ```solidity\\n * function foo() public {\\n *     require(hasRole(MY_ROLE, msg.sender));\\n *     ...\\n * }\\n * ```\\n *\\n * Roles can be granted and revoked dynamically via the {grantRole} and\\n * {revokeRole} functions. Each role has an associated admin role, and only\\n * accounts that have a role's admin role can call {grantRole} and {revokeRole}.\\n *\\n * By default, the admin role for all roles is `DEFAULT_ADMIN_ROLE`, which means\\n * that only accounts with this role will be able to grant or revoke other\\n * roles. More complex role relationships can be created by using\\n * {_setRoleAdmin}.\\n *\\n * WARNING: The `DEFAULT_ADMIN_ROLE` is also its own admin: it has permission to\\n * grant and revoke this role. Extra precautions should be taken to secure\\n * accounts that have been granted it. We recommend using {AccessControlDefaultAdminRules}\\n * to enforce additional security measures for this role.\\n */\\nabstract contract AccessControl is Context, IAccessControl, ERC165 {\\n    struct RoleData {\\n        mapping(address account => bool) hasRole;\\n        bytes32 adminRole;\\n    }\\n\\n    mapping(bytes32 role => RoleData) private _roles;\\n\\n    bytes32 public constant DEFAULT_ADMIN_ROLE = 0x00;\\n\\n    /**\\n     * @dev Modifier that checks that an account has a specific role. Reverts\\n     * with an {AccessControlUnauthorizedAccount} error including the required role.\\n     */\\n    modifier onlyRole(bytes32 role) {\\n        _checkRole(role);\\n        _;\\n    }\\n\\n    /// @inheritdoc ERC165\\n    function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {\\n        return interfaceId == type(IAccessControl).interfaceId || super.supportsInterface(interfaceId);\\n    }\\n\\n    /**\\n     * @dev Returns `true` if `account` has been granted `role`.\\n     */\\n    function hasRole(bytes32 role, address account) public view virtual returns (bool) {\\n        return _roles[role].hasRole[account];\\n    }\\n\\n    /**\\n     * @dev Reverts with an {AccessControlUnauthorizedAccount} error if `_msgSender()`\\n     * is missing `role`. Overriding this function changes the behavior of the {onlyRole} modifier.\\n     */\\n    function _checkRole(bytes32 role) internal view virtual {\\n        _checkRole(role, _msgSender());\\n    }\\n\\n    /**\\n     * @dev Reverts with an {AccessControlUnauthorizedAccount} error if `account`\\n     * is missing `role`.\\n     */\\n    function _checkRole(bytes32 role, address account) internal view virtual {\\n        if (!hasRole(role, account)) {\\n            revert AccessControlUnauthorizedAccount(account, role);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the admin role that controls `role`. See {grantRole} and\\n     * {revokeRole}.\\n     *\\n     * To change a role's admin, use {_setRoleAdmin}.\\n     */\\n    function getRoleAdmin(bytes32 role) public view virtual returns (bytes32) {\\n        return _roles[role].adminRole;\\n    }\\n\\n    /**\\n     * @dev Grants `role` to `account`.\\n     *\\n     * If `account` had not been already granted `role`, emits a {RoleGranted}\\n     * event.\\n     *\\n     * Requirements:\\n     *\\n     * - the caller must have ``role``'s admin role.\\n     *\\n     * May emit a {RoleGranted} event.\\n     */\\n    function grantRole(bytes32 role, address account) public virtual onlyRole(getRoleAdmin(role)) {\\n        _grantRole(role, account);\\n    }\\n\\n    /**\\n     * @dev Revokes `role` from `account`.\\n     *\\n     * If `account` had been granted `role`, emits a {RoleRevoked} event.\\n     *\\n     * Requirements:\\n     *\\n     * - the caller must have ``role``'s admin role.\\n     *\\n     * May emit a {RoleRevoked} event.\\n     */\\n    function revokeRole(bytes32 role, address account) public virtual onlyRole(getRoleAdmin(role)) {\\n        _revokeRole(role, account);\\n    }\\n\\n    /**\\n     * @dev Revokes `role` from the calling account.\\n     *\\n     * Roles are often managed via {grantRole} and {revokeRole}: this function's\\n     * purpose is to provide a mechanism for accounts to lose their privileges\\n     * if they are compromised (such as when a trusted device is misplaced).\\n     *\\n     * Emits a {RoleRevoked} event if the calling account had `role` and this call successfully revoked it.\\n     *\\n     * Requirements:\\n     *\\n     * - the caller must be `callerConfirmation`.\\n     *\\n     * May emit a {RoleRevoked} event.\\n     */\\n    function renounceRole(bytes32 role, address callerConfirmation) public virtual {\\n        if (callerConfirmation != _msgSender()) {\\n            revert AccessControlBadConfirmation();\\n        }\\n\\n        _revokeRole(role, callerConfirmation);\\n    }\\n\\n    /**\\n     * @dev Sets `adminRole` as ``role``'s admin role.\\n     *\\n     * Emits a {RoleAdminChanged} event.\\n     */\\n    function _setRoleAdmin(bytes32 role, bytes32 adminRole) internal virtual {\\n        bytes32 previousAdminRole = getRoleAdmin(role);\\n        _roles[role].adminRole = adminRole;\\n        emit RoleAdminChanged(role, previousAdminRole, adminRole);\\n    }\\n\\n    /**\\n     * @dev Attempts to grant `role` to `account` and returns a boolean indicating if `role` was granted.\\n     *\\n     * Internal function without access restriction.\\n     *\\n     * May emit a {RoleGranted} event.\\n     */\\n    function _grantRole(bytes32 role, address account) internal virtual returns (bool) {\\n        if (!hasRole(role, account)) {\\n            _roles[role].hasRole[account] = true;\\n            emit RoleGranted(role, account, _msgSender());\\n            return true;\\n        } else {\\n            return false;\\n        }\\n    }\\n\\n    /**\\n     * @dev Attempts to revoke `role` from `account` and returns a boolean indicating if `role` was revoked.\\n     *\\n     * Internal function without access restriction.\\n     *\\n     * May emit a {RoleRevoked} event.\\n     */\\n    function _revokeRole(bytes32 role, address account) internal virtual returns (bool) {\\n        if (hasRole(role, account)) {\\n            _roles[role].hasRole[account] = false;\\n            emit RoleRevoked(role, account, _msgSender());\\n            return true;\\n        } else {\\n            return false;\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0xf7e47e67e49ee2a94aa5c52580045b6ec2e6e402d2376c14a75a151664d7c98f\",\"license\":\"MIT\"},\"npm/@openzeppelin/contracts@5.7.0/access/IAccessControl.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.4.0) (access/IAccessControl.sol)\\n\\npragma solidity >=0.8.4;\\n\\n/**\\n * @dev External interface of AccessControl declared to support ERC-165 detection.\\n */\\ninterface IAccessControl {\\n    /**\\n     * @dev The `account` is missing a role.\\n     */\\n    error AccessControlUnauthorizedAccount(address account, bytes32 neededRole);\\n\\n    /**\\n     * @dev The caller of a function is not the expected one.\\n     *\\n     * NOTE: Don't confuse with {AccessControlUnauthorizedAccount}.\\n     */\\n    error AccessControlBadConfirmation();\\n\\n    /**\\n     * @dev Emitted when `newAdminRole` is set as ``role``'s admin role, replacing `previousAdminRole`\\n     *\\n     * `DEFAULT_ADMIN_ROLE` is the starting admin for all roles, despite\\n     * {RoleAdminChanged} not being emitted to signal this.\\n     */\\n    event RoleAdminChanged(bytes32 indexed role, bytes32 indexed previousAdminRole, bytes32 indexed newAdminRole);\\n\\n    /**\\n     * @dev Emitted when `account` is granted `role`.\\n     *\\n     * `sender` is the account that originated the contract call. This account bears the admin role (for the granted role).\\n     * Expected in cases where the role was granted using the internal {AccessControl-_grantRole}.\\n     */\\n    event RoleGranted(bytes32 indexed role, address indexed account, address indexed sender);\\n\\n    /**\\n     * @dev Emitted when `account` is revoked `role`.\\n     *\\n     * `sender` is the account that originated the contract call:\\n     *   - if using `revokeRole`, it is the admin role bearer\\n     *   - if using `renounceRole`, it is the role bearer (i.e. `account`)\\n     */\\n    event RoleRevoked(bytes32 indexed role, address indexed account, address indexed sender);\\n\\n    /**\\n     * @dev Returns `true` if `account` has been granted `role`.\\n     */\\n    function hasRole(bytes32 role, address account) external view returns (bool);\\n\\n    /**\\n     * @dev Returns the admin role that controls `role`. See {grantRole} and\\n     * {revokeRole}.\\n     *\\n     * To change a role's admin, use {AccessControl-_setRoleAdmin}.\\n     */\\n    function getRoleAdmin(bytes32 role) external view returns (bytes32);\\n\\n    /**\\n     * @dev Grants `role` to `account`.\\n     *\\n     * If `account` had not been already granted `role`, emits a {RoleGranted}\\n     * event.\\n     *\\n     * Requirements:\\n     *\\n     * - the caller must have ``role``'s admin role.\\n     */\\n    function grantRole(bytes32 role, address account) external;\\n\\n    /**\\n     * @dev Revokes `role` from `account`.\\n     *\\n     * If `account` had been granted `role`, emits a {RoleRevoked} event.\\n     *\\n     * Requirements:\\n     *\\n     * - the caller must have ``role``'s admin role.\\n     */\\n    function revokeRole(bytes32 role, address account) external;\\n\\n    /**\\n     * @dev Revokes `role` from the calling account.\\n     *\\n     * Roles are often managed via {grantRole} and {revokeRole}: this function's\\n     * purpose is to provide a mechanism for accounts to lose their privileges\\n     * if they are compromised (such as when a trusted device is misplaced).\\n     *\\n     * If the calling account had been granted `role`, emits a {RoleRevoked}\\n     * event.\\n     *\\n     * Requirements:\\n     *\\n     * - the caller must be `callerConfirmation`.\\n     */\\n    function renounceRole(bytes32 role, address callerConfirmation) external;\\n}\\n\",\"keccak256\":\"0xbff9f59c84e5337689161ce7641c0ef8e872d6a7536fbc1f5133f128887aba3c\",\"license\":\"MIT\"},\"npm/@openzeppelin/contracts@5.7.0/interfaces/draft-IERC6093.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.5.0) (interfaces/draft-IERC6093.sol)\\n\\npragma solidity >=0.8.4;\\n\\n/**\\n * @dev Standard ERC-20 Errors\\n * Interface of the https://eips.ethereum.org/EIPS/eip-6093[ERC-6093] custom errors for ERC-20 tokens.\\n */\\ninterface IERC20Errors {\\n    /**\\n     * @dev Indicates an error related to the current `balance` of a `sender`. Used in transfers.\\n     * @param sender Address whose tokens are being transferred.\\n     * @param balance Current balance for the interacting account.\\n     * @param needed Minimum amount required to perform a transfer.\\n     */\\n    error ERC20InsufficientBalance(address sender, uint256 balance, uint256 needed);\\n\\n    /**\\n     * @dev Indicates a failure with the token `sender`. Used in transfers.\\n     * @param sender Address whose tokens are being transferred.\\n     */\\n    error ERC20InvalidSender(address sender);\\n\\n    /**\\n     * @dev Indicates a failure with the token `receiver`. Used in transfers.\\n     * @param receiver Address to which tokens are being transferred.\\n     */\\n    error ERC20InvalidReceiver(address receiver);\\n\\n    /**\\n     * @dev Indicates a failure with the `spender`\\u2019s `allowance`. Used in transfers.\\n     * @param spender Address that may be allowed to operate on tokens without being their owner.\\n     * @param allowance Amount of tokens a `spender` is allowed to operate with.\\n     * @param needed Minimum amount required to perform a transfer.\\n     */\\n    error ERC20InsufficientAllowance(address spender, uint256 allowance, uint256 needed);\\n\\n    /**\\n     * @dev Indicates a failure with the `approver` of a token to be approved. Used in approvals.\\n     * @param approver Address initiating an approval operation.\\n     */\\n    error ERC20InvalidApprover(address approver);\\n\\n    /**\\n     * @dev Indicates a failure with the `spender` to be approved. Used in approvals.\\n     * @param spender Address that may be allowed to operate on tokens without being their owner.\\n     */\\n    error ERC20InvalidSpender(address spender);\\n}\\n\\n/**\\n * @dev Standard ERC-721 Errors\\n * Interface of the https://eips.ethereum.org/EIPS/eip-6093[ERC-6093] custom errors for ERC-721 tokens.\\n */\\ninterface IERC721Errors {\\n    /**\\n     * @dev Indicates that an address can't be an owner. For example, `address(0)` is a forbidden owner in ERC-721.\\n     * Used in balance queries.\\n     * @param owner Address of the current owner of a token.\\n     */\\n    error ERC721InvalidOwner(address owner);\\n\\n    /**\\n     * @dev Indicates a `tokenId` whose `owner` is the zero address.\\n     * @param tokenId Identifier number of a token.\\n     */\\n    error ERC721NonexistentToken(uint256 tokenId);\\n\\n    /**\\n     * @dev Indicates an error related to the ownership over a particular token. Used in transfers.\\n     * @param sender Address whose tokens are being transferred.\\n     * @param tokenId Identifier number of a token.\\n     * @param owner Address of the current owner of a token.\\n     */\\n    error ERC721IncorrectOwner(address sender, uint256 tokenId, address owner);\\n\\n    /**\\n     * @dev Indicates a failure with the token `sender`. Used in transfers.\\n     * @param sender Address whose tokens are being transferred.\\n     */\\n    error ERC721InvalidSender(address sender);\\n\\n    /**\\n     * @dev Indicates a failure with the token `receiver`. Used in transfers.\\n     * @param receiver Address to which tokens are being transferred.\\n     */\\n    error ERC721InvalidReceiver(address receiver);\\n\\n    /**\\n     * @dev Indicates a failure with the `operator`\\u2019s approval. Used in transfers.\\n     * @param operator Address that may be allowed to operate on tokens without being their owner.\\n     * @param tokenId Identifier number of a token.\\n     */\\n    error ERC721InsufficientApproval(address operator, uint256 tokenId);\\n\\n    /**\\n     * @dev Indicates a failure with the `approver` of a token to be approved. Used in approvals.\\n     * @param approver Address initiating an approval operation.\\n     */\\n    error ERC721InvalidApprover(address approver);\\n\\n    /**\\n     * @dev Indicates a failure with the `operator` to be approved. Used in approvals.\\n     * @param operator Address that may be allowed to operate on tokens without being their owner.\\n     */\\n    error ERC721InvalidOperator(address operator);\\n}\\n\\n/**\\n * @dev Standard ERC-1155 Errors\\n * Interface of the https://eips.ethereum.org/EIPS/eip-6093[ERC-6093] custom errors for ERC-1155 tokens.\\n */\\ninterface IERC1155Errors {\\n    /**\\n     * @dev Indicates an error related to the current `balance` of a `sender`. Used in transfers.\\n     * @param sender Address whose tokens are being transferred.\\n     * @param balance Current balance for the interacting account.\\n     * @param needed Minimum amount required to perform a transfer.\\n     * @param tokenId Identifier number of a token.\\n     */\\n    error ERC1155InsufficientBalance(address sender, uint256 balance, uint256 needed, uint256 tokenId);\\n\\n    /**\\n     * @dev Indicates a failure with the token `sender`. Used in transfers.\\n     * @param sender Address whose tokens are being transferred.\\n     */\\n    error ERC1155InvalidSender(address sender);\\n\\n    /**\\n     * @dev Indicates a failure with the token `receiver`. Used in transfers.\\n     * @param receiver Address to which tokens are being transferred.\\n     */\\n    error ERC1155InvalidReceiver(address receiver);\\n\\n    /**\\n     * @dev Indicates a failure with the `operator`\\u2019s approval. Used in transfers.\\n     * @param operator Address that may be allowed to operate on tokens without being their owner.\\n     * @param owner Address of the current owner of a token.\\n     */\\n    error ERC1155MissingApprovalForAll(address operator, address owner);\\n\\n    /**\\n     * @dev Indicates a failure with the `approver` of a token to be approved. Used in approvals.\\n     * @param approver Address initiating an approval operation.\\n     */\\n    error ERC1155InvalidApprover(address approver);\\n\\n    /**\\n     * @dev Indicates a failure with the `operator` to be approved. Used in approvals.\\n     * @param operator Address that may be allowed to operate on tokens without being their owner.\\n     */\\n    error ERC1155InvalidOperator(address operator);\\n\\n    /**\\n     * @dev Indicates an array length mismatch between ids and values in a safeBatchTransferFrom operation.\\n     * Used in batch transfers.\\n     * @param idsLength Length of the array of token identifiers\\n     * @param valuesLength Length of the array of token amounts\\n     */\\n    error ERC1155InvalidArrayLength(uint256 idsLength, uint256 valuesLength);\\n}\\n\",\"keccak256\":\"0x1b88b3fb3d85ba5496d7d5f396f83ee1fddcdd6762059ff65992655b67920998\",\"license\":\"MIT\"},\"npm/@openzeppelin/contracts@5.7.0/token/ERC20/ERC20.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.5.0) (token/ERC20/ERC20.sol)\\n\\npragma solidity ^0.8.20;\\n\\nimport {IERC20} from \\\"./IERC20.sol\\\";\\nimport {IERC20Metadata} from \\\"./extensions/IERC20Metadata.sol\\\";\\nimport {Context} from \\\"../../utils/Context.sol\\\";\\nimport {IERC20Errors} from \\\"../../interfaces/draft-IERC6093.sol\\\";\\n\\n/**\\n * @dev Implementation of the {IERC20} interface.\\n *\\n * This implementation is agnostic to the way tokens are created. This means\\n * that a supply mechanism has to be added in a derived contract using {_mint}.\\n *\\n * TIP: For a detailed writeup see our guide\\n * https://forum.openzeppelin.com/t/how-to-implement-erc20-supply-mechanisms/226[How\\n * to implement supply mechanisms].\\n *\\n * The default value of {decimals} is 18. To change this, you should override\\n * this function so it returns a different value.\\n *\\n * We have followed general OpenZeppelin Contracts guidelines: functions revert\\n * instead returning `false` on failure. This behavior is nonetheless\\n * conventional and does not conflict with the expectations of ERC-20\\n * applications.\\n */\\nabstract contract ERC20 is Context, IERC20, IERC20Metadata, IERC20Errors {\\n    mapping(address account => uint256) private _balances;\\n\\n    mapping(address account => mapping(address spender => uint256)) private _allowances;\\n\\n    uint256 private _totalSupply;\\n\\n    string private _name;\\n    string private _symbol;\\n\\n    /**\\n     * @dev Sets the values for {name} and {symbol}.\\n     *\\n     * Both values are immutable: they can only be set once during construction.\\n     */\\n    constructor(string memory name_, string memory symbol_) {\\n        _name = name_;\\n        _symbol = symbol_;\\n    }\\n\\n    /**\\n     * @dev Returns the name of the token.\\n     */\\n    function name() public view virtual returns (string memory) {\\n        return _name;\\n    }\\n\\n    /**\\n     * @dev Returns the symbol of the token, usually a shorter version of the\\n     * name.\\n     */\\n    function symbol() public view virtual returns (string memory) {\\n        return _symbol;\\n    }\\n\\n    /**\\n     * @dev Returns the number of decimals used to get its user representation.\\n     * For example, if `decimals` equals `2`, a balance of `505` tokens should\\n     * be displayed to a user as `5.05` (`505 / 10 ** 2`).\\n     *\\n     * Tokens usually opt for a value of 18, imitating the relationship between\\n     * Ether and Wei. This is the default value returned by this function, unless\\n     * it's overridden.\\n     *\\n     * NOTE: This information is only used for _display_ purposes: it in\\n     * no way affects any of the arithmetic of the contract, including\\n     * {IERC20-balanceOf} and {IERC20-transfer}.\\n     */\\n    function decimals() public view virtual returns (uint8) {\\n        return 18;\\n    }\\n\\n    /// @inheritdoc IERC20\\n    function totalSupply() public view virtual returns (uint256) {\\n        return _totalSupply;\\n    }\\n\\n    /// @inheritdoc IERC20\\n    function balanceOf(address account) public view virtual returns (uint256) {\\n        return _balances[account];\\n    }\\n\\n    /**\\n     * @dev See {IERC20-transfer}.\\n     *\\n     * Requirements:\\n     *\\n     * - `to` cannot be the zero address.\\n     * - the caller must have a balance of at least `value`.\\n     */\\n    function transfer(address to, uint256 value) public virtual returns (bool) {\\n        address owner = _msgSender();\\n        _transfer(owner, to, value);\\n        return true;\\n    }\\n\\n    /// @inheritdoc IERC20\\n    function allowance(address owner, address spender) public view virtual returns (uint256) {\\n        return _allowances[owner][spender];\\n    }\\n\\n    /**\\n     * @dev See {IERC20-approve}.\\n     *\\n     * NOTE: If `value` is the maximum `uint256`, the allowance is not updated on\\n     * `transferFrom`. This is semantically equivalent to an infinite approval.\\n     *\\n     * Requirements:\\n     *\\n     * - `spender` cannot be the zero address.\\n     */\\n    function approve(address spender, uint256 value) public virtual returns (bool) {\\n        address owner = _msgSender();\\n        _approve(owner, spender, value);\\n        return true;\\n    }\\n\\n    /**\\n     * @dev See {IERC20-transferFrom}.\\n     *\\n     * Skips emitting an {Approval} event indicating an allowance update. This is not\\n     * required by the ERC. See {xref-ERC20-_approve-address-address-uint256-bool-}[_approve].\\n     *\\n     * NOTE: Does not update the allowance if the current allowance\\n     * is the maximum `uint256`.\\n     *\\n     * Requirements:\\n     *\\n     * - `from` and `to` cannot be the zero address.\\n     * - `from` must have a balance of at least `value`.\\n     * - the caller must have allowance for ``from``'s tokens of at least\\n     * `value`.\\n     */\\n    function transferFrom(address from, address to, uint256 value) public virtual returns (bool) {\\n        address spender = _msgSender();\\n        _spendAllowance(from, spender, value);\\n        _transfer(from, to, value);\\n        return true;\\n    }\\n\\n    /**\\n     * @dev Moves a `value` amount of tokens from `from` to `to`.\\n     *\\n     * This internal function is equivalent to {transfer}, and can be used to\\n     * e.g. implement automatic token fees, slashing mechanisms, etc.\\n     *\\n     * Emits a {Transfer} event.\\n     *\\n     * NOTE: This function is not virtual, {_update} should be overridden instead.\\n     */\\n    function _transfer(address from, address to, uint256 value) internal {\\n        if (from == address(0)) {\\n            revert ERC20InvalidSender(address(0));\\n        }\\n        if (to == address(0)) {\\n            revert ERC20InvalidReceiver(address(0));\\n        }\\n        _update(from, to, value);\\n    }\\n\\n    /**\\n     * @dev Transfers a `value` amount of tokens from `from` to `to`, or alternatively mints (or burns) if `from`\\n     * (or `to`) is the zero address. All customizations to transfers, mints, and burns should be done by overriding\\n     * this function.\\n     *\\n     * Emits a {Transfer} event.\\n     */\\n    function _update(address from, address to, uint256 value) internal virtual {\\n        if (from == address(0)) {\\n            // Overflow check required: The rest of the code assumes that totalSupply never overflows\\n            _totalSupply += value;\\n        } else {\\n            uint256 fromBalance = _balances[from];\\n            if (fromBalance < value) {\\n                revert ERC20InsufficientBalance(from, fromBalance, value);\\n            }\\n            unchecked {\\n                // Overflow not possible: value <= fromBalance <= totalSupply.\\n                _balances[from] = fromBalance - value;\\n            }\\n        }\\n\\n        if (to == address(0)) {\\n            unchecked {\\n                // Overflow not possible: value <= totalSupply or value <= fromBalance <= totalSupply.\\n                _totalSupply -= value;\\n            }\\n        } else {\\n            unchecked {\\n                // Overflow not possible: balance + value is at most totalSupply, which we know fits into a uint256.\\n                _balances[to] += value;\\n            }\\n        }\\n\\n        emit Transfer(from, to, value);\\n    }\\n\\n    /**\\n     * @dev Creates a `value` amount of tokens and assigns them to `account`, by transferring it from address(0).\\n     * Relies on the `_update` mechanism\\n     *\\n     * Emits a {Transfer} event with `from` set to the zero address.\\n     *\\n     * NOTE: This function is not virtual, {_update} should be overridden instead.\\n     */\\n    function _mint(address account, uint256 value) internal {\\n        if (account == address(0)) {\\n            revert ERC20InvalidReceiver(address(0));\\n        }\\n        _update(address(0), account, value);\\n    }\\n\\n    /**\\n     * @dev Destroys a `value` amount of tokens from `account`, lowering the total supply.\\n     * Relies on the `_update` mechanism.\\n     *\\n     * Emits a {Transfer} event with `to` set to the zero address.\\n     *\\n     * NOTE: This function is not virtual, {_update} should be overridden instead\\n     */\\n    function _burn(address account, uint256 value) internal {\\n        if (account == address(0)) {\\n            revert ERC20InvalidSender(address(0));\\n        }\\n        _update(account, address(0), value);\\n    }\\n\\n    /**\\n     * @dev Sets `value` as the allowance of `spender` over the `owner`'s tokens.\\n     *\\n     * This internal function is equivalent to `approve`, and can be used to\\n     * e.g. set automatic allowances for certain subsystems, etc.\\n     *\\n     * Emits an {Approval} event.\\n     *\\n     * Requirements:\\n     *\\n     * - `owner` cannot be the zero address.\\n     * - `spender` cannot be the zero address.\\n     *\\n     * Overrides to this logic should be done to the variant with an additional `bool emitEvent` argument.\\n     */\\n    function _approve(address owner, address spender, uint256 value) internal {\\n        _approve(owner, spender, value, true);\\n    }\\n\\n    /**\\n     * @dev Variant of {_approve} with an optional flag to enable or disable the {Approval} event.\\n     *\\n     * By default (when calling {_approve}) the flag is set to true. On the other hand, approval changes made by\\n     * `_spendAllowance` during the `transferFrom` operation sets the flag to false. This saves gas by not emitting any\\n     * `Approval` event during `transferFrom` operations.\\n     *\\n     * Anyone who wishes to continue emitting `Approval` events on the `transferFrom` operation can force the flag to\\n     * true using the following override:\\n     *\\n     * ```solidity\\n     * function _approve(address owner, address spender, uint256 value, bool) internal virtual override {\\n     *     super._approve(owner, spender, value, true);\\n     * }\\n     * ```\\n     *\\n     * Requirements are the same as {_approve}.\\n     */\\n    function _approve(address owner, address spender, uint256 value, bool emitEvent) internal virtual {\\n        if (owner == address(0)) {\\n            revert ERC20InvalidApprover(address(0));\\n        }\\n        if (spender == address(0)) {\\n            revert ERC20InvalidSpender(address(0));\\n        }\\n        _allowances[owner][spender] = value;\\n        if (emitEvent) {\\n            emit Approval(owner, spender, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Updates `owner`'s allowance for `spender` based on spent `value`.\\n     *\\n     * Does not update the allowance value in case of infinite allowance.\\n     * Revert if not enough allowance is available.\\n     *\\n     * Does not emit an {Approval} event.\\n     */\\n    function _spendAllowance(address owner, address spender, uint256 value) internal virtual {\\n        uint256 currentAllowance = allowance(owner, spender);\\n        if (currentAllowance < type(uint256).max) {\\n            if (currentAllowance < value) {\\n                revert ERC20InsufficientAllowance(spender, currentAllowance, value);\\n            }\\n            unchecked {\\n                _approve(owner, spender, currentAllowance - value, false);\\n            }\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0x669464167428061ee0f8618b73b3ee90aff8405683e7ddde8cd77dadaa1afe29\",\"license\":\"MIT\"},\"npm/@openzeppelin/contracts@5.7.0/token/ERC20/IERC20.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.4.0) (token/ERC20/IERC20.sol)\\n\\npragma solidity >=0.4.16;\\n\\n/**\\n * @dev Interface of the ERC-20 standard as defined in the ERC.\\n */\\ninterface IERC20 {\\n    /**\\n     * @dev Emitted when `value` tokens are moved from one account (`from`) to\\n     * another (`to`).\\n     *\\n     * Note that `value` may be zero.\\n     */\\n    event Transfer(address indexed from, address indexed to, uint256 value);\\n\\n    /**\\n     * @dev Emitted when the allowance of a `spender` for an `owner` is set by\\n     * a call to {approve}. `value` is the new allowance.\\n     */\\n    event Approval(address indexed owner, address indexed spender, uint256 value);\\n\\n    /**\\n     * @dev Returns the value of tokens in existence.\\n     */\\n    function totalSupply() external view returns (uint256);\\n\\n    /**\\n     * @dev Returns the value of tokens owned by `account`.\\n     */\\n    function balanceOf(address account) external view returns (uint256);\\n\\n    /**\\n     * @dev Moves a `value` amount of tokens from the caller's account to `to`.\\n     *\\n     * Returns a boolean value indicating whether the operation succeeded.\\n     *\\n     * Emits a {Transfer} event.\\n     */\\n    function transfer(address to, uint256 value) external returns (bool);\\n\\n    /**\\n     * @dev Returns the remaining number of tokens that `spender` will be\\n     * allowed to spend on behalf of `owner` through {transferFrom}. This is\\n     * zero by default.\\n     *\\n     * This value changes when {approve} or {transferFrom} are called.\\n     */\\n    function allowance(address owner, address spender) external view returns (uint256);\\n\\n    /**\\n     * @dev Sets a `value` amount of tokens as the allowance of `spender` over the\\n     * caller's tokens.\\n     *\\n     * Returns a boolean value indicating whether the operation succeeded.\\n     *\\n     * IMPORTANT: Beware that changing an allowance with this method brings the risk\\n     * that someone may use both the old and the new allowance by unfortunate\\n     * transaction ordering. One possible solution to mitigate this race\\n     * condition is to first reduce the spender's allowance to 0 and set the\\n     * desired value afterwards:\\n     * https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729\\n     *\\n     * Emits an {Approval} event.\\n     */\\n    function approve(address spender, uint256 value) external returns (bool);\\n\\n    /**\\n     * @dev Moves a `value` amount of tokens from `from` to `to` using the\\n     * allowance mechanism. `value` is then deducted from the caller's\\n     * allowance.\\n     *\\n     * Returns a boolean value indicating whether the operation succeeded.\\n     *\\n     * Emits a {Transfer} event.\\n     */\\n    function transferFrom(address from, address to, uint256 value) external returns (bool);\\n}\\n\",\"keccak256\":\"0x74ed01eb66b923d0d0cfe3be84604ac04b76482a55f9dd655e1ef4d367f95bc2\",\"license\":\"MIT\"},\"npm/@openzeppelin/contracts@5.7.0/token/ERC20/extensions/IERC20Metadata.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.4.0) (token/ERC20/extensions/IERC20Metadata.sol)\\n\\npragma solidity >=0.6.2;\\n\\nimport {IERC20} from \\\"../IERC20.sol\\\";\\n\\n/**\\n * @dev Interface for the optional metadata functions from the ERC-20 standard.\\n */\\ninterface IERC20Metadata is IERC20 {\\n    /**\\n     * @dev Returns the name of the token.\\n     */\\n    function name() external view returns (string memory);\\n\\n    /**\\n     * @dev Returns the symbol of the token.\\n     */\\n    function symbol() external view returns (string memory);\\n\\n    /**\\n     * @dev Returns the decimals places of the token.\\n     */\\n    function decimals() external view returns (uint8);\\n}\\n\",\"keccak256\":\"0xd6fa4088198f04eef10c5bce8a2f4d60554b7ec4b987f684393c01bf79b94d9f\",\"license\":\"MIT\"},\"npm/@openzeppelin/contracts@5.7.0/utils/Context.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.0.1) (utils/Context.sol)\\n\\npragma solidity ^0.8.20;\\n\\n/**\\n * @dev Provides information about the current execution context, including the\\n * sender of the transaction and its data. While these are generally available\\n * via msg.sender and msg.data, they should not be accessed in such a direct\\n * manner, since when dealing with meta-transactions the account sending and\\n * paying for execution may not be the actual sender (as far as an application\\n * is concerned).\\n *\\n * This contract is only required for intermediate, library-like contracts.\\n */\\nabstract contract Context {\\n    function _msgSender() internal view virtual returns (address) {\\n        return msg.sender;\\n    }\\n\\n    function _msgData() internal view virtual returns (bytes calldata) {\\n        return msg.data;\\n    }\\n\\n    function _contextSuffixLength() internal view virtual returns (uint256) {\\n        return 0;\\n    }\\n}\\n\",\"keccak256\":\"0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2\",\"license\":\"MIT\"},\"npm/@openzeppelin/contracts@5.7.0/utils/introspection/ERC165.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.4.0) (utils/introspection/ERC165.sol)\\n\\npragma solidity ^0.8.20;\\n\\nimport {IERC165} from \\\"./IERC165.sol\\\";\\n\\n/**\\n * @dev Implementation of the {IERC165} interface.\\n *\\n * Contracts that want to implement ERC-165 should inherit from this contract and override {supportsInterface} to check\\n * for the additional interface id that will be supported. For example:\\n *\\n * ```solidity\\n * function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {\\n *     return interfaceId == type(MyInterface).interfaceId || super.supportsInterface(interfaceId);\\n * }\\n * ```\\n */\\nabstract contract ERC165 is IERC165 {\\n    /// @inheritdoc IERC165\\n    function supportsInterface(bytes4 interfaceId) public view virtual returns (bool) {\\n        return interfaceId == type(IERC165).interfaceId;\\n    }\\n}\\n\",\"keccak256\":\"0x2d9dc2fe26180f74c11c13663647d38e259e45f95eb88f57b61d2160b0109d3e\",\"license\":\"MIT\"},\"npm/@openzeppelin/contracts@5.7.0/utils/introspection/IERC165.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.4.0) (utils/introspection/IERC165.sol)\\n\\npragma solidity >=0.4.16;\\n\\n/**\\n * @dev Interface of the ERC-165 standard, as defined in the\\n * https://eips.ethereum.org/EIPS/eip-165[ERC].\\n *\\n * Implementers can declare support of contract interfaces, which can then be\\n * queried by others ({ERC165Checker}).\\n *\\n * For an implementation, see {ERC165}.\\n */\\ninterface IERC165 {\\n    /**\\n     * @dev Returns true if this contract implements the interface defined by\\n     * `interfaceId`. See the corresponding\\n     * https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[ERC section]\\n     * to learn more about how these ids are created.\\n     *\\n     * This function call must use less than 30 000 gas.\\n     */\\n    function supportsInterface(bytes4 interfaceId) external view returns (bool);\\n}\\n\",\"keccak256\":\"0x8891738ffe910f0cf2da09566928589bf5d63f4524dd734fd9cedbac3274dd5c\",\"license\":\"MIT\"},\"project/contracts/GoldRWAToken.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.20;\\n\\nimport \\\"@openzeppelin/contracts/token/ERC20/ERC20.sol\\\";\\nimport \\\"@openzeppelin/contracts/access/AccessControl.sol\\\";\\n\\ncontract GoldRWAToken is ERC20, AccessControl {\\n    bytes32 public constant MINTER_ROLE = keccak256(\\\"MINTER_ROLE\\\");\\n    bytes32 public constant ASSET_MANAGER_ROLE =\\n        keccak256(\\\"ASSET_MANAGER_ROLE\\\");\\n\\n    string private _assetDocument;\\n\\n    event TokensMinted(\\n        address indexed to,\\n        uint256 amount,\\n        address indexed minter\\n    );\\n\\n    event TokensBurned(\\n        address indexed from,\\n        uint256 amount\\n    );\\n\\n    event AssetDocumentUpdated(\\n        string oldDocument,\\n        string newDocument,\\n        address indexed updater\\n    );\\n\\n    constructor(\\n        string memory initialAssetDocument,\\n        address admin\\n    ) ERC20(\\\"Gold RWA Token\\\", \\\"GLDR\\\") {\\n        require(admin != address(0), \\\"Invalid admin\\\");\\n\\n        _grantRole(DEFAULT_ADMIN_ROLE, admin);\\n        _grantRole(MINTER_ROLE, admin);\\n        _grantRole(ASSET_MANAGER_ROLE, admin);\\n\\n        _assetDocument = initialAssetDocument;\\n    }\\n\\n    /**\\n     * @notice Issue RWA tokens\\n     * @dev Only accounts with MINTER_ROLE can call this function.\\n     */\\n    function mint(\\n        address to,\\n        uint256 amount\\n    ) external onlyRole(MINTER_ROLE) {\\n        require(to != address(0), \\\"Invalid recipient\\\");\\n        require(amount > 0, \\\"Amount must be greater than zero\\\");\\n\\n        _mint(to, amount);\\n\\n        emit TokensMinted(to, amount, msg.sender);\\n    }\\n\\n    /**\\n     * @notice Burn caller's own tokens.\\n     */\\n    function burn(\\n        uint256 amount\\n    ) external {\\n        require(amount > 0, \\\"Amount must be greater than zero\\\");\\n\\n        _burn(msg.sender, amount);\\n\\n        emit TokensBurned(msg.sender, amount);\\n    }\\n\\n    /**\\n     * @notice Update the simulated asset proof document.\\n     */\\n    function updateAssetDocument(\\n        string calldata document\\n    ) external onlyRole(ASSET_MANAGER_ROLE) {\\n        require(bytes(document).length > 0, \\\"Empty document\\\");\\n\\n        string memory oldDocument = _assetDocument;\\n\\n        _assetDocument = document;\\n\\n        emit AssetDocumentUpdated(\\n            oldDocument,\\n            document,\\n            msg.sender\\n        );\\n    }\\n\\n    /**\\n     * @notice Return current asset proof document.\\n     */\\n    function assetDocument()\\n        external\\n        view\\n        returns (string memory)\\n    {\\n        return _assetDocument;\\n    }\\n}\",\"keccak256\":\"0xe6ffe359c50dc8576d40445f934c14246bd94e4ee2bcaa178a2a6cb84873d0bb\",\"license\":\"MIT\"}},\"version\":1}",
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 538,
+        "contract": "project/contracts/GoldRWAToken.sol:GoldRWAToken",
+        "label": "_balances",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_mapping(t_address,t_uint256)"
+      },
+      {
+        "astId": 544,
+        "contract": "project/contracts/GoldRWAToken.sol:GoldRWAToken",
+        "label": "_allowances",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))"
+      },
+      {
+        "astId": 546,
+        "contract": "project/contracts/GoldRWAToken.sol:GoldRWAToken",
+        "label": "_totalSupply",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 548,
+        "contract": "project/contracts/GoldRWAToken.sol:GoldRWAToken",
+        "label": "_name",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_string_storage"
+      },
+      {
+        "astId": 550,
+        "contract": "project/contracts/GoldRWAToken.sol:GoldRWAToken",
+        "label": "_symbol",
+        "offset": 0,
+        "slot": "4",
+        "type": "t_string_storage"
+      },
+      {
+        "astId": 26,
+        "contract": "project/contracts/GoldRWAToken.sol:GoldRWAToken",
+        "label": "_roles",
+        "offset": 0,
+        "slot": "5",
+        "type": "t_mapping(t_bytes32,t_struct(RoleData)21_storage)"
+      },
+      {
+        "astId": 1220,
+        "contract": "project/contracts/GoldRWAToken.sol:GoldRWAToken",
+        "label": "_assetDocument",
+        "offset": 0,
+        "slot": "6",
+        "type": "t_string_storage"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_bytes32": {
+        "encoding": "inplace",
+        "label": "bytes32",
+        "numberOfBytes": "32"
+      },
+      "t_mapping(t_address,t_bool)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => bool)",
+        "numberOfBytes": "32",
+        "value": "t_bool"
+      },
+      "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => mapping(address => uint256))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_address,t_uint256)"
+      },
+      "t_mapping(t_address,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_mapping(t_bytes32,t_struct(RoleData)21_storage)": {
+        "encoding": "mapping",
+        "key": "t_bytes32",
+        "label": "mapping(bytes32 => struct AccessControl.RoleData)",
+        "numberOfBytes": "32",
+        "value": "t_struct(RoleData)21_storage"
+      },
+      "t_string_storage": {
+        "encoding": "bytes",
+        "label": "string",
+        "numberOfBytes": "32"
+      },
+      "t_struct(RoleData)21_storage": {
+        "encoding": "inplace",
+        "label": "struct AccessControl.RoleData",
+        "members": [
+          {
+            "astId": 18,
+            "contract": "project/contracts/GoldRWAToken.sol:GoldRWAToken",
+            "label": "hasRole",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_mapping(t_address,t_bool)"
+          },
+          {
+            "astId": 20,
+            "contract": "project/contracts/GoldRWAToken.sol:GoldRWAToken",
+            "label": "adminRole",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_bytes32"
+          }
+        ],
+        "numberOfBytes": "64"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "assetDocument()": {
+        "notice": "Return current asset proof document."
+      },
+      "burn(uint256)": {
+        "notice": "Burn caller's own tokens."
+      },
+      "mint(address,uint256)": {
+        "notice": "Issue RWA tokens"
+      },
+      "updateAssetDocument(string)": {
+        "notice": "Update the simulated asset proof document."
+      }
+    },
+    "version": 1
+  },
+  "argsData": "0x00000000000000000000000000000000000000000000000000000000000000400000000000000000000000000e4928df01fb0940944a570e5cf1741b62863b9f0000000000000000000000000000000000000000000000000000000000000025697066733a2f2f516d4578616d706c65476f6c64526573657276655265706f727432303236000000000000000000000000000000000000000000000000000000",
+  "transaction": {
+    "hash": "0x408eebf2f24adf7bbfcbb80f9a99bce62a6b0dc473866024e5b1607659c30b10",
+    "nonce": "0x31",
+    "origin": "0x0e4928df01fb0940944a570e5cf1741b62863b9f"
+  },
+  "receipt": {
+    "blockHash": "0x8bdbae7f56067ae6e4d6ed2e65de439be04722736aad974ab9163bdb4591aa36",
+    "blockNumber": "0x37c504e",
+    "transactionIndex": "0x0"
+  }
+}
