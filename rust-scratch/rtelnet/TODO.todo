@@ -1,0 +1,5 @@
+rtelnet:
+  ✔ use femme & log @done(24-01-07 08:50)
+  ✔ rewrite it using BufRead and BufWrite, and make loop constructs clear @done(24-01-07 08:50)
+  ✔ variant of `rcat` which is multithreaded (not async) and use `BufReader` @done(24-01-07 18:48)
+  ✔ add support for ColorWheel / lolcat @done(24-01-07 18:49)

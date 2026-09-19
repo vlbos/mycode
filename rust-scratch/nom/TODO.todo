@@ -1,0 +1,23 @@
+key-value parsing:
+  ✔ build hex code parser from string @done(23-01-30 09:46)
+  ✔ parse CSS like style w/ hex code [alpha, no alpha] and properties [color, background] @done(23-02-01 16:56)
+  ✔ parse CSS like style (above) but w/ `Vec<String>` as input and not `&str` @done(23-02-02 11:39)
+
+natural language parsing:
+  ✔ parse natural language text for name, age, preference @done(23-02-04 12:04)
+
+standard markdown parser:
+  ✔ implement a standard markdown parser @done(23-02-09 14:46)
+
+parse non standard markdown:
+  ✔ `md_parse` add `@<key>: ["<value1>", "<value2>", .. ]\n`, `@<key>: "<value>"\n` syntax @done(23-02-10 17:22)
+    ✔ eg `@title: "Something"]\n`; make the quotes optional & cut to EOL @done(23-02-10 13:19)
+    ✔ eg `@tags: ["tag", "tag 2"]\n`; make the quotes optional if there are no spaces @done(23-02-10 17:19)
+  ✔ integrate the above into `parser.rs` @done(23-02-12 09:53)
+  ☐ move `md_parse` into `r3bl_tui` crate
+  ☐ write developerlife article on nom using the `r3bl_tui` crate
+
+syn hi formatting for r3bl-cmdr notes app:
+  ☐ parse `Vec<String>` containing MD content w/ some special syntax for tags, title for notes in rc
+  ☐ generate `styled_texts` for rendering
+  ☐ provide a way to attach styles to format the non standard MD syntax

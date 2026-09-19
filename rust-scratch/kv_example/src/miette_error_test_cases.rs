@@ -1,0 +1,229 @@
+/*
+ *   Copyright (c) 2024 Nazmul Idris
+ *   All rights reserved.
+ *
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
+ */
+
+//! This module contains all the test cases for the [miette] crate. This isn't used by any
+//! other module in the project, and is only used for testing purposes.
+
+/// USE CASE 1: Lazy, don't want to make my own [miette::Diagnostic] trait implementation
+/// along with custom error types (using [thiserror]).
+///
+/// This is a sample of how to use the [miette] to auto generate error reports for
+/// existing [Result]s containing [std::error::Error] types **WHICH DO NOT** implement
+/// [miette::Diagnostic] trait (unlike the examples below, which do implement it). You can
+/// also add additional context information to the error report, so that it can bubble up
+/// w/ more context provided after the errors are generated, and they are getting bubbled
+/// up the call chain.
+#[cfg(test)]
+mod app_use_case_into_diagnostic_and_context {
+    use crossterm::style::Stylize;
+    use miette::{Context, IntoDiagnostic};
+
+    /// The errors are "unwrapped" / displayed in the opposite order in which they are
+    /// added / stacked.
+    ///
+    /// DISPLAY ORDER: | STACK / CREATE ORDER:
+    /// 1. Top:        | The third ".. additional context .." error.
+    /// 2. Middle:     | The second ".. database corrupted .. " error.
+    /// 3. Bottom:     | The first "parse error".
+    ///
+    /// Here's the actual output:
+    /// ```
+    /// Error:   × 🎃 this is additional context about the failure
+    /// ├─▶ database corrupted
+    /// ├─▶ 🍍 foo bar baz
+    /// ╰─▶ invalid digit found in string
+    /// ```
+    #[test]
+    fn test_into_diagnostic() -> miette::Result<()> {
+        let result: Result<u32, std::num::ParseIntError> = "1.2".parse::<u32>();
+        assert!(result.is_err());
+
+        let new_miette_result = result
+            .into_diagnostic()
+            .context("🍍 foo bar baz")
+            .wrap_err(rkv::StoreError::DatabaseCorrupted)
+            .wrap_err("🎃 this is additional context about the failure");
+
+        assert!(new_miette_result.is_err());
+
+        println!(
+            "{}:\n{:?}\n",
+            "debug output".blue().bold(),
+            new_miette_result
+        );
+
+        let Err(ref miette_report) = new_miette_result else {
+            panic!("This should result in an error!");
+        };
+
+        let mut iter = miette_report.chain();
+        // First.
+        assert_eq!(
+            iter.next().map(|it| it.to_string()).unwrap(),
+            "🎃 this is additional context about the failure"
+        );
+        // Second.
+        assert_eq!(
+            iter.next().map(|it| it.to_string()).unwrap(),
+            "database corrupted"
+        );
+        // Third.
+        assert_eq!(
+            iter.next().map(|it| it.to_string()).unwrap(),
+            "🍍 foo bar baz"
+        );
+        // Fourth.
+        assert_eq!(
+            iter.next().map(|it| it.to_string()).unwrap(),
+            "invalid digit found in string"
+        );
+
+        Ok(())
+    }
+
+    /// It is possible to convert from a [miette::Report] into an [Box]ed [std::error::Error].
+    #[test]
+    fn test_convert_report_into_error() -> std::result::Result<(), Box<dyn std::error::Error>> {
+        let result = "1.2"
+            .parse::<u32>()
+            .into_diagnostic()
+            .wrap_err(miette::Report::msg(
+                "wrapper for the source parse int error",
+            ));
+
+        match result {
+            Ok(_) => {
+                return Ok(());
+            }
+            Err(miette_report) => {
+                let it: Box<dyn std::error::Error> = miette_report.into();
+                return Err(it);
+            }
+        }
+    }
+}
+
+/// USE CASE 2: Full custom error types, with [miette::Diagnostic] trait implementations.
+///
+/// More info on [miette] and [thiserror] crates:
+/// - [tutorial](https://johns.codes/blog/build-a-db/part01)
+/// - [thiserror](https://docs.rs/thiserror/latest/thiserror/#derives)
+/// - [miette](https://docs.rs/miette/latest/miette/index.html)
+///
+/// The gist of creating custom error types is to use the [thiserror] crate to create the
+/// error type, and then use the [miette] crate to create the error type's
+/// [miette::Diagnostic] trait implementation (declaratively).
+///
+/// 1. The [thiserror] crate is used to create the error type. You can declaratively:
+///    - Add the conversions from existing source errors to your custom type using the
+///      `#[from]` attribute. This allows you to use the `?` operator to convert from the
+///      source error to your custom error type.
+///    - Provide really nice display output messages (using template literals to include
+///      field values) for each error variant, using the `#[error]` attribute.
+/// 2. Miette is used to create the [miette::Diagnostic] trait implementation for your
+///    custom error type. This is done declaratively, and you can provide error codes and
+///    help links for each error variant. The report is automatically generated by miette,
+///    and you can customize if you like.
+#[derive(thiserror::Error, Debug, miette::Diagnostic)]
+enum RkvError {
+    #[diagnostic(
+        code(rkv::DatabaseError::FileSystemError),
+        help("https://docs.rs/rkv/latest/rkv/enum.StoreError.html"),
+        // url(docsrs) /* Works if this code was on crates.io / docs.rs */
+    )]
+    #[error("📂 Could not create db folder: '{db_folder_path}' on disk")]
+    CouldNotCreateDbFolder { db_folder_path: String },
+
+    #[diagnostic(
+        code(rkv::DatabaseError::StoreCreationOrAccessError),
+        help("https://docs.rs/rkv/latest/rkv/enum.StoreError.html"),
+        // url(docsrs) /* Works if this code was on crates.io / docs.rs */
+    )]
+    #[error("💾 Could not get or create environment, or open store")]
+    CouldNotGetOrCreateEnvironmentOrOpenStore {
+        #[from]
+        source: rkv::StoreError,
+    },
+}
+
+/// USE CASE 2 (continued): Full custom error types, with [miette::Diagnostic] trait
+/// implementations.
+///
+/// This is a sample of how to use the [miette] and [thiserror] crates to create custom
+/// error types. All the tests in this module fail so that you can see how the error
+/// messages are displayed.
+#[cfg(test)]
+mod library_use_case_fails_tests_miette_thiserror {
+    use super::*;
+    use pretty_assertions::assert_eq;
+
+    // Flat error.
+    fn throws_flat_error_db() -> miette::Result<(), RkvError> {
+        Err(RkvError::CouldNotCreateDbFolder {
+            db_folder_path: "some/path/to/db".into(),
+        })
+    }
+
+    // Nested error.
+    fn throws_nested_error_store() -> miette::Result<(), RkvError> {
+        let store_error = rkv::StoreError::DatabaseCorrupted;
+        let rkv_error = RkvError::from(store_error);
+        Err(rkv_error)
+
+        // Same as above.
+        // Err(rkv::StoreError::DatabaseCorrupted.into())
+
+        // Same as above.
+        // Err(RkvError::CouldNotGetOrCreateEnvironmentOrOpenStore {
+        //     source: rkv::StoreError::DatabaseCorrupted,
+        // })
+    }
+
+    #[test]
+    fn fails_with_flat_error() -> miette::Result<()> {
+        let result = throws_flat_error_db();
+        if let Err(rkv_error) = &result {
+            assert_eq!(
+                format!("{:?}", rkv_error),
+                "CouldNotCreateDbFolder { db_folder_path: \"some/path/to/db\" }"
+            );
+        }
+
+        // The following will induce a panic, since the error is not handled, and will display
+        // a pretty message in the test output.
+        result?;
+
+        Ok(())
+    }
+
+    #[test]
+    fn fails_with_nested_error() -> miette::Result<()> {
+        let result = throws_nested_error_store();
+        if let Err(rkv_error) = &result {
+            assert_eq!(
+                format!("{:?}", rkv_error),
+                "CouldNotGetOrCreateEnvironmentOrOpenStore { source: DatabaseCorrupted }"
+            );
+        }
+
+        // The following will induce a panic, since the error is not handled, and will display
+        // a pretty message in the test output.
+        result?;
+
+        Ok(())
+    }
+}

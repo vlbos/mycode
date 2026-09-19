@@ -1,0 +1,44 @@
+{
+	"files": [
+		{
+			"path": "my_proc_macros_lib/src/view_token_stream.rs",
+			"bookmarks": [
+				{
+					"line": 2,
+					"column": 34,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "my_proc_macros_lib/src/lib.rs",
+			"bookmarks": [
+				{
+					"line": 36,
+					"column": 1,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "my_proc_macros_lib/src/custom_syntax.rs",
+			"bookmarks": [
+				{
+					"line": 53,
+					"column": 1,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "tests/test_fn_macro_custom_syntax.rs",
+			"bookmarks": [
+				{
+					"line": 33,
+					"column": 1,
+					"label": ""
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,10 @@
+{
+  "cSpell.words": [
+    "bincode",
+    "CBOR",
+    "docsrs",
+    "LMDB",
+    "POSIX",
+    "thiserror"
+  ]
+}

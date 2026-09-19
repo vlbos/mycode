@@ -1,0 +1,24 @@
+{
+  "cSpell.words": [
+    "appender",
+    "bigendian",
+    "bincode",
+    "BOOKM",
+    "CBOR",
+    "dialoguer",
+    "geohashing",
+    "getall",
+    "indicatif",
+    "jaegertracing",
+    "oneshot",
+    "opentelemetry",
+    "otel",
+    "otlp",
+    "procspawn",
+    "sdktrace",
+    "setclientid",
+    "sqlx",
+    "tempdir",
+    "tempfile"
+  ]
+}

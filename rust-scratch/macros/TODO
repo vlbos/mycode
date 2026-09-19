@@ -1,0 +1,24 @@
+derive macro `builder.rs`:
+  ✔ Refactor helper functions into `utils.rs` @started(22-03-26 11:00) @done(22-03-26 11:00) @lasted(31s)
+  ✔ Create a `<STRUCT>Builder` struct block w/ all the fields @started(22-03-26 11:04) @done(22-03-26 11:30) @lasted(26m45s)
+  ✔ Extract traits and fns into `utils` @done(22-03-26 18:19)
+  ✔ Create a `<STRUCT>Builder` impl block w/ new() & fn for each named field @started(22-03-27 11:11) @done(22-03-27 13:20) @lasted(2h9m47s)
+    ✔ build() @done(22-03-27 15:53)
+  ✔ Update README.md @done(22-03-27 21:01)
+
+learn how to use extension:
+  ✔ [Todo+](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-todo-plus) @done(22-03-27 15:53)
+
+attrib macro `logger.rs`:
+  ✔ Make attrib macro that takes `AttributeArgs` @started(22-03-28 10:00) @done(22-03-28 16:36) @lasted(6h36m59s)
+  ✔ Make attrib macro that takes set of idents separated by `+` (syn `trace_var` eg) @started(22-03-29 11:30) @done(22-03-29 12:15) @lasted(45m)
+  ✔ Update README.md @done(22-03-29 12:15)
+
+fn like macros:
+  ✔ Use syn `lazy-static` eg to make my fn like macro & practice custom syntax creation @started(22-03-29 10:00) @done(22-03-30 16:24) @lasted(1d6h24m50s)
+  ✔ Build the "manager of things" macro @done(22-03-30 16:24)
+  ✔ Update README.md @started(22-03-30 16:30) @done(22-03-30 20:43) @lasted(4h13m37s)
+
+publish DL article:
+  ✔ Convert README.md into a new article @done(22-03-30 21:13)
+  ✔ Publish the article @done(22-03-30 21:16)

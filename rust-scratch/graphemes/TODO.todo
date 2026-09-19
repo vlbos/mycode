@@ -1,0 +1,15 @@
+reedline:
+  ✔ how does it handle grapheme clusters? @done(22-07-22 17:37)
+
+crossterm:
+  ✔ is there a way to use crossterm (at startup) to a list of grapheme cluster sizes for that terminal @done(22-07-22 17:37)
+
+lib.rs:
+  ✔ make `UnicodeStringExt` trait @done(22-07-25 16:53)
+    - simplify handling of a String which has grapheme clusters
+    - split the string into a Vec of grapheme clusters structs
+    - get the "logical" index into the Vec given then "physical" index (byte boundary based)
+    - get the "physical" index into the String given then "logical" index (grapheme cluster based)
+    - write tests
+  ✔ move the code into `r3bl_rs_utils` `tui_core` codebase @done(22-07-26 10:50)
+

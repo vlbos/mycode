@@ -1,0 +1,9 @@
+# get kv working:
+  ✔ choose what format to use for serde: bincode, not: JSON, CBOR @done(24-01-20 19:41)
+  ✔ CRUD the kv @done(24-01-20 19:41)
+
+# get rkv working:
+  ✔ CRUD the rkv @done(24-01-21 14:01)
+
+# figure out how miette works:
+  ✔ use miette & thiserror @done(24-01-27 19:52)
